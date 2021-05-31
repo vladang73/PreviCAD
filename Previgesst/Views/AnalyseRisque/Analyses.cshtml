@@ -1,0 +1,177 @@
+﻿@model Previgesst.ViewModels.EditCadenassageViewModel
+@using  Previgesst.Ressources
+@using Previgesst.Ressources.Analyse
+
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white;"></div>
+
+        <div class="panel-body">
+
+            <div style="padding-bottom:10px;padding-top:-6px">
+
+                @if (Model.estUpdate)
+                {
+                    <a href='~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AnalyseRisque/Create/@Model.ClientId' target="_blank" class="btn btn-success"><i class="fa fa-plus"></i> @AREditClientRES.Ajouter </a>
+
+                }
+
+                <a target='_blank' href='~/AnalyseRisque/getXLAnalyseClient/@Model.ClientId' class="btn btn-info">@AREditClientRES.DocumentComplet</a>
+                <a target='_blank' href='~/AnalyseRisque/getXLAnalyseClientEN/@Model.ClientId' class="btn btn-info">@AREditClientRES.DocumentCompletEN</a>
+
+                <br />
+
+            </div>
+
+
+            <div id="Documents" class="tab-pane">
+
+
+                @Html.AntiForgeryToken()
+
+                @(Html.Kendo().Grid<AnalyseRisqueListViewModel>()
+                    .Name("list-analyse")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(c => c.AnalyseRisqueId).Hidden();
+                        columns.Bound(c => c.NoRef)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                        .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                        .StartsWith(GridRES.StartsWith)
+                        .IsEqualTo(GridRES.Egale)
+                        .IsNotEqualTo(GridRES.NotEquals)
+                            ))).Width(160).Title(AREditClientRES.NumeroEquipement);
+
+                        columns.Bound(c => c.Equipement)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                        .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                        .StartsWith(GridRES.StartsWith)
+                        .IsEqualTo(GridRES.Egale)
+                        .IsNotEqualTo(GridRES.NotEquals)
+                            ))).Width(410);
+                        // TODO MAX : if DateMAJ NULL, display none
+                        columns.Bound(c => c.DateMAJ)
+                            .Filterable(f => f.Extra(false)
+                        ).Format("{0:" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern + "}").Width(130).Title(AREditClientRES.MiseAJour);
+
+                        columns.Bound(c => c.AfficherChezClient).ClientTemplate("<center><input disabled type='checkbox' #= AfficherChezClient ? checked='checked' :'' # /></center>").Title(AREditClientRES.AfficherChezLeClient).Sortable(false).Width(150);
+
+                        //columns.Bound(e => e.Id).ClientTemplate("<a  href='Edit?ID=#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-primary' style='float:right'>Modifier</a>").Title("").Filterable(false).Sortable(false);
+                        columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='" + Url.Action("getXLAnalyse", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-info downloadButton'></a>").Title(AREditClientRES.DocAnalyse).Filterable(false).Sortable(false).Width(80).HtmlAttributes(new { @class = "text-center" }).HeaderHtmlAttributes(new { @class = "text-center" });
+                        columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='" + Url.Action("getXLAnalyseEN", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-info downloadButton'></a>").Title(AREditClientRES.DocAnalyseEN).Filterable(false).Sortable(false).Width(80).HtmlAttributes(new { @class = "text-center" }).HeaderHtmlAttributes(new { @class = "text-center" });
+                        columns.Bound(e => e.Id).ClientTemplate("<a  href='" + Url.Action("Edit", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-primary btn-edit-previ' style='text-align:center'></a>").Title(AREditClientRES.Vide).Filterable(false).Sortable(false).Width(70).HtmlAttributes(new { @class = "text-center" }).HeaderHtmlAttributes(new { @class = "text-center" });
+                        columns.Command(c =>
+                        {
+                            c.Custom(AREditClientRES.Vide)
+                                    .Click("ConfirmDeleteRowAnalyse")
+                                    .HtmlAttributes(new { @class = "k-grid-effacer" });
+
+                        })
+                        .Width(70);
+                    })
+                    .Sortable(s => s.AllowUnsort(false))
+                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                    .Filterable()
+                    .Editable(e => e.DisplayDeleteConfirmation(false))
+                    .DataSource(ds => ds
+                        .Ajax()
+
+                        .PageSize(20)
+                        .Model(m =>
+                        {
+                            m.Id(e => e.AnalyseRisqueId);
+                        })
+                        .Read(r => r.Action("ReadListAnalyseRisque", "AnalyseRisque", new { client = Model.ClientId }))
+                        .Destroy(u => u.Action("DeleteAnalyse", "AnalyseRisque"))
+
+                    )
+                    .Events(e => e
+                        .DataBound("ListeDataBoundAnalyse")
+
+                    )
+                    @*.ToolBar(tb =>
+                    {
+                        tb.Template(@<a href='~/AnalyseRisque/Create?id=@Model.ClientId' target="_blank" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter une nouvelle analyse</a>);
+                    })*@
+                )
+
+            </div>
+        </div>
+</div>
+
+<script>
+
+    function ConfirmDeleteRowAnalyse(e) {
+        //debugger;
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.NoRef, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+
+    }
+
+
+
+
+    function ListeDataBoundAnalyse(e) {
+
+
+
+        var selecteurGrid = "#list-analyse";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                $(this).remove();
+            }
+        })
+
+
+        $(selecteurGrid + " tbody tr .btn-edit-previ").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is editable
+            if (!currentDataItem.Editable) {
+
+                $(this).remove();
+            }
+        })
+
+
+        // on cache la colonne AfficherChezClient
+
+        var estClient = '@Model.estClient';
+        if (estClient == 'True') {
+            var grid = $("#list-analyse").data("kendoGrid");
+            grid.hideColumn("AfficherChezClient");
+
+
+            //grid.hideColumn("")
+        }
+
+    }
+ 
+    
+
+</script>
+

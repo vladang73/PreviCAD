@@ -1,0 +1,158 @@
+﻿@using Previgesst.Ressources;
+@{
+    ViewBag.Title = "Documents";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/MesApplications/Index">@DocumentRES.Accueil</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">@DocumentRES.DocumentGeneraux</li>
+                </ol>
+            </nav>
+
+            <hr />
+
+
+            <div class="panel panel-danger">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">@DocumentRES.DocumentGeneraux</div>
+                <div class="panel-body">
+
+
+
+                    @Html.AntiForgeryToken()
+
+                    @(Html.Kendo().Grid<DocumentViewModel>()
+                                                            .Name("liste-doc")
+                                                            .Columns(columns =>
+                                                            {
+
+                                                                columns.Bound(e => e.DocumentId).Hidden();
+                                                                columns.Bound(c => c.DisplaySection).Hidden()
+                                                               .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                            .ForString(str => str.Clear()
+                                                            .Contains(GridRES.Contains)
+                                                            .StartsWith(GridRES.StartsWith)
+                                                            .IsEqualTo(GridRES.Egale)
+                                                            .IsNotEqualTo(GridRES.NotEquals)
+                                                                                           )));
+
+                                                                columns.Bound(c => c.Titre)
+                                                                     .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                                  .ForString(str => str.Clear()
+                                                                  .Contains(GridRES.Contains)
+                                                                    .StartsWith(GridRES.StartsWith)
+                                                                    .IsEqualTo(GridRES.Egale)
+                                                                    .IsNotEqualTo(GridRES.NotEquals)
+                                                                     )));
+
+
+                                                                columns.Bound(c => c.Ordre)
+                                                                .Filterable(false).Hidden();
+
+
+
+                                                                columns.Bound(e => e.Bidon).ClientTemplate("<a href='../../File/DownloadFile?ID=#= " + nameof(DocumentViewModel.DocumentId) + " #' class='btn btn-info' style='text-align:center'>" + @DocumentRES.Telecharger +"</a>").Title("").Filterable(false).Sortable(false).Width(100);
+
+
+                                                            })
+
+                                                            .Sortable(s => s.AllowUnsort(false))
+                                                            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                                                            .Filterable()
+                                                            .DataSource(ds => ds
+                                                                .Ajax()
+                                                                .Group(x => x.Add(c => c.DisplaySection))
+                                                                .Sort(x => x.Add(c => c.Ordre))
+                                                                .PageSize(20)
+                                                                .Model(m =>
+                                                                {
+                                                                    m.Id(e => e.DocumentId);
+                                                                    m.Field(e => e.Bidon).Editable(true);
+
+
+
+                                                                })
+
+                                                            .Read(r => r.Action("ReadListDocumentsGeneraux", "MesApplications"))
+
+
+                                                            .Events(e => e
+                                                                .Error("docListeErreur")
+                                                            )
+                                                        )
+
+                                                        .Events(e => e
+                                                            .DataBound("docListeDataBound")
+                                                        ).Editable(e => e.DisplayDeleteConfirmation(false))
+
+                    )
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+
+    function ConfirmDeleteRow(e) {
+
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.FileName, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+        //debugger;
+    }
+
+
+    function docListeErreur(args) {
+        //debugger;
+        var selecteurGrid = "#liste-doc";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("Erreur - Gestions",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+
+
+
+    }
+
+    function docListeDataBound(e) { }
+
+</script>
+

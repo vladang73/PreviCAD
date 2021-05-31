@@ -1,0 +1,24 @@
+﻿
+<div id="mydiv">
+
+    @(Html.Kendo().Upload()
+    .Name("file")
+    .Multiple(false)
+    .Async(a => a
+        .Save("SaveLink", "Client" )
+      
+        .AutoUpload(true)
+
+    )
+    .Events(
+
+    e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelect")
+    ))
+
+
+  
+
+</div>
+
+
+

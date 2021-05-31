@@ -1,0 +1,181 @@
+﻿@model IEnumerable<UserListViewModel>
+@{
+    ViewBag.Title = "Utilisateurs";
+}
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Liste des utilisateurs</li>
+                </ol>
+            </nav>
+
+            @*<h3>Liste des utilisateurs</h3>*@
+            <hr />
+
+            <div class="panel panel-danger">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Utilisateurs</div>
+                <div class="panel-body">
+
+
+                    <div class="form-group">
+                        @Html.ActionLink("Ajouter", "EditUser", new { }, new { @class = "btn btn-success" })
+                    </div>
+
+                    @(Html.Kendo().Grid<UserListViewModel>()
+                                                .Name("user-list")
+                                                .Columns(columns =>
+                                                {
+                                                    columns.Bound(u => u.UserName)
+                                                        .Filterable(f => f
+                                                            .Extra(false));
+                                                    columns.Bound(u => u.Email)
+                                                        .Filterable(f => f
+                                                            .Extra(false));
+                                                    columns.Bound(u => u.Inactive)
+                                                           .ClientTemplate("<input type='checkbox' ${ " + nameof(UserListViewModel.Inactive) + " == true ? 'checked' : ''} disabled />")
+                                                           .HtmlAttributes(new { @class = "text-center" })
+                                                           .HeaderHtmlAttributes(new { @class = "text-center" });
+                                                    columns.Bound(u => u.UserId)
+                                                        .ClientTemplate(
+                                                            "<a href='" + Url.Action("EditUser", "Manage") + "/#= " + nameof(UserListViewModel.UserId) + " #' class='btn btn-default btn-xs'>" +
+                                                            "Accéder" + "</a>").Title("").Filterable(false).Sortable(false);
+                                                })
+                                                .Sortable()
+                                                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 10, 25, 50, 100 }).Input(true).Info(false).Numeric(false))
+                                                .Filterable()
+                                                .DataSource(ds => ds
+                                                    .Ajax()
+                                                    .PageSize(50)
+                                                    .Sort(s => s.Add(nameof(UserListViewModel.UserName)).Ascending())
+                                                    .Read(r => r.Action("UserRead", "Manage")))
+                                                .Events(e => e      //Garder les filtres pour la durée de la session du client
+                                                    .DataBound("dataBoundKendo")
+                                                    .Change("changeKendo")
+                                                    .ColumnHide("columnHideKendo")
+                                                    .ColumnShow("columnShowKendo")
+                                                    .ColumnReorder("columnReorderKendo"))
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+
+                var uniqueName = '@ViewContext.RouteData.Values["controller"]' + '@ViewContext.RouteData.Values["action"]' + '1_';
+                var colState = uniqueName + "columnState";
+                var gridState = uniqueName + "gridState";
+                var gridRows = uniqueName + "gridRows";
+
+                //On page ready, apply any exisiting cookie grid state
+                $(function () {
+                    var grid = $("#user-list").data("kendoGrid");
+
+                    var state = JSON.parse($.cookie(gridState) || null);
+                    var currentColumnState = JSON.parse($.cookie(colState) || null);
+
+                    if (currentColumnState && currentColumnState.length > 0) {
+                        for (var i = 0; i < currentColumnState.length; i++) {
+                            grid.hideColumn(currentColumnState[i]);
+                        }
+                    }
+
+                    if (state) {
+                        if (state.filter) {
+                            parseFilterDates(state.filter, grid.dataSource.options.schema.model.fields);
+                        }
+                        grid.dataSource.query(state);
+                    } else {
+                        grid.dataSource.read();
+                    }
+
+                    //Bind the grid to dataBound so that changes the user make are sent to the save routine
+                    grid.bind("dataBinding", dataBoundKendo);
+                });
+
+
+                function parseFilterDates(filter, fields) {
+                    if (filter.filters) {
+                        for (var i = 0; i < filter.filters.length; i++) {
+                            parseFilterDates(filter.filters[i], fields);
+                        }
+                    } else {
+                        if (fields[filter.field].type == "date") {
+                            filter.value = kendo.parseDate(filter.value);
+                        }
+                    }
+                }
+
+
+                //When the grid is databound, or changes made, persist them
+                function dataBoundKendo(e) {
+                    var grid = this;
+                    var dataSource = this.dataSource;
+
+                    var state = kendo.stringify({
+                        page: dataSource.page(),
+                        pageSize: dataSource.pageSize(),
+                        sort: dataSource.sort(),
+                        group: dataSource.group(),
+                        filter: dataSource.filter()
+                    });
+
+                    var currentColumnState = [];
+                    for (var i = 0; i < grid.columns.length; i++) {
+                        if (grid.columns[i].hidden) {
+                            currentColumnState.push(grid.columns[i].field);
+                        }
+                    }
+                    $.cookie(colState, JSON.stringify(currentColumnState));
+
+                    $.cookie(gridState, state);
+
+                    if ($.cookie(gridRows)) {
+                        $.each(JSON.parse($.cookie(gridRows)), function () {
+                            var item = dataSource.get(this);
+                            var row = grid.tbody.find('[data-uid=' + item.uid + ']');
+                            row.addClass('k-state-selected');
+                        });
+                    }
+                }
+
+                function columnHideKendo(e) {
+                    setTimeout(function () {
+                        e.sender.trigger("dataBoundKendo");
+                    });
+                }
+
+                function columnShowKendo(e) {
+                    setTimeout(function () {
+                        e.sender.trigger("dataBoundKendo");
+                    });
+                }
+
+                function columnReorderKendo(e) {
+                    setTimeout(function () {
+                        e.sender.trigger("dataBoundKendo");
+                    });
+                }
+
+                function changeKendo() {
+                    var grid = this;
+                    var ids = grid.select().map(function () {
+                        return grid.dataItem($(this)).Id;
+                    }).toArray();
+                    $.cookie(gridRows, JSON.stringify(ids));
+                }
+    </script>
+}

@@ -1,0 +1,259 @@
+﻿@model DroitsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hr />
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Documents généraux</li>
+                </ol>
+            </nav>
+
+
+
+            <div class="panel panel-danger">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Édition des documents généraux <a href="" target="_blank"><img src="/Images/help.png" class="help-icon" title="Centre support" /></a></div>
+                <div class="panel-body">
+
+
+                    <div id="Documents" class="tab-pane">
+
+                        @Html.AntiForgeryToken()
+
+                        @(Html.Kendo().Grid<DocumentViewModel>()
+                            .Name("liste-doc")
+                            .Columns(columns =>
+                            {
+
+                                columns.Bound(e => e.DocumentId).Hidden();
+                                columns.Bound(c => c.SectionId).Hidden();
+                                columns.Bound(c => c.DisplaySection).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains("Contient")
+                        .StartsWith("Commence par")
+                        .IsEqualTo("Égal")
+                        .IsNotEqualTo("Différent")
+                       ))).Hidden();
+
+
+                                columns.Bound(c => c.Titre)
+                                     .Filterable(f => f.Extra(false).Operators(operators => operators
+                                  .ForString(str => str.Clear()
+                                  .Contains("Contient")
+                                      .StartsWith("Commence par")
+                                      .IsEqualTo("Égal")
+                                      .IsNotEqualTo("Différent")
+                                     )));
+
+
+                                columns.Bound(c => c.Ordre)
+                                .Filterable(false);
+
+                                columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
+
+                                columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='#=BasePath#' class='btn btn-info' style='float:right'>Télécharger le document</a>").Title("").Filterable(false).Sortable(false).Width(200);
+                                columns.Command(c =>
+                                {
+                                    c.Edit();
+                                    c.Custom("Effacer")
+                                          .Click("ConfirmDeleteRow")
+                                          .HtmlAttributes(new { @class = "k-grid-effacer" });
+
+                                })
+                                   .Width(250).Hidden( !Model.estUpdate);
+
+                            })
+
+                            .Sortable(s => s.AllowUnsort(false))
+                            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                            .Filterable()
+                            .DataSource(ds => ds
+                                .Ajax()
+                                   //.Sort( x=> x.Add (c => c.DisplaySection))
+                                   //.Sort(x => x.Add(c => c.Ordre))
+                                   .Group(g => g.Add(c => c.DisplaySection))
+                                .PageSize(20)
+                                .Model(m =>
+                                {
+                                    m.Id(e => e.DocumentId);
+                                    m.Field(e => e.Bidon).Editable(true);
+
+
+
+                                })
+
+                            .Read(r => r.Action("ReadListDocumentsGeneraux", "Documents"))
+                            .Create(c => c.Action("SaveGEN", "Documents"))
+                            .Update(u => u.Action("SaveGEN", "Documents"))
+                            .Destroy(u => u.Action("DeleteDOC", "Documents"))
+
+
+                            .Events(e => e
+                                .Error("docListeErreur")
+                            )
+                        )
+
+                        .Events(e => e
+                            .DataBound("docListeDataBound")
+
+                        ).Editable(e => e.DisplayDeleteConfirmation(false)).
+                        Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentEditor").Window(w => w.Title("Édition d'un document").Width(600).Name("editWindow")))
+
+                        @*.ToolBar(tb =>
+                            {
+                            tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
+                            }*@
+
+                        .ToolBar(t =>
+                        {
+                            t.Create().Text("Ajouter").HtmlAttributes(new { @class = "btn btn-success " });
+
+                        })
+                        )
+
+
+                    </div>
+                </div>
+            </div>
+
+            </div></div></div>
+            <script>
+
+
+
+                $(function () {
+                    $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+                    $("span.k-add").removeClass("k-icon");
+                    if ("@Model.estUpdate"=="False")
+                        $("#Documents .k-grid-toolbar").hide();
+                });
+
+
+
+
+
+                function ConfirmDeleteRow(e) {
+
+                    e.preventDefault();
+
+                    var grid = this;
+                    var row = $(e.currentTarget).closest("tr");
+                    var dataItem = this.dataItem(row);
+
+                    ShowDeleteConfirm(dataItem.FileName, function (args) {
+                        if (args.confirmed === true) {
+                            grid.removeRow(row);
+                        }
+                    });
+                    //debugger;
+                }
+
+
+                function docListeErreur(args) {
+                    //debugger;
+                    var selecteurGrid = "#liste-doc";
+                    if (args.errors) {
+                        var grid = $(selecteurGrid).data("kendoGrid");
+                        var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+                        grid.one("dataBinding", function (e) {
+                            e.preventDefault();
+
+                            $.each(args.errors, function (propertyName) {
+                                var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                                alert(this.errors);
+                                ShowNotification("Erreur - Gestions",
+                                    errorList,
+                                    "errorListTemplate");
+                            });
+                        });
+                    }
+
+
+
+                }
+
+                function docListeDataBound(e) { }
+
+            </script>
+
+            <script>
+
+
+                function fileSelect(e) {
+
+                    var extension = e.files[0].extension.toLowerCase().trim();
+
+                    if (extension != ".xlsx" && extension != ".docx" && extension != ".pdf" && extension != ".xls" && extension != ".doc") {
+                        e.preventDefault();
+
+                        ShowNotification("Attention!", "Seuls les fichiers Excel, Word et PDF sont acceptés.", "errorTemplate")
+                    }
+                }
+
+                function fileSuccess(e) {
+
+
+                    //debugger;
+                    var z = $('.k-popup-edit-form');
+
+                    var gview = $("#liste-doc").data("kendoGrid");
+
+
+                    var row = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
+
+
+                    var item = gview.dataItem(row);
+
+                    //    dataItem.FileName = e.response.FileName;
+                    //   if (e.response.Section.trim() != "")
+
+                    {
+
+                        item.set('Titre', e.response.Titre);
+                        item.set('SectionId', e.response.Section);
+                        item.set('DocumentId', e.response.DocumentId);
+                        item.set('Ordre', e.response.Ordre);
+                        item.set('FileName', e.response.NomFichier);
+                        item.set('BasePath', e.response.BasePath);
+
+                    }
+
+                }
+
+
+
+                function fileUpload(e) {
+                    //   alert (this.dataItem)
+
+                    var z = $('.k-popup-edit-form');
+                    var gview = $("#liste-doc").data("kendoGrid");
+                    var item = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
+                    var selectedItem = gview.dataItem(item);
+
+
+
+                    selectedItem.dirty = true;
+                    e.data = { DocumentId: selectedItem.DocumentId, Titre: selectedItem.Titre, Section: selectedItem.SectionId, Ordre: selectedItem.Ordre, SectionTexte: selectedItem.SectionTexte };
+
+                }
+
+
+
+
+
+
+
+            </script>

@@ -1,0 +1,346 @@
+﻿@using Previgesst.Ressources.Cadenassage
+@using Previgesst.Ressources
+@model Previgesst.ViewModels.EditCadenassageViewModel
+
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+    <div class="panel-body">
+        <div class="actionButton" style="padding-bottom:10px;padding-top:10px">
+
+
+            @if (Model.estUpdate)
+            {
+                <a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/CreerFiche/@Model.ClientId" class="btn btn-success">@CadFichesRES.Ajouter<img class="addButtonImg" src="~/Images/addWhite.png" /></a>
+                <br />
+            }
+
+            @*Add filters
+
+                // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
+                <select class="filterEquipment">
+                    <option class="filterButton" value="equipment">Filtre équipement</option>
+                    <option class="filterButton" value="test1">Test 1</option>
+                    <option class="filterButton" value="test2">Test 2</option>
+                </select>
+                <select class="filterDepartment">
+                    <option class="filterButton" value="departement">Filtre département</option>
+                    <option class="filterButton" value="test1">Test 1</option>
+                    <option class="filterButton" value="test2">Test 2</option>
+                </select>
+            *@
+        </div>
+            <div class="fichesCadenassage">
+
+                @Html.AntiForgeryToken()
+
+                @(Html.Kendo().Grid<LigneCadenassageGridViewModel>
+                    ()
+                    .Name("list")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(e => e.FicheCadenassageId).Hidden();
+
+                        columns.Bound(e => e.RevisionCourante).Title(CadFichesRES.Actif).ClientTemplate("<center><input onclick='doCheck(#=FicheCadenassageId#, this)' " + Model.RCDisabled + " type='checkbox' #=RevisionCourante ? checked='checked' :'' # /></center>").Width(60);
+                        columns.Bound(c => c.NoFiche).Width(60).Title(CadFichesRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
+                        .ForString(str => str.Clear()
+                        .Contains(GridRES.Contains)
+                        .StartsWith(GridRES.StartsWith)
+                        .IsEqualTo(GridRES.Egale)
+                        .IsNotEqualTo(GridRES.NotEquals)
+                    )));
+                        columns.Bound(e => e.TitreFiche).Title(CadFichesRES.Type).ClientTemplate("").Width(50);
+                        columns.Bound(e => e.NomEquipement).Width(170).Title(CadFichesRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        )));
+                        columns.Bound(e => e.Departement).Title(CadFichesRES.Departement).Width(140).Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        )));
+
+                        // columns.Bound(e => e.estDocumentPrevigesst).ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>").Title(CadFichesRES.Previ).Width(45).Hidden(Model.estClient);
+                        columns.Bound(e => e.TravailAEffectuer).Title(CadFichesRES.AEffectuer).ClientTemplate("").Width(320);
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' class='btn btn-info downloadButton' style='text-align:center' title='"+ CadFichesRES.Telecharger +"'></a>").Title(CadFichesRES.Fiche).Filterable(false).Sortable(false).Width(20);
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' class='btn btn-info downloadButton' style='text-align:center' title='"+ CadFichesRES.Telecharger +"'></a>").Title(CadFichesRES.Sheet).Filterable(false).Sortable(false).Width(20);
+                        if (User.IsInRole("Administrateur")) { columns.Bound(e => e.estDocumentPrevigesst).ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>").Title("Prévi").Width(45); }
+                        columns.Bound(bt => bt.FicheCadenassageId)
+                            .ClientTemplate("<a href='../../FicheCadenassage/EditFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn btn-primary btn-edit-force k-cde-edit'></a>").Title(CadFichesRES.Vide).Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
+                        columns.Bound(bt => bt.FicheCadenassageId)
+                            .ClientTemplate("<a href='../../FicheCadenassage/DuplicateFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn btn-success k-cde-edit'></a>").Title(CadFichesRES.Vide).Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
+
+                        columns.Command(c =>
+                        {
+                            c.Custom(CadFichesRES.Vide)
+                            .Click("ConfirmDeleteRowFiche")
+                            .HtmlAttributes(new { @class = "k-grid-effacer" });
+                        }).Title(CadFichesRES.Vide).Width(20).Hidden(!Model.estUpdate);
+                    })
+                        .Sortable(s => s.AllowUnsort(false))
+                        .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
+                        { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                        .Filterable()
+                        .DataSource(ds => ds
+                            .Ajax()
+                            //.Sort( x=> x.Add (c => c.DisplaySection))
+                            //.Sort(x => x.Add(c => c.Ordre))
+                            .Filter(f =>
+                            {
+                                //f.Add(b => b.estDocumentPrevigesst).IsEqualTo(true);
+                                if ( !Model.estUpdate)
+                                {
+                                    f.Add(b => b.RevisionCourante).IsEqualTo(true);
+                                }
+                            }
+                        )
+                        .PageSize(20)
+                        .Model(m =>
+                        {
+                            m.Id(e => e.FicheCadenassageId);
+                            m.Field(e => e.Suppressible).DefaultValue(false);
+                        }
+                    )
+                    .Read(r => r.Action("ReadListFiches", "FicheCadenassage", new { client = Model.ClientId }))
+                    //.Create(c => c.Action("SaveFiche", "FicheCadenassage", new { client = Model.ClientId }))
+                    //.Update(u => u.Action("SaveFiche", "FicheCadenassage", new { client = Model.ClientId }))
+                    .Destroy(u => u.Action("DeleteFiche", "FicheCadenassage"))
+                    .Events(e => e
+                        .Error("ListeErreurFiche")
+                    )
+                    )
+                    .Events(e => e
+                        .DataBound("ListeDataBoundFiche")
+                    )
+                    //.
+                    .Editable(e => e.DisplayDeleteConfirmation(false))
+                //Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneEditor").Window(w => w.Title("Édition d'un document").Width(1200).Name("editWindow")))
+                )
+            </div>
+        </div>
+    </div>
+
+<script>
+    // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
+    @*jQuery('.filterButton').click(function () {
+        // CLEAR KENDO FILTERS
+        jQuery('.k-animation-container input').val('');
+
+        var dataFilter = [];
+        if (jQuery(this).hasClass('activeFilter')) {
+            jQuery(this).removeClass('activeFilter');
+        } else {
+            jQuery(this).addClass('activeFilter');
+
+            jQuery('.filterButton').each(function () {
+                filterName = jQuery(this).text();
+                if (jQuery(this).hasClass('activeFilter')) {
+                    filterValue = "activeFilter";
+                } else {
+                    filterValue = "";
+                }
+                filterInfos = filterName + " " + filterValue;
+                dataFilter.push(filterInfos);
+            });
+
+            jQuery.ajax({
+                url: '@Url.Action("activeFilter")',
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: dataFilter,
+
+                success: function (result) {
+                    console.log('good');
+                },
+                error: function (data) {
+                    console.log('not good');
+                }
+            })
+        }
+    *@
+
+    function doCheck(ficheCadenassage, e) {
+        //call ajax pour activer/désactiver la fiche
+        var dataInput = {
+            ficheId: ficheCadenassage,
+            etat: e.checked
+            };
+        $.ajax({
+            data: JSON.stringify(dataInput),
+            url: '@Url.Action("ActiverDesactiver")',
+            type: "POST",
+
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+            },
+            error: function (data) {
+            }
+        })
+    }
+
+    $("#Fich").click(function () {
+
+        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        $("a.k-grid-add").addClass("btn btn-success btn-test");
+        $("span.k-add").removeClass("k-icon");
+
+        $("a.btn-test").text("@CadFichesRES.Ajouter");
+    });
+
+
+
+
+    function ConfirmDeleteRowFiche(e) {
+        //debugger;
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.NoFiche, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+    function ListeErreurFiche(args) {
+        //debugger;
+        var selecteurGrid = "#list";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("Erreur - Gestions",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+    }
+
+    function ListeDataBoundFiche(e) {
+        var selecteurGrid = "#list";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                    $(this).remove();
+            }
+        })
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+
+        //Selects all delete buttons
+        $("#list tbody tr .k-cde-edit").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                $(this).remove();
+            }
+        })
+    }
+
+        // FICHE/PROCÉDURE : Check and replace the string by an image
+        setTimeout(function () {
+            jQuery('.fichesCadenassage #list table tbody tr td:nth-child(4)').each(function () {
+                if (jQuery(this).text() == 'Procédure de travail sécuritaire') {
+                    jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Procédure de travail sécuritaire'>");
+                }
+                else if(jQuery(this).text() == 'Safe work procedure'){
+                    jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
+                }
+                else if(jQuery(this).text() == 'Fiche de cadenassage'){
+                    jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
+                }
+                else if(jQuery(this).text() == 'Lockout card'){
+                    jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout card'>");
+                }
+            });
+        }, 3000);
+
+
+    // Replace "true" and "false" strings
+    jQuery(".k-filterable[data-field='RevisionCourante'] .k-grid-filter").click(function () {
+        if (jQuery('.k-filter-help-text').length == 0) {
+            setTimeout(function () {
+
+
+                // Replace bad title strings
+                jQuery('.k-filter-help-text').each(function () {
+                    var titleValue = jQuery(this);
+                    if (titleValue.text() == "Afficher les lignes avec la valeur qui") {
+                        var newTitleTitle = titleValue.text().replace("Afficher les lignes avec la valeur qui", "");
+                        jQuery(this).text(newTitleTitle);
+                    } else if (titleValue.text() == "Show items with value that:") {
+                        var newTitleTitle = titleValue.text().replace("Show items with value that:", "");
+                        jQuery(this).text(newTitleTitle);
+                    } else {
+                    console.log('error');
+                    }
+                });
+
+                // Replace bad label button
+                jQuery('.k-button').each(function () {
+                    var valueButton = jQuery(this);
+                    if (valueButton.text() == 'Effacer filtre') {
+                        var newValueButton = valueButton.text().replace('Effacer filtre', 'Effacer');
+                        jQuery(this).text(newValueButton);
+                    }
+                });
+
+
+                // Replace bad label strings
+                jQuery('label').each(function () {
+                    var myLabel = jQuery(this).text();
+
+                    if (myLabel == "est vraie") {
+                        var newLabel = jQuery(this).text().replace("est vraie", "Active");
+                        jQuery(this).text(newLabel);
+                        jQuery(this).prepend("<input type='radio' data-bind='checked: filters[0].value' value='true' name='filters[0].value' style='margin-left: 5px;'>");
+                    } else if (myLabel == "est fausse") {
+                        var newLabel = jQuery(this).text().replace("est fausse", "Inactive");
+                        jQuery(this).text(newLabel);
+                        jQuery(this).prepend("<input type='radio' data-bind='checked: filters[0].value' value='false' name='filters[0].value' style='margin-left: 5px;'>");
+                    } else if (myLabel == "is true") {
+                        var newLabel = jQuery(this).text().replace("is true", "Active");
+                        jQuery(this).text(newLabel);
+                        jQuery(this).prepend("<input type='radio' data-bind='checked: filters[0].value' value='true' name='filters[0].value' style='margin-left: 5px;'>");
+                    } else {
+                        var newLabel = jQuery(this).text().replace("is false", "Inactive");
+                        jQuery(this).text(newLabel);
+                        jQuery(this).prepend("<input type='radio' data-bind='checked: filters[0].value' value='false' name='filters[0].value' style='margin-left: 5px;'>");
+                    }
+                });
+
+                jQuery('.k-filter-help-text').parent().find('.k-button:nth-child(2)').addClass('emptyFilter');
+                jQuery('.emptyFilter').click();
+            },300);
+        }
+    });
+</script>

@@ -1,0 +1,94 @@
+﻿@using Previgesst.Ressources;
+
+@model LoginClientViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+@if (Model.MaintenancePrevue == true)
+{
+    <div>
+        <div class="nextUpdateApp">
+            <div class="nextUpdateApp-content">
+                <h4><img src="/Images/update.png" alt="mise à jour à venir"> @ParametresAppRES.NextUpdateLabel</h4>
+                <p>
+                    @if (Model.Langue == "fr")
+                    {
+                        <span>@Model.NextUpdateTextFr</span>
+                    }
+                    else
+                    {
+                        <span>@Model.NextUpdateTextEn</span>
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
+<br />
+<br />
+
+<div class="container loginPage">
+
+    <div class="row">
+
+        <div class="col-md-9" style="float:initial;margin:0 auto;">
+
+            <div class="panel panel-danger">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">@ClientLoginRES.Titre</div>
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <section id="loginForm">
+                                @using (Html.BeginForm("Index", "ClientLogin", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    //@Html.AntiForgeryToken()
+
+                                    <hr />
+
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Identificateur, new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.Identificateur, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Identificateur, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserName, new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-8">
+                                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-8">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col col-md-12">
+                                            <input type="submit" value="@ClientLoginRES.SeConnecter" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <br />
+                                    @*<p>
+                                            <a href="~/Account/ResetPassword">Récupérer le mot de passe</a>
+                                        </p>*@
+                                }
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

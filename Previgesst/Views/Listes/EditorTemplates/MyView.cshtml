@@ -1,0 +1,6 @@
+﻿@(Html.Kendo().DropDownList()
+            .Name("Description") // The name of the widget should be the same as the name of the property.
+            .DataValueField("MaterielId") // The value of the dropdown is taken from the EmployeeID property.
+            .DataTextField("Description") // The text of the items is taken from the EmployeeName property.
+            .BindTo((System.Collections.IEnumerable)ViewData["Elements"]) // A list of all employees which is populated in the controller.
+)

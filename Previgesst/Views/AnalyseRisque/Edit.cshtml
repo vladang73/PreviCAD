@@ -1,0 +1,408 @@
+﻿@using Previgesst.ViewModels
+@using Previgesst.Ressources.Analyse
+@using Previgesst.Ressources
+
+@model AnalyseRisqueEditViewModel
+@{
+    ViewBag.Title = "Analyses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container-fluid EditAnalyseDeRisque">
+    <div class="cadenassageContent analyseContent row">
+        <div class="cadenassageContent--header col col-sm-12 col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    @*<li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>*@
+                    <li class="breadcrumb-item"><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AnalyseRisque/EditClient?ID=@Model.ClientId">@*@ARCreateRES.ListeDesAnalyses @Model.NomClient*@ @ARCreateRES.Retour </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@ARCreateRES.EditionAnalyse</li>
+                </ol>
+            </nav>
+            <hr />
+        </div>
+        <div class="panel panel-danger col col-xs-12 col-sm-12 col-md-12 col-lg-10 col-x-10" style="margin:30px auto;">
+            <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white"><span>@ARCreateRES.EditionAnalyseRisque</span> <a href="https://previgesst.com/centre-de-support/" class="supportLink" target="_blank"><img src="/Images/help.png" class="help-icon" title="Centre support" /> @ARCreateRES.CentreSupport</a></div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Edit", "AnalyseRisque", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+                    @Html.HiddenFor(m => m.Id)
+
+                    Previgesst.Sessions.sessionInfo session = (Previgesst.Sessions.sessionInfo)Session["utilisateur"];
+                    var nomUtilisateur = session?.Nom;
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-inline">
+                                    <!-- Compagny name -->
+                                    <div class="col-md-3">
+                                        @Html.LabelFor(m => m.NomClient, new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.NomClient, new { @class = "form-control", @readonly = "readonly", @style = "width:100%" })
+                                    </div>
+                                </div>
+                                <!-- Creator -->
+                                <div class="form-group form-inline">
+                                    <div class="col-md-3">
+                                        @Html.LabelFor(m => m.Createur, new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.Createur, new { @class = "form-control", @readonly = "readonly", @style = "width:100%" })
+                                    </div>
+                                </div>
+                                <!-- Creation date -->
+                                <div class="form-group form-inline">
+                                    <div class="col-md-3">
+                                        @Html.LabelFor(m => m.DateCreation, new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.DateCreation, new { @class = "form-control", @readonly = "readonly", @style = "width:100%" })
+                                    </div>
+                                </div>
+                                <!-- User update -->
+                                @if (Model.UserMAJ == null)
+                                {
+                                    @Html.HiddenFor(m => m.UserMAJ)
+                                }
+                                else
+                                {
+                                    <div class="form-group form-inline">
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(m => m.UserMAJ, new { @class = "control-label pull-right" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.UserMAJ, new { @class = "form-control", @readonly = "readonly", @style = "width:100%" })
+                                        </div>
+                                    </div>
+                                }
+                                <!-- Date update -->
+
+                                @if (Model.DateMAJ == "")
+                                {
+                                    @Html.HiddenFor(m => m.DateMAJ)
+                                }
+                                else
+                                {
+                                    <div class="form-group form-inline">
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(m => m.DateMAJ, new { @class = "control-label pull-right" })
+                                        </div>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.DateMAJ, new { @class = "form-control", @readonly = "readonly", @style = "width:100%" })
+                                        </div>
+                                    </div>
+                                }
+                                <!-- Participants -->
+                                <div class="form-group form-inline">
+                                    <div class="col-md-3">
+                                        @Html.LabelFor(m => m.Participants, new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.Participants, new { @class = "form-control", @style = "width:100%" })
+                                        @Html.ValidationMessageFor(m => m.Participants, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <!-- Ref -->
+                                <div class="form-group form-inline">
+                                    <div class="col-md-3">
+                                        @Html.LabelFor(m => m.NoRef, new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.NoRef, new { @class = "form-control", @style = "width:100%" })
+                                        @Html.ValidationMessageFor(m => m.NoRef, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <!-- Equipement -->
+                                <div class="form-group form-inline">
+                                    <div class="col-md-3">
+                                        @Html.LabelFor(m => m.Equipement, new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.Equipement, new { @class = "form-control", @style = "width:100%" })
+                                        @Html.ValidationMessageFor(m => m.Equipement, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <!-- Active -->
+                                <div class="form-group form-inline">
+                                    <div class="col-md-3">
+                                        @Html.LabelFor(m => m.AfficherChezClient, new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.CheckBoxFor(m => m.AfficherChezClient)
+                                        @Html.ValidationMessageFor(m => m.AfficherChezClient, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div style="padding-left: 150px;">
+                            <div class="col-md-9" style="width: 20%;display:inline-block;text-align: center;">
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary" value="@ARCreateRES.Enregistrer" />
+                                </div>
+                            </div>
+                            <div class="col-md-9" style="width: 20%;display:inline-block;text-align: center;">
+                                <div class="form-group">
+                                    <a href='~/AnalyseRisque/getXLAnalyse?id=@Model.Id' class="btn btn-info">@AREditClientRES.DocumentAnalyse</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9" style="width: 20%;display:inline-block;text-align: center;">
+                                <div class="form-group">
+                                    <a href='~/AnalyseRisque/getXLAnalyseEN?id=@Model.Id' class="btn btn-info">@AREditClientRES.DocumentAnalyseEN</a>
+                                </div>
+                            </div>
+                            <div class="col-md-9" style="width: 20%;display:inline-block;text-align: center;">
+                                <div class="form-group">
+                                    <input type="button" class="btn btn-success" value="@ARCreateRES.Renumeroter" onclick="RenumeroterLignes()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <hr />
+                <h4>@ARCreateRES.Lignes</h4>
+
+                    @Html.AntiForgeryToken()
+
+                    @(Html.Kendo().Grid<LigneAnalyseRisqueEditViewModel>()
+                            .Name("list")
+                            .Columns(columns =>
+                            {
+                                columns.Bound(c => c.Rang).Title(ARLignesRES.RangListe)
+                                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                    .ForString(str => str.Clear()
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                ))).Width(40);
+
+                                //                columns.Bound(c => c.Equipement)
+                                //                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                //                .ForString(str => str.Clear()
+                                //                  .Contains(GridRES.Contains)
+                                //.StartsWith(GridRES.StartsWith)
+                                //.IsEqualTo(GridRES.Egale)
+                                //.IsNotEqualTo(GridRES.NotEquals)
+                                //                    ))).Width(170);
+
+                                columns.Bound(c => c.Operation)
+                                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                    .ForString(str => str.Clear()
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                ))).Width(190);
+
+                                columns.Bound(c => c.Zone)
+                                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                    .ForString(str => str.Clear()
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                ))).Width(180);
+
+                                columns.Bound(model => model.IndiceFinalAvantTEXTE).Title(ARLignesRES.IndiceAvantListe)
+                                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                    .ForString(str => str.Clear()
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                ))).Width(80);
+
+                                columns.Bound(c => c.PhenomeneDescription).Title(ARLignesRES.PhenomeneDescriptionListe)
+                                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                    .ForString(str => str.Clear()
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                ))).Width(210);
+
+                                columns.Bound(model => model.IndiceFinalApresTEXTE).Title(ARLignesRES.IndiceApresListe)
+                                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                    .ForString(str => str.Clear()
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                ))).Width(80);
+
+                                columns.Bound(c => c.ConformiteAuNormes).Title(ARLignesRES.ConformiteListe).ClientTemplate("<center><input disabled type='checkbox' #= ConformiteAuNormes ? checked='checked' :'' # /></center>")
+                                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                    .ForString(str => str.Clear()
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                ))).Width(110);
+
+                                columns.Bound(bt => Model.Id)
+                                    .ClientTemplate(
+                                    "<a onclick='return duplicateFunction(#=IdLigneAnalyseRisqueEditor#, this)' href='../../AnalyseRisque/DuplicateLigneAnalyseRisque/#= " + nameof(LigneAnalyseRisqueEditViewModel.IdLigneAnalyseRisqueEditor) + " #' class='btn btn-primary k-cde-edit' >" +
+                                    ARCreateRES.Vide + "</a>").Title(ARCreateRES.Vide).Filterable(false).Sortable(false).Width(10).Hidden(!Model.AfficherChezClient);
+                        
+                                    columns.Command(command => { command.Edit();command.Custom(ARCreateRES.Vide).Click("ConfirmDeleteRow").HtmlAttributes(new { @class = "k-grid-dupliquer" }); }).Width(30);
+                                })
+                            .Sortable(s => s.AllowUnsort(false))
+                            .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
+                            { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                            .Filterable()
+                            .DataSource(ds => ds
+                                .Ajax()
+                                .PageSize(20)
+                                .Model(m =>
+                                {
+                                    m.Id(e => e.IdLigneAnalyseRisqueEditor);
+                                })
+                                .Read(r => r.Action("ReadLigneAnalyseRisque", "AnalyseRisque", new { id = Model.Id }))
+                                .Create(c => c.Action("CreateLigneAnalyseRisque", "AnalyseRisque", new { idAnalyseRisque = Model.Id }))
+                                .Update(u => u.Action("UpdateLigneAnalyseRisque", "AnalyseRisque", new { idAnalyseRisque = Model.Id }))
+                                .Destroy(d => d.Action("DeleteLigneAnalyseRisque", "AnalyseRisque"))
+                                .Events(e => e
+                                    .Error("ListeErreur")
+                                )
+                            )
+                            .Events(e => e
+                                .DataBound("ListeDataBound")
+                            ).Editable(e => e.DisplayDeleteConfirmation(false))
+                            .Scrollable(s => s.Enabled(true).Height("auto"))
+                            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneAnalyseRisqueEditor").Window(w => w.Title(ARLignesRES.Edition).Width(950).Name("editWindow")))
+                
+                        .ToolBar(tb =>
+                        {
+                            tb.Create();
+                        })
+                    )
+                        
+            </div>
+        </div>
+        <a class="shieldLogoCadenassage" href="@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") }"><img src='/Images/shield.png'></a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // White background for the body ID
+    jQuery('#body').css('background', '#FFF');
+
+    // Get and inject the li name selected
+    jQuery(document).on('click', '.nav-tabs li', function () {
+        let liSelected = jQuery(this).find('.icon-noactive').attr('title');
+        jQuery('.currentTitleAnalyse').html(liSelected);
+    });
+
+    // HIDE CURRENT LOGO
+    jQuery('.content-wrapper .float-left img').css('display', 'none');
+
+
+    function ConfirmDeleteRow(e) {
+        e.preventDefault();
+        //debugger;
+        var grid = this;
+        console.dir(grid);
+        var row = $(e.currentTarget).closest("tr");
+        console.log('row ' + row);
+        var dataItem = this.dataItem(row);
+        console.log('dataItem ' + dataItem);
+
+        ShowDeleteConfirm("@ARLignesRES.Ligne " + dataItem.Rang, function (args) {
+            console.log('ShowDeleteConfirm IN !!');
+            console.dir(args);
+            if (args.confirmed === true) {
+                console.log('IN ShowDeleteConfirm');
+                console.dir(grid.removeRow);
+                grid.removeRow(row);
+            }
+        });
+     }
+
+    function ListeErreur(args) {
+        var selecteurGrid = "#list";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    ShowNotification("@ARCreateRES.Erreur",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+    }
+
+    function ListeDataBound(e) {
+        var selecteurGrid = "#list";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+        // $(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+    }
+
+
+    function RenumeroterLignes() {
+        var dataInput = {
+            AnalyseId: $("#@Html.IdFor(m => m.Id)").val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("RenumeroterLignes")',
+            type: "POST",
+            data: JSON.stringify(dataInput),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                // reload de la grille
+                $('#list').data('kendoGrid').dataSource.read();
+                $('#list').data('kendoGrid').refresh();
+            }
+        })
+    }
+    
+    function duplicateFunction(IdLigneAnalyseRisqueEditor) {
+       // debugger;
+        var dataInput = {
+            Id: IdLigneAnalyseRisqueEditor
+        };
+
+        $.ajax({
+            data: JSON.stringify(dataInput),
+            url: '@Url.Action("DuplicateLigneAnalyseRisque")',
+            type: "POST",
+
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                $("#list").data("kendoGrid").dataSource.read();
+            },
+            error: function (data) {                       
+            }
+        })
+        $("#list").data("kendoGrid").dataSource.read();
+        return false;
+    }
+</script>
+
+<style type="text/css">
+    .k-window {
+        width: 95% !important;
+        left: 2% !important;
+        max-width: 950px;
+    }
+    .k-window .container {
+        width: 100% !important;
+    }
+</style>

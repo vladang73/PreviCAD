@@ -1,0 +1,87 @@
+﻿@model Previgesst.ViewModels.EmployeRegistreViewModel
+@using Previgesst.Ressources.Previcad
+
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="cadenassageContent registreEmploye row">
+        <div class="cadenassageContent--header col col-sm-12 col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">@PrevIndexRES.Cadenassage - @Model.Nom</li>
+                </ol>
+            </nav>
+            <hr />
+        </div>
+
+        <ul class="nav nav-tabs col-md-1" role="tablist">
+            <li role="presentation" class="active">
+                <a id="Fiches" href="#TabFiches" aria-controls="general" role="tab" data-toggle="tab">
+                    <img src="~/Images/fiche-de-cadenassage.png" class="menu-icon icon-noactive" title="@PrevIndexRES.Fiches" /><img src="~/Images/fiche-de-cadenassage-previ.png" class="menu-icon icon-active" title="@PrevIndexRES.Fiches" /><!--@PrevIndexRES.Fiches-->
+                </a>
+            </li>
+
+            <li role="presentation">
+                <a id="EnCours" href="#TabEnCours" onclick="refreshEnCours()" aria-controls="" role="tab" data-toggle="tab"><img src="~/Images/cadenas-ferme.png" class="menu-icon icon-noactive" title="@PrevIndexRES.EnCours" /><img src="~/Images/cadenas-ferme-previ.png" class="menu-icon icon-active" title="@PrevIndexRES.EnCours" /><!--@PrevIndexRES.EnCours--></a>
+            </li>
+            <li role="presentation">
+                <a id="Dep" href="#TabTermines" onclick="refreshTermines()" aria-controls="" role="tab" data-toggle="tab"><img src="~/Images/cadenas-ouvert.png" class="menu-icon icon-noactive" title="@PrevIndexRES.Termines" /><img src="~/Images/cadenas-ouvert-previ.png" class="menu-icon icon-active" title="@PrevIndexRES.Termines" /><!--@PrevIndexRES.Termines--></a>
+            </li>
+
+            <li role="presentation">
+                <a id="Doc" href="#TabDocuments" aria-controls="" role="tab" data-toggle="tab"><img src="~/Images/programme-de-cadenassage.png" class="menu-icon icon-noactive" title="@PrevIndexRES.Programme" /><img src="~/Images/programme-de-cadenassage-previ.png" class="menu-icon icon-active" title="@PrevIndexRES.Programme" /><!--@PrevIndexRES.Programme--></a>
+            </li>
+
+
+        </ul>
+        <div class="panel panel-danger col col-xs-12 col-sm-12 col-md-10">
+            <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white"><span class="currentTitleCadenassage">@PrevIndexRES.Fiches</span> <a href="https://previgesst.com/centre-de-support/" class="supportLink" target="_blank"><img src="/Images/help.png" class="help-icon" title="Centre support" /> @PrevIndexRES.CentreSupport</a></div>
+            <div class="panel-body">
+                <div class="tab-content">
+
+                    <div id="TabFiches" class="tab-pane active">
+                        @Html.Partial("Fiches", @Model)
+                    </div>
+                    <div id="TabEnCours" class="tab-pane">
+                        @Html.Partial("EnCours", @Model)
+                    </div>
+                    <div id="TabTermines" class="tab-pane">
+                        @Html.Partial("Termines", @Model)
+                    </div>
+                    <div id="TabDocuments" class="tab-pane">
+                        @Html.Partial("Documents", @Model)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <a class='shieldLogoCadenassage' href='#'><img src='/Images/shield.png'><a />
+    </div>
+</div>
+
+<script>
+    function refreshEnCours(e) {
+        $("#listEnCours").data("kendoGrid").dataSource.read();
+    }
+
+    function refreshTermines(e) {
+        $("#listTermines").data("kendoGrid").dataSource.read();
+    }
+    
+    // Get and inject the li name selected
+    jQuery(document).on('click', '.nav-tabs li', function () {
+        let liSelected = jQuery(this).find('.icon-noactive').attr('title');
+        jQuery('.currentTitleCadenassage').html(liSelected);
+    });
+
+    // White background for the body ID
+    jQuery('#body').css('background', '#FFF');
+
+    // HIDE CURRENT LOGO
+    jQuery('.content-wrapper .float-left img').css('display', 'none');
+</script>

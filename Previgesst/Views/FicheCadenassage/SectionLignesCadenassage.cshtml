@@ -1,0 +1,340 @@
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Cadenassage
+@model Previgesst.ViewModels.EditFicheViewModel
+
+<div class="panel panel-danger">
+
+
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+
+
+    <div class="panel-body">
+        <div style="margin-bottom:10px;">
+            <input type="button" class="btn btn-success" value="@CadLigneCadRES.Renumeroter" onclick="RenumeroterLignes()" />
+        </div>
+
+        <div id="Documents" class="tab-pane">
+
+
+
+            @Html.AntiForgeryToken()
+
+            @(Html.Kendo().Grid<LigneInstructionViewModel>()
+                                    .Name("listCAD")
+                                    .Columns(columns =>
+                                    {
+
+                                        columns.Bound(e => e.LigneInstructionId).Hidden();
+                                        columns.Bound(e => e.FicheCadenassageId).Hidden();
+
+                                        columns.Bound(c => c.NoLigne).Filterable(f => f.Extra(false)).Title("#").Width("50px");
+
+
+                                        columns.Bound(c => c.TexteInstruction)
+                                             .Filterable(f => f.Extra(false).Operators(operators => operators
+                                          .ForString(str => str.Clear()
+                                          .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                             ))).Title(CadLigneCadRES.Instruction);
+
+                                        columns.Bound(c => c.TexteSupplementaireInstruction).Title("Instruction").Width("150")
+                                 .Filterable(f => f.Extra(false).Operators(operators => operators
+                              .ForString(str => str.Clear()
+                               .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                 ))).Title(CadLigneCadRES.AutresInstructions);
+
+                                                            columns.Bound(c => c.TexteSupplementaireDispositif)
+                                 .Filterable(f => f.Extra(false).Operators(operators => operators
+                              .ForString(str => str.Clear()
+                              .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                 ))).Title(CadLigneCadRES.Dispositif).Width("120px");
+                                  
+
+
+                                        columns.Bound(e => e.Thumbnail).ClientTemplate("<img src='#=Thumbnail#'/>").EditorTemplateName("VideView").Title(CadLigneCadRES.Image).Filterable(false).Sortable(false);
+                                 
+
+
+                                        columns.Command(c =>
+                                        {
+                                            c.Edit();
+                                            c.Custom(CadLigneCadRES.Effacer)
+                                                  .Click("ConfirmDeleteRowCAD")
+                                                  .HtmlAttributes(new { @class = "k-grid-effacer" });
+
+                                        })
+                                           .Width(200);
+
+                                    })
+
+                                    .Sortable(s => s.AllowUnsort(false))
+                                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                                    .Filterable()
+                                    .DataSource(ds => ds
+                                        .Ajax()
+                                           .Sort(x => x.Add(c => c.NoLigne))
+
+                                        .PageSize(20)
+                                        .Model(m =>
+                                        {
+                                            m.Id(e => e.LigneInstructionId);
+
+
+
+                                        })
+
+                                    .Read(r => r.Action("ReadListCadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                                    .Create(c => c.Action("SaveItemCadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                                    .Update(u => u.Action("SaveItemCadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                                    .Destroy(u => u.Action("DeleteItemCadenassage", "FicheCadenassage"))
+                                    
+
+
+                                    .Events(e => e
+                                        .Error("ListeErreurCAD").RequestEnd("EndLC")
+                                    )
+                                    )
+
+                                    .Events(e => e
+                                        .DataBound("ListeDataBoundCAD").Edit("Edit")
+
+                                    ).
+                                    Editable(e => e.DisplayDeleteConfirmation(false)).
+                                    Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneInstruction").Window(w => w.Title(CadLigneCadRES.Edition).Width(600)))
+
+
+                                    @*.ToolBar(tb =>
+                                        {
+                                        tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
+                                        }*@
+
+                                    .ToolBar(t =>
+                                    {
+                                        t.Create();
+                                    }).Scrollable(s => s.Enabled(true).Height("auto"))
+            )
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+
+    $("#EtapCadFich").click(function () {
+
+        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        $("a.k-grid-add").addClass("btn btn-success btn-sectioncad");
+        $("span.k-add").removeClass("k-icon");
+        $("a.btn-sectioncad").text("@CadLigneCadRES.Ajouter");
+
+        // ADD ICONE "+"
+        setTimeout(function () { $("#Cadenassage").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+    });
+
+    function EndLC(e) {
+        if (e.type == "update" || e.type == "destroy" || e.type == "create") {
+
+            var grid = $("#listPhoto").data("kendoGrid")
+            grid.dataSource.read();
+
+        }
+    }
+
+    //function end(e)
+    //{
+    //    // reload de la grille car pas de refresh sur application mise à jour
+
+    //    if (e.type == "update")
+    //    {
+    //        var grid = $("#list").data("kendoGrid");
+    //        grid.dataSource.read();
+
+    //    }
+
+    //}
+
+    var imageWindow;
+    var timer;
+    function Edit(e) {
+        var item = $(e.container).find('[value=Image]').hide();
+        
+
+        //debugger;
+    }
+    function changerImage(e) {
+
+
+
+    var config = {
+        //contextPath: '@Url.Content("~")'
+         path: '@Url.Content("~/upload/setInstrPic/")'
+    };
+
+
+        imageWindow = PopupCenter(config.path+ e, "@CadLigneCadRES.ChangerImage", 600, 300);
+
+
+        timer = setInterval(checkWindow, 100);
+
+    }
+
+    function checkWindow() {
+
+        if (imageWindow.closed) {
+
+            $('#listCAD').data('kendoGrid').dataSource.read();
+            $('#listCAD').data('kendoGrid').refresh();
+            clearInterval(timer);
+        }
+
+    }
+
+    function PopupCenter(url, title, w, h) {
+        var userAgent = navigator.userAgent,
+            mobile = function () {
+                return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
+                    /\b(iP[ao]d)/.test(userAgent) ||
+                    /Android/i.test(userAgent) ||
+                    /Mobile/i.test(userAgent);
+            },
+            screenX = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+            screenY = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+            outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
+            outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : document.documentElement.clientHeight - 22,
+            targetWidth = mobile() ? null : w,
+            targetHeight = mobile() ? null : h,
+            V = screenX < 0 ? window.screen.width + screenX : screenX,
+            left = parseInt(V + (outerWidth - targetWidth) / 2, 10),
+            right = parseInt(screenY + (outerHeight - targetHeight) / 2.5, 10),
+            features = [];
+        if (targetWidth !== null) {
+            features.push('width=' + targetWidth);
+        }
+        if (targetHeight !== null) {
+            features.push('height=' + targetHeight);
+        }
+        features.push('left=' + left);
+        features.push('top=' + right);
+        features.push('scrollbars=0');
+        features.push('location=0');
+        features.push('menubar=0');
+        features.push('title=0');
+        features.push('resizable=0');
+
+
+
+        var newWindow = window.open(url, title, features.join(','));
+
+        if (window.focus) {
+            newWindow.focus();
+        }
+
+        return newWindow;
+    }
+
+
+    function ConfirmDeleteRowCAD(e) {
+
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.NoLigne, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+
+    }
+
+
+    function ListeErreurCAD(args) {
+
+        var selecteurGrid = "#listCAD";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("@CadLigneCadRES.Erreur",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+
+
+
+    }
+
+    function ListeDataBoundCAD(e) {
+
+
+
+        var selecteurGrid = "#listCAD";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                $(this).remove();
+            }
+        })
+    }
+
+    function RenumeroterLignes() {
+
+
+
+
+        var dataInput = {
+            FicheCadenassageId: $("#@Html.IdFor(m => m.FicheCadenassageId)").val()
+        };
+
+        $.ajax({
+            url: '@Url.Action("RenumeroterLignes")',
+            type: "POST",
+            data: JSON.stringify(dataInput),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+
+                // reload de la grille
+                $('#listCAD').data('kendoGrid').dataSource.read();
+                $('#listCAD').data('kendoGrid').refresh();
+
+
+                }
+            })
+
+
+
+            }
+</script>

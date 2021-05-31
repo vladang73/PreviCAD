@@ -1,0 +1,12 @@
+﻿<div id="mydiv">
+    @(Html.Kendo().Upload()
+        .Name("file")
+        .Multiple(false)
+        .Async(a => a
+            .Save("SaveLinkPhoto", "FicheCadenassage")
+            .AutoUpload(true)
+
+        )
+        .Events(e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelectJpg"))
+    )
+</div>

@@ -1,0 +1,122 @@
+﻿@*@using Microsoft.AspNet.Identity*@
+@using Previgesst.Ressources
+
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <a href='@Url.Action("Index", "MesApplications")'>
+                        <img class="logoHeader" src='@Url.Content("~/Images/dark_logo.png")' />
+                    </a>
+
+                </div>
+                <div style="margin-right:0px;margin-left:auto;padding:30px;width:300px;position: absolute;right: 0;top: 0;">
+                    <ul id="menu">
+                        @{
+                            using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
+
+                            {
+
+                                string path = Request.Url.PathAndQuery;
+
+                                path = path.Replace("/en/", "");
+                                path = path.Replace("/fr/", "");
+                                if (path.Length == 0)
+                                {
+                                    path = "ClientLogin/Index";
+                                }
+                                if (path.Substring(0, 1) == "/")
+                                {
+                                    path = path.Substring(1);
+                                }
+                                //utilisé pour prévicad client
+                                if (Session["ClientID"] != null && !path.Contains("?"))
+                                {
+                                    path = path + "?ClientID=" + Session["ClientID"];
+                                }
+
+
+                                <li style="padding:1px;"><a onclick="/*setCookie('langue','fr',365);*/location.href='/fr/@path'" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;">Fr</a></li>
+                                <li style="padding:0px;">-</li>
+                                <li style="padding-left:1px;"><a onclick="/*setCookie('langue','en',365);*/location.href='/en/@path'" class="dropdown-toggle" style="color: #1d65ac; font-size: smaller;">En</a></li>
+
+                                //@Html.AntiForgeryToken()
+                                if (Request.IsAuthenticated)
+                                {
+
+
+                                    Previgesst.Sessions.sessionInfo session = (Previgesst.Sessions.sessionInfo)Session["utilisateur"];
+                                    var nomUtilisateur = session?.Nom;
+
+
+                                    if (nomUtilisateur != null)
+                                    { @:<li class="dropdown">
+                                            @:<a href="#" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;" data-toggle="dropdown" role="button">@nomUtilisateur<span class="caret"></span></a>
+                                            @: <ul class="dropdown-menu">
+                                                @:<li><a href="javascript:document.getElementById('logoutForm').submit()">@LayoutRES.SeDeconnecter</a></li>
+                                            @: </ul>
+                                        @: </li>
+                                    }
+                                }
+
+                                if (HttpContext.Current.Session["EmployeCadenassage"] != null)
+                                {
+                                    EmployeRegistreViewModel employe = (EmployeRegistreViewModel)HttpContext.Current.Session["EmployeCadenassage"];
+
+                                    { @:<li class="dropdown">
+                                            @:<a href="#" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;" data-toggle="dropdown" role="button">@employe.Nom<span class="caret"></span></a>
+                                            @: <ul class="dropdown-menu" style="min-width:10px;">
+                                                @:<li><a href="javascript:document.getElementById('logoutForm').submit()">@LayoutRES.SeDeconnecter</a></li>
+                                            @: </ul>
+                                        @: </li>
+                                    }
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Rotate image in display none -->
+<img class='rotate-phone' src='@Url.Content("~/Images/rotate-phone.png")' />
+<img class='enlarge-screen' src='@Url.Content("~/Images/enlarge-screen.png")' />
+<script>
+    /*
+     function setCookie(cname, cvalue, exdays) {
+      var d = new Date();
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+      var expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    */
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+</script>
+@{
+    if (Request.Url.PathAndQuery != "/" && Request.Url.PathAndQuery != "/Account/Login" && Request.Url.PathAndQuery.Contains( "/Registre/Index?")==false)
+    {
+        <script src="https://previgesst.com/wp-content/themes/previgesst/application.js"></script>
+    }
+}

@@ -1,0 +1,103 @@
+﻿@model UploadViewModel
+
+@{
+    ViewBag.Title = "Analyses";
+    Layout = "~/Views/Shared/_LayoutMinimum.cshtml";
+}
+
+
+
+
+<style>
+    div.k-edit-form-container {
+        width: auto;
+    }
+
+        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
+            width: 100%;
+            max-width: none;
+            padding-left: 0px;
+        }
+
+
+
+    .petit {
+        max-height: 20px;
+    }
+
+    .row {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+
+    .col {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style>
+
+<div class="container" style="width:600px;">
+
+
+    <div class="panel panel-default" style="margin-left:15px;margin-right:30px;">
+
+        <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white"></div>
+        <div class="panel-body">
+
+
+
+            @(Html.Kendo().Upload()
+                .Name("file")
+                .HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
+                                    .Multiple(false)
+                                    .Async(a => a
+                                        .Save("SaveLink", "Upload")
+                                        .AutoUpload(true)
+                                    )
+                                    .Events(
+                                    e => e.Success("fileSuccess").Upload("fileUpload").Select(@Model.Extensions)
+                                    ))
+
+
+
+        </div>
+    </div>
+</div>
+<script>
+
+
+    function fileSelectJpg(e) {
+
+        var extension = e.files[0].extension.toLowerCase().trim();
+
+        if (extension.toLowerCase() != ".jpg" && extension.toLowerCase() != ".jpeg") {
+            e.preventDefault();
+           // alert('@Model.Message');
+
+            ShowNotification("Erreur sur type de fichier", '@Model.Message', "infoTemplate") 
+        }
+    }
+
+
+
+
+
+
+    function fileSuccess(e) {
+
+
+
+
+    }
+
+
+
+    function fileUpload(e) {
+
+        e.data = { DocumentId: @Model.ItemId, TypeDoc:'@Model.typeUpload' };
+
+    }
+
+
+</script>
+

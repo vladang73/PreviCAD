@@ -1,0 +1,186 @@
+﻿@using Previgesst.Ressources
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications Prévigesst</title>
+
+    @Styles.Render("~/content/css")
+    @Styles.Render("~/Content/csskendo")
+    @Styles.Render("~/content/cssAfter")
+    
+    @Scripts.Render("~/bundles/cldr")
+    @Scripts.Render("~/bundles/globalize")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/site")
+</head>
+<body style="border-top-width:0px;">
+    <header>
+        @*  @Html.Partial("_Navigation")*@
+    </header>
+
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+
+    @*<footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>Prévigesst @DateTime.Now.Year</p>
+                </div>
+            </div>
+        </footer>*@
+
+    @* Popup générique pour la suppression *@
+    <div id="delete-generic-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="delete-generic-title">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="delete-generic-title">@GridRES.Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        @GridRES.DeleteMessage
+                        <span class="text-danger">'<span class="element-to-delete"></span>'</span>?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-danger" value="@GridRES.Oui" onclick="deleteGenericResult(true)" data-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasSupprimer" onclick="deleteGenericResult(false)" data-dismiss="modal" />
+                    <input type="hidden" class="delete-generic-result" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Popup générique pour dupliquer *@
+    <div id="duplicate-generic-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="duplicate-generic-title">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="duplicate-generic-title">@GridRES.ConfirmationDuplication</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        @GridRES.DuplicateMessage
+                        <span class="text-danger">'<span class="element-to-duplicate"></span>'</span>?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-success" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" />
+                    <input type="hidden" class="duplicate-generic-result" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="infoTemplate" type="text/x-kendo-template">
+        <div class="alert alert-info">
+            <h3>
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="warningTemplate" type="text/x-kendo-template">
+        <div class="alert alert-warning">
+            <h3>
+                <span class="glyphicon glyphicon-warning-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="errorTemplate" type="text/x-kendo-template">
+        <div class="alert alert-danger">
+            <h3>
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="errorListTemplate" type="text/x-kendo-template">
+        <div class="alert alert-danger">
+            <h3>
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                #= title #
+            </h3>
+            <ul>#= message #</ul>
+        </div>
+    </script>
+
+    <script id="successTemplate" type="text/x-kendo-template">
+        <div class="alert alert-success">
+            <h3>
+                <span class="glyphicon glyphicon-ok-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script type="text/x-kendo-template" id="gridValidationMessageTemplate">
+        # if (field) { #
+        <li>
+            #=field#
+            <ul>
+                # } #
+                # for (var i = 0; i < messages.length; ++i) { #
+                <li>#= messages[i] #</li>
+                # } #
+                # if (field) { #
+            </ul>
+        </li>
+        # } #
+    </script>
+
+    @(Html.Kendo().Notification()
+        .Name("notification")
+        .Position(p => p.Pinned(true).Top(75).Left(30))
+        .Stacking(NotificationStackingSettings.Down)
+        .AutoHideAfter(15 * 1000)
+        .HideOnClick(true)
+        .Button(false)
+        .Templates(t =>
+        {
+            t.Add().Type("infoTemplate").ClientTemplateID("infoTemplate");
+            t.Add().Type("errorTemplate").ClientTemplateID("errorTemplate");
+            t.Add().Type("warningTemplate").ClientTemplateID("warningTemplate");
+            t.Add().Type("successTemplate").ClientTemplateID("successTemplate");
+        })
+    )
+
+    @if (ViewBag.NotiticationTemplate != null && ViewBag.NotificationTitle != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                ShowNotification("@ViewBag.NotificationTitle",
+                                 "@ViewBag.NotificationMessage",
+                                 "@ViewBag.NotiticationTemplate");
+            });
+        </script>
+    }
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

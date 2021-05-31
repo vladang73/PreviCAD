@@ -1,0 +1,186 @@
+﻿@using Previgesst.Ressources.Cadenassage
+@model EditFicheViewModel
+
+
+<div class="panel panel-danger">
+
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+
+
+
+    <div class="panel-body" style="padding:30px">
+
+        @{
+            string editFicheUrl = "EditFiche";
+            string creerFicheUrl = "CreerFiche";
+            string currentUrl = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
+            var vm = new EditFicheViewModel();
+
+            if (currentUrl.Contains(editFicheUrl))
+            {
+                vm.sauvegarderMaFicheDeCadenassage = "EditerFiche";
+            }
+            else if (currentUrl.Contains(creerFicheUrl))
+            {
+                vm.sauvegarderMaFicheDeCadenassage = "SaveFiche";
+            }
+            else
+            {
+                vm.sauvegarderMaFicheDeCadenassage = "SaveFiche";
+            }
+        }
+
+        @using (Html.BeginForm(vm.sauvegarderMaFicheDeCadenassage, "FicheCadenassage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken();
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+            @Html.HiddenFor(model => model.ClientId)
+            @Html.HiddenFor(model => model.FicheCadenassageId)
+            @Html.HiddenFor(model => model.EstDocumentPrevigesst)
+            @Html.HiddenFor(model => model.NomClient)
+
+
+            <div class="form-group">
+                @if (Model.FicheCadenassageId != 0)
+                {
+                    <div>
+                        <a href='~/FicheCadenassage/GetFiche?id=@Model.FicheCadenassageId' class='btn btn-info buttonView'>@CadInfoGeneralesRES.Fiche</a>
+                    </div>
+                }
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.EquipementId, new { @class = "control-label" })
+
+                @(Html.Kendo().DropDownListFor(m => m.EquipementId)
+                    .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                        .OptionLabel("-- " + CadInfoGeneralesRES.SelectionnerEquipement + " --")
+                    .DataValueField(nameof(EquipementDDLViewModel.EquipementId))
+                    .DataTextField(nameof(EquipementDDLViewModel.NomEquipement))
+                        .BindTo((System.Collections.IEnumerable)ViewData["Equipements"])
+                )
+
+
+                @Html.ValidationMessageFor(m => m.EquipementId, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DepartementId, new { @class = "control-label" })
+
+                @(Html.Kendo().DropDownListFor(m => m.DepartementId)
+                    .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                        .OptionLabel("-- " + CadInfoGeneralesRES.SelectionnerDepartement + " --")
+                    .DataValueField(nameof(DepartementDDLViewModel.DepartementId))
+                    .DataTextField(nameof(DepartementDDLViewModel.NomDepartement))
+                        .BindTo((System.Collections.IEnumerable)ViewData["Departements"])
+                )
+
+
+                @Html.ValidationMessageFor(m => m.DepartementId, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.TravailAEffectuer, new { @class = "control-label" })
+
+                @Html.TextAreaFor(m => m.TravailAEffectuer, new { @class = "form-control", @rows = 3 })
+                @Html.ValidationMessageFor(m => m.TravailAEffectuer, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.TravailAEffectuerEN, new { @class = "control-label" })
+
+                @Html.TextAreaFor(m => m.TravailAEffectuerEN, new { @class = "form-control", @rows = 3 })
+                @Html.ValidationMessageFor(m => m.TravailAEffectuerEN, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.NoFiche, new { @class = "control-label" })
+
+                @Html.TextBoxFor(m => m.NoFiche, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.NoFiche, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ApprouvePar, new { @class = "control-label" })
+
+                @Html.TextBoxFor(m => m.ApprouvePar, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ApprouvePar, "", new { @class = "text-danger" })
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DateCreation, new { @class = "control-label" })
+
+                @(Html.Kendo().DatePickerFor(m => m.DateCreation).HtmlAttributes(new { @class = "form-control", @style = "margin-left:5px" }))
+                @Html.ValidationMessageFor(m => m.BidonErreurCreation, "", new { @class = "text-danger" })
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DateRevision, new { @class = "control-label" })
+
+                @(Html.Kendo().DatePickerFor(m => m.DateRevision).HtmlAttributes(new { @class = "form-control", @style = "margin-left:5px" }))
+                @Html.ValidationMessageFor(m => m.DateRevision, "", new { @class = "text-danger" })
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.AfficherClient, new { @class = "control-label" })
+
+                @Html.CheckBoxFor(m => m.AfficherClient, new { @style = "vertical-align:middle;margin-left:5px" })
+                @Html.ValidationMessageFor(m => m.AfficherClient, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.RevisionCourante, new { @class = "control-label" })
+
+                @Html.CheckBoxFor(m => m.RevisionCourante, new { @style = "vertical-align:middle;margin-left:5px" })
+                @Html.ValidationMessageFor(m => m.RevisionCourante, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.TitreFiche, new { @class = "control-label" })
+
+                @(Html.Kendo().DropDownListFor(m => m.TitreFiche)
+                    .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+                        .OptionLabel("-- " + CadInfoGeneralesRES.SelectionnerTypeFiche + " --")
+                    .DataValueField(nameof(TitreFicheDDLViewModel.Texte))
+                    .DataTextField(nameof(TitreFicheDDLViewModel.Texte))
+                        .BindTo((System.Collections.IEnumerable)ViewData["Titres"])
+
+
+                )
+                @Html.ValidationMessageFor(m => m.TitreFiche, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="@CadInfoGeneralesRES.Enregistrer" />
+            </div>
+        }
+    </div>
+</div>

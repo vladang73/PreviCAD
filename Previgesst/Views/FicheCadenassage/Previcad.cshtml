@@ -1,0 +1,20 @@
+﻿@using Previgesst.Ressources.Cadenassage
+@model Previgesst.ViewModels.EditCadenassageViewModel
+
+<!--<h3>@CadDeptPrevicad.Lien </h3>-->
+<br />
+<button type="button" class="btn btn-primary"><a style="color:#fff" href="mailto:?subject=@CadDeptPrevicad.EmailSubject&body=@CadDeptPrevicad.EmailContent : @Model.LienPrevicad"><img src='/Images/email.png' style='width: 40px;'> @CadDeptPrevicad.Send</a></button>
+<p style="margin:10px 0;">@CadDeptPrevicad.Or</p>
+<button onclick="copieClientUrl()" type="button" class="btn btn-info"><img src='/Images/lien-partage.png' style='width: 40px;'><a style="color:#fff">@CadDeptPrevicad.Copy</a></button>
+<input type="text" style="width:560px;" id="urlClient" value="@Model.LienPrevicad">
+
+
+
+<script defer="defer">
+    function copieClientUrl() {
+        var copyText = document.getElementById("urlClient");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+    }
+</script>

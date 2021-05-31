@@ -1,0 +1,225 @@
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Previcad
+@model Previgesst.ViewModels.EmployeRegistreViewModel
+
+
+<style>
+
+    .k-grid-content {
+        overflow-x: scroll!important;
+    }
+</style>
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+    <div class="panel-body">
+        <div style="padding-bottom:10px;padding-top:10px">
+
+        </div>
+        <div>
+
+
+            @Html.AntiForgeryToken()
+
+            @(Html.Kendo().Grid<LigneRegistreViewModel>()
+                    .Name("list")
+                    .Columns(columns =>
+                    {
+
+                        columns.Bound(e => e.FicheCadenassageId).Hidden();
+                        columns.Bound(c => c.NoFicheCadenassage).Title(PrevFicheRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(40);
+
+                        columns.Bound(e => e.NomEquipement).Title(PrevFicheRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(140);
+                        columns.Bound(e => e.NomDepartement).Title(PrevFicheRES.Departement).Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(110);
+
+                        columns.Bound(e => e.TitreFiche).Title(PrevFicheRES.Type).ClientTemplate("").Width(70);
+                        columns.Bound(e => e.TravailAEffectuer).Title(PrevFicheRES.Travaux).ClientTemplate("").Width(140);
+                        columns.Command(command => command.Custom(PrevFicheRES.Materiel).Click("showDetails").HtmlAttributes(new {@class="btn materialButton", @style="text-align:center"})).Width(50);
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  class='btn downloadButton' style='text-align:center' title="+PrevFicheRES.Telecharger+"></a>").Title("").Filterable(false).Sortable(false).Hidden( @Model.Langue!="fr").Width(43);
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  class='btn downloadButton' title="+PrevFicheRES.Telecharger+"></a>").Title("").Filterable(false).Sortable(false).Hidden(@Model.Langue !="en").Width(43);
+
+                        columns.Command(e => e.Edit().Text(PrevFicheRES.Cadenasser)).Width(65);
+
+                    })
+
+                    .Sortable(s => s.AllowUnsort(false))
+                    .Scrollable(e => e.Enabled(true))
+                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                    .Filterable()
+
+                    .DataSource(ds => ds
+                        .Ajax()
+
+                        //.Sort( x=> x.Add (c => c.DisplaySection))
+                        //.Sort(x => x.Add(c => c.Ordre))
+                        .Filter(f =>
+                        {
+                            //f.Add(b => b.estDocumentPrevigesst).IsEqualTo(true);
+
+                        })
+
+                        .PageSize(20)
+                        .Model(m =>
+                        {
+                            m.Id(e => e.FicheCadenassageId);
+                        })
+                    .Read(r => r.Action("ReadListFiches", "Registre", new { client = Model.ClientId }))
+                    .Update(r => r.Action("AddNewLine", "Registre", new { client = Model.ClientId }))
+                    ).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistreNew").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600)))
+                    .Events( e=> e.Edit("onEditFiches")).Events(e=>e.DataBound("dataBoundFiches"))
+            )
+
+        </div>
+
+    </div>
+</div>
+
+@(Html.Kendo().Window().Name("Materiel")
+    .Title(PrevFicheRES.Materiel)
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(300)
+)
+
+<hidden id="ficheId"></hidden>
+
+<script type="text/x-kendo-template" id="template">
+    <div id="details-container">
+        #= TexteMateriel.length ==0 ? "@PrevFicheRES.Aucun" :TexteMateriel.join("<br />") #
+    </div>
+</script>
+
+<script>
+
+    var detailsTemplate = kendo.template($("#template").html());
+
+    function showDetails(e) {
+        e.preventDefault();
+
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wnd = $("#Materiel").data("kendoWindow");
+        //debugger;
+        wnd.content(detailsTemplate(dataItem));
+        wnd.center().open();
+    }
+
+    function addNew(e) {
+
+        $('.k-grid-add').trigger('click');
+        var t = $('.k-popup-edit-form').find("#FicheCadenassageId");
+        t.val(e);
+
+    }
+
+    function onInitNewRow(e) {
+
+    }
+
+    function navigate(e) {
+      
+    }
+
+
+</script>
+
+
+
+<style type="text/css">
+    #details-container {
+        padding: 10px;
+    }
+</style>
+
+
+<script>
+    function dataBoundFiches(e) {
+        var selecteurGrid = "#list";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        $(selecteurGrid + " .k-grid-edit").find("span").remove();
+        var classe = $(selecteurGrid + " .k-grid-edit").attr("class");
+        classe = "btn btn-success " + classe;
+        $(selecteurGrid + " .k-grid-edit").removeAttr("class").addClass(classe).removeClass("k-button").removeClass("k-button-icontext");
+        $(selecteurGrid + " .k-button").removeClass("k-button").removeClass("k-button-icontext");
+
+    }
+
+    function onEditFiches(e) {
+     
+        e.container.find(".k-grid-cancel").bind("click", function () {
+           
+            $("#list").data("kendoGrid").dataSource.read();
+            $("#listEnCours").data("kendoGrid").dataSource.read();
+            $("#listTermines").data("kendoGrid").dataSource.read();
+            
+            // FICHE/PROCÉDURE : Check and replace the string by an image
+            setTimeout(function () {
+                jQuery('.registreEmploye #list table tbody tr td:nth-child(5)').each(function () {
+                    if (jQuery(this).text() == 'Procédure de travail sécuritaire') {
+                        jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Procédure de travail sécuritaire'>");
+                    }
+                    else if(jQuery(this).text() == 'Safe work procedure'){
+                       jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
+                    }
+                    else if(jQuery(this).text() == 'Fiche de cadenassage'){
+                       jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
+                    }
+                    else if(jQuery(this).text() == 'Lockout card'){
+                       jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout card'>");
+                    }
+                });
+            }, 300);
+
+        })
+    }
+
+        // FICHE/PROCÉDURE : Check and replace the string by an image
+        setTimeout(function () {
+            jQuery('.registreEmploye #list table tbody tr td:nth-child(5)').each(function () {
+                if (jQuery(this).text() == 'Procédure de travail sécuritaire') {
+                    jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Procédure de travail sécuritaire'>");
+                }
+                else if(jQuery(this).text() == 'Safe work procedure'){
+                   jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
+                }
+                else if(jQuery(this).text() == 'Fiche de cadenassage'){
+                   jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
+                }
+                else if(jQuery(this).text() == 'Lockout card'){
+                   jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout card'>");
+                }
+            });
+        }, 3000);
+
+        // Add img title
+        setTimeout(function () {
+            jQuery('.materialButton').each(function () {
+                jQuery(this).attr('title', 'Materiel');
+            });
+            jQuery('.k-grid-edit').each(function () {
+                jQuery(this).attr('title', 'Effectuez');
+            });
+        }, 3000);
+
+</script>

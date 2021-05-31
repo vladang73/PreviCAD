@@ -1,0 +1,132 @@
+﻿@model AnalyseRisqueCreateViewModel
+@using Previgesst.Ressources.Analyse
+@using Previgesst.Ressources
+
+@{
+    ViewBag.Title = "Analyses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+            <div class="panel panel-danger analyseContent">
+
+                <div class="panel-heading 	back-panel" style="font-size:larger;font-weight:500;color:white">@ARCreateRES.Creation</div>
+
+                <div class="panel-body">
+
+                    @using (Html.BeginForm("Create", "AnalyseRisque", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken();
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="form-group form-inline" style="width:100%">
+                                    @*<div class="col-md-3">
+                                        @Html.LabelFor(m => m.ClientId, new { @class = "control-label pull-right" })
+
+                                    </div>*@
+                                    @*<div class="col-md-3">
+                                        @Html.(m => m.ClientId, new { @class = "hidden" })
+                                    </div>*@
+                                <div class="col-md-6">
+                                    @*@if (User.IsInRole("System"))
+
+                                    {
+                                        @Html.TextBox("NameClient", (string)ViewBag.NameClient, new { @class = "form-control", @readonly = "readonly", @style = "width:100%" })
+
+                                    }*@
+                                    @*else
+                                    {
+
+                                        @(Html.Kendo().DropDownListFor(m => m.ClientId)
+                                                .HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
+                                                .OptionLabel("-- Sélectionner un client --")
+                                                .DataValueField(nameof(ClientDDLViewModel.ClientId))
+                                                .DataTextField(nameof(ClientDDLViewModel.ClientNom))
+                                                .Filter(FilterType.Contains)
+                                                .IgnoreCase(true)
+                                                .BindTo(ViewBag.ListeClients)
+                                        )
+                                    }*@
+
+                                    @Html.HiddenFor(m => m.ClientId)
+                                    @Html.ValidationMessageFor(m => m.ClientId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group form-inline" style="width:100%">
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => m.NoRef, new { @class = "control-label pull-right" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.NoRef, new { @class = "form-control", @style = "width:100%" })
+                            @Html.ValidationMessageFor(m => m.NoRef, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group form-inline" style="width:100%">
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => m.Equipement, new { @class = "control-label pull-right" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(m => m.Equipement, new { @class = "form-control", @style = "width:100%" })
+                            @Html.ValidationMessageFor(m => m.Equipement, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group form-inline" style="width:100%">
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => m.AfficherChezClient, new { @class = "control-label pull-right" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.CheckBoxFor(m => m.AfficherChezClient, new { @class = "control-label" })
+                            @Html.ValidationMessageFor(m => m.AfficherChezClient, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group form-inline" style="width:100%">
+                        <div class="col-md-6" style="display:none;">
+                            @Html.TextBoxFor(m => m.Createur, new { @class = "control-label" })
+                            @Html.ValidationMessageFor(m => m.AfficherChezClient, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="row">
+                    <div class="col-md-10" style="margin-left:calc(25% + -8px)">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-primary" value="@ARCreateRES.Creer" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // White background for the body ID
+    jQuery('#body').css('background', '#FFF');
+
+    // HIDE CURRENT LOGO
+    jQuery('.content-wrapper .float-left img').css('display', 'none');
+</script>

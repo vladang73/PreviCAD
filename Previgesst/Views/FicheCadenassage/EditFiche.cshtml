@@ -1,0 +1,164 @@
+﻿@using Previgesst.Ressources.Cadenassage
+@model Previgesst.ViewModels.EditFicheViewModel
+
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.DroitAjout == false)
+{
+    string paramDroitAjout = Request.QueryString["DroitAjout"];
+
+    if (paramDroitAjout != "true")
+    {
+        <div class="tryDone">
+            <div class="tryDone--content">
+                <h1>@CadEditFicheRES.PeriodeDEssaieTitre</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>@CadEditFicheRES.PeriodeDEssaieTexte</p>
+                        <p>@CadEditFicheRES.PeriodeDEssaieContact</p>
+                        <div class="tryDone--button">
+                            <a href="mailto:mferland@previgesst.com">@CadEditFicheRES.PeriodeDEssaieBouton</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="https://previgesst.com/wp-content/uploads/2020/09/maintenance.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<div class="container-fluid">
+    <div class="cadenassageContent row">
+        <div class="cadenassageContent--header col col-sm-12 col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/Edit/@Model.ClientId">@CadEditFicheRES.Retour @*@CadEditFicheRES.CartesDe - @Model.NomClient*@</a></li>
+
+                    @if (Model.FicheCadenassageId == 0)
+                    {
+                        <li class="breadcrumb-item active" aria-current="page">@CadEditFicheRES.CreationFiche</li>
+                    }
+                    else
+                    {
+                        <li class="breadcrumb-item active" aria-current="page">@CadEditFicheRES.EditionFiche @Model.NoFiche</li>
+                    }
+
+                </ol>
+            </nav>
+            <hr />
+        </div>
+        <ul class="nav nav-tabs col-md-1" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#InfosGenerales" aria-controls="general" role="tab" data-toggle="tab"><img src="/Images/infosgenerales.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.InformationsGenerales" /><img src="/Images/infosgenerales-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.InformationsGenerales" /><!--@CadEditFicheRES.InformationsGenerales--></a>
+            </li>
+            @if (Model.FicheCadenassageId != 0)
+            {
+                <li role="presentation">
+                    <a id="MatFich" href="#Materiel" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/materielrequis.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.MaterielRequis" /><img src="/Images/materielrequis-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.MaterielRequis" /><!--@CadEditFicheRES.MaterielRequis--></a>
+                </li>
+                <li role="presentation">
+                    <a href="#Sources" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/Sourcedenergie.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.SourcesEnergie" /><img src="/Images/Sourcedenergie-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.SourcesEnergie" /><!--@CadEditFicheRES.SourcesEnergie--></a>
+                </li>
+
+                <li role="presentation">
+                    <a id="ImageCadFich" href="#ImagesFiche" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/Images.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.Images" /><img src="/Images/Images-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.Images" /><!--@CadEditFicheRES.Images--></a>
+                </li>
+
+                <li role="presentation">
+                    <a id="EtapCadFich" href="#Cadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/etapesdecadenassage.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.EtapesCadenassage" /><img src="/Images/etapesdecadenassage-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.EtapesCadenassage" /><!--@CadEditFicheRES.EtapesCadenassage--></a>
+                </li>
+
+                <li role="presentation">
+                    <a id="EtapdecFich" href="#Decadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/etapesdedecadenassage.png.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.EtapesDecadenassage" /><img src="/Images/etapesdedecadenassage.png-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.EtapesDecadenassage" /><!--@CadEditFicheRES.EtapesDecadenassage--></a>
+                </li>
+            }
+        </ul>
+        <div class="panel panel-danger col col-xs-12 col-sm-12 col-md-10">
+            <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white"><span class="currentTitleCadenassage">@CadEditFicheRES.GestionCadenassage</span> <a href="https://previgesst.com/centre-de-support/" class="supportLink" target="_blank"><img src="/Images/help.png" class="help-icon" title="Centre support" /> @CadEditRES.CentreSupport</a></div>
+            <div class="panel-body">
+                <div class="tab-content">
+
+                    @if (!Model.DisplaySourceTab)
+                    {<div id="InfosGenerales" class="tab-pane active">
+                            @Html.Partial("SectionInfoGenerales", @Model)
+                        </div>}
+                    else
+                    { <div id="InfosGenerales" class="tab-pane ">
+                            @Html.Partial("SectionInfoGenerales", @Model)
+                        </div>}
+
+
+                    @if (Model.FicheCadenassageId != 0)
+                    {
+
+                        <div id="Materiel" class="tab-pane">
+                            @Html.Partial("SectionMateriel", @Model)
+
+                        </div>
+
+
+
+                        if (Model.DisplaySourceTab)
+                        {
+                            <div id="Sources" class="tab-pane active">
+                                @Html.Partial("SectionSources", new
+                                    SourceEnergieCadenassageViewModel
+                                { FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="Sources" class="tab-pane">
+                                @Html.Partial("SectionSources", new
+                                    SourceEnergieCadenassageViewModel
+                            { FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
+                            </div>
+                        }
+
+                        <div id="ImagesFiche" class="tab-pane">
+                            @Html.Partial("SectionImages", @Model)
+
+                        </div>
+
+
+                        <div id="Cadenassage" class="tab-pane">
+                            @Html.Partial("SectionLignesCadenassage", @Model)
+
+                        </div>
+
+                        <div id="Decadenassage" class="tab-pane">
+
+                            @Html.Partial("SectionLignesDecadenassage", @Model)
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+        <a class='shieldLogoCadenassage' href='@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/shield.png'><a />
+    </div>
+</div>
+<script type="text/javascript">
+    // White background for the body ID
+    jQuery('#body').css('background', '#FFF');
+
+    // Get and inject the li name selected
+    jQuery(document).on('click', '.nav-tabs li', function () {
+        let liSelected = jQuery(this).find('.icon-noactive').attr('title');
+        jQuery('.currentTitleCadenassage').html(liSelected);
+    });
+
+    // HIDE CURRENT LOGO
+    jQuery('.content-wrapper .float-left img').css('display', 'none');
+
+    if(jQuery('.tryDone').length) {
+        jQuery('.btn-primary').css('display', 'none');
+        jQuery('body .panel-danger:first-child').css('opacity', '.3');
+    }
+</script>

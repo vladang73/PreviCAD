@@ -1,0 +1,23 @@
+﻿// Commandes pour les migrations. Exécuter à partir du "Package Manager Console" ("Console du Gestionnaire de package")
+
+//Activer les migrations -- ne pas toucher car migration déjà active sur le projet
+Enable-Migrations
+
+
+//Ajouter une migration, -Force permet d'écraser la dernière migration (si le Update-Database n'a pas été fait)
+Add-Migration -ConfigurationTypeName Previgesst.DataContexts.DbContextMigrations.Configuration "Previg_74" -Force
+
+
+//Mise à jour de la base de données (exécuter les migrations même si on a pas touché à la base de données : c'est pour enregistrer la migration)
+Update-Database -ConfigurationTypeName Previgesst.DataContexts.DbContextMigrations.Configuration
+
+
+//Mise à jour à une migration spécifique -- uniquement pour revenir à une version antérieure
+Update-Database -TargetMigration:"Previg_25"
+
+
+
+
+
+// Ajouter une mise à jour à la migration en cours (ex: nous sommes sur la migration 69 déjà faite et on apporte une modification à la base de données)
+Add-Migration Previg_69

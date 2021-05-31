@@ -1,0 +1,173 @@
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Cadenassage
+@model Previgesst.ViewModels.EditCadenassageViewModel
+
+
+<div class="panel panel-danger">
+
+    @*<div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#E39901;color:white">Équipements </div>
+        <div class="panel-body">*@
+
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+
+
+    <div class="panel-body">
+
+        
+        @Html.AntiForgeryToken()
+
+        @(Html.Kendo().Grid<DepartementViewModel>()
+            .Name("listDEPT")
+            .Columns(columns =>
+            {
+                columns.Bound(e => e.DepartementId).Hidden();
+                columns.Bound(c => c.NomDepartement)//.EditorTemplateName("MyView")
+                .Filterable(f => f.Extra(false).Operators(operators => operators
+                .ForString(str => str.Clear()
+                .Contains(GridRES.Contains)
+                .StartsWith(GridRES.StartsWith)
+                .IsEqualTo(GridRES.Egale)
+                .IsNotEqualTo(GridRES.NotEquals)
+            )));
+            columns.Bound(c => c.NomDepartementEN)//.EditorTemplateName("MyView")
+            .Filterable(f => f.Extra(false).Operators(operators => operators
+                .ForString(str => str.Clear()
+                .Contains(GridRES.Contains)
+                .StartsWith(GridRES.StartsWith)
+                .IsEqualTo(GridRES.Egale)
+                .IsNotEqualTo(GridRES.NotEquals)
+            )));
+            columns.Command(c =>
+                {
+                    c.Edit();
+                    c.Custom(CadDeptRES.Vide)
+                    .Click("ConfirmDeleteRowDEPT")
+                    .HtmlAttributes(new { @class = "k-grid-effacer" });
+                }
+            ).Width(250);
+            })
+            .Sortable(s => s.AllowUnsort(false))
+            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
+            .Filterable()
+            //.AutoBind(false)
+            .DataSource(ds => ds
+                .Ajax()
+                .PageSize(10).Sort(x => x.Add(c => c.NomDepartement)
+            )
+            .Model(m =>
+            {
+                m.Id(e => e.DepartementId);
+                m.Field(e => e.Suppressible).DefaultValue(true);
+
+            })
+            .Read(r => r.Action("ReadListDepartement", "Departement", new { client = Model.ClientId }))
+            .Create(c => c.Action("SaveDepartement", "Departement", new { client = Model.ClientId }))
+            .Update(u => u.Action("SaveDepartement", "Departement", new { client = Model.ClientId }))
+            .Destroy(d => d.Action("DeleteDepartement", "Departement"))
+            .Events(e => e
+                .Error("ListeErreurDEPT").RequestEnd("EndDept")
+            )
+            )
+            .Events(e => e
+                .DataBound("ListeDataBoundDEPT").Edit("Edit")
+            )
+            .Editable(e => e
+                .Mode(GridEditMode.InLine)
+                .CreateAt(GridInsertRowPosition.Top)
+                .DisplayDeleteConfirmation(false)
+            )
+            .ToolBar(t =>
+            {
+                t.Create();
+            })
+        )
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+
+    $("#Dep").click(function () {
+
+        $("#listDEPT").find("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        $("#listDEPT").find("a.k-grid-add").addClass("btn btn-success btn-test ");
+        $("#listDEPT").find("span.k-add").removeClass("k-icon");
+        $("#listDEPT").find("a.btn-test").text("@CadDeptRES.Ajouter");
+
+        
+        // ADD ICONE "+"
+        setTimeout(function(){ $("#listDEPT").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+    });
+
+
+    function EndDept(e) {
+
+
+    }
+
+
+
+    function ConfirmDeleteRowDEPT(e) {
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.NomDepartement, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+
+    function ListeErreurDEPT(args) {
+        var selecteurGrid = "#listDEPT";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    ShowNotification("@CadDeptRES.Erreur",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+    }
+
+    function ListeDataBoundDEPT(e) {
+
+
+
+        var selecteurGrid = "#listDEPT";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                $(this).remove();
+            }
+        })
+    }
+
+
+
+</script>

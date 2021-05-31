@@ -1,0 +1,1734 @@
+﻿/* GENERAL */
+
+.shieldLogoCadenassage {
+    position: absolute;
+    left: 35px;
+    top: 10px;
+}
+
+.shieldLogoCadenassage img {
+    width: 50px;
+}
+
+header .content-wrapper {
+    padding-top: 0 !important;
+}
+
+header .logoHeader {
+    margin: 20px 10px 25px 10px;
+    width: 250px;
+}
+
+#body {
+    min-height: 895px;
+}
+
+.nextUpdateApp {
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    z-index: 9999;
+    background: #fff;
+    padding: 20px 20px;
+    border-radius: 20px;
+    min-width: 220px;
+    max-width: 400px;
+    min-height: 120px;
+    border: 2px solid #000032;
+}
+
+.nextUpdateApp h4 {
+    margin: 0px;
+}
+
+.nextUpdateApp h4 img {
+    max-width: 50px;
+    margin-right: 20px;
+}
+
+.nextUpdateApp p {
+    margin-left: 76px;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.addButtonImg {
+    width: 17px;
+    margin: 0 5px 2px 5px;
+}
+
+/* Filters buttons */
+
+.filterButton, .filterDepartment, .filterEquipment {
+    padding: 5px 10px;
+    text-align: center;
+    color: #fff;
+    background-color: #1793ff;
+    border-radius: 11px 10px 2px 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.filterDepartment option, .filterEquipment option {
+    cursor: pointer;
+}
+
+.filterActiveSheet {
+    position: absolute;
+    top: 4px;
+    left: 550px;
+}
+
+.filterType {
+    position: absolute;
+    top: 4px;
+    left: 527px;
+}
+
+.filterEquipment {
+    position: absolute;
+    top: 3px;
+    left: 520px;
+}
+
+.filterDepartment {
+    position: absolute;
+    top: 3px;
+    left: 720px;
+}
+
+.activeFilter {
+    background: #000032 !important;
+    border: 1px solid #f2f2f2 !important;
+    color: #FFF;
+}
+/* End Filters buttons */
+
+.panel-danger table {
+    border-spacing: 0 10px;
+}
+
+.panel-danger thead tr {
+    height: 50px;
+}
+
+.panel-danger .k-grid-header th.k-header {
+    padding-bottom: 17px;
+    font-weight: bold;
+    border: none;
+}
+
+.panel-danger .k-grid-header th.k-header a {
+    bottom: 17px;
+}
+
+.panel-danger tbody tr {
+    height: 80px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    transition: .4s;
+}
+
+.sectionEdition table tbody tr {
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.panel-danger table tbody tr:hover {
+    transform: scale(1.02);
+    -webkit-box-shadow: 0px 1px 8px 0px rgba(128,128,128,1);
+    -moz-box-shadow: 0px 1px 8px 0px rgba(128,128,128,1);
+    box-shadow: 0px 1px 8px 0px rgba(128,128,128,1);
+}
+
+.panel-danger table tbody tr td {
+    background: #FFF;
+    position: relative;
+    overflow: initial;
+}
+
+.panel-danger table tbody tr:hover td {
+    background: #F9F9F9;
+}
+
+.panel-danger table tbody tr td:nth-child(2) {
+    -webkit-border-radius: 7px 0 0 7px;
+    -moz-border-radius: 7px 0 0 7px;
+    border-radius: 7px 0 0 7px;
+}
+
+.sectionEdition table tbody tr td:first-child {
+    -webkit-border-radius: 7px 0 0 7px;
+    -moz-border-radius: 7px 0 0 7px;
+    border-radius: 7px 0 0 7px;
+}
+
+.sectionEdition table tbody .k-grouping-row td {
+    -webkit-border-radius: 7px !important;
+    -moz-border-radius: 7px !important;
+    border-radius: 7px !important;
+}
+
+.previgesstClient table tbody tr td:nth-child(3) {
+    -webkit-border-radius: 7px 0 0 7px;
+    -moz-border-radius: 7px 0 0 7px;
+    border-radius: 7px 0 0 7px;
+}
+
+.EditAnalyseDeRisque table tbody tr td:first-child
+{
+    -webkit-border-radius: 7px 0 0 7px;
+    -moz-border-radius: 7px 0 0 7px;
+    border-radius: 7px 0 0 7px;
+}
+
+.panel-danger table tbody tr td:last-child {
+    -webkit-border-radius: 0 7px 7px 0;
+    -moz-border-radius: 0 7px 7px 0;
+    border-radius: 0 7px 7px 0;
+}
+
+.back-panel-light {
+    height: 35px;
+}
+
+.k-filter-row th, .k-grid-header th.k-header {
+    background: #f2f2f2;
+}
+
+.k-grid-header th.k-with-icon .k-link {
+    margin-left: 12px;
+    margin-right: 0 !important;
+}
+
+.k-header > .k-grid-filter, .k-header > .k-header-column-menu {
+    position: absolute !important;
+    left: 7px;
+    bottom: 6px;
+    float: initial !important;
+}
+
+.rotate-phone--user, .rotate-phone--text {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+.enlarge-screen--user {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 25%;
+    width: 50%;
+    height: auto;
+    z-index: 9999;
+}
+.rotate-phone {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+.enlarge-screen {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 25%;
+    width: 50%;
+    height: auto;
+    z-index: 9999;
+}
+
+/* Hide text and icon... */
+input[type=checkbox] {
+    transform: scale(1.2);
+}
+
+.k-edit {
+    display: none;
+}
+
+.k-grid-effacer, .k-grid-Effacer, .k-grid-dupliquer {
+    background: url('/Images/remove.png') 50% no-repeat;
+    background-size: contain;
+    min-width: initial !important;
+    width: auto;
+    height: 20px;
+    border: initial;
+    font-size: 0px;
+    position: absolute;
+    left: -109%;
+    bottom: 8px;
+}
+
+.k-grid-effacer:hover, .k-grid-Effacer:hover, .k-grid-dupliquer:hover {
+    background: url('/Images/remove.png') 50% no-repeat;
+    background-size: contain;
+    min-width: initial !important;
+    width: auto;
+    border: initial;
+}
+
+.btn-edit-previ, .k-grid-edit {
+    background: url('/Images/edit.png') 50% no-repeat;
+    background-size: contain;
+    min-width: initial !important;
+    width: auto;
+    height: 20px;
+    border: initial;
+    font-size: 0px;
+    position: absolute;
+    right: 20px;
+    bottom: 45px;
+}
+
+.btn-edit-previ:hover, .k-grid-edit:hover {
+    background: url('/Images/edit.png') 50% no-repeat;
+    background-size: contain;
+    min-width: initial !important;
+    width: auto;
+    border: initial;
+    font-size: 0px;
+}
+
+/* FORCE IMAGE OF EDIT VERSION */
+.btn-edit-force {
+    background: url('/Images/edit.png') 50% no-repeat !important;
+    background-size: contain !important;
+    min-width: initial !important;
+    width: auto !important;
+    height: 6px !important;
+    border: initial !important;
+    position: absolute !important;
+    left: 85% !important; /*TOTO MAX - Before right -19px */
+    top: 31px !important;
+}
+
+.btn-edit-force:hover {
+    background: url('/Images/edit.png') 50% no-repeat !important;
+    background-size: contain !important;
+    min-width: initial !important;
+    border: initial !important;
+}
+
+.k-cde-edit {
+    background: url('/Images/add.png') 50% no-repeat;
+    background-size: contain;
+    min-width: initial !important;
+    width: auto;
+    height: 6px;
+    border: initial;
+    position: absolute;
+    left: -10%; /*TOTO MAX - Before right: -1px */
+    top: 8px; /*TOTO MAX - Before 10px */
+    z-index: 999;
+}
+
+.k-cde-edit:hover {
+    background: url('/Images/add.png') 50% no-repeat;
+    background-size: contain;
+    min-width: initial !important;
+    border: initial;
+}
+
+
+.k-grid-telecharger, .downloadButton {
+    background: url('/Images/dl.png') 50% no-repeat;
+    background-size: contain;
+    min-width: 10px !important;
+    width: auto;
+    height: 30px;
+    border: initial;
+    margin: 5px !important;
+}
+
+.k-grid-telecharger:hover, .downloadButton:hover {
+    background: url('/Images/dl.png') 50% no-repeat;
+    background-size: contain;
+}
+
+.materialButton {
+    background: url('/Images/materiel-employe.png') 50% no-repeat;
+    background-size: contain;
+    min-width: 10px !important;
+    width: auto;
+    height: 30px;
+    border: initial;
+    margin: 5px !important;
+    font-size: 0;
+    color: #FFF;
+}
+
+.materialButton:hover {
+    background: url('/Images/materiel-employe.png') 50% no-repeat;
+    background-size: contain;
+}
+
+
+.etiquetteButton {
+    background: url('/Images/etiquette.png') 50% no-repeat;
+    background-size: contain;
+    min-width: 10px !important;
+    width: auto;
+    height: 30px;
+    border: initial;
+}
+
+.etiquetteButton:hover {
+    background: url('/Images/etiquette.png') 50% no-repeat;
+    background-size: contain;
+}
+
+.supportLink {
+    position: absolute;
+    right: 0px;
+    top: -38px;
+    color: #157EFB;
+}
+
+.help-icon {
+    width: 30px;
+    height: auto;
+    margin-top: -3px;
+    transition: .4s;
+    margin-left: 10px;
+}
+
+.help-icon:hover {
+    opacity: .4;
+    transform: scale(1.2);
+}
+
+.menu-icon {
+    width: 40px;
+    height: auto;
+    transition: .4s;
+}
+
+.menu-icon:hover {
+    transform: scale(1.2);
+}
+
+.icon-noactive {
+    display: block;
+}
+
+.icon-active {
+    display: none;
+}
+
+.active .icon-noactive {
+    display: none;
+}
+
+.active .icon-active {
+    display: block;
+}
+/* End Hide text and icon... */
+/* End General */
+/* site title
+----------------------------------------------------------*/
+.site-title {
+    color: #c8c8c8;
+    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
+    font-size: 2.3em;
+    margin: 0;
+}
+
+.site-title a, .site-title a:hover, .site-title a:active {
+    background: none;
+    color: #c8c8c8;
+    outline: none;
+    text-decoration: none;
+}
+
+/* menu
+----------------------------------------------------------*/
+ul#menu {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 0 0 5px;
+    padding: 0px;
+    text-align: right;
+}
+
+ul#menu li {
+    display: inline;
+    list-style: none;
+    padding-left: 15px;
+}
+
+ul#menu li a {
+    background: none;
+    color: #000052 !important;
+    text-decoration: none;
+}
+
+ul#menu li a:hover {
+    color: #282828 !important;
+    text-decoration: none;
+}
+
+ul#menu li .dropdown-menu {
+    left: initial;
+    right: 0;
+}
+
+ul#menu li .dropdown-menu li {
+    padding: 0;
+}
+
+ul#menu li .dropdown-menu .divider {
+    display:list-item;
+}
+
+@media (min-width: 768px) {
+
+    .navbar-right {
+        float: right !important;
+        margin-right: -15px;
+        margin-top: 30px;
+        margin-right: -180px;
+    }
+}
+
+/* CONTENT */
+/* Login page */
+.loginPage {
+    margin: 0px auto;
+    padding-top: 100px;
+}
+
+.loginPage .panel, .loginPage .panel-danger {
+    border: initial;
+    border-radius: 14px;
+}
+
+.loginPage .panel-heading {
+    border-radius: 14px 14px 0 0;
+}
+
+.loginPage .panel-body {
+    padding: 40px;
+}
+
+#loginForm .form-horizontal .control-label {
+    text-align: left !important;
+}
+
+#loginForm .btn-primary {
+    background: #FFF !important;
+    color: #000032 !important;
+    transition: .4s;
+    float: right;
+    border: 1px #000032 solid !important;
+}
+
+#loginForm .btn-primary:hover {
+    background: #000032 !important;
+    color: #FFF !important;
+    border: 1px #FFF solid !important;
+}
+
+#loginForm .form-horizontal .form-group {
+    width: 75%;
+    margin: 20px auto !important;
+}
+/* End Login page */
+/* Global list */
+.k-header {
+    border: none;
+    text-align: left;
+}
+
+.k-grid tr td{
+    border: none;
+}
+/* End Global list */
+/* TableauStandard */
+.tableauStandard table tbody .k-grid-effacer, .tableauStandard table tbody .k-grid-Effacer, .tableauStandard table tbody .k-grid-dupliquer {
+    left: 80%;
+}
+/* End TableauStandard */
+/* Liste équipements */
+#listEquipement table tbody tr td:nth-child(4), #listEquipement table tbody tr td:nth-child(5), #listEquipement table tbody tr td:nth-child(6) {
+    text-align: center;
+}
+
+#listEquipement table tbody tr td:nth-child(4) img {
+    width: 120px;
+}
+
+#listEquipement .k-grid-effacer, #listEquipement .k-grid-Effacer, #listEquipement .k-grid-dupliquer {
+    left: 0%;
+    bottom: 20px;
+}
+
+#listEquipement .btn-edit-previ, #listEquipement .k-grid-edit {
+    right: initial;
+    left: 0%;
+    bottom: 50px;
+}
+/* End Liste équipements */
+/* Départements */
+#listDEPT table tbody tr td:nth-child(4) {
+    text-align: center;
+}
+
+#listDEPT .k-grid-edit {
+    left: 40%;
+}
+
+#listDEPT .k-grid-effacer, #listDEPT .k-grid-Effacer, #listDEPT .k-grid-dupliquer {
+    left: 60%;
+}
+
+/* End Départenents*/
+/* Employés */
+#Employes table tbody tr td:last-child {
+    text-align: center;
+}
+
+#Employes .panel-danger table .k-grid-header th.k-header a {
+    text-align: center;
+}
+
+#Employes .k-grid-header th.k-with-icon .k-link {
+    margin-left: 8px;
+}
+
+.cadenassageAdmin #Employes .k-grid-header th.k-with-icon .k-link {
+    margin-left: 12px;
+}
+
+.cadenassageAdmin #EmployesCadenassage #Employes table tbody tr td {
+    text-align: left;
+}
+
+#listEMP .btn-edit-previ, #listEMP .k-grid-edit {
+    left: 0%;
+}
+
+#listEMP .k-grid-effacer, #listEMP .k-grid-Effacer, #listEMP .k-grid-dupliquer {
+    left: 0%;
+}
+/* End Employés */
+/* Registre */
+.cadenassageContent #RegistreCadenassage .panel-body {
+    padding: 0 7px 7px 7px;
+}
+
+#listLignesRegistre table thead tr th:nth-child(2) .k-link, #listLignesRegistre table thead tr th:nth-child(4) .k-link, #listLignesRegistre table thead tr th:nth-child(11) .k-link {
+    margin-right: 5px;
+}
+
+#listLignesRegistre table thead tr th:nth-child(10) {
+    margin-right: 0px;
+}
+
+#listLignesRegistre table tbody tr td:nth-child(2), #listLignesRegistre table tbody tr td:nth-child(3), #listLignesRegistre table tbody tr td:nth-child(4) {
+    text-align: center;
+}
+
+/* Need to display with Kendo and hide in CSS cause the Kendo don't take the first respon Q1 to the excel document  */
+#listLignesRegistre table thead tr [data-field="Rep1"], #listLignesRegistre table thead tr [data-field="Rep2"], #listLignesRegistre table thead tr [data-field="Rep3"] {
+    display: none;
+}
+
+#listLignesRegistre table tbody tr td:nth-child(13), #listLignesRegistre table tbody tr td:nth-child(14), #listLignesRegistre table tbody tr td:nth-child(15) {
+    display: none;
+}
+
+#listLignesRegistre table tbody tr td:last-child {
+    width: 30px;
+}
+
+#TabTermines #Employes table thead tr th:nth-child(10), #TabTermines #Employes table tbody tr td:nth-child(10), #TabEnCours #Employes table thead tr th:nth-child(10), #TabEnCours #Employes table tbody tr td:nth-child(10) {
+    display: none;
+}
+/* End Registre*/
+/* Programme de cadenassage */
+.tryDone {
+    position: absolute;
+    left: 9%;
+    top: 29%;
+    height: 100%;
+    width: 83%;
+    z-index: 99;
+    padding: 10px;
+}
+
+.tryDone .tryDone--content {
+    position: absolute;
+    top: 10%;
+    left: 16%;
+    font-weight: bold;
+    color: #000032;
+    padding: 5px 20px;
+    border: 1px solid #E6E6E6;
+    text-transform: uppercase;
+    z-index: 999;
+    width: 70%;
+    max-width: 1200px;
+    height: 50%;
+    max-height: 500px;
+    background: #FFF;
+    border-radius: 15px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-evenly;
+    -webkit-box-shadow: 0px 7px 12px -8px #E6E6E6;
+    -moz-box-shadow: 0px 7px 12px -8px #E6E6E6;
+    box-shadow: 0px 7px 12px -8px #E6E6E6;
+}
+
+.tryDone .tryDone--content h1 {
+    font-size: 22px;
+    color: red;
+    font-weight: bold;
+    margin: 0;
+    text-transform: none;
+}
+
+.tryDone .tryDone--content .row > div  {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 100%;
+    justify-content: space-evenly;
+}
+
+.tryDone .tryDone--content .row > div:first-child {
+    padding-left: 60px;
+}
+
+.tryDone .tryDone--content p {
+    font-size: 16px;
+    text-transform: initial;
+    margin: 10px;
+    line-height: 150%;
+    width: 100%;
+    font-weight: initial;
+}
+
+.tryDone .tryDone--button {
+    height: 50px;
+    padding: 12px 20px;
+    background: #000032;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+    color: #FFF;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 1s;
+    position: relative;
+    z-index: 9999;
+    line-height: initial;
+    margin-top: 30px;
+    text-transform: initial;
+}
+
+.tryDone .tryDone--button:hover {
+    background: rgba(0,212,255,1);
+}
+
+.tryDone .tryDone--button a {
+    color: #FFF;
+    text-transform: none;
+}
+
+.tryDone .tryDone--content img {
+    width: 70%;
+}
+
+#Documents table tbody tr td:last-child {
+    text-align: center;
+}
+
+.k-grid {
+    border: none;
+}
+
+.cadenassageContent {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-pack: space-between;
+    -moz-box-pack: space-between;
+    -ms-flex-pack: space-between;
+    justify-content: space-between;
+}
+
+.cadenassageContent .nav > li > a {
+    padding: 10px 8px;
+}
+
+.cadenassageContent table {
+    margin-top: -10px;
+}
+
+.analyseContent #list-analyse table {
+    width: 100% !important;
+}
+
+.cadenassageContent table thead {
+    border: none;
+}
+
+.cadenassageContent--header {
+    padding: 0 8% 0 9%;
+}
+
+.cadenassageContent--header nav {
+    margin-top: 10px;
+}
+
+.cadenassageContent--header .breadcrumb {
+    padding: 20px 15px 0 0;
+    background: initial;
+    margin-bottom: -5px;
+}
+
+.cadenassageContent--header h1 {
+    color: #000052;
+    font-size: 30px;
+}
+
+.cadenassageContent .nav-tabs {
+    width: 85px !important;
+    background: #FFF;
+    padding: 15px 5px 15px 30px;
+    max-height: 387px;
+    margin-top: 5px;
+    border-bottom: initial;
+}
+
+.cadenassageContent .nav-tabs li {
+    width: 65px;
+    display: block;
+    min-height: 50px;
+    text-align: center;
+}
+
+.cadenassageContent .nav-tabs > li.active > a, .cadenassageContent .nav-tabs > li.active > a:focus, .cadenassageContent .nav-tabs > li.active > a:hover {
+    min-height: 50px;
+    text-align: center;
+    background: initial;
+    border: none;
+    border-radius: initial;
+}
+
+.cadenassageContent .panel {
+    border: initial;
+    border-radius: 10px;
+}
+
+.cadenassageContent > .panel-danger {
+    background-color: #f2f2f2;
+    margin-top: 30px;
+}
+
+.cadenassageContent #list {
+    background-color: #f2f2f2;
+    margin-top: 0px;
+}
+
+.cadenassageContent > .panel-danger {
+    border-color: initial;
+    /*-webkit-box-shadow: 0px 1px 8px 0px rgba(128,128,128,1);
+    -moz-box-shadow: 0px 1px 8px 0px rgba(128,128,128,1);
+    box-shadow: 0px 1px 8px 0px rgba(128,128,128,1);*/
+    margin-top: 30px;
+}
+
+.cadenassageContent .panel-danger > .panel-heading {
+    border-color: #000052;
+    background-color: #f2f2f2 !important;
+    color: #000052 !important;
+    margin-bottom: 10px;
+    font-size: 14px !important;
+}
+
+.cadenassageContent .back-panel-light {
+    display: none;
+}
+
+.cadenassageContent .tab-content {
+    border: initial;
+}
+
+.cadenassageContent .panel-danger {
+    border-color: initial;
+}
+
+.cadenassageContent .panel-body {
+    padding-top: 0px;
+    background: #f2f2f2;
+}
+
+.cadenassageContent .panel-body > div {
+    padding: 0 !important;
+}
+
+body .analyseContent .panel-body > div {
+    padding: 11px !important;
+}
+
+.cadenassageContent .panel-body > div > .btn-success {
+    position: absolute;
+    top: 3px;
+    left: 400px;
+}
+
+body .analyseContent .panel-body > div > .btn-success {
+    left: 140px;
+}
+
+.cadenassageContent #Cadenassage .panel-body > div > .btn-success, .cadenassageContent #Decadenassage .panel-body > div > .btn-success {
+    left: 370px;
+    background: #157efb !important;
+    border-color: #050045;
+    top: 4px;
+}
+
+.cadenassageContent .btn-test, .cadenassageContent .k-grid-add {
+    position: absolute;
+    top: -48px;
+    left: 210px;
+}
+
+body .analyseContent .k-grid-add {
+    top: -69px;
+    left: 100px;
+}
+
+body .EditAnalyseDeRisque .analyseContent .k-grid-add {
+    top: -4px;
+    left: -3px;
+}
+
+.analyseContent #list-analyse {
+    border: 1px solid #F2F2F2;
+}
+
+.cadenassageContent .k-grid-top {
+    background: #f2f2f2 !important;
+}
+
+.cadenassageContent #Previcad {
+    margin: 30px 0;
+}
+
+.cadenassageContent #Previcad p {
+    margin: 30px 0 !important;
+}
+
+.cadenassageContent #Previcad button {
+    background: #FFF !important;
+    transition: .4s;
+    border-color: #157EFB !important;
+}
+
+.cadenassageContent #Previcad button a {
+    color: #000052 !important;
+}
+
+.cadenassageContent #Previcad button:hover {
+    background: #000052 !important;
+}
+
+.cadenassageContent #Previcad button:hover a {
+    color: #FFF !important;
+}
+
+.cadenassageImageDownload {
+    background: url('/Images/image.png') 50% no-repeat;
+    background-size: contain;
+    min-width: initial !important;
+    border: none;
+    width: 35px;
+    height: 40px;
+    font-size: 0px;
+}
+
+.cadenassageContent #liste-doc .btn-edit-previ, .cadenassageContent #liste-doc .k-grid-edit {
+    left: 30% !important;
+}
+
+.cadenassageContent #liste-doc .k-grid-Effacer {
+    left: 30%;
+    top: initial;
+}
+
+table .k-grid-header th.k-header {
+    border: none;
+    position: relative;
+}
+
+table tr th {
+    border: none;
+}
+
+.fichesCadenassage #list thead tr [data-field="estDocumentPrevigesst"], .fichesCadenassage #list thead tr [data-field="RevisionCourante"], .fichesCadenassage #list thead tr [data-field="NoFiche"], .fichesCadenassage #list thead tr [data-field="FicheCadenassageId"], .fichesCadenassage #list thead tr [data-field="FicheCadenassageId"] {
+    font-weight: initial;
+    /*background: #CCC;*/
+}
+
+.fichesCadenassage #list thead tr th.k-header:nth-child(8), .fichesCadenassage #list thead tr th.k-header:nth-child(9) {
+    text-align: center;
+}
+
+.fichesCadenassage #list table tbody tr td:nth-child(1), .fichesCadenassage #list tbody tr td:nth-child(2), .fichesCadenassage #list tbody tr td:nth-child(9), .fichesCadenassage #list tbody tr td:nth-child(10), .fichesCadenassage #list tbody tr td:nth-child(11), .fichesCadenassage #list tbody tr td:nth-child(12), .fichesCadenassage #list tbody tr td:nth-child(13) {
+    text-align: center;
+}
+
+.fichesCadenassage #list thead tr th:nth-child(1) .k-link, .fichesCadenassage #list thead tr th:nth-child(2) .k-link {
+    margin-right: -5px !important;
+}
+
+.fichesCadenassage #list table tbody tr td:nth-child(2), .fichesCadenassage #list table tbody tr td:nth-child(8), .fichesCadenassage #list table tbody tr td:nth-child(9), .fichesCadenassage #list table tbody tr td:nth-child(10), .fichesCadenassage #list table tbody tr td:nth-child(11) {
+    text-align: center;
+}
+
+.fichesCadenassage #list table tbody tr td:nth-child(4) {
+    color: #FFF;
+    font-size: 0px;
+    text-align: center;
+}
+
+.fichesCadenassage .k-button, .fichesCadenassage .k-widget {
+    box-shadow: initial;
+}
+
+    /* Edit Cadenassage */
+
+#Cadenassage #Documents .k-grid-header th.k-with-icon .k-link, #Cadenassage #Documents .k-grid-header th.k-header .k-link {
+    padding-bottom: 17px;
+    font-weight: bold;
+    margin-left: 0;
+}
+
+#Cadenassage #Documents .k-filter-row th, #Cadenassage #Documents .k-grid-header th.k-header {
+    border: none;
+    padding: .5em .6em .4em .6em;
+}
+
+.cadenassageContent .buttonView, .k-grid-update {
+    background-color: #157EFB !important;
+}
+
+.cadenassageContent #listMAT .k-grid-Effacer {
+    left: 81%;
+}
+
+.cadenassageContent #listPhoto .k-grid-edit {
+    left: 50%;
+    top: 30%;
+    right: initial;
+}
+
+.cadenassageContent #listPhoto .k-grid-Effacer {
+    left: 50%;
+    top: 60%;
+}
+
+.cadenassageContent #listCAD .k-grid-edit {
+    left: 50%;
+    bottom: 50%;
+}
+
+.cadenassageContent #listCAD .k-grid-add, .cadenassageContent #listDEC .k-grid-add {
+    top: -58px;
+    left: 195px;
+}
+
+.cadenassageContent #listMAT .k-grid-add, .cadenassageContent #listPhoto .k-grid-add {
+    left: 120px;
+}
+
+.cadenassageContent #listDEC .k-grid-Effacer {
+    left: 81%;
+    top: 60%;
+}
+
+.cadenassageContent #listDEC .k-grid-edit {
+    left: 81%;
+    top: 30%;
+}
+
+.cadenassageContent #listCAD .k-grid-Effacer {
+    left: 63%;
+    top: 60%;
+}
+/* End Edit Cadenassage */
+
+/* Setting Admin */
+.cadenassageContent #CadParamAdminContent .CadParamAdminContent--form input {
+    position: relative;
+    left: 5px;
+    top: 7px;
+}
+
+.cadenassageContent #CadParamAdminContent .CadParamAdminContent--submit {
+    padding-left: 0 !important;
+}
+/* End Setting Admin */
+/* Employés Cadenassage */
+.cadenassageContent #TabDocuments #Documents .k-grid-content, .cadenassageContent #TabTermines #Employes .k-grid-content, .cadenassageContent #TabEnCours #Employes .k-grid-content, .cadenassageContent #TabFiches #list .k-grid-content {
+    height: initial !important;
+    min-height: 300px;
+}
+.analyseContent .k-grid-content {
+    overflow: initial;
+}
+
+.registreEmploye .panel-danger table tbody .k-grid-edit {
+    bottom: 28px;
+}
+
+.registreEmploye #TabFiches #list table tbody tr td:nth-child(5) {
+    color: #FFF;
+    font-size: 0px;
+    text-align: center;
+}
+
+.registreEmploye .k-grid-edit {
+    background: url(/Images/play.png) 50% no-repeat;
+    width: 8px;
+    height: 10px;
+    right: 20px;
+}
+
+.registreEmploye div.k-grid-header {
+    padding-right: 0 !important;
+    border: initial !important;
+}
+
+.registreEmploye .panel-danger .k-grid-header th.k-header {
+    overflow: initial !important;
+}
+
+.registreEmploye .panel-danger .k-grid-header th.k-header {
+    position: relative;
+}
+
+.registreEmploye .k-header > .k-grid-filter {
+    left: 1px;
+}
+/* End Employés Cadenassage */
+/* End Programme de cadenassage */
+/* Liste de nos clients */
+.previgesstClient #list table tbody tr td:nth-child(6) {
+    text-align: center;
+}
+
+.previgesstClient #list table tbody tr td:nth-child(6) img {
+    width: 120px;
+}
+
+.previgesstClient #list thead tr th:nth-child(6) .k-link {
+    margin-right: 5px;
+}
+
+.previgesstClient #list .k-grid-Effacer {
+    bottom: 30px !important;
+    left: 40%
+}
+
+.previgesstClient #list .k-grid-edit {
+    right: initial;
+    left: 40%;
+    top: 30px !important;
+}
+/* End Liste de nos clients */
+/* Liste documents */
+#liste-doc .btn-edit-previ, #liste-doc .k-grid-edit {
+    right: initial;
+    left: 50%;
+}
+
+#liste-doc .k-grid-Effacer {
+    left: 50%;
+    top: initial;
+}
+/* End Liste documents */
+/* Utilisateurs */
+#Utilisateurs .k-grid-Effacer {
+    left: 80%;
+}
+/* End Utilisateurs */
+/* Analyse de risques */
+.EditAnalyseDeRisque .k-grid-content table, .EditAnalyseDeRisque .k-grid-header table {
+    table-layout: initial;
+}
+
+#list-analyse .btn-edit-previ, #list-analyse .k-grid-edit {
+    left: 40%;
+    bottom: 45px;
+    height: 8px;
+}
+
+.analyseContent #list-analyse .btn-edit-previ, .analyseContent #list-analyse .k-grid-edit {
+    right: 0%;
+    left: initial;
+}
+
+.EditAnalyseDeRisque #list .k-cde-edit {
+    right: initial;
+    left: 45%;
+}
+
+.EditAnalyseDeRisque #list .k-grid-edit {
+    right: initial;
+    left: -35%;
+}
+
+.EditAnalyseDeRisque #list .k-grid-dupliquer {
+    right: initial;
+    left: -40%;
+}
+
+.EditAnalyseDeRisque div.k-grid-header {
+    padding-right: initial !important;
+}
+.analyseContent .form-horizontal .control-label {
+    width: 100%;
+    text-align: left;
+}
+
+.analyseContent .form-horizontal input[type="checkbox"] {
+    width: auto;
+}
+
+#list-analyse .k-grid-effacer, .k-grid-Effacer, #list-analyse .k-grid-dupliquer {
+    height: 20px;
+    left: -65%;
+    bottom: 12px;
+}
+
+.analyseContent #list-analyse .k-grid-effacer, .analyseContent .k-grid-Effacer, .analyseContent #list-analyse .k-grid-dupliquer {
+    left: initial;
+    right: 98%;
+}
+
+#list-analyse tr th:nth-child(4) .k-grid-filter {
+    margin-top: 11px;
+}
+
+#list-analyse thead tr [data-field="AfficherChezClient"] {
+    text-align: center;
+}
+
+.EditAnalyseDeRisque #list thead tr th, .EditAnalyseDeRisque #list tbody tr td {
+    text-align: center;
+    border: none;
+    position: relative;
+}
+
+.EditAnalyseDeRisque #list tbody tr td:last-child a {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.EditAnalyseDeRisque #list thead tr th:nth-child(3) .k-grid-filter, .EditAnalyseDeRisque #list thead tr th:nth-child(5) .k-grid-filter, .EditAnalyseDeRisque #list thead tr th:nth-child(6) .k-grid-filter {
+    margin-top: 9px;
+}
+
+.EditAnalyseDeRisque .k-cde-edit {
+    right: -8px;
+}
+
+.EditAnalyseDeRisque .btn-edit-previ, .EditAnalyseDeRisque .k-grid-edit {
+    bottom: 28px;
+}
+
+.EditAnalyseDeRisque .k-grid-effacer, .EditAnalyseDeRisque .k-grid-Effacer, .EditAnalyseDeRisque .k-grid-dupliquer {
+    left: -45%;
+    bottom: 1px;
+}
+/* End Sections */
+/* Liste documents */
+.sectionEdition #list .btn-edit-previ, .sectionEdition #list .k-grid-edit {
+    left: 40%;
+    right: initial;
+}
+
+.sectionEdition #list .k-grid-Effacer, .sectionEdition #list .k-grid-Effacer {
+    left: 40%;
+}
+/* End Liste documents */
+/* site title
+----------------------------------------------------------*/
+.site-title {
+    color: #c8c8c8;
+    font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
+    font-size: 2.3em;
+    margin: 0;
+}
+
+.site-title a, .site-title a:hover, .site-title a:active {
+    background: none;
+    color: #c8c8c8;
+    outline: none;
+    text-decoration: none;
+}
+
+/* info and errors */
+.message-info {
+    border: 1px solid;
+    clear: both;
+    padding: 10px 20px;
+}
+
+.message-error {
+    clear: both;
+    color: #e80c4d;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.message-success {
+    color: #7ac0da;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}
+
+.error {
+    color: #e80c4d;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* Grid */
+.k-filter {
+    background: url(/Images/filter.png) 50% no-repeat !important;
+    background-size: contain !important;
+}
+
+.k-filter-menu label:not(:first-of-type) {
+    margin-left: 10px;
+}
+
+.k-filter-menu label input[type='radio'] {
+    margin-right: 3px;
+}
+
+.k-grid-header th.text-center {
+    text-align: center;
+}
+
+.k-grid-header th.text-left {
+    text-align: left;
+}
+
+.k-grid-header th.text-right {
+    text-align: right;
+}
+
+/* Notifications */
+.k-notification .alert {
+    margin: 0;
+    /*min-width: 150px;*/
+}
+
+.k-notification .alert span.glyphicon {
+    margin: 0 5px 0 0;
+    white-space: nowrap;
+}
+
+.k-notification .alert h3 {
+    padding: 0;
+    margin: 10px 5px;
+    white-space: nowrap;
+}
+
+.k-notification .alert p {
+    margin: 0 0 0 42px;
+}
+
+/* Tabs */
+.tab-content {
+    padding: 8px 5px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Formulaires */
+.form-group label {
+    vertical-align: middle;
+}
+
+.CenteredPopUp {
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+    background: red;
+}
+
+/* footer */
+
+.myfooter {
+    background-color: #b12a30;
+    /*font-family: myfont;*/
+    text-align: justify;
+    /*height: 300px;*/
+    height: 100%;
+}
+
+.myfooter .row {
+    display: flex;
+    flex-flow: row;
+}
+
+.myfooter .row > div {
+    padding: 10px 60px 0 30px;
+}
+
+.subfooter {
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.subfooter p {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.myfooter a {
+    color: azure;
+    font-size: 14px;
+}
+
+.myfooter p {
+    color: azure;
+    font-size: 10px;
+}
+
+.myfooter h3 {
+    margin-bottom: 20px;
+    /*font-family: myfont2;*/
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+
+/*footer Admin*/
+
+.myfooterAdm {
+    /*background-color: #0c5c82;*/
+    padding-top: 10px;
+    font-family: myfont;
+    text-align: justify;
+    /*height: 300px;*/
+    height: 100%;
+}
+
+.subfooterAdm {
+    /*background-color: #0c5c82;*/
+    background-color: #06193F;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    /*margin-top: 70px;*/
+}
+
+.subfooterAdm p {
+    margin-top: 15px;
+}
+
+.myfooterAdm a {
+    color: azure;
+    font-size: 14px;
+}
+
+.myfooterAdm p {
+    color: azure;
+    font-size: 14px;
+}
+
+.myfooterAdm h3  {
+    margin-bottom: 20px;
+    /*font-family: myfont2;*/
+    color: white;
+}
+
+.containerFooter {
+    display: none;
+}
+
+.myfooter .container {
+    padding: 20px 0;
+}
+/*.colStyle {
+    border-left: 1px solid #fff;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+}*/
+.colStyle {
+    border-left: 1px solid #fff;
+    height: 190px;
+    position: absolute;
+    /* left: 50%; */
+    right: 100%;
+    margin-right: 3px;
+    margin-top: 3px;
+    top: 0;
+}
+
+
+
+
+
+
+
+
+
+
+.k-in, .k-item, .k-window-action {
+    border-color: transparent;
+    color: black;
+}
+
+
+
+/*.k-reset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    text-decoration: none;
+    font-size: 100%;
+    list-style: none;
+    color: black;
+}*/
+
+*.k-reset{ color:black;}
+
+
+
+.panel-body {
+    padding: 14px;
+}
+
+
+.imgDropDown 
+{
+ border: 1px solid lightgray;
+}
+
+.txtImgDropDown
+ {
+font-size: xx-large;
+vertical-align: middle;
+width: 30px;
+text-align: right;
+display: inline-block;
+}
+
+.k-widget.k-tooltip-validation {
+    border-color: #fbeed5;
+    background-color: #fbeed5;
+    color: #AA0000;
+}
+
+@media screen and (max-width: 1320px) {
+
+    #listLignesRegistre table thead tr th:nth-child(9), #listLignesRegistre table tbody tr td:nth-child(9) {
+        display: none;
+    }
+
+    #listLignesRegistre table thead tr th:nth-child(11), #listLignesRegistre table tbody tr td:nth-child(11) {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 1199px) {
+
+    .previgesstClient #list .k-grid-Effacer {
+        top: 70px;
+    }
+
+    .cadenassageContent--header {
+        padding: 0 7% 0 11%;
+    }
+
+    .sectionEdition #list .btn-edit-previ, .sectionEdition #list .k-grid-Effacer {
+        top: 53px;
+    }
+
+    .EditAnalyseDeRisque .k-grid-edit {
+        left: -42%;
+        right: initial;
+    }
+
+    #listLignesRegistre table .k-grid-edit {
+        right: 10px;
+    }
+
+    .cadenassageContent #RegistreCadenassage .panel-body {
+        padding: 0;
+        width: 105%;
+        margin-left: -20px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+
+    .shieldLogoCadenassage {
+        left: 8px;
+    }
+
+    .supportLink {
+        top: -37px;
+    }
+
+    .cadenassageContent .nav-tabs {
+        padding: 0;
+    }
+
+    .cadenassageContent table {
+        font-size: 12px;
+    }
+
+    .tryDone--content h1 {
+        font-size: 18px !important;
+        text-align: center;
+        line-height: 150%;
+    }
+
+    .tryDone .tryDone--content .row > div:nth-child(2) {
+        display: none;
+    }
+
+    .cadenassageContent > .panel-danger, .cadenassageContent #list {
+        margin-top: 0;
+    }
+
+    #list-analyse .btn-edit-previ, #list-analyse .k-grid-edit {
+        left: -25%;
+    }
+
+    #list-analyse .k-grid-effacer, .k-grid-Effacer, #list-analyse .k-grid-dupliquer {
+        bottom: 10px;
+        left: -110%;
+    }
+
+    .fichesCadenassage .k-grid-effacer, .k-grid-Effacer, .k-grid-dupliquer {
+        top: 53px;
+    }
+
+    .EditAnalyseDeRisque .k-grid-effacer, .EditAnalyseDeRisque .k-grid-Effacer, .EditAnalyseDeRisque .k-grid-dupliquer {
+        bottom: initial;
+        top: 57px;
+    }
+
+    .EditAnalyseDeRisque #list .k-cde-edit {
+        left: 50%;
+    }
+
+    .cadenassageContent { /* TOTO MAX - Class bootstrap added and after it */
+        -webkit-box-pack: start;
+        -moz-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: start;
+        padding-right: 10px;
+    }
+
+    .cadenassageContent--header {
+        padding: 0;
+    }
+
+    .cadenassageContent .panel-body {
+        padding: 5px;
+    }
+
+    .cadenassageContent .btn-sectionEmp, .cadenassageContent .btn-test, .cadenassageContent .k-grid-add {
+        position: absolute;
+        top: -58px;
+        left: 230px;
+    }
+
+    .cadenassageContent #listCAD .k-grid-add, .cadenassageContent #listDEC .k-grid-add {
+        top: -67px;
+        left: 220px;
+    }
+
+    .cadenassageContent #listMAT .k-grid-add, .cadenassageContent #listPhoto .k-grid-add {
+        left: 120px;
+        top: -58px;
+    }
+
+    body .analyseContent .k-grid-add {
+        top: -79px;
+    }
+
+    .cadenassageContent .nav-tabs {
+        width: 100% !important;
+    }
+
+    .cadenassageContent .nav-tabs > li.active > a, .cadenassageContent .nav-tabs > li.active > a:focus, .cadenassageContent .nav-tabs > li.active > a:hover {
+        border-right: initial;
+    }
+
+    .cadenassageContent #RegistreCadenassage .panel-body {
+        width: auto;
+    }
+
+    .cadenassageContent #Previcad {
+        margin: 20px 0 40px 0;
+    }
+
+    .cadenassageContent #Previcad p {
+        margin: 20px 0 !important;
+    }
+}

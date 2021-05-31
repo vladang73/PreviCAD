@@ -1,0 +1,274 @@
+﻿
+@{
+    ViewBag.Title = "Analyses";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+@model AnalyseRisqueListViewModel
+
+
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="~/MesApplications/Index">Accueil</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Analyse de risques</li>
+    </ol>
+</nav>
+
+<hr />
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#BA3500;color:white">Analyse de risques</div>
+    <div class="panel-body">
+
+
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#Analyses" aria-controls="general" role="tab" data-toggle="tab">Analyses de risques</a>
+            </li>
+            <li role="presentation">
+                <a href="#Documents" aria-controls="pratiques" role="tab" data-toggle="tab">Documents</a>
+            </li>
+
+
+
+        </ul>
+
+
+
+
+
+        <div class="tab-content">
+
+            <div id="Analyses" class="tab-pane active">
+
+                @Html.AntiForgeryToken()
+
+                @(Html.Kendo().Grid<AnalyseRisqueListViewModel>()
+    .Name("list")
+    .Columns(columns =>
+    {
+
+        columns.Bound(c => c.NoRef)
+           .Filterable(f => f.Extra(false).Operators(operators => operators
+        .ForString(str => str.Clear()
+        .Contains("Contient")
+            .StartsWith("Commence par")
+            .IsEqualTo("Égal")
+            .IsNotEqualTo("Différent")
+           )));
+        columns.Bound(c => c.DateMAJ)
+           .Filterable(f => f.Extra(false).Operators(operators => operators
+        .ForDate(d => d.Clear()
+            .IsEqualTo("Égal")
+            .IsGreaterThan("Plus grand")
+            .IsGreaterThanOrEqualTo("Plus grand ou égal")
+            .IsLessThan("Plus petit")
+            .IsLessThanOrEqualTo("Plus petit ou égal")
+           ))).Format("{0:" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern + "}");
+
+        //   columns.Bound(e => e.Id).ClientTemplate("<a href='/AnalyseRisque/Edit?ID=#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-info' style='float:right'>Télécharger l'analyse</a>").Title("").Filterable(false).Sortable(false).Width(200);
+        columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='~/MesApplications/getXLAnalyseClient?id=#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-info' style='float:right'>Document d'analyse</a>").Title("").Filterable(false).Sortable(false);
+
+
+    })
+    .Sortable(s => s.AllowUnsort(false))
+    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+    .Filterable()
+    .DataSource(ds => ds
+        .Ajax()
+        //.Group(g => g.Add(c => c.NomClient))
+        .PageSize(20)
+        .Model(m =>
+        {
+            m.Id(e => e.Id);
+        })
+        .Read(r => r.Action("ReadListAnalyseRisqueUnClient", "MesApplications"))
+        .Create(c => c.Action("Save", "Listes"))
+        .Events(e => e
+            .Error("ListeErreur")
+        )
+    )
+    .Events(e => e
+        .DataBound("ListeDataBound")
+    )
+    @*.ToolBar(tb =>
+        {
+        tb.Template(@<a href="/AnalyseRisque/Create" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter une nouvelle analyse</a>);
+        })*@
+                )
+
+            </div>
+
+            <div id="Documents" class="tab-pane">
+
+                @Html.AntiForgeryToken()
+
+                @(Html.Kendo().Grid<DocumentViewModel>()
+        .Name("liste-doc")
+        .Columns(columns =>
+        {
+
+            columns.Bound(e => e.DocumentId).Hidden();
+            columns.Bound(c => c.DisplaySection)
+               .Filterable(f => f.Extra(false).Operators(operators => operators
+            .ForString(str => str.Clear()
+            .Contains("Contient")
+                .StartsWith("Commence par")
+                .IsEqualTo("Égal")
+                .IsNotEqualTo("Différent")
+               )));
+
+            columns.Bound(c => c.Titre)
+                 .Filterable(f => f.Extra(false).Operators(operators => operators
+              .ForString(str => str.Clear()
+              .Contains("Contient")
+                  .StartsWith("Commence par")
+                  .IsEqualTo("Égal")
+                  .IsNotEqualTo("Différent")
+                 )));
+
+
+
+
+            //   columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
+
+            columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='~/File/DownloadFile?ID=#= " + nameof(DocumentViewModel.DocumentId) + " #' class='btn btn-info' style='float:right'>Télécharger le document</a>").Title("").Filterable(false).Sortable(false).Width(200);
+            //columns.Command(c =>
+            //{
+            //    c.Edit();
+            //    c.Custom("Effacer")
+            //          .Click("ConfirmDeleteRow")
+            //          .HtmlAttributes(new { @class = "k-grid-effacer" });
+
+            //})
+            //   .Width(250);
+
+        })
+
+        .Sortable(s => s.AllowUnsort(false))
+        .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+        .Filterable()
+        .DataSource(ds => ds
+            .Ajax()
+             .Group(g => g.Add(c => c.SectionId))
+            .Sort(x => x.Add(c => c.SectionId))
+            .Sort(x => x.Add(c => c.Ordre))
+            .PageSize(20)
+            .Model(m =>
+            {
+                m.Id(e => e.DocumentId);
+                m.Field(e => e.Bidon).Editable(true);
+
+
+
+            })
+
+        .Read(r => r.Action("ReadListAnalyseRisqueDocument", "MesApplications"))
+
+        // .Destroy(u => u.Action("DeleteDOC", "Documents"))
+
+        .Events(e => e
+            .Error("docListeErreur")
+        )
+    )
+
+    .Events(e => e
+        .DataBound("docListeDataBound")
+    ).Editable(e => e.DisplayDeleteConfirmation(false))
+
+
+                )
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+    function docListeDataBound(e)
+    { }
+
+    function docListeErreur(e)
+    { }
+
+
+    function ConfirmDeleteRow(e) {
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.Description, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+
+    function ListeErreur(args) {
+        var selecteurGrid = "#list";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    ShowNotification("Erreur - Gestions",
+                                        errorList,
+                                        "errorListTemplate");
+                });
+            });
+        }
+    }
+
+    function ListeDataBound(e) {
+
+
+
+        var selecteurGrid = "#list";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                $(this).remove();
+            }
+        })
+    }
+
+
+
+
+
+
+
+
+</script>

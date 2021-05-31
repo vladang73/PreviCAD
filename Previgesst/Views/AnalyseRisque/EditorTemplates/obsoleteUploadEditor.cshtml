@@ -1,0 +1,81 @@
+﻿
+<div id="mydiv">
+
+    @(Html.Kendo().Upload()
+    .Name("file")
+    .Multiple(false)
+    .Async(a => a
+        .Save("SaveLink", "Documents" )
+      
+        .AutoUpload(true)
+
+    )
+    .Events(
+
+    e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelect")
+    ))
+
+
+  
+
+</div>
+
+<script>
+
+
+    function fileSelect(e)
+    {
+    
+        var extension = e.files[0].extension.toLowerCase().trim();
+       
+        if (extension != ".xlsx" && extension != ".docx" && extension != ".pdf")
+        {
+            e.preventDefault();
+            alert( "Les seuls fichiers acceptés sont .docx, .xlsx et .pdf")
+        }
+    }
+    function fileSuccess(e)
+    {
+       
+        var grid = $("#liste-doc").data("kendoGrid");
+        var row = file.closest("TR");
+        var dataItem = grid.dataItem(row);
+        dataItem.FileName = e.response.FileName;
+        if (e.response.Section.trim() != "")
+        {
+        
+            dataItem.set('Titre', e.response.Titre);
+            dataItem.set('Section', e.response.Section);
+            dataItem.set('DocumentId', e.response.DocumentId);
+            dataItem.set('Ordre', e.response.Ordre);
+            dataItem.set('NomFichier', e.response.NomFichier);
+
+        }
+
+    }
+
+   
+
+    function fileUpload(e)
+    {
+       
+
+        var grid = $("#liste-doc").data("kendoGrid");
+        var row = file.closest("TR");
+        var dataItem = grid.dataItem(row);
+        dataItem.dirty = true;
+ 
+             
+            e.data = { DocumentId: dataItem.DocumentId , Titre: dataItem.Titre, Section:dataItem.Section, Ordre:dataItem.Ordre};
+
+    }
+
+
+
+    
+
+
+
+</script>
+
+

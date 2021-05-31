@@ -1,0 +1,146 @@
+﻿@model Previgesst.ViewModels.EmployeRegistreViewModel
+@using Previgesst.Ressources.Previcad
+@using Previgesst.Ressources
+
+
+<style>
+
+    .k-grid-content {
+        overflow-x: scroll !important;
+    }
+</style>
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+
+
+
+    <div class="panel-body">
+
+
+        <div id="Employes" class="tab-pane">
+
+            @Html.AntiForgeryToken()
+
+            @(Html.Kendo().Grid<LigneRegistreViewModel>
+                ()
+                .Name("listTermines")
+                .Columns(columns =>
+                {
+
+
+
+                    columns.Bound(e => e.NoFicheCadenassage).Title(PrevFicheRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                     .StartsWith(GridRES.StartsWith)
+                     .IsEqualTo(GridRES.Egale)
+                     .IsNotEqualTo(GridRES.NotEquals)
+                    ))).Width(40);
+                    columns.Bound(e => e.NomDepartement).Title(PrevFicheRES.Departement).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                     .StartsWith(GridRES.StartsWith)
+                     .IsEqualTo(GridRES.Egale)
+                     .IsNotEqualTo(GridRES.NotEquals)
+                    ))).Width(105);
+                    columns.Bound(e => e.NomEquipement).Title(PrevFicheRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                     .StartsWith(GridRES.StartsWith)
+                     .IsEqualTo(GridRES.Egale)
+                     .IsNotEqualTo(GridRES.NotEquals)
+                    ))).Width(140);
+                    
+                    columns.Bound(e => e.EmployeRegistreId).Hidden(true);
+                    columns.Bound(e => e.FicheCadenassageId).Hidden(true);
+                    columns.Bound(e => e.DateDebut).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Debut).Width(70);
+
+                    columns.Bound(e => e.DateFin).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Fin).Width(70);
+
+                    columns.Bound(e => e.FinPrevue).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Enabled(false)).Title(PrevFicheRES.FinPrevueEmploye).Width(70);
+                    columns.Bound(e => e.Note).Width(110);
+                    columns.Bound(e => e.BonDeTravail).Title(PrevFicheRES.BonDeTravail).Width(50);
+                    columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title=" + PrevFicheRES.Etiquette + "></a>").Title("").Filterable(false).Sortable(false).Width(40);
+                    // columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier)).Width(40);
+
+
+                })
+                .DataSource(ds => ds
+                .Ajax()
+                .PageSize(10)
+
+                .Model(m =>
+                {
+                    m.Id(e => e.LigneRegistreId);
+
+                }))
+
+                .Sortable(s => s.AllowUnsort(false))
+                 .Scrollable(e => e.Enabled(true))
+                .ToolBar(tools => tools.Excel())
+                .Editable(e => e
+                .Mode(GridEditMode.PopUp)).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistre").Window(w => w.Title(PrevFicheRES.Modifier).Width(600))
+
+                .DisplayDeleteConfirmation(false)
+                )
+                .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
+                { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                .Filterable()
+                .DataSource(ds => ds
+                .Ajax()
+                .Filter(f =>
+                {
+                    f.Add(b => b.Termine).IsEqualTo(true);
+                })
+                .Sort(x => x.Add(c => c.DateDebut).Descending())
+
+                .PageSize(20)
+
+
+                .Read(r => r.Action("ReadLignesRegistreCadenassageUnEmploye", "Registre", new { client = Model.ClientId }))
+                .Create(c => c.Action("SaveLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
+                .Update(u => u.Action("SaveLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
+                .Destroy(d => d.Action("DeleteLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
+
+
+
+                ).Events(e => e.DataBound("dataBoundTermines")).Events(e => e.Edit("onEditTermines"))
+
+            )
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function dataBoundTermines(e) {
+        var selecteurGrid = "#listTermines";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        $(selecteurGrid + " .k-grid-edit").find("span").remove();
+        var classe = $(selecteurGrid + " .k-grid-edit").attr("class");
+        classe = "btn btn-success " + classe;
+        $(selecteurGrid + " .k-grid-edit").removeAttr("class").addClass(classe).removeClass("k-button").removeClass("k-button-icontext");
+
+    }
+
+    function onEditTermines(e) {
+
+        e.container.find(".k-grid-cancel").bind("click", function () {
+            $("#listEnCours").data("kendoGrid").dataSource.read();
+            $("#listTermines").data("kendoGrid").dataSource.read();
+
+        })
+
+
+
+
+
+    }
+</script>
+
+

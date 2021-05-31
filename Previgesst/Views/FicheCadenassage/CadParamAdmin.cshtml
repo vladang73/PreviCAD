@@ -1,0 +1,37 @@
+﻿@using Previgesst.Ressources.Cadenassage
+@using Previgesst.Ressources
+@model EditCadenassageViewModel
+
+
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+    <div class="panel-body">
+
+        <div id="CadParamAdminContent" class="tab-pane">
+            <!-- First paramet : function; second function : current folder name of this file -->
+            @using (Html.BeginForm("SaveParametersCadAdmin", "FicheCadenassage", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken();
+
+            <div class="form-group CadParamAdminContent--form">
+
+                @Html.HiddenFor(model => model.ClientId, new { @style = "margin-left:10px;" })
+               
+
+                @Html.LabelFor(model => model.NotificationDebutCad, new { @class = "control-label" })
+
+                @Html.CheckBoxFor(model => model.NotificationDebutCad, new { @style = "margin-left:10px;" })
+
+            </div>
+
+                <div class="form-group">
+                    <div class="col col-md-12 CadParamAdminContent--submit">
+                        <input type="submit" value="@CadEditRES.Enregistrer" class="btn btn-primary" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

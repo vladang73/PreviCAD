@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+            <div class="container-fluid">
+                <hr />
+
+                @*<div class="row">
+                        <div class="col-md-12">
+                            &nbsp;
+                        </div>
+
+                    </div>*@
+
+                <div class="row">
+                    @*<div class="col-md-4" style="margin:0px;">
+                            <a href="/AnalyseRisque/Index" style="text-decoration:none;">
+                                <div class="panel panel-danger" style="padding:3px;">
+
+                                    <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#E39901;color:white">Gestion - Cadenassage</div>
+                                    <div class="panel-body">
+                                        <img src="~/Images/Client/cadenassage.jpg" class="img-responsive center-block" />
+                                    </div>
+
+
+                                </div>
+                            </a>
+
+                        </div>*@
+
+                    <div class="col-md-4">
+                        <a href="~/FicheCadenassage/Index" style="text-decoration:none;">
+                            <div class="panel panel-danger">
+                                @*   <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Gestion - Cadenassage</div>*@
+                                <div class="panel-body"><img src="~/Images/Images2019/Previcad.jpg" class="img-responsive center-block" /></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="~/AnalyseRisque/Index" style="text-decoration:none;">
+                            <div class="panel panel-danger">
+                                @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Gestion - Analyses de risques</div>*@
+                                <div class="panel-body"><img src="~/Images/Images2019/Analyse-risque.jpg" class="img-responsive center-block" /></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="~/Documents/Index" style="text-decoration:none;">
+                            <div class="panel panel-danger">
+                                @*    <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Gestion - Documents</div>*@
+                                <div class="panel-body"><img src="~/Images/Images2019/documents.jpg" class="img-responsive center-block" /></div>
+                            </div>
+                        </a>
+                    </div>
+
+
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <a href="#" style="text-decoration:none;">
+                            <div class="panel panel-danger">
+                                @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Simdut - À venir!</div>*@
+                                <div class="panel-body"><img src="~/Images/Images2019/Simdut_grisé.jpg" class="img-responsive center-block" /></div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <a href="#" style="text-decoration:none;">
+                            <div class="panel panel-danger">
+                                @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Simdut - À venir!</div>*@
+                                <div class="panel-body"><img src="~/Images/Images2019/Formation_gris.jpg" class="img-responsive center-block" /></div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+                <hr />
+                @if (User.IsInRole("Administrateur"))
+                {
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="~/Manage/Index" style="text-decoration:none;">
+                                <div class="panel panel-danger">
+                                    @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white;">Utilisateurs</div>*@
+                                    <div class="panel-body"><img src="~/Images/Images2019/Utilisateurs.jpg" class="img-responsive center-block" /></div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2">
+                            <a href="~/Client/Index" style="text-decoration:none;">
+                                <div class="panel panel-danger">
+                                    @*    <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Clients<br /></div>*@
+                                    <div class="panel-body"><img src="~/Images/Images2019/Clients.jpg" class="img-responsive center-block" /></div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2">
+                            <a href="~/Section/Index" style="text-decoration:none;">
+                                <div class="panel panel-danger">
+                                    @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Sections</div>*@
+                                    <div class="panel-body"><img src="~/Images/Images2019/Sections.jpg" class="img-responsive center-block" /></div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <a href="~/ParametresApp/Index" style="text-decoration:none;">
+                                <div class="panel panel-danger">
+                                    <div class="panel-body"><img src="~/Images/Settings.png" class="img-responsive center-block" style="max-width: 80px;" /></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@using Previgesst.Ressources
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ParametresAppViewModel
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/ParametresApp/Index">Paramètres de l'application</a></li>
+                </ol>
+            </nav>
+
+            <hr />
+            <div class="panel panel-danger sectionEdition">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Paramètres de l'application</div>
+                <div class="panel-body">
+
+
+                    <div id="Documents" class="tab-pane">
+
+                        @using (Html.BeginForm("SaveParametersApp", "ParametresApp", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken();
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+                            // TOTAL CADENASSAGE SHEETS
+                            <hr />
+                            <h1><strong>Général</strong></h1>
+                            <hr />
+
+                            <h2>Maintenance</h2>
+
+                            // ID MAINTEANCE
+                            <div class="form-group">
+                                @Html.HiddenFor(m => m.ParametresAppId, new { @class = "form-control" })
+                            </div>
+
+                            // ACTIVATION OF THE MAINTENANCE BOX
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.NextUpdateCase, new { @class = "control-label" })
+                                @Html.CheckBoxFor(m => m.NextUpdateCase, new { @class = "control-label" })
+                                @Html.ValidationMessageFor(m => m.NextUpdateCase, "", new { @class = "text-danger" })
+                            </div>
+
+                            // DESCRIPTION FR
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.NextUpdateTextFr, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.NextUpdateTextFr, new { @class = "form-control" })
+                            </div>
+
+                            // DESCRIPTION EN
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.NextUpdateTextEn, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.NextUpdateTextEn, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" value="Enregistrer" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

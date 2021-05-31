@@ -1,0 +1,89 @@
+﻿@model SectionViewModel
+<style>
+    div.k-edit-form-container {
+        width: auto;
+    }
+
+        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
+            width: 100%;
+            max-width: none;
+            padding-left: 0px;
+        }
+
+
+
+    .petit {
+        max-height: 20px;
+    }
+
+    .row {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+
+    .col {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style>
+
+<div class="container" style="width:600px; margin:0px;padding:0px;">
+
+    <div class="row">
+        <div class="col-md-12" style="padding-left:0px;">
+            @Html.HiddenFor(model => model.SectionId)
+            <div class="panel panel-info">
+
+                <div class="panel-heading">Sections de la documentation</div>
+                <div class="panel-body">
+
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        @Html.LabelFor(model => model.ApplicationPreviId, new { @class = "control-label" })
+
+                        @(Html.Kendo().DropDownListFor(m => m.ApplicationPreviId)
+                                    .DataValueField("ApplicationPreviId")
+                                    .DataTextField("Nom")
+                                    .BindTo((System.Collections.IEnumerable)ViewData["Applications"])
+                                    .HtmlAttributes(new { data_value_primitive = "true" })
+                        )
+                        @Html.ValidationMessageFor(model => model.ApplicationName)
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:5px;">
+
+
+                        @Html.LabelFor(model => model.Nom, new { @class = "control-label pull-left" })
+
+
+                        @Html.TextBoxFor(model => model.Nom, new { @class = "form-control petit", @style = "width:90%" })
+                        @Html.ValidationMessageFor(model => model.Nom)
+
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:5px;">
+
+
+                        @Html.LabelFor(m => m.Ordre, new { @class = "control-label pull-left" })
+                        @(Html.Kendo().NumericTextBoxFor(m => m.Ordre)
+.HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
+.Min(0)
+.Decimals(0)
+.Format("N0")
+
+                        )
+                        @Html.ValidationMessageFor(model => model.Ordre)
+                    </div>
+
+               
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

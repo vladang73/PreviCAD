@@ -1,0 +1,100 @@
+﻿@using Previgesst.Ressources;
+@model ClientEditDetailsViewModel
+@*@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+
+
+                    <li class="breadcrumb-item active" aria-current="page">@ClientRES.Administration - @Model.Nom </li>
+
+                </ol>
+            </nav>
+
+
+
+
+
+            <hr />
+
+
+
+            <div class="panel panel-danger">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">@ClientRES.Administration </div>
+                <div class="panel-body">
+
+
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class=@Model.classDefault>
+                            <a href="#Utilisateurs" aria-controls="general" role="tab" data-toggle="tab">@ClientRES.Utilisateurs</a>
+                        </li>
+
+
+                        @*<li role="presentation">
+                                <a href="#Previcad" aria-controls="previcad" role="tab" data-toggle="tab">PREVICAD</a>
+                            </li>*@
+
+
+                        @if (User.IsInRole("Administrateur"))
+                        {
+                            <li role="presentation">
+                                <a href="#Applications" aria-controls="pratiques" role="tab" data-toggle="tab">Applications permises</a>
+                            </li>
+
+
+                            <li role="presentation" class=@Model.classMaximums>
+                                <a href="#Maximums" aria-controls="Maximums" role="tab" data-toggle="tab">Maximums</a>
+                            </li>
+
+                        }
+
+
+
+
+                    </ul>
+
+                    <div class="tab-content">
+
+
+                        <div id="Utilisateurs" class="tab-pane @Model.classDefault">
+                            @Html.Partial("Utilisateurs", @Model)
+                        </div>
+
+
+                        @*<div id="Previcad" class="tab-pane">
+                                @Html.Partial("Previcad", @Model)
+                            </div>*@
+
+                        @if (User.IsInRole("Administrateur"))
+                        {
+                            <div id="Applications" class="tab-pane">
+                                @Html.Partial("Applications", @Model)
+
+                            </div>
+
+                            <div id="Maximums" class="tab-pane @Model.classMaximums">
+                                @Html.Partial("Maximums", @Model)
+                            </div>
+                        }
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+</div></div></div>

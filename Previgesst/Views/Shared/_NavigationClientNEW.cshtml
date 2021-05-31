@@ -1,0 +1,98 @@
+﻿@*@using Microsoft.AspNet.Identity*@
+
+
+
+@*<div class="container">*@
+
+@*<div class="content-wrapper">
+        <div style="clear:both">
+            <div style="float:left">left</div>
+        </div>
+        <div style="clear:both">
+            <div style="float:right">right</div>
+        </div>
+
+    </div>*@
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="content-wrapper">
+
+            <div class="float-left">
+                <a href='@Url.Action("Index", "MesApplications")'>
+                    <img class="logoHeader" src='@Url.Content("~/Images/dark_logo.png")' />
+                </a>
+
+            </div>
+            <div style="margin-right:0px;margin-left:auto;padding:30px;width:300px;position: absolute;right: 0;top: 0;">
+                <ul id="menu">
+                    @{
+                        using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
+
+                        {
+
+                            string path = Request.Url.PathAndQuery;
+
+                            path = path.Replace("/en/", "");
+                            path = path.Replace("/fr/", "");
+                            if (path.Length == 0)
+                            {
+                                path = "ClientLogin/Index";
+                            }
+                            if (path.Substring(0, 1) == "/")
+                            {
+                                path = path.Substring(1);
+                            }
+                            //utilisé pour prévicad client
+                            if (Session["ClientID"] != null && !path.Contains("?"))
+                            {
+                                path = path + "?ClientID=" + Session["ClientID"];
+                            }
+
+
+                            <li style="padding:1px;"><a href="/fr/@path" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;">Fr</a></li>
+                            <li style="padding:0px;">-</li>
+                            <li style="padding-left:1px;"><a href="/en/@path" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;">En</a></li>
+
+                            @Html.AntiForgeryToken()
+                            if (Request.IsAuthenticated)
+                            {
+
+
+                                Previgesst.Sessions.sessionInfo session = (Previgesst.Sessions.sessionInfo)Session["utilisateur"];
+                                var nomUtilisateur = session?.Nom;
+
+
+                                if (nomUtilisateur != null)
+                                { @:<li class="dropdown">
+                                        @:<a href="#" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;" data-toggle="dropdown" role="button">@nomUtilisateur<span class="caret"></span></a>
+                                        @: <ul class="dropdown-menu">
+
+
+
+
+
+
+
+
+                                            @:<li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+                                        @: </ul>
+                                    @: </li>
+                                }
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@*</div>*@
+
+@{
+    if (Request.Url.PathAndQuery != "/" && Request.Url.PathAndQuery != "/Account/Login" && Request.Url.PathAndQuery.Contains( "/Registre/Index?")==false)
+    {
+        <script src="https://previgesst.com/wp-content/themes/previgesst/application.js"></script>
+    }
+}

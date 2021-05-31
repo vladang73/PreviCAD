@@ -1,0 +1,81 @@
+﻿@model Previgesst.ViewModels.EditCadenassageViewModel
+@using Previgesst.Ressources.Analyse
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+
+
+
+<div class="container-fluid">
+    <div class="cadenassageContent analyseContent row">
+        <div class="cadenassageContent--header col col-sm-12 col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page"><h1>@AREditClientRES.GestionAnalyses</h1></li>
+                </ol>
+            </nav>
+            <hr />
+        </div>
+        <ul class="nav nav-tabs col-md-1" role="tablist">
+            <li role="presentation" class="active">
+                <a id="AnalysFich" href="#Fiches" aria-controls="general" role="tab" data-toggle="tab"><img src="~/Images/analyse-de-risque.png" class="menu-icon icon-noactive" title="@AREditClientRES.Analyses" /><img src="~/Images/analyse-de-risque-previ.png" class="menu-icon icon-active" title="@AREditClientRES.Analyses" /><!--@AREditClientRES.Analyses--></a>
+            </li>
+            <li role="presentation">
+                <a id="DocCliAnalyse" href="#DocClients" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="~/Images/analyse-de-risque-doc.png" class="menu-icon icon-noactive" title="@AREditClientRES.Documents" /><img src="~/Images/analyse-de-risque-doc-previ.png" class="menu-icon icon-active" title="@AREditClientRES.Documents" /><!--@AREditClientRES.Documents--></a>
+            </li>
+        </ul>
+
+        <div class="panel panel-danger col col-xs-12 col-sm-12 col-md-10">
+            <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white"><span class="currentTitleAnalyse">@AREditClientRES.Analyses</span> <a href="https://previgesst.com/centre-de-support/" class="supportLink" target="_blank"><img src="/Images/help.png" class="help-icon" title="Centre support" /> @AREditClientRES.CentreSupport</a></div>
+            <div class="panel-body">
+                @*<ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#Fiches" aria-controls="general" role="tab" data-toggle="tab">Analyses</a>
+                    </li>
+
+                    <li role="presentation">
+                        <a href="#Documents" aria-controls="general" role="tab" data-toggle="tab">Documents du client</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div id="Fiches" class="tab-pane active">
+                        @Html.Partial("Analyses", @Model)
+                    </div>
+
+                    <div id="Documents" class="tab-pane active">
+                        @Html.Partial("DocClients", @Model)
+                    </div>
+                </div>*@
+
+                <div class="tab-content">
+                    <div id="Fiches" class="tab-pane active">
+                        @Html.Partial("Analyses", @Model)
+                    </div>
+
+                    <div id="DocClients" class="tab-pane">
+
+                        @Html.Partial("DocClients", @Model)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class='shieldLogoCadenassage' href='@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/shield.png'><a />
+    </div>
+</div>
+<script type="text/javascript">
+    // White background for the body ID
+    jQuery('#body').css('background', '#FFF');
+
+    // Get and inject the li name selected
+    jQuery(document).on('click', '.nav-tabs li', function () {
+        let liSelected = jQuery(this).find('.icon-noactive').attr('title');
+        jQuery('.currentTitleAnalyse').html(liSelected);
+    });
+
+    // HIDE CURRENT LOGO
+    jQuery('.content-wrapper .float-left img').css('display', 'none');
+</script>

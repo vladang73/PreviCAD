@@ -1,0 +1,404 @@
+﻿@model AffichageListesViewModel
+
+
+@{
+    ViewBag.Title = "Analyses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+
+            <hr />
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AdminPrevi/Index">Accueil</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Liste des analyses de risque</li>
+                </ol>
+            </nav>
+
+
+            <hr />
+
+
+            <div class="panel panel-danger">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Édition de l'analyse de risque</div>
+                <div class="panel-body">
+
+
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#Clients" aria-controls="general" role="tab" data-toggle="tab">Clients</a>
+                        </li>
+                        @*<li role="presentation">
+                                <a id="DocAnalyseR" href="#Documents" aria-controls="pratiques" role="tab" data-toggle="tab">Documents</a>
+                            </li>*@
+
+                        @if (Model.AfficherListes)
+                        {
+                            <li role="presentation">
+                                <a href="#Listes" aria-controls="pratiques" role="tab" data-toggle="tab">Listes</a>
+                            </li>
+                        }
+
+
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <div id="Clients" class="tab-pane active">
+
+
+
+                            @Html.AntiForgeryToken()
+
+                            @(Html.Kendo().Grid<ClientListViewModel>()
+                                                .Name("list-client")
+                                                .Columns(columns =>
+                                                {
+                                                    columns.Bound(c => c.Nom)
+                                                       .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                    .ForString(str => str.Clear()
+                                                    .Contains("Contient")
+                                                        .StartsWith("Commence par")
+                                                        .IsEqualTo("Égal")
+                                                        .IsNotEqualTo("Différent")
+                                                       )));
+                                                    columns.Bound(c => c.Identificateur)
+                                                       .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                    .ForString(str => str.Clear()
+                                                    .Contains("Contient")
+                                                        .StartsWith("Commence par")
+                                                        .IsEqualTo("Égal")
+                                                        .IsNotEqualTo("Différent")
+                                                       )));
+                                                    columns.Bound(e => e.ClientId).ClientTemplate("<a target='_blank'  href='../AnalyseRisque/EditClient?ID=#= " + nameof(ClientListViewModel.ClientId) + " #' class='btn btn-primary' style='float:left'>Gérer les analyses</a>").Title("").Filterable(false).Sortable(false).Width("100px");
+
+                                                })
+                                                .Sortable(s => s.AllowUnsort(false))
+                                                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                                                .Filterable()
+                                                .DataSource(ds => ds
+                                                    .Ajax()
+
+                                                    .PageSize(20)
+                                                    .Model(m =>
+                                                    {
+                                                        m.Id(e => e.ClientId);
+                                                    })
+                                                    .Read(r => r.Action("ReadListClientsActifs", "Client"))
+                                                //  .Create(c => c.Action("Save", "Listes"))
+
+                                                )
+
+
+
+                                    @*.ToolBar(tb =>
+                                        {
+                                        tb.Template(@<a href="/AnalyseRisque/Create" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter une nouvelle analyse</a>);
+                                        })*@
+                            )
+
+
+
+
+
+
+
+                        </div>
+
+
+                        <div id="Documents" class="tab-pane">
+
+                            @Html.AntiForgeryToken()
+
+                            @(Html.Kendo().Grid<DocumentViewModel>()
+                                                    .Name("liste-doc")
+                                                    .Columns(columns =>
+                                                    {
+
+                                                        columns.Bound(e => e.DocumentId).Hidden();
+                                                                    // columns.Bound(c => c.Section)
+                                                                    //  .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                                            @*.ForString(str => str.Clear()
+                                                                                .Contains("Contient")
+                                                                                    .StartsWith("Commence par")
+                                                                                    .IsEqualTo("Égal")
+                                                                                    .IsNotEqualTo("Différent")
+                                                                                   )));*@
+
+          columns.Bound(c => c.Titre)
+               .Filterable(f => f.Extra(false).Operators(operators => operators
+            .ForString(str => str.Clear()
+            .Contains("Contient")
+                .StartsWith("Commence par")
+                .IsEqualTo("Égal")
+                .IsNotEqualTo("Différent")
+               )));
+
+
+          columns.Bound(c => c.Ordre)
+          .Filterable(false);
+
+          columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
+
+          columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='../File/DownloadFile?ID=#= " + nameof(DocumentViewModel.DocumentId) + " #' class='btn btn-info' style='float:right'>Télécharger le document</a>").Title("").Filterable(false).Sortable(false).Width(200);
+
+          columns.Bound(c => c.DisplaySection).Hidden()
+       .Filterable(f => f.Extra(false).Operators(operators => operators
+       .ForString(str => str.Clear()
+       .Contains("Contient")
+        .StartsWith("Commence par")
+        .IsEqualTo("Égal")
+        .IsNotEqualTo("Différent")
+       )));
+
+          columns.Command(c =>
+          {
+              c.Edit();
+              c.Custom("Effacer")
+                    .Click("ConfirmDeleteRow")
+                    .HtmlAttributes(new { @class = "k-grid-effacer" });
+
+          })
+             .Width(250);
+
+      })
+
+      .Sortable(s => s.AllowUnsort(false))
+      .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+      .Filterable()
+      .DataSource(ds => ds
+          .Ajax()
+           .Group(g => g.Add(c => c.DisplaySection))
+          //.Sort(x => x.Add(c => c.Section))
+          .Sort(x => x.Add(c => c.Ordre))
+          .PageSize(20)
+          .Model(m =>
+          {
+              m.Id(e => e.DocumentId);
+              m.Field(e => e.Bidon).Editable(true);
+
+
+
+          })
+
+      .Read(r => r.Action("ReadListAnalyseRisque", "Documents"))
+      .Create(c => c.Action("SaveAR", "Documents"))
+      .Update(u => u.Action("SaveAR", "Documents"))
+      .Destroy(u => u.Action("DeleteDOC", "Documents"))
+
+      .Events(e => e
+          .Error("docListeErreur")
+      )
+  )
+
+  .Events(e => e
+      .DataBound("docListeDataBound")
+  ).Editable(e => e.DisplayDeleteConfirmation(false))
+                                                        @*.ToolBar(tb =>
+                                                            {
+                                                            tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
+                                                            }*@
+
+     .ToolBar(t =>
+     {
+         t.Create();
+     }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentEditor").Window(w => w.Title("Édition d'un document").Width(600).Name("editWindow")))
+                            )
+
+
+                        </div>
+
+                        <div id="Listes" class="tab-pane">
+                            <hr />
+                            <div style="margin-left:10px">
+
+                                <div class="row" style="margin-bottom:10px;"><div class="col-md-4"><a href="~/Listes/Situations" target="_blank" class="btn btn-primary form-control">Situations dangereuses</a><br /></div></div>
+                                <div class="row" style="margin-bottom:10px;"><div class="col-md-4"><a href="~/Listes/Phenomenes" target="_blank" class="btn btn-primary form-control">Phénomènes dangereux</a><br /></div></div>
+                                <div class="row" style="margin-bottom:10px;"><div class="col-md-4"><a href="~/Listes/Evenements" target="_blank" class="btn btn-primary form-control">Événements dangereux</a><br /></div></div>
+                                <div class="row" style="margin-bottom:10px;"><div class="col-md-4"><a href="~/Listes/Dommages" target="_blank" class="btn btn-primary form-control">Dommages potentiels</a><br /></div></div>
+                                @*   <div class="row" style="margin-bottom:10px;"><div class="col-md-4"><a href="~/Listes/Mesures" target="_blank" class="btn btn-primary form-control">Mesures de prévention</a><br /></div></div>*@
+                                @*      <div class="row" style="margin-bottom:10px;"><div class="col-md-4"><a href="~/Listes/Reglements" target="_blank" class="btn btn-primary form-control">Règlements / Normes</a><br /></div></div>*@
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+
+
+    $("#DocAnalyseR").click(function () {
+
+        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        $("a.k-grid-add").addClass("btn btn-success btn-AnalyseR");
+        $("span.k-add").removeClass("k-icon");
+        $("a.btn-AnalyseR").text("Ajouter");
+
+        //var link = $("p.k-reset").find('a');
+        //$("p.k-reset:contains('DisplaySection')").text('Section').css("color", "black").before(link);
+
+    });
+
+
+
+    var collapseAllGroups = function (grid) {
+
+        var trouve = false;
+
+        grid.table.find(".k-grouping-row").each(function () {
+            if (trouve == true)
+                grid.collapseGroup(this);
+            trouve = true;
+
+
+        });
+    }
+
+
+    function ConfirmDeleteRow(e) {
+
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.FileName, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+        //debugger;
+    }
+
+
+    function docListeErreur(args) {
+        ////debugger;
+        var selecteurGrid = "#liste-doc";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("Erreur - Gestions",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+
+
+
+    }
+
+    function docListeDataBound(e) { }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+<script>
+
+
+    function fileSelect(e) {
+
+        var extension = e.files[0].extension.toLowerCase().trim();
+
+        if (extension != ".xlsx" && extension != ".docx" && extension != ".pdf" && extension != ".xls" && extension != ".doc") {
+            e.preventDefault();
+
+            ShowNotification("Attention!", "Seuls les fichiers Excel, Word et PDF sont acceptés.", "errorTemplate")
+        }
+    }
+
+    function fileSuccess(e) {
+
+
+        //debugger;
+        var z = $('.k-popup-edit-form');
+
+        var gview = $("#liste-doc").data("kendoGrid");
+
+
+        var row = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
+
+
+        var item = gview.dataItem(row);
+
+        //    dataItem.FileName = e.response.FileName;
+        //   if (e.response.Section.trim() != "")
+
+        {
+
+            item.set('Titre', e.response.Titre);
+            item.set('SectionId', e.response.Section);
+            item.set('DocumentId', e.response.DocumentId);
+            item.set('Ordre', e.response.Ordre);
+            item.set('FileName', e.response.NomFichier);
+
+        }
+
+    }
+
+
+
+    function fileUpload(e) {
+        //   alert (this.dataItem)
+
+        var z = $('.k-popup-edit-form');
+
+        var gview = $("#liste-doc").data("kendoGrid");
+
+
+        var item = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
+
+
+
+        var selectedItem = gview.dataItem(item);
+
+
+
+        selectedItem.dirty = true;
+
+
+        e.data = { DocumentId: selectedItem.DocumentId, Titre: selectedItem.Titre, Section: selectedItem.SectionId, Ordre: selectedItem.Ordre, SectionTexte: selectedItem.SectionTexte };
+
+    }
+
+
+
+
+
+
+
+</script>

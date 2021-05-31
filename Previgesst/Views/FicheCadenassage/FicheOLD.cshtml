@@ -1,0 +1,178 @@
+﻿@model Previgesst.ViewModels.EditCadenassageViewModel
+
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#E39901;color:white">Fiches de cadenassage </div>
+    <div class="panel-body">
+
+
+
+
+        @Html.AntiForgeryToken()
+
+        @(Html.Kendo().Grid<LigneCadenassageGridViewModel>()
+        .Name("listFiches")
+        .Columns(columns =>
+        {
+            columns.Bound(e => e.FicheCadenassageId).Hidden();
+
+            columns.Bound(c => c.Departement)
+           .Filterable(f => f.Extra(false).Operators(operators => operators
+        .ForString(str => str.Clear()
+ .Contains("Contient")
+            .StartsWith("Commence par")
+            .IsEqualTo("Égal")
+            .IsNotEqualTo("Différent")
+           )));
+
+            columns.Bound(c => c.NomEquipement)
+               .Filterable(f => f.Extra(false).Operators(operators => operators
+            .ForString(str => str.Clear()
+     .Contains("Contient")
+                .StartsWith("Commence par")
+                .IsEqualTo("Égal")
+                .IsNotEqualTo("Différent")
+               )));
+
+            columns.Bound(c => c.TravailAEffectuer).Width(200)
+               .Filterable(f => f.Extra(false).Operators(operators => operators
+            .ForString(str => str.Clear()
+     .Contains("Contient")
+                .StartsWith("Commence par")
+                .IsEqualTo("Égal")
+                .IsNotEqualTo("Différent")
+               )));
+
+
+            columns.Command(c =>
+            {
+                c.Edit();
+                c.Custom("Effacer")
+                    .Click("ConfirmDeleteRowFC")
+                    .HtmlAttributes(new { @class = "k-grid-effacer" });
+
+            })
+            .Width(250);
+        })
+        .Sortable(s => s.AllowUnsort(false))
+        .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
+        .Filterable()
+        //.AutoBind(false)
+        .DataSource(ds => ds
+            .Ajax()
+            .PageSize(10).Sort(x => x.Add(c => c.NomEquipement))
+
+        .Model(m =>
+        {
+            m.Id(e => e.FicheCadenassageId);
+
+
+        })
+        //.Read(r => r.Action("ReadListFiches", "FicheCadenassage", new { client = Model.ClientId }))
+        //.Create(c => c.Action("SaveFiche", "FicheCadenassage", new { client = Model.ClientId }))
+        //.Update(u => u.Action("SaveFiche", "FicheCadenassage", new { client = Model.ClientId }))
+        .Read(r => r.Action("ReadListFiches", "FicheCadenassage", new { client =1 }))
+        .Create(c => c.Action("SaveFiche", "FicheCadenassage", new { client =1 }))
+        .Update(u => u.Action("SaveFiche", "FicheCadenassage", new { client = 1 }))
+        .Destroy(d => d.Action("DeleteEquipement", "FicheCadenassage"))
+        .Events(e => e
+            .Error("ListeErreurFC")
+
+        )
+    )
+    .Events(e => e
+        .DataBound("ListeDataBoundFC")
+
+
+    )
+        .Editable(e => e.DisplayDeleteConfirmation(false)).
+    Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("Ligne").Window(w => w.Title("Édition d'une fiche").Width(1200).Name("editWindow")))
+
+
+
+
+    .ToolBar(t =>
+    {
+        t.Create();
+    })
+        )
+    </div>
+</div>
+
+<script type="text/javascript">
+  
+
+ 
+
+
+
+    function ConfirmDeleteRowFC(e) {
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.NomEquipement, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+
+    function ListeErreurFC(args) {
+        var selecteurGrid = "#listEquipement";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    ShowNotification("Erreur - Gestions",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+    }
+
+    function ListeDataBoundFC(e) {
+
+
+
+        var selecteurGrid = "#listEquipement";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+         //   if (!currentDataItem.Suppressible) {
+            if (1 == 1) {
+                $(this).remove();
+            }
+
+         
+            
+        })
+    }
+
+
+
+
+
+
+
+
+</script>

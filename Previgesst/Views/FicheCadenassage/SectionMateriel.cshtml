@@ -1,0 +1,192 @@
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Cadenassage
+@model Previgesst.ViewModels.EditFicheViewModel
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+
+
+
+    <div class="panel-body">
+
+
+        <div id="Documents" class="tab-pane">
+
+            @Html.AntiForgeryToken()
+
+            @(Html.Kendo().Grid<MaterielRequisCadenassageViewModel>()
+                                    .Name("listMAT")
+                                    .Columns(columns =>
+                                    {
+
+                                        columns.Bound(e => e.MaterielRequisCadenassageId).Hidden();
+                                        columns.Bound(e => e.FicheCadenassageId).Hidden();
+
+                                        columns.Bound(c => c.NomMateriel)
+                                             .Filterable(f => f.Extra(false).Operators(operators => operators
+                                          .ForString(str => str.Clear()
+                                            .Contains(GridRES.Contains)
+                                            .StartsWith(GridRES.StartsWith)
+                                            .IsEqualTo(GridRES.Egale)
+                                            .IsNotEqualTo(GridRES.NotEquals)
+                                             )));
+
+                                        columns.Bound(c => c.Quantite).Filterable(f => f.Extra(false));
+
+
+
+
+                                        columns.Command(c =>
+                                        {
+                                            c.Edit();
+                                            c.Custom(CadMaterielRES.Effacer)
+                                                  .Click("ConfirmDeleteRowMAT")
+                                                  .HtmlAttributes(new { @class = "k-grid-effacer" });
+
+                                        })
+                                           .Width(250);
+
+                                    })
+
+                                    .Sortable(s => s.AllowUnsort(false))
+                                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                                    .Filterable()
+                                    .DataSource(ds => ds
+                                        .Ajax()
+                                           .Sort(x => x.Add(c => c.NomMateriel))
+
+                                        .PageSize(20)
+                                        .Model(m =>
+                                        {
+                                            m.Id(e => e.MaterielRequisCadenassageId);
+
+
+
+                                        })
+
+                                    .Read(r => r.Action("ReadListMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                                    .Create(c => c.Action("SaveItemMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                                    .Update(u => u.Action("SaveItemMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                                    .Destroy(u => u.Action("DeleteItemMateriel", "FicheCadenassage"))
+
+
+                                    .Events(e => e
+                                        .Error("ListeErreurMAT")
+                                    )
+                                    )
+
+                                    .Events(e => e
+                                        .DataBound("ListeDataBoundMAT")
+
+                                    ).
+                                    Editable(e => e.DisplayDeleteConfirmation(false)).
+                                    Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneMateriel").Window(w => w.Title(CadMaterielRES.Edition).Width(600)))
+
+
+                                    @*.ToolBar(tb =>
+                                        {
+                                        tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
+                                        }*@
+
+                                    .ToolBar(t =>
+                                    {
+                                        t.Create();
+                                    })
+            )
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    //function end(e)
+    //{
+    //    // reload de la grille car pas de refresh sur application mise à jour
+
+    //    if (e.type == "update")
+    //    {
+    //        var grid = $("#list").data("kendoGrid");
+    //        grid.dataSource.read();
+
+    //    }
+
+    //}
+
+    $("#MatFich").click(function () {
+
+        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        $("a.k-grid-add").addClass("btn btn-success btn-sectionMat");
+        $("span.k-add").removeClass("k-icon");
+        $("a.btn-sectionMat").text("@CadMaterielRES.Ajouter");
+        
+        // ADD ICONE "+"
+        setTimeout(function () { $("#Materiel").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+
+    });
+
+    function ConfirmDeleteRowMAT(e) {
+
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.NoLigne, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+
+    }
+
+
+    function ListeErreurMAT(args) {
+
+        var selecteurGrid = "#listMAT";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("@CadMaterielRES.Erreur",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+
+
+
+    }
+
+    function ListeDataBoundMAT(e) {
+
+        var selecteurGrid = "#listMAT";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                $(this).remove();
+            }
+        })
+    }
+</script>

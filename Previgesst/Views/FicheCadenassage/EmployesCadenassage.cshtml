@@ -1,0 +1,207 @@
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Cadenassage
+@model Previgesst.ViewModels.EditCadenassageViewModel
+
+
+@*<h1>@Model.IdentificateurUnique</h1>
+<h2>@Model.ClientId</h2>*@
+
+<div class="panel panel-danger">
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+
+
+
+    <div class="panel-body">
+
+
+        <div id="Employes" class="tab-pane" style="text-align:center;">
+
+            @Html.AntiForgeryToken()
+
+            @(Html.Kendo().Grid<EmployeRegistreViewModel>()
+                    .Name("listEMP")
+                    .Columns(columns =>
+                    {
+
+                        columns.Bound(e => e.EmployeRegistreId).Hidden();
+                        columns.Bound(e => e.ClientId).Hidden();
+                        columns.Bound(e => e.Password).Hidden();
+
+
+                        columns.Bound(c => c.NoEmploye)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(90);
+
+                        columns.Bound(c => c.Nom)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(290);
+
+                        columns.Bound(c => c.NomDepartement)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(290);
+
+                        columns.Bound(c => c.NoCadenas)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(100);
+
+                        columns.Bound(e => e.Actif).Filterable(f => f.Extra(false)).ClientTemplate("<center><input disabled type='checkbox' #= Actif ? checked='checked' :'' # /></center>").Width(50);
+                        columns.Command(c =>
+                        {
+                            c.Edit();
+                            c.Custom(CadEmpRES.Vide)
+                            .Click("ConfirmDeleteEmploye")
+                            .HtmlAttributes(new { @class = "k-grid-effacer" });
+                            }).Width(30);
+                        })
+
+                        .Sortable(s => s.AllowUnsort(false))
+                        .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
+                        { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                        .Filterable()
+                        .DataSource(ds => ds
+                            .Ajax()
+                            .Filter(f =>
+                            {
+                                f.Add(b => b.Actif).IsEqualTo(true);
+                            })
+                            .Sort(x => x.Add(c => c.NoEmploye))
+                            .PageSize(20)
+                            .Model(m =>
+                            {
+                                m.Id(e => e.EmployeRegistreId);
+                            })
+                            .Read(r => r.Action("ReadListEmployesCadenassage", "FicheCadenassage", new { IDClient = Model.ClientId }))
+                            .Create(c => c.Action("SaveItemEmployesCadenassage", "FicheCadenassage", new { IDClient = Model.ClientId }))
+                            .Update(u => u.Action("SaveItemEmployesCadenassage", "FicheCadenassage", new { IDClient = Model.ClientId }))
+                            .Destroy(u => u.Action("DeleteItemEmployesCadenassage", "FicheCadenassage"))
+                            .Events(e => e
+                                .Error("errorEmployes").RequestEnd("EndEmp")
+                            )
+                        )
+                        .Events(e => e
+                            .DataBound("ListeDataBoundEMP")
+                        ).Editable(e => e.DisplayDeleteConfirmation(false))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneEmploye").Window(w => w.Title(CadEmpRES.Employe).Width(600)))
+
+                    .ToolBar(t =>
+                    {
+                        t.Create();
+                    })
+                )
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    function EndEmp(e) {
+
+        if (e.type == "update" || e.type == "destroy" || e.type == "create") {
+            $("#listDEPT").data("kendoGrid").dataSource.read();
+        }
+    }
+
+
+    $("#Emp").click(function () {
+        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        $("a.k-grid-add").addClass("btn btn-success btn-sectionEmp");
+        $("span.k-add").removeClass("k-icon");
+        $("a.btn-sectionEmp").text("@CadEmpRES.Ajouter");
+
+        
+        // ADD ICONE "+"
+        setTimeout(function(){ $("#EmployesCadenassage").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+    });
+
+    function ConfirmDeleteEmploye(e) {
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.Nom, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+
+
+
+    function ListeDataBoundEMP(e) {
+        var selecteurGrid = "#listEMP";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                $(this).remove();
+            }
+        })
+    }
+</script>
+
+
+
+<script type="text/kendo-template" id="messageEmployes">
+    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
+         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage">
+        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    var validationMessageTmpl = kendo.template($("#messageEmployes").html());
+
+    function errorEmployes(args) {
+        if (args.errors) {
+            var grid = $("#listEMP").data("kendoGrid");
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();   // cancel grid rebind if error occurs
+                for (var error in args.errors) {
+                    showMessage(grid.editable.element, error, args.errors[error].errors);
+                }
+            });
+        }
+    }
+
+    function showMessage(container, name, errors) {
+        //add the validation message to the form
+        container.find("[data-valmsg-for=" + name + "],[data-val-msg-for=" + name + "]")
+            .replaceWith(validationMessageTmpl({ field: name, message: errors[0] }))
+    }
+</script>
+
+

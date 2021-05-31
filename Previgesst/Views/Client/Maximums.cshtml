@@ -1,0 +1,135 @@
+﻿@model ClientEditDetailsViewModel
+
+
+<div class="row">
+
+    <div class="col-md-10">
+        <div class="panel panel-danger">
+
+            <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+            <div class="panel-body">
+
+
+
+
+
+
+                @using (Html.BeginForm("SaveMaximums", "Client", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+                    @Html.HiddenFor(model => model.ClientId)
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NbAdminUtilisateurs, new { @class = "control-label" })
+
+                        @Html.TextBoxFor(m => m.NbAdminUtilisateurs, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NbAdminUtilisateurs, "", new { @class = "text-danger" })
+
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NbAdminsPrevicadMax, new { @class = "control-label" })
+
+                        @Html.TextBoxFor(m => m.NbAdminsPrevicadMax, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NbAdminsPrevicadMax, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NbAuditeursMax, new { @class = "control-label" })
+
+                        @Html.TextBoxFor(m => m.NbAuditeursMax, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NbAuditeursMax, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NbUtilisateursPrevicad, new { @class = "control-label" })
+
+                        @Html.TextBoxFor(m => m.NbUtilisateursPrevicad, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NbUtilisateursPrevicad, "", new { @class = "text-danger" })
+
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NbAdminsAnalyseRisqueMax, new { @class = "control-label" })
+
+                        @Html.TextBoxFor(m => m.NbAdminsAnalyseRisqueMax, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NbAdminsAnalyseRisqueMax, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    // TOTAL CADENASSAGE SHEETS
+                    <hr />
+                    <h4><strong>CADENASSAGE - ACCÈS</strong></h4>
+                    <hr />
+                    if (Model.TotalCadenassage == null)
+                    {
+                        @Html.HiddenFor(m => m.TotalCadenassage)
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.TotalCadenassage, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.TotalCadenassage, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    }
+
+                    // USER STATUS FOR THE ANALYSIS
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.StatusCadenassage, new { @class = "control-label" })
+                        <p><strong>0</strong> = Non | <strong>1</strong> = Oui <!--<strong>2</strong> = Illimité </p>-->
+                        @Html.TextBoxFor(m => m.StatusCadenassage, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.StatusCadenassage, "", new { @class = "text-danger" })
+                    </div>
+
+                    // LIMIT SHEETS
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.NbLimitCadenassage, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.NbLimitCadenassage, new { @class = "form-control" })
+                    </div>
+
+                    // TRIAL PERIOD
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PeriodeEssai, new { @class = "control-label" })
+                        @Html.CheckBoxFor(m => m.PeriodeEssai, new { @class = "control-label" })
+                        @Html.ValidationMessageFor(m => m.PeriodeEssai, "", new { @class = "text-danger" })
+                    </div>
+
+                    // DEADLINE
+                    if (Model.DateCadenassage == null)
+                    {
+                        @Html.HiddenFor(m => m.DateCadenassage)
+                    }
+                    else
+                    {
+                        <div class="form-group">
+
+                            @Html.LabelFor(m => m.DateCadenassage, new { @class = "control-label" })
+                            <br />
+                            @(Html.Kendo().DatePickerFor(m => m.DateCadenassage).HtmlAttributes(new { @class = "form-control", @style = "margin-left:5px" }))
+                            @*@Html.TextBoxFor(m => m.DateCadenassage, new { @class = "form-control" })*@
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.NbAdminsDocumentsMax, new { @class = "control-label" })
+
+                        @Html.TextBoxFor(m => m.NbAdminsDocumentsMax, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NbAdminsDocumentsMax, "", new { @class = "text-danger" })*@
+
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Enregistrer" />
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

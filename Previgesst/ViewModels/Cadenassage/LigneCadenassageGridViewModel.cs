@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+using Previgesst.Ressources.Cadenassage;
+
+namespace Previgesst.ViewModels
+{
+    public class LigneCadenassageGridViewModel
+    { public int FicheCadenassageId { get; set; }
+        public int EquipementId { get; set; }
+        [DisplayName("Équipement")]
+
+        [Display(ResourceType = typeof(CadFichesRES), Name = "Equipement")]
+        public String NomEquipement { get; set; }
+
+        [Display(ResourceType = typeof(CadFichesRES), Name = "Departement")]
+        [Required]
+        [StringLength(250)]
+
+        public string Departement { get; set; }
+        [Display(ResourceType = typeof(CadFichesRES), Name = "NoFiche")]
+        [Required]
+        [StringLength(250)]
+        public string NoFiche { get; set; }
+        [Display(ResourceType = typeof(CadFichesRES), Name = "ApprouvePar")]
+        [StringLength(250)]
+        public string ApprouvePar { get; set; }
+        public int ClientId { get; set; }
+        public DateTime? DateRevision { get; set; }
+        public DateTime? DateCreation { get; set; }
+        [Display(ResourceType = typeof(CadFichesRES), Name = "Travail")]
+        [Required]
+        [StringLength(250)]
+        public string TravailAEffectuer { get; set; }
+
+        public Boolean Suppressible { get; set; }
+        public Boolean Editable { get; set; }
+        [Display(ResourceType = typeof(CadFichesRES), Name = "Previgesst")]
+        public Boolean estDocumentPrevigesst { get; set; }
+
+        [Display(ResourceType = typeof(CadFichesRES), Name = "RevActive")]
+        public Boolean RevisionCourante { get; set; }
+
+        public string TitreFiche { get; set; }
+
+        public List<string> TexteMateriel { get; set; }
+    
+
+    }
+}

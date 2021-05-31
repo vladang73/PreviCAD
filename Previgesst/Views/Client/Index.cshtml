@@ -1,0 +1,283 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //  Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>
+
+                    <li class="breadcrumb-item active" aria-current="page">Gestion des clients</li>
+                </ol>
+            </nav>
+
+            <hr />
+
+
+            <div class="panel panel-danger previgesstClient">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Clients</div>
+                <div class="panel-body">
+
+
+
+
+                    @Html.AntiForgeryToken()
+
+                    @(Html.Kendo().Grid<ClientListViewModel>()
+                        .Name("list")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(e => e.ClientId).Hidden();
+                            columns.Bound(e => e.Logo).Hidden();
+                            columns.Bound(c => c.Nom)
+                                .Filterable(f => f
+                                    .Extra(false));
+                            columns.Bound(c => c.Identificateur).Filterable(f => f
+                            .Extra(false));
+
+
+
+
+                            columns.Bound(c => c.Actif).Filterable(f => f
+                           .Extra(false)).ClientTemplate("<center><input disabled type='checkbox' #= Actif ? checked='checked' :'' # /></center>");
+
+
+                            columns.Bound(e => e.Thumb).ClientTemplate("<img src='#=Thumb#'/>").EditorTemplateName("VideView").Title("Image").Filterable(false).Sortable(false);
+                            columns.Bound(e => e.Thumb).ClientTemplate("<input type=button onclick='changerImage(#=ClientId#)' value='Image' class='btn btn-primary'/>").EditorTemplateName("VideView").Filterable(false).Sortable(false).Title("");
+
+
+                            columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a target='_blank' href='../Client/Details?id=#= ClientId #' class='btn btn-primary'>Détails</a>").Title("").Filterable(false).Sortable(false);
+                            columns.Command(c =>
+                            {
+                                c.Edit();
+                                c.Custom("Effacer")
+                                    .Click("ConfirmDeleteRow")
+                                    .HtmlAttributes(new { @class = "k-grid-effacer" });
+                            })
+                            .Width(250);
+                        })
+                        .Sortable(s => s.AllowUnsort(false))
+                        .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
+                        .Filterable()
+                        //.AutoBind(false)
+                        .DataSource(ds => ds
+
+                            .Ajax()
+                            .PageSize(10)
+                            .Sort(s =>
+                            {
+                                s.Add(nameof(ClientListViewModel.Nom)).Ascending();
+                            })
+                            .Filter(f =>
+                            {
+                                f.Add(b => b.Actif).IsEqualTo(true);
+                            })
+                            .Model(m =>
+                            {
+                                m.Id(e => e.ClientId);
+
+                                m.Field(e => e.Bidon).Editable(true);
+                                m.Field(e => e.Thumb).Editable(false);
+                                m.Field(e => e.Lien).Editable(false);
+
+                            })
+                            .Read(r => r.Action("ReadListClients", "Client"))
+                            .Create(c => c.Action("Save", "Client").Data("sendAntiForgeryToken"))
+                            .Update(u => u.Action("Save", "Client").Data("sendAntiForgeryToken"))
+                            .Destroy(d => d.Action("Delete", "Client").Data("sendAntiForgeryToken"))
+                            .Events(e => e
+                                .Error("ListErreur")
+                            )
+                        )
+                        .Events(e => e
+                            .DataBound("ListDataBound").Edit("Edit")
+
+                        )
+                        .Editable(e => e
+                            .Mode(GridEditMode.InLine)
+                            .CreateAt(GridInsertRowPosition.Top)
+                            .DisplayDeleteConfirmation(false)
+                        )
+                        .ToolBar(t =>
+                        {
+                            t.Create().Text("Ajouter").HtmlAttributes(new { @class = "btn btn-success" });
+                        })
+                    )
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+    $("span.k-add").removeClass("k-icon");
+
+
+    function ConfirmDeleteRow(e) {
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.Nom, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+
+    function ListErreur(e, status) {
+        if (e.errors) {
+
+            var message = "Erreur:\n";
+
+            var grid = $('#list').data('kendoGrid');
+            var gridElement = grid.editable.element;
+
+            var validationMessageTemplate = kendo.template(
+                "<div id='#=field#_validationMessage' " +
+                "class='k-widget k-tooltip k-tooltip-validation " +
+                "k-invalid-msg field-validation-error' " +
+                "style='margin: 0.5em;' data-for='#=field#' " +
+                "data-val-msg-for='#=field#' role='alert'>" +
+                "<span class='k-icon k-warning'></span>" +
+                "#=message#" +
+                "<div class='k-callout k-callout-n'></div>" +
+                "</div>");
+
+            $.each(e.errors, function (key, value) {
+                if (value.errors) {
+                    gridElement.find("[data-valmsg-for=" + key + "],[data-val-msg-for=" + key + "]")
+                        .replaceWith(validationMessageTemplate({ field: key, message: value.errors[0] }));
+                    gridElement.find("input[name=" + key + "]").focus();
+                }
+            });
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();   // cancel grid rebind
+            });
+        }
+    }
+
+
+    function ListDataBound(e) {
+        var selecteurGrid = "#list";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.EstSupprimable) {
+
+                $(this).remove();
+            }
+        })
+    }
+
+</script>
+
+<script>
+
+
+            var imageWindow;
+            var timer;
+            function Edit(e) {
+                var item = $(e.container).find('[value=Image]').hide();
+
+                //debugger;
+            }
+            function changerImage(e) {
+
+
+                var path = '@Url.Content("~/upload/SetClientPic/")';
+                path = path + e;
+
+                  var config = {contextPath: path };
+
+
+          //      imageWindow = PopupCenter( config.contextPath + "/upload/setClientPic/" + e, "Charger l'image", 600, 300);
+
+                imageWindow = PopupCenter( config.contextPath, "Charger l'image", 600, 300);
+
+                timer = setInterval(checkWindow, 100);
+
+            }
+
+            function checkWindow() {
+
+                if (imageWindow.closed) {
+
+                    $('#list').data('kendoGrid').dataSource.read();
+                    $('#list').data('kendoGrid').refresh();
+                    clearInterval(timer);
+                }
+
+            }
+
+            function PopupCenter(url, title, w, h) {
+                var userAgent = navigator.userAgent,
+                    mobile = function () {
+                        return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
+                            /\b(iP[ao]d)/.test(userAgent) ||
+                            /Android/i.test(userAgent) ||
+                            /Mobile/i.test(userAgent);
+                    },
+                    screenX = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+                    screenY = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+                    outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
+                    outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : document.documentElement.clientHeight - 22,
+                    targetWidth = mobile() ? null : w,
+                    targetHeight = mobile() ? null : h,
+                    V = screenX < 0 ? window.screen.width + screenX : screenX,
+                    left = parseInt(V + (outerWidth - targetWidth) / 2, 10),
+                    right = parseInt(screenY + (outerHeight - targetHeight) / 2.5, 10),
+                    features = [];
+                if (targetWidth !== null) {
+                    features.push('width=' + targetWidth);
+                }
+                if (targetHeight !== null) {
+                    features.push('height=' + targetHeight);
+                }
+                features.push('left=' + left);
+                features.push('top=' + right);
+                features.push('scrollbars=0');
+                features.push('location=0');
+                features.push('menubar=0');
+                features.push('title=0');
+                features.push('resizable=0');
+
+
+
+                var newWindow = window.open(url, title, features.join(','));
+
+                if (window.focus) {
+                    newWindow.focus();
+                }
+
+                return newWindow;
+            }
+
+
+
+</script>

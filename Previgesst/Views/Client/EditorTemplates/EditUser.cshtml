@@ -1,0 +1,216 @@
+﻿
+@model UtilisateurIndexViewModel
+
+<style>
+    div.k-edit-form-container {
+        width: auto;
+    }
+
+        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
+            width: 100%;
+            max-width: none;
+            padding-left: 0px;
+        }
+
+
+
+    .petit {
+        max-height: 20px;
+    }
+
+    .row {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+
+    .col {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .form-group {
+        margin-right: 15px;
+        margin-left: 2px;
+    }
+</style>
+
+
+
+
+
+<div class="container" style="width:600px; margin:0px;padding:0px;">
+
+    <div class="row">
+        <div class="col-md-12" style="padding-left:0px;">
+
+            <div class="panel panel-info">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Usager</div>
+                <div class="panel-body">
+
+                    @* <div class="form-group">*@
+
+
+                    @Html.HiddenFor(x => x.UtilisateurId)
+                    @Html.HiddenFor(x => x.ClientId, new { @value = Model.ClientId })
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.NomUtilisateur, new { @class = "control-label pull-left" })
+
+
+                        @Html.TextBoxFor(model => model.NomUtilisateur, new { @class = "form-control petit", @style = "width:100%" })
+                        @Html.ValidationMessageFor(model => model.NomUtilisateur)
+
+
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Courriel, new { @class = "control-label pull-left" })
+
+
+                        @Html.TextBoxFor(model => model.Courriel, new { @class = "form-control petit", @style = "width:100%" })
+                        @Html.ValidationMessageFor(model => model.Courriel)
+
+
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nom, new { @class = "control-label pull-left" })
+
+                        @Html.TextBoxFor(model => model.Nom, new { @class = "form-control petit", @style = "width:100%" })
+                        @Html.ValidationMessageFor(model => model.Nom)
+
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MotDePasse, new { @class = "control-label pull-left" })
+
+                        @Html.TextBoxFor(model => model.MotDePasse, new { @class = "form-control petit", @style = "width:100%", @autocomplte = "new-password" })
+                        @Html.ValidationMessageFor(model => model.MotDePasse)
+
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Actif, new { @class = "control-label pull-left" })
+
+
+                        @Html.CheckBoxFor(model => model.Actif, new { @style = "margin-left:10px;" })
+                        @Html.ValidationMessageFor(model => model.Actif)
+
+                    </div>
+
+                    <h4 style="text-align:center;padding:20px 0;"><strong>PARAMÈTRES</strong></h4>
+
+                    <p><strong>NOTIFICATIONS</strong></p>
+                    <hr />
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NotificationDebutCad, new { @class = "control-label pull-left" })
+
+
+                        @Html.CheckBoxFor(model => model.NotificationDebutCad, new { @style = "margin-left:10px;" })
+                        @Html.ValidationMessageFor(model => model.NotificationDebutCad)
+
+                    </div>
+
+                    <hr />
+                    <p><strong>ACCÈS</strong></p>
+                    <hr />
+
+                    @if (User.IsInRole("Administrateur"))
+                    {
+
+
+                        <div class="row">
+                            <div class="col-md-10">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.AdmUtilisateurs, new { @class = "control-label pull-left" })
+                                    @Html.CheckBoxFor(model => model.AdmUtilisateurs, new { @style = "margin-left:10px;" })
+                                    @Html.ValidationMessageFor(model => model.AdmUtilisateurs)
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(model => model.AdmUtilisateurs)
+                    }
+
+                    <div class="row">
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AdmPrevicad, new { @class = "control-label pull-left" })
+
+
+                                @Html.CheckBoxFor(model => model.AdmPrevicad, new { @style = "margin-left:10px;" })
+                                @Html.ValidationMessageFor(model => model.AdmPrevicad)
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.AdmAnalyseRisque, new { @class = "control-label pull-left" })
+
+
+                                @Html.CheckBoxFor(model => model.AdmAnalyseRisque, new { @style = "margin-left:10px;" })
+                                @Html.ValidationMessageFor(model => model.AdmAnalyseRisque)
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Auditeur, new { @class = "control-label pull-left" })
+
+
+                                @Html.CheckBoxFor(model => model.Auditeur, new { @style = "margin-left:10px;" })
+                                @Html.ValidationMessageFor(model => model.Auditeur)
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ROPrevicad, new { @class = "control-label pull-left" })
+
+
+                                @Html.CheckBoxFor(model => model.ROPrevicad, new { @style = "margin-left:10px;" })
+                                @Html.ValidationMessageFor(model => model.ROPrevicad)
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ROAnalyseRisque, new { @class = "control-label pull-left" })
+
+
+                                @Html.CheckBoxFor(model => model.ROAnalyseRisque, new { @style = "margin-left:10px;" })
+                                @Html.ValidationMessageFor(model => model.ROAnalyseRisque)
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RODocuments, new { @class = "control-label pull-left" })
+
+
+                                @Html.CheckBoxFor(model => model.RODocuments, new { @style = "margin-left:10px;" })
+                                @Html.ValidationMessageFor(model => model.RODocuments)
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-5">
+
+                            <div class="form-group">
+                                @Html.ValidationMessageFor(model => model.MessageErreur)
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
