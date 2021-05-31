@@ -16,8 +16,15 @@ namespace Previgesst.Controllers
         // GET: AdminPrevi
 
         public ActionResult Index()
-        {   ViewData["Culture"]= System.Threading.Thread.CurrentThread.CurrentCulture;
-            ViewData["UICulture"]=System.Threading.Thread.CurrentThread.CurrentUICulture;
+        {
+            ViewData["Culture"] = System.Threading.Thread.CurrentThread.CurrentCulture;
+            ViewData["UICulture"] = System.Threading.Thread.CurrentThread.CurrentUICulture;
+
+            if (HttpContext.Session["IsCorporate"] == null)
+            {
+                Response.Redirect("/Account/LogOff");
+            }
+
             return View();
         }
     }

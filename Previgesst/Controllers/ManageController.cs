@@ -22,6 +22,7 @@ namespace Previgesst.Controllers
         UtilisateurService utilisateurService;
         private string Layout;
 
+        private readonly ClientRepository clientRepository;
         private readonly ManageService manageService;
         public ManageService ManageService
         {
@@ -31,10 +32,11 @@ namespace Previgesst.Controllers
             }
         }
 
-        public ManageController(ILogger logger, ManageService manageService, UtilisateurService utilisateurService) : base(logger)
+        public ManageController(ILogger logger, ManageService manageService, UtilisateurService utilisateurService, ClientRepository clientRepository) : base(logger)
         {
             this.manageService = manageService;
             this.utilisateurService = utilisateurService;
+            this.clientRepository = clientRepository;
 
             if (utilisateurService.GetSession() != null)
             {
@@ -43,13 +45,13 @@ namespace Previgesst.Controllers
             }
             else
                 this.Layout = "~/Views/Shared/_Layout.cshtml";
-       
-    }
 
-    /// <summary>
-    /// Liste des utilisateurs
-    /// </summary>
-    [AuthorizeRoles(Enums.Roles.Administrateur, Enums.Roles.LectureEcriture)]
+        }
+
+        /// <summary>
+        /// Liste des utilisateurs
+        /// </summary>
+        [AuthorizeRoles(Enums.Roles.Administrateur, Enums.Roles.LectureEcriture)]
         public ActionResult Index()
         {
             ShowSavedMessage();
@@ -63,7 +65,7 @@ namespace Previgesst.Controllers
         /// <param name="request">Requête read Telerik</param>
         /// <returns>Resultat de la requête en JSON</returns>
      //   [Authorize(Roles = Roles.Administration)]
-        public ActionResult UserRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult UserRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(ManageService.GetFiltered(request));
         }
@@ -72,7 +74,7 @@ namespace Previgesst.Controllers
         public ActionResult GenerateResetPassword(string id)
         {
             var vm = ManageService.GeneratePasswordResetVM(id);
-            return View("GenerateResetPassword","_Layout", vm);
+            return View("GenerateResetPassword", "_Layout", vm);
         }
 
         [HttpPost]
@@ -91,6 +93,8 @@ namespace Previgesst.Controllers
             var vm = ManageService.GetUserVM(id);
 
             PopulateRoles();
+            PopulateClients();
+
             return View(vm);
         }
 
@@ -103,6 +107,7 @@ namespace Previgesst.Controllers
                 ModelState.AddModelError("UserName", "Utilisateur existant");
             if (manageService.estCourrielExistant(user.Email, user.UserName))
                 ModelState.AddModelError("Email", "Courriel existant");
+
             if (ModelState.IsValid)
             {
                 var result = ManageService.SaveUser(user);
@@ -116,13 +121,29 @@ namespace Previgesst.Controllers
                     AddErrors(result);
                 }
             }
+
             PopulateRoles();
+            PopulateClients();
+
             return View(user);
         }
 
         protected void PopulateRoles()
         {
             ViewBag.Roles = ManageService.GetRoleList();
+        }
+
+        protected void PopulateClients()
+        {
+            ViewBag.Clients = clientRepository.GetAll()
+                                            .Where(x => x.Actif)
+                                            .Select(x => new
+                                            {
+                                                ClientID = x.ClientId,
+                                                ClientName = x.Nom + " (" + x.Identificateur + ")"
+                                            })
+                                            .OrderBy(x => x.ClientName)
+                                            .ToList();
         }
 
         [HttpPost]
@@ -156,11 +177,11 @@ namespace Previgesst.Controllers
         public ActionResult MyAccount()
         {
             var vm = ManageService.GetMyAccountVM();
-            return View("MyAccount", Layout,vm);
+            return View("MyAccount", Layout, vm);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]       
+        [ValidateAntiForgeryToken]
         public ActionResult MyAccount(MyAccountViewModel myAccount)
         {
             if (ModelState.IsValid)
@@ -178,7 +199,7 @@ namespace Previgesst.Controllers
 
             }
 
-            return View("MyAccount",Layout, myAccount);
+            return View("MyAccount", Layout, myAccount);
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Previgesst.ActionFilters
                 // see 409 - http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
                 filterContext.HttpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
 
-                Logger.Info("Trop de demande pour la requête suivante : " + key);
+                if (Logger != null) Logger.Info("Trop de demande pour la requête suivante : " + key);
             }
         }
 

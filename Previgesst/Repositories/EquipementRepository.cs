@@ -7,20 +7,18 @@ using System.Web;
 
 namespace Previgesst.Repositories
 {
-    public class EquipementRepository:RepositoryBase<Equipement>
-
-
+    public class EquipementRepository : RepositoryBase<Equipement>
     {
-
-
-        public EquipementRepository(DbContext context) : base (context) {
+        public EquipementRepository(DbContext context) : base(context)
+        {
 
         }
         public override Equipement Get(int id)
         {
-                 return dbSet.Include(Z => Z.Client).Where(x => x.EquipementId == id).FirstOrDefault();
+            return dbSet.Include(Z => Z.Client)
+                        .Include(Z => Z.EquipementArticulo)
+                        .Where(x => x.EquipementId == id)
+                        .FirstOrDefault();
         }
-   
-
     }
 }

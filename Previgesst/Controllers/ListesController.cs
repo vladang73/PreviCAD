@@ -5,6 +5,10 @@ using Previgesst.Services;
 using Previgesst.ViewModels;
 using System.Web.Mvc;
 
+
+
+using System.Collections.Generic;
+
 namespace Previgesst.Controllers
 {
 
@@ -24,62 +28,91 @@ namespace Previgesst.Controllers
             return View();
         }
 
-        public ActionResult PhenomeneListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult PhenomeneListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredPhenomene(request));
         }
 
-        public ActionResult ReglementListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult ReglementListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredReglement(request));
         }
 
-        public ActionResult DommageListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult DommageListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredDommage(request));
         }
 
-        public ActionResult SituationListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult SituationListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredSituations(request));
         }
 
-        public ActionResult EvenementListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult EvenementListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredEvenements(request));
         }
 
 
-        public ActionResult TypeReductionListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult TypeReductionListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredTypesReduction(request));
         }
 
-    
 
-        public ActionResult DispositifListRead([DataSourceRequest]DataSourceRequest request)
+
+        public ActionResult DispositifListRead([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(listeService.GetFilteredDispositif (request));
+            return Json(listeService.GetFilteredDispositif(request));
         }
 
-        public ActionResult AccessoireListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult AccessoireListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredAccessoire(request));
         }
 
-        public ActionResult SourceEnergieListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult SourceEnergieListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredSourceEnergie(request));
         }
 
-        public ActionResult MaterielListRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult MaterielListRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(listeService.GetFilteredMateriel(request));
         }
 
 
-        public ActionResult GetListRead([DataSourceRequest]DataSourceRequest request , Enums.TypeListe iditem)
+        [HttpGet]
+        public JsonResult GetListReadForMultiselect(Enums.TypeListe iditem)
         {
+            List<SimpleListViewModel> result = null;
+
+            switch (iditem)
+            {
+                case Enums.TypeListe.accessoire:
+                    result = listeService.GetAccessoire();
+                    break;
+                case Enums.TypeListe.materiel:
+                    result = listeService.GetMateriel();
+                    break;
+                case Enums.TypeListe.sourceEnergie:
+                    result = listeService.GetSourceEnergie();
+                    break;
+                case Enums.TypeListe.dispositif:
+                    result = listeService.GetDispositif();
+                    break;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetListRead([DataSourceRequest] DataSourceRequest request, Enums.TypeListe iditem)
+        {
+            if (request.Filters == null)
+            {
+                request.Filters = new System.Collections.Generic.List<Kendo.Mvc.IFilterDescriptor>();
+                request.Sorts = new System.Collections.Generic.List<Kendo.Mvc.SortDescriptor>();
+            }
 
             if (iditem == Enums.TypeListe.phenomene)
                 return (PhenomeneListRead(request));
@@ -89,7 +122,7 @@ namespace Previgesst.Controllers
                 return (EvenementListRead(request));
             else if (iditem == Enums.TypeListe.typereduction)
                 return (TypeReductionListRead(request));
-          
+
             else if (iditem == Enums.TypeListe.dispositif)
                 return (DispositifListRead(request));
             else if (iditem == Enums.TypeListe.accessoire)
@@ -99,7 +132,7 @@ namespace Previgesst.Controllers
             else if (iditem == Enums.TypeListe.materiel)
                 return (MaterielListRead(request));
             else if (iditem == Enums.TypeListe.reglement)
-                return (ReglementListRead (request));
+                return (ReglementListRead(request));
             else if (iditem == Enums.TypeListe.dommage)
                 return (DommageListRead(request));
             else
@@ -108,7 +141,7 @@ namespace Previgesst.Controllers
         }
 
         [HttpPost]
-  
+
         public ActionResult Save([DataSourceRequest] DataSourceRequest request,
            SimpleListViewModel item, Enums.TypeListe iditem)
         {
@@ -120,13 +153,13 @@ namespace Previgesst.Controllers
 
         }
         [HttpPost]
-       
+
         public ActionResult Delete([DataSourceRequest] DataSourceRequest request,
             SimpleListViewModel item, Enums.TypeListe iditem)
         {
             if (item != null)
             {
-                if (!listeService.Supprimer(item,iditem))
+                if (!listeService.Supprimer(item, iditem))
                 {
                     ModelState.AddModelError("", "Impossible de supprimer l'élément car il est utilisé");
                     item = null;
@@ -138,9 +171,9 @@ namespace Previgesst.Controllers
 
         public ActionResult Phenomenes()
         {
-            
 
-               var vm = new ViewSimpleListViewModel() { NomDescriptionEn = "DescriptionEN", NomDescription = "Description", NomId = "Id", NomListe = "Phénomènes dangereux", Type = Enums.TypeListe.phenomene };
+
+            var vm = new ViewSimpleListViewModel() { NomDescriptionEn = "DescriptionEN", NomDescription = "Description", NomId = "Id", NomListe = "Phénomènes dangereux", Type = Enums.TypeListe.phenomene };
             return View("Index", vm);
 
         }
@@ -156,7 +189,7 @@ namespace Previgesst.Controllers
 
         public ActionResult Situations()
         {
-          
+
             var vm = new ViewSimpleListViewModel() { NomDescriptionEn = "DescriptionEN", NomDescription = "Description", NomId = "Id", NomListe = "Situations dangereuses", Type = Enums.TypeListe.situation };
             return View("Index", vm);
 
@@ -164,26 +197,26 @@ namespace Previgesst.Controllers
 
         public ActionResult Evenements()
         {
-           
+
             var vm = new ViewSimpleListViewModel() { NomDescriptionEn = "DescriptionEN", NomDescription = "Description", NomId = "Id", NomListe = "Événements dangereux", Type = Enums.TypeListe.evenement };
 
-            return View("Index",vm);
+            return View("Index", vm);
 
         }
 
         public ActionResult TypesReductions()
         {
-           
+
             var vm = new ViewSimpleListViewModel() { NomDescription = "Description", NomId = "Id", NomListe = "Analyse de risques - Types de réductions", Type = Enums.TypeListe.typereduction };
-            return View("Index",vm);
+            return View("Index", vm);
 
         }
 
         public ActionResult Mesures()
         {
-          
+
             var vm = new ViewSimpleListViewModel() { NomDescription = "Description", NomId = "Id", NomListe = "Mesures de prévention", Type = Enums.TypeListe.mesure };
-            return View("Index",vm);
+            return View("Index", vm);
         }
 
 

@@ -6,6 +6,10 @@
 @{
     ViewBag.Title = "Analyses";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewData["Layout"] != null)
+    {
+        Layout = (string)ViewData["Layout"];
+    }
 }
 
 
@@ -171,9 +175,9 @@
                 <hr />
                 <h4>@ARCreateRES.Lignes</h4>
 
-                    @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
 
-                    @(Html.Kendo().Grid<LigneAnalyseRisqueEditViewModel>()
+                @(Html.Kendo().Grid<LigneAnalyseRisqueEditViewModel>()
                             .Name("list")
                             .Columns(columns =>
                             {
@@ -253,7 +257,7 @@
                                     .ClientTemplate(
                                     "<a onclick='return duplicateFunction(#=IdLigneAnalyseRisqueEditor#, this)' href='../../AnalyseRisque/DuplicateLigneAnalyseRisque/#= " + nameof(LigneAnalyseRisqueEditViewModel.IdLigneAnalyseRisqueEditor) + " #' class='btn btn-primary k-cde-edit' >" +
                                     ARCreateRES.Vide + "</a>").Title(ARCreateRES.Vide).Filterable(false).Sortable(false).Width(10).Hidden(!Model.AfficherChezClient);
-                        
+
                                     columns.Command(command => { command.Edit();command.Custom(ARCreateRES.Vide).Click("ConfirmDeleteRow").HtmlAttributes(new { @class = "k-grid-dupliquer" }); }).Width(30);
                                 })
                             .Sortable(s => s.AllowUnsort(false))
@@ -280,16 +284,17 @@
                             ).Editable(e => e.DisplayDeleteConfirmation(false))
                             .Scrollable(s => s.Enabled(true).Height("auto"))
                             .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneAnalyseRisqueEditor").Window(w => w.Title(ARLignesRES.Edition).Width(950).Name("editWindow")))
-                
+
                         .ToolBar(tb =>
                         {
                             tb.Create();
                         })
                     )
-                        
+
             </div>
         </div>
-        <a class="shieldLogoCadenassage" href="@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") }"><img src='/Images/shield.png'></a>
+        @*<a class="shieldLogoCadenassage" href="@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") }"><img src='/Images/shield.png'></a>*@
+        <a class='shieldLogoCadenassage' href='@if (this.Layout.EndsWith("_Layout.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/dark_logo.png'></a>
     </div>
 </div>
 
@@ -372,7 +377,7 @@
             }
         })
     }
-    
+
     function duplicateFunction(IdLigneAnalyseRisqueEditor) {
        // debugger;
         var dataInput = {
@@ -388,7 +393,7 @@
             success: function (result) {
                 $("#list").data("kendoGrid").dataSource.read();
             },
-            error: function (data) {                       
+            error: function (data) {
             }
         })
         $("#list").data("kendoGrid").dataSource.read();
@@ -402,7 +407,8 @@
         left: 2% !important;
         max-width: 950px;
     }
-    .k-window .container {
-        width: 100% !important;
-    }
+
+        .k-window .container {
+            width: 100% !important;
+        }
 </style>

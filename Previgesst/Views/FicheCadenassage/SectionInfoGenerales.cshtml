@@ -49,8 +49,59 @@
                         <a href='~/FicheCadenassage/GetFiche?id=@Model.FicheCadenassageId' class='btn btn-info buttonView'>@CadInfoGeneralesRES.Fiche</a>
                     </div>
                 }
-
             </div>
+
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(m => m.CreatedPar, new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.CreatedPar, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.CreatedPar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(m => m.DateCreation, new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    <input name="DateCreation" id="DateCreation" class="form-control" readonly="readonly" value="@Model.DateCreation" />
+
+                    @*@Html.TextBoxFor(m => m.DateCreation, new { @class = "form-control", @readonly = "readonly" })*@
+                    @*@(Html.Kendo().DatePickerFor(m => m.DateCreation).HtmlAttributes(new { @class = "form-control", @readonly = "readonly" }))*@
+                    @Html.ValidationMessageFor(m => m.DateCreation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(m => m.UpdatedPar, new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    @Html.TextBoxFor(m => m.UpdatedPar, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.UpdatedPar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(m => m.DateUpdated, new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    <input name="DateUpdated" id="DateUpdated" class="form-control" readonly="readonly" value="@Model.DateUpdated" />
+
+                    @*@Html.TextBoxFor(m => m.DateUpdated, new { @class = "form-control", @readonly = "readonly", @value = Model.DateUpdated.Value.ToString("yyyy-MM-dd h:m tt") })*@
+                    @*@(Html.Kendo().DatePickerFor(m => m.DateUpdated).HtmlAttributes(new { @class = "form-control", @readonly = "readonly" }))*@
+                    @Html.ValidationMessageFor(m => m.DateUpdated, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
             <div class="form-group">
                 @Html.LabelFor(m => m.EquipementId, new { @class = "control-label" })
 
@@ -65,7 +116,6 @@
 
                 @Html.ValidationMessageFor(m => m.EquipementId, "", new { @class = "text-danger" })
             </div>
-
 
             <div class="form-group">
                 @Html.LabelFor(m => m.DepartementId, new { @class = "control-label" })
@@ -82,7 +132,6 @@
                 @Html.ValidationMessageFor(m => m.DepartementId, "", new { @class = "text-danger" })
             </div>
 
-
             <div class="form-group">
                 @Html.LabelFor(m => m.TravailAEffectuer, new { @class = "control-label" })
 
@@ -91,8 +140,6 @@
 
             </div>
 
-
-
             <div class="form-group">
                 @Html.LabelFor(m => m.TravailAEffectuerEN, new { @class = "control-label" })
 
@@ -100,11 +147,6 @@
                 @Html.ValidationMessageFor(m => m.TravailAEffectuerEN, "", new { @class = "text-danger" })
 
             </div>
-
-
-
-
-
 
             <div class="form-group">
                 @Html.LabelFor(m => m.NoFiche, new { @class = "control-label" })
@@ -116,7 +158,7 @@
 
 
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(m => m.ApprouvePar, new { @class = "control-label" })
 
                 @Html.TextBoxFor(m => m.ApprouvePar, new { @class = "form-control" })
@@ -141,7 +183,7 @@
                 @Html.ValidationMessageFor(m => m.DateRevision, "", new { @class = "text-danger" })
 
             </div>
-
+            *@
 
             <div class="form-group">
                 @Html.LabelFor(m => m.AfficherClient, new { @class = "control-label" })
@@ -159,9 +201,6 @@
 
             </div>
 
-
-
-
             <div class="form-group">
                 @Html.LabelFor(m => m.TitreFiche, new { @class = "control-label" })
 
@@ -178,8 +217,38 @@
 
             </div>
 
+
+            if (currentUrl.Contains(editFicheUrl))
+            {
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => m.ApprouvePar, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.ApprouvePar, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.ApprouvePar, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => m.DateApproved, new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-6">
+                        <input name="DateUpdated" id="DateApproved" class="form-control" readonly="readonly" value="@Model.DateApproved" />
+                        @Html.ValidationMessageFor(m => m.DateApproved, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="@CadInfoGeneralesRES.Enregistrer" />
+                <input type="submit" class="btn btn-primary" name="save" value="@CadInfoGeneralesRES.Enregistrer" />
+
+                @if (currentUrl.Contains(editFicheUrl))
+                {
+                    <input type="submit" class="btn btn-info" name="approve" value="@CadInfoGeneralesRES.Approuve" />
+                }
             </div>
         }
     </div>

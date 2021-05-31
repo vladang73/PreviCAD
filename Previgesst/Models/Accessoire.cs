@@ -9,6 +9,7 @@ namespace Previgesst.Models
     public class Accessoire
     {
         public int AccessoireId { get; set; }
+
         [Required]
         [StringLength(250)]
 

@@ -123,6 +123,9 @@
   <data name="ChangerImage" xml:space="preserve">
     <value>Changer l'image</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>Détailles</value>
+  </data>
   <data name="Effacer" xml:space="preserve">
     <value>Effacer</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="NomFR" xml:space="preserve">
     <value>Nom de l'équipement (FR)</value>
+  </data>
+  <data name="Num" xml:space="preserve">
+    <value># Équipement</value>
   </data>
   <data name="Vide" xml:space="preserve">
     <value> </value>

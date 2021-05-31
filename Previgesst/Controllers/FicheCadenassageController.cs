@@ -42,6 +42,10 @@ namespace Previgesst.Controllers
         private PhotoFicheCadenassageRepository photoFicheCadenassageRepository;
         private EmployeRegistreService employeRegistreService;
         private LignesRegistreService lignesRegistreService;
+
+        private EquipementArticuloeService equipementArticuloeService;
+        private DispositifService dispositifService;
+
         private string Layout;
 
         public FicheCadenassageController(ClientRepository clientRepository, FicheCadenassageService ficheCadenassageService,
@@ -54,7 +58,8 @@ namespace Previgesst.Controllers
             UploadController uploadController,
             PhotoFicheCadenassageRepository photoFicheCadenassageRepository,
             EmployeRegistreService employeRegistreService,
-            LignesRegistreService lignesRegistreService)
+            LignesRegistreService lignesRegistreService,
+            EquipementArticuloeService equipementArticuloeService, DispositifService dispositifService)
         {
             this.ficheCadenassageService = ficheCadenassageService;
             this.sectionService = sectionService;
@@ -77,6 +82,10 @@ namespace Previgesst.Controllers
             this.photoFicheCadenassageRepository = photoFicheCadenassageRepository;
             this.employeRegistreService = employeRegistreService;
             this.lignesRegistreService = lignesRegistreService;
+
+            this.equipementArticuloeService = equipementArticuloeService;
+            this.dispositifService = dispositifService;
+
 
             if (utilisateurService.GetSession() != null)
             {
@@ -117,7 +126,7 @@ namespace Previgesst.Controllers
             ViewData["DefaultSection"] = sectionDDL.FirstOrDefault();
         }
 
-        public ActionResult ReadLignesRegistreCadenassage([DataSourceRequest]DataSourceRequest request, int client)
+        public ActionResult ReadLignesRegistreCadenassage([DataSourceRequest] DataSourceRequest request, int client)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Client(client, false))
                 return Json(lignesRegistreService.GetListeLignesRegistre(request, client), JsonRequestBehavior.AllowGet);
@@ -126,7 +135,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult ReadListFiches([DataSourceRequest]DataSourceRequest request, int client)
+        public ActionResult ReadListFiches([DataSourceRequest] DataSourceRequest request, int client)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Client(client, false))
                 return Json(ficheCadenassageService.GetReadCadenas(request, client), JsonRequestBehavior.AllowGet);
@@ -135,11 +144,12 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult SaveFiche(
-            EditFicheViewModel item)
+        public ActionResult SaveFiche(EditFicheViewModel item)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Client(item.ClientId, true))
             {
+                ViewData["Layout"] = Layout;
+
                 // Initialize VM, create DroitAjout and parser it
                 var vm = new EditFicheViewModel();
                 vm.DroitAjout = true;
@@ -159,6 +169,11 @@ namespace Previgesst.Controllers
                             return View("EditFiche", Layout, item);
                         }
 
+                        item.CreatedPar = User.Identity.Name;
+                        item.DateCreation = DateTime.Now;
+
+                        item.UpdatedPar = User.Identity.Name;
+                        item.DateUpdated = DateTime.Now;
 
                         ficheCadenassageService.SaveFiche(item);
 
@@ -174,11 +189,12 @@ namespace Previgesst.Controllers
                 return Json("");
         }
 
-        public ActionResult EditerFiche(
-        EditFicheViewModel item)
+        public ActionResult EditerFiche(EditFicheViewModel item, string save, string approve)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Client(item.ClientId, true))
             {
+                ViewData["Layout"] = Layout;
+
                 // Initialize VM, create DroitAjout and parser it
                 var vm = new EditFicheViewModel();
                 vm.DroitAjout = true;
@@ -197,7 +213,20 @@ namespace Previgesst.Controllers
                     }
 
 
-                    ficheCadenassageService.SaveFiche(item);
+                    if (!string.IsNullOrEmpty(approve))
+                    {
+                        item.DateApproved = DateTime.Now;
+                        item.ApprouvePar = User.Identity.Name;
+
+                        ficheCadenassageService.ApproveFiche(item);
+                    }
+                    else if (!string.IsNullOrEmpty(save))
+                    {
+                        item.UpdatedPar = User.Identity.Name;
+                        item.DateUpdated = DateTime.Now;
+
+                        ficheCadenassageService.SaveFiche(item);
+                    }
 
                     ViewData["idFiche"] = item.FicheCadenassageId;
                     // return View("EditFiche", item);
@@ -211,8 +240,7 @@ namespace Previgesst.Controllers
 
 
 
-        public ActionResult DeleteFiche([DataSourceRequest] DataSourceRequest request,
-         LigneCadenassageGridViewModel fiche)
+        public ActionResult DeleteFiche([DataSourceRequest] DataSourceRequest request, LigneCadenassageGridViewModel fiche)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(fiche.FicheCadenassageId, true))
             {
@@ -237,9 +265,16 @@ namespace Previgesst.Controllers
         public ActionResult Index()
         {
             PopulateSections();
+
+            bool isCorporate = false;
+            bool.TryParse(Convert.ToString(HttpContext.Session["IsCorporate"]), out isCorporate);
+
+
             AffichageListesViewModel model = new AffichageListesViewModel();
             // seuls les administrateurs PREVI peuvent modifier les listes de référence, utilisés par TOUS les clients
-            model.AfficherListes = User.IsInRole("Administrateur");
+            model.AfficherListes = User.IsInRole("Administrateur") && !isCorporate;
+
+            ViewData["Layout"] = Layout;
             return View("Index", Layout, model);
         }
 
@@ -262,11 +297,11 @@ namespace Previgesst.Controllers
 
                 var sessionUtilisateur = utilisateurService.GetSession();
 
-               
+
                 vm.ClientId = Id;
                 vm.Nom = client.Nom;
                 vm.Logo = client.Thumb;
-                
+
 
                 vm.estClient = (sessionUtilisateur != null);
                 vm.estUpdate = (
@@ -282,7 +317,7 @@ namespace Previgesst.Controllers
                 vm.estAudit = (sessionUtilisateur != null && sessionUtilisateur.Auditeur);
                 vm.LienPrevicad = getLienPrevicad(Id);
                 vm.IdentificateurUnique = client.IdentificateurUnique;
-                if(sessionUtilisateur != null)
+                if (sessionUtilisateur != null)
                 {
                     vm.NotificationDebutCad = sessionUtilisateur.NotificationDebutCad;
                 }
@@ -292,6 +327,7 @@ namespace Previgesst.Controllers
                 //var equipements = utilisateurService.filtreEquipement();
 
                 PopulateDepartement(Id);
+                ViewData["Layout"] = Layout;
                 return View("Edit", Layout, vm);
             }
 
@@ -327,6 +363,7 @@ namespace Previgesst.Controllers
 
                 vm.DroitAjout = true;
 
+                ViewData["Layout"] = Layout;
                 return View("EditFiche", Layout, vm);
             }
 
@@ -353,14 +390,23 @@ namespace Previgesst.Controllers
         {
             if (utilisateurService.VerifierBonClientCadenassage_Client(Id, true))
             {
+                ViewData["Layout"] = Layout;
+
                 var vm = new EditFicheViewModel();
                 vm.FicheCadenassageId = 0;
                 vm.ClientId = Id;
+
+                vm.CreatedPar = User.Identity.Name;
+                vm.DateCreation = DateTime.Now;
+
+                vm.UpdatedPar = User.Identity.Name;
+                vm.DateUpdated = DateTime.Now;
+
                 var client = clientRepository.Get(Id);
                 vm.NomClient = client.Nom;
 
 
-                vm.EstDocumentPrevigesst = (Request.IsAuthenticated) && ( User.IsInRole("Administrateur") || User.IsInRole("Lecture-Écriture"));
+                vm.EstDocumentPrevigesst = (Request.IsAuthenticated) && (User.IsInRole("Administrateur") || User.IsInRole("Lecture-Écriture"));
                 vm.TitreFiche = "Fiche de cadenassage";
                 vm.RevisionCourante = true;
                 vm.AfficherClient = true;
@@ -453,7 +499,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult ReadListPhoto([DataSourceRequest]DataSourceRequest request, int ficheId)
+        public ActionResult ReadListPhoto([DataSourceRequest] DataSourceRequest request, int ficheId)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
             {
@@ -570,7 +616,7 @@ namespace Previgesst.Controllers
         #region Ligne_decadenassage
 
 
-        public ActionResult ReadListDecadenassage([DataSourceRequest]DataSourceRequest request, int ficheId)
+        public ActionResult ReadListDecadenassage([DataSourceRequest] DataSourceRequest request, int ficheId)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
                 return Json(ligneDecadenassageService.GetListeLignesDecadenassage(request, ficheId), JsonRequestBehavior.AllowGet);
@@ -652,7 +698,7 @@ namespace Previgesst.Controllers
         #region Materiel
 
 
-        public ActionResult ReadListMateriel([DataSourceRequest]DataSourceRequest request, int ficheId)
+        public ActionResult ReadListMateriel([DataSourceRequest] DataSourceRequest request, int ficheId)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
             {
@@ -774,7 +820,7 @@ namespace Previgesst.Controllers
         #region LignesInstruction
 
 
-        public ActionResult ReadListCadenassage([DataSourceRequest]DataSourceRequest request, int ficheId)
+        public ActionResult ReadListCadenassage([DataSourceRequest] DataSourceRequest request, int ficheId)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
                 return Json(ligneInstructionService.GetListeLignesInstruction(request, ficheId), JsonRequestBehavior.AllowGet);
@@ -790,19 +836,19 @@ namespace Previgesst.Controllers
             {
                 foreach (var v in ModelState.Values)
                 {
-                    if (v.Errors.Count >=1)
+                    if (v.Errors.Count >= 1)
                     {
-                       if (v.Value.Culture.TwoLetterISOLanguageName=="en")
+                        if (v.Value.Culture.TwoLetterISOLanguageName == "en")
                         {
-                            
-                            decimal newValue ;
-                            string[] raws = (string []) v.Value.RawValue;
-                            if (decimal.TryParse(raws[0].Replace(",","."), out newValue))
+
+                            decimal newValue;
+                            string[] raws = (string[])v.Value.RawValue;
+                            if (decimal.TryParse(raws[0].Replace(",", "."), out newValue))
                             {
                                 item.NoLigne = newValue;
                                 v.Errors.Clear();
                             }
-                          
+
                         }
                     }
                 }
@@ -911,10 +957,10 @@ namespace Previgesst.Controllers
 
 
 
-        public ActionResult ReadListEmployesCadenassage([DataSourceRequest]DataSourceRequest request, int IDClient)
+        public ActionResult ReadListEmployesCadenassage([DataSourceRequest] DataSourceRequest request, int IDClient)
         {
             PopulateDepartement(IDClient);
-            if (utilisateurService.VerifierBonClientCadenassage_Client(IDClient, false) )
+            if (utilisateurService.VerifierBonClientCadenassage_Client(IDClient, false))
                 return Json(employeRegistreService.GetListeEmployes(request, IDClient), JsonRequestBehavior.AllowGet);
             else
                 return Json("");
@@ -924,7 +970,7 @@ namespace Previgesst.Controllers
         public ActionResult SaveItemEmployesCadenassage([DataSourceRequest] DataSourceRequest request,
          EmployeRegistreViewModel item, int IDClient)
         {
-            if (utilisateurService.VerifierBonClientCadenassage_Client(IDClient, false) )
+            if (utilisateurService.VerifierBonClientCadenassage_Client(IDClient, false))
             {
                 if (item != null && ModelState.IsValid)
                 {
@@ -963,7 +1009,7 @@ namespace Previgesst.Controllers
             }
         }
 
-        public bool activeFilter ()
+        public bool activeFilter()
         {
             // FUNCTION TO SERVICES
             return true;
@@ -972,7 +1018,7 @@ namespace Previgesst.Controllers
         public ActionResult DeleteItemEmployesCadenassage([DataSourceRequest] DataSourceRequest request,
          EmployeRegistreViewModel item)
         {
-            if (utilisateurService.VerifierBonClientCadenassage_Client(item.ClientId, false) )
+            if (utilisateurService.VerifierBonClientCadenassage_Client(item.ClientId, false))
             {
                 if (item != null)
                 {
@@ -992,11 +1038,11 @@ namespace Previgesst.Controllers
 
             var verificationUtilisateurEnLigne = utilisateurService.VerificationUtilisateurEnLigne(item.ClientId);
             var session = utilisateurService.GetSession();
-            
-            if(verificationUtilisateurEnLigne != null)
+
+            if (verificationUtilisateurEnLigne != null)
             {
 
-                if (item != null )
+                if (item != null)
                 {
                     utilisateurService.SaveParametersCadAdmin(item, session.UtilisateurId);
 
@@ -1007,5 +1053,61 @@ namespace Previgesst.Controllers
 
             return Json("");
         }
+
+
+        #region ----- Equipement Articuloe -----
+
+        public ActionResult EquipementArticuloes(int id)
+        {
+            PopulateMateriel();
+            PopulateDispositifs();
+            PopulateSourceEnergie();
+
+
+            ViewData["EqID"] = id;
+            return View();
+        }
+
+
+
+        public ActionResult ReadListArticuloe([DataSourceRequest] DataSourceRequest request, int equipementId)
+        {
+            return Json(equipementArticuloeService.GetReadListeEquipementArticuloes(request, equipementId), JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult SaveArticuloe([DataSourceRequest] DataSourceRequest request, EquipementArticuloViewModel item)
+        {
+            if (item != null && ModelState.IsValid)
+            {
+                equipementArticuloeService.SaveEquipementArticula(item);
+            }
+            return Json(new[] { item }.ToDataSourceResult(request, ModelState));
+        }
+
+
+        public ActionResult DeleteArticuloe([DataSourceRequest] DataSourceRequest request, EquipementArticuloViewModel item)
+        {
+            if (item != null)
+            {
+                if (!equipementArticuloeService.Supprimer(item))
+                {
+
+                    item = null;
+                }
+            }
+            return Json(new[] { item }.ToDataSourceResult(request, ModelState));
+        }
+
+
+        private void PopulateDispositifs()
+        {
+            var dispositifDDL = dispositifService.GetAllAsDispositifsDDLViewModel();
+
+            ViewData["Dispositifs"] = dispositifDDL;
+        }
+
+
+        #endregion
     }
 }

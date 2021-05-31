@@ -1,0 +1,231 @@
+﻿@using Previgesst.Ressources
+
+@{
+    ViewBag.Title = "Equipement Articuloe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .k-grid-effacer {
+        left: 80%;
+    }
+</style>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <hr />
+
+            <nav aria-label="breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="~/FicheCadenassage/Index">Equipment Management</a></li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Gestion des Equipement Articuloes</li>
+                    </ol>
+                </nav>
+            </nav>
+
+
+            <div class="panel panel-danger">
+
+                <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Equipement Articuloes</div>
+                <div class="panel-body">
+
+                    <div id="Documents" class="tab-pane">
+
+                        @Html.AntiForgeryToken()
+
+                        @(Html.Kendo().Grid<EquipementArticuloViewModel>()
+                                .Name("list")
+                                .Columns(columns =>
+                                {
+
+                                    columns.Bound(e => e.EquipementId).Hidden();
+                                    columns.Bound(e => e.EquipementArticuloID).Hidden();
+
+                                    columns.Bound(c => c.AccessoriesDescription).Title("Accessories")
+                                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                .ForString(str => str.Clear()
+                                                    .Contains(GridRES.Contains)
+                                                    .StartsWith(GridRES.StartsWith)
+                                                    .IsEqualTo(GridRES.Egale)
+                                                    .IsNotEqualTo(GridRES.NotEquals)
+                                                )
+                                            ));
+
+                                    columns.Bound(c => c.EnergyDescription).Title("Energy")
+                                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                .ForString(str => str.Clear()
+                                                    .Contains(GridRES.Contains)
+                                                    .StartsWith(GridRES.StartsWith)
+                                                    .IsEqualTo(GridRES.Egale)
+                                                    .IsNotEqualTo(GridRES.NotEquals)
+                                                )
+                                            ));
+
+                                    columns.Bound(c => c.DepositDescription).Title("Deposit")
+                                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                .ForString(str => str.Clear()
+                                                    .Contains(GridRES.Contains)
+                                                    .StartsWith(GridRES.StartsWith)
+                                                    .IsEqualTo(GridRES.Egale)
+                                                    .IsNotEqualTo(GridRES.NotEquals)
+                                                )
+                                            ));
+
+                                    columns.Bound(c => c.Nomenclature)
+                                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                .ForString(str => str.Clear()
+                                                    .Contains(GridRES.Contains)
+                                                    .StartsWith(GridRES.StartsWith)
+                                                    .IsEqualTo(GridRES.Egale)
+                                                    .IsNotEqualTo(GridRES.NotEquals)
+                                                )
+                                            ));
+
+                                    columns.Command(c =>
+                                    {
+                                        c.Edit();
+                                        c.Custom("Effacer")
+                                              .Click("ConfirmDeleteRow")
+                                              .HtmlAttributes(new { @class = "k-grid-effacer" })
+                                              ;
+
+                                    })
+                                       .Width(250);
+                                })
+
+                                .Sortable(s => s.AllowUnsort(false))
+                                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                                .Filterable()
+                                .DataSource(ds => ds
+                                                    .Ajax()
+                                                    .Sort(x => x.Add(c => c.AccessoriesDescription))
+
+                                                    .PageSize(20)
+                                                    .Model(m =>
+                                                    {
+                                                        m.Id(e => e.EquipementArticuloID);
+                                                    })
+
+                                                    .Read(r => r.Action("ReadListArticuloe", "FicheCadenassage", new { equipementId = ViewData["EqID"] }))
+                                                    .Create(c => c.Action("SaveArticuloe", "FicheCadenassage"))
+                                                    .Update(u => u.Action("SaveArticuloe", "FicheCadenassage"))
+                                                    .Destroy(u => u.Action("DeleteArticuloe", "FicheCadenassage"))
+
+
+                                                    .Events(e => e.Error("ListeErreur").RequestEnd("end"))
+                                                    .Model(model => {
+                                                        model.Id(m => m.EquipementArticuloID);
+                                                        model.Field(m => m.EquipementId).DefaultValue(ViewData["EqID"]);
+                                                    })
+                                )
+
+
+                                //.Events(e => e .DataBound("ListeDataBound"))
+                                .Editable(e => e.DisplayDeleteConfirmation(false))
+                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EquipementArticuloeEditor").Window(w => w.Title("Édition d'une Equipement articuloe").Width(600).Name("editWindow").Events(e => e.Close("doRefresh"))))
+
+
+                                .ToolBar(t =>
+                                {
+                                    t.Create();
+                                })
+
+                        )
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+
+    $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+    $("a.k-grid-add").addClass("btn btn-success btn-instruction");
+    $("span.k-add").removeClass("k-icon");
+    $("a.btn-instruction").text("Nouvelle Equipement Articuloe");
+
+
+
+    function end(e) {
+        // reload de la grille car pas de refresh sur application mise à jour
+
+        if (e.type == "update") {
+            var grid = $("#list").data("kendoGrid");
+            grid.dataSource.read();
+        }
+    }
+
+    function doRefresh(e) {
+        var grid = $("#list").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+
+    function ConfirmDeleteRow(e) {
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.Identificateur, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+    function ListeErreur(args) {
+
+        var selecteurGrid = "#list";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("Erreur - Gestions",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+    }
+
+
+
+    function ListeDataBound(e) {
+        //var selecteurGrid = "#list";
+        //var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
+
+        //        //$(this).remove();
+        //        $(this).removeClass('k-grid-Effacer');
+        //    }
+        //})
+    }
+
+</script>
+
+

@@ -51,6 +51,15 @@
                         .IsNotEqualTo(GridRES.NotEquals)
                     )));
                         columns.Bound(e => e.TitreFiche).Title(CadFichesRES.Type).ClientTemplate("").Width(50);
+
+                        columns.Bound(e => e.NumeroEquipment).Title(CadFichesRES.Num).Width(100).Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        )));
+
                         columns.Bound(e => e.NomEquipement).Width(170).Title(CadFichesRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
@@ -58,7 +67,8 @@
                             .IsEqualTo(GridRES.Egale)
                             .IsNotEqualTo(GridRES.NotEquals)
                         )));
-                        columns.Bound(e => e.Departement).Title(CadFichesRES.Departement).Width(140).Filterable(f => f.Extra(false).Operators(operators => operators
+                        
+                        columns.Bound(e => e.Departement).Title(CadFichesRES.Departement).Width(100).Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
                             .StartsWith(GridRES.StartsWith)

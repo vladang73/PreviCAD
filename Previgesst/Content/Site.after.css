@@ -6,9 +6,11 @@
     top: 10px;
 }
 
-.shieldLogoCadenassage img {
-    width: 50px;
-}
+    .shieldLogoCadenassage img {
+        /*width: 50px;*/
+        width: 250px;
+        margin: 10px 0;
+    }
 
 header .content-wrapper {
     padding-top: 0 !important;

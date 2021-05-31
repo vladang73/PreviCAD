@@ -41,7 +41,7 @@ namespace Previgesst.DataContexts.DbContextMigrations
                 Name = "Administrateur",
                 Description = "Administrateur du système"
             };
-            context.Roles.AddOrUpdate(roleAdmin);
+            context.Roles.AddOrUpdate(x => x.Id, roleAdmin);
 
             //Utilisateurs
             var UserAdminId = "3F492F1C-6B97-4170-B711-C991D32F89B7";
@@ -62,7 +62,7 @@ namespace Previgesst.DataContexts.DbContextMigrations
                 LockoutEndDateUtc = null
             };
             userAdmin.Roles.Add(new IdentityUserRole { UserId = userAdmin.Id, RoleId = roleAdmin.Id });
-            context.Users.AddOrUpdate(userAdmin);
+            context.Users.AddOrUpdate(x => x.Id, userAdmin);
 
 
             /*for (int i = 0; i < 500; i++)

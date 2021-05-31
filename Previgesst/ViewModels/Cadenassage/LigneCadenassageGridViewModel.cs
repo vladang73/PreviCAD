@@ -12,25 +12,46 @@ namespace Previgesst.ViewModels
     { public int FicheCadenassageId { get; set; }
         public int EquipementId { get; set; }
         [DisplayName("Équipement")]
-
         [Display(ResourceType = typeof(CadFichesRES), Name = "Equipement")]
         public String NomEquipement { get; set; }
 
         [Display(ResourceType = typeof(CadFichesRES), Name = "Departement")]
         [Required]
         [StringLength(250)]
-
         public string Departement { get; set; }
+
+        [Required]
+        [StringLength(250)]
+        [Display(ResourceType = typeof(CadFichesRES), Name = "Num")]
+        public string NumeroEquipment { get; set; }
+
         [Display(ResourceType = typeof(CadFichesRES), Name = "NoFiche")]
         [Required]
         [StringLength(250)]
         public string NoFiche { get; set; }
+        public int ClientId { get; set; }
+
+
+        //public DateTime? DateRevision { get; set; }
+
         [Display(ResourceType = typeof(CadFichesRES), Name = "ApprouvePar")]
         [StringLength(250)]
         public string ApprouvePar { get; set; }
-        public int ClientId { get; set; }
-        public DateTime? DateRevision { get; set; }
+        public DateTime? DateApproved { get; set; }
+
+        [StringLength(250)]
+        public string CreatedPar { get; set; }
+
         public DateTime? DateCreation { get; set; }
+
+
+
+        [StringLength(250)]
+        public string UpdatedPar { get; set; }
+        public DateTime? DateUpdated { get; set; }
+
+
+
         [Display(ResourceType = typeof(CadFichesRES), Name = "Travail")]
         [Required]
         [StringLength(250)]

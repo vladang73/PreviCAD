@@ -1,6 +1,9 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool IsCorporate = false;
+    bool.TryParse(Convert.ToString(HttpContext.Current.Session["IsCorporate"]), out IsCorporate);
 }
 
 <div class="container">
@@ -89,44 +92,49 @@
                 </div>
 
                 <hr />
-                @if (User.IsInRole("Administrateur"))
+
+                @if (User.IsInRole("Administrateur") && HttpContext.Current.Session["IsCorporate"] != null)
                 {
 
                     <div class="row">
-                        <div class="col-md-2">
-                            <a href="~/Manage/Index" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white;">Utilisateurs</div>*@
-                                    <div class="panel-body"><img src="~/Images/Images2019/Utilisateurs.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
+                        @if (!IsCorporate)
+                        {
+                            <div class="col-md-2">
+                                <a href="~/Manage/Index" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body"><img src="~/Images/Images2019/Utilisateurs.jpg" class="img-responsive center-block" /></div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
 
                         <div class="col-md-2">
                             <a href="~/Client/Index" style="text-decoration:none;">
                                 <div class="panel panel-danger">
-                                    @*    <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Clients<br /></div>*@
                                     <div class="panel-body"><img src="~/Images/Images2019/Clients.jpg" class="img-responsive center-block" /></div>
                                 </div>
                             </a>
                         </div>
 
-                        <div class="col-md-2">
-                            <a href="~/Section/Index" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Sections</div>*@
-                                    <div class="panel-body"><img src="~/Images/Images2019/Sections.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-                        
-                        <div class="col-md-2">
-                            <a href="~/ParametresApp/Index" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    <div class="panel-body"><img src="~/Images/Settings.png" class="img-responsive center-block" style="max-width: 80px;" /></div>
-                                </div>
-                            </a>
-                        </div>
+                        @if (!IsCorporate)
+                        {
+                            <div class="col-md-2">
+                                <a href="~/Section/Index" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body"><img src="~/Images/Images2019/Sections.jpg" class="img-responsive center-block" /></div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-md-2">
+                                <a href="~/ParametresApp/Index" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body"><img src="~/Images/Settings.png" class="img-responsive center-block" style="max-width: 80px;" /></div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+
                     </div>
                 }
             </div>

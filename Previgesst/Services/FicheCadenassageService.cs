@@ -93,12 +93,17 @@ namespace Previgesst.Services
             ws.Cells["C1"].Value = langue == "" ? fiche.TitreFiche : fiche.TitreFicheEN;
             ws.Cells["C2"].Value = langue == "" ? fiche.Equipement.NomEquipement : fiche.Equipement.NomEquipementEN;
             ws.Cells["C5"].Value = langue == "" ? fiche.TravailAEffectuer : fiche.TravailAEffectuerEN;
-            
+
             ws.Cells["J1"].Value = langue == "" ? fiche.Departement.NomDepartement : fiche.Departement.NomDepartementEN;
             ws.Cells["J2"].Value = FicheRES.NoFiche + fiche.NoFiche;
             ws.Cells["J3"].Value = FicheRES.ApprouvePar + fiche.ApprouvePar;
-            ws.Cells["J4"].Value = FicheRES.Date + (fiche.DateCreation?.ToShortDateString()) ?? string.Empty;
-            ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateRevision?.ToShortDateString()) ?? string.Empty;
+
+
+            ws.Cells["J4"].Value = FicheRES.Date + (fiche.DateApproved?.ToShortDateString()) ?? string.Empty;
+            ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateUpdated.HasValue ? fiche.DateUpdated?.ToShortDateString() : fiche.DateCreation?.ToShortDateString()) ?? string.Empty; 
+
+            //ws.Cells["J4"].Value = FicheRES.Date + (fiche.DateCreation?.ToShortDateString()) ?? string.Empty;
+            //ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateRevision?.ToShortDateString()) ?? string.Empty;
 
             double hauteurLigne = 0;
 
@@ -106,20 +111,20 @@ namespace Previgesst.Services
             {
                 ws.Cells["A12"].Value = langue == "" ? "CONTRÔLE DES SOURCES D'ÉNERGIE" : "CONTROL OF ENERGY SOURCES";
 
-              
 
-                ws.Cells["A31"].Value = langue =="" ? "Tout intervenant doit avoir la formation  et l'entrainement nécessaire avant d'effectuer cette tâche.":
+
+                ws.Cells["A31"].Value = langue == "" ? "Tout intervenant doit avoir la formation  et l'entrainement nécessaire avant d'effectuer cette tâche." :
                     "All participants must have the necessary formation and training before performing this task.";
-             
+
                 ws.Cells["A32"].Value = langue == "" ? "La présente procédure est élaborée à partir des principes énoncés aux articles 188.2, 188.4 et 189 du Règlement sur la santé et sécurité du travail. Une analyse de risques a été effectué avant l'élaboration de cette méthode de travail qui assure une sécurité équivalente au cadenassage." :
                     "This procedure is developed on the basis of the principles set out in sections 188.2, 188.4 and 189 of the Regulation respecting occupational health and safety. A risk analysis was conducted prior to the development of this method of work, which has a safety equivalent to lockout.";
 
 
-                ws.Cells["A33"].Value = langue =="" ? "Toute personne ayant à intervenir sur la machine en cours de travaux doit d'abord en informer ses collègues travaillant à proximité.	" : "Anyone who has to intervene on the machine during work must first inform his colleagues and affix his personal lock";
+                ws.Cells["A33"].Value = langue == "" ? "Toute personne ayant à intervenir sur la machine en cours de travaux doit d'abord en informer ses collègues travaillant à proximité.	" : "Anyone who has to intervene on the machine during work must first inform his colleagues and affix his personal lock";
 
-      
 
-                ws.Cells["A35"].Value = langue == "" ? "REMISE EN FONCTION":"RESET";
+
+                ws.Cells["A35"].Value = langue == "" ? "REMISE EN FONCTION" : "RESET";
 
 
             }
@@ -154,16 +159,16 @@ namespace Previgesst.Services
 
 
             hauteurLigne = 0;
-            GetHeight(ws.Cells.GetSubrangeRelative(30, 0, 12, 1), ws.Cells["A31"].Value?.ToString(), "", ws.Cells["A31"].Style.Font, ws.Parent.Worksheets[1],false, ref hauteurLigne);
+            GetHeight(ws.Cells.GetSubrangeRelative(30, 0, 12, 1), ws.Cells["A31"].Value?.ToString(), "", ws.Cells["A31"].Style.Font, ws.Parent.Worksheets[1], false, ref hauteurLigne);
             ws.Rows[30].Height = (int)hauteurLigne;
 
             hauteurLigne = 0;
             GetHeight(ws.Cells.GetSubrangeRelative(31, 0, 12, 1), ws.Cells["A32"].Value?.ToString(), "", ws.Cells["A32"].Style.Font, ws.Parent.Worksheets[1], false, ref hauteurLigne);
-            ws.Rows[31].Height = (int)(hauteurLigne/1.2);
+            ws.Rows[31].Height = (int)(hauteurLigne / 1.2);
 
             hauteurLigne = 0;
             GetHeight(ws.Cells.GetSubrangeRelative(32, 0, 12, 1), ws.Cells["A33"].Value?.ToString(), "", ws.Cells["A33"].Style.Font, ws.Parent.Worksheets[1], false, ref hauteurLigne);
-            ws.Rows[32].Height = (int)(hauteurLigne/1.2);
+            ws.Rows[32].Height = (int)(hauteurLigne / 1.2);
 
 
             //On peut ajouter jusqu'à 10 types de sources d'énergie
@@ -318,7 +323,7 @@ namespace Previgesst.Services
                     var imagePath = HttpContext.Current.Server.MapPath("~/Images/Cadenassage/Photos/" + photos.ElementAt(i).PhotoFicheCadenassageId + "/" + photos.ElementAt(i).Fichier);
 
                     AjoutImageGemBOX(ws, imagePath, ligne + 1, colonne, ligne + 1, colonneFin);
-                    ws.Cells[ligne + 2, colonne].Value = langue==""? photos.ElementAt(i).Localisation:photos.ElementAt(i).LocalisationEN;
+                    ws.Cells[ligne + 2, colonne].Value = langue == "" ? photos.ElementAt(i).Localisation : photos.ElementAt(i).LocalisationEN;
                     switch (colonne)
                     {
                         case 0: colonne = 2; colonneFin = 3; break;
@@ -672,9 +677,9 @@ namespace Previgesst.Services
                     ws.Cells[ligne, 6].GetCharacters(0, texteDispositif.Length).Font.Weight = 700;
 
                 ws.Cells[ligne, 9].Value = texteAccessoire;
-                if (texteAccessoire.Length>0)
+                if (texteAccessoire.Length > 0)
                     ws.Cells[ligne, 9].GetCharacters(0, texteAccessoire.Length).Font.Weight = 700;
-                
+
                 ws.Cells[ligne, 12].Value = texteImage;
 
 
@@ -861,20 +866,29 @@ namespace Previgesst.Services
             {
                 Departement = langue == "fr" ? x.Departement.NomDepartement : x.Departement.NomDepartementEN,
                 EquipementId = x.EquipementId,
+                NumeroEquipment = x.Equipement.NumeroEquipement,
                 FicheCadenassageId = x.FicheCadenassageId,
                 NoFiche = x.NoFiche,
                 NomEquipement = langue == "fr" ? x.Equipement.NomEquipement : x.Equipement.NomEquipementEN,
-                ApprouvePar = x.ApprouvePar,
                 ClientId = x.ClientId,
-                DateCreation = x.DateCreation,
-                DateRevision = x.DateRevision,
                 TravailAEffectuer = langue == "fr" ? x.TravailAEffectuer : x.TravailAEffectuerEN,
-                TitreFiche = langue=="fr"? x.TitreFiche: x.TitreFicheEN,
+                TitreFiche = langue == "fr" ? x.TitreFiche : x.TitreFicheEN,
                 estDocumentPrevigesst = x.estDocumentPrevigesst,
                 RevisionCourante = x.RevisionCourante,
                 TexteMateriel = x.MaterielsRequisCadenassage.Select(z => z.Materiel.Description + " (" + z.Quantite.ToString() + ")").ToList(),
                 //Suppressible = ((x.estDocumentPrevigesst == true) && droitSuppressionPrevi) || (x.estDocumentPrevigesst == false && droitSuppressionClient)
-                Suppressible = (x.estDocumentPrevigesst == true && droitSuppressionPrevi) || (x.estDocumentPrevigesst == false && droitSuppressionClient) || (x.estDocumentPrevigesst==false && droitSuppressionPrevi)
+                Suppressible = (x.estDocumentPrevigesst == true && droitSuppressionPrevi) || (x.estDocumentPrevigesst == false && droitSuppressionClient) || (x.estDocumentPrevigesst == false && droitSuppressionPrevi),
+
+                ApprouvePar = x.ApprouvePar,
+                DateApproved = x.DateApproved,
+
+                CreatedPar = x.CreatedPar,
+                DateCreation = x.DateCreation,
+
+                UpdatedPar = x.UpdatedPar,
+                DateUpdated = x.DateUpdated,
+
+                //DateRevision = x.DateRevision,
 
             }).ToDataSourceResult(request);
 
@@ -894,14 +908,14 @@ namespace Previgesst.Services
             {
                 FicheCadenassageId = x.FicheCadenassageId,
                 NoFicheCadenassage = x.NoFiche,
-                NomEquipement = langue=="fr"? x.Equipement.NomEquipement: x.Equipement.NomEquipementEN,
-                NomDepartement = langue=="fr"? x.Departement.NomDepartement: x.Departement.NomDepartementEN,
-                TravailAEffectuer = langue=="fr"? x.TravailAEffectuer: x.TravailAEffectuerEN,
-                TitreFiche = langue== "fr"? x.TitreFiche: x.TitreFicheEN,
+                NomEquipement = langue == "fr" ? x.Equipement.NomEquipement : x.Equipement.NomEquipementEN,
+                NomDepartement = langue == "fr" ? x.Departement.NomDepartement : x.Departement.NomDepartementEN,
+                TravailAEffectuer = langue == "fr" ? x.TravailAEffectuer : x.TravailAEffectuerEN,
+                TitreFiche = langue == "fr" ? x.TitreFiche : x.TitreFicheEN,
                 LigneRegistreId = 0,
                 DateDebut = DateTime.Today,
 
-                TexteMateriel = x.MaterielsRequisCadenassage.Select(z => langue=="fr"? z.Materiel.Description + " (" + z.Quantite.ToString() + ")"  : z.Materiel.DescriptionEN + " (" + z.Quantite.ToString() + ")").ToList(),
+                TexteMateriel = x.MaterielsRequisCadenassage.Select(z => langue == "fr" ? z.Materiel.Description + " (" + z.Quantite.ToString() + ")" : z.Materiel.DescriptionEN + " (" + z.Quantite.ToString() + ")").ToList(),
 
 
             }).ToDataSourceResult(request);
@@ -911,32 +925,38 @@ namespace Previgesst.Services
         public EditFicheViewModel getFicheVM(int FicheCadenassageId)
         {
             var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-          
+
 
 
             var result = ficheCadenassageRepository.Get(FicheCadenassageId);
             var vm = new EditFicheViewModel
             {
-                ApprouvePar = result.ApprouvePar,
                 ClientId = result.ClientId,
-                DateCreation = result.DateCreation,
-                DateRevision = result.DateRevision,
+                //DateRevision = result.DateRevision,
                 EquipementId = result.EquipementId,
                 DepartementId = result.DepartementId,
                 FicheCadenassageId = result.FicheCadenassageId,
                 NoFiche = result.NoFiche,
                 TravailAEffectuer = result.TravailAEffectuer,
-                TravailAEffectuerEN=result.TravailAEffectuerEN,
+                TravailAEffectuerEN = result.TravailAEffectuerEN,
                 SourcesEnergieId = result.SourcesEnergieCadenassage.Select(x => x.SourceEnergieId).ToList(),
                 NomClient = result.Client.Nom,
                 AfficherClient = result.AfficherClient,
                 EstDocumentPrevigesst = result.estDocumentPrevigesst,
-                TitreFiche = langue=="fr"? result.TitreFiche: result.TitreFicheEN,
-                RevisionCourante = result.RevisionCourante
+                TitreFiche = langue == "fr" ? result.TitreFiche : result.TitreFicheEN,
+                RevisionCourante = result.RevisionCourante,
 
+                ApprouvePar = result.ApprouvePar,
+                DateApproved = result.DateApproved,
 
+                CreatedPar = result.CreatedPar,
+                DateCreation = result.DateCreation,
+
+                UpdatedPar = result.UpdatedPar,
+                DateUpdated = result.DateUpdated
 
             };
+
             return vm;
 
         }
@@ -989,10 +1009,7 @@ namespace Previgesst.Services
             }
 
 
-            item.ApprouvePar = model.ApprouvePar;
             item.ClientId = model.ClientId;
-            item.DateCreation = model.DateCreation;
-            item.DateRevision = model.DateRevision;
             item.DepartementId = model.DepartementId;
             item.EquipementId = model.EquipementId;
             item.FicheCadenassageId = model.FicheCadenassageId;
@@ -1001,6 +1018,19 @@ namespace Previgesst.Services
             item.TravailAEffectuerEN = model.TravailAEffectuerEN;
             item.estDocumentPrevigesst = model.EstDocumentPrevigesst;
             item.TitreFiche = model.TitreFiche;
+
+
+            item.CreatedPar = model.CreatedPar;
+            item.DateCreation = model.DateCreation;
+            item.UpdatedPar = model.UpdatedPar;
+            item.DateUpdated = model.DateUpdated;
+
+            item.ApprouvePar = null;
+            item.DateApproved = null;
+
+            //item.DateRevision = model.DateRevision;
+
+
             if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout card")
             {
                 item.TitreFiche = "Fiche de cadenassage";
@@ -1037,6 +1067,44 @@ namespace Previgesst.Services
 
 
         }
+
+        public void ApproveFiche(EditFicheViewModel model)
+        {
+            var item = ficheCadenassageRepository.Get(model.FicheCadenassageId);
+            var AjouterEtapesDecadenassage = false;
+            if (item == null)
+            {
+                item = new Models.FicheCadenassage();
+                AjouterEtapesDecadenassage = true;
+            }
+
+
+            item.ApprouvePar = model.ApprouvePar;
+            item.DateApproved = model.DateApproved;
+
+            if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout card")
+            {
+                item.TitreFiche = "Fiche de cadenassage";
+                item.TitreFicheEN = "Lockout card";
+            }
+            else
+            {
+                item.TitreFiche = "Procédure de travail sécuritaire";
+                item.TitreFicheEN = "Safe work procedure";
+            }
+
+            if (item.FicheCadenassageId > 0)
+            {
+                ficheCadenassageRepository.Update(item);
+                ficheCadenassageRepository.SaveChanges();
+            }
+
+            if (AjouterEtapesDecadenassage)
+            {
+                AjouterLignesDecadenassageDefaut(item.FicheCadenassageId);
+            }
+        }
+
 
         private void AjouterLignesDecadenassageDefaut(int ficheCadenassageId)
         {
@@ -1230,7 +1298,7 @@ namespace Previgesst.Services
 
         }
 
-       
+
     }
     #endregion
 

@@ -23,10 +23,10 @@ namespace Previgesst.Services
         private ReglementRepository reglementRepository;
         private DommageRepository dommageRepository;
 
-    
+
         public ListesService(PhenomeneRepository pheneomeneRepository, SituationRepository situationRepository, EvenementRepository evenementRepository,
-            TypeReductionRepository typeReductionRepository,  DispositifRepository dispositifRepository,
-            AccessoireRepository accessoireRepository, SourceEnergieRepository sourceEnergieRepository, MaterielRepository materielRepository, 
+            TypeReductionRepository typeReductionRepository, DispositifRepository dispositifRepository,
+            AccessoireRepository accessoireRepository, SourceEnergieRepository sourceEnergieRepository, MaterielRepository materielRepository,
             ReglementRepository reglementRepository, DommageRepository dommageRepository
             )
         {
@@ -34,7 +34,7 @@ namespace Previgesst.Services
             this.situationRepository = situationRepository;
             this.evenementRepository = evenementRepository;
             this.typeReductionRepository = typeReductionRepository;
-          
+
             this.dispositifRepository = dispositifRepository;
             this.accessoireRepository = accessoireRepository;
             this.sourceEnergieRepository = sourceEnergieRepository;
@@ -54,7 +54,7 @@ namespace Previgesst.Services
                     Id = a.PhenomeneId,
                     Description = a.Description,
                     DescriptionEN = a.DescriptionEN,
-                    Suppressible = !pheneomeneRepository.estUtilise(a.PhenomeneId)  
+                    Suppressible = !pheneomeneRepository.estUtilise(a.PhenomeneId)
                 });
             return result;
         }
@@ -68,7 +68,7 @@ namespace Previgesst.Services
                 {
                     Id = a.DommagePossibleId,
                     Description = a.Description,
-                     DescriptionEN = a.DescriptionEN,
+                    DescriptionEN = a.DescriptionEN,
                     Suppressible = !dommageRepository.estUtilise(a.DommagePossibleId)
                 });
             return result;
@@ -83,7 +83,7 @@ namespace Previgesst.Services
                 {
                     Id = a.ReglementId,
                     Description = a.Description,
-                
+
                     Suppressible = !reglementRepository.estUtilise(a.ReglementId)
                 });
             return result;
@@ -98,7 +98,7 @@ namespace Previgesst.Services
                     Id = a.SituationId,
                     Description = a.Description,
                     DescriptionEN = a.DescriptionEN,
-                    Suppressible = !situationRepository.estUtilise(a.SituationId) 
+                    Suppressible = !situationRepository.estUtilise(a.SituationId)
                 });
             return result;
         }
@@ -112,7 +112,7 @@ namespace Previgesst.Services
                     Id = a.EvenementId,
                     Description = a.Description,
                     DescriptionEN = a.DescriptionEN,
-                    Suppressible = !evenementRepository.estUtilise(a.EvenementId) 
+                    Suppressible = !evenementRepository.estUtilise(a.EvenementId)
                 });
             return result;
         }
@@ -130,7 +130,7 @@ namespace Previgesst.Services
             return result;
         }
 
-   
+
 
         public DataSourceResult GetFilteredDispositif(DataSourceRequest request)
         {
@@ -142,7 +142,7 @@ namespace Previgesst.Services
                     Id = a.DispositifId,
                     Description = a.Description,
                     DescriptionEN = a.DescriptionEN,
-                    Suppressible = !dispositifRepository.estUtilise(a.DispositifId) 
+                    Suppressible = !dispositifRepository.estUtilise(a.DispositifId)
                 });
             return result;
         }
@@ -157,7 +157,7 @@ namespace Previgesst.Services
                     Id = a.AccessoireId,
                     Description = a.Description,
                     DescriptionEN = a.DescriptionEN,
-                    Suppressible = !accessoireRepository.estUtilise(a.AccessoireId) 
+                    Suppressible = !accessoireRepository.estUtilise(a.AccessoireId)
                 });
             return result;
         }
@@ -187,7 +187,7 @@ namespace Previgesst.Services
                     Id = a.MaterielId,
                     Description = a.Description,
                     DescriptionEN = a.DescriptionEN,
-                    Suppressible = !materielRepository.estUtilise(a.MaterielId) 
+                    Suppressible = !materielRepository.estUtilise(a.MaterielId)
                 });
             return result;
         }
@@ -322,7 +322,7 @@ namespace Previgesst.Services
             model.Id = item.EvenementId;
         }
 
-        
+
 
         private void SaveSituation(SimpleListViewModel model)
         {
@@ -438,15 +438,15 @@ namespace Previgesst.Services
             {
                 case Enums.TypeListe.phenomene: SavePhenomene(model); break;
                 case Enums.TypeListe.evenement: SaveEvenement(model); break;
-               
+
                 case Enums.TypeListe.situation: SaveSituation(model); break;
                 case Enums.TypeListe.typereduction: SaveTypeReduction(model); break;
                 case Enums.TypeListe.dispositif: SaveDispositif(model); break;
                 case Enums.TypeListe.accessoire: SaveAccessoire(model); break;
                 case Enums.TypeListe.sourceEnergie: SaveSourceEnergie(model); break;
                 case Enums.TypeListe.materiel: SaveMateriel(model); break;
-                case Enums.TypeListe.reglement: SaveReglement(model);break;
-                case Enums.TypeListe.dommage: SaveDommage(model);break;
+                case Enums.TypeListe.reglement: SaveReglement(model); break;
+                case Enums.TypeListe.dommage: SaveDommage(model); break;
 
 
             }
@@ -506,7 +506,7 @@ namespace Previgesst.Services
             return true;
 
         }
-       
+
 
         public bool SupprimerSituation(SimpleListViewModel model)
         {
@@ -593,7 +593,7 @@ namespace Previgesst.Services
             {
                 case Enums.TypeListe.phenomene: return (SupprimerPhenomene(model));
                 case Enums.TypeListe.evenement: return (SupprimerEvenement(model));
-               
+
                 case Enums.TypeListe.situation: return (SupprimerSituation(model));
                 case Enums.TypeListe.typereduction: return (SupprimerTypeReduction(model));
                 case Enums.TypeListe.dispositif: return (SupprimerDispositif(model));
@@ -607,6 +607,62 @@ namespace Previgesst.Services
             return true;
 
         }
+
+
+        #region ----- For Multiselect in Popup ----- 
+
+
+        public List<SimpleListViewModel> GetSourceEnergie()
+        {
+            return sourceEnergieRepository.AsQueryable()
+                                          .Select(a => new SimpleListViewModel
+                                          {
+                                              Id = a.SourceEnergieId,
+                                              Description = a.Description,
+                                              DescriptionEN = a.DescriptionEN,
+                                              //Suppressible = !sourceEnergieRepository.estUtilise(a.SourceEnergieId)
+                                          })
+                                          .ToList();
+        }
+        public List<SimpleListViewModel> GetDispositif()
+        {
+            return dispositifRepository.AsQueryable()
+                                          .Select(a => new SimpleListViewModel
+                                          {
+                                              Id = a.DispositifId,
+                                              Description = a.Description,
+                                              DescriptionEN = a.DescriptionEN,
+                                              //Suppressible = !sourceEnergieRepository.estUtilise(a.SourceEnergieId)
+                                          })
+                                          .ToList();
+        }
+
+        public List<SimpleListViewModel> GetAccessoire()
+        {
+            return accessoireRepository.AsQueryable()
+                                          .Select(a => new SimpleListViewModel
+                                          {
+                                              Id = a.AccessoireId,
+                                              Description = a.Description,
+                                              DescriptionEN = a.DescriptionEN,
+                                              //Suppressible = !sourceEnergieRepository.estUtilise(a.SourceEnergieId)
+                                          })
+                                          .ToList();
+        }
+
+        public List<SimpleListViewModel> GetMateriel()
+        {
+            return materielRepository.AsQueryable()
+                                          .Select(a => new SimpleListViewModel
+                                          {
+                                              Id = a.MaterielId,
+                                              Description = a.Description,
+                                              DescriptionEN = a.DescriptionEN,
+                                              //Suppressible = !sourceEnergieRepository.estUtilise(a.SourceEnergieId)
+                                          })
+                                          .ToList();
+        }
+        #endregion
 
 
     }

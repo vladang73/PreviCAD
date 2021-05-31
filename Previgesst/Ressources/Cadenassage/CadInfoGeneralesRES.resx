@@ -123,11 +123,17 @@
   <data name="AfficherClient" xml:space="preserve">
     <value>Afficher chez le client</value>
   </data>
+  <data name="Approuve" xml:space="preserve">
+    <value>Approuvé</value>
+  </data>
   <data name="ApprouvePar" xml:space="preserve">
     <value>Approuvé par</value>
   </data>
+  <data name="Createur" xml:space="preserve">
+    <value>Créateur</value>
+  </data>
   <data name="DateCreation" xml:space="preserve">
-    <value>Date de création</value>
+    <value>Créé le</value>
   </data>
   <data name="DateCreationObligatoire" xml:space="preserve">
     <value>Le champ Date de création est obligatoire</value>
@@ -182,5 +188,11 @@
   </data>
   <data name="TypeFiche" xml:space="preserve">
     <value>Type de fiche</value>
+  </data>
+  <data name="UpdatedBy" xml:space="preserve">
+    <value>Mise à jour par</value>
+  </data>
+  <data name="UpdatedDate" xml:space="preserve">
+    <value>Mise à jour le</value>
   </data>
 </root>

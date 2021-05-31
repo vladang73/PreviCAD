@@ -124,7 +124,7 @@
     <value>DATE: </value>
   </data>
   <data name="DateRevision" xml:space="preserve">
-    <value>DATE DE RÉVISION: </value>
+    <value>DATE DE CRÉATION/RÉVISION: </value>
   </data>
   <data name="Departement" xml:space="preserve">
     <value>Département: </value>

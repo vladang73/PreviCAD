@@ -50,13 +50,26 @@ namespace Previgesst.Services
         public SignInStatus Login(string userName, string password)
         {
             var result = SignInManager.PasswordSignIn(userName, password, false, false);
+
+            #region ----- if corporate customer -----
+
+            if (result == SignInStatus.Success)
+            {
+                var currentUser = UserManager.FindByName(userName);
+
+                HttpContext.Current.Session["IsCorporate"] = currentUser.IsCorporate;
+                HttpContext.Current.Session["CorporateClients"] = string.IsNullOrEmpty(currentUser.CorporateClients) ? null : currentUser.CorporateClients.Split(',');
+            }
+
+            #endregion
+
             return result;
         }
 
         public IdentityResult ResetPassword(ResetPasswordViewModel model)
         {
             var user = UserManager.FindByName(model.UserName);
-            if(user == null)
+            if (user == null)
             {
                 //Do not reveal that the user doesn't exist
                 return IdentityResult.Success;
@@ -66,7 +79,7 @@ namespace Previgesst.Services
 
             return result;
         }
-        
+
         public void SignOut()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

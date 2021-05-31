@@ -140,6 +140,8 @@ namespace Previgesst.Services
             //Map all fields
             user.Email = userVM.Email;
             user.Inactive = userVM.Inactive;
+            user.IsCorporate = userVM.IsCorporate;
+            user.CorporateClients = userVM.CorporateClients == null? "" : string.Join(",", userVM.CorporateClients);
 
             //Update user and roles in a transaction
             using (var transaction = UserManager.DbContext.Database.BeginTransaction())
@@ -251,7 +253,9 @@ namespace Previgesst.Services
                 Inactive = user.Inactive,
                 RoleNames = (isCreate ? new List<string>() : UserManager.GetRoles(user.Id)),
                 IsCreate = isCreate,
-                CanDelete = (!isCreate && CurrentUserId != user.Id)     //Pas supprimer un nouveau ou l'utilisateur en cours
+                CanDelete = (!isCreate && CurrentUserId != user.Id),     //Pas supprimer un nouveau ou l'utilisateur en cours
+                IsCorporate = user.IsCorporate,
+                CorporateClients = string.IsNullOrEmpty(user.CorporateClients) ? null : user.CorporateClients.Split(',')
             };
             return vm;
         }

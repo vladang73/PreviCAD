@@ -1,0 +1,101 @@
+﻿@model EquipementArticuloViewModel
+<style>
+    div.k-edit-form-container {
+        width: auto;
+    }
+
+        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
+            width: 100%;
+            max-width: none;
+            padding-left: 0px;
+        }
+
+
+
+    .petit {
+        max-height: 20px;
+        padding-right:0px;
+    }
+
+    .row {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+
+    .col {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style>
+
+<div class="container" style="width:600px; margin:0px;padding:0px;">
+
+    <div class="row">
+        <div class="col-md-12" style="padding-left:0px;">
+
+            @Html.HiddenFor(model => model.EquipementId)
+            @Html.HiddenFor(model => model.EquipementArticuloID)
+
+            <div class="panel panel-info">
+
+                <div class="panel-heading">Equipement Articulo</div>
+                <div class="panel-body">
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        @Html.LabelFor(model => model.Energy, new { @class = "control-label" })
+
+                        @(Html.Kendo().DropDownListFor(m => m.Energy)
+                                                    .DataValueField("SourceEnergieId")
+                                                    .DataTextField("Description")
+                                                    .BindTo((System.Collections.IEnumerable)ViewData["SourceEnergies"])
+                                                    .HtmlAttributes(new { data_value_primitive = "true" })
+                        )
+                        @Html.ValidationMessageFor(model => model.Energy)
+                    </div>
+
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        @Html.LabelFor(model => model.Deposit, new { @class = "control-label" })
+
+                        @(Html.Kendo().DropDownListFor(m => m.Deposit)
+                                                    .DataValueField("DispositifId")
+                                                    .DataTextField("Description")
+                                                    .BindTo((System.Collections.IEnumerable)ViewData["Dispositifs"])
+                                                    .HtmlAttributes(new { data_value_primitive = "true" })
+                        )
+                        @Html.ValidationMessageFor(model => model.Deposit)
+                    </div>
+
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        @Html.LabelFor(model => model.Accessories, new { @class = "control-label" })
+
+                        @(Html.Kendo().DropDownListFor(m => m.Accessories)
+                                                    .DataValueField("MaterielId")
+                                                    .DataTextField("Description")
+                                                    .BindTo((System.Collections.IEnumerable)ViewData["Materiels"])
+                                                    .HtmlAttributes(new { data_value_primitive = "true" })
+                        )
+                        @Html.ValidationMessageFor(model => model.Accessories)
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        @Html.LabelFor(model => model.Nomenclature, new { @class = "control-label pull-left" })
+
+
+                        @Html.TextBoxFor(model => model.Nomenclature, new { @class = "form-control petit", @style = "width:95%;" })
+                        @Html.ValidationMessageFor(model => model.Nomenclature)
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

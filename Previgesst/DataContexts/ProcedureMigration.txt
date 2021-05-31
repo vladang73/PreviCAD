@@ -5,7 +5,7 @@ Enable-Migrations
 
 
 //Ajouter une migration, -Force permet d'écraser la dernière migration (si le Update-Database n'a pas été fait)
-Add-Migration -ConfigurationTypeName Previgesst.DataContexts.DbContextMigrations.Configuration "Previg_74" -Force
+Add-Migration -ConfigurationTypeName Previgesst.DataContexts.DbContextMigrations.Configuration "Previg_77" -Force
 
 
 //Mise à jour de la base de données (exécuter les migrations même si on a pas touché à la base de données : c'est pour enregistrer la migration)

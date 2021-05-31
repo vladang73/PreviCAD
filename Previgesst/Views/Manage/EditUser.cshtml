@@ -21,7 +21,7 @@
     @Html.HiddenFor(m => m.UserId);
     @Html.ValidationSummary(true, "", new { @class = "text-danger" });
 
-    <br/>
+    <br />
 
 
     <div class="row">
@@ -56,16 +56,42 @@
                     @(Html.Kendo().MultiSelectFor(m => m.RoleNames)
                         .Placeholder("Sélectionner le rôle")
                         .DataTextField("Description")
-                        .DataValueField("Name") 
+                        .DataValueField("Name")
                         .BindTo(ViewBag.Roles))
                     @Html.ValidationMessageFor(m => m.RoleNames, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Inactive, new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(m => m.Inactive, new { @class = "col-md-2  text-right" })
                 <div class="col-md-6">
                     @Html.CheckBoxFor(m => m.Inactive)
                     @Html.ValidationMessageFor(m => m.Inactive, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.IsCorporate, new { @class = "col-md-2 text-right" })
+                <div class="col-md-6">
+                    @Html.CheckBoxFor(m => m.IsCorporate, new { @id = "IsCorporate", @onclick = "ShowHideCorporate(this);" })
+                    @Html.ValidationMessageFor(m => m.IsCorporate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group" id="divCorporate" style="display: none">
+                @Html.LabelFor(m => m.CorporateClients, new { @class = "col-md-2 control-label" })
+                <div class="col-md-6">
+                    @(Html.Kendo().MultiSelectFor(m => m.CorporateClients)
+                                  .Name("CorporateClients")
+                                  .Placeholder("Select Clients")
+                                  .DataTextField("ClientName")
+                                  .DataValueField("ClientID")
+                                  .BindTo(ViewBag.Clients))
+
+                    @Html.ValidationMessageFor(m => m.CorporateClients, "", new { @class = "text-danger" })
+
+                    <br />
+                    <br />
+                    <br />
                 </div>
             </div>
         </div>
@@ -80,16 +106,16 @@
                     <input type="submit" class="btn btn-primary" value="Enregistrer" />
                     <!--<a href="#" class="btn btn-primary reload-link">Annuler</a>-->
                     @if (Model.CanDelete)
-                {
+                    {
                         <button id="btnDelete" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-popup">Supprimer</button>
                     }
                     @if (!Model.IsCreate)
-                {
-                        @Html.ActionLink("Réinitialiser le mot de passe...", "GenerateResetPassword", new { id = Model.UserId }, new { @class = "btn btn-info" , @target="_blank" })
-                        
+                    {
+                        @Html.ActionLink("Réinitialiser le mot de passe...", "GenerateResetPassword", new { id = Model.UserId }, new { @class = "btn btn-info", @target = "_blank" })
+
                     }
                 </div>
-                </div>
+            </div>
 
         </div>
     </div>
@@ -127,4 +153,15 @@
     </div>
 }
 
-    
+<script type="text/javascript">
+    function ShowHideCorporate(ctrl) {
+        console.log('ShowHideCorporate', $(ctrl));
+
+        $('#divCorporate').hide();
+        if ($(ctrl).is(':checked')) {
+            $('#divCorporate').show();
+        }
+    }
+
+    $(document).ready(function () { ShowHideCorporate('#IsCorporate'); });
+</script>

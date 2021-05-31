@@ -225,6 +225,7 @@
     <Compile Include="App_Start\LogConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CorporateController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminPreviController.cs" />
     <Compile Include="Controllers\AnalyseRisqueController.cs" />
@@ -570,13 +571,9 @@
     <Compile Include="DataContexts\DbContextMigrations\202009021442250_Previg_72.Designer.cs">
       <DependentUpon>202009021442250_Previg_72.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataContexts\DbContextMigrations\202009291431503_Previg_73.cs" />
-    <Compile Include="DataContexts\DbContextMigrations\202009291431503_Previg_73.Designer.cs">
-      <DependentUpon>202009291431503_Previg_73.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataContexts\DbContextMigrations\202009301239528_Previg_74.cs" />
-    <Compile Include="DataContexts\DbContextMigrations\202009301239528_Previg_74.Designer.cs">
-      <DependentUpon>202009301239528_Previg_74.cs</DependentUpon>
+    <Compile Include="DataContexts\DbContextMigrations\202104012300037_Previg_73.cs" />
+    <Compile Include="DataContexts\DbContextMigrations\202104012300037_Previg_73.Designer.cs">
+      <DependentUpon>202104012300037_Previg_73.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\DbContextMigrations\Configuration.cs" />
     <Compile Include="DataContexts\Extensions\MigrationExtensions.cs" />
@@ -585,6 +582,7 @@
     <Compile Include="Enums\NotificationDefinition.cs" />
     <Compile Include="Enums\Roles.cs" />
     <Compile Include="Enums\TypeListe.cs" />
+    <Compile Include="Enums\TaskList.cs" />
     <Compile Include="Enums\TypeUpload.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -615,6 +613,7 @@
     <Compile Include="Models\DocumentClient.cs" />
     <Compile Include="Models\DommagesPossibles.cs" />
     <Compile Include="Models\EmployeRegistre.cs" />
+    <Compile Include="Models\EquipementArticulo.cs" />
     <Compile Include="Models\Equipement.cs" />
     <Compile Include="Models\Evenement.cs" />
     <Compile Include="Models\Extensions\IdentityExtensions.cs" />
@@ -653,6 +652,7 @@
     <Compile Include="Repositories\DocumentRepository.cs" />
     <Compile Include="Repositories\DommageRepository.cs" />
     <Compile Include="Repositories\EmployeRegistreRepository.cs" />
+    <Compile Include="Repositories\EquipementArticuloRepository.cs" />
     <Compile Include="Repositories\EquipementRepository.cs" />
     <Compile Include="Repositories\EvenementRepository.cs" />
     <Compile Include="Repositories\FicheCadenassageRepository.cs" />
@@ -983,6 +983,7 @@
     <Compile Include="Services\DocumentService.cs" />
     <Compile Include="Services\DommagePossibleService.cs" />
     <Compile Include="Services\EmployeRegistreService.cs" />
+    <Compile Include="Services\EquipementArticuloeService.cs" />
     <Compile Include="Services\EquipementService.cs" />
     <Compile Include="Services\EvenementService.cs" />
     <Compile Include="Services\FicheCadenassageService.cs" />
@@ -1032,6 +1033,7 @@
     <Compile Include="ViewModels\Cadenassage\DepartementViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\EditCadenassageViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\EditFicheViewModel.cs" />
+    <Compile Include="ViewModels\Cadenassage\EquipementArticuloViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\LigneCadenassageGridViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\LigneInstructionViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\LigneDecadenassageViewModel.cs" />
@@ -1462,7 +1464,7 @@
     <Content Include="Images\Client\document_grey.jpg" />
     <Content Include="Images\Client\sections.jpg" />
     <Content Include="Images\Client\utilisateurs.jpg" />
-    <Content Include="Images\dark_logo.png" />
+    <Content Include="Images\dark_logo_Old.png" />
     <Content Include="Images\departements-previ.png" />
     <Content Include="Images\departements.png" />
     <Content Include="Images\dl.png" />
@@ -1510,8 +1512,10 @@
     <Content Include="Images\materielrequis-previ.png" />
     <Content Include="Images\materielrequis.png" />
     <Content Include="Images\play.png" />
+    <Content Include="Images\dark_logo.png" />
     <Content Include="Images\previgesst2.png" />
     <Content Include="Images\previLogo.jpg" />
+    <Content Include="Images\previLogo_old.jpg" />
     <Content Include="Images\procedure.png" />
     <Content Include="Images\programme-de-cadenassage-previ.png" />
     <Content Include="Images\programme-de-cadenassage.png" />
@@ -2106,6 +2110,11 @@
     <Content Include="Templates\AnalyseRisquesEN.xlsx" />
     <Content Include="Views\ParametresApp\Index.cshtml" />
     <Content Include="Views\FicheCadenassage\CadParamAdmin.cshtml" />
+    <Content Include="Views\FicheCadenassage\EditorTemplates\EquipementEditor.cshtml" />
+    <Content Include="Views\FicheCadenassage\EquipementArticuloes.cshtml" />
+    <Content Include="Views\FicheCadenassage\EditorTemplates\EquipementArticuloeEditor.cshtml" />
+    <Content Include="Views\Corporate\Login.cshtml" />
+    <Content Include="Views\Corporate\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />
@@ -2363,11 +2372,8 @@
     <EmbeddedResource Include="DataContexts\DbContextMigrations\202009021442250_Previg_72.resx">
       <DependentUpon>202009021442250_Previg_72.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataContexts\DbContextMigrations\202009291431503_Previg_73.resx">
-      <DependentUpon>202009291431503_Previg_73.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DataContexts\DbContextMigrations\202009301239528_Previg_74.resx">
-      <DependentUpon>202009301239528_Previg_74.cs</DependentUpon>
+    <EmbeddedResource Include="DataContexts\DbContextMigrations\202104012300037_Previg_73.resx">
+      <DependentUpon>202104012300037_Previg_73.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\Analyse\ARCreateRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -2610,6 +2616,7 @@
     <EmbeddedResource Include="Ressources\Previcad\PrevIndexRES.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrevIndexRES.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\UtilisateursRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

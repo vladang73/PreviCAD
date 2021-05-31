@@ -39,7 +39,7 @@ namespace Previgesst.ViewModels
 
         public string TravailAEffectuer { get; set; }
 
-        
+
         [StringLength(250)]
         [MaxLength(250, ErrorMessageResourceType = typeof(CadInfoGeneralesRES), ErrorMessageResourceName = "ErreurTravailEN")]
         [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "TravailAEffectuerEN")]
@@ -56,23 +56,40 @@ namespace Previgesst.ViewModels
 
 
         [StringLength(250)]
-      
-         [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "ApprouvePar")]
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "ApprouvePar")]
         [MaxLength(250, ErrorMessageResourceType = typeof(CadInfoGeneralesRES), ErrorMessageResourceName = "ErreurApprouvePar")]
-
         public string ApprouvePar { get; set; }
 
+        public DateTime? DateApproved { get; set; }
 
 
         [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "DateCreation")]
-    
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime? DateCreation { get; set; }
+
+
+        [StringLength(250)]
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "Createur")]
+        public string CreatedPar { get; set; }
+
+
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "UpdatedDate")]
+        public DateTime? DateUpdated { get; set; }
+
+        [StringLength(250)]
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "UpdatedBy")]
+        public string UpdatedPar { get; set; }
+
+
+
+
+
+
         public string BidonErreurCreation { get; set; }
 
 
-        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "DateRevision")]
-
-        public DateTime? DateRevision { get; set; }
+        //[Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "DateRevision")]
+        //public DateTime? DateRevision { get; set; }
 
         public bool EstDocumentPrevigesst { get; set; }
 

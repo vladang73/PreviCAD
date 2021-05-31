@@ -148,7 +148,10 @@
     <value>FR</value>
   </data>
   <data name="NoFiche" xml:space="preserve">
-    <value>#</value>
+    <value># Fiche</value>
+  </data>
+  <data name="Num" xml:space="preserve">
+    <value># Équipement</value>
   </data>
   <data name="Previ" xml:space="preserve">
     <value>Prévi</value>

@@ -38,15 +38,30 @@ namespace Previgesst.Models
         [StringLength(250)]
         public string NoFiche { get; set; }
 
+        /*
+        [StringLength(250)]
+        public string NumeroEquipment { get; set; }
+        */
 
         [StringLength(250)]
         public string ApprouvePar { get; set; }
 
+        public DateTime? DateApproved { get; set; }
+
 
         public DateTime? DateCreation { get; set; }
 
+        [StringLength(250)]
+        public string CreatedPar { get; set; }
 
-        public DateTime? DateRevision { get; set; }
+
+        public DateTime? DateUpdated { get; set; }
+
+        [StringLength(250)]
+        public string UpdatedPar { get; set; }
+
+
+        //public DateTime? DateRevision { get; set; }
 
         public virtual ICollection<MaterielRequisCadenassage> MaterielsRequisCadenassage { get; set; }
         public virtual ICollection<SourceEnergieCadenassage> SourcesEnergieCadenassage { get; set; }

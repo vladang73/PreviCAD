@@ -20,7 +20,7 @@ namespace Previgesst.Services
         private UtilisateurService utilisateurService;
 
         public ClientService(ClientRepository clientRepository, UtilisateurRepository utilisateurRepository, ClientApplicationPreviRepository clientApplicationPreviRepository,
-          ApplicationPrevisService applicationPrevisService, UtilisateurService utilisateurService   )
+          ApplicationPrevisService applicationPrevisService, UtilisateurService utilisateurService)
         {
             this.clientRepository = clientRepository;
             this.utilisateurRepository = utilisateurRepository;
@@ -106,7 +106,7 @@ namespace Previgesst.Services
             thumb.Dispose();
         }
 
-        internal DataSourceResult ReadListUtilisateurs([DataSourceRequest]DataSourceRequest request, int clientId)
+        internal DataSourceResult ReadListUtilisateurs([DataSourceRequest] DataSourceRequest request, int clientId)
         {
 
 
@@ -118,17 +118,17 @@ namespace Previgesst.Services
                 Nom = u.Nom,
                 MotDePasse = Helpers.Encryption.Decrypt(u.Password, true),
                 Courriel = u.Courriel,
-               
+
                 Actif = u.Actif,
                 NotificationDebutCad = u.NotificationDebutCad,
                 Suppressible = true,
-                AdmAnalyseRisque= u.AdmAnalyseRisque,
+                AdmAnalyseRisque = u.AdmAnalyseRisque,
                 //AdmDocuments=u.AdmDocuments,
-                AdmPrevicad= u.AdmPrevicad,
-                Auditeur=u.Auditeur,
+                AdmPrevicad = u.AdmPrevicad,
+                Auditeur = u.Auditeur,
                 ROAnalyseRisque = u.ROAnalyseRisque,
-                RODocuments= u.RODocuments,
-                ROPrevicad=u.ROPrevicad,
+                RODocuments = u.RODocuments,
+                ROPrevicad = u.ROPrevicad,
                 AdmUtilisateurs = u.AdmUtilisateurs
 
             }).ToDataSourceResult(request);
@@ -140,9 +140,32 @@ namespace Previgesst.Services
         internal DataSourceResult GetReadListeClient(DataSourceRequest request)
         {
             var baseURL = Helpers.URLHelper.GetBaseUrl();
-          
-            var time = DateTime.Now.ToLongTimeString();
-            var result = clientRepository.GetAll().Select(c => new ClientListViewModel()
+                        var time = DateTime.Now.ToLongTimeString();
+
+            #region -----    -----
+
+            bool isCorporate = false;
+            var corporateClients = new List<int>();
+
+            bool.TryParse(Convert.ToString(HttpContext.Current.Session["IsCorporate"]), out isCorporate);
+
+
+            if (isCorporate && HttpContext.Current.Session["CorporateClients"] != null)
+            {
+                corporateClients = ((string[])HttpContext.Current.Session["CorporateClients"]).Select(x => int.Parse(x)).ToList();
+            }
+
+
+            #endregion
+
+            var result = clientRepository.AsQueryable();
+
+            if (isCorporate)
+            {
+                result = result.Where(x => corporateClients.Contains(x.ClientId));
+            }
+
+            return result.Select(c => new ClientListViewModel()
             {
                 Actif = c.Actif,
                 ClientId = c.ClientId,
@@ -152,16 +175,7 @@ namespace Previgesst.Services
                 Logo = c.Logo,
                 //Thumb = c.Thumb + "?t=" + DateTime.Now.ToLongTimeString()
                 Thumb = baseURL + "Images/Cadenassage/Clients/" + c.ClientId.ToString() + "/thumb.jpg?time=" + time,
-               
-
-
-
             }).ToDataSourceResult(request);
-
-
-
-
-            return result;
         }
 
 
@@ -169,25 +183,45 @@ namespace Previgesst.Services
         {
             var baseURL = Helpers.URLHelper.GetBaseUrl();
             var time = DateTime.Now.ToLongTimeString();
-            var result = clientRepository.AsQueryable().Where(x => x.Actif == true).ToList().Select(c => new ClientListViewModel()
+
+
+            #region -----    -----
+
+            bool isCorporate = false;
+            var corporateClients = new List<int>();
+
+            bool.TryParse(Convert.ToString(HttpContext.Current.Session["IsCorporate"]), out isCorporate);
+
+
+            if (isCorporate && HttpContext.Current.Session["CorporateClients"] != null)
             {
-                Actif = c.Actif,
-                ClientId = c.ClientId,
-                Identificateur = c.Identificateur,
-                Nom = c.Nom,
-                EstSupprimable = (c.AnalysesRisques.Count == 0 && c.FichesCadenassage.Count == 0),
-                Logo = c.Logo,
-                //Thumb = c.Thumb + "?t=" + DateTime.Now.ToLongTimeString()
-                Thumb = baseURL + "Images/Cadenassage/Clients/" + c.ClientId.ToString() + "/thumb.jpg?time=" + time,
+                corporateClients = ((string[])HttpContext.Current.Session["CorporateClients"]).Select(x => int.Parse(x)).ToList();
+            }
 
 
+            #endregion
 
-            }).ToDataSourceResult(request);
+            var result = clientRepository.AsQueryable().Where(x => x.Actif == true);
+
+            if (isCorporate)
+            {
+                result = result.Where(x => corporateClients.Contains(x.ClientId));
+            }
 
 
+            return result
+                         .Select(c => new ClientListViewModel()
+                         {
+                             Actif = c.Actif,
+                             ClientId = c.ClientId,
+                             Identificateur = c.Identificateur,
+                             Nom = c.Nom,
+                             EstSupprimable = (c.AnalysesRisques.Count == 0 && c.FichesCadenassage.Count == 0),
+                             Logo = c.Logo,
+                             //Thumb = c.Thumb + "?t=" + DateTime.Now.ToLongTimeString()
+                             Thumb = baseURL + "Images/Cadenassage/Clients/" + c.ClientId.ToString() + "/thumb.jpg?time=" + time,
 
-
-            return result;
+                         }).ToDataSourceResult(request);
 
         }
 
@@ -212,7 +246,7 @@ namespace Previgesst.Services
 
         }
 
-        
+
 
         public bool Supprimer(ClientListViewModel model)
         {
@@ -235,7 +269,7 @@ namespace Previgesst.Services
             return true;
         }
 
-    
+
 
         internal ClientListViewModel getClientVM(int id)
         {
@@ -268,7 +302,7 @@ namespace Previgesst.Services
                 EstSupprimable = (client.AnalysesRisques.Count == 0 && client.FichesCadenassage.Count == 0),
                 Logo = client.Logo,
                 Thumb = client.Thumb,
-                UniqueIdentifier= client.IdentificateurUnique
+                UniqueIdentifier = client.IdentificateurUnique
 
 
 
@@ -280,20 +314,20 @@ namespace Previgesst.Services
 
         }
 
-        public void SaveMaximums (ClientEditDetailsViewModel vm)
+        public void SaveMaximums(ClientEditDetailsViewModel vm)
         {
             var item = clientRepository.Get(vm.ClientId);
-            if (item !=null)
+            if (item != null)
             {
                 item.NbAdminsAnalyseRisqueMax = vm.NbAdminsAnalyseRisqueMax;
-               // item.NbAdminsDocumentsMax = vm.NbAdminsDocumentsMax;
+                // item.NbAdminsDocumentsMax = vm.NbAdminsDocumentsMax;
                 item.NbAdminsPrevicadMax = vm.NbAdminsPrevicadMax;
                 item.NbUtilisateursPrevicad = vm.NbUtilisateursPrevicad;
                 item.NbAuditeursMax = vm.NbAuditeursMax;
                 item.NbAdminUtilisateurs = vm.NbAdminUtilisateurs;
                 item.StatusCadenassage = vm.StatusCadenassage;
                 item.NbLimitCadenassage = vm.NbLimitCadenassage;
-                if(vm.PeriodeEssai == true)
+                if (vm.PeriodeEssai == true)
                 {
                     item.PeriodeEssai = 1;
                 }

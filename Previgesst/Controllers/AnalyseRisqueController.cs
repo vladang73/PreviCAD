@@ -96,9 +96,14 @@ namespace Previgesst.Controllers
         public ActionResult Index()
         {
             PopulateSections(applicationPreviService.getIdByName(Enums.Applications.Analyse));
-            AffichageListesViewModel model= new AffichageListesViewModel();
+            AffichageListesViewModel model = new AffichageListesViewModel();
+
+            bool isCorporate = false;
+            bool.TryParse(Convert.ToString(HttpContext.Session["IsCorporate"]), out isCorporate);
+
             // seuls les administrateurs PREVI peuvent modifier les listes de référence, utilisés par TOUS les clients
-            model.AfficherListes = User.IsInRole("Administrateur");
+            model.AfficherListes = User.IsInRole("Administrateur") && !isCorporate;
+            ViewData["Layout"] = Layout;
             return View("Index", Layout, model);
         }
 
@@ -107,7 +112,7 @@ namespace Previgesst.Controllers
         public ActionResult Create(int id)
         {
             //ViewBag.ListeClients = clientService.GetAnalyseRisqueCreateClientDDL();
-            
+
             AnalyseRisqueCreateViewModel arcvm = new AnalyseRisqueCreateViewModel();
             var Createur = "";
             if (utilisateurService.GetSession() != null)
@@ -122,15 +127,16 @@ namespace Previgesst.Controllers
             arcvm.ClientId = id;
             arcvm.Createur = Createur;
             arcvm.AfficherChezClient = (utilisateurService.GetSession() != null);
-            return View("Create",Layout,arcvm);
-       }
+            ViewData["Layout"] = Layout;
+            return View("Create", Layout, arcvm);
+        }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AnalyseRisqueCreateViewModel arcvm)
         {
-           return RedirectToAction("Edit",new { id = analyseRisqueService.CreateAnalyseRisque(arcvm) });
+            return RedirectToAction("Edit", new { id = analyseRisqueService.CreateAnalyseRisque(arcvm) });
         }
 
         public ActionResult EditClient(int ID)
@@ -140,14 +146,15 @@ namespace Previgesst.Controllers
                 var sessionUtilisateur = utilisateurService.GetSession();
 
                 var client = clientRepository.Get(ID);
-                var vm = new EditCadenassageViewModel { ClientId = ID, Nom = client.Nom , estClient = (sessionUtilisateur !=null)};
-                vm.estUpdate = (sessionUtilisateur == null && 
+                var vm = new EditCadenassageViewModel { ClientId = ID, Nom = client.Nom, estClient = (sessionUtilisateur != null) };
+                vm.estUpdate = (sessionUtilisateur == null &&
                                     (User.IsInRole("Administrateur") ||
-                                    User.IsInRole("Lecture-Écriture") )
-                                ) 
-                || (  sessionUtilisateur != null && sessionUtilisateur.AdmAnalyseRisque);
+                                    User.IsInRole("Lecture-Écriture"))
+                                )
+                || (sessionUtilisateur != null && sessionUtilisateur.AdmAnalyseRisque);
 
-                return View("EditClient",Layout, vm);
+                ViewData["Layout"] = Layout;
+                return View("EditClient", Layout, vm);
             }
             return Json("");
         }
@@ -155,8 +162,8 @@ namespace Previgesst.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-          
-            if (utilisateurService.VerifierBonClientAnalyse_Risque( id, true))
+
+            if (utilisateurService.VerifierBonClientAnalyse_Risque(id, true))
             {
                 // On rempli les combobox pour les EditorTemplate
                 PopulatePhenomene();
@@ -171,9 +178,11 @@ namespace Previgesst.Controllers
                 PopulateProbabilite();
                 PopulateEtat();
 
-                return View("Edit",Layout,analyseRisqueService.GetAnalyseRisqueEditViewModel(id));
-           }
-           return Json("");
+                ViewData["Layout"] = Layout;
+
+                return View("Edit", Layout, analyseRisqueService.GetAnalyseRisqueEditViewModel(id));
+            }
+            return Json("");
         }
 
 
@@ -183,7 +192,7 @@ namespace Previgesst.Controllers
         public ActionResult Edit(AnalyseRisqueEditViewModel arevm)
         {
             analyseRisqueService.UpdateAnalyseRisque(arevm);
-            return Redirect("~/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName +  "/AnalyseRisque/Edit?ID=" + arevm.Id);
+            return Redirect("~/" + System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "/AnalyseRisque/Edit?ID=" + arevm.Id);
         }
 
 
@@ -193,12 +202,14 @@ namespace Previgesst.Controllers
             {
                 ViewData["idFiche"] = Id;
                 var vm = ligneAnalyseRisqueService.getFicheVM(Id);
+
+                ViewData["Layout"] = Layout;
                 return View("EditLigneAnalyseRisque", Layout, vm);
             }
             return Json("");
         }
 
-        public ActionResult ReadListAnalyseRisque([DataSourceRequest]DataSourceRequest request, int client)
+        public ActionResult ReadListAnalyseRisque([DataSourceRequest] DataSourceRequest request, int client)
         {
             if (utilisateurService.VerifierBonClientAnalyse_Client(client, false))
             {
@@ -207,17 +218,17 @@ namespace Previgesst.Controllers
             return Json("");
         }
 
-        
-        public ActionResult ReadListAnalyseRisqueUnClient([DataSourceRequest]DataSourceRequest request)
+
+        public ActionResult ReadListAnalyseRisqueUnClient([DataSourceRequest] DataSourceRequest request)
         {
             var userInfo = utilisateurService.GetSession();
             return Json(analyseRisqueService.GetReadListAnalyseRisque(request, userInfo.ClientId));
         }
 
 
-        public ActionResult ReadLigneAnalyseRisque([DataSourceRequest]DataSourceRequest request, int id)
+        public ActionResult ReadLigneAnalyseRisque([DataSourceRequest] DataSourceRequest request, int id)
         {
-            if (utilisateurService.VerifierBonClientAnalyse_Risque( id, false))
+            if (utilisateurService.VerifierBonClientAnalyse_Risque(id, false))
             {
                 return Json(analyseRisqueService.GetReadListLigneAnalyseRisque(request, id));
             }
@@ -226,7 +237,7 @@ namespace Previgesst.Controllers
 
 
 
-        public ActionResult CreateLigneAnalyseRisque([DataSourceRequest]DataSourceRequest request, LigneAnalyseRisqueEditViewModel larevm, int idAnalyseRisque)
+        public ActionResult CreateLigneAnalyseRisque([DataSourceRequest] DataSourceRequest request, LigneAnalyseRisqueEditViewModel larevm, int idAnalyseRisque)
         {
             if (!ModelState.IsValid)
             {
@@ -248,11 +259,11 @@ namespace Previgesst.Controllers
                 }
             }
 
-            if (utilisateurService.VerifierBonClientAnalyse_Risque( idAnalyseRisque, true))
+            if (utilisateurService.VerifierBonClientAnalyse_Risque(idAnalyseRisque, true))
             {
 
                 if (larevm != null && ModelState.IsValid)
-                ligneAnalyseRisqueService.UpdateLigneAnalyseRisque(larevm, idAnalyseRisque);
+                    ligneAnalyseRisqueService.UpdateLigneAnalyseRisque(larevm, idAnalyseRisque);
 
                 return Json(new[] { larevm }.ToDataSourceResult(request, ModelState));
                 /*var v = new RouteValueDictionary();
@@ -266,7 +277,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult UpdateLigneAnalyseRisque([DataSourceRequest]DataSourceRequest request, LigneAnalyseRisqueEditViewModel larevm, int idAnalyseRisque)
+        public ActionResult UpdateLigneAnalyseRisque([DataSourceRequest] DataSourceRequest request, LigneAnalyseRisqueEditViewModel larevm, int idAnalyseRisque)
         {
             if (!ModelState.IsValid)
             {
@@ -289,10 +300,10 @@ namespace Previgesst.Controllers
                 }
             }
 
-            if (utilisateurService.VerifierBonClientAnalyse_Risque( idAnalyseRisque, true))
+            if (utilisateurService.VerifierBonClientAnalyse_Risque(idAnalyseRisque, true))
             {
                 if (larevm != null && ModelState.IsValid)
-                ligneAnalyseRisqueService.UpdateLigneAnalyseRisque(larevm, idAnalyseRisque);
+                    ligneAnalyseRisqueService.UpdateLigneAnalyseRisque(larevm, idAnalyseRisque);
 
                 return Json(new[] { larevm }.ToDataSourceResult(request, ModelState));
                 // return View("Edit", Layout, idAnalyseRisque);
@@ -305,7 +316,7 @@ namespace Previgesst.Controllers
             var newFicheId = ligneAnalyseRisqueService.DupliquerLigneAnalyseRisque(Id);
         }
 
-        public ActionResult DeleteLigneAnalyseRisque([DataSourceRequest]DataSourceRequest request, LigneAnalyseRisqueEditViewModel larevm)
+        public ActionResult DeleteLigneAnalyseRisque([DataSourceRequest] DataSourceRequest request, LigneAnalyseRisqueEditViewModel larevm)
         {
             if (larevm != null)
                 ligneAnalyseRisqueService.DeleteLigneAnalyseRisque(larevm);
@@ -316,7 +327,7 @@ namespace Previgesst.Controllers
         public ActionResult DeleteAnalyse([DataSourceRequest] DataSourceRequest request,
        AnalyseRisqueListViewModel fiche)
         {
-            if (utilisateurService.VerifierBonClientAnalyse_Risque( fiche.AnalyseRisqueId, true))
+            if (utilisateurService.VerifierBonClientAnalyse_Risque(fiche.AnalyseRisqueId, true))
             {
                 if (fiche != null)
                 {
@@ -331,12 +342,12 @@ namespace Previgesst.Controllers
             return Json("");
         }
 
-        public void getXLAnalyseClientEN( int id)
+        public void getXLAnalyseClientEN(int id)
         {
             getXLAnalyseClient(id, "en");
         }
 
-        public void getXLAnalyseClient (int id, string langue="fr")
+        public void getXLAnalyseClient(int id, string langue = "fr")
         {
             //  on doit être authentifié client ou previgesst
             var ClientFromSession = utilisateurService.GetSession();
@@ -419,12 +430,12 @@ namespace Previgesst.Controllers
 
         }
 
-        public void getXLAnalyseEN( int id)
+        public void getXLAnalyseEN(int id)
         {
             getXLAnalyse(id, "en");
         }
 
-        public void getXLAnalyse(int id, string langue="fr")
+        public void getXLAnalyse(int id, string langue = "fr")
         {
             //  on doit être authentifié client ou previgesst
             var ClientFromSession = utilisateurService.GetSession();
@@ -442,11 +453,11 @@ namespace Previgesst.Controllers
                 if (Analyse.ClientId != ClientIdFromSession)
                 {
                     utilisateurService.LogOff();
-                    RedirectToAction(Layout,"Index", "ClientLogin");
+                    RedirectToAction(Layout, "Index", "ClientLogin");
                 }
             }
 
-            analyseRisqueService.ReturnFile(id,false,langue);
+            analyseRisqueService.ReturnFile(id, false, langue);
 
 
             //string templateName = HttpContext.Server.MapPath("~/Templates/AnalyseRisques.xlsx");        
@@ -637,7 +648,7 @@ namespace Previgesst.Controllers
         //}
         private void PopulateZones(int id)
         {
-            ViewBag.Zones=  ligneAnalyseRisqueService.getZones(id);
+            ViewBag.Zones = ligneAnalyseRisqueService.getZones(id);
         }
 
         public string RetourneOperations(int id)

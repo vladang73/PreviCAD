@@ -30,6 +30,8 @@ namespace Previgesst.Models
         [Required]
         public bool Inactive { get; set; }
         public static object Identity { get; internal set; }
+        public bool IsCorporate { get; set; }
+        public string CorporateClients { get; set; }
     }
 
     public class Role : IdentityRole

@@ -29,7 +29,7 @@ namespace Previgesst.ViewModels
 
         public string TokenExpiryHour { get; set; }
     }
-    
+
     public class ResetPasswordViewModel
     {
         [Display(Name = "Nom d'utilisateur")]
@@ -59,7 +59,7 @@ namespace Previgesst.ViewModels
 
         [Display(Name = "Courriel")]
         public string Email { get; set; }
-        
+
         [Display(Name = "Inactif")]
         public bool Inactive { get; set; }
     }
@@ -104,6 +104,13 @@ namespace Previgesst.ViewModels
         [Display(Name = "Rôles")]
         [NotEmpty]
         public IEnumerable<string> RoleNames { get; set; }
+
+
+        [Display(Name = "Is Corporate")]
+        public bool IsCorporate { get; set; }
+
+        [Display(Name = "Clients")]
+        public IEnumerable<string> CorporateClients { get; set; }
     }
 
     public class RoleViewModel

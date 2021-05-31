@@ -11,9 +11,7 @@ using System.Web.Mvc;
 
 namespace Previgesst.Controllers
 {
-    public class EquipementController:Controller
-
-   
+    public class EquipementController : Controller
     {
         private EquipementService equipementService;
 
@@ -21,12 +19,37 @@ namespace Previgesst.Controllers
         {
             this.equipementService = equipementService;
         }
-        public ActionResult ReadListEquipement([DataSourceRequest]DataSourceRequest request, int client)
+        public ActionResult ReadListEquipement([DataSourceRequest] DataSourceRequest request, int client)
         {
 
-            return Json(equipementService.GetReadListeEquipements(request,client), JsonRequestBehavior.AllowGet);
+            return Json(equipementService.GetReadListeEquipements(request, client), JsonRequestBehavior.AllowGet);
+        }
+        //public ActionResult GetEquipementArticuloes(int equipementId)
+        //{
+        //    return Json(equipementService.GetEquipementArticuloes(equipementId), JsonRequestBehavior.AllowGet);
+        //}
+        //public ActionResult DeleteEquipementArticuloes(int equipementArticuloeID)
+        //{
+        //    return Json(new { IsSuccess = equipementService.DeleteEquipementArticula(equipementArticuloeID) }, JsonRequestBehavior.AllowGet);
+        //}
+
+        public ActionResult SaveEquipementNew(EquipementViewModel item)
+        {
+            if (item != null && item.EquipementId > 0)
+            {
+                equipementService.SaveEquipementNew(item, "Equipment");
+            }
+            return Json(new { isSuccess = true });
         }
 
+        //public ActionResult SaveEnergyInfo(EquipementArticuloViewModel item)
+        //{
+        //    if (item != null && item.EquipementId > 0)
+        //    {
+        //        equipementService.SaveEquipementArticula(item);
+        //    }
+        //    return Json(new { isSuccess = true });
+        //}
 
         public ActionResult SaveEquipement([DataSourceRequest] DataSourceRequest request,
          EquipementViewModel item, int client)
@@ -34,14 +57,13 @@ namespace Previgesst.Controllers
             if (item != null && ModelState.IsValid)
             {
                 item.ClientId = client;
-               equipementService.SaveEquipement(item);
+                equipementService.SaveEquipement(item);
             }
             return Json(new[] { item }.ToDataSourceResult(request, ModelState));
 
         }
 
-        public ActionResult DeleteEquipement([DataSourceRequest] DataSourceRequest request,
-         EquipementViewModel equipement)
+        public ActionResult DeleteEquipement([DataSourceRequest] DataSourceRequest request, EquipementViewModel equipement)
         {
             if (equipement != null)
             {
@@ -53,6 +75,11 @@ namespace Previgesst.Controllers
             }
             return Json(new[] { equipement }.ToDataSourceResult(request, ModelState));
 
+        }
+
+        public ActionResult EditEquipement([DataSourceRequest] DataSourceRequest request, EquipementViewModel equipement)
+        {
+            return PartialView("EquipementEditor.cshtml");
         }
 
     }

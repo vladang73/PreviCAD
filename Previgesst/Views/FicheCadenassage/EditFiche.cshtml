@@ -4,7 +4,10 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewData["Layout"] != null)
+    {
+        Layout = (string)ViewData["Layout"];
+    }
 }
 @if (Model.DroitAjout == false)
 {
@@ -84,13 +87,17 @@
                 <div class="tab-content">
 
                     @if (!Model.DisplaySourceTab)
-                    {<div id="InfosGenerales" class="tab-pane active">
+                    {
+                        <div id="InfosGenerales" class="tab-pane active">
                             @Html.Partial("SectionInfoGenerales", @Model)
-                        </div>}
+                        </div>
+                    }
                     else
-                    { <div id="InfosGenerales" class="tab-pane ">
+                    {
+                        <div id="InfosGenerales" class="tab-pane ">
                             @Html.Partial("SectionInfoGenerales", @Model)
-                        </div>}
+                        </div>
+                    }
 
 
                     @if (Model.FicheCadenassageId != 0)
@@ -141,7 +148,9 @@
                 </div>
             </div>
         </div>
-        <a class='shieldLogoCadenassage' href='@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/shield.png'><a />
+        @*<a class='shieldLogoCadenassage' href='@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/shield.png'></a>*@
+        <a class='shieldLogoCadenassage' href='@if (this.Layout.EndsWith("_Layout.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/dark_logo.png'></a>
+
     </div>
 </div>
 <script type="text/javascript">

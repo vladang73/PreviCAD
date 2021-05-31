@@ -25,9 +25,7 @@ namespace Previgesst.Services
                 {
 
                     MaterielId = s.MaterielId,
-                    Description = s.Description
-
-
+                    Description = s.Description.Trim()
                 });
 
                 return applicationDDL;
@@ -38,7 +36,7 @@ namespace Previgesst.Services
                 {
 
                     MaterielId = s.MaterielId,
-                    Description = s.DescriptionEN
+                    Description = s.DescriptionEN.Trim()
                 });
                 return applicationDDL;
             }

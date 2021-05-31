@@ -123,11 +123,17 @@
   <data name="AfficherClient" xml:space="preserve">
     <value>Post on premises</value>
   </data>
+  <data name="Approuve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
   <data name="ApprouvePar" xml:space="preserve">
     <value>Approved by</value>
   </data>
+  <data name="Createur" xml:space="preserve">
+    <value>Creator</value>
+  </data>
   <data name="DateCreation" xml:space="preserve">
-    <value>Created on</value>
+    <value>Creata the</value>
   </data>
   <data name="DateCreationObligatoire" xml:space="preserve">
     <value>The field Creation on is mandatory </value>
@@ -182,5 +188,11 @@
   </data>
   <data name="TypeFiche" xml:space="preserve">
     <value>Type of sheet</value>
+  </data>
+  <data name="UpdatedBy" xml:space="preserve">
+    <value>Updated By</value>
+  </data>
+  <data name="UpdatedDate" xml:space="preserve">
+    <value>Updarted Date</value>
   </data>
 </root>
