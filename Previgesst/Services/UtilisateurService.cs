@@ -758,7 +758,7 @@ namespace Previgesst.Services
 
 
             // HttpContext.Current.Session.Timeout = 180;
-            HttpContext.Current.Session.Timeout = 131400;
+            //HttpContext.Current.Session.Timeout = 131400;
             return (utilisateur != null);
 
         }

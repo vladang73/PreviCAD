@@ -18,7 +18,7 @@ namespace Previgesst.Services
 
         public int getIdByName( string Nom)
         {
-            return applicationPreviRepository.GetAll().Where(x => x.Nom == Nom).FirstOrDefault().ApplicationPreviId;
+            return applicationPreviRepository.AsQueryable().Where(x => x.Nom == Nom).FirstOrDefault().ApplicationPreviId;
 
         }
 

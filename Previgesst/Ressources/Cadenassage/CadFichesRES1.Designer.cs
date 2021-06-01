@@ -151,7 +151,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to # Fiche.
+        ///   Looks up a localized string similar to #.
         /// </summary>
         public static string NoFiche {
             get {
@@ -160,7 +160,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to # Équipement.
+        ///   Looks up a localized string similar to Numéro de l&apos;équipement.
         /// </summary>
         public static string Num {
             get {
