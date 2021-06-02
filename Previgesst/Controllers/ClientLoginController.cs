@@ -70,7 +70,7 @@ namespace Previgesst.Controllers
         }
 
         [HttpPost]
-      //[ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Index(LoginClientViewModel vm, string ReturnUrl)
         {
 
@@ -78,11 +78,21 @@ namespace Previgesst.Controllers
             if (isLogOK)
             {
                 //var result = accountService.Login("CDEUser", "6k^3U6+8_2N-FvprQXs>");
-
+                
                 var result = accountService.Login(vm.UserName, vm.Password);
 
+                // if logged in
+                if (result == Microsoft.AspNet.Identity.Owin.SignInStatus.Success)
+                {
+                    return RedirectToLocal(ReturnUrl);
+                }
+                else
+                {
+                    System.Web.HttpContext.Current.Session.Abandon();
 
-                return RedirectToLocal(ReturnUrl);
+                    ModelState.AddModelError("", "Tentative de connexion non valide.");
+                    return View(vm);
+                }
             }
             else
             {
@@ -111,7 +121,7 @@ namespace Previgesst.Controllers
 
                 Uri uri = urlBuilder.Uri;
                 string url = urlBuilder.ToString().Replace("%3F", "?");
-                
+
                 System.Web.HttpContext.Current.Session.Abandon();
                 return Redirect(url);
 
