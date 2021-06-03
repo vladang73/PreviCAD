@@ -140,7 +140,7 @@ namespace Previgesst.Services
         internal DataSourceResult GetReadListeClient(DataSourceRequest request)
         {
             var baseURL = Helpers.URLHelper.GetBaseUrl();
-                        var time = DateTime.Now.ToLongTimeString();
+            var time = DateTime.Now.ToLongTimeString();
 
             #region -----    -----
 
@@ -206,6 +206,16 @@ namespace Previgesst.Services
             if (isCorporate)
             {
                 result = result.Where(x => corporateClients.Contains(x.ClientId));
+            }
+            else
+            {
+                // fix for no admin, he should not be able to see all clients
+                var session = utilisateurService.GetSession();
+
+                if (session != null)
+                {
+                    result = result.Where(x => x.ClientId == session.ClientId);
+                }
             }
 
 

@@ -2,7 +2,15 @@
 
 @{
     ViewBag.Title = "Equipement Articuloe";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (ViewData["Layout"] != null)
+    {
+        Layout = (string)ViewData["Layout"];
+    }
+
+    int clientId = 0;
+    int.TryParse(Convert.ToString(ViewData["LeClient"]), out clientId);
 }
 
 <style>
@@ -22,8 +30,14 @@
             <nav aria-label="breadcrumb">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="~/FicheCadenassage/Index">Equipment Management</a></li>
-
+                        @if (clientId > 0)
+                        {
+                            <li class="breadcrumb-item"><a href="~/FicheCadenassage/Edit/@clientId">Equipment Management</a></li>
+                        }
+                        else
+                        {
+                            <li class="breadcrumb-item"><a href="~/FicheCadenassage/Index">Equipment Management</a></li>
+                        }
                         <li class="breadcrumb-item active" aria-current="page">Gestion des Equipement Articuloes</li>
                     </ol>
                 </nav>

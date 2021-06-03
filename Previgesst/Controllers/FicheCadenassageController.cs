@@ -1065,6 +1065,13 @@ namespace Previgesst.Controllers
 
 
             ViewData["EqID"] = id;
+            ViewData["Layout"] = Layout;
+
+            var session = utilisateurService.GetSession();
+            if (session != null)
+            {
+                ViewData["LeClient"] = session.ClientId;
+            }
             return View();
         }
 

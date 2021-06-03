@@ -49,6 +49,7 @@ namespace Previgesst.Services
 
         public SignInStatus Login(string userName, string password)
         {
+            // signin user based on AspNetUsers table
             var result = SignInManager.PasswordSignIn(userName, password, false, false);
 
             #region ----- if corporate customer -----

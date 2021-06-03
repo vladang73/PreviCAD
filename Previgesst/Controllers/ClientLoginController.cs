@@ -73,7 +73,7 @@ namespace Previgesst.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Index(LoginClientViewModel vm, string ReturnUrl)
         {
-
+            // check into utilisateur table
             var isLogOK = utilisateurService.isLoginOk(vm);
             if (isLogOK)
             {
@@ -88,6 +88,7 @@ namespace Previgesst.Controllers
                 }
                 else
                 {
+                    //this is new code here
                     System.Web.HttpContext.Current.Session.Abandon();
 
                     ModelState.AddModelError("", "Tentative de connexion non valide.");
