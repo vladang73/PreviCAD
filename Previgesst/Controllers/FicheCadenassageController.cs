@@ -510,8 +510,7 @@ namespace Previgesst.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult SaveItemPhoto([DataSourceRequest] DataSourceRequest request,
-         PhotoFicheCadenassageViewModel item, int ficheId)
+        public ActionResult SaveItemPhoto([DataSourceRequest] DataSourceRequest request, PhotoFicheCadenassageViewModel item, int ficheId)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, true))
             {
@@ -520,6 +519,8 @@ namespace Previgesst.Controllers
                     item.FicheCadenassageId = ficheId;
                     photoFicheCadenassageService.SaveLigneCadenassagePhoto(item);
 
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(ficheId, User.Identity.Name);
                 }
                 //PopulatePhoto(ficheId);
                 return Json(new[] { item }.ToDataSourceResult(request, ModelState));
@@ -530,8 +531,7 @@ namespace Previgesst.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult DeleteItemPhoto([DataSourceRequest] DataSourceRequest request,
-         PhotoFicheCadenassageViewModel item)
+        public ActionResult DeleteItemPhoto([DataSourceRequest] DataSourceRequest request, PhotoFicheCadenassageViewModel item)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(item.FicheCadenassageId, true))
             {
@@ -578,7 +578,8 @@ namespace Previgesst.Controllers
                 photoFicheCadenassageService.SaveLigneCadenassagePhoto(d);
                 PhotoFicheCadenassageId = d.PhotoFicheCadenassageId;
 
-
+                // update approve and modified fields
+                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, User.Identity.Name);
             }
             else
             {
@@ -587,6 +588,9 @@ namespace Previgesst.Controllers
                 photo.Localisation = Localisation;
                 photo.LocalisationEN = LocalisationEN;
                 photoFicheCadenassageService.SaveLigneCadenassagePhoto(photo);
+
+                // update approve and modified fields
+                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, User.Identity.Name);
             }
 
             uploadController.SaveLinkWithContext(file, PhotoFicheCadenassageId, Enums.TypeUpload.ImageCadenassage, this.ControllerContext.HttpContext.Server);
@@ -625,8 +629,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult SaveItemDecadenassage([DataSourceRequest] DataSourceRequest request,
-         LigneDecadenassageViewModel item, int ficheId)
+        public ActionResult SaveItemDecadenassage([DataSourceRequest] DataSourceRequest request, LigneDecadenassageViewModel item, int ficheId)
         {// bug du numeric updown, ne s'ajuste pas bien sur changemetn de locale
             if (!ModelState.IsValid)
             {
@@ -660,6 +663,9 @@ namespace Previgesst.Controllers
                     item.FicheCadenassageId = ficheId;
                     ligneDecadenassageService.SaveLigneDecadenassage(item);
                     item = ligneDecadenassageService.getLigneVM(item.LigneDecadenassageId);
+
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(ficheId, User.Identity.Name);
                 }
                 return Json(new[] { item }.ToDataSourceResult(request, ModelState));
 
@@ -668,8 +674,7 @@ namespace Previgesst.Controllers
 
         }
 
-        public ActionResult DeleteItemDecadenassage([DataSourceRequest] DataSourceRequest request,
-         LigneDecadenassageViewModel item)
+        public ActionResult DeleteItemDecadenassage([DataSourceRequest] DataSourceRequest request, LigneDecadenassageViewModel item)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(item.FicheCadenassageId, true))
             {
@@ -709,8 +714,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult SaveItemMateriel([DataSourceRequest] DataSourceRequest request,
-         MaterielRequisCadenassageViewModel item, int ficheId)
+        public ActionResult SaveItemMateriel([DataSourceRequest] DataSourceRequest request, MaterielRequisCadenassageViewModel item, int ficheId)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, true))
             {
@@ -718,6 +722,9 @@ namespace Previgesst.Controllers
                 {
                     item.FicheCadenassageId = ficheId;
                     materielRequisCadenassageService.SaveLigneCadenassageMateriel(item);
+
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(ficheId, User.Identity.Name);
                 }
                 return Json(new[] { item }.ToDataSourceResult(request, ModelState));
             }
@@ -725,8 +732,7 @@ namespace Previgesst.Controllers
 
         }
 
-        public ActionResult DeleteItemMateriel([DataSourceRequest] DataSourceRequest request,
-         MaterielRequisCadenassageViewModel item)
+        public ActionResult DeleteItemMateriel([DataSourceRequest] DataSourceRequest request, MaterielRequisCadenassageViewModel item)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(item.FicheCadenassageId, true))
             {
@@ -743,10 +749,6 @@ namespace Previgesst.Controllers
             }
 
             return Json("");
-
-
-
-
         }
 
 
@@ -755,7 +757,6 @@ namespace Previgesst.Controllers
             var DDL = materielService.GetAllMaterielDDLViewModel();
 
             ViewData["Materiel"] = DDL;
-
         }
 
 
@@ -789,14 +790,14 @@ namespace Previgesst.Controllers
                 itemSources.SourcesEnergieId = listeInt;
                 this.sourceEnergieCadenassageRepository.UpdateSources(itemSources);
 
-
-
+                // update approve and modified fields
+                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, User.Identity.Name);
             }
+
             return 0;
         }
 
-        public ActionResult SaveSources(
-         SourceEnergieCadenassageViewModel item)
+        public ActionResult SaveSources(SourceEnergieCadenassageViewModel item)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(item.FicheCadenassageId, true))
             {
@@ -805,7 +806,10 @@ namespace Previgesst.Controllers
 
                     this.sourceEnergieCadenassageRepository.UpdateSources(item);
 
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(item.FicheCadenassageId, User.Identity.Name);
                 };
+
                 var vm = ficheCadenassageService.getFicheVM(item.FicheCadenassageId);
                 vm.DisplaySourceTab = true;
                 PopulateLists(vm.ClientId);
@@ -829,8 +833,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult SaveItemCadenassage([DataSourceRequest] DataSourceRequest request,
-         LigneInstructionViewModel item, int ficheId)
+        public ActionResult SaveItemCadenassage([DataSourceRequest] DataSourceRequest request, LigneInstructionViewModel item, int ficheId)
         {
             if (!ModelState.IsValid)
             {
@@ -862,6 +865,9 @@ namespace Previgesst.Controllers
                     item.FicheCadenassageId = ficheId;
                     ligneInstructionService.SaveLigneInstruction(item);
                     item = ligneInstructionService.getLigneVM(item.LigneInstructionId);
+
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(ficheId, User.Identity.Name);
                 }
                 return Json(new[] { item }.ToDataSourceResult(request, ModelState));
             }
@@ -871,8 +877,7 @@ namespace Previgesst.Controllers
 
         }
 
-        public ActionResult DeleteItemCadenassage([DataSourceRequest] DataSourceRequest request,
-         LigneInstructionViewModel item)
+        public ActionResult DeleteItemCadenassage([DataSourceRequest] DataSourceRequest request, LigneInstructionViewModel item)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(item.FicheCadenassageId, true))
             {
@@ -967,8 +972,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult SaveItemEmployesCadenassage([DataSourceRequest] DataSourceRequest request,
-         EmployeRegistreViewModel item, int IDClient)
+        public ActionResult SaveItemEmployesCadenassage([DataSourceRequest] DataSourceRequest request, EmployeRegistreViewModel item, int IDClient)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Client(IDClient, false))
             {
@@ -1015,8 +1019,7 @@ namespace Previgesst.Controllers
             return true;
         }
 
-        public ActionResult DeleteItemEmployesCadenassage([DataSourceRequest] DataSourceRequest request,
-         EmployeRegistreViewModel item)
+        public ActionResult DeleteItemEmployesCadenassage([DataSourceRequest] DataSourceRequest request, EmployeRegistreViewModel item)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Client(item.ClientId, false))
             {

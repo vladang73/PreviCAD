@@ -43,9 +43,9 @@ namespace Previgesst.Controllers
             }
             else
                 this.Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+        }
 
-    public ActionResult Login()
+        public ActionResult Login()
         {
             ShowSavedMessage();
 
@@ -56,7 +56,7 @@ namespace Previgesst.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string ReturnUrl)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var result = AccountService.Login(model.UserName, model.Password);
                 //CDEUser
@@ -78,12 +78,12 @@ namespace Previgesst.Controllers
                 }
             }
 
-            return View("Login", Layout,model);
+            return View("Login", Layout, model);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if(Url.IsLocalUrl(returnUrl))
+            if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
@@ -111,7 +111,7 @@ namespace Previgesst.Controllers
                 if (result.Succeeded)
                 {
                     SaveSuccessMessage("Mot de passe réinitialisé avec succès");
-                    return RedirectToAction( nameof(Login));
+                    return RedirectToAction(nameof(Login));
                 }
 
                 AddErrors(result);

@@ -100,7 +100,7 @@ namespace Previgesst.Services
 
 
             ws.Cells["J4"].Value = FicheRES.Date + (fiche.DateApproved?.ToShortDateString()) ?? string.Empty;
-            ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateUpdated.HasValue ? fiche.DateUpdated?.ToShortDateString() : fiche.DateCreation?.ToShortDateString()) ?? string.Empty; 
+            ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateUpdated.HasValue ? fiche.DateUpdated?.ToShortDateString() : fiche.DateCreation?.ToShortDateString()) ?? string.Empty;
 
             //ws.Cells["J4"].Value = FicheRES.Date + (fiche.DateCreation?.ToShortDateString()) ?? string.Empty;
             //ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateRevision?.ToShortDateString()) ?? string.Empty;
@@ -994,8 +994,6 @@ namespace Previgesst.Services
 
 
             }
-
-
         }
 
         public void SaveFiche(EditFicheViewModel model)
@@ -1298,8 +1296,23 @@ namespace Previgesst.Services
 
         }
 
+        public void UnapproveFiche(int ficheCadenassageId, string updatedPar)
+        {
+            var item = ficheCadenassageRepository.Get(ficheCadenassageId);
+            if (item != null)
+            {
+                item.UpdatedPar = updatedPar;
+                item.DateUpdated = DateTime.Now;
 
+                item.ApprouvePar = null;
+                item.DateApproved = null;
+
+                ficheCadenassageRepository.Update(item);
+                ficheCadenassageRepository.SaveChanges();
+            }
+        }
     }
+
     #endregion
 
 }
