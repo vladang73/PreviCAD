@@ -79,6 +79,10 @@
                 <li role="presentation">
                     <a id="EtapdecFich" href="#Decadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/etapesdedecadenassage.png.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.EtapesDecadenassage" /><img src="/Images/etapesdedecadenassage.png-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.EtapesDecadenassage" /><!--@CadEditFicheRES.EtapesDecadenassage--></a>
                 </li>
+
+                <li role="presentation">
+                    <a id="DocFicheCadenassage" href="#DocFiche" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="~/Images/analyse-de-risque-doc.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.Documents" /><img src="~/Images/analyse-de-risque-doc-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.Documents" /><!--@CadEditFicheRES.Documents--></a>
+                </li>
             }
         </ul>
         <div class="panel panel-danger col col-xs-12 col-sm-12 col-md-10">
@@ -144,6 +148,11 @@
 
                         </div>
 
+                        <div id="DocFiche" class="tab-pane">
+
+                            @Html.Partial("SectionDocuments", @Model)
+
+                        </div>
                     }
                 </div>
             </div>

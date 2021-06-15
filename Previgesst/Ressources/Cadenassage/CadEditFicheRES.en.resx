@@ -126,6 +126,9 @@
   <data name="CreationFiche" xml:space="preserve">
     <value>Sheet creation</value>
   </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
   <data name="EditionFiche" xml:space="preserve">
     <value>Edit Sheet</value>
     <comment>Edition of Card #</comment>

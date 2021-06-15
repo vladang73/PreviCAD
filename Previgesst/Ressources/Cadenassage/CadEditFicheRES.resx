@@ -126,6 +126,9 @@
   <data name="CreationFiche" xml:space="preserve">
     <value>Création d'une fiche</value>
   </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
   <data name="EditionFiche" xml:space="preserve">
     <value>Édition de la fiche </value>
     <comment>Edition of Card #</comment>

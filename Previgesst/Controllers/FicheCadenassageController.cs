@@ -362,6 +362,15 @@ namespace Previgesst.Controllers
                 PopulateLists(vm.ClientId);
 
                 vm.DroitAjout = true;
+                
+                
+                var sessionUtilisateur = utilisateurService.GetSession();
+                vm.estClient = (sessionUtilisateur != null);
+                vm.estUpdate = (
+                      (sessionUtilisateur == null && (User.IsInRole("Administrateur") || User.IsInRole("Lecture-Écriture")))
+                      || (sessionUtilisateur != null && sessionUtilisateur.AdmPrevicad)
+                      );
+
 
                 ViewData["Layout"] = Layout;
                 return View("EditFiche", Layout, vm);

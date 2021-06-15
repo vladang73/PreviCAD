@@ -19,24 +19,24 @@ namespace Previgesst.DataContexts
         public DbSet<EmployeRegistre> EmployesRegistre { get; set; }
 
         public DbSet<LigneRegistre> LignesRegistre { get; set; }
-        public DbSet <PhotoFicheCadenassage> PhotosFichersCadenassage { get; set; }
-        public DbSet <ClientApplicationPrevi>ClientApplicationPrevi { get; set; }
+        public DbSet<PhotoFicheCadenassage> PhotosFichersCadenassage { get; set; }
+        public DbSet<ClientApplicationPrevi> ClientApplicationPrevi { get; set; }
         public DbSet<DocumentClient> DocumentClient { get; set; }
-        public DbSet<Departement>Departement { get; set; }
+        public DbSet<Departement> Departement { get; set; }
         public DbSet<FicheCadenassage> FicheCadenassage { get; set; }
         public DbSet<LigneInstruction> LigneInstruction { get; set; }
-        public DbSet<LigneDecadenassage>LigneDecadenassage { get; set; }
-        public DbSet<MaterielRequisCadenassage>MaterielRequisCadenassage { get; set; }
+        public DbSet<LigneDecadenassage> LigneDecadenassage { get; set; }
+        public DbSet<MaterielRequisCadenassage> MaterielRequisCadenassage { get; set; }
 
-        public DbSet<SourceEnergieCadenassage>SourceEnergieCadenassage { get; set; }
+        public DbSet<SourceEnergieCadenassage> SourceEnergieCadenassage { get; set; }
 
-        public DbSet<Instruction>Instruction { get; set; }
+        public DbSet<Instruction> Instruction { get; set; }
 
-     
 
-        public DbSet<Equipement>Equipement { get; set; }
 
-        public DbSet <Section> Section { get; set; }
+        public DbSet<Equipement> Equipement { get; set; }
+
+        public DbSet<Section> Section { get; set; }
         public DbSet<Utilisateur> Utilisateur { get; set; }
         public DbSet<RoleUtilisateur> RoleUtilisateur { get; set; }
 
@@ -50,7 +50,7 @@ namespace Previgesst.DataContexts
         public DbSet<Situation> Situation { get; set; }
         public DbSet<Evenement> Evenement { get; set; }
         public DbSet<TypeReduction> TypeReduction { get; set; }
-     
+
 
         public DbSet<Dispositif> Dispositif { get; set; }
         public DbSet<Accessoire> Accessoire { get; set; }
@@ -69,6 +69,7 @@ namespace Previgesst.DataContexts
 
         public DbSet<Reglement> Reglement { get; set; }
 
+        public DbSet<DocumentFiche> DocumentFiche { get; set; }
 
         /// <summary>
         /// Constructeur qui appel la base (DbContext) avec la connection string en paramêtre.

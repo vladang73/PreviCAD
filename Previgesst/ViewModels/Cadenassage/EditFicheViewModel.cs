@@ -115,5 +115,8 @@ namespace Previgesst.ViewModels
 
         public Boolean DroitAjout { get; set; }
 
+        public Boolean estUpdate { get; set; }
+
+        public Boolean estClient { get; set; }
     }
 }

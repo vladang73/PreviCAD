@@ -129,6 +129,16 @@
   <data name="ApprouvePar" xml:space="preserve">
     <value>Approved by</value>
   </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="AttentionType" xml:space="preserve">
+    <value>Only Excel, Word et PDF files are accepted</value>
+    <comment>Only Excel, Word et PDF files are accepted</comment>
+  </data>
+  <data name="AucunDocument" xml:space="preserve">
+    <value>No document available</value>
+  </data>
   <data name="Departement" xml:space="preserve">
     <value>Department</value>
   </data>
@@ -138,11 +148,17 @@
   <data name="Editer" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="Edition" xml:space="preserve">
+    <value>Line edition</value>
+  </data>
   <data name="Effacer" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="Equipement" xml:space="preserve">
     <value>Equipment</value>
+  </data>
+  <data name="Erreur" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="Fiche" xml:space="preserve">
     <value>FR</value>
@@ -161,6 +177,10 @@
   </data>
   <data name="String1" xml:space="preserve">
     <value>EN</value>
+  </data>
+  <data name="TailleMaximale" xml:space="preserve">
+    <value>The maximum size is 3 MB.</value>
+    <comment>The maximum size is 3 MB.</comment>
   </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Download</value>

@@ -97,6 +97,33 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attention!.
+        /// </summary>
+        public static string Attention {
+            get {
+                return ResourceManager.GetString("Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seuls les fichiers Excel, Word et PDF sont acceptés..
+        /// </summary>
+        public static string AttentionType {
+            get {
+                return ResourceManager.GetString("AttentionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aucun document disponible.
+        /// </summary>
+        public static string AucunDocument {
+            get {
+                return ResourceManager.GetString("AucunDocument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Département.
         /// </summary>
         public static string Departement {
@@ -124,6 +151,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Édition d&apos;une ligne.
+        /// </summary>
+        public static string Edition {
+            get {
+                return ResourceManager.GetString("Edition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effacer.
         /// </summary>
         public static string Effacer {
@@ -142,6 +178,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Erreur.
+        /// </summary>
+        public static string Erreur {
+            get {
+                return ResourceManager.GetString("Erreur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FR.
         /// </summary>
         public static string Fiche {
@@ -151,7 +196,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to #.
+        ///   Looks up a localized string similar to # Fiche.
         /// </summary>
         public static string NoFiche {
             get {
@@ -160,7 +205,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numéro de l&apos;équipement.
+        ///   Looks up a localized string similar to # Équipement.
         /// </summary>
         public static string Num {
             get {
@@ -201,6 +246,15 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string Sheet {
             get {
                 return ResourceManager.GetString("Sheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La taille maximale est de 3 Mo..
+        /// </summary>
+        public static string TailleMaximale {
+            get {
+                return ResourceManager.GetString("TailleMaximale", resourceCulture);
             }
         }
         
