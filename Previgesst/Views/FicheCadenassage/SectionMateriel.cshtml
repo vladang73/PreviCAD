@@ -60,9 +60,6 @@
                                         .Model(m =>
                                         {
                                             m.Id(e => e.MaterielRequisCadenassageId);
-
-
-
                                         })
 
                                     .Read(r => r.Action("ReadListMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
@@ -71,14 +68,10 @@
                                     .Destroy(u => u.Action("DeleteItemMateriel", "FicheCadenassage"))
 
 
-                                    .Events(e => e
-                                        .Error("ListeErreurMAT")
-                                    )
+                                    .Events(e => e.Error("ListeErreurMAT").Sync("MaterialSync"))
                                     )
 
-                                    .Events(e => e
-                                        .DataBound("ListeDataBoundMAT")
-
+                                    .Events(e => e.DataBound("ListeDataBoundMAT")
                                     ).
                                     Editable(e => e.DisplayDeleteConfirmation(false)).
                                     Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneMateriel").Window(w => w.Title(CadMaterielRES.Edition).Width(600)))
@@ -174,10 +167,6 @@
         var grid = $(selecteurGrid).data("kendoGrid");
 
 
-        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
-
-
-
         //Selects all delete buttons
         $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
             var currentDataItem = grid.dataItem($(this).closest("tr"));
@@ -188,5 +177,9 @@
                 $(this).remove();
             }
         })
+    }
+
+    function MaterialSync(e) {
+        window.location.reload();
     }
 </script>

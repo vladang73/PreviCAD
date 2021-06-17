@@ -60,16 +60,12 @@
                                     .Create(c => c.Action("SaveItemPhoto", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
                                     .Update(u => u.Action("SaveItemPhoto", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
                                     .Destroy(u => u.Action("DeleteItemPhoto", "FicheCadenassage"))
-                                    .Events(e => e
-                                        .Error("ListeErreurPhoto").RequestEnd("EndPhoto")
-                                    )
+                                    
+                                    .Events(e => e.Error("ListeErreurPhoto").RequestEnd("EndPhoto").Sync("ImagesSync"))
                                     )
 
-                                    .Events(e => e
-                                        .DataBound("ListeDataBoundPhoto")
-
-                                    ).
-                                    Editable(e => e.DisplayDeleteConfirmation(false))
+                                    .Events(e => e.DataBound("ListeDataBoundPhoto"))
+                                    .Editable(e => e.DisplayDeleteConfirmation(false))
 
 
                                     @*.ToolBar(tb =>
@@ -227,4 +223,8 @@
 
         });
     });
+
+    function ImagesSync(e) {
+        window.location.reload();
+    }
 </script>

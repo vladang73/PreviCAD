@@ -77,7 +77,7 @@
                         .Destroy(u => u.Action("DeleteDocumentFiche", "DocumentsFiche"))
 
 
-                        .Events(e => e.Error("docListeErreur"))
+                        .Events(e => e.Error("docListeErreur").Sync("DocumentsSync"))
                     )
 
                     .Events(e => e.DataBound("docListeDataBound"))
@@ -203,6 +203,10 @@
         var selectedItem = gview.dataItem(item);
         selectedItem.dirty = true;
         e.data = { DocumentFicheId: selectedItem.DocumentFicheId, FicheId:@Model.FicheCadenassageId, Titre: selectedItem.Titre };
+    }
+
+    function DocumentsSync(e) {
+        window.location.reload();
     }
 
 </script>

@@ -103,9 +103,7 @@
                     .Update(u => u.Action("SaveItemDecadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
                     .Destroy(u => u.Action("DeleteItemDecadenassage", "FicheCadenassage"))
 
-                    .Events(e => e
-                        .Error("ListeErreurDEC").RequestEnd("EndDC")
-                    )
+                    .Events(e => e.Error("ListeErreurDEC").RequestEnd("EndDC").Sync("DecadenassageSync"))
                 )
 
                 .Events(e => e
@@ -133,7 +131,7 @@
 <script>
     function EndDC(e) {
 
-        if (e.type == "update" || e.type=="destroy" || e.type=="create") {
+        if (e.type == "update" || e.type == "destroy" || e.type == "create") {
 
             var grid = $("#listPhoto").data("kendoGrid")
             grid.dataSource.read();
@@ -159,15 +157,12 @@
     var timerDEC;
     function EditDEC(e) {
         var item = $(e.container).find('[value=Image]').hide();
-
-
     }
+
     function changerImageDEC(e) {
-
-
-           var config = {
-           path : '@Url.Content("~/upload/setDECPic/")'
-    };
+        var config = {
+            path: '@Url.Content("~/upload/setDECPic/")'
+        };
 
         imageWindowDEC = PopupCenter(config.path + e, "@CadLigneCadRES.ChangerImage", 600, 300);
         timerDEC = setInterval(checkWindowDEC, 100);
@@ -280,7 +275,7 @@
     }
 
 
-     function RenumeroterLignesDEC() {
+    function RenumeroterLignesDEC() {
         var dataInput = {
             FicheCadenassageId: $("#@Html.IdFor(m => m.FicheCadenassageId)").val()
         };
@@ -296,8 +291,12 @@
                 // reload de la grille
                 $('#listDEC').data('kendoGrid').dataSource.read();
                 $('#listDEC').data('kendoGrid').refresh();
-                }
-            })
+            }
+        })
+    }
+
+    function DecadenassageSync(e) {
+        window.location.reload();
     }
 </script>
 

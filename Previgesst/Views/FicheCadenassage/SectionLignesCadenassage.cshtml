@@ -88,8 +88,6 @@
                                         {
                                             m.Id(e => e.LigneInstructionId);
 
-
-
                                         })
 
                                     .Read(r => r.Action("ReadListCadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
@@ -99,9 +97,7 @@
                                     
 
 
-                                    .Events(e => e
-                                        .Error("ListeErreurCAD").RequestEnd("EndLC")
-                                    )
+                                    .Events(e => e.Error("ListeErreurCAD").RequestEnd("EndLC").Sync("CadenassageSync"))
                                     )
 
                                     .Events(e => e
@@ -169,25 +165,18 @@
     var timer;
     function Edit(e) {
         var item = $(e.container).find('[value=Image]').hide();
-        
-
-        //debugger;
     }
+
     function changerImage(e) {
 
+        var config = {
+            //contextPath: '@Url.Content("~")'
+            path: '@Url.Content("~/upload/setInstrPic/")'
+        };
 
-
-    var config = {
-        //contextPath: '@Url.Content("~")'
-         path: '@Url.Content("~/upload/setInstrPic/")'
-    };
-
-
-        imageWindow = PopupCenter(config.path+ e, "@CadLigneCadRES.ChangerImage", 600, 300);
-
+        imageWindow = PopupCenter(config.path + e, "@CadLigneCadRES.ChangerImage", 600, 300);
 
         timer = setInterval(checkWindow, 100);
-
     }
 
     function checkWindow() {
@@ -280,14 +269,9 @@
                 });
             });
         }
-
-
-
     }
 
     function ListeDataBoundCAD(e) {
-
-
 
         var selecteurGrid = "#listCAD";
         var grid = $(selecteurGrid).data("kendoGrid");
@@ -310,10 +294,6 @@
     }
 
     function RenumeroterLignes() {
-
-
-
-
         var dataInput = {
             FicheCadenassageId: $("#@Html.IdFor(m => m.FicheCadenassageId)").val()
         };
@@ -329,12 +309,11 @@
                 // reload de la grille
                 $('#listCAD').data('kendoGrid').dataSource.read();
                 $('#listCAD').data('kendoGrid').refresh();
-
-
-                }
-            })
-
-
-
             }
+        })
+    }
+
+    function CadenassageSync(e) {
+        window.location.reload();
+    }
 </script>
