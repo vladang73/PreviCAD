@@ -225,6 +225,9 @@
     });
 
     function ImagesSync(e) {
-        window.location.reload();
+        if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
+        if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
+
+        //window.location.reload();
     }
 </script>

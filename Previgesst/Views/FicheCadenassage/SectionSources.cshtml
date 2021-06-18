@@ -70,7 +70,7 @@
                     success: function (result) {
                         ShowNotification("@CadSourcesRES.Succes", "@CadSourcesRES.SourcesEnregistrees", "successTemplate")
 
-                        window.location.reload();
+                        SourcesSync();
                     },
                     error: function (data) {
                         ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")
@@ -83,4 +83,11 @@
         // ADD ICONE "+"
         setTimeout(function () { $("#Sources").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
     })
+
+    function SourcesSync(e) {
+        if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
+        if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
+
+        //window.location.reload();
+    }
 </script>
