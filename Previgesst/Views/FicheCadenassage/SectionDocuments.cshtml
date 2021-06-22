@@ -40,7 +40,7 @@
                                    .IsNotEqualTo(GridRES.NotEquals)
                                  ))).Width(140);
 
-                            columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor")
+                            columns.Bound(c => c.FileName).EditorTemplateName("UploadEditorDoc")
                                    .Encoded(false).Sortable(false).Filterable(false);
 
                             columns.Bound(e => e.Bidon).EditorTemplateName("Vide")
@@ -52,7 +52,7 @@
                             {
                                 c.Edit();
                                 c.Custom(CadFichesRES.Effacer)
-                                      .Click("ConfirmDeleteRow")
+                                      .Click("ConfirmDeleteRowDoc")
                                       .HtmlAttributes(new { @class = "k-grid-effacer" });
 
                             }).Hidden(!Model.estUpdate)
@@ -115,7 +115,7 @@
 
 
 
-    function ConfirmDeleteRow(e) {
+    function ConfirmDeleteRowDoc(e) {
 
         e.preventDefault();
 
@@ -126,6 +126,7 @@
         ShowDeleteConfirm(dataItem.FileName, function (args) {
             if (args.confirmed === true) {
                 grid.removeRow(row);
+                DocumentsSync();
             }
         });
     }
@@ -155,8 +156,7 @@
 
 
 
-    function fileSelect(e) {
-
+    function docSelect(e) {
         var extension = e.files[0].extension.toLowerCase().trim();
         var size = e.files[0].size;
         var estClient = '@Model.estClient';
@@ -176,15 +176,11 @@
         }
     }
 
-    function fileSuccess(e) {
+    function docSuccess(e) {
         var z = $('.k-popup-edit-form');
 
         var gview = $("#liste-doc").data("kendoGrid");
-
-
         var row = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
-
-
         var item = gview.dataItem(row);
 
         item.set('Titre', e.response.Titre);
@@ -194,9 +190,8 @@
     }
 
 
-    function fileUpload(e) {
+    function docUpload(e) {
         //   alert (this.dataItem)
-        debugger;
         var z = $('.k-popup-edit-form');
         var gview = $("#liste-doc").data("kendoGrid");
         var item = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");

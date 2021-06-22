@@ -102,124 +102,103 @@
 
     function fileSuccess(e) {
 
-
-     
         var grid = $('#listPhoto').data('kendoGrid');
         var item = grid.dataItem('tr.k-grid-edit-row');
-    
 
-        {
-
-            item.set('PhotoFicheCadenassageId', e.response.PhotoFicheCadenassageId);
-            item.set('FicheCadenassageId', e.response.FicheCadenassageId);  
-            item.set('Rang', e.response.Rang)
-            item.set('URL', e.response.URL)
-            item.set('Suppressible', e.response.Suppressible)
-            item.set('Localisation', e.response.Localisation)
-            item.set('LocalisationEN', e.response.LocalisationEN)
-         
-
-        }
-     //   debugger;
-      //  $("#DDLigneInstruction").data("kendoDropDownList").refresh();
-       // $("#DDLigneDecadenassage").data("kendoDropDownList").refresh();
-    
-     
-
+        item.set('PhotoFicheCadenassageId', e.response.PhotoFicheCadenassageId);
+        item.set('FicheCadenassageId', e.response.FicheCadenassageId);
+        item.set('Rang', e.response.Rang)
+        item.set('URL', e.response.URL)
+        item.set('Suppressible', e.response.Suppressible)
+        item.set('Localisation', e.response.Localisation)
+        item.set('LocalisationEN', e.response.LocalisationEN)
     }
 
 
 
     function fileUpload(e) {
-    
         var grid = $('#listPhoto').data('kendoGrid');
         var selectedItem = grid.dataItem('tr.k-grid-edit-row');
 
         selectedItem.dirty = true;
-        e.data = { PhotoFicheCadenassageId: selectedItem.PhotoFicheCadenassageId, Rang: selectedItem.Rang,  FicheCadenassageId: '@Model.FicheCadenassageId', Localisation:selectedItem.Localisation , LocalisationEN:selectedItem.LocalisationEN};
-
-
+        e.data = { PhotoFicheCadenassageId: selectedItem.PhotoFicheCadenassageId, Rang: selectedItem.Rang, FicheCadenassageId: '@Model.FicheCadenassageId', Localisation: selectedItem.Localisation, LocalisationEN: selectedItem.LocalisationEN };
     }
 
-      function fileSelectJpg(e) {
+    function fileSelectJpg(e) {
 
         var extension = e.files[0].extension.toLowerCase().trim();
 
         if (extension.toLowerCase() != ".jpg" && extension.toLowerCase() != ".jpeg") {
             e.preventDefault();
-         
 
-        ShowNotification("@CadImageRES.ErreurTypeFichier", '@CadImageRES.ErreurDescription', "infoTemplate")
+
+            ShowNotification("@CadImageRES.ErreurTypeFichier", '@CadImageRES.ErreurDescription', "infoTemplate")
         }
-        }
+    }
 
    
 
-        function ConfirmDeleteRowPhoto(e) {
+    function ConfirmDeleteRowPhoto(e) {
 
-            e.preventDefault();
+        e.preventDefault();
 
-            var grid = this;
-            var row = $(e.currentTarget).closest("tr");
-            var dataItem = this.dataItem(row);
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
 
-            ShowDeleteConfirm(dataItem.Rang, function (args) {
-                if (args.confirmed === true) {
-                    grid.removeRow(row);
-                }
+        ShowDeleteConfirm(dataItem.Rang, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+                ImagesSync();
+            }
+        });
+
+    }
+
+
+    function ListeErreurPhoto(args) {
+
+        var selecteurGrid = "#listPhoto";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("@CadImageRES.Erreur",
+                        errorList,
+                        "errorListTemplate");
+                });
             });
-
         }
+    }
 
+    function ListeDataBoundPhoto(e) {
+        var selecteurGrid = "#listPhoto";
+        var grid = $(selecteurGrid).data("kendoGrid");
 
-            function ListeErreurPhoto(args) {
+        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
 
-                var selecteurGrid = "#listPhoto";
-                if (args.errors) {
-                    var grid = $(selecteurGrid).data("kendoGrid");
-                    var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
-                    grid.one("dataBinding", function (e) {
-                        e.preventDefault();
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-                        $.each(args.errors, function (propertyName) {
-                            var errorList = validationTemplate({ field: propertyName, messages: this.errors });
-                            alert(this.errors);
-                            ShowNotification("@CadImageRES.Erreur",
-                                errorList,
-                               "errorListTemplate");
-                        });
-                    });
-                }
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
 
-
-
+                $(this).remove();
             }
-
-            function ListeDataBoundPhoto(e) {
-
-                
-                var selecteurGrid = "#listPhoto";
-                var grid = $(selecteurGrid).data("kendoGrid");
-                
-                //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
-                
-                //Selects all delete buttons
-                $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-                    var currentDataItem = grid.dataItem($(this).closest("tr"));
-
-                    //Check in the current dataItem if the row is deletable
-                    if (!currentDataItem.Suppressible) {
-
-                        $(this).remove();
-                    }
-                })
-            }
+        })
+    }
 
 // reload pour masquer le bouton de suppression qui réapparait comme par magie sur Undo.
     $(document).ready(function () {
         $("#listPhoto").on("mousedown", ".k-grid-cancel", function (e) {
             e.preventDefault = false;
-            $("#listPhoto").data("kendoGrid").dataSource.read();  
+            $("#listPhoto").data("kendoGrid").dataSource.read();
 
         });
     });

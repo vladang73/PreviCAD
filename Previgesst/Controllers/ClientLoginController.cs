@@ -77,9 +77,9 @@ namespace Previgesst.Controllers
             var isLogOK = utilisateurService.isLoginOk(vm);
             if (isLogOK)
             {
-                //var result = accountService.Login("CDEUser", "6k^3U6+8_2N-FvprQXs>");
+                var result = accountService.Login("CDEUser", "6k^3U6+8_2N-FvprQXs>");
                 
-                var result = accountService.Login(vm.UserName, vm.Password);
+                //var result = accountService.Login(vm.UserName, vm.Password);
 
                 // if logged in
                 if (result == Microsoft.AspNet.Identity.Owin.SignInStatus.Success)

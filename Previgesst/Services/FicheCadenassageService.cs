@@ -1004,8 +1004,24 @@ namespace Previgesst.Services
             {
                 item = new Models.FicheCadenassage();
                 AjouterEtapesDecadenassage = true;
+                
+                item.ApprouvePar = null;
+                item.DateApproved = null;
             }
 
+            if (AjouterEtapesDecadenassage == false)
+            {
+                if (item.DepartementId != model.DepartementId || item.EquipementId != model.EquipementId ||
+                    item.FicheCadenassageId != model.FicheCadenassageId || item.NoFiche != model.NoFiche ||
+                    item.TravailAEffectuer != model.TravailAEffectuer ||
+                    item.TravailAEffectuerEN != model.TravailAEffectuerEN ||
+                    item.estDocumentPrevigesst != model.EstDocumentPrevigesst ||
+                    (item.TitreFiche != model.TitreFiche && item.TitreFicheEN != model.TitreFiche))
+                {
+                    item.ApprouvePar = null;
+                    item.DateApproved = null;
+                }
+            }
 
             item.ClientId = model.ClientId;
             item.DepartementId = model.DepartementId;
@@ -1023,8 +1039,7 @@ namespace Previgesst.Services
             item.UpdatedPar = model.UpdatedPar;
             item.DateUpdated = model.DateUpdated;
 
-            item.ApprouvePar = null;
-            item.DateApproved = null;
+
 
             //item.DateRevision = model.DateRevision;
 
@@ -1059,11 +1074,9 @@ namespace Previgesst.Services
             {
                 AjouterLignesDecadenassageDefaut(item.FicheCadenassageId);
             }
+
             model.FicheCadenassageId = item.FicheCadenassageId;
-            var equipement = equipementRepository.Get(item.EquipementId);
-
-
-
+            //var equipement = equipementRepository.Get(item.EquipementId);
         }
 
         public void ApproveFiche(EditFicheViewModel model)

@@ -70,7 +70,10 @@
                     success: function (result) {
                         ShowNotification("@CadSourcesRES.Succes", "@CadSourcesRES.SourcesEnregistrees", "successTemplate")
 
-                        SourcesSync();
+                        debugger;
+                        if (result == 1) {
+                            SourcesSync();
+                        }
                     },
                     error: function (data) {
                         ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")

@@ -63,7 +63,7 @@
                                         .Save("SaveDocumentFicheLinkCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId })
                                         .AutoUpload(true)
                               )
-                              .Events(e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelect"))
+                              .Events(e => e.Success("docSuccess").Upload("docUpload").Select("docSelect"))
                         )
 
 

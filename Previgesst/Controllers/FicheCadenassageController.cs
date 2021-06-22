@@ -169,10 +169,13 @@ namespace Previgesst.Controllers
                             return View("EditFiche", Layout, item);
                         }
 
-                        item.CreatedPar = User.Identity.Name;
-                        item.DateCreation = DateTime.Now;
+                        var user = GetCurrentUser();
 
-                        item.UpdatedPar = User.Identity.Name;
+
+                        item.CreatedPar = user;
+                        item.UpdatedPar = user;
+
+                        item.DateCreation = DateTime.Now;
                         item.DateUpdated = DateTime.Now;
 
                         ficheCadenassageService.SaveFiche(item);
@@ -212,17 +215,19 @@ namespace Previgesst.Controllers
                         return View("EditFiche", Layout, item);
                     }
 
+                    var user = GetCurrentUser();
+
 
                     if (!string.IsNullOrEmpty(approve))
                     {
+                        item.ApprouvePar = user;
                         item.DateApproved = DateTime.Now;
-                        item.ApprouvePar = User.Identity.Name;
 
                         ficheCadenassageService.ApproveFiche(item);
                     }
                     else if (!string.IsNullOrEmpty(save))
                     {
-                        item.UpdatedPar = User.Identity.Name;
+                        item.UpdatedPar = user;
                         item.DateUpdated = DateTime.Now;
 
                         ficheCadenassageService.SaveFiche(item);
@@ -362,8 +367,8 @@ namespace Previgesst.Controllers
                 PopulateLists(vm.ClientId);
 
                 vm.DroitAjout = true;
-                
-                
+
+
                 var sessionUtilisateur = utilisateurService.GetSession();
                 vm.estClient = (sessionUtilisateur != null);
                 vm.estUpdate = (
@@ -405,10 +410,12 @@ namespace Previgesst.Controllers
                 vm.FicheCadenassageId = 0;
                 vm.ClientId = Id;
 
-                vm.CreatedPar = User.Identity.Name;
+                var user = GetCurrentUser();
+
+                vm.CreatedPar = user;
                 vm.DateCreation = DateTime.Now;
 
-                vm.UpdatedPar = User.Identity.Name;
+                vm.UpdatedPar = user;
                 vm.DateUpdated = DateTime.Now;
 
                 var client = clientRepository.Get(Id);
@@ -529,7 +536,7 @@ namespace Previgesst.Controllers
                     photoFicheCadenassageService.SaveLigneCadenassagePhoto(item);
 
                     // update approve and modified fields
-                    ficheCadenassageService.UnapproveFiche(ficheId, User.Identity.Name);
+                    ficheCadenassageService.UnapproveFiche(ficheId, GetCurrentUser());
                 }
                 //PopulatePhoto(ficheId);
                 return Json(new[] { item }.ToDataSourceResult(request, ModelState));
@@ -588,7 +595,7 @@ namespace Previgesst.Controllers
                 PhotoFicheCadenassageId = d.PhotoFicheCadenassageId;
 
                 // update approve and modified fields
-                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, User.Identity.Name);
+                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, GetCurrentUser());
             }
             else
             {
@@ -599,7 +606,7 @@ namespace Previgesst.Controllers
                 photoFicheCadenassageService.SaveLigneCadenassagePhoto(photo);
 
                 // update approve and modified fields
-                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, User.Identity.Name);
+                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, GetCurrentUser());
             }
 
             uploadController.SaveLinkWithContext(file, PhotoFicheCadenassageId, Enums.TypeUpload.ImageCadenassage, this.ControllerContext.HttpContext.Server);
@@ -674,7 +681,7 @@ namespace Previgesst.Controllers
                     item = ligneDecadenassageService.getLigneVM(item.LigneDecadenassageId);
 
                     // update approve and modified fields
-                    ficheCadenassageService.UnapproveFiche(ficheId, User.Identity.Name);
+                    ficheCadenassageService.UnapproveFiche(ficheId, GetCurrentUser());
                 }
                 return Json(new[] { item }.ToDataSourceResult(request, ModelState));
 
@@ -733,7 +740,7 @@ namespace Previgesst.Controllers
                     materielRequisCadenassageService.SaveLigneCadenassageMateriel(item);
 
                     // update approve and modified fields
-                    ficheCadenassageService.UnapproveFiche(ficheId, User.Identity.Name);
+                    ficheCadenassageService.UnapproveFiche(ficheId, GetCurrentUser());
                 }
                 return Json(new[] { item }.ToDataSourceResult(request, ModelState));
             }
@@ -796,11 +803,17 @@ namespace Previgesst.Controllers
                 var listeInt = new List<int>();
                 foreach (var s in Sources)
                     listeInt.Add(s);
-                itemSources.SourcesEnergieId = listeInt;
-                this.sourceEnergieCadenassageRepository.UpdateSources(itemSources);
 
-                // update approve and modified fields
-                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, User.Identity.Name);
+                itemSources.SourcesEnergieId = listeInt;
+
+                if (this.sourceEnergieCadenassageRepository.CheckIfChanged(itemSources))
+                {
+                    this.sourceEnergieCadenassageRepository.UpdateSources(itemSources);
+
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(FicheCadenassageId, GetCurrentUser());
+                    return 1;
+                }
             }
 
             return 0;
@@ -816,7 +829,7 @@ namespace Previgesst.Controllers
                     this.sourceEnergieCadenassageRepository.UpdateSources(item);
 
                     // update approve and modified fields
-                    ficheCadenassageService.UnapproveFiche(item.FicheCadenassageId, User.Identity.Name);
+                    ficheCadenassageService.UnapproveFiche(item.FicheCadenassageId, GetCurrentUser());
                 };
 
                 var vm = ficheCadenassageService.getFicheVM(item.FicheCadenassageId);
@@ -876,7 +889,7 @@ namespace Previgesst.Controllers
                     item = ligneInstructionService.getLigneVM(item.LigneInstructionId);
 
                     // update approve and modified fields
-                    ficheCadenassageService.UnapproveFiche(ficheId, User.Identity.Name);
+                    ficheCadenassageService.UnapproveFiche(ficheId, GetCurrentUser());
                 }
                 return Json(new[] { item }.ToDataSourceResult(request, ModelState));
             }
@@ -1128,5 +1141,23 @@ namespace Previgesst.Controllers
 
 
         #endregion
+
+        private string GetCurrentUser()
+        {
+            var user = "";
+
+            if (utilisateurService.GetSession() != null)
+            {
+                // on est dans le mode BLEU, accès administratif mais Client
+                user = utilisateurService.GetSession().NomUtilisateur;
+            }
+            else
+            {
+                // version super admin
+                user = System.Web.HttpContext.Current.User.Identity.Name;
+            }
+
+            return user;
+        }
     }
 }
