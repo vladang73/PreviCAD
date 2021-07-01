@@ -147,7 +147,7 @@
         $("span.k-add").removeClass("k-icon");
         $("a.btn-sectiondeca").text("@CadLigneCadRES.Ajouter");
 
-        
+
         // ADD ICONE "+"
         setTimeout(function () { $("#Decadenassage").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
 
@@ -299,6 +299,7 @@
         if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
         if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
 
+        GetUpdateInfo();
         //window.location.reload();
     }
 </script>

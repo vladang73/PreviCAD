@@ -93,10 +93,10 @@
     });
 
     function EndPhoto(e) {
-        
+
         if (e.type == "update" || e.type == "destroy" || e.type == "create") {
             $("#listCAD").data("kendoGrid").dataSource.read();
-            $("#listDEC").data("kendoGrid").dataSource.read();  
+            $("#listDEC").data("kendoGrid").dataSource.read();
         }
     }
 
@@ -136,7 +136,7 @@
         }
     }
 
-   
+
 
     function ConfirmDeleteRowPhoto(e) {
 
@@ -207,6 +207,7 @@
         if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
         if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
 
+        GetUpdateInfo();
         //window.location.reload();
     }
 </script>

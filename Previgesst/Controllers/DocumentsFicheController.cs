@@ -22,10 +22,14 @@ namespace Previgesst.Controllers
         private ApplicationPrevisService applicationPrevisService;
         private DocumentFicheService documentFicheService;
         private DocumentFicheRepository documentFicheRepository;
+        private UtilisateurService utilisateurService;
+        private FicheCadenassageService ficheCadenassageService;
+        private DocumentFicheNoteService documentFicheNoteService;
 
 
-        public DocumentsFicheController(DocumentService documentService, DocumentRepository documentRepository, SectionService sectionService,
-            ApplicationPrevisService applicationPrevisService, DocumentFicheService documentFicheService, DocumentFicheRepository documentFicheRepository)
+        public DocumentsFicheController(DocumentService documentService, DocumentRepository documentRepository, SectionService sectionService, UtilisateurService utilisateurService,
+            ApplicationPrevisService applicationPrevisService, DocumentFicheService documentFicheService, DocumentFicheRepository documentFicheRepository,
+            FicheCadenassageService ficheCadenassageService, DocumentFicheNoteService documentFicheNoteService)
         {
             this.documentService = documentService;
             this.documentRepository = documentRepository;
@@ -33,6 +37,10 @@ namespace Previgesst.Controllers
             this.applicationPrevisService = applicationPrevisService;
             this.documentFicheService = documentFicheService;
             this.documentFicheRepository = documentFicheRepository;
+
+            this.utilisateurService = utilisateurService;
+            this.ficheCadenassageService = ficheCadenassageService;
+            this.documentFicheNoteService = documentFicheNoteService;
         }
 
         // GET: Documents
@@ -181,6 +189,7 @@ namespace Previgesst.Controllers
 
         public ActionResult ReadListDocFicheCadenassage([DataSourceRequest] DataSourceRequest request, int id)
         {
+
             return Json(documentFicheService.GetReadListDocumentFiche(request, Enums.Applications.Cadenassage, id));
         }
 
@@ -191,6 +200,9 @@ namespace Previgesst.Controllers
                 item.ApplicationPreviId = applicationPrevisService.getIdByName(Enums.Applications.Cadenassage);
                 item.FicheCadenassageId = id;
                 documentFicheService.SaveDocumentFiche(item);
+
+                // update approve and modified fields
+                ficheCadenassageService.UnapproveFiche(item.FicheCadenassageId, GetCurrentUser());
             }
             return Json(new[] { item }.ToDataSourceResult(request, ModelState));
         }
@@ -204,6 +216,11 @@ namespace Previgesst.Controllers
                 if (!documentFicheService.Supprimer(document))
                 {
                     document = null;
+                }
+                else
+                {
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(document.FicheCadenassageId, GetCurrentUser());
                 }
             }
             return Json(new[] { document }.ToDataSourceResult(request, ModelState));
@@ -235,6 +252,12 @@ namespace Previgesst.Controllers
                 d.ApplicationPreviId = applicationPrevisService.getIdByName(type);
                 this.documentFicheService.SaveDocumentFiche(d);
                 DocumentFicheId = d.DocumentFicheId;
+
+                if (DocumentFicheId > 0)
+                {
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(FicheId, GetCurrentUser());
+                }
             }
 
 
@@ -266,6 +289,40 @@ namespace Previgesst.Controllers
             var vm = documentFicheService.getVM(DocumentFicheId);
 
             return Json(new { Type = "Upload", DocumentFicheId = vm.DocumentFicheId, NomFichier = vm.FileName, Titre = vm.Titre, BasePath = vm.BasePath }, JsonRequestBehavior.AllowGet);
+        }
+
+        private string GetCurrentUser()
+        {
+            var user = "";
+
+            if (utilisateurService.GetSession() != null)
+            {
+                // on est dans le mode BLEU, accès administratif mais Client
+                user = utilisateurService.GetSession().NomUtilisateur;
+            }
+            else
+            {
+                // version super admin
+                user = System.Web.HttpContext.Current.User.Identity.Name;
+            }
+
+            return user;
+        }
+
+        //[HttpPost]
+        public JsonResult SaveDocNotesAjax(int FicheCadenassageId, string Notes)
+        {
+            if (documentFicheNoteService.isChanged(FicheCadenassageId, Notes))
+            {
+                documentFicheNoteService.SaveNotes(new Models.DocumentFicheNote { FicheCadenassageId = FicheCadenassageId, Notes = Notes });
+
+                // update approve and modified fields
+                ficheCadenassageService.UnapproveFiche(FicheCadenassageId, GetCurrentUser());
+            
+            return Json("1", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("0", JsonRequestBehavior.AllowGet);
         }
 
         #region ----- AnalyseRisque -----

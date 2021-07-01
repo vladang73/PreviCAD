@@ -70,7 +70,6 @@
                     success: function (result) {
                         ShowNotification("@CadSourcesRES.Succes", "@CadSourcesRES.SourcesEnregistrees", "successTemplate")
 
-                        debugger;
                         if (result == 1) {
                             SourcesSync();
                         }
@@ -91,6 +90,7 @@
         if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
         if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
 
+        GetUpdateInfo();
         //window.location.reload();
     }
 </script>

@@ -90,7 +90,13 @@
                     })
             )
 
-
+            <div class="">
+                <br />
+                <label>Comments</label>
+                <textarea id="DocNotes" name="DocNotes" class="form-control" rows="5">@ViewBag.Comments</textarea>
+                <br />
+                <input type="button" class="btn btn-info" value="Save Comments" onclick="SaveDocNotes()" />
+            </div>
         </div>
     </div>
 </div>
@@ -204,7 +210,34 @@
         if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
         if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
 
+        GetUpdateInfo();
         //window.location.reload();
+    }
+
+    function SaveDocNotes() {
+        var notes = $('#DocNotes').val();
+        var model = {
+            FicheCadenassageId: @Model.FicheCadenassageId,
+            Notes: notes
+        };
+
+        $.ajax({
+            url: '/DocumentsFiche/SaveDocNotesAjax',
+            type: "POST",
+            data: JSON.stringify(model),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                ShowNotification("@CadSourcesRES.Succes", "@CadSourcesRES.SourcesEnregistrees", "successTemplate")
+
+                if (result == 1) {
+                    DocumentsSync();
+                }
+            },
+            error: function (data) {
+                ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")
+            }
+        });
     }
 
 </script>

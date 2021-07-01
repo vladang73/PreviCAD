@@ -45,6 +45,7 @@ namespace Previgesst.Controllers
 
         private EquipementArticuloeService equipementArticuloeService;
         private DispositifService dispositifService;
+        private DocumentFicheNoteService documentFicheNoteService;
 
         private string Layout;
 
@@ -55,10 +56,9 @@ namespace Previgesst.Controllers
             LigneInstructionService ligneInstructionService, InstructionService instructionService, DepartementService departementService,
             CadenasService cadenasService, UtilisateurService utilisateurService,
             PhotoFicheCadenassageService photoFicheCadenassageService, FicheCadenassageRepository ficheCadenassageRepository,
-            UploadController uploadController,
+            UploadController uploadController, DocumentFicheNoteService documentFicheNoteService,
             PhotoFicheCadenassageRepository photoFicheCadenassageRepository,
-            EmployeRegistreService employeRegistreService,
-            LignesRegistreService lignesRegistreService,
+            EmployeRegistreService employeRegistreService, LignesRegistreService lignesRegistreService,
             EquipementArticuloeService equipementArticuloeService, DispositifService dispositifService)
         {
             this.ficheCadenassageService = ficheCadenassageService;
@@ -86,6 +86,7 @@ namespace Previgesst.Controllers
             this.equipementArticuloeService = equipementArticuloeService;
             this.dispositifService = dispositifService;
 
+            this.documentFicheNoteService = documentFicheNoteService;
 
             if (utilisateurService.GetSession() != null)
             {
@@ -377,6 +378,13 @@ namespace Previgesst.Controllers
                       );
 
 
+                ViewBag.Comments = "";
+                var model = documentFicheNoteService.GetNotes(Id);
+                if (model != null)
+                {
+                    ViewBag.Comments = model.Notes;
+                }
+
                 ViewData["Layout"] = Layout;
                 return View("EditFiche", Layout, vm);
             }
@@ -555,9 +563,14 @@ namespace Previgesst.Controllers
                 {
                     if (!photoFicheCadenassageService.Supprimer(item))
                     {
-
                         item = null;
                     }
+                    else
+                    {
+                        // update approve and modified fields
+                        ficheCadenassageService.UnapproveFiche(item.FicheCadenassageId, GetCurrentUser());
+                    }
+
                     //  PopulatePhoto(item.FicheCadenassageId);
                     return Json(new[] { item }.ToDataSourceResult(request, ModelState));
                 }
@@ -701,6 +714,11 @@ namespace Previgesst.Controllers
 
                         item = null;
                     }
+                    else
+                    {
+                        // update approve and modified fields
+                        ficheCadenassageService.UnapproveFiche(item.FicheCadenassageId, GetCurrentUser());
+                    }
                 }
                 foreach (var e in ModelState.Values)
                 {
@@ -756,8 +774,12 @@ namespace Previgesst.Controllers
                 {
                     if (!materielRequisCadenassageService.Supprimer(item))
                     {
-
                         item = null;
+                    }
+                    else
+                    {
+                        // update approve and modified fields
+                        ficheCadenassageService.UnapproveFiche(item.FicheCadenassageId, GetCurrentUser());
                     }
 
                     return Json(new[] { item }.ToDataSourceResult(request, ModelState));
@@ -907,8 +929,12 @@ namespace Previgesst.Controllers
                 {
                     if (!ligneInstructionService.Supprimer(item))
                     {
-
                         item = null;
+                    }
+                    else
+                    {
+                        // update approve and modified fields
+                        ficheCadenassageService.UnapproveFiche(item.FicheCadenassageId, GetCurrentUser());
                     }
                 }
 
@@ -1158,6 +1184,19 @@ namespace Previgesst.Controllers
             }
 
             return user;
+        }
+
+        public JsonResult GetUpdateInfo(int id)
+        {
+            var model = ficheCadenassageRepository.Get(id);
+
+            if (model != null)
+            {
+                return Json(new { Success = "1", model.UpdatedPar, DateUpdated = model.DateUpdated.Value.ToString(), model.ApprouvePar, model.DateApproved }, JsonRequestBehavior.AllowGet);
+            }
+
+
+            return Json(new { Success = "0" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

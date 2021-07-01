@@ -580,6 +580,10 @@
     <Compile Include="DataContexts\DbContextMigrations\202106151525334_Previg_76.Designer.cs">
       <DependentUpon>202106151525334_Previg_76.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\DbContextMigrations\202106302253415_Previg_77.cs" />
+    <Compile Include="DataContexts\DbContextMigrations\202106302253415_Previg_77.Designer.cs">
+      <DependentUpon>202106302253415_Previg_77.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\DbContextMigrations\Configuration.cs" />
     <Compile Include="DataContexts\Extensions\MigrationExtensions.cs" />
     <Compile Include="Enums\Applications.cs" />
@@ -615,6 +619,7 @@
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Dispositif.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\DocumentFicheNotes.cs" />
     <Compile Include="Models\DocumentFiche.cs" />
     <Compile Include="Models\DocumentClient.cs" />
     <Compile Include="Models\DommagesPossibles.cs" />
@@ -654,6 +659,7 @@
     <Compile Include="Repositories\ClientRepository.cs" />
     <Compile Include="Repositories\DepartementRepository.cs" />
     <Compile Include="Repositories\DispostifRepository.cs" />
+    <Compile Include="Repositories\DocumentFicheNoteRepository.cs" />
     <Compile Include="Repositories\DocumentFicheRepository.cs" />
     <Compile Include="Repositories\DocumentClientRepository.cs" />
     <Compile Include="Repositories\DocumentRepository.cs" />
@@ -986,6 +992,7 @@
     <Compile Include="Services\ClientService.cs" />
     <Compile Include="Services\DepartementService.cs" />
     <Compile Include="Services\DispositifService.cs" />
+    <Compile Include="Services\DocumentFicheNoteService.cs" />
     <Compile Include="Services\DocumentFicheService.cs" />
     <Compile Include="Services\DocumentClientService.cs" />
     <Compile Include="Services\DocumentService.cs" />
@@ -2389,6 +2396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\DbContextMigrations\202106151525334_Previg_76.resx">
       <DependentUpon>202106151525334_Previg_76.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DbContextMigrations\202106302253415_Previg_77.resx">
+      <DependentUpon>202106302253415_Previg_77.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\Analyse\ARCreateRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

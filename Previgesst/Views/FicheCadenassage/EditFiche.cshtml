@@ -179,4 +179,28 @@
         jQuery('.btn-primary').css('display', 'none');
         jQuery('body .panel-danger:first-child').css('opacity', '.3');
     }
+
+    function GetUpdateInfo() {
+        var id = '@Model.FicheCadenassageId';
+            
+
+        $.ajax({
+            url: '/FicheCadenassage/GetUpdateInfo?id=' + id,
+            type: "GET",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                console.log(result);
+
+                if (result.Success == "1") {
+                    //UpdatedPar
+                    if ($('#UpdatedPar') != undefined) { $('#UpdatedPar').val(result.UpdatedPar); }
+                    if ($('#DateUpdated') != undefined) { $('#DateUpdated').val(result.DateUpdated); }
+                }
+            },
+            error: function (data) {
+                ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")
+            }
+        });
+    }
 </script>

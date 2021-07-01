@@ -71,6 +71,8 @@ namespace Previgesst.DataContexts
 
         public DbSet<DocumentFiche> DocumentFiche { get; set; }
 
+        public DbSet<DocumentFicheNote> DocumentFicheNote { get; set; }
+
         /// <summary>
         /// Constructeur qui appel la base (DbContext) avec la connection string en paramêtre.
         /// </summary>

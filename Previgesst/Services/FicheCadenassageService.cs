@@ -1004,7 +1004,7 @@ namespace Previgesst.Services
             {
                 item = new Models.FicheCadenassage();
                 AjouterEtapesDecadenassage = true;
-                
+
                 item.ApprouvePar = null;
                 item.DateApproved = null;
             }
@@ -1020,6 +1020,9 @@ namespace Previgesst.Services
                 {
                     item.ApprouvePar = null;
                     item.DateApproved = null;
+
+                    item.UpdatedPar = model.UpdatedPar;
+                    item.DateUpdated = model.DateUpdated;
                 }
             }
 
@@ -1036,9 +1039,6 @@ namespace Previgesst.Services
 
             item.CreatedPar = model.CreatedPar;
             item.DateCreation = model.DateCreation;
-            item.UpdatedPar = model.UpdatedPar;
-            item.DateUpdated = model.DateUpdated;
-
 
 
             //item.DateRevision = model.DateRevision;
