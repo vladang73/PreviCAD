@@ -32,11 +32,11 @@
                     <ol class="breadcrumb">
                         @if (clientId > 0)
                         {
-                            <li class="breadcrumb-item"><a href="~/FicheCadenassage/Edit/@clientId">Equipment Management</a></li>
+                            <li class="breadcrumb-item"><a href="~/FicheCadenassage/Edit/@clientId">Gestion d'équipement</a></li>
                         }
                         else
                         {
-                            <li class="breadcrumb-item"><a href="~/FicheCadenassage/Index">Equipment Management</a></li>
+                            <li class="breadcrumb-item"><a href="~/FicheCadenassage/Index">Gestion d'équipement</a></li>
                         }
                         <li class="breadcrumb-item active" aria-current="page">Gestion des Equipement Articuloes</li>
                     </ol>
@@ -46,7 +46,7 @@
 
             <div class="panel panel-danger">
 
-                <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Equipement Articuloes</div>
+                <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Gestion d'énergie</div>
                 <div class="panel-body">
 
                     <div id="Documents" class="tab-pane">
@@ -61,7 +61,7 @@
                                     columns.Bound(e => e.EquipementId).Hidden();
                                     columns.Bound(e => e.EquipementArticuloID).Hidden();
 
-                                    columns.Bound(c => c.AccessoriesDescription).Title("Accessories")
+                                    columns.Bound(c => c.AccessoriesDescription).Title("Accessoires")
                                             .Filterable(f => f.Extra(false).Operators(operators => operators
                                                 .ForString(str => str.Clear()
                                                     .Contains(GridRES.Contains)
@@ -71,7 +71,7 @@
                                                 )
                                             ));
 
-                                    columns.Bound(c => c.EnergyDescription).Title("Energy")
+                                    columns.Bound(c => c.EnergyDescription).Title("Source d’énergie")
                                             .Filterable(f => f.Extra(false).Operators(operators => operators
                                                 .ForString(str => str.Clear()
                                                     .Contains(GridRES.Contains)
@@ -81,7 +81,7 @@
                                                 )
                                             ));
 
-                                    columns.Bound(c => c.DepositDescription).Title("Deposit")
+                                    columns.Bound(c => c.DepositDescription).Title("Dispositif")
                                             .Filterable(f => f.Extra(false).Operators(operators => operators
                                                 .ForString(str => str.Clear()
                                                     .Contains(GridRES.Contains)
