@@ -61,7 +61,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to APPROUVÉ PAR: .
+        ///   Looks up a localized string similar to Approbateur: .
         /// </summary>
         internal static string ApprouvePar {
             get {
@@ -70,7 +70,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DATE: .
+        ///   Looks up a localized string similar to Approbation: .
         /// </summary>
         internal static string Date {
             get {
@@ -79,7 +79,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DATE DE CRÉATION/RÉVISION: .
+        ///   Looks up a localized string similar to Création/Révision: .
         /// </summary>
         internal static string DateRevision {
             get {

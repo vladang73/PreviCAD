@@ -124,7 +124,7 @@
     <value>Afficher chez le client</value>
   </data>
   <data name="Approuve" xml:space="preserve">
-    <value>Approuvé</value>
+    <value>Approuver</value>
   </data>
   <data name="ApprouvePar" xml:space="preserve">
     <value>Approuvé par</value>
@@ -194,5 +194,8 @@
   </data>
   <data name="UpdatedDate" xml:space="preserve">
     <value>Mise à jour le</value>
+  </data>
+  <data name="DateApproved" xml:space="preserve">
+    <value>Date d'approbation</value>
   </data>
 </root>

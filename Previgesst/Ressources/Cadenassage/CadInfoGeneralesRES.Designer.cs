@@ -79,7 +79,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Approuvé.
+        ///   Looks up a localized string similar to Approuver.
         /// </summary>
         public static string Approuve {
             get {
@@ -102,6 +102,15 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string Createur {
             get {
                 return ResourceManager.GetString("Createur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date d&apos;approbation.
+        /// </summary>
+        public static string DateApproved {
+            get {
+                return ResourceManager.GetString("DateApproved", resourceCulture);
             }
         }
         
