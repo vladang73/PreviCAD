@@ -9,7 +9,8 @@ using Previgesst.Ressources.Cadenassage;
 namespace Previgesst.ViewModels
 {
     public class LigneCadenassageGridViewModel
-    { public int FicheCadenassageId { get; set; }
+    {
+        public int FicheCadenassageId { get; set; }
         public int EquipementId { get; set; }
         [DisplayName("Équipement")]
         [Display(ResourceType = typeof(CadFichesRES), Name = "Equipement")]
@@ -68,7 +69,15 @@ namespace Previgesst.ViewModels
         public string TitreFiche { get; set; }
 
         public List<string> TexteMateriel { get; set; }
-    
 
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public bool IsApproved
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(ApprouvePar);
+            }
+        }
     }
 }
