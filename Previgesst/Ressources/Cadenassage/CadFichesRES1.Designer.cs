@@ -70,7 +70,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to À effectuer.
+        ///   Looks up a localized string similar to Travail à effectuer.
         /// </summary>
         public static string AEffectuer {
             get {

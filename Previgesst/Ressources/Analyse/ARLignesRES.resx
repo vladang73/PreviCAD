@@ -121,7 +121,7 @@
     <value>Analyse de risque</value>
   </data>
   <data name="Categorie" xml:space="preserve">
-    <value>Catégorie de système de commande</value>
+    <value>Commentaires</value>
   </data>
   <data name="CategorieSystemeCommande" xml:space="preserve">
     <value>Catégorie de systèmes de commande installés</value>

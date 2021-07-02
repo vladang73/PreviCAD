@@ -121,7 +121,7 @@
     <value>Risk Analysis</value>
   </data>
   <data name="Categorie" xml:space="preserve">
-    <value>Command system category</value>
+    <value>Comments</value>
   </data>
   <data name="CategorieSystemeCommande" xml:space="preserve">
     <value>Installed command systems category</value>

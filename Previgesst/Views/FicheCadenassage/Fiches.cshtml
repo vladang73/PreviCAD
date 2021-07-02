@@ -42,7 +42,7 @@
                     {
                         columns.Bound(e => e.FicheCadenassageId).Hidden();
 
-                        columns.Bound(e => e.RevisionCourante).Title(CadFichesRES.Actif).ClientTemplate("<center><input onclick='doCheck(#=FicheCadenassageId#, this)' " + Model.RCDisabled + " type='checkbox' #=RevisionCourante ? checked='checked' :'' # /></center>").Width(60);
+                        columns.Bound(e => e.RevisionCourante).Title("A/R").ClientTemplate("<center><input onclick='doCheck(#=FicheCadenassageId#, this)' " + Model.RCDisabled + " type='checkbox' #=RevisionCourante ? checked='checked' :'' # /></center>").Width(60);
                         columns.Bound(c => c.NoFiche).Width(60).Title(CadFichesRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
                         .ForString(str => str.Clear()
                         .Contains(GridRES.Contains)
@@ -78,6 +78,7 @@
 
                         // columns.Bound(e => e.estDocumentPrevigesst).ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>").Title(CadFichesRES.Previ).Width(45).Hidden(Model.estClient);
                         columns.Bound(e => e.TravailAEffectuer).Title(CadFichesRES.AEffectuer).ClientTemplate("").Width(320);
+
                         columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' class='btn btn-info downloadButton' style='text-align:center' title='"+ CadFichesRES.Telecharger +"'></a>").Title(CadFichesRES.Fiche).Filterable(false).Sortable(false).Width(20);
                         columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' class='btn btn-info downloadButton' style='text-align:center' title='"+ CadFichesRES.Telecharger +"'></a>").Title(CadFichesRES.Sheet).Filterable(false).Sortable(false).Width(20);
                         if (User.IsInRole("Administrateur")) { columns.Bound(e => e.estDocumentPrevigesst).ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>").Title("Prévi").Width(45); }
