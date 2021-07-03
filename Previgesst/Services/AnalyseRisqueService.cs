@@ -203,9 +203,17 @@ namespace Previgesst.Services
 
                     for (int i = 0; i < datalist.Count(); i++)
                     {
-                        var phenomene = (datalist[i].Phenomene?.Length >= 4 && datalist[i].Phenomene?.Substring(4, 1) == "-") ? datalist[i].Phenomene?.Substring(4) : datalist[i].Phenomene;
-                        var evenement = (datalist[i].Evenement?.Length >= 4 && datalist[i].Evenement?.Substring(4, 1) == "-") ? datalist[i].Evenement?.Substring(4) : datalist[i].Evenement;
-                        var dommage = (datalist[i].Dommage?.Length >= 4 && datalist[i].Dommage?.Substring(4, 1) == "-") ? datalist[i].Dommage?.Substring(4) : datalist[i].Dommage;
+                        string tempPhenomene = "";
+                        string tempEvenement = "";
+                        string tempDommage = "";
+
+                        if (!string.IsNullOrEmpty(datalist[i].Phenomene)) tempPhenomene = datalist[i].Phenomene.Trim();
+                        if (!string.IsNullOrEmpty(datalist[i].Evenement)) tempEvenement = datalist[i].Evenement.Trim();
+                        if (!string.IsNullOrEmpty(datalist[i].Dommage)) tempDommage = datalist[i].Dommage.Trim();
+
+                        var phenomene = (tempPhenomene.Length >= 4 && tempPhenomene.Substring(4, 1) == "-") ? tempPhenomene.Substring(4) : tempPhenomene;
+                        var evenement = (tempEvenement.Length >= 4 && tempEvenement.Substring(4, 1) == "-") ? tempEvenement.Substring(4) : tempEvenement;
+                        var dommage = (tempDommage.Length >= 4 && tempDommage.Substring(4, 1) == "-") ? tempDommage.Substring(4) : tempDommage;
 
                         ws.Cells[i + 4, 1].Value = datalist[i].NoReference;
                         ws.Cells[i + 4, 2].Value = datalist[i].Equipement;
