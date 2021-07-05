@@ -149,7 +149,7 @@ namespace Previgesst.Services
             }
             else
             {// version super admin
-                user =  System.Web.HttpContext.Current.User.Identity.Name;
+                user = System.Web.HttpContext.Current.User.Identity.Name;
                 analyseRisque.AfficherChezClient = arevm.AfficherChezClient;
             }
             analyseRisque.Description = arevm.NoRef;
@@ -229,7 +229,7 @@ namespace Previgesst.Services
                         ws.Cells[i + 4, 10].Value = datalist[i].FrequenceAvant;
                         ws.Cells[i + 4, 11].Value = datalist[i].ProbabiliteAvant;
                         ws.Cells[i + 4, 12].Value = datalist[i].PossibiliteAvant;
-                        ws.Cells[i + 4, 13].Value = getTextFromIndice( datalist[i].IndiceFinalAvant);
+                        ws.Cells[i + 4, 13].Value = getTextFromIndice(datalist[i].IndiceFinalAvant);
                         ws.Cells[i + 4, 14].Value = datalist[i].NbPersonnesExposees;
                         ws.Cells[i + 4, 15].Value = datalist[i].SystemeCommandeAvant;
 
@@ -240,7 +240,7 @@ namespace Previgesst.Services
                         ws.Cells[i + 4, 19].Value = datalist[i].FrequenceApres;
                         ws.Cells[i + 4, 20].Value = datalist[i].ProbabiliteApres;
                         ws.Cells[i + 4, 21].Value = datalist[i].PossibiliteApres;
-                        ws.Cells[i + 4, 22].Value = getTextFromIndice( datalist[i].IndiceFinalApres);
+                        ws.Cells[i + 4, 22].Value = getTextFromIndice(datalist[i].IndiceFinalApres);
                         ws.Cells[i + 4, 23].Value = datalist[i].SystemeCommandeInstalles;
                         ws.Cells[i + 4, 24].Value = datalist[i].ConformiteAuNormes;
 
@@ -252,7 +252,7 @@ namespace Previgesst.Services
                     var datalist2 = datalist.Where(x => (x.PlanAction ?? "") != "").ToList();
                     for (int i = 0; i < datalist2.Count(); i++)
                     {
-                       // if ((datalist[i].PlanAction ?? "") != "")
+                        // if ((datalist[i].PlanAction ?? "") != "")
                         {
                             ws2.Cells[ligne + 4, 1].Value = datalist2[i].NoReference;
                             ws2.Cells[ligne + 4, 2].Value = datalist2[i].Equipement;
@@ -261,7 +261,7 @@ namespace Previgesst.Services
                             ws2.Cells[ligne + 4, 5].Value = datalist2[i].PlanAction;
                             ws2.Cells[ligne + 4, 6].Value = datalist2[i].ResponsableAnalyse;
                             if (datalist2[i].DateDeRealisation.HasValue)
-                                ws2.Cells[ligne + 4, 7].Value =  datalist2[i].DateDeRealisation ;
+                                ws2.Cells[ligne + 4, 7].Value = datalist2[i].DateDeRealisation;
                             ws2.Cells[ligne + 4, 8].Value = datalist2[i].EtatId;
                             ligne++;
                         }
@@ -385,7 +385,14 @@ namespace Previgesst.Services
                                 }
                                 if (trouveN2)
                                 {
-                                    ws2.Cells[4 + k, 2, 4 + debutN2, 2].Merge = true;
+                                    try
+                                    {
+                                        ws2.Cells[4 + k, 2, 4 + debutN2, 2].Merge = true;
+                                    }
+                                    catch
+                                    {
+                                        // TODO: need to fix the error of the merging
+                                    }
                                     // troisieme niveau
 
                                     var trouveN3 = false;
@@ -542,7 +549,7 @@ namespace Previgesst.Services
         {
             var fiche = analyseRisqueRepository.Get(Id);
             int i = 1;
-            foreach (var v in fiche.LignesAnalyseRisque.Where(x => x.Zone != null || x.Operation !=null).OrderBy(x => x.Rang))
+            foreach (var v in fiche.LignesAnalyseRisque.Where(x => x.Zone != null || x.Operation != null).OrderBy(x => x.Rang))
             {
                 v.Rang = i;
                 i++;
