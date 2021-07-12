@@ -51,11 +51,13 @@ namespace Previgesst.Controllers
             var ClientFromSession = utilisateurService.GetSession();
             if (!Request.IsAuthenticated && ClientFromSession == null)
             {
-                utilisateurService.LogOff();
-                this.Response.Redirect("~/ClientLogin/Index");
+                //utilisateurService.LogOff();
+                //this.Response.Redirect("~/ClientLogin/Index");
+
+                this.Response.Redirect("/Default/AccessDenied");
             }
 
-          
+
 
             var file = documentRepository.Get(ID);
 
@@ -76,8 +78,10 @@ namespace Previgesst.Controllers
 
             if (!Request.IsAuthenticated && ClientFromSession == null && empRegistre.ClientId==0)
             {
-                utilisateurService.LogOff();
-                this.Response.Redirect("~/ClientLogin/Index");
+                //utilisateurService.LogOff();
+                //this.Response.Redirect("~/ClientLogin/Index");
+
+                this.Response.Redirect("/Default/AccessDenied");
             }
 
 
@@ -87,8 +91,10 @@ namespace Previgesst.Controllers
             if (empRegistre.ClientId != 0)
             { if ( file.ClientId != empRegistre.ClientId)
                 {
-                    employeRegistreService.LogOff();
-                    this.Response.Redirect("~/ClientLogin/Index");
+                    //employeRegistreService.LogOff();
+                    //this.Response.Redirect("~/ClientLogin/Index");
+
+                    this.Response.Redirect("/Default/AccessDenied");
                 }
             }
 
@@ -96,8 +102,10 @@ namespace Previgesst.Controllers
             {
                 if (file.ClientId != ClientFromSession.ClientId)
                 {
-                    employeRegistreService.LogOff();
-                    this.Response.Redirect("~/ClientLogin/Index");
+                    //employeRegistreService.LogOff();
+                    //this.Response.Redirect("~/ClientLogin/Index");
+
+                    this.Response.Redirect("/Default/AccessDenied");
                 }
             }
 
@@ -124,8 +132,10 @@ namespace Previgesst.Controllers
 
             if (!Request.IsAuthenticated && ClientFromSession == null && empRegistre.ClientId == 0)
             {
-                utilisateurService.LogOff();
-                this.Response.Redirect("~/ClientLogin/Index");
+                //utilisateurService.LogOff();
+                //this.Response.Redirect("~/ClientLogin/Index");
+
+                this.Response.Redirect("/Default/AccessDenied");
             }
 
 

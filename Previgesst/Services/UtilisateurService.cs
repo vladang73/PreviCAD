@@ -315,12 +315,14 @@ namespace Previgesst.Services
 
 
         public void RedirectToClientLogin()
-        { //Redirection si CDEUser et pas de session
-           
-            LogOff();
-            HttpContext.Current.Server.TransferRequest("~/ClientLogin/Index", false);
+        {
+            //Redirection si CDEUser et pas de session
 
+            //LogOff();
+            //HttpContext.Current.Server.TransferRequest("~/ClientLogin/Index", false);
             //  HttpContext.Current.ApplicationInstance.CompleteRequest();
+
+            HttpContext.Current.Server.TransferRequest("~/Default/AccessDenied", false);
         }
 
 

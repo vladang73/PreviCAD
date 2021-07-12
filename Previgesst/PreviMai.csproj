@@ -2138,6 +2138,7 @@
     <Content Include="Views\FicheCadenassage\SectionDocuments.cshtml" />
     <Content Include="Views\FicheCadenassage\EditorTemplates\LigneDocumentFicheEditor.cshtml" />
     <Content Include="Views\FicheCadenassage\EditorTemplates\UploadEditorDoc.cshtml" />
+    <Content Include="Views\Default\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />

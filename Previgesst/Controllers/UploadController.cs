@@ -23,7 +23,7 @@ namespace Previgesst.Controllers
         private UtilisateurService utilisateurService;
         private PhotoFicheCadenassageRepository photoFicheCadenassageRepository;
         private HttpServerUtilityBase server;
-        
+
         public UploadController(EquipementService equipementService, EquipementRepository equipementRepository, LigneInstructionRepository ligneInstructionRepository,
             LigneInstructionService ligneInstructionService, LigneDecadenassageRepository ligneDecadenassageRepository,
             ClientRepository clientRepository, UtilisateurService utilisateurService,
@@ -97,8 +97,8 @@ namespace Previgesst.Controllers
         {
 
             if (this.server == null)
-                server = this.ControllerContext.HttpContext.Server ;
-           
+                server = this.ControllerContext.HttpContext.Server;
+
 
             var fichier = file.ToList()[0];
             if (fichier == null)
@@ -111,53 +111,53 @@ namespace Previgesst.Controllers
 
             if (TypeDoc == TypeUpload.Equipement)
             {
-                
-                if (utilisateurService.VerifierBonClientCadenassage_Equipement( DocumentId, true))
+
+                if (utilisateurService.VerifierBonClientCadenassage_Equipement(DocumentId, true))
                 {
-                var repertoire = @"~/Images/Cadenassage/Equipements/" + DocumentId + "/";
-                createOrCleanRep(repertoire);                
-                fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), nomFichier));
-                    
-                saveTOXLSize(server.MapPath(repertoire), nomFichier);
-                saveThumb(server.MapPath(repertoire), nomFichier);
-                var vm = equipementRepository.Get(DocumentId);
-                vm.NomFichier = nomFichier;
-                equipementRepository.Update(vm);
-                equipementRepository.SaveChanges();
+                    var repertoire = @"~/Images/Cadenassage/Equipements/" + DocumentId + "/";
+                    createOrCleanRep(repertoire);
+                    fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), nomFichier));
+
+                    saveTOXLSize(server.MapPath(repertoire), nomFichier);
+                    saveThumb(server.MapPath(repertoire), nomFichier);
+                    var vm = equipementRepository.Get(DocumentId);
+                    vm.NomFichier = nomFichier;
+                    equipementRepository.Update(vm);
+                    equipementRepository.SaveChanges();
                 }
 
                 return Json(new { Type = "Done" }, JsonRequestBehavior.AllowGet);
             }
             else if (TypeDoc == TypeUpload.Client)
             {
-                if (utilisateurService.VerifierBonClientCadenassage_Client( DocumentId, true))
+                if (utilisateurService.VerifierBonClientCadenassage_Client(DocumentId, true))
                 {
-                var repertoire = @"~/Images/Cadenassage/Clients/" + DocumentId + "/";
-                createOrCleanRep(repertoire);
-                fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), nomFichier));
-                saveTOXLSize(server.MapPath(repertoire), nomFichier);
-                saveThumb(server.MapPath(repertoire), nomFichier);
-                var vm = clientRepository.Get(DocumentId);
-                vm.Logo = nomFichier;
-                clientRepository.Update(vm);
-                clientRepository.SaveChanges();
-                return Json(new { Type = "Done" }, JsonRequestBehavior.AllowGet);
+                    var repertoire = @"~/Images/Cadenassage/Clients/" + DocumentId + "/";
+                    createOrCleanRep(repertoire);
+                    fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), nomFichier));
+                    saveTOXLSize(server.MapPath(repertoire), nomFichier);
+                    saveThumb(server.MapPath(repertoire), nomFichier);
+                    var vm = clientRepository.Get(DocumentId);
+                    vm.Logo = nomFichier;
+                    clientRepository.Update(vm);
+                    clientRepository.SaveChanges();
+                    return Json(new { Type = "Done" }, JsonRequestBehavior.AllowGet);
                 }
 
             }
             else if (TypeDoc == TypeUpload.Instruction)
             {
-                if (utilisateurService.VerifierBonClientCadenassage_Instruction( DocumentId,true))
+                if (utilisateurService.VerifierBonClientCadenassage_Instruction(DocumentId, true))
                 {
-                var repertoire = @"~/Images/Cadenassage/Instructions/" + DocumentId + "/";
-                createOrCleanRep(repertoire);
-                fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), nomFichier));
-                saveTOXLSize(server.MapPath(repertoire), nomFichier);
-                saveThumb(server.MapPath(repertoire), nomFichier);
-                var vm = ligneInstructionRepository.Get(DocumentId);
-             //   vm.NomFichier = nomFichier;
-                ligneInstructionRepository.Update(vm);
-                ligneInstructionRepository.SaveChanges();
+                    var repertoire = @"~/Images/Cadenassage/Instructions/" + DocumentId + "/";
+                    createOrCleanRep(repertoire);
+                    fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), nomFichier));
+                    saveTOXLSize(server.MapPath(repertoire), nomFichier);
+                    saveThumb(server.MapPath(repertoire), nomFichier);
+                    var vm = ligneInstructionRepository.Get(DocumentId);
+                    //   vm.NomFichier = nomFichier;
+                    ligneInstructionRepository.Update(vm);
+                    ligneInstructionRepository.SaveChanges();
                 }
 
                 return Json(new { Type = "Done" }, JsonRequestBehavior.AllowGet);
@@ -165,7 +165,7 @@ namespace Previgesst.Controllers
             }
             else if (TypeDoc == TypeUpload.ImageCadenassage)
             {
-                if (utilisateurService.VerifierBonClientCadenassage_PhotoCadenassage( DocumentId, true))
+                if (utilisateurService.VerifierBonClientCadenassage_PhotoCadenassage(DocumentId, true))
                 {
                     var repertoire = @"~/Images/Cadenassage/Photos/" + DocumentId + "/";
                     createOrCleanRep(repertoire);
@@ -175,7 +175,7 @@ namespace Previgesst.Controllers
                     fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), nomFichier));
                     saveTOXLSize(server.MapPath(repertoire), nomFichier);
                     saveThumb(server.MapPath(repertoire), nomFichier);
-                   
+
                 }
 
                 return Json(new { Type = "Done" }, JsonRequestBehavior.AllowGet);
@@ -185,30 +185,30 @@ namespace Previgesst.Controllers
 
             else if (TypeDoc == TypeUpload.Document)
             {
-               
+
 
             }
-            else if ( TypeDoc == TypeUpload.Decadenassage)
+            else if (TypeDoc == TypeUpload.Decadenassage)
 
             {
-                if (utilisateurService.VerifierBonClientCadenassage_LigneDecadenassage( DocumentId, true))
+                if (utilisateurService.VerifierBonClientCadenassage_LigneDecadenassage(DocumentId, true))
                 {
-                var repertoire = @"~/Images/Cadenassage/Decadenassage/" + DocumentId + "/";
-                createOrCleanRep(repertoire);
-                fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), fichier.FileName));
-                saveTOXLSize(server.MapPath(repertoire), fichier.FileName);
-                saveThumb(server.MapPath(repertoire), fichier.FileName);
-                var vm = ligneDecadenassageRepository.Get(DocumentId);
-               // vm.NomFichier = fichier.FileName;
-                ligneDecadenassageRepository.Update(vm);
-                ligneDecadenassageRepository.SaveChanges();
+                    var repertoire = @"~/Images/Cadenassage/Decadenassage/" + DocumentId + "/";
+                    createOrCleanRep(repertoire);
+                    fichier.SaveAs(System.IO.Path.Combine(server.MapPath(repertoire), fichier.FileName));
+                    saveTOXLSize(server.MapPath(repertoire), fichier.FileName);
+                    saveThumb(server.MapPath(repertoire), fichier.FileName);
+                    var vm = ligneDecadenassageRepository.Get(DocumentId);
+                    // vm.NomFichier = fichier.FileName;
+                    ligneDecadenassageRepository.Update(vm);
+                    ligneDecadenassageRepository.SaveChanges();
                 }
 
                 return Json(new { Type = "Done" }, JsonRequestBehavior.AllowGet);
             }
 
 
-         
+
 
             return Json(new { Type = "Upload" }, JsonRequestBehavior.AllowGet);
 

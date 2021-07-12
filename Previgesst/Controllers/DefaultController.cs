@@ -19,5 +19,11 @@ namespace Previgesst.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public ActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

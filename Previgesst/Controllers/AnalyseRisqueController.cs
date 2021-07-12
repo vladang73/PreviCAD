@@ -353,8 +353,10 @@ namespace Previgesst.Controllers
             var ClientFromSession = utilisateurService.GetSession();
             if (!Request.IsAuthenticated && ClientFromSession == null)
             {
-                utilisateurService.LogOff();
-                this.Response.Redirect("~/ClientLogin/Index");
+                //utilisateurService.LogOff();
+                //this.Response.Redirect("~/ClientLogin/Index");
+
+                RedirectToAction(Layout, "AccessDenied", "Default");
             }
 
             // si authentifié client, seulement l'analyse qui nous revient!
@@ -363,71 +365,14 @@ namespace Previgesst.Controllers
                 var ClientIdFromSession = utilisateurService.GetSession().ClientId;
                 if (id != ClientIdFromSession)
                 {
-                    utilisateurService.LogOff();
-                    RedirectToAction(Layout, "Index", "ClientLogin");
+                    //utilisateurService.LogOff();
+                    //RedirectToAction(Layout, "Index", "ClientLogin");
+
+                    RedirectToAction(Layout, "AccessDenied", "Default");
                 }
             }
 
             analyseRisqueService.ReturnFile(id, true, langue);
-
-
-            //string templateName = HttpContext.Server.MapPath("~/Templates/AnalyseRisques.xlsx");        
-            //using (var source = System.IO.File.OpenRead(templateName))
-            //{
-
-            //    using (var excel = new OfficeOpenXml.ExcelPackage(source))
-            //    {
-            //        var datalist = analyseRisqueRepository.GetAnalyse(id);
-
-            //        var ws = excel.Workbook.Worksheets[1];
-
-            //        for (int i = 0; i < datalist.Count(); i++)
-            //        {
-            //            ws.Cells[i + 4, 1].Value = datalist[i].NoReference;
-            //            ws.Cells[i + 4, 2].Value = datalist[i].Equipement;
-            //            ws.Cells[i + 4, 3].Value = datalist[i].Operation;
-            //            ws.Cells[i + 4, 4].Value = datalist[i].Zone;
-
-            //            ws.Cells[i + 4, 5].Value = datalist[i].Phenomene;
-            //            ws.Cells[i + 4,6].Value = datalist[i].Situation;
-            //            ws.Cells[i + 4,7].Value = datalist[i].Evenement;
-            //            ws.Cells[i + 4, 8].Value = datalist[i].GraviteAvant;
-            //            ws.Cells[i + 4, 9].Value = datalist[i].FrequenceAvant;
-            //            ws.Cells[i + 4, 10].Value = datalist[i].ProbabiliteAvant;
-            //            ws.Cells[i + 4, 11].Value = datalist[i].PossibiliteAvant;
-            //            ws.Cells[i + 4, 12].Value = datalist[i].IndiceFinalAvant;
-            //            ws.Cells[i + 4, 13].Value = datalist[i].NbPersonnesExposees;
-            //            ws.Cells[i + 4, 14].Value = datalist[i].SystemeCommandeAvant;
-
-
-            //            ws.Cells[i + 4, 15].Value = datalist[i].Reglement;
-            //            ws.Cells[i + 4, 16].Value = datalist[i].Mesure;
-            //            ws.Cells[i + 4, 17].Value = datalist[i].GraviteApres;
-            //            ws.Cells[i + 4, 18].Value = datalist[i].FrequenceApres;
-            //            ws.Cells[i + 4, 19].Value = datalist[i].ProbabiliteApres;
-            //            ws.Cells[i + 4, 20].Value = datalist[i].PossibiliteApres;
-            //            ws.Cells[i + 4, 21].Value = datalist[i].IndiceFinalApres;
-            //            ws.Cells[i + 4, 22].Value = datalist[i].SystemeCommandeInstalles;
-            //            ws.Cells[i + 4, 23].Value = datalist[i].ConformiteAuNormes;
-
-
-
-            //        }
-
-
-
-
-
-            //        excel.Workbook.Properties.Title = "Analyse de risques";
-            //        this.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            //        this.Response.AddHeader(
-            //                  "content-disposition",
-            //                  string.Format("attachment;  filename={0}", "RapportDePlanification.xlsx"));
-            //        this.Response.BinaryWrite(excel.GetAsByteArray());
-            //    }
-            //}
-
-
         }
 
         public void getXLAnalyseEN(int id)
@@ -441,8 +386,10 @@ namespace Previgesst.Controllers
             var ClientFromSession = utilisateurService.GetSession();
             if (!Request.IsAuthenticated && ClientFromSession == null)
             {
-                utilisateurService.LogOff();
-                this.Response.Redirect("~/ClientLogin/Index");
+                //utilisateurService.LogOff();
+                //this.Response.Redirect("~/ClientLogin/Index");
+
+                RedirectToAction(Layout, "AccessDenied", "Default");
             }
 
             // si authentifié client, seulement l'analyse qui nous revient!
@@ -452,8 +399,10 @@ namespace Previgesst.Controllers
                 var ClientIdFromSession = utilisateurService.GetSession().ClientId;
                 if (Analyse.ClientId != ClientIdFromSession)
                 {
-                    utilisateurService.LogOff();
-                    RedirectToAction(Layout, "Index", "ClientLogin");
+                    //utilisateurService.LogOff();
+                    //RedirectToAction(Layout, "Index", "ClientLogin");
+
+                    RedirectToAction(Layout, "AccessDenied", "Default");
                 }
             }
 

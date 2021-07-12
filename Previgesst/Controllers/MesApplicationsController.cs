@@ -87,14 +87,18 @@ namespace Previgesst.Controllers
             var Analyse = analyseRisqueRepository.Get(id);
             if (Analyse == null)
             {
-                utilisateurService.LogOff();
-                this.Response.Redirect("~/ClientLogin/Index");
+                //utilisateurService.LogOff();
+                //this.Response.Redirect("~/ClientLogin/Index");
+
+                this.Response.Redirect("/Default/AccessDenied");
             }
             var ClientIdFromSession = utilisateurService.GetSession().ClientId;
             if (Analyse.ClientId != ClientIdFromSession)
             {
-                utilisateurService.LogOff();
-                this.Response.Redirect("~/ClientLogin/Index");
+                //utilisateurService.LogOff();
+                //this.Response.Redirect("~/ClientLogin/Index");
+            
+                this.Response.Redirect("/Default/AccessDenied");
             }
             else
             {
