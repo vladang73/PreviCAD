@@ -61,7 +61,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Acceso denegado, no tiene permiso para acceder a este recurso..
+        ///   Looks up a localized string similar to Accès refusé, vous n&apos;êtes pas autorisé à accéder à cette ressource..
         /// </summary>
         public static string AccessDeniedMessage {
             get {

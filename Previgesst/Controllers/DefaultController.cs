@@ -4,14 +4,27 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NLog;
+using Previgesst.Services;
 
 namespace Previgesst.Controllers
 {
     [Authorize]
     public class DefaultController : ControllerBase
     {
-        public DefaultController(ILogger logger) : base(logger)
+        private UtilisateurService utilisateurService;
+        private string Layout;
+
+        public DefaultController(ILogger logger, UtilisateurService utilisateurService) : base(logger)
         {
+            this.utilisateurService = utilisateurService;
+
+            if (utilisateurService.GetSession() != null)
+            {
+                this.Layout = "~/Views/Shared/_LayoutClient.cshtml";
+
+            }
+            else
+                this.Layout = "~/Views/Shared/_Layout.cshtml";
         }
 
         // GET: Default
@@ -23,7 +36,7 @@ namespace Previgesst.Controllers
         [AllowAnonymous]
         public ActionResult AccessDenied()
         {
-            return View();
+            return View("AccessDenied", this.Layout);
         }
     }
 }
