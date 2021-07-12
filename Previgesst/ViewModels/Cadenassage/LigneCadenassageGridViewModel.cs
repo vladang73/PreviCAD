@@ -63,21 +63,21 @@ namespace Previgesst.ViewModels
         [Display(ResourceType = typeof(CadFichesRES), Name = "Previgesst")]
         public Boolean estDocumentPrevigesst { get; set; }
 
-        [Display(ResourceType = typeof(CadFichesRES), Name = "RevActive")]
-        public Boolean RevisionCourante { get; set; }
+        [Display(ResourceType = typeof(CadFichesRES), Name = "IsApproved")]
+        public Boolean IsApproved { get; set; }
 
         public string TitreFiche { get; set; }
 
         public List<string> TexteMateriel { get; set; }
 
 
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public bool IsApproved
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(ApprouvePar);
-            }
-        }
+        //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        //public bool IsApproved
+        //{
+        //    get
+        //    {
+        //        return !string.IsNullOrEmpty(ApprouvePar);
+        //    }
+        //}
     }
 }

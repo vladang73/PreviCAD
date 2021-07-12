@@ -381,8 +381,8 @@ namespace Previgesst.Services
                         // CUSTOMER
                         if (periodeEssai == 0)
                         {
-                            // CHECK ACTIVE SHEET
-                            var activeSheet = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == session.ClientId).Where(x => x.RevisionCourante == true).Select(x => x.RevisionCourante);
+                            // CHECK approved SHEET
+                            var activeSheet = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == session.ClientId).Where(x => x.IsApproved == true).Select(x => x.IsApproved);
                             var countActiveSheet = activeSheet.Count();
 
                             if (countActiveSheet < nbLimitCadenassage)
@@ -454,8 +454,8 @@ namespace Previgesst.Services
                             // CUSTOMER
                             if (periodeEssai == 0)
                             {
-                                // CHECK ACTIVE SHEET
-                                var activeSheet = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == session.ClientId).Where(x => x.RevisionCourante == true).Select(x => x.RevisionCourante);
+                                // CHECK approved SHEET
+                                var activeSheet = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == session.ClientId).Where(x => x.IsApproved == true).Select(x => x.IsApproved);
                                 var countActiveSheet = activeSheet.Count();
 
                                 if (countActiveSheet < nbLimitCadenassage)
@@ -550,8 +550,8 @@ namespace Previgesst.Services
                             // CUSTOMER
                             if (periodeEssai == 0)
                             {
-                                // CHECK ACTIVE SHEET
-                                var activeSheet = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == session.ClientId).Where(x => x.RevisionCourante == true).Select(x => x.RevisionCourante);
+                                // CHECK Approved SHEET
+                                var activeSheet = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == session.ClientId).Where(x => x.IsApproved == true).Select(x => x.IsApproved);
                                 var countActiveSheet = activeSheet.Count();
 
                                 if (countActiveSheet < nbLimitCadenassage)

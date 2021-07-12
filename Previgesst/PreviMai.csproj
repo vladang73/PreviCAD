@@ -584,6 +584,10 @@
     <Compile Include="DataContexts\DbContextMigrations\202106302253415_Previg_77.Designer.cs">
       <DependentUpon>202106302253415_Previg_77.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\DbContextMigrations\202107091048558_Previg_78.cs" />
+    <Compile Include="DataContexts\DbContextMigrations\202107091048558_Previg_78.Designer.cs">
+      <DependentUpon>202107091048558_Previg_78.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\DbContextMigrations\Configuration.cs" />
     <Compile Include="DataContexts\Extensions\MigrationExtensions.cs" />
     <Compile Include="Enums\Applications.cs" />
@@ -2399,6 +2403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\DbContextMigrations\202106302253415_Previg_77.resx">
       <DependentUpon>202106302253415_Previg_77.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DbContextMigrations\202107091048558_Previg_78.resx">
+      <DependentUpon>202107091048558_Previg_78.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\Analyse\ARCreateRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

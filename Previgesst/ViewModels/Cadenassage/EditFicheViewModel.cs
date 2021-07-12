@@ -111,7 +111,8 @@ namespace Previgesst.ViewModels
 
         [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "Actif")]
 
-        public Boolean RevisionCourante { get; set; }
+        //public Boolean RevisionCourante { get; set; }
+        public Boolean IsApproved { get; set; }
 
         public Boolean DroitAjout { get; set; }
 

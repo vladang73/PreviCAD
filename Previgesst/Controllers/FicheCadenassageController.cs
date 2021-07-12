@@ -432,7 +432,7 @@ namespace Previgesst.Controllers
 
                 vm.EstDocumentPrevigesst = (Request.IsAuthenticated) && (User.IsInRole("Administrateur") || User.IsInRole("Lecture-Écriture"));
                 vm.TitreFiche = "Fiche de cadenassage";
-                vm.RevisionCourante = true;
+                //vm.RevisionCourante = true;
                 vm.AfficherClient = true;
                 //  vm.DateCreation = DateTime.Today;
                 vm.SourcesEnergieId = new List<int>();
@@ -1050,15 +1050,17 @@ namespace Previgesst.Controllers
 
         public void ActiverDesactiver(int ficheId, bool etat)
         {
-            if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
-            {
-                if (utilisateurService.VerifierLimiteFicheCadenassage(etat) == true)
-                {
-                    var vm = ficheCadenassageService.getFicheVM(ficheId);
-                    vm.RevisionCourante = etat;
-                    ficheCadenassageService.SaveFiche(vm);
-                }
-            }
+            // not needed with approved functionality 
+
+            //if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
+            //{
+            //    if (utilisateurService.VerifierLimiteFicheCadenassage(etat) == true)
+            //    {
+            //        var vm = ficheCadenassageService.getFicheVM(ficheId);
+            //        vm.RevisionCourante = etat;
+            //        ficheCadenassageService.SaveFiche(vm);
+            //    }
+            //}
         }
 
         public bool activeFilter()

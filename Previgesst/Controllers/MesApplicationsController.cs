@@ -127,12 +127,17 @@ namespace Previgesst.Controllers
         [Authorize]
         public ActionResult GetClientCadenassage()
         {
-            var ClientIdFromSession = utilisateurService.GetSession().ClientId;
-            if (utilisateurService.VerifierBonClientCadenassage_Client(ClientIdFromSession, false))
-                return RedirectToAction("Edit", "FicheCadenassage", new { Id = ClientIdFromSession });
-            return Json("");
+            var session = utilisateurService.GetSession();
+            if (session != null)
+            {
+                var ClientIdFromSession = utilisateurService.GetSession().ClientId;
+                if (utilisateurService.VerifierBonClientCadenassage_Client(ClientIdFromSession, false))
+                    return RedirectToAction("Edit", "FicheCadenassage", new { Id = ClientIdFromSession });
+            }
 
+            return Json("");
         }
+
         [Authorize]
         public ActionResult ReadListAnalyseRisqueUnClient([DataSourceRequest]DataSourceRequest request)
         {

@@ -196,6 +196,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approuvée.
+        /// </summary>
+        public static string IsApproved {
+            get {
+                return ResourceManager.GetString("IsApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to # Fiche.
         /// </summary>
         public static string NoFiche {

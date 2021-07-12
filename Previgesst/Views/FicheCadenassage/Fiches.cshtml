@@ -43,7 +43,7 @@
                         columns.Bound(e => e.FicheCadenassageId).Hidden();
 
                         //columns.Bound(e => e.RevisionCourante).Title("A/R").ClientTemplate("<center><input onclick='doCheck(#=FicheCadenassageId#, this)' " + Model.RCDisabled + " type='checkbox' #=RevisionCourante ? checked='checked' :'' # /></center>").Width(60);
-                        columns.Bound(e => e.IsApproved).Title("A/R").ClientTemplate("<center><input disabled='disabled' " + Model.RCDisabled + " type='checkbox' #=IsApproved ? checked='checked' :'' # /></center>").Width(60);
+                        columns.Bound(e => e.IsApproved).Title(CadFichesRES.IsApproved).ClientTemplate("<center><input disabled='disabled' " + Model.RCDisabled + " type='checkbox' #=IsApproved ? checked='checked' :'' # /></center>").Width(60);
 
                         columns.Bound(c => c.NoFiche).Width(60).Title(CadFichesRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
@@ -111,7 +111,7 @@
                                 //f.Add(b => b.estDocumentPrevigesst).IsEqualTo(true);
                                 if ( !Model.estUpdate)
                                 {
-                                    f.Add(b => b.RevisionCourante).IsEqualTo(true);
+                                    f.Add(b => b.IsApproved).IsEqualTo(true);
                                 }
                             }
                         )
@@ -301,7 +301,7 @@
 
 
     // Replace "true" and "false" strings
-    jQuery(".k-filterable[data-field='RevisionCourante'] .k-grid-filter").click(function () {
+    jQuery(".k-filterable[data-field='IsApproved'] .k-grid-filter").click(function () {
         if (jQuery('.k-filter-help-text').length == 0) {
             setTimeout(function () {
 
@@ -335,19 +335,19 @@
                     var myLabel = jQuery(this).text();
 
                     if (myLabel == "est vraie") {
-                        var newLabel = jQuery(this).text().replace("est vraie", "Active");
+                        var newLabel = jQuery(this).text().replace("est vraie", "Approuvée");
                         jQuery(this).text(newLabel);
                         jQuery(this).prepend("<input type='radio' data-bind='checked: filters[0].value' value='true' name='filters[0].value' style='margin-left: 5px;'>");
                     } else if (myLabel == "est fausse") {
-                        var newLabel = jQuery(this).text().replace("est fausse", "Inactive");
+                        var newLabel = jQuery(this).text().replace("est fausse", "No Aprovado");
                         jQuery(this).text(newLabel);
                         jQuery(this).prepend("<input type='radio' data-bind='checked: filters[0].value' value='false' name='filters[0].value' style='margin-left: 5px;'>");
                     } else if (myLabel == "is true") {
-                        var newLabel = jQuery(this).text().replace("is true", "Active");
+                        var newLabel = jQuery(this).text().replace("is true", "Approuvée");
                         jQuery(this).text(newLabel);
                         jQuery(this).prepend("<input type='radio' data-bind='checked: filters[0].value' value='true' name='filters[0].value' style='margin-left: 5px;'>");
                     } else {
-                        var newLabel = jQuery(this).text().replace("is false", "Inactive");
+                        var newLabel = jQuery(this).text().replace("is false", "No Aprovado");
                         jQuery(this).text(newLabel);
                         jQuery(this).prepend("<input type='radio' data-bind='checked: filters[0].value' value='false' name='filters[0].value' style='margin-left: 5px;'>");
                     }

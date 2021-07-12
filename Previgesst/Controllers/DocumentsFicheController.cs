@@ -283,7 +283,7 @@ namespace Previgesst.Controllers
                     documentFicheRepository.Update(mydoc);
                     nomFichier = fichier.FileName;
 
-                    documentRepository.SaveChanges();
+                    documentFicheRepository.SaveChanges();
                 }
             }
             var vm = documentFicheService.getVM(DocumentFicheId);
@@ -318,8 +318,54 @@ namespace Previgesst.Controllers
 
                 // update approve and modified fields
                 ficheCadenassageService.UnapproveFiche(FicheCadenassageId, GetCurrentUser());
-            
-            return Json("1", JsonRequestBehavior.AllowGet);
+
+                return Json("1", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json("0", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CreateArchive(int id)
+        {
+            if (utilisateurService.VerifierBonClientCadenassage_Fiche(id, false))
+            {
+                var d = new DocumentFicheViewModel();
+
+
+                d.Titre = "Archive " + DateTime.Now.ToString();
+                d.FicheCadenassageId = id;
+                d.ApplicationPreviId = applicationPrevisService.getIdByName(Enums.Applications.Cadenassage);
+                this.documentFicheService.SaveDocumentFiche(d);
+                int DocumentFicheId = d.DocumentFicheId;
+
+                if (DocumentFicheId > 0)
+                {
+                    // update approve and modified fields
+                    ficheCadenassageService.UnapproveFiche(id, GetCurrentUser());
+                }
+
+
+                if (DocumentFicheId > 0)
+                {
+                    var repertoire = @"~/FicheDocFiles/" + DocumentFicheId + "/";
+
+                    if (!System.IO.Directory.Exists(Server.MapPath(repertoire)))
+                        System.IO.Directory.CreateDirectory(Server.MapPath(repertoire));
+
+                    string fileName = "";
+                    ficheCadenassageService.ReturnArchive(id, "fr", Server.MapPath(repertoire), ref fileName);
+
+               
+                    var mydoc = documentFicheRepository.Get(DocumentFicheId);
+                    mydoc.FileName = fileName;
+                    mydoc.Titre = fileName.Replace(".pdf", "");
+
+                    documentFicheRepository.Update(mydoc);
+                    documentFicheRepository.SaveChanges();
+                }
+
+
+                return Json("1", JsonRequestBehavior.AllowGet);
             }
 
             return Json("0", JsonRequestBehavior.AllowGet);

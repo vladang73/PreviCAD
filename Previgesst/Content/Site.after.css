@@ -911,6 +911,12 @@ body .analyseContent .panel-body > div > .btn-success {
     left: 210px;
 }
 
+.cadenassageContent .k-grid-archive {
+    position: absolute;
+    top: -48px;
+    left: 300px;
+}
+
 body .analyseContent .k-grid-add {
     top: -69px;
     left: 100px;

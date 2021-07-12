@@ -80,7 +80,9 @@ namespace Previgesst.Models
         public Boolean AfficherClient { get; set; }
 
 
-        public Boolean RevisionCourante { get; set; }
+        public Boolean IsApproved { get; set; }
+
+        //public Boolean RevisionCourante { get; set; }
     }
 
     public class MaterielRequisCadenassage

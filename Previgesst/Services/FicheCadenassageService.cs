@@ -70,9 +70,26 @@ namespace Previgesst.Services
 
         }
 
+        internal void ReturnArchive(int id, string langue, string filePath, ref string fileName)
+        {
+            string noFeche = "";
+            var ef = GenerateFile(id, langue, ref noFeche);
 
+            //ef.Save(HttpContext.Current.Response, FicheRES.Fiche + noFeche + ".pdf");
+
+            fileName = string.Format("Archive {0}{1} {2}.pdf", FicheRES.Fiche, noFeche, DateTime.Now.ToString("yyyyMMddhmmss"));
+            ef.Save(System.IO.Path.Combine(filePath, fileName));
+        }
 
         internal void ReturnFile2(int id, string langue)
+        {
+            string noFeche = "";
+            var ef = GenerateFile(id, langue, ref noFeche);
+
+            ef.Save(HttpContext.Current.Response, FicheRES.Fiche + noFeche + ".pdf");
+        }
+
+        private GemBox.Spreadsheet.ExcelFile GenerateFile(int id, string langue, ref string noFeche)
         {
             //changement de culture en fonction de la langue choisie
 
@@ -401,10 +418,10 @@ namespace Previgesst.Services
                 }
             }
 
+            noFeche = fiche.NoFiche;
 
-            ef.Save(HttpContext.Current.Response, FicheRES.Fiche + fiche.NoFiche + ".pdf");
 
-
+            return ef;
         }
 
 
@@ -874,7 +891,7 @@ namespace Previgesst.Services
                 TravailAEffectuer = langue == "fr" ? x.TravailAEffectuer : x.TravailAEffectuerEN,
                 TitreFiche = langue == "fr" ? x.TitreFiche : x.TitreFicheEN,
                 estDocumentPrevigesst = x.estDocumentPrevigesst,
-                RevisionCourante = x.RevisionCourante,
+                //RevisionCourante = x.RevisionCourante,
                 TexteMateriel = x.MaterielsRequisCadenassage.Select(z => z.Materiel.Description + " (" + z.Quantite.ToString() + ")").ToList(),
                 //Suppressible = ((x.estDocumentPrevigesst == true) && droitSuppressionPrevi) || (x.estDocumentPrevigesst == false && droitSuppressionClient)
                 Suppressible = (x.estDocumentPrevigesst == true && droitSuppressionPrevi) || (x.estDocumentPrevigesst == false && droitSuppressionClient) || (x.estDocumentPrevigesst == false && droitSuppressionPrevi),
@@ -887,6 +904,8 @@ namespace Previgesst.Services
 
                 UpdatedPar = x.UpdatedPar,
                 DateUpdated = x.DateUpdated,
+
+                IsApproved = x.IsApproved
 
                 //DateRevision = x.DateRevision,
 
@@ -904,7 +923,7 @@ namespace Previgesst.Services
             droitSuppressionPrevi = droits.EstAdminPrevi || droits.EstUpdatePrevi;
             //droitSuppressionClient = false;
 
-            var result = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == clientId && x.RevisionCourante == true).Select(x => new LigneRegistreViewModel()
+            var result = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == clientId && x.IsApproved == true).Select(x => new LigneRegistreViewModel()
             {
                 FicheCadenassageId = x.FicheCadenassageId,
                 NoFicheCadenassage = x.NoFiche,
@@ -944,7 +963,8 @@ namespace Previgesst.Services
                 AfficherClient = result.AfficherClient,
                 EstDocumentPrevigesst = result.estDocumentPrevigesst,
                 TitreFiche = langue == "fr" ? result.TitreFiche : result.TitreFicheEN,
-                RevisionCourante = result.RevisionCourante,
+                //RevisionCourante = result.RevisionCourante,
+                IsApproved = result.IsApproved,
 
                 ApprouvePar = result.ApprouvePar,
                 DateApproved = result.DateApproved,
@@ -1007,6 +1027,7 @@ namespace Previgesst.Services
 
                 item.ApprouvePar = null;
                 item.DateApproved = null;
+                item.IsApproved = false;
             }
 
             if (AjouterEtapesDecadenassage == false)
@@ -1020,6 +1041,7 @@ namespace Previgesst.Services
                 {
                     item.ApprouvePar = null;
                     item.DateApproved = null;
+                    item.IsApproved = false;
 
                     item.UpdatedPar = model.UpdatedPar;
                     item.DateUpdated = model.DateUpdated;
@@ -1056,7 +1078,7 @@ namespace Previgesst.Services
             }
 
             item.AfficherClient = model.AfficherClient;
-            item.RevisionCourante = model.RevisionCourante;
+            //item.RevisionCourante = model.RevisionCourante;
 
             if (item.FicheCadenassageId > 0)
             {
@@ -1092,6 +1114,7 @@ namespace Previgesst.Services
 
             item.ApprouvePar = model.ApprouvePar;
             item.DateApproved = model.DateApproved;
+            item.IsApproved = true;
 
             if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout card")
             {
@@ -1319,6 +1342,7 @@ namespace Previgesst.Services
 
                 item.ApprouvePar = null;
                 item.DateApproved = null;
+                item.IsApproved = false;
 
                 ficheCadenassageRepository.Update(item);
                 ficheCadenassageRepository.SaveChanges();

@@ -163,6 +163,9 @@
   <data name="Fiche" xml:space="preserve">
     <value>FR</value>
   </data>
+  <data name="IsApproved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
   <data name="NoFiche" xml:space="preserve">
     <value>#</value>
   </data>

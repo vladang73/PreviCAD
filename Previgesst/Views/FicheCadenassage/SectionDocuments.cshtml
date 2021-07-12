@@ -87,6 +87,8 @@
                     .ToolBar(t =>
                     {
                         t.Create();
+                        t.Custom().Text("Archive").Name("Archive")
+                                      .HtmlAttributes(new { @class = "k-grid-archive btn-info" });
                     })
             )
 
@@ -117,8 +119,10 @@
         if (estUpdate == 'False') {
             $("a.btn-analyse").hide();
         }
-    });
 
+        $("a.k-grid-archive").removeClass("k-button  k-button-icontext");
+        $("a.k-grid-archive").addClass("btn");
+    });
 
 
     function ConfirmDeleteRowDoc(e) {
@@ -240,4 +244,29 @@
         });
     }
 
+    $('.k-grid-Archive').click(function (e) {
+        e.preventDefault();
+        ArchiveDocument();
+    });
+
+    function ArchiveDocument() {
+        $.ajax({
+            url: '/DocumentsFiche/CreateArchive?id=@Model.FicheCadenassageId',
+            type: "POST",
+            //data: JSON.stringify(model),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function (result) {
+                ShowNotification("@CadSourcesRES.Succes", "@CadSourcesRES.SourcesEnregistrees", "successTemplate")
+
+                if (result == 1) {
+                    DocumentsSync();
+                    $("#liste-doc").data("kendoGrid").dataSource.read();
+                }
+            },
+            error: function (data) {
+                ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")
+            }
+        });
+    }
 </script>
