@@ -9,6 +9,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 
+
+using Gma.QrCodeNet.Encoding;
+using Gma.QrCodeNet.Encoding.Windows.Render;
+using System.IO;
+using System.Drawing.Imaging;
+using System.Drawing;
+
 namespace Previgesst.Services
 {
     public class EquipementService
@@ -96,7 +103,10 @@ namespace Previgesst.Services
                 //Nomenclature = x.Nomenclature,
                 Function = x.Function,
                 YearOfProduction = x.YearOfProduction,
-                NumberOfSerie = x.NumberOfSerie
+                NumberOfSerie = x.NumberOfSerie,
+
+                QRCode = baseURL + x.QRCode ?? "",
+                //QRCode = baseURL + "Images/Cadenassage/Equipements/" + x.EquipementId.ToString() + "/QRCode.jpg?time=" + time,
 
             }).ToDataSourceResult(request);
 
@@ -249,5 +259,100 @@ namespace Previgesst.Services
 
             return true;
         }
+
+        public string SaveEquipementQR(int equipementId)
+        {
+            var repertoire = @"/Images/Cadenassage/Equipements/" + equipementId + "/";
+
+            if (!System.IO.Directory.Exists(HttpContext.Current.Server.MapPath(repertoire)))
+                System.IO.Directory.CreateDirectory(HttpContext.Current.Server.MapPath(repertoire));
+
+
+            ////////////////////////////////////////////////////////////////////
+
+
+            //ViewBag.item = Helpers.URLHelper.GetBaseUrl();
+
+            ///////////////////////////////////////////////////////
+
+            int width = 100;
+            var encoder = new QrEncoder(ErrorCorrectionLevel.Q);
+            var myCode = new QrCode();
+
+            var baseURL = Helpers.URLHelper.GetBaseUrl();
+            if (baseURL.Right(1) != "/" && baseURL.Right(1) != @"\")
+                baseURL += "/";
+
+            string qrString = string.Format("{0}search-procedure?eq={1}", baseURL, equipementId);
+
+            if (encoder.TryEncode(qrString, out myCode))
+            {
+                GraphicsRenderer dRenderer = new GraphicsRenderer(new FixedModuleSize(width, QuietZoneModules.Two), Brushes.Black, Brushes.White);
+
+                using (var ms = new MemoryStream())
+                {
+                    dRenderer.WriteToStream(myCode.Matrix, ImageFormat.Png, ms);
+
+                    string fileFullPath = System.IO.Path.Combine(HttpContext.Current.Server.MapPath(repertoire), "QRCode.png");
+
+                    using (FileStream file = new FileStream(fileFullPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    {
+                        //byte[] bytes = new byte[file.Length];
+                        //file.Read(bytes, 0, (int)file.Length);
+                        //ms.Write(bytes, 0, (int)file.Length);
+
+                        //ms.CopyTo(file);
+
+                        ms.WriteTo(file);
+                    }
+                    //return File(ms.ToArray(), "image/png");
+                }
+            }
+
+
+
+            ////////////////////////////////////////////////////////////////////
+
+            var item = equipementRepository.Get(equipementId);
+            if (item != null)
+            {
+                item.QRCode = repertoire + "QRCode.png";
+                if (string.IsNullOrEmpty(item.NumeroEquipement)) item.NumeroEquipement = "-";
+
+                equipementRepository.Update(item);
+                equipementRepository.SaveChanges();
+
+                return repertoire + "QRCode.png?t=" + DateTime.Now.Ticks.ToString();
+            }
+
+            return "";
+        }
+
+
+        internal List<EquipementQRViewModel> GetEquipementsWithQR(int ClientId)
+        {
+            var baseURL = Helpers.URLHelper.GetBaseUrl();
+            if (baseURL.Right(1) != "/" && baseURL.Right(1) != @"\")
+                baseURL += "/";
+            var time = DateTime.Now.ToLongTimeString();
+
+            var result = equipementRepository.AsQueryable()
+                        .Where(x => x.ClientId == ClientId)
+                        .Where(x => x.QRCode != null)
+                        .OrderBy(x => x.NomEquipement)
+                        .Select(x => new EquipementQRViewModel()
+                        {
+                            ClientId = x.ClientId,
+                            EquipementId = x.EquipementId,
+                            NomEquipement = x.NomEquipement,
+                            NomClient = x.Client.Nom,
+
+                            QRCode = baseURL + x.QRCode ?? "",
+                        })
+                        .ToList();
+
+            return result;
+        }
+
     }
 }

@@ -1200,5 +1200,12 @@ namespace Previgesst.Controllers
 
             return Json(new { Success = "0" }, JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult PrintQR(int id)
+        {
+            var equipments = equipementService.GetEquipementsWithQR(id);
+            return View(equipments);
+        }
     }
 }

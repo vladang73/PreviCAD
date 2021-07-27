@@ -56,6 +56,8 @@ namespace Previgesst.Models
 
         public string Function { get; set; }
 
+        public string QRCode { get; set; }
+
         public virtual ICollection<FicheCadenassage> FicheCadenassage { get; set; }
         public virtual ICollection<EquipementArticulo> EquipementArticulo { get; set; }
 

@@ -1,0 +1,58 @@
+﻿@using Previgesst.Ressources.Cadenassage
+@model List<Previgesst.ViewModels.EquipementQRViewModel>
+
+@{
+    ViewBag.Title = "Print QR";
+    Layout = null;
+    if (ViewData["Layout"] != null)
+    {
+        Layout = (string)ViewData["Layout"];
+    }
+}
+
+<style type="text/css">
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<div class="container-fluid">
+    @if (Model != null && Model.Count() > 0)
+    {
+    <table cellpadding="0" cellspacing="0" border="0" class="center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.QRCode" alt="QR Code" width="200" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>@item.NomClient</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Equipment # @item.EquipementId</label>
+                    <br />
+                    <br />
+                    <br />
+                </td>
+            </tr>
+        }
+    </table>
+
+    }
+</div>
+
+
+<script type="text/javascript">
+    // White background for the body ID
+    jQuery('#body').css('background', '#FFF');
+
+
+    // HIDE CURRENT LOGO
+    jQuery('.content-wrapper .float-left img').css('display', 'none');
+</script>
