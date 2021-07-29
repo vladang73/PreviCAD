@@ -13,6 +13,11 @@
             @if (Model.estUpdate)
             {
                 <a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/CreerFiche/@Model.ClientId" class="btn btn-success">@CadFichesRES.Ajouter<img class="addButtonImg" src="~/Images/addWhite.png" /></a>
+
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 490px;">
+                    Scan QR
+                </button>
+
                 <br />
             }
 
@@ -40,6 +45,7 @@
                     .Name("list")
                     .Columns(columns =>
                     {
+                        columns.Bound(e => e.EquipementId).Hidden();
                         columns.Bound(e => e.FicheCadenassageId).Hidden();
 
                         //columns.Bound(e => e.RevisionCourante).Title("A/R").ClientTemplate("<center><input onclick='doCheck(#=FicheCadenassageId#, this)' " + Model.RCDisabled + " type='checkbox' #=RevisionCourante ? checked='checked' :'' # /></center>").Width(60);
@@ -138,8 +144,8 @@
                 //Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneEditor").Window(w => w.Title("Édition d'un document").Width(1200).Name("editWindow")))
                 )
         </div>
-        </div>
     </div>
+</div>
 
 <script>
     // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
@@ -357,5 +363,64 @@
                 jQuery('.emptyFilter').click();
             },300);
         }
+    });
+</script>
+
+
+
+<div class="modal" tabindex="-1" role="dialog" id="qrModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="display: inline-block;">Scan Equipment QR Code</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="qr-reader" style="width:500px"></div>
+                <div id="qr-reader-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/html5-qrcode.min.js"></script>
+
+<script type="text/javascript">
+    var resultContainer = document.getElementById('qr-reader-results');
+    var lastResult, countResults = 0;
+
+    function onScanSuccess(decodedText, decodedResult) {
+        if (decodedText !== lastResult) {
+            ++countResults;
+            lastResult = decodedText;
+            // Handle on success condition with the decoded message.
+            console.log('Scan result ' + decodedText, decodedResult);
+
+
+
+            $('#qrModal').modal('hide');
+            var qrEqID = decodedText.split('#')[1];
+
+            var qrFilter = new Array();
+            qrFilter.push({ field: "EquipementId", operator: "eq", value: qrEqID });
+
+
+            var grid = $("#list").data("kendoGrid");
+            grid.dataSource.filter(qrFilter);
+            grid.dataSource.read();
+        }
+    }
+
+    $('#btnScanQR').click(function () {
+        var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+        $('#qr-reader').removeAttr('style');
+    });
+
+    $(document).ready(function () {
+        //$('.actionButton').append($('#btnScanQR'));
     });
 </script>

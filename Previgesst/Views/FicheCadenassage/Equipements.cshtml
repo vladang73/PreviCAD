@@ -13,7 +13,9 @@
         border-radius: 4px;
         width: 95%;
     }
+
 </style>
+
 
 <div class="panel panel-danger">
 
@@ -26,9 +28,8 @@
 
     <div class="panel-body">
 
-        @*<input type="file" accept="image/*" capture="camera" />
+        <a class="btn btn-info btn-print-qr" href="@Url.Action("PrintQR", "FicheCadenassage", new { @id = Model.ClientId })" style="position: absolute; top: 3px; left: 350px;" target="_blank"><span></span>Impression Code QR</a>
 
-        <input type="file" accept="capture=camera" />*@
 
         @Html.AntiForgeryToken()
 
@@ -125,12 +126,6 @@
                                 .ToolBar(t =>
                                 {
                                     t.Create();
-
-                                    t.Custom().Text("Impression Code QR")
-                                    .HtmlAttributes(new { @class = "btn btn-info btn-print-qr", @target = "_blank" })
-                                    //.Url("http://www.google.com")
-                                    .Action("PrintQR", "FicheCadenassage", new { @id = Model.ClientId })
-                                    ;
                                 })
                             )
     </div>
@@ -235,7 +230,7 @@
 
 
         <div class="form-group">
-            <img class="img-responsive" id="QRCode" name="QRCode" src="#= (QRCode == null) ? '' : QRCode #" />
+            <img class="img-responsive" id="QRCode" name="QRCode" />
         </div>
 
 
@@ -505,6 +500,10 @@
 
         wind.content(qrCodeTemplate(dataItem));
         wind.center().open();
+
+        if (dataItem.QRCode.includes('QRCode.png')) {
+            $('img#QRCode').attr('src', dataItem.QRCode);
+        }
     }
 
     function closeDetailsQR() {
@@ -512,12 +511,6 @@
     }
 
     function SaveQRInfo() {
-        //if valid
-        //var model = {
-        //    EquipementId: $('#details-container-qr').find("#EquipementId").val(),
-        //    QRCode: $('#details-container-qr').find("#Model").val(),
-        //};
-
         var eqId = $('#details-container-qr').find("#EquipementId").val();
 
         console.log('eqId', eqId);
@@ -540,15 +533,5 @@
             }
         });
     }
-
-
-    //$('.btn-print-qr').click(function (e) {
-    //    e.preventDefault();
-    //    PrintQRCodes();
-    //});
-
-    //function PrintQRCodes() {
-
-    //}
 
 </script>

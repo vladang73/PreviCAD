@@ -283,7 +283,7 @@ namespace Previgesst.Services
             if (baseURL.Right(1) != "/" && baseURL.Right(1) != @"\")
                 baseURL += "/";
 
-            string qrString = string.Format("{0}search-procedure?eq={1}", baseURL, equipementId);
+            string qrString = string.Format("Equipment#{0}", equipementId);
 
             if (encoder.TryEncode(qrString, out myCode))
             {
