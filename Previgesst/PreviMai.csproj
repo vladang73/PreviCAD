@@ -81,6 +81,9 @@
     <Reference Include="GemBox.Spreadsheet, Version=43.0.35.1095, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
       <HintPath>..\packages\GemBox.Spreadsheet.43.0.0.1095\lib\net35\GemBox.Spreadsheet.dll</HintPath>
     </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QrCode.Net.0.4.0.0\lib\net45\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
     <Reference Include="Kendo.Mvc">
       <HintPath>..\lib\KENDOUIMVC\2016.2.714.545\Kendo.Mvc.dll</HintPath>
       <Private>True</Private>
@@ -588,6 +591,10 @@
     <Compile Include="DataContexts\DbContextMigrations\202107091048558_Previg_78.Designer.cs">
       <DependentUpon>202107091048558_Previg_78.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\DbContextMigrations\202107261137211_Previg_79.cs" />
+    <Compile Include="DataContexts\DbContextMigrations\202107261137211_Previg_79.Designer.cs">
+      <DependentUpon>202107261137211_Previg_79.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\DbContextMigrations\Configuration.cs" />
     <Compile Include="DataContexts\Extensions\MigrationExtensions.cs" />
     <Compile Include="Enums\Applications.cs" />
@@ -1053,6 +1060,7 @@
     <Compile Include="ViewModels\Cadenassage\EditCadenassageViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\EditFicheViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\EquipementArticuloViewModel.cs" />
+    <Compile Include="ViewModels\Cadenassage\EquipementQRViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\LigneCadenassageGridViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\LigneInstructionViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\LigneDecadenassageViewModel.cs" />
@@ -1699,6 +1707,7 @@
     <Content Include="Scripts\cldr\supplemental\weekData.json" />
     <Content Include="Scripts\cldr\supplemental\windowsZones.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\html5-qrcode.min.js" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2139,6 +2148,7 @@
     <Content Include="Views\FicheCadenassage\EditorTemplates\LigneDocumentFicheEditor.cshtml" />
     <Content Include="Views\FicheCadenassage\EditorTemplates\UploadEditorDoc.cshtml" />
     <Content Include="Views\Default\AccessDenied.cshtml" />
+    <Content Include="Views\FicheCadenassage\PrintQR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />
@@ -2407,6 +2417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\DbContextMigrations\202107091048558_Previg_78.resx">
       <DependentUpon>202107091048558_Previg_78.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DbContextMigrations\202107261137211_Previg_79.resx">
+      <DependentUpon>202107261137211_Previg_79.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\Analyse\ARCreateRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

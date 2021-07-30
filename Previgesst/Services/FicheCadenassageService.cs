@@ -923,21 +923,23 @@ namespace Previgesst.Services
             droitSuppressionPrevi = droits.EstAdminPrevi || droits.EstUpdatePrevi;
             //droitSuppressionClient = false;
 
-            var result = ficheCadenassageRepository.AsQueryable().Where(x => x.ClientId == clientId && x.IsApproved == true).Select(x => new LigneRegistreViewModel()
-            {
-                FicheCadenassageId = x.FicheCadenassageId,
-                NoFicheCadenassage = x.NoFiche,
-                NomEquipement = langue == "fr" ? x.Equipement.NomEquipement : x.Equipement.NomEquipementEN,
-                NomDepartement = langue == "fr" ? x.Departement.NomDepartement : x.Departement.NomDepartementEN,
-                TravailAEffectuer = langue == "fr" ? x.TravailAEffectuer : x.TravailAEffectuerEN,
-                TitreFiche = langue == "fr" ? x.TitreFiche : x.TitreFicheEN,
-                LigneRegistreId = 0,
-                DateDebut = DateTime.Today,
+            var result = ficheCadenassageRepository.AsQueryable()
+                        .Where(x => x.ClientId == clientId && x.IsApproved == true)
+                        .Select(x => new LigneRegistreViewModel()
+                        {
+                            FicheCadenassageId = x.FicheCadenassageId,
+                            NoFicheCadenassage = x.NoFiche,
+                            NomEquipement = langue == "fr" ? x.Equipement.NomEquipement : x.Equipement.NomEquipementEN,
+                            NomDepartement = langue == "fr" ? x.Departement.NomDepartement : x.Departement.NomDepartementEN,
+                            TravailAEffectuer = langue == "fr" ? x.TravailAEffectuer : x.TravailAEffectuerEN,
+                            TitreFiche = langue == "fr" ? x.TitreFiche : x.TitreFicheEN,
+                            LigneRegistreId = 0,
+                            DateDebut = DateTime.Today,
 
-                TexteMateriel = x.MaterielsRequisCadenassage.Select(z => langue == "fr" ? z.Materiel.Description + " (" + z.Quantite.ToString() + ")" : z.Materiel.DescriptionEN + " (" + z.Quantite.ToString() + ")").ToList(),
+                            TexteMateriel = x.MaterielsRequisCadenassage.Select(z => langue == "fr" ? z.Materiel.Description + " (" + z.Quantite.ToString() + ")" : z.Materiel.DescriptionEN + " (" + z.Quantite.ToString() + ")").ToList(),
+                            EquipementId = x.EquipementId
 
-
-            }).ToDataSourceResult(request);
+                        }).ToDataSourceResult(request);
 
             return result;
         }

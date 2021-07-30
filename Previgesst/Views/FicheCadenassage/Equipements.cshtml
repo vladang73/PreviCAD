@@ -13,7 +13,9 @@
         border-radius: 4px;
         width: 95%;
     }
+
 </style>
+
 
 <div class="panel panel-danger">
 
@@ -26,6 +28,7 @@
 
     <div class="panel-body">
 
+        <a class="btn btn-info btn-print-qr" href="@Url.Action("PrintQR", "FicheCadenassage", new { @id = Model.ClientId })" style="position: absolute; top: 3px; left: 350px;" target="_blank"><span></span>Impression Code QR</a>
 
 
         @Html.AntiForgeryToken()
@@ -35,6 +38,8 @@
                                 .Columns(columns =>
                                 {
                                     columns.Bound(e => e.EquipementId).Hidden();
+                                    columns.Bound(e => e.QRCode).Hidden();
+
                                     //NomEquipement
                                     columns.Bound(c => c.NumeroEquipment)//.EditorTemplateName("MyView")
                                     .Filterable(f => f.Extra(false).Operators(operators => operators
@@ -67,6 +72,8 @@
                                     columns.Command(command => command.Custom("Détails").Click("showDetailsNew"));
 
                                     columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie"));
+
+                                    columns.Command(command => command.Custom("QR").Click("showDetailsQR"));
 
                                     //columns.Bound(bt => bt.EquipementId).ClientTemplate("<a href='/EquipementArticuloe/Index/#= " + nameof(EquipementViewModel.EquipementId) + " #' class='btn btn-primary btn-edit-force k-cde-edit'></a>").Title("Énergie").Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
 
@@ -130,11 +137,17 @@
         .Modal(true)
         .Width(650)
 )
+@(Html.Kendo().Window().Name("QrDetails")
+        .Title("équipements QR Code")
+        .Visible(false)
+        .Modal(true)
+        .Width(450)
+)
 
 <script type="text/x-kendo-template" id="eqTemplate">
     <div id="details-contaner">
 
-            <input type="hidden" id="EquipementId" value="#=EquipementId#" />
+        <input type="hidden" id="EquipementId" value="#=EquipementId#" />
 
 
         <div class="form-group">
@@ -210,117 +223,43 @@
     </div>
 </script>
 
-@*
+<script type="text/x-kendo-template" id="qrTemplate">
+    <div id="details-container-qr">
 
-        @(Html.Kendo().Window().Name("EngDetails")
-                .Title("Énergie")
-                .Visible(false)
-                .Modal(true)
-                .Width(900)
-                .Height(500)
-        )
+        <input type="hidden" id="EquipementId" value="#=EquipementId#" />
 
 
-
-
-
-
-                <div class="col-md-3">
-                </div>
-                <div class="form-group col-1">
-                </div>
-                <div class="form-group col-1">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control petit" id="Nomenclature" name="Nomenclature" value="#= (Nomenclature == null) ? '' : Nomenclature #" />
-
-                </div>
-                <div class="form-group text-right">
-                </div>
-
-                <style>
-                      .k-grid .k-grid-toolbar .k-grid-add,
-                      .k-grid tbody .k-grid-edit,
-                      .k-grid tbody .k-grid-update,
-                      .k-grid tbody .k-grid-cancel,
-                      .k-grid tbody .k-grid-delete ,
-                      {
-                          min-width: 0 !important;
-                          position: static !important;
-                      }
-
-                      .k-grid .k-grid-toolbar .k-grid-add .k-icon,
-                      .k-grid tbody .k-grid-edit .k-icon,
-                      .k-grid tbody .k-grid-update .k-icon,
-                      .k-grid tbody .k-grid-cancel .k-icon,
-                      .k-grid tbody .k-grid-delete .k-icon {
-                          margin: 0 !important;
-                      }
-                 </style>
-
-    <script type="text/x-kendo-template" id="engTemplate">
-        <div id="energy-contaner">
-
-        <style>
-                .k-button.k-grid-cancel,
-                .k-button.k-grid-update,
-                .k-button.k-grid-delete
-                {
-                    min-width: 0 !important;
-                    padding: 0 !important;
-                    border: 0;
-                    background-color: transparent !important;
-                }
-                .k-button.k-grid-edit{
-                    min-width: 0 !important;
-                    bottom: auto;
-                }
-         </style>
-
-
-            <input type="hidden" id="EquipementId" value="#=EquipementId#" />
-
-            <table class="table table-condensed">
-                <tr>
-                    <th width="22%"><label for="Energy">Sources d'énergie</label></th>
-                    <th width="22%"><label for="Deposit">Dispositifs</label></th>
-                    <th width="22%"><label for="Accessories">Matériels</label></th>
-                    <th width="22%"><label for="Nomenclature">Nomenclature</label></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td><select id="Energy" class="k-multiselect"></select></td>
-                    <td><select id="Deposit" class="k-multiselect"></select></td>
-                    <td><select id="Accessories" class="k-multiselect"></select></td>
-                    <td><input type="text" class="form-control petit" id="Nomenclature" name="Nomenclature" /></td>
-                    <td>
-                        <a class="k-button k-button-icontext k-primary k-grid-update" onclick="SaveEnergieInfo()">
-                            <span class="k-icon k-update"></span>
-                        </a>
-
-                        <a class="k-button k-button-icontext k-grid-cancel" onclick="closeEnergieInfo()">
-                            <span class="k-icon k-cancel"></span>
-                        </a>
-                    </td>
-                </tr>
-            </table>
-
-            <div id="gridEnergy"></div>
-
-            </div>
+        <div class="form-group">
+            <img class="img-responsive" id="QRCode" name="QRCode" />
         </div>
-    </script>
-*@
+
+
+        <div class="form-group text-right">
+            <a class="k-button k-button-icontext k-primary k-grid-update" onclick="SaveQRInfo()">
+                <span class="k-icon k-update"></span>Mettre à jour
+            </a>
+
+            <a class="k-button k-button-icontext k-grid-cancel" onclick="closeDetailsQR()">
+                <span class="k-icon k-cancel"></span>Annuler
+            </a>
+        </div>
+
+    </div>
+</script>
 
 
 <script type="text/javascript">
 
     var detailsTemplate;
     var energieTemplate;
+    var qrCodeTemplate;
 
     $(document).ready(function () {
         detailsTemplate = kendo.template($("#eqTemplate").html());
+        qrCodeTemplate = kendo.template($("#qrTemplate").html());
         //energieTemplate = kendo.template($("#engTemplate").html());
+
+        $('.btn-print-qr').removeClass("k-button  k-button-icontext");
     });
 
     function showDetailsNew(e) {
@@ -409,132 +348,6 @@
         wind.center().open();*@
     }
 
-    @*
-
-    function SaveEnergieInfo() {
-        //if valid
-        var model = {
-            EquipementId: $('#energy-contaner').find("#EquipementId").val(),
-            Energy: $('#energy-contaner').find("#Energy").val(),
-            Accessories: $('#energy-contaner').find("#Accessories").val(),
-            Deposit: $('#energy-contaner').find("#Deposit").val(),
-            Nomenclature: $('#energy-contaner').find("#Nomenclature").val(),
-        };
-
-        $.ajax({
-            url: '/Equipement/SaveEnergyInfo/',
-            type: 'POST',
-            data: model,
-            dataType: 'json',
-            cache: false,
-            success: function (result) {
-                GetGridForPopup('#gridEnergy', model.EquipementId, '/Equipement/GetEquipementArticuloes');
-            },
-            error: function (req, status, errorObj) {
-            }
-        });
-    }
-
-    function GetDropdownForPopup(ctrlID, selectedValue, urlToList) {
-        $.ajax({
-            url: urlToList,
-            type: "GET",
-            //data: JSON.stringify(dataInput),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-                // reload de la grille
-
-                var multiselect = $('#energy-contaner').find(ctrlID).kendoDropDownList({
-                    dataTextField: "Description",
-                    dataValueField: "Id",
-                    optionLabel: "Select",
-                    dataSource: result
-                }).data("kendoDropDownList");
-
-
-                //if (selectedValue != null) {
-                //    multiselect.value(selectedValue.split(','));
-                //    multiselect.trigger("change");
-                //}
-            }
-        });
-    }
-
-    function GetGridForPopup(ctrlID, selectedValue, urlToList) {
-        $.ajax({
-            url: urlToList + '?equipementId=' + selectedValue,
-            type: "GET",
-            //data: JSON.stringify(dataInput),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-                // reload de la grille
-
-                $('#energy-contaner')
-                    .find(ctrlID)
-                    .kendoGrid({
-                        columns: [
-                            { field: "EnergyDescription", title: "Energy" },
-                            { field: "DepositDescription", title: "Deposit" },
-                            { field: "AccessoriesDescription", title: "Accessories" },
-                            { field: "Nomenclature" },
-                            {
-                                command: [
-                                    { name: "edit", text: { edit: " ", update: " ", cancel: " " } },
-                                    { name: "destroy", text: " " }, //, template: "<a class='k-button k-button-icontext k-grid-delete k-grid-effacer'><span class=' '></span></a>" }
-                                ],
-                                width: "80px",
-                            }
-                        ],
-                        dataSource: result,
-                        editable: "inline",
-                        remove: function (e) {
-                            e.preventDefault();
-
-                            var grid = this;
-                            var selectedValue = e.model.EquipementArticuloID;
-
-                            $.post('/Equipement/DeleteEquipementArticuloes?equipementArticuloeID=' + selectedValue, function (result) {
-                                console.log(result);
-                                if (result.IsSuccess == false) {
-                                    grid.cancelChanges();
-                                }
-                            });
-                        }
-                    })
-                    .data("kendoGrid");
-
-            }
-        });
-    }
-
-    function DeleteEquipementArticuloe(selectedValue) {
-        $.ajax({
-            url: '/Equipement/DeleteEquipementArticuloes?equipementArticuloeID=' + selectedValue,
-            type: "POST",
-            async: false,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function (result) {
-                // reload de la grille
-                return result.IsSuccess;
-            }
-        });
-    }
-
-    function closeEnergieInfo() {
-        $("#EngDetails").data("kendoWindow").close();
-    }
-
-    function ClearEnergieInfo() {
-        $('#energy-contaner').find("#EquipementId").val(0);
-        $('#energy-contaner').find("#Energy").val('');
-        $('#energy-contaner').find("#Accessories").val('');
-        $('#energy-contaner').find("#Deposit").val('');
-        $('#energy-contaner').find("#Nomenclature").val('');
-    }
-    *@
 
     var imageWindow;
     var timer;
@@ -677,4 +490,48 @@
             }
         })
     }
+
+
+
+    function showDetailsQR(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wind = $("#QrDetails").data("kendoWindow");
+
+        wind.content(qrCodeTemplate(dataItem));
+        wind.center().open();
+
+        if (dataItem.QRCode.includes('QRCode.png')) {
+            $('img#QRCode').attr('src', dataItem.QRCode);
+        }
+    }
+
+    function closeDetailsQR() {
+        $("#QrDetails").data("kendoWindow").close();
+    }
+
+    function SaveQRInfo() {
+        var eqId = $('#details-container-qr').find("#EquipementId").val();
+
+        console.log('eqId', eqId);
+
+        $.ajax({
+            url: '/Equipement/SaveEquipementQR?id=' + eqId,
+            type: 'POST',
+            //data: model,
+            dataType: 'json',
+            cache: false,
+            success: function (result) {
+                if (result.isSuccess == true) {
+                    //closeDetailsEQ();
+                    $('#listEquipement').data('kendoGrid').dataSource.read();
+
+                    $('#details-container-qr').find("#QRCode").attr('src', result.QRCode);
+                }
+            },
+            error: function (req, status, errorObj) {
+            }
+        });
+    }
+
 </script>

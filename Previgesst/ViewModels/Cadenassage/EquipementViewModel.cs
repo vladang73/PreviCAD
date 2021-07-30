@@ -53,6 +53,7 @@ namespace Previgesst.ViewModels
         public bool Suppressible { get; set; }
 
         public string NomFichier { get; set; }
+        public string QRCode { get; set; }
 
 
     }

@@ -72,6 +72,6 @@ namespace Previgesst.ViewModels
         [Display(ResourceType = typeof(PrevFicheRES), Name = "BonDeTravail")]
         public string BonDeTravail { get; set; }
 
-
+        public int EquipementId { get; set; }
     }
 }

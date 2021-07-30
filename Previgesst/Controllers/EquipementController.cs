@@ -51,8 +51,7 @@ namespace Previgesst.Controllers
         //    return Json(new { isSuccess = true });
         //}
 
-        public ActionResult SaveEquipement([DataSourceRequest] DataSourceRequest request,
-         EquipementViewModel item, int client)
+        public ActionResult SaveEquipement([DataSourceRequest] DataSourceRequest request, EquipementViewModel item, int client)
         {
             if (item != null && ModelState.IsValid)
             {
@@ -80,6 +79,17 @@ namespace Previgesst.Controllers
         public ActionResult EditEquipement([DataSourceRequest] DataSourceRequest request, EquipementViewModel equipement)
         {
             return PartialView("EquipementEditor.cshtml");
+        }
+
+        [HttpPost]
+        public ActionResult SaveEquipementQR(int id)
+        {
+            string filePath = "";
+            if (id > 0)
+            {
+                filePath = equipementService.SaveEquipementQR(id);
+            }
+            return Json(new { isSuccess = true, QRCode = filePath });
         }
 
     }

@@ -6,7 +6,7 @@
 <style>
 
     .k-grid-content {
-        overflow-x: scroll!important;
+        overflow-x: scroll !important;
     }
 </style>
 
@@ -18,7 +18,9 @@
 
         </div>
         <div>
-
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 400px;">
+                Scan QR
+            </button>
 
             @Html.AntiForgeryToken()
 
@@ -26,8 +28,9 @@
                     .Name("list")
                     .Columns(columns =>
                     {
-
+                        columns.Bound(e => e.EquipementId).Hidden();
                         columns.Bound(e => e.FicheCadenassageId).Hidden();
+
                         columns.Bound(c => c.NoFicheCadenassage).Title(PrevFicheRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
@@ -78,14 +81,15 @@
                         })
 
                         .PageSize(20)
-                        .Model(m =>
-                        {
+                        .Model(m => {
                             m.Id(e => e.FicheCadenassageId);
                         })
-                    .Read(r => r.Action("ReadListFiches", "Registre", new { client = Model.ClientId }))
-                    .Update(r => r.Action("AddNewLine", "Registre", new { client = Model.ClientId }))
-                    ).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistreNew").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600)))
-                    .Events( e=> e.Edit("onEditFiches")).Events(e=>e.DataBound("dataBoundFiches"))
+                        .Read(r => r.Action("ReadListFiches", "Registre", new { client = Model.ClientId }))
+                        .Update(r => r.Action("AddNewLine", "Registre", new { client = Model.ClientId }))
+                    )
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistreNew").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600)))
+                    .Events( e=> e.Edit("onEditFiches"))
+                    .Events(e=>e.DataBound("dataBoundFiches"))
             )
 
         </div>
@@ -136,7 +140,7 @@
     }
 
     function navigate(e) {
-      
+
     }
 
 
@@ -166,27 +170,27 @@
     }
 
     function onEditFiches(e) {
-     
+
         e.container.find(".k-grid-cancel").bind("click", function () {
-           
+
             $("#list").data("kendoGrid").dataSource.read();
             $("#listEnCours").data("kendoGrid").dataSource.read();
             $("#listTermines").data("kendoGrid").dataSource.read();
-            
+
             // FICHE/PROCÉDURE : Check and replace the string by an image
             setTimeout(function () {
                 jQuery('.registreEmploye #list table tbody tr td:nth-child(5)').each(function () {
                     if (jQuery(this).text() == 'Procédure de travail sécuritaire') {
                         jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Procédure de travail sécuritaire'>");
                     }
-                    else if(jQuery(this).text() == 'Safe work procedure'){
-                       jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
+                    else if (jQuery(this).text() == 'Safe work procedure') {
+                        jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
                     }
-                    else if(jQuery(this).text() == 'Fiche de cadenassage'){
-                       jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
+                    else if (jQuery(this).text() == 'Fiche de cadenassage') {
+                        jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
                     }
-                    else if(jQuery(this).text() == 'Lockout card'){
-                       jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout card'>");
+                    else if (jQuery(this).text() == 'Lockout card') {
+                        jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout card'>");
                     }
                 });
             }, 300);
@@ -194,32 +198,86 @@
         })
     }
 
-        // FICHE/PROCÉDURE : Check and replace the string by an image
-        setTimeout(function () {
-            jQuery('.registreEmploye #list table tbody tr td:nth-child(5)').each(function () {
-                if (jQuery(this).text() == 'Procédure de travail sécuritaire') {
-                    jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Procédure de travail sécuritaire'>");
-                }
-                else if(jQuery(this).text() == 'Safe work procedure'){
-                   jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
-                }
-                else if(jQuery(this).text() == 'Fiche de cadenassage'){
-                   jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
-                }
-                else if(jQuery(this).text() == 'Lockout card'){
-                   jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout card'>");
-                }
-            });
-        }, 3000);
+    // FICHE/PROCÉDURE : Check and replace the string by an image
+    setTimeout(function () {
+        jQuery('.registreEmploye #list table tbody tr td:nth-child(5)').each(function () {
+            if (jQuery(this).text() == 'Procédure de travail sécuritaire') {
+                jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Procédure de travail sécuritaire'>");
+            }
+            else if (jQuery(this).text() == 'Safe work procedure') {
+                jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
+            }
+            else if (jQuery(this).text() == 'Fiche de cadenassage') {
+                jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
+            }
+            else if (jQuery(this).text() == 'Lockout card') {
+                jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout card'>");
+            }
+        });
+    }, 3000);
 
-        // Add img title
-        setTimeout(function () {
-            jQuery('.materialButton').each(function () {
-                jQuery(this).attr('title', 'Materiel');
-            });
-            jQuery('.k-grid-edit').each(function () {
-                jQuery(this).attr('title', 'Effectuez');
-            });
-        }, 3000);
+    // Add img title
+    setTimeout(function () {
+        jQuery('.materialButton').each(function () {
+            jQuery(this).attr('title', 'Materiel');
+        });
+        jQuery('.k-grid-edit').each(function () {
+            jQuery(this).attr('title', 'Effectuez');
+        });
+    }, 3000);
 
+</script>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="qrModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="display: inline-block;">Scan Equipment QR Code</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="qr-reader" style="width:500px"></div>
+                <div id="qr-reader-results"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/html5-qrcode.min.js"></script>
+
+<script type="text/javascript">
+    var resultContainer = document.getElementById('qr-reader-results');
+    var lastResult, countResults = 0;
+
+    function onScanSuccess(decodedText, decodedResult) {
+        if (decodedText !== lastResult) {
+            ++countResults;
+            lastResult = decodedText;
+            // Handle on success condition with the decoded message.
+            console.log('Scan result ' + decodedText, decodedResult);
+
+
+
+            $('#qrModal').modal('hide');
+            var qrEqID = decodedText.split('#')[1];
+
+            var qrFilter = new Array();
+            qrFilter.push({ field: "EquipementId", operator: "eq", value: qrEqID });
+
+
+            var grid = $("#list").data("kendoGrid");
+            grid.dataSource.filter(qrFilter);
+            grid.dataSource.read();
+        }
+    }
+
+    $('#btnScanQR').click(function() {
+        var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess);
+        $('#qr-reader').removeAttr('style');
+    });
 </script>
