@@ -141,6 +141,9 @@
   <data name="Num" xml:space="preserve">
     <value># Équipement</value>
   </data>
+  <data name="PrintQRCode" xml:space="preserve">
+    <value>Imprimer le code QR</value>
+  </data>
   <data name="Vide" xml:space="preserve">
     <value> </value>
   </data>

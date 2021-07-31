@@ -180,6 +180,9 @@
   <data name="Oui" xml:space="preserve">
     <value>Oui</value>
   </data>
+  <data name="ScanQR" xml:space="preserve">
+    <value>Scannez le QR</value>
+  </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Telecharger</value>
   </data>

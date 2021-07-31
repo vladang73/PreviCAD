@@ -124,11 +124,20 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numéro de l&apos;équipement.
+        ///   Looks up a localized string similar to # Équipement.
         /// </summary>
         public static string Num {
             get {
                 return ResourceManager.GetString("Num", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imprimer le code QR.
+        /// </summary>
+        public static string PrintQRCode {
+            get {
+                return ResourceManager.GetString("PrintQRCode", resourceCulture);
             }
         }
         

@@ -177,6 +177,9 @@
   <data name="Registre" xml:space="preserve">
     <value>Lockout logbook</value>
   </data>
+  <data name="ScanQR" xml:space="preserve">
+    <value>Scan QR</value>
+  </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Download</value>
   </data>

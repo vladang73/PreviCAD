@@ -18,8 +18,8 @@
 
         </div>
         <div>
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 400px;">
-                Scan QR
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 420px;">
+                @PrevFicheRES.ScanQR
             </button>
 
             @Html.AntiForgeryToken()
@@ -234,12 +234,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" style="display: inline-block;">Scan Equipment QR Code</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnCloseQRPopup">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div id="qr-reader" style="width:500px"></div>
+                <div id="qr-reader" style="width:300px"></div>
                 <div id="qr-reader-results"></div>
             </div>
         </div>
@@ -276,8 +276,19 @@
     }
 
     $('#btnScanQR').click(function() {
-        var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
-        html5QrcodeScanner.render(onScanSuccess);
-        $('#qr-reader').removeAttr('style');
+        //var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
+        //html5QrcodeScanner.render(onScanSuccess);
+        //$('#qr-reader').removeAttr('style');
+
+        const html5QrCode = new Html5Qrcode("qr-reader");
+        const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+            /* handle success */
+            onScanSuccess(decodedText, decodedResult);
+        };
+        const config = { fps: 10, qrbox: 200 };
+        // If you want to prefer back camera
+        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+
+        $('#btnCloseQRPopup').off('click').click(function () { alert('closing popup'); html5QrCode.stop(); });
     });
 </script>

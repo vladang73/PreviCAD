@@ -178,6 +178,9 @@
   <data name="RevActive" xml:space="preserve">
     <value>Active rev.</value>
   </data>
+  <data name="ScanQR" xml:space="preserve">
+    <value>Scan QR</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value>EN</value>
   </data>

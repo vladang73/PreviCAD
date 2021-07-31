@@ -250,6 +250,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scannez le QR.
+        /// </summary>
+        public static string ScanQR {
+            get {
+                return ResourceManager.GetString("ScanQR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EN.
         /// </summary>
         public static string Sheet {
