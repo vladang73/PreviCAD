@@ -134,13 +134,13 @@
 </div>
 
 @(Html.Kendo().Window().Name("EqDetails")
-        .Title("Gestion des équipements")
+        .Title(CadEquipRES.EquipmentMgmt)
         .Visible(false)
         .Modal(true)
         .Width(650)
 )
 @(Html.Kendo().Window().Name("QrDetails")
-        .Title("Équipements QR Code")
+        .Title(@CadEquipRES.CreateEquipmentQR)
         .Visible(false)
         .Modal(true)
         .Width(250)

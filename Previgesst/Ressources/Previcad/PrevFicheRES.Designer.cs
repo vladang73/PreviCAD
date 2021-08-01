@@ -106,6 +106,15 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Effacer la recherche QR.
+        /// </summary>
+        public static string ClearQRFilter {
+            get {
+                return ResourceManager.GetString("ClearQRFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Début.
         /// </summary>
         public static string Debut {

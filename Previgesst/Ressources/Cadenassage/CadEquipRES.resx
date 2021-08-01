@@ -123,11 +123,17 @@
   <data name="ChangerImage" xml:space="preserve">
     <value>Changer l'image</value>
   </data>
+  <data name="CreateEquipmentQR" xml:space="preserve">
+    <value>Équipements QR Code</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>Détailles</value>
   </data>
   <data name="Effacer" xml:space="preserve">
     <value>Effacer</value>
+  </data>
+  <data name="EquipmentMgmt" xml:space="preserve">
+    <value>Gestion des équipements</value>
   </data>
   <data name="Erreurs" xml:space="preserve">
     <value>Erreurs</value>

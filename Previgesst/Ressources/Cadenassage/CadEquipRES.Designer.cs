@@ -79,6 +79,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Équipements QR Code.
+        /// </summary>
+        public static string CreateEquipmentQR {
+            get {
+                return ResourceManager.GetString("CreateEquipmentQR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Détailles.
         /// </summary>
         public static string Details {
@@ -93,6 +102,15 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string Effacer {
             get {
                 return ResourceManager.GetString("Effacer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestion des équipements.
+        /// </summary>
+        public static string EquipmentMgmt {
+            get {
+                return ResourceManager.GetString("EquipmentMgmt", resourceCulture);
             }
         }
         

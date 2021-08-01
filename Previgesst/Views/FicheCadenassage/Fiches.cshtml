@@ -18,21 +18,25 @@
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 575px;">
                     @CadFichesRES.ScanQR
                 </button>
+
+                <button type="button" class="btn btn-primary"  id="btnClearQRFilter" style="position: absolute; top: 3px; left: 750px;">
+                    @CadFichesRES.ClearQRFilter
+                </button>
             }
 
             @*Add filters
 
-                // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
-                <select class="filterEquipment">
-                    <option class="filterButton" value="equipment">Filtre équipement</option>
-                    <option class="filterButton" value="test1">Test 1</option>
-                    <option class="filterButton" value="test2">Test 2</option>
-                </select>
-                <select class="filterDepartment">
-                    <option class="filterButton" value="departement">Filtre département</option>
-                    <option class="filterButton" value="test1">Test 1</option>
-                    <option class="filterButton" value="test2">Test 2</option>
-                </select>
+        // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
+        <select class="filterEquipment">
+            <option class="filterButton" value="equipment">Filtre équipement</option>
+            <option class="filterButton" value="test1">Test 1</option>
+            <option class="filterButton" value="test2">Test 2</option>
+        </select>
+        <select class="filterDepartment">
+            <option class="filterButton" value="departement">Filtre département</option>
+            <option class="filterButton" value="test1">Test 1</option>
+            <option class="filterButton" value="test2">Test 2</option>
+        </select>
             *@
         </div>
         <div class="fichesCadenassage">
@@ -392,7 +396,8 @@
     var lastResult, countResults = 0;
 
     function onScanSuccess(decodedText, decodedResult) {
-        if (decodedText !== lastResult) {
+        //if (decodedText !== lastResult)
+        {
             ++countResults;
             lastResult = decodedText;
             // Handle on success condition with the decoded message.
@@ -410,6 +415,8 @@
             var grid = $("#list").data("kendoGrid");
             grid.dataSource.filter(qrFilter);
             grid.dataSource.read();
+
+            //alert('filtered ' + decodedText);
         }
     }
 
@@ -422,6 +429,9 @@
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             /* handle success */
             onScanSuccess(decodedText, decodedResult);
+
+            console.log('stoping scan');
+            html5QrCode.stop();
         };
         const config = { fps: 10, qrbox: 200 };
         // If you want to prefer back camera
@@ -430,7 +440,10 @@
         $('#btnCloseQRPopup').off('click').click(function () { alert('closing popup'); html5QrCode.stop(); });
     });
 
-    $(document).ready(function () {
-        //$('.actionButton').append($('#btnScanQR'));
+    $('#btnClearQRFilter').click(function () {
+        var qrFilter = new Array();
+        var grid = $("#list").data("kendoGrid");
+        grid.dataSource.filter(qrFilter);
+        grid.dataSource.read();
     });
 </script>

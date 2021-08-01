@@ -132,6 +132,9 @@
   <data name="Card" xml:space="preserve">
     <value>Card</value>
   </data>
+  <data name="ClearQRFilter" xml:space="preserve">
+    <value>Effacer la recherche QR</value>
+  </data>
   <data name="Debut" xml:space="preserve">
     <value>Début</value>
   </data>

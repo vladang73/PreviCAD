@@ -139,6 +139,9 @@
   <data name="AucunDocument" xml:space="preserve">
     <value>No document available</value>
   </data>
+  <data name="ClearQRFilter" xml:space="preserve">
+    <value>Clear QR Search</value>
+  </data>
   <data name="Departement" xml:space="preserve">
     <value>Department</value>
   </data>

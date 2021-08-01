@@ -18,6 +18,10 @@
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 500px; ">
                 @PrevFicheRES.ScanQR
             </button>
+
+            <button type="button" class="btn btn-primary" id="btnClearQRFilter" style="position: absolute; top: 3px; left: 750px;">
+                @PrevFicheRES.ClearQRFilter
+            </button>
         </div>
         <div>
             
@@ -250,15 +254,16 @@
 <script src="~/Scripts/html5-qrcode.min.js"></script>
 
 <script type="text/javascript">
-    var resultContainer = document.getElementById('qr-reader-results');
+    //var resultContainer = document.getElementById('qr-reader-results');
     var lastResult, countResults = 0;
 
     function onScanSuccess(decodedText, decodedResult) {
-        if (decodedText !== lastResult) {
+        /*if (decodedText !== lastResult)*/
+        {
             ++countResults;
             lastResult = decodedText;
             // Handle on success condition with the decoded message.
-            console.log('Scan result ' + decodedText, decodedResult);
+            console.log('Scan result ' + decodedText, decodedResult, new Date());
 
 
 
@@ -272,6 +277,8 @@
             var grid = $("#list").data("kendoGrid");
             grid.dataSource.filter(qrFilter);
             grid.dataSource.read();
+
+            //alert('filtered ' + decodedText);
         }
     }
 
@@ -284,11 +291,22 @@
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             /* handle success */
             onScanSuccess(decodedText, decodedResult);
+
+            console.log('stoping scan');
+            $('#qrModal').modal('hide');
+            html5QrCode.stop();
         };
         const config = { fps: 10, qrbox: 200 };
         // If you want to prefer back camera
         html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
 
         $('#btnCloseQRPopup').off('click').click(function () { alert('closing popup'); html5QrCode.stop(); });
+    });
+
+    $('#btnClearQRFilter').click(function () {
+        var qrFilter = new Array();
+        var grid = $("#list").data("kendoGrid");
+        grid.dataSource.filter(qrFilter);
+        grid.dataSource.read();
     });
 </script>
