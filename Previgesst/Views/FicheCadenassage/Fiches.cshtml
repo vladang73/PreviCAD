@@ -13,12 +13,11 @@
             @if (Model.estUpdate)
             {
                 <a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/CreerFiche/@Model.ClientId" class="btn btn-success">@CadFichesRES.Ajouter<img class="addButtonImg" src="~/Images/addWhite.png" /></a>
+                <br />
 
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 510px;">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 575px;">
                     @CadFichesRES.ScanQR
                 </button>
-
-                <br />
             }
 
             @*Add filters

@@ -28,7 +28,7 @@
 
     <div class="panel-body">
 
-        <a class="btn btn-info btn-print-qr" href="@Url.Action("PrintQR", "FicheCadenassage", new { @id = Model.ClientId })" style="position: absolute; top: 3px; left: 360px;" target="_blank">
+        <a class="btn btn-info btn-print-qr" href="@Url.Action("PrintQR", "FicheCadenassage", new { @id = Model.ClientId })" style="position: absolute; top: 3px; left: 425px;" target="_blank">
             @CadEquipRES.PrintQRCode
         </a>
 
@@ -140,10 +140,10 @@
         .Width(650)
 )
 @(Html.Kendo().Window().Name("QrDetails")
-        .Title("équipements QR Code")
+        .Title("Équipements QR Code")
         .Visible(false)
         .Modal(true)
-        .Width(450)
+        .Width(250)
 )
 
 <script type="text/x-kendo-template" id="eqTemplate">
@@ -232,7 +232,7 @@
 
 
         <div class="form-group">
-            <img class="img-responsive" id="QRCode" name="QRCode" />
+            <img class="img-responsive" id="QRCode" name="QRCode" style="width: 200px;" />
         </div>
 
 
