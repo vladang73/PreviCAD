@@ -268,6 +268,15 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scannez le code QR de l&apos;équipement.
+        /// </summary>
+        public static string ScanQREquip {
+            get {
+                return ResourceManager.GetString("ScanQREquip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telecharger.
         /// </summary>
         public static string Telecharger {

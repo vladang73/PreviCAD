@@ -183,6 +183,9 @@
   <data name="ScanQR" xml:space="preserve">
     <value>Scan QR</value>
   </data>
+  <data name="ScanQREquip" xml:space="preserve">
+    <value>Scan Equipment QR Code</value>
+  </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Download</value>
   </data>
