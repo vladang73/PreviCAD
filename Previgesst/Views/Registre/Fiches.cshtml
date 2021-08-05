@@ -300,7 +300,7 @@
         // If you want to prefer back camera
         html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
 
-        $('#btnCloseQRPopup').off('click').click(function () { alert('closing popup'); html5QrCode.stop(); });
+        $('#btnCloseQRPopup').off('click').click(function () { html5QrCode.stop(); });
     });
 
     $('#btnClearQRFilter').click(function () {
