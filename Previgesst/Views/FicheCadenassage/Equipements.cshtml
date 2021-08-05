@@ -13,6 +13,39 @@
         border-radius: 4px;
         width: 95%;
     }
+    .eq-grid-class{
+        background-color: transparent;
+        /*overflow-x: scroll;*/
+    }
+
+        .eq-grid-class td[role=gridcell] {
+            min-width: 25px;
+        }
+        /*.eq-grid-class::after{
+            clear:both !important;
+        }
+        .eq-grid-class td[role=gridcell] {
+            min-width: 25px;
+        }
+        .eq-grid-class table {
+            transform: translate(10px);
+        }*/
+
+    @@media screen and (max-width: 1400px) {
+        .eq-grid-class {
+            background-color: transparent;
+            overflow-x: scroll;
+        }
+
+           /* .eq-grid-class::after {
+                clear: both !important;
+            }*/
+
+
+            .eq-grid-class table {
+                transform: translate(10px);
+            }
+    }
 
 </style>
 
@@ -37,6 +70,7 @@
 
         @(Html.Kendo().Grid<EquipementViewModel>()
                                 .Name("listEquipement")
+                                .HtmlAttributes(new { @class = "eq-grid-class" })
                                 .Columns(columns =>
                                 {
                                     columns.Bound(e => e.EquipementId).Hidden();
