@@ -20,5 +20,10 @@ namespace Previgesst.ViewModels
         public int ClientId { get; set; }
         public string NomClient { get; set; }
         public string QRCode { get; set; }
+
+        [Required]
+        [StringLength(250)]
+        [Display(ResourceType = typeof(CadEquipRES), Name = "Num")]
+        public string NumeroEquipment { get; set; }
     }
 }

@@ -138,6 +138,21 @@
   <data name="Erreurs" xml:space="preserve">
     <value>Erreurs</value>
   </data>
+  <data name="Landscape" xml:space="preserve">
+    <value>Paysage</value>
+  </data>
+  <data name="MissingEquipments" xml:space="preserve">
+    <value>Please equipment to print QR code.</value>
+  </data>
+  <data name="MissingOptions" xml:space="preserve">
+    <value>Please selecte a print template.</value>
+  </data>
+  <data name="MissingOrientation" xml:space="preserve">
+    <value>Veuillez sélectionner l'orientation de la page</value>
+  </data>
+  <data name="Nom" xml:space="preserve">
+    <value>Nom de l'équipement</value>
+  </data>
   <data name="NomEN" xml:space="preserve">
     <value>Nom de l'équipement (EN)</value>
   </data>
@@ -147,8 +162,26 @@
   <data name="Num" xml:space="preserve">
     <value># Équipement</value>
   </data>
+  <data name="Portrait" xml:space="preserve">
+    <value>Portrait</value>
+  </data>
   <data name="PrintQRCode" xml:space="preserve">
     <value>Imprimer le code QR</value>
+  </data>
+  <data name="QROption1" xml:space="preserve">
+    <value>1. 60503 [3,5 x 5 pouces] 4 par feuille</value>
+  </data>
+  <data name="QROption2" xml:space="preserve">
+    <value>2. 60505 [2 x 4 pouces] 10 par feuilles</value>
+  </data>
+  <data name="QROption3" xml:space="preserve">
+    <value>3. 5524 [1/3 X 4 pouces]  6 par feuilles</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Tout</value>
+  </data>
+  <data name="SelectQRToPrint" xml:space="preserve">
+    <value>Sélectionnez les codes QR à imprimer</value>
   </data>
   <data name="Vide" xml:space="preserve">
     <value> </value>

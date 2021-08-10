@@ -2149,6 +2149,8 @@
     <Content Include="Views\FicheCadenassage\EditorTemplates\UploadEditorDoc.cshtml" />
     <Content Include="Views\Default\AccessDenied.cshtml" />
     <Content Include="Views\FicheCadenassage\PrintQR.cshtml" />
+    <Content Include="Views\FicheCadenassage\OnlyWithQR.cshtml" />
+    <Content Include="Views\FicheCadenassage\PrintQR5524.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />

@@ -329,29 +329,46 @@ namespace Previgesst.Services
         }
 
 
-        internal List<EquipementQRViewModel> GetEquipementsWithQR(int ClientId)
+        internal List<EquipementQRViewModel> GetEquipementsWithQR(int ClientId, string selectedNo = "")
         {
             var baseURL = Helpers.URLHelper.GetBaseUrl();
             if (baseURL.Right(1) != "/" && baseURL.Right(1) != @"\")
                 baseURL += "/";
             var time = DateTime.Now.ToLongTimeString();
+            var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
             var result = equipementRepository.AsQueryable()
                         .Where(x => x.ClientId == ClientId)
                         .Where(x => x.QRCode != null)
+                        ;
+
+            //var selectedEQIds = new List<int>();
+            if (!string.IsNullOrEmpty(selectedNo))
+            {
+                var selectedEQIds = selectedNo.Split(',').Select(x => int.Parse(x)); //.ToList();
+
+                result = result.Where(x => selectedEQIds.Contains(x.EquipementId));
+            }
+
+
+            return result
                         .OrderBy(x => x.NomEquipement)
                         .Select(x => new EquipementQRViewModel()
                         {
                             ClientId = x.ClientId,
                             EquipementId = x.EquipementId,
-                            NomEquipement = x.NomEquipement,
+                            //NomEquipement = x.NomEquipement,
+                            //NomEquipementEN = x.NomEquipementEN,
                             NomClient = x.Client.Nom,
+                            NumeroEquipment = x.NumeroEquipement,
+
+                            NomEquipement = langue == "fr" ? x.NomEquipement : x.NomEquipementEN,
 
                             QRCode = baseURL + x.QRCode ?? "",
                         })
                         .ToList();
 
-            return result;
+            //return result;
         }
 
     }

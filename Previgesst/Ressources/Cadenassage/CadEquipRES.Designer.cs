@@ -124,6 +124,51 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paysage.
+        /// </summary>
+        public static string Landscape {
+            get {
+                return ResourceManager.GetString("Landscape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please equipment to print QR code..
+        /// </summary>
+        public static string MissingEquipments {
+            get {
+                return ResourceManager.GetString("MissingEquipments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please selecte a print template..
+        /// </summary>
+        public static string MissingOptions {
+            get {
+                return ResourceManager.GetString("MissingOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Veuillez sélectionner l&apos;orientation de la page.
+        /// </summary>
+        public static string MissingOrientation {
+            get {
+                return ResourceManager.GetString("MissingOrientation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nom de l&apos;équipement.
+        /// </summary>
+        public static string Nom {
+            get {
+                return ResourceManager.GetString("Nom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nom de l&apos;équipement (EN).
         /// </summary>
         public static string NomEN {
@@ -151,11 +196,65 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Portrait.
+        /// </summary>
+        public static string Portrait {
+            get {
+                return ResourceManager.GetString("Portrait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Imprimer le code QR.
         /// </summary>
         public static string PrintQRCode {
             get {
                 return ResourceManager.GetString("PrintQRCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1. 60503 [3,5 x 5 pouces] 4 par feuille.
+        /// </summary>
+        public static string QROption1 {
+            get {
+                return ResourceManager.GetString("QROption1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2. 60505 [2 x 4 pouces] 10 par feuilles.
+        /// </summary>
+        public static string QROption2 {
+            get {
+                return ResourceManager.GetString("QROption2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3. 5524 [1/3 X 4 pouces]  6 par feuilles.
+        /// </summary>
+        public static string QROption3 {
+            get {
+                return ResourceManager.GetString("QROption3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tout.
+        /// </summary>
+        public static string SelectAll {
+            get {
+                return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sélectionnez les codes QR à imprimer.
+        /// </summary>
+        public static string SelectQRToPrint {
+            get {
+                return ResourceManager.GetString("SelectQRToPrint", resourceCulture);
             }
         }
         
