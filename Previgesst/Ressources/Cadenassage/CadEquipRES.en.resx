@@ -142,7 +142,7 @@
     <value>Landscape</value>
   </data>
   <data name="MissingEquipments" xml:space="preserve">
-    <value>Please equipment to print QR code.</value>
+    <value>Please select equipment to print QR code.</value>
   </data>
   <data name="MissingOptions" xml:space="preserve">
     <value>Please selecte a print template.</value>

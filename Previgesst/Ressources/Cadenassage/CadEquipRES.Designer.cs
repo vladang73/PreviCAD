@@ -133,7 +133,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please equipment to print QR code..
+        ///   Looks up a localized string similar to Veuillez sélectionner l&apos;équipement pour imprimer le code QR..
         /// </summary>
         public static string MissingEquipments {
             get {
@@ -142,7 +142,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please selecte a print template..
+        ///   Looks up a localized string similar to Veuillez sélectionner un modèle d&apos;impression..
         /// </summary>
         public static string MissingOptions {
             get {

@@ -42,16 +42,16 @@
         rows = 5;
         col = 2;
 
-        height = 192 + 10;
-        width = 384;
+        height = 192 - 10;
+        width = 384-20;
 
         if (orientation == "L")
         {
             rows = 2;
             col = 5;
 
-            height = 384;
-            width = 192 + 10;
+            height = 384-20;
+            width = 192-5;
         }
     }
     else if (template == "5524")
@@ -121,8 +121,12 @@
 
     .P_60505 {
         display: inline-block;
-        position: relative;
-        top: -145px;
+        /* position: relative; */
+        /* top: -145px; */
+        float: right;
+        padding-top: 5px;
+        max-width: 180px;
+        overflow: hidden;
     }
 
     @@media print {
@@ -197,8 +201,8 @@
                     }
                 *@
                 <div class="@(template == "60505" && orientation == "P" ? "P_60505" : "")">
-                    <label style="display: block; font-size: 16px; padding: 5px 0 5px 20px; font-weight: bold;">@item.NomClient</label>
-                    <label style="display: block; font-size: 16px; padding: 5px 0 0 20px; font-weight: bold;">@item.NomEquipement [@item.EquipementId]</label>
+                    <label style="display: block; font-size: 16px; padding: 5px 0 5px 10px; font-weight: bold;">@item.NomClient</label>
+                    <label style="display: block; font-size: 16px; padding: 5px 0 0 10px; font-weight: bold;">@item.NomEquipement [@item.EquipementId]</label>
                 </div>
             </div>
 

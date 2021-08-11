@@ -142,10 +142,10 @@
     <value>Paysage</value>
   </data>
   <data name="MissingEquipments" xml:space="preserve">
-    <value>Please equipment to print QR code.</value>
+    <value>Veuillez sélectionner l'équipement pour imprimer le code QR.</value>
   </data>
   <data name="MissingOptions" xml:space="preserve">
-    <value>Please selecte a print template.</value>
+    <value>Veuillez sélectionner un modèle d'impression.</value>
   </data>
   <data name="MissingOrientation" xml:space="preserve">
     <value>Veuillez sélectionner l'orientation de la page</value>
