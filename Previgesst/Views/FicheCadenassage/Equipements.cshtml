@@ -60,8 +60,8 @@
     <div class="panel-body">
 
         @*<a class="btn btn-info btn-print-qr" href="@Url.Action("PrintQR", "FicheCadenassage", new { @id = Model.ClientId })" style="position: absolute; top: 3px; left: 425px;" target="_blank">
-            @CadEquipRES.PrintQRCode
-        </a>*@
+                @CadEquipRES.PrintQRCode
+            </a>*@
 
         <input type="button" class="btn btn-info btn-print-qr" style="position: absolute; top: 3px; left: 425px;" value="@CadEquipRES.PrintQRCode" />
         @*<div id="EqWithQR"></div>*@
@@ -169,6 +169,8 @@
 </div>
 
 
+
+
 @(Html.Kendo().Window().Name("EqDetails")
         .Title(CadEquipRES.EquipmentMgmt)
         .Visible(false)
@@ -181,12 +183,11 @@
         .Modal(true)
         .Width(250)
 )
-
 @(Html.Kendo().Window().Name("EqWithQR")
         .Title(CadEquipRES.SelectQRToPrint)
         .Visible(false)
         .Modal(true)
-        .Width(550)
+        .Width(600)
         .Height(650)
 )
 
@@ -295,7 +296,7 @@
 </script>
 
 
-<script type="text/javascript">
+<script type="text/javascript" charset="utf-8">
 
     var detailsTemplate;
     var energieTemplate;
@@ -587,31 +588,59 @@
         var url = "@Url.Action("OnlyWithQR", "FicheCadenassage", new { @id = Model.ClientId })";
         var temp = $("#EqWithQR").data("kendoWindow");
 
-        var evt = function () {
-            console.log('loading grid', $("#tableOnlyWithQR"));
 
-            //$("#tableOnlyWithQR")
-            //    .kendoGrid({
-            //        height: 550,
-            //        sortable: true
-            //    });
+        var evt = function () {
+            console.log('loading grid');
+
+            $("#gridTest").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "@Url.Action("OnlyWithQRData", "FicheCadenassage", new { @id = Model.ClientId })",
+                            dataType: "json"
+                        }
+                    },
+                    pageSize: 10,
+                },
+                pageable: {
+                    buttonCount: 5
+                },
+                filterable: {
+                    extra: false,
+                    operators: {
+                        string: {
+                            contains: "@GridRES.Contains",
+                            startswith: "@GridRES.StartsWith",
+                            eq: "@GridRES.Egale",
+                            neq: "@GridRES.NotEquals"
+                        }
+                    }
+                },
+
+                height: "465px",
+                scrollable: true,
+                sortable: true,
+                resizable: true,
+                columns: [
+                    {
+                        field: "EquipementId", filterable: false, sortable: false, width: "45px",
+                        template: "<input type='checkbox' name='selected-equi' class='selected-equi' data-eqid='#: EquipementId #' />",
+                        headerTemplate: "<input type='checkbox' onClick='toggleOnlyWithQR(this)' class='selected-equi-all' />"
+                    },
+                    { field: "NumeroEquipment", width: "150px", title: "@CadEquipRES.Num" },
+                    { field: "NomEquipement", title: "@CadEquipRES.Nom" }
+                ]
+            });
         };
 
 
-        //temp.bind("open", evt);
+        temp.unbind("refresh");
         temp.bind("refresh", evt);
 
         temp.refresh({ url: url })
             .center()
             .open()
             ;
-
-        //$(document).ready(evt);
-
-        //$("#tableOnlyWithQR").kendoGrid({
-        //    /*height: 550,*/
-        //    sortable: true
-        //}).data("kendoGrid");
     }
 
 
@@ -639,17 +668,17 @@
         });
 
         if (selectedNo.length == 0) {
-            alert('@CadEquipRES.MissingOptions');
+            alert("@Html.Raw(CadEquipRES.MissingOptions)");
             return;
         }
 
         if (selectedOption == undefined) {
-            alert('@CadEquipRES.MissingEquipments');
+            alert("@Html.Raw(CadEquipRES.MissingEquipments)");
             return;
         }
 
         if (selectedOri == undefined) {
-            alert('@CadEquipRES.MissingOrientation');
+            alert("@Html.Raw(CadEquipRES.MissingOrientation)");
             return;
         }
 

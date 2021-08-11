@@ -1207,7 +1207,7 @@ namespace Previgesst.Controllers
         //    var equipments = equipementService.GetEquipementsWithQR(id);
         //    return View(equipments);
         //}
-        
+
         public ActionResult PrintQR(int id, string opt, string ori, string equ)
         {
             var equipments = equipementService.GetEquipementsWithQR(id, equ);
@@ -1218,6 +1218,12 @@ namespace Previgesst.Controllers
         {
             var equipments = equipementService.GetEquipementsWithQR(id);
             return View(equipments);
+        }
+
+        public JsonResult OnlyWithQRData(int id)
+        {
+            var equipments = equipementService.GetEquipementsWithQR(id);
+            return Json(equipments, JsonRequestBehavior.AllowGet);
         }
     }
 }

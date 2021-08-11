@@ -188,18 +188,6 @@
 
             <div class="label-border" style="display:inline-block;overflow: hidden; width: @width;height: @height;">
                 <img src="@item.QRCode" alt="QR Code" style="width: @(wd)px;" />
-
-                @*style="height: @(height-50)px;width: 100%;"*@
-
-                @*@if (orientation == "L")
-                    {
-                        <img src="@item.QRCode" alt="QR Code" style="height: @(height-50)px;width: 100%;" />
-                    }
-                    else
-                    {
-                        <img src="@item.QRCode" alt="QR Code" style="width: 100%;" />
-                    }
-                *@
                 <div class="@(template == "60505" && orientation == "P" ? "P_60505" : "")">
                     <label style="display: block; font-size: 16px; padding: 5px 0 5px 10px; font-weight: bold;">@item.NomClient</label>
                     <label style="display: block; font-size: 16px; padding: 5px 0 0 10px; font-weight: bold;">@item.NomEquipement [@item.EquipementId]</label>
@@ -224,33 +212,6 @@
                 }
             }
         }
-
-
-
-        @*<table cellpadding="0" cellspacing="0" border="0" class="center">
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <img src="@item.QRCode" alt="QR Code" width="200" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>@item.NomClient</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>@item.NomEquipement [@item.EquipementId]</label>
-                            <br />
-                            <br />
-                            <br />
-                        </td>
-                    </tr>
-                }
-            </table>*@
-
     }
     else
     {
