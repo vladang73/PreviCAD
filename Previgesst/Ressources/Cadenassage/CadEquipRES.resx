@@ -159,11 +159,17 @@
   <data name="NomFR" xml:space="preserve">
     <value>Nom de l'équipement (FR)</value>
   </data>
+  <data name="NoQRAvailable" xml:space="preserve">
+    <value>Il n'y a pas de codes QR disponibles.</value>
+  </data>
   <data name="Num" xml:space="preserve">
     <value># Équipement</value>
   </data>
   <data name="Portrait" xml:space="preserve">
     <value>Portrait</value>
+  </data>
+  <data name="PrintMe" xml:space="preserve">
+    <value>Imprime moi</value>
   </data>
   <data name="PrintQRCode" xml:space="preserve">
     <value>Imprimer le code QR</value>

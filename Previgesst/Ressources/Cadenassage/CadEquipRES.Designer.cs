@@ -187,6 +187,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Il n&apos;y a pas de codes QR disponibles..
+        /// </summary>
+        public static string NoQRAvailable {
+            get {
+                return ResourceManager.GetString("NoQRAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to # Équipement.
         /// </summary>
         public static string Num {
@@ -201,6 +210,15 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string Portrait {
             get {
                 return ResourceManager.GetString("Portrait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imprime moi.
+        /// </summary>
+        public static string PrintMe {
+            get {
+                return ResourceManager.GetString("PrintMe", resourceCulture);
             }
         }
         
