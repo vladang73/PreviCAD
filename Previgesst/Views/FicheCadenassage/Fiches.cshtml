@@ -15,36 +15,35 @@
                 <a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/CreerFiche/@Model.ClientId" class="btn btn-success">@CadFichesRES.Ajouter<img class="addButtonImg" src="~/Images/addWhite.png" /></a>
                 <br />
 
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 575px;">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 515px;">
                     @CadFichesRES.ScanQR
                 </button>
 
-                <button type="button" class="btn btn-primary"  id="btnClearQRFilter" style="position: absolute; top: 3px; left: 750px;">
+                <button type="button" class="btn btn-primary" id="btnClearQRFilter" style="position: absolute; top: 3px; left: 645px;">
                     @CadFichesRES.ClearQRFilter
                 </button>
             }
 
             @*Add filters
 
-        // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
-        <select class="filterEquipment">
-            <option class="filterButton" value="equipment">Filtre équipement</option>
-            <option class="filterButton" value="test1">Test 1</option>
-            <option class="filterButton" value="test2">Test 2</option>
-        </select>
-        <select class="filterDepartment">
-            <option class="filterButton" value="departement">Filtre département</option>
-            <option class="filterButton" value="test1">Test 1</option>
-            <option class="filterButton" value="test2">Test 2</option>
-        </select>
+                // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
+                <select class="filterEquipment">
+                    <option class="filterButton" value="equipment">Filtre équipement</option>
+                    <option class="filterButton" value="test1">Test 1</option>
+                    <option class="filterButton" value="test2">Test 2</option>
+                </select>
+                <select class="filterDepartment">
+                    <option class="filterButton" value="departement">Filtre département</option>
+                    <option class="filterButton" value="test1">Test 1</option>
+                    <option class="filterButton" value="test2">Test 2</option>
+                </select>
             *@
         </div>
         <div class="fichesCadenassage">
 
             @Html.AntiForgeryToken()
 
-            @(Html.Kendo().Grid<LigneCadenassageGridViewModel>
-                    ()
+            @(Html.Kendo().Grid<LigneCadenassageGridViewModel>()
                     .Name("list")
                     .Columns(columns =>
                     {
@@ -52,9 +51,9 @@
                         columns.Bound(e => e.FicheCadenassageId).Hidden();
 
                         //columns.Bound(e => e.RevisionCourante).Title("A/R").ClientTemplate("<center><input onclick='doCheck(#=FicheCadenassageId#, this)' " + Model.RCDisabled + " type='checkbox' #=RevisionCourante ? checked='checked' :'' # /></center>").Width(60);
-                        columns.Bound(e => e.IsApproved).Title(CadFichesRES.IsApproved).ClientTemplate("<center><input disabled='disabled' " + Model.RCDisabled + " type='checkbox' #=IsApproved ? checked='checked' :'' # /></center>").Width(60);
+                        columns.Bound(e => e.IsApproved).Title(CadFichesRES.IsApproved).ClientTemplate("<center><input disabled='disabled' " + Model.RCDisabled + " type='checkbox' #=IsApproved ? checked='checked' :'' # /></center>").Width(80);
 
-                        columns.Bound(c => c.NoFiche).Width(60).Title(CadFichesRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
+                        columns.Bound(c => c.NoFiche).Width(80).Title(CadFichesRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
                             .StartsWith(GridRES.StartsWith)
@@ -62,7 +61,7 @@
                             .IsNotEqualTo(GridRES.NotEquals)
                         ))).HeaderHtmlAttributes(new { style = "font-weight: bold;" });
 
-                        columns.Bound(e => e.TitreFiche).Title(CadFichesRES.Type).ClientTemplate("").Width(50);
+                        columns.Bound(e => e.TitreFiche).Title(CadFichesRES.Type).ClientTemplate("").Width(75);
 
                         columns.Bound(e => e.NumeroEquipment).Title(CadFichesRES.Num).Width(100).Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
@@ -80,7 +79,7 @@
                             .IsNotEqualTo(GridRES.NotEquals)
                         )));
 
-                        columns.Bound(e => e.Departement).Title(CadFichesRES.Departement).Width(100).Filterable(f => f.Extra(false).Operators(operators => operators
+                        columns.Bound(e => e.Departement).Title(CadFichesRES.Departement).Width(115).Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
                             .StartsWith(GridRES.StartsWith)
@@ -89,12 +88,12 @@
                         )));
 
                         // columns.Bound(e => e.estDocumentPrevigesst).ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>").Title(CadFichesRES.Previ).Width(45).Hidden(Model.estClient);
-                        columns.Bound(e => e.TravailAEffectuer).Title(CadFichesRES.AEffectuer).ClientTemplate("").Width(320).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
+                        columns.Bound(e => e.TravailAEffectuer).Title(CadFichesRES.AEffectuer).ClientTemplate("").Width(300).HtmlAttributes(new { style = "text-align: left;" }).HeaderHtmlAttributes(new { style = "text-align: left;" });
 
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' class='btn btn-info downloadButton' style='text-align:center;' title='" + CadFichesRES.Telecharger +"'></a>").Title(CadFichesRES.Fiche).Filterable(false).Sortable(false).Width(20).HeaderHtmlAttributes(new { style = "font-weight: bold;" });
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' class='btn btn-info downloadButton' style='text-align:center' title='"+ CadFichesRES.Telecharger +"'></a>").Title(CadFichesRES.Sheet).Filterable(false).Sortable(false).Width(20).HeaderHtmlAttributes(new { style = "font-weight: bold;" });
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' class='btn btn-info downloadButton' style='text-align:center;' title='" + CadFichesRES.Telecharger +"'></a>").Title(CadFichesRES.Fiche).Filterable(false).Sortable(false).Width(35).HeaderHtmlAttributes(new { style = "font-weight:bold;text-align:center;vertical-align:top;" });
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' class='btn btn-info downloadButton' style='text-align:center' title='"+ CadFichesRES.Telecharger +"'></a>").Title(CadFichesRES.Sheet).Filterable(false).Sortable(false).Width(35).HeaderHtmlAttributes(new { style = "font-weight:bold;text-align:center;vertical-align:top;" });
 
-                        if (User.IsInRole("Administrateur")) { columns.Bound(e => e.estDocumentPrevigesst).ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>").Title("Prévi").Width(45); }
+                        if (User.IsInRole("Administrateur")) { columns.Bound(e => e.estDocumentPrevigesst).ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>").Title("Prévi").Width(65).HeaderHtmlAttributes(new { style = "font-weight:bold;text-align:center;" }); }
                         columns.Bound(bt => bt.FicheCadenassageId)
                             .ClientTemplate("<a href='../../FicheCadenassage/EditFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn btn-primary btn-edit-force k-cde-edit'></a>").Title(CadFichesRES.Vide).Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
                         columns.Bound(bt => bt.FicheCadenassageId)
@@ -107,37 +106,35 @@
                             .HtmlAttributes(new { @class = "k-grid-effacer" });
                         }).Title(CadFichesRES.Vide).Width(20).Hidden(!Model.estUpdate);
                     })
-                        .Sortable(s => s.AllowUnsort(false))
-                        .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
-                        { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                        .Filterable()
-                        .DataSource(ds => ds
-                            .Ajax()
-                            //.Sort( x=> x.Add (c => c.DisplaySection))
-                            //.Sort(x => x.Add(c => c.Ordre))
-                            .Filter(f =>
+
+                    .Sortable(s => s.AllowUnsort(false))
+                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int>{ 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                    .Filterable()
+                    .Scrollable()
+                    .HtmlAttributes(new { @class = "fix-grid-height" })
+                    .DataSource(ds => ds
+                        .Ajax()
+                        //.Sort( x=> x.Add (c => c.DisplaySection))
+                        //.Sort(x => x.Add(c => c.Ordre))
+                        .Filter(f =>
+                        {
+                            //f.Add(b => b.estDocumentPrevigesst).IsEqualTo(true);
+                            if ( !Model.estUpdate)
                             {
-                                //f.Add(b => b.estDocumentPrevigesst).IsEqualTo(true);
-                                if ( !Model.estUpdate)
-                                {
-                                    f.Add(b => b.IsApproved).IsEqualTo(true);
-                                }
+                                f.Add(b => b.IsApproved).IsEqualTo(true);
                             }
-                        )
+                        })
                         .PageSize(20)
                         .Model(m =>
                         {
                             m.Id(e => e.FicheCadenassageId);
                             m.Field(e => e.Suppressible).DefaultValue(false);
-                        }
-                    )
-                    .Read(r => r.Action("ReadListFiches", "FicheCadenassage", new { client = Model.ClientId }))
-                    //.Create(c => c.Action("SaveFiche", "FicheCadenassage", new { client = Model.ClientId }))
-                    //.Update(u => u.Action("SaveFiche", "FicheCadenassage", new { client = Model.ClientId }))
-                    .Destroy(u => u.Action("DeleteFiche", "FicheCadenassage"))
-                    .Events(e => e
-                        .Error("ListeErreurFiche")
-                    )
+                        })
+                        .Read(r => r.Action("ReadListFiches", "FicheCadenassage", new { client = Model.ClientId }))
+                        //.Create(c => c.Action("SaveFiche", "FicheCadenassage", new { client = Model.ClientId }))
+                        //.Update(u => u.Action("SaveFiche", "FicheCadenassage", new { client = Model.ClientId }))
+                        .Destroy(u => u.Action("DeleteFiche", "FicheCadenassage"))
+                        .Events(e => e.Error("ListeErreurFiche"))
                     )
                     .Events(e => e
                         .DataBound("ListeDataBoundFiche")

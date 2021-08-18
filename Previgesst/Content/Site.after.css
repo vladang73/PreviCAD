@@ -1740,3 +1740,78 @@ display: inline-block;
         margin: 20px 0 !important;
     }
 }
+
+.fix-grid-height .k-grid-content {
+    height: 700px !important;
+    overflow: scroll;
+}
+
+.fix-grid-height .k-grid-effacer,
+.fix-grid-height .k-grid-Effacer,
+.fix-grid-height .k-grid-dupliquer {
+    left: -5px;
+}
+
+.fix-grid-height .k-grid-content table {
+    transform: translate(10px);
+}
+
+.fix-grid-height td[role=gridcell] {
+    min-width: 25px;
+}
+
+.fix-grid-height .k-header > .k-grid-filter,
+.fix-grid-height .k-header > .k-header-column-menu {
+    position: relative !important;
+    float: left !important;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+
+/*
+
+    https://stackoverflow.com/questions/8738072/forcing-web-site-to-show-in-landscape-mode-only
+html {
+    display: block;
+}
+
+@media only screen and (orientation:portrait) {
+    html {
+        height: 100vw;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
+@media only screen and (orientation:landscape) {
+    html {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+    and (orientation: portrait)
+
+    https://css-tricks.com/snippets/css/orientation-lock/
+
+
+@media screen and (min-width: 2000px) and (orientation: portrait) {
+    html {
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        width: 100vh;
+        overflow-x: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+}
+    
+    */

@@ -18,22 +18,6 @@
         background-color: transparent;
     }
 
-        .eq-grid-class td[role=gridcell] {
-            min-width: 25px;
-        }
-
-    /*    #listEquipement .btn-edit-previ,
-    #listEquipement .k-grid-edit {
-        bottom: 50%;
-        margin-bottom: 10px;
-    }
-
-    #listEquipement .k-grid-effacer,
-    #listEquipement .k-grid-Effacer,
-    #listEquipement .k-grid-dupliquer
-    {
-        bottom: 25%;
-    }*/
 
     @@media screen and (max-width: 1400px) {
         .eq-grid-class {
@@ -45,6 +29,7 @@
                 transform: translate(10px);
             }
     }
+
 </style>
 
 
@@ -71,7 +56,7 @@
 
         @(Html.Kendo().Grid<EquipementViewModel>()
                                 .Name("listEquipement")
-                                .HtmlAttributes(new { @class = "eq-grid-class" })
+                                .HtmlAttributes(new { @class = "eq-grid-class fix-grid-height" })
                                 .Columns(columns =>
                                 {
                                     columns.Bound(e => e.EquipementId).Hidden();
@@ -106,16 +91,16 @@
                                         )
                                     )); ;
 
-                                    columns.Command(command => command.Custom("Détails").Click("showDetailsNew"));
+                                    columns.Command(command => command.Custom("Détails").Click("showDetailsNew")).Width(100);
 
-                                    columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie"));
+                                    columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie")).Width(100);
 
-                                    columns.Command(command => command.Custom("QR").Click("showDetailsQR"));
+                                    columns.Command(command => command.Custom("QR").Click("showDetailsQR")).Width(100);
 
                                     //columns.Bound(bt => bt.EquipementId).ClientTemplate("<a href='/EquipementArticuloe/Index/#= " + nameof(EquipementViewModel.EquipementId) + " #' class='btn btn-primary btn-edit-force k-cde-edit'></a>").Title("Énergie").Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
 
                                     columns.Bound(e => e.Thumbnail).ClientTemplate("<img src='#=Thumbnail#'/>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false);
-                                    columns.Bound(e => e.Thumbnail).ClientTemplate("<input type=button onclick='changerImage(#=EquipementId#)' value='Image' class='cadenassageImageDownload'/>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false);
+                                    columns.Bound(e => e.Thumbnail).ClientTemplate("<input type=button onclick='changerImage(#=EquipementId#)' value='Image' class='cadenassageImageDownload'/>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false).Width(80);
                                     columns.Command(c =>
                                     {
                                         c.Edit().Text("");
@@ -134,6 +119,7 @@
                                 .Sortable(s => s.AllowUnsort(false))
                                 .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
                                 .Filterable()
+                                .Scrollable()
                                 //.AutoBind(false)
                                 .DataSource(ds => ds
                                     .Ajax()
@@ -599,8 +585,8 @@
                             url: "@Url.Action("OnlyWithQRData", "FicheCadenassage", new { @id = Model.ClientId })",
                             dataType: "json"
                         }
-                    },
-                    pageSize: 10,
+                    }
+                    //pageSize: 10,
                 },
                 //pageable: {
                 //    buttonCount: 5
