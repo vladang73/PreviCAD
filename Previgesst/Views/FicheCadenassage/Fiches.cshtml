@@ -97,7 +97,7 @@
                         columns.Bound(bt => bt.FicheCadenassageId)
                             .ClientTemplate("<a href='../../FicheCadenassage/EditFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn btn-primary btn-edit-force k-cde-edit'></a>").Title(CadFichesRES.Vide).Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
                         columns.Bound(bt => bt.FicheCadenassageId)
-                            .ClientTemplate("<a href='../../FicheCadenassage/DuplicateFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn btn-success k-cde-edit'></a>").Title(CadFichesRES.Vide).Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
+                            .ClientTemplate("<a href='../../FicheCadenassage/DuplicateFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn btn-success k-cde-edit'></a>").Title(CadFichesRES.Vide).Filterable(false).Sortable(false).Width(15).Hidden(!Model.estUpdate);
 
                         columns.Command(c =>
                         {

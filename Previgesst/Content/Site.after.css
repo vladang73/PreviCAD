@@ -1743,13 +1743,14 @@ display: inline-block;
 
 .fix-grid-height .k-grid-content {
     height: 700px !important;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .fix-grid-height .k-grid-effacer,
 .fix-grid-height .k-grid-Effacer,
 .fix-grid-height .k-grid-dupliquer {
-    left: -5px;
+    left: -20px;
 }
 
 .fix-grid-height .k-grid-content table {
