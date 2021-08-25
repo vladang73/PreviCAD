@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "Errors";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using Previgesst.Ressources.Cadenassage
+@using Previgesst.Ressources
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12 ">
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Journaux d'erreurs</li>
+                </ol>
+            </nav>
+
+            <hr />
+
+
+            <div class="panel panel-danger previgesstClient">
+
+                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Journaux</div>
+                <div class="panel-body">
+
+                    @Html.AntiForgeryToken()
+
+                    @(Html.Kendo().Grid<Previgesst.Models.LogEntry>()
+                        .Name("list")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(e => e.LogEntryId).Hidden();
+                            columns.Bound(e => e.Date).Filterable(f => f.Extra(false)).Width(180).Format("{0:G}");
+                            columns.Bound(c => c.Level).Filterable(f => f.Extra(false)).Width(80);
+                            columns.Bound(c => c.MachineName).Filterable(f => f.Extra(false));
+                            columns.Bound(e => e.Message).Filterable(f => f.Extra(false));
+
+
+                            columns.Bound(e => e.Exception).Hidden();
+                            columns.Bound(e => e.Logger).Hidden();
+                            columns.Bound(e => e.StackTrace).Hidden();
+
+
+                            columns.Command(command => command.Custom("Détails").Click("showDetailsNew")).Width(100);
+                        })
+                        .Sortable(s => s.AllowUnsort(false))
+                        .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
+                        .Filterable()
+                        .DataSource(ds => ds
+
+                            .Ajax()
+                            .PageSize(10)
+                            .Sort(s => { s.Add("LogEntryId").Descending(); })
+                            .Read(r => r.Action("ReadListLogs", "AdminPrevi"))
+                            )
+                        )
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@(Html.Kendo().Window().Name("EqDetails")
+        .Title("Journaux")
+        .Visible(false)
+        .Modal(true)
+        .Width(650)
+)
+
+
+<script type="text/x-kendo-template" id="eqTemplate">
+    <div id="details-contaner" style="max-height:500px;overflow:scroll;">
+
+        <div class="form-group">
+            <label>Exception</label>
+            <p> #= Exception # </p>
+        </div>
+
+        <div class="form-group">
+            <label>Logger</label>
+            <p> #= Logger # </p>
+        </div>
+
+        <div class="form-group">
+            <label>Message</label>
+            <p> #= Message # </p>
+        </div>
+
+        <div class="form-group">
+            <label>StackTrace</label>
+            <p> #= StackTrace # </p>
+        </div>
+
+
+    </div>
+</script>
+
+
+
+<script type="text/javascript">
+
+    var detailsTemplate;
+
+    $(document).ready(function () {
+        detailsTemplate = kendo.template($("#eqTemplate").html());
+    });
+
+    function showDetailsNew(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        var wind = $("#EqDetails").data("kendoWindow");
+
+        wind.content(detailsTemplate(dataItem));
+        wind.center().open();
+    }
+
+
+</script>

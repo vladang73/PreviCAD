@@ -1,5 +1,6 @@
 ﻿using Previgesst.ActionFilters;
 using Previgesst.Enums;
+using Previgesst.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,16 @@ namespace Previgesst.Controllers
     [AuthorizeRoles(Enums.Roles.Administrateur, Enums.Roles.LectureEcriture, Enums.Roles.LectureSeule)]
     public class AdminPreviController : Controller
     {
-        // GET: AdminPrevi
+        LogEntryService logService;
 
+        public AdminPreviController(LogEntryService logService) //: base(logger)
+        {
+            this.logService = logService;
+        }
+
+
+
+        // GET: AdminPrevi
         public ActionResult Index()
         {
             ViewData["Culture"] = System.Threading.Thread.CurrentThread.CurrentCulture;
@@ -27,5 +36,20 @@ namespace Previgesst.Controllers
 
             return View();
         }
+
+        #region ----- NLog Errors -----
+
+        [AuthorizeRoles(Enums.Roles.Administrateur)]
+        public ActionResult Errors()
+        {
+            return View();
+        }
+
+        public ActionResult ReadListLogs([Kendo.Mvc.UI.DataSourceRequest] Kendo.Mvc.UI.DataSourceRequest request)
+        {
+            return Json(logService.GetReadListeLogs(request));
+        }
+
+        #endregion
     }
 }

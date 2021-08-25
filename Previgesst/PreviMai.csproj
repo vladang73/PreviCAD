@@ -1036,6 +1036,7 @@
     <Compile Include="Services\EtatService.cs" />
     <Compile Include="Services\SituationService.cs" />
     <Compile Include="Services\SourceEnergieService.cs" />
+    <Compile Include="Services\LogEntryService.cs" />
     <Compile Include="Services\UtilisateurService.cs" />
     <Compile Include="Sessions\sessionInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -2150,6 +2151,7 @@
     <Content Include="Views\Default\AccessDenied.cshtml" />
     <Content Include="Views\FicheCadenassage\PrintQR.cshtml" />
     <Content Include="Views\FicheCadenassage\OnlyWithQR.cshtml" />
+    <Content Include="Views\AdminPrevi\Errors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />

@@ -22,21 +22,25 @@
                 <button type="button" class="btn btn-primary" id="btnClearQRFilter" style="position: absolute; top: 3px; left: 645px;">
                     @CadFichesRES.ClearQRFilter
                 </button>
+
+                <span id="lblResolution" style="font-weight:bold; position: absolute; top: 10px; left: 850px;">
+                    
+                </span>
             }
 
             @*Add filters
 
-                // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
-                <select class="filterEquipment">
-                    <option class="filterButton" value="equipment">Filtre équipement</option>
-                    <option class="filterButton" value="test1">Test 1</option>
-                    <option class="filterButton" value="test2">Test 2</option>
-                </select>
-                <select class="filterDepartment">
-                    <option class="filterButton" value="departement">Filtre département</option>
-                    <option class="filterButton" value="test1">Test 1</option>
-                    <option class="filterButton" value="test2">Test 2</option>
-                </select>
+        // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
+        <select class="filterEquipment">
+            <option class="filterButton" value="equipment">Filtre équipement</option>
+            <option class="filterButton" value="test1">Test 1</option>
+            <option class="filterButton" value="test2">Test 2</option>
+        </select>
+        <select class="filterDepartment">
+            <option class="filterButton" value="departement">Filtre département</option>
+            <option class="filterButton" value="test1">Test 1</option>
+            <option class="filterButton" value="test2">Test 2</option>
+        </select>
             *@
         </div>
         <div class="fichesCadenassage">
@@ -51,7 +55,7 @@
                         columns.Bound(e => e.FicheCadenassageId).Hidden();
 
                         //columns.Bound(e => e.RevisionCourante).Title("A/R").ClientTemplate("<center><input onclick='doCheck(#=FicheCadenassageId#, this)' " + Model.RCDisabled + " type='checkbox' #=RevisionCourante ? checked='checked' :'' # /></center>").Width(60);
-                        columns.Bound(e => e.IsApproved).Title(CadFichesRES.IsApproved).ClientTemplate("<center><input disabled='disabled' " + Model.RCDisabled + " type='checkbox' #=IsApproved ? checked='checked' :'' # /></center>").Width(80);
+                        columns.Bound(e => e.IsApproved).Title(CadFichesRES.IsApproved).ClientTemplate("<center><input disabled='disabled' " + Model.RCDisabled + " type='checkbox' #=IsApproved ? checked='checked' :'' # /></center>").Width(100);
 
                         columns.Bound(c => c.NoFiche).Width(80).Title(CadFichesRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
