@@ -114,8 +114,8 @@
                     .Sortable(s => s.AllowUnsort(false))
                     .Pageable(s => s.PageSizes(true).PageSizes(new List<int>{ 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
                     .Filterable()
-                    .Scrollable()
-                    .HtmlAttributes(new { @class = "fix-grid-height" })
+                    //.Scrollable()
+                    .HtmlAttributes(new { @class = "fix-grid-height-na" })
                     .DataSource(ds => ds
                         .Ajax()
                         //.Sort( x=> x.Add (c => c.DisplaySection))

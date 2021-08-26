@@ -1011,8 +1011,9 @@ table tr th {
 }
 
 .fichesCadenassage #list table tbody tr td:nth-child(4) {
-    color: #FFF;
+    /*color: #FFF;
     font-size: 0px;
+    */
     text-align: center;
 }
 

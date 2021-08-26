@@ -130,21 +130,21 @@
         // HIDE CURRENT LOGO
         jQuery('.content-wrapper .float-left img').css('display', 'none');
 
-        function GridResize() {
-            var windowHeight = $(window).height();
-            var gridHeight = $('.fix-grid-height').find('.k-grid-content').height();
+        //function GridResize() {
+        //    var windowHeight = $(window).height();
+        //    var gridHeight = $('.fix-grid-height').find('.k-grid-content').height();
 
-            var newHeight = windowHeight - 500;
-            newHeight = 300 > newHeight ? 300 : newHeight;
+        //    var newHeight = windowHeight - 500;
+        //    newHeight = 300 > newHeight ? 300 : newHeight;
 
 
-            console.log('windowHeight', windowHeight, 'k-grid-content', gridHeight, 'new height', newHeight);
+        //    console.log('windowHeight', windowHeight, 'k-grid-content', gridHeight, 'new height', newHeight);
 
-            $('.fix-grid-height').find('.k-grid-content').attr('style', 'height:' + newHeight + 'px !important;');
+        //    $('.fix-grid-height').find('.k-grid-content').attr('style', 'height:' + newHeight + 'px !important;');
 
-            $('#lblResolution').text($(window).width() + 'x' + $(window).height());
-        }
+        //    $('#lblResolution').text($(window).width() + 'x' + $(window).height());
+        //}
 
-        $(document).ready(GridResize);
-        $(window).resize(GridResize);
+        //$(document).ready(GridResize);
+        //$(window).resize(GridResize);
     </script>

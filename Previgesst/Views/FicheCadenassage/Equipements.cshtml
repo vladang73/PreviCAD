@@ -56,7 +56,7 @@
 
         @(Html.Kendo().Grid<EquipementViewModel>()
                                 .Name("listEquipement")
-                                .HtmlAttributes(new { @class = "eq-grid-class fix-grid-height" })
+                                .HtmlAttributes(new { @class = "eq-grid-class fix-grid-height-na" })
                                 .Columns(columns =>
                                 {
                                     columns.Bound(e => e.EquipementId).Hidden();
@@ -119,7 +119,7 @@
                                 .Sortable(s => s.AllowUnsort(false))
                                 .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
                                 .Filterable()
-                                .Scrollable()
+                                //.Scrollable()
                                 //.AutoBind(false)
                                 .DataSource(ds => ds
                                     .Ajax()
