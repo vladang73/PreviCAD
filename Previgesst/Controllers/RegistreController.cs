@@ -24,6 +24,10 @@ namespace Previgesst.Controllers
         private DocumentClientService documentClientService;
         private ParametresAppService parametresAppService;
         private ParametresAppController parametresAppController;
+
+        private LigneInstructionService ligneInstructionService;
+        private LigneDecadenassageService ligneDecadenassageService;
+
         private string Layout;
 
         public RegistreController(EmployeRegistreService employeRegistreService,
@@ -33,7 +37,8 @@ namespace Previgesst.Controllers
                LigneRegistreRepository ligneRegistreRepository,
                DocumentClientService documentClientService,
                ParametresAppService parametresAppService,
-               ParametresAppController parametresAppController)
+               ParametresAppController parametresAppController,
+               LigneInstructionService ligneInstructionService, LigneDecadenassageService ligneDecadenassageService)
         {
             this.employeRegistreService = employeRegistreService;
             this.ficheCadenassageService = ficheCadenassageService;
@@ -44,6 +49,8 @@ namespace Previgesst.Controllers
             this.parametresAppService = parametresAppService;
             this.parametresAppController = parametresAppController;
 
+            this.ligneInstructionService = ligneInstructionService;
+            this.ligneDecadenassageService = ligneDecadenassageService;
         }
 
         [HttpGet]
@@ -89,7 +96,7 @@ namespace Previgesst.Controllers
             //return View(loginInfo);
         }
 
-        public ActionResult ReadListFiches([DataSourceRequest]DataSourceRequest request, int client)
+        public ActionResult ReadListFiches([DataSourceRequest] DataSourceRequest request, int client)
         {
             var loginInfo = employeRegistreService.getEmployeRegistre();
             if (loginInfo == null)
@@ -101,7 +108,7 @@ namespace Previgesst.Controllers
 
         }
 
-        public ActionResult ReadListDocClientCadenassage([DataSourceRequest]DataSourceRequest request, int id)
+        public ActionResult ReadListDocClientCadenassage([DataSourceRequest] DataSourceRequest request, int id)
         {
             var loginInfo = employeRegistreService.getEmployeRegistre();
             if (loginInfo == null)
@@ -112,7 +119,7 @@ namespace Previgesst.Controllers
 
         }
 
-        public ActionResult ReadLignesRegistreCadenassageUnEmploye([DataSourceRequest]DataSourceRequest request, int client)
+        public ActionResult ReadLignesRegistreCadenassageUnEmploye([DataSourceRequest] DataSourceRequest request, int client)
         {
 
             var loginInfo = employeRegistreService.getEmployeRegistre();
@@ -126,8 +133,7 @@ namespace Previgesst.Controllers
 
         }
 
-        public ActionResult AddNewLine([DataSourceRequest] DataSourceRequest request,
-        LigneRegistreViewModel item, int client)
+        public ActionResult AddNewLine([DataSourceRequest] DataSourceRequest request, LigneRegistreViewModel item, int client)
         {
             var loginInfo = employeRegistreService.getEmployeRegistre();
 
@@ -209,8 +215,7 @@ namespace Previgesst.Controllers
             }
         }
 
-        public ActionResult SaveLigneRegistreUnEmploye([DataSourceRequest] DataSourceRequest request,
-         LigneRegistreViewModel item, int client)
+        public ActionResult SaveLigneRegistreUnEmploye([DataSourceRequest] DataSourceRequest request, LigneRegistreViewModel item, int client)
         {
 
             var loginInfo = employeRegistreService.getEmployeRegistre();
@@ -234,8 +239,7 @@ namespace Previgesst.Controllers
 
         }
 
-        public ActionResult SaveAudit([DataSourceRequest] DataSourceRequest request,
-         LigneRegistreViewModel item)
+        public ActionResult SaveAudit([DataSourceRequest] DataSourceRequest request, LigneRegistreViewModel item)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Fiche(item.FicheCadenassageId, false))
             {
@@ -260,5 +264,30 @@ namespace Previgesst.Controllers
             return Json("");
 
         }
+
+
+        public ActionResult Instruction(int ficheId)
+        {
+            return View();
+        }
+
+
+        public ActionResult ReadListCadenassage([DataSourceRequest] DataSourceRequest request, int ficheId)
+        {
+            if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
+                return Json(ligneInstructionService.GetListeLignesInstruction(request, ficheId), JsonRequestBehavior.AllowGet);
+            else
+                return Json("");
+        }
+
+
+        public ActionResult ReadListDecadenassage([DataSourceRequest] DataSourceRequest request, int ficheId)
+        {
+            if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
+                return Json(ligneDecadenassageService.GetListeLignesDecadenassage(request, ficheId), JsonRequestBehavior.AllowGet);
+            else
+                return Json("");
+        }
+
     }
 }

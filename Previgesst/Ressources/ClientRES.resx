@@ -144,6 +144,9 @@
   <data name="NotificationDebutCad" xml:space="preserve">
     <value>Notification début cadenassage</value>
   </data>
+  <data name="NotificationNonConformite" xml:space="preserve">
+    <value>Notification de non-conformité</value>
+  </data>
   <data name="PasAdminEtLecture" xml:space="preserve">
     <value>On ne peut pas être à la fois Admin et Lecture pour une application</value>
   </data>

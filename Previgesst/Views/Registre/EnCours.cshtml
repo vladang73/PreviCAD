@@ -23,93 +23,193 @@
 
             @Html.AntiForgeryToken()
 
-            @(Html.Kendo().Grid<LigneRegistreViewModel>
-    ()
-    .Name("listEnCours")
-    .Columns(columns =>
-    {
+            @(Html.Kendo().Grid<LigneRegistreViewModel>()
+                    .Name("listEnCours")
+                    .Columns(columns =>
+                    {
 
-        columns.Bound(e => e.NoFicheCadenassage).Title(PrevFicheRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
-        .ForString(str => str.Clear()
-        .Contains(GridRES.Contains)
-        .StartsWith(GridRES.StartsWith)
-        .IsEqualTo(GridRES.Egale)
-        .IsNotEqualTo(GridRES.NotEquals)
-        ))).Width(40);
-        columns.Bound(e => e.NomDepartement).Title(PrevFicheRES.Departement).Filterable(f => f.Extra(false).Operators(operators => operators
-        .ForString(str => str.Clear()
-        .Contains(GridRES.Contains)
-        .StartsWith(GridRES.StartsWith)
-        .IsEqualTo(GridRES.Egale)
-        .IsNotEqualTo(GridRES.NotEquals)
-        ))).Width(100);
-        columns.Bound(e => e.NomEquipement).Title(PrevFicheRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
-        .ForString(str => str.Clear()
-        .Contains(GridRES.Contains)
-        .StartsWith(GridRES.StartsWith)
-        .IsEqualTo(GridRES.Egale)
-        .IsNotEqualTo(GridRES.NotEquals)
-        ))).Width(100);
-        columns.Bound(e => e.EmployeRegistreId).Hidden(true);
-        columns.Bound(e => e.FicheCadenassageId).Hidden(true);
-        columns.Bound(e => e.DateDebut).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Debut).Width(70);
-
-        columns.Bound(e => e.DateFin).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Fin).Width(70);
-
-        columns.Bound(e => e.FinPrevue).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.FinPrevueEmploye).Width(70);
-        columns.Bound(e => e.Note).Width(100);
-        columns.Bound(e => e.BonDeTravail).Title(PrevFicheRES.BonDeTravail).Width(50);
-        columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette +"></a>").Title("").Filterable(false).Sortable(false).Width(55);
-        columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier)).Width(20);
-
-    })
-    .DataSource(ds => ds
-    .Ajax()
-    .PageSize(10)
-
-    .Model(m =>
-    {
-        m.Id(e => e.LigneRegistreId);
-
-    }))
-
-    .Sortable(s => s.AllowUnsort(false))
-    .Scrollable(e => e.Enabled(true))
-    .ToolBar(tools => tools.Excel())
-    .Editable(e => e
-    .Mode(GridEditMode.PopUp)).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistre").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600))
-
-    .DisplayDeleteConfirmation(false)
-    )
-    .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
-        { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-        .Filterable()
-        .DataSource(ds => ds
-        .Ajax().Events(e=>e.RequestEnd("doRefresh"))
-        .Filter(f =>
-        {
-            f.Add(b => b.Termine).IsEqualTo(false);
-        })
-        .Sort(x => x.Add(c => c.DateDebut).Descending())
-
-        .PageSize(20)
+                        columns.Bound(e => e.NoFicheCadenassage)
+                                .Title(PrevFicheRES.NoFiche)
+                                .Filterable(f => f.Extra(false)
+                                .Operators(operators => operators
+                                        .ForString(str => str.Clear()
+                                        .Contains(GridRES.Contains)
+                                        .StartsWith(GridRES.StartsWith)
+                                        .IsEqualTo(GridRES.Egale)
+                                        .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(40);
 
 
-        .Read(r => r.Action("ReadLignesRegistreCadenassageUnEmploye", "Registre", new { client = Model.ClientId }))
-        .Create(c => c.Action("SaveLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
-        .Update(u => u.Action("SaveLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
-        .Destroy(d => d.Action("DeleteLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
+                        columns.Bound(e => e.NomDepartement)
+                                .Title(PrevFicheRES.Departement)
+                                .Filterable(f => f.Extra(false)
+                                .Operators(operators => operators
+                                        .ForString(str => str.Clear()
+                                        .Contains(GridRES.Contains)
+                                        .StartsWith(GridRES.StartsWith)
+                                        .IsEqualTo(GridRES.Egale)
+                                        .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(100);
+
+
+                        columns.Bound(e => e.NomEquipement)
+                                .Title(PrevFicheRES.Equipement)
+                                .Filterable(f => f.Extra(false)
+                                .Operators(operators => operators
+                                        .ForString(str => str.Clear()
+                                        .Contains(GridRES.Contains)
+                                        .StartsWith(GridRES.StartsWith)
+                                        .IsEqualTo(GridRES.Egale)
+                                        .IsNotEqualTo(GridRES.NotEquals)
+                        ))).Width(100);
+
+
+                        columns.Bound(e => e.EmployeRegistreId).Hidden(true);
+                        columns.Bound(e => e.FicheCadenassageId).Hidden(true);
+                        columns.Bound(e => e.DateDebut).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Debut).Width(70);
+
+                        columns.Bound(e => e.DateFin).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Fin).Width(70);
+
+                        columns.Bound(e => e.FinPrevue).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.FinPrevueEmploye).Width(70);
+                        columns.Bound(e => e.Note).Width(100);
+                        columns.Bound(e => e.BonDeTravail).Title(PrevFicheRES.BonDeTravail).Width(50);
 
 
 
-        ).Events(e => e.DataBound("dataBoundEnCours")).Events(e=>e.Edit("onEditEnCours"))
+                        columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette +"></a>").Title("").Filterable(false).Sortable(false).Width(55);
+
+                        columns.Command(command => command.Custom("étapes").Click("showDetailsNew")).Width(100);
+
+                        columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier)).Width(20);
+
+                    })
+                    .DataSource(ds => ds
+                    .Ajax()
+                    .PageSize(10)
+
+                    .Model(m =>
+                    {
+                        m.Id(e => e.LigneRegistreId);
+
+                    }))
+
+                    .Sortable(s => s.AllowUnsort(false))
+                    .Scrollable(e => e.Enabled(true))
+                    .ToolBar(tools => tools.Excel())
+                    .Editable(e => e
+                    .Mode(GridEditMode.PopUp)).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistre").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600))
+
+                    .DisplayDeleteConfirmation(false)
+                    )
+                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
+                        { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                        .Filterable()
+                        .DataSource(ds => ds
+                        .Ajax().Events(e=>e.RequestEnd("doRefresh"))
+                        .Filter(f =>
+                        {
+                            f.Add(b => b.Termine).IsEqualTo(false);
+                        })
+                        .Sort(x => x.Add(c => c.DateDebut).Descending())
+
+                        .PageSize(20)
+
+
+                        .Read(r => r.Action("ReadLignesRegistreCadenassageUnEmploye", "Registre", new { client = Model.ClientId }))
+                        .Create(c => c.Action("SaveLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
+                        .Update(u => u.Action("SaveLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
+                        .Destroy(d => d.Action("DeleteLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
+
+
+
+                        ).Events(e => e.DataBound("dataBoundEnCours")).Events(e=>e.Edit("onEditEnCours"))
 
         )
 
 
-</div>
+        </div>
     </div>
 </div>
+
+
+@(Html.Kendo().Window().Name("EqDetails")
+        .Title("étape de cadenassage et décadenassage et non-conformité")
+        .Visible(false)
+        .Modal(true)
+        .Width(650)
+        .Height(300)
+)
+
+
+<script type="text/x-kendo-template" id="eqTemplate">
+    <div id="details-contaner">
+
+        <input type="hidden" id="EquipementId" value="#=EquipementId#" />
+
+
+        <div class="form-group">
+            <label for="Manufacturer">Fabricant</label>
+            <input type="text" class="form-control petit" id="Manufacturer" name="Manufacturer" value="#= (Manufacturer == null) ? '' : Manufacturer #" />
+        </div>
+
+        <div class="form-group">
+            <label for="Model">Modèle</label>
+            <input type="text" class="form-control petit" id="Model" name="Model" value="#= (Model == null) ? '' : Model #" />
+        </div>
+
+        <div class="form-group">
+            <label for="NumberOfSerie">Numéro de série</label>
+            <input type="text" class="form-control petit" id="NumberOfSerie" name="NumberOfSerie" value="#= (NumberOfSerie == null) ? '' : NumberOfSerie #" />
+        </div>
+
+        <div class="form-group">
+            <label for="YearOfProduction">Année de fabrication</label>
+            <input type="text" class="form-control petit" id="YearOfProduction" name="YearOfProduction" value="#= (YearOfProduction == null) ? '' : YearOfProduction #" />
+        </div>
+
+        <div class="form-group">
+            <label for="Function">Fonction</label>
+            <input type="text" class="form-control petit" id="Function" name="Function" value="#= (Function == null) ? '' : Function #" />
+        </div>
+
+        <div class="form-group">
+            <label for="Model">Tâches</label>
+            <select id="Task" multiple="multiple" data-placeholder="Sélectionner des tâches">
+                <option value="1">Empty</option>
+                <option value="2">Completed</option>
+                <option value="3">Non-Compliant</option>
+                <option value="4">Not Applicable</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="RiskAnalysis" name="RiskAnalysis" # if (RiskAnalysis) { # checked=\"checked\" # } # />
+            <label for="RiskAnalysis">Analyse de risque complétée</label>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="LockoutProcedure" name="LockoutProcedure" # if (LockoutProcedure) { # checked=\"checked\" # } # />
+            <label for="LockoutProcedure">Procédure de cadenassage complétée</label>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="SafeWorkProcedure" name="SafeWorkProcedure" # if (SafeWorkProcedure) { # checked=\"checked\" # } # />
+            <label for="SafeWorkProcedure">Procédure de travail sécuritaire complétée</label>
+        </div>
+
+        <div class="form-group text-right">
+            <a class="k-button k-button-icontext k-primary k-grid-update" onclick="SaveEquipementsInfo()">
+                <span class="k-icon k-update"></span>Mettre à jour
+            </a>
+
+            <a class="k-button k-button-icontext k-grid-cancel" onclick="closeDetailsNew()">
+                <span class="k-icon k-cancel"></span>Annuler
+            </a>
+        </div>
+
+    </div>
+</script>
+
 
 <script>
     function dataBoundEnCours(e) {
@@ -125,7 +225,7 @@
     }
 
     function onEditEnCours(e) {
-       
+
         e.container.find(".k-grid-cancel").bind("click", function () {
             $("#listEnCours").data("kendoGrid").dataSource.read();
             $("#listTermines").data("kendoGrid").dataSource.read();
@@ -135,20 +235,51 @@
     }
 
     function doRefresh(e) {
-        if (e.type == "update") 
-        {
+        if (e.type == "update") {
             $("#listEnCours").data("kendoGrid").dataSource.read();
             $("#listTermines").data("kendoGrid").dataSource.read();
         }
-       
+
     }
-    
+
     // Add img title
     setTimeout(function () {
         jQuery('.k-grid-edit').each(function () {
             jQuery(this).attr('title', 'Effectuez');
         });
     }, 3000);
+
+
+    function showDetailsNew(e) {
+        e.preventDefault();
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        console.log(dataItem);
+        //var wind = $("#EqDetails").data("kendoWindow");
+
+        ////wind.content(detailsTemplate(dataItem));
+        //wind.center().open();
+        ////var multiselect = $('#details-contaner').find("#Task").kendoMultiSelect().data("kendoMultiSelect");
+
+        ////if (dataItem.Task != null) {
+        ////    multiselect.value(dataItem.Task.split(','));
+        ////    multiselect.trigger("change");
+        ////}
+
+
+
+        var url = "@Url.Action("Instruction", "Registre")";
+        ur = url + '?ficheId=' + dataItem.FicheCadenassageId;
+
+        console.log(url);
+
+        var temp = $("#EqDetails").data("kendoWindow");
+
+        temp.refresh({ url: url })
+            .center()
+            .open()
+            ;
+    }
+
 </script>
 
 

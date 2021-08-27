@@ -57,7 +57,7 @@ namespace Previgesst.Controllers
         // GET: Client
         public ActionResult Index()
         {
-            return View("Index",this.Layout);
+            return View("Index", this.Layout);
         }
 
 
@@ -99,7 +99,7 @@ namespace Previgesst.Controllers
             vm.NbAuditeursMax = client.NbAuditeursMax;
             vm.NbUtilisateursPrevicad = client.NbUtilisateursPrevicad;
             vm.NbAdminUtilisateurs = client.NbAdminUtilisateurs;
-          
+
 
             vm.ApplicationIds = clientApplicationPreviRepository.getClientApplications(id);
             return vm;
@@ -171,17 +171,17 @@ namespace Previgesst.Controllers
 
 
 
-        public ActionResult ReadListClients([DataSourceRequest]DataSourceRequest request)
+        public ActionResult ReadListClients([DataSourceRequest] DataSourceRequest request)
         {
             return Json(clientService.GetReadListeClient(request));
         }
 
-        public ActionResult ReadListClientsActifs([DataSourceRequest]DataSourceRequest request)
+        public ActionResult ReadListClientsActifs([DataSourceRequest] DataSourceRequest request)
         {
             return Json(clientService.GetReadListeClientActifs(request));
         }
 
-        public ActionResult ReadListUtilisateurs([DataSourceRequest]DataSourceRequest request, int clientId)
+        public ActionResult ReadListUtilisateurs([DataSourceRequest] DataSourceRequest request, int clientId)
         {
             return Json(clientService.ReadListUtilisateurs(request, clientId));
         }
@@ -235,7 +235,7 @@ namespace Previgesst.Controllers
                     //on enregistre.
                     clientService.SaveMaximums(model);
                     SaveSuccessMessage("Maximums sauvegardés");
-                    return Redirect("~/Client/Details?id=" + model.ClientId); 
+                    return Redirect("~/Client/Details?id=" + model.ClientId);
                 }
 
             }
@@ -256,17 +256,20 @@ namespace Previgesst.Controllers
                 else if (utilisateurService.EstCourrielExistant(item))
                     ModelState.AddModelError("Courriel", ClientRES.CourrielExistant);
                 else if (utilisateurService.EstCourrielExistant(item))
+                {
                     ModelState.AddModelError("NotificationDebutCad", ClientRES.NotificationDebutCad);
+                    ModelState.AddModelError("NotificationNonConformite", ClientRES.NotificationNonConformite);
+                }
                 else if (utilisateurService.DepassementAdminPrevicad(item))
                     ModelState.AddModelError("AdmPrevicad", ClientRES.DépassementMax);
                 else if (utilisateurService.DepassementAdminAnalyse(item))
                     ModelState.AddModelError("AdmAnalyseRisque", ClientRES.DépassementMax);
-              
+
                 else if (utilisateurService.DepassementAuditeurs(item))
                     ModelState.AddModelError("Auditeur", ClientRES.DépassementMax);
                 else if (utilisateurService.DepassementAdminUtilisateurs(item))
                     ModelState.AddModelError("AdmUtilisateurs", ClientRES.DépassementMax);
-                    //ModelState.AddModelError("AdmUtilisateurs", ClientRES.DépassementMax);
+                //ModelState.AddModelError("AdmUtilisateurs", ClientRES.DépassementMax);
                 else if (item.AdmAnalyseRisque && item.ROAnalyseRisque)
                     ModelState.AddModelError("AdmAnalyseRisque", ClientRES.PasAdminEtLecture);
                 else if (item.AdmPrevicad && item.ROPrevicad)

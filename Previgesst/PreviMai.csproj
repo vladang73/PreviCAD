@@ -595,6 +595,10 @@
     <Compile Include="DataContexts\DbContextMigrations\202107261137211_Previg_79.Designer.cs">
       <DependentUpon>202107261137211_Previg_79.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\DbContextMigrations\202108262227146_Previg_80.cs" />
+    <Compile Include="DataContexts\DbContextMigrations\202108262227146_Previg_80.Designer.cs">
+      <DependentUpon>202108262227146_Previg_80.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\DbContextMigrations\Configuration.cs" />
     <Compile Include="DataContexts\Extensions\MigrationExtensions.cs" />
     <Compile Include="Enums\Applications.cs" />
@@ -2152,6 +2156,7 @@
     <Content Include="Views\FicheCadenassage\PrintQR.cshtml" />
     <Content Include="Views\FicheCadenassage\OnlyWithQR.cshtml" />
     <Content Include="Views\AdminPrevi\Errors.cshtml" />
+    <Content Include="Views\Registre\Instruction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />
@@ -2423,6 +2428,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\DbContextMigrations\202107261137211_Previg_79.resx">
       <DependentUpon>202107261137211_Previg_79.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DbContextMigrations\202108262227146_Previg_80.resx">
+      <DependentUpon>202108262227146_Previg_80.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\Analyse\ARCreateRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

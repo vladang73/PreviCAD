@@ -180,8 +180,23 @@
   <data name="Non" xml:space="preserve">
     <value>Non</value>
   </data>
+  <data name="Option1" xml:space="preserve">
+    <value>Vide</value>
+  </data>
+  <data name="Option2" xml:space="preserve">
+    <value>Complété</value>
+  </data>
+  <data name="Option3" xml:space="preserve">
+    <value>Non-conforme</value>
+  </data>
+  <data name="Option4" xml:space="preserve">
+    <value>Sans objet</value>
+  </data>
   <data name="Oui" xml:space="preserve">
     <value>Oui</value>
+  </data>
+  <data name="Registre" xml:space="preserve">
+    <value>Lockout logbook</value>
   </data>
   <data name="ScanQR" xml:space="preserve">
     <value>Scannez le QR</value>

@@ -1104,7 +1104,8 @@ namespace Previgesst.Controllers
                 }
             }
 
-            return Json("");
+            return RedirectToAction("Edit", new { Id = item.ClientId });
+            //return Json("");
         }
 
 

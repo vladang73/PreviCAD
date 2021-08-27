@@ -171,6 +171,9 @@
   <data name="NotificationDebutCad" xml:space="preserve">
     <value>Notifications de début de cadenassage</value>
   </data>
+  <data name="NotificationNonConformite" xml:space="preserve">
+    <value>Notification de non-conformité</value>
+  </data>
   <data name="User" xml:space="preserve">
     <value>Utilisateur</value>
   </data>

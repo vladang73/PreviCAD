@@ -223,6 +223,15 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification de non-conformité.
+        /// </summary>
+        public static string NotificationNonConformite {
+            get {
+                return ResourceManager.GetString("NotificationNonConformite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Utilisateur.
         /// </summary>
         public static string User {

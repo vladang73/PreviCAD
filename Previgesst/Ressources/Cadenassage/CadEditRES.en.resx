@@ -150,6 +150,9 @@
   <data name="NotificationDebutCad" xml:space="preserve">
     <value>Lockout start notifications</value>
   </data>
+  <data name="NotificationNonConformite" xml:space="preserve">
+    <value>Notification of Non-Compliance</value>
+  </data>
   <data name="Programme" xml:space="preserve">
     <value>Lockout program</value>
   </data>

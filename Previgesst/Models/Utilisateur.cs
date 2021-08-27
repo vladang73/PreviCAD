@@ -7,7 +7,8 @@ using System.Web;
 namespace Previgesst.Models
 {
     public class Utilisateur
-    { public int UtilisateurId { get; set; }
+    {
+        public int UtilisateurId { get; set; }
 
         [Required]
         [StringLength(250)]
@@ -51,6 +52,7 @@ namespace Previgesst.Models
         public Boolean AdmUtilisateurs { get; set; }
 
         public Boolean NotificationDebutCad { get; set; }
-
+        
+        public Boolean NotificationNonConformite { get; set; }
     }
 }

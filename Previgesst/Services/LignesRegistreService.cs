@@ -45,7 +45,8 @@ namespace Previgesst.Services
 
             }
             else
-            { var session = utilisateurService.GetSession();
+            {
+                var session = utilisateurService.GetSession();
                 item.NomAuditeur = session.NomUtilisateur;
             }
             ligneRegistreRepository.Update(item);
@@ -116,7 +117,7 @@ namespace Previgesst.Services
             model.NoCadenas = item.EmployeRegistre.NoCadenas;
             model.NoEmploye = item.EmployeRegistre.NoEmploye;
 
-            if(item.DateFin == null)
+            if (item.DateFin == null)
             {
                 var liste = NotificationCourrielCadActive();
                 var infoClient = GetCieInformation();
@@ -134,7 +135,7 @@ namespace Previgesst.Services
                         GeneralService.SendMail(
                             "<center><table style=\"width:500px;padding:30px;border:1px solid #efeeef;\">" +
                                 "<tr>" +
-                                    "<td><center><img style=\"max-height:100px;\" src=\"cid:" + Logo+"\"></img></center></td>" +
+                                    "<td><center><img style=\"max-height:100px;\" src=\"cid:" + Logo + "\"></img></center></td>" +
                                 "</tr>" +
                                 "<tr>" +
                                     "<td><center><h1 style=\"margin-bottom:-30px\">Cadenassage en cours</h1></center></td>" +
@@ -183,12 +184,18 @@ namespace Previgesst.Services
 
             // Get compagny ID
             var compagnieId = session.ClientId;
+
             // Get all contact by compagny ID when the notification is activate
-            var resultContacts = utilisateurRepository.AsQueryable().Where(x => x.ClientId == compagnieId).Where(x => x.Actif == true).Where(x => x.NotificationDebutCad == true).Select(x => new UtilisateurIndexViewModel()
-            {
-                Nom = x.Nom,
-                Courriel = x.Courriel
-            }).ToList();
+            var resultContacts = utilisateurRepository.AsQueryable()
+                                                      .Where(x => x.ClientId == compagnieId)
+                                                      .Where(x => x.Actif == true)
+                                                      .Where(x => x.NotificationDebutCad == true)
+                                                      .Select(x => new UtilisateurIndexViewModel()
+                                                      {
+                                                          Nom = x.Nom,
+                                                          Courriel = x.Courriel
+                                                      })
+                                                      .ToList();
 
             return resultContacts;
         }
@@ -214,32 +221,32 @@ namespace Previgesst.Services
 
             var result = ligneRegistreRepository.AsQueryable().OrderByDescending(x => x.DateDebut).Where(x => x.EmployeRegistre.ClientId == ClientId).Select(x => new LigneRegistreViewModel()
             {
-                 DateDebut=  x.DateDebut,
-                 DateFin= x.DateFin,
-                
-                 
-                 NoCadenas = x.EmployeRegistre.NoCadenas,
-                 NoEmploye = x.EmployeRegistre.NoEmploye,
-                 Nom = x.EmployeRegistre.Nom,
-                 NomDepartement = x.FicheCadenassage.Departement.NomDepartement,
-                 Note  =x.Note,
-                 NomEquipement = x.FicheCadenassage.Equipement.NomEquipement,
-                 Termine = x.DateFin != null ,
-                 NoFicheCadenassage = x.FicheCadenassage.NoFiche,
-                 FinPrevue = x.FinPrevue,
-                 LigneRegistreId= x.LigneRegistreId,
-                 EmployeRegistreId = x.EmployeRegistreId,
-                 FicheCadenassageId = x.FicheCadenassageId,
-                 NomAuditeur = x.NomAuditeur,
-                 BonDeTravail = x.BonDeTravail,
-                 Rep1 = x.Rep1,
-                 Rep2 = x.Rep2,
-                 Rep3 =x.Rep3,
-                 Rep4 = x.Rep4,
-                 NoteAudit= x.NoteAudit
-                 
-             
-                
+                DateDebut = x.DateDebut,
+                DateFin = x.DateFin,
+
+
+                NoCadenas = x.EmployeRegistre.NoCadenas,
+                NoEmploye = x.EmployeRegistre.NoEmploye,
+                Nom = x.EmployeRegistre.Nom,
+                NomDepartement = x.FicheCadenassage.Departement.NomDepartement,
+                Note = x.Note,
+                NomEquipement = x.FicheCadenassage.Equipement.NomEquipement,
+                Termine = x.DateFin != null,
+                NoFicheCadenassage = x.FicheCadenassage.NoFiche,
+                FinPrevue = x.FinPrevue,
+                LigneRegistreId = x.LigneRegistreId,
+                EmployeRegistreId = x.EmployeRegistreId,
+                FicheCadenassageId = x.FicheCadenassageId,
+                NomAuditeur = x.NomAuditeur,
+                BonDeTravail = x.BonDeTravail,
+                Rep1 = x.Rep1,
+                Rep2 = x.Rep2,
+                Rep3 = x.Rep3,
+                Rep4 = x.Rep4,
+                NoteAudit = x.NoteAudit
+
+
+
 
             }).ToDataSourceResult(request);
 
@@ -255,15 +262,15 @@ namespace Previgesst.Services
                 BonDeTravail = x.BonDeTravail,
                 DateDebut = x.DateDebut,
                 DateFin = x.DateFin,
-           
+
 
                 NoCadenas = x.EmployeRegistre.NoCadenas,
                 NoEmploye = x.EmployeRegistre.NoEmploye,
                 Nom = x.EmployeRegistre.Nom,
-                NomDepartement = langue=="fr"? x.FicheCadenassage.Departement.NomDepartement: x.FicheCadenassage.Departement.NomDepartementEN,
+                NomDepartement = langue == "fr" ? x.FicheCadenassage.Departement.NomDepartement : x.FicheCadenassage.Departement.NomDepartementEN,
                 Note = x.Note,
-                NomEquipement = langue=="fr"? x.FicheCadenassage.Equipement.NomEquipement: x.FicheCadenassage.Equipement.NomEquipementEN,
-                Termine = x.DateFin != null ,
+                NomEquipement = langue == "fr" ? x.FicheCadenassage.Equipement.NomEquipement : x.FicheCadenassage.Equipement.NomEquipementEN,
+                Termine = x.DateFin != null,
                 NoFicheCadenassage = x.FicheCadenassage.NoFiche,
                 FinPrevue = x.FinPrevue,
                 LigneRegistreId = x.LigneRegistreId,
@@ -293,7 +300,7 @@ namespace Previgesst.Services
             ws.Cells["E15"].Value = ligne.EmployeRegistre.Nom;
             ws.Cells["P15"].Value = ligne.EmployeRegistre.Nom;
 
-            ws.Cells["F17"].Value =  ligne.EmployeRegistre.Departement.NomDepartement;
+            ws.Cells["F17"].Value = ligne.EmployeRegistre.Departement.NomDepartement;
             ws.Cells["Q17"].Value = ligne.EmployeRegistre.Departement.NomDepartementEN;
 
             ws.Cells["F19"].Value = DateTime.Today;
@@ -313,8 +320,8 @@ namespace Previgesst.Services
             ws.Cells["U31"].Value = ligne.FinPrevue;
 
 
-            
-            ef.Save(HttpContext.Current.Response,( langue=="fr"?"Etiquette-" : "Label-" )+ ligne.FicheCadenassage.NoFiche + ".pdf");
+
+            ef.Save(HttpContext.Current.Response, (langue == "fr" ? "Etiquette-" : "Label-") + ligne.FicheCadenassage.NoFiche + ".pdf");
 
 
         }

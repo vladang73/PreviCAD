@@ -27,8 +27,11 @@ namespace Previgesst.ViewModels
         public string LienPrevicad { get; set; }
 
         [Display(ResourceType = typeof(CadEditRES), Name = "NotificationDebutCad")]
-
         public Boolean NotificationDebutCad { get; set; }
+
+        [Display(ResourceType = typeof(CadEditRES), Name = "NotificationNonConformite")]
+        public Boolean NotificationNonConformite { get; set; }
+
         public DataSourceResult departements { get; internal set; }
     }
 }

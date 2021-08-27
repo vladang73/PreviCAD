@@ -18,11 +18,16 @@
             <div class="form-group CadParamAdminContent--form">
 
                 @Html.HiddenFor(model => model.ClientId, new { @style = "margin-left:10px;" })
-               
+
 
                 @Html.LabelFor(model => model.NotificationDebutCad, new { @class = "control-label" })
-
                 @Html.CheckBoxFor(model => model.NotificationDebutCad, new { @style = "margin-left:10px;" })
+
+                <br />
+                <br />
+
+                @Html.LabelFor(model => model.NotificationNonConformite, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.NotificationNonConformite, new { @style = "margin-left:10px;" })
 
             </div>
 

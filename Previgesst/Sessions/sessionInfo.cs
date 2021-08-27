@@ -10,13 +10,13 @@ namespace Previgesst.Sessions
         public string NomUtilisateur { get; set; }
         public int ClientId { get; set; }
         public int RoleId { get; set; }
- 
+
         public string Nom { get; set; }
         public int UtilisateurId { get; set; }
 
         public Boolean AdmPrevicad { get; set; }
         public Boolean AdmAnalyseRisque { get; set; }
-      //  public Boolean AdmDocuments { get; set; }
+        //  public Boolean AdmDocuments { get; set; }
 
         public Boolean ROPrevicad { get; set; }
         public Boolean ROAnalyseRisque { get; set; }
@@ -28,8 +28,7 @@ namespace Previgesst.Sessions
 
         public Boolean NotificationDebutCad { get; set; }
 
+        public Boolean NotificationNonConformite { get; set; }
 
     }
-
-    
 }

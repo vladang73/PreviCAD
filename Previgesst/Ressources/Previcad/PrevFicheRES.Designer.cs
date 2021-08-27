@@ -250,11 +250,56 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vide.
+        /// </summary>
+        public static string Option1 {
+            get {
+                return ResourceManager.GetString("Option1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complété.
+        /// </summary>
+        public static string Option2 {
+            get {
+                return ResourceManager.GetString("Option2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Non-conforme.
+        /// </summary>
+        public static string Option3 {
+            get {
+                return ResourceManager.GetString("Option3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sans objet.
+        /// </summary>
+        public static string Option4 {
+            get {
+                return ResourceManager.GetString("Option4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oui.
         /// </summary>
         public static string Oui {
             get {
                 return ResourceManager.GetString("Oui", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lockout logbook.
+        /// </summary>
+        public static string Registre {
+            get {
+                return ResourceManager.GetString("Registre", resourceCulture);
             }
         }
         

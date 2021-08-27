@@ -177,6 +177,24 @@
   <data name="NoFiche" xml:space="preserve">
     <value>#</value>
   </data>
+  <data name="Non" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="Option1" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="Option2" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Option3" xml:space="preserve">
+    <value>Non-Compliant</value>
+  </data>
+  <data name="Option4" xml:space="preserve">
+    <value>Not Applicable</value>
+  </data>
+  <data name="Oui" xml:space="preserve">
+    <value>Oui</value>
+  </data>
   <data name="Registre" xml:space="preserve">
     <value>Lockout logbook</value>
   </data>

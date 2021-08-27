@@ -70,5 +70,8 @@ namespace Previgesst.ViewModels
         [Display(ResourceType = typeof(UtilisateursRES), Name = "NotificationDebutCad")]
         public Boolean NotificationDebutCad { get; set; }
 
+
+        [Display(ResourceType = typeof(UtilisateursRES), Name = "NotificationNonConformite")]
+        public Boolean NotificationNonConformite { get; set; }
     }
 }

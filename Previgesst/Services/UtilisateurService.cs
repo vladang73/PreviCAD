@@ -66,7 +66,7 @@ namespace Previgesst.Services
         public Sessions.sessionInfo GetSession()
         {
             Sessions.sessionInfo s = (Sessions.sessionInfo)HttpContext.Current.Session["utilisateur"];
-            return s ;
+            return s;
         }
 
         public void LogOff()
@@ -79,12 +79,12 @@ namespace Previgesst.Services
         public bool ForceRedirect()
         {
             var nomUser = System.Web.HttpContext.Current.User.Identity.Name;
-            if (nomUser == "CDEUser" &&  GetSession()== null)
+            if (nomUser == "CDEUser" && GetSession() == null)
             {
                 return true;
             }
             return false;
-       
+
         }
         [Authorize]
         public Boolean VerifierBonClientCadenassage_Equipement(int equipementId, bool ModeUpdateSeulement)
@@ -98,7 +98,7 @@ namespace Previgesst.Services
 
             var session = GetSession();
             if (session == null)
-         
+
             {
                 //  RedirectToClientLogin(res);
                 //  return false;
@@ -143,7 +143,7 @@ namespace Previgesst.Services
                 return false;
             }
             var vm = getAccesClientVM(ligne.FicheCadenassage.ClientId);
-            if (ligne.FicheCadenassage.ClientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad ))))
+            if (ligne.FicheCadenassage.ClientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad))))
             {
                 return true;
             }
@@ -175,7 +175,7 @@ namespace Previgesst.Services
                 return false;
             }
             var vm = getAccesClientVM(ligne.FicheCadenassage.ClientId);
-            if (ligne.FicheCadenassage.ClientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad ))))
+            if (ligne.FicheCadenassage.ClientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad))))
             {
                 return true;
             }
@@ -208,7 +208,7 @@ namespace Previgesst.Services
                 return false;
             }
             var vm = getAccesClientVM(ligne.FicheCadenassage.ClientId);
-            if (ligne.FicheCadenassage.ClientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad ))))
+            if (ligne.FicheCadenassage.ClientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad))))
             {
                 return true;
             }
@@ -242,7 +242,7 @@ namespace Previgesst.Services
                 return false;
             }
             var vm = getAccesClientVM(fiche.ClientId);
-            if (fiche.ClientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad ))))
+            if (fiche.ClientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad))))
             {
                 return true;
             }
@@ -270,7 +270,7 @@ namespace Previgesst.Services
             }
 
             var vm = getAccesClientVM(clientId);
-            if (clientId == session.ClientId && vm.AccessAnalyse && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad ))))
+            if (clientId == session.ClientId && vm.AccessAnalyse && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad))))
                 return true;
 
 
@@ -346,7 +346,7 @@ namespace Previgesst.Services
             }
             var vm = getAccesClientVM(clientId);
 
-            if (clientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad ))))
+            if (clientId == session.ClientId && vm.AccessCadenassage && (ModeUpdateSeulement == false || (ModeUpdateSeulement && (session.AdmPrevicad))))
                 return true;
 
             RedirectToClientLogin();
@@ -364,7 +364,7 @@ namespace Previgesst.Services
             }
             else
             {
-                if(etat == false)
+                if (etat == false)
                 {
                     return true;
                 }
@@ -626,7 +626,7 @@ namespace Previgesst.Services
 
 
         public void UpdateNbOfCadenassageSheet(int ClientId, int nouveauTotalFichesCadenassage)
-        { 
+        {
             var client = clientRepository.Get(ClientId);
             client.TotalCadenassage = nouveauTotalFichesCadenassage;
             clientRepository.Update(client);
@@ -692,11 +692,12 @@ namespace Previgesst.Services
             item.Nom = model.Nom;
             item.NomUtilisateur = model.NomUtilisateur.Trim();
             item.Password = Helpers.Encryption.Encrypt(model.MotDePasse.Trim(), true);
-            
+
             item.Actif = model.Actif;
             item.ClientId = model.ClientId;
             item.Courriel = model.Courriel;
             item.NotificationDebutCad = model.NotificationDebutCad;
+            item.NotificationNonConformite = model.NotificationNonConformite;
             item.AdmAnalyseRisque = model.AdmAnalyseRisque;
             item.AdmPrevicad = model.AdmPrevicad;
             //item.AdmDocuments = model.AdmDocuments;
@@ -718,7 +719,7 @@ namespace Previgesst.Services
             utilisateurRepository.SaveChanges();
             item = utilisateurRepository.Get(item.UtilisateurId);
             model.UtilisateurId = item.UtilisateurId;
-            
+
 
         }
         public bool isLoginOk(LoginClientViewModel vm)
@@ -735,10 +736,10 @@ namespace Previgesst.Services
                 session.ClientId = client.ClientId;
                 session.Nom = utilisateur.Nom;
                 session.NomUtilisateur = utilisateur.NomUtilisateur;
-                
+
                 session.UtilisateurId = utilisateur.UtilisateurId;
                 session.AdmAnalyseRisque = utilisateur.AdmAnalyseRisque;
-               
+
                 session.AdmPrevicad = utilisateur.AdmPrevicad;
                 session.Auditeur = utilisateur.Auditeur;
                 session.ROAnalyseRisque = utilisateur.ROAnalyseRisque;
@@ -746,7 +747,8 @@ namespace Previgesst.Services
                 session.ROPrevicad = utilisateur.ROPrevicad;
                 session.AdmUtilisateurs = utilisateur.AdmUtilisateurs;
                 session.NotificationDebutCad = utilisateur.NotificationDebutCad;
-                
+                session.NotificationNonConformite = utilisateur.NotificationNonConformite;
+
 
 
                 HttpContext.Current.Session["utilisateur"] = session;
@@ -793,7 +795,7 @@ namespace Previgesst.Services
 
         public Boolean DepassementAdminPrevicad(UtilisateurIndexViewModel model)
         {
-          
+
             var client = clientRepository.AsQueryable().Where(x => x.ClientId == model.ClientId).FirstOrDefault();
             if (model.AdmPrevicad)
             {
@@ -808,9 +810,9 @@ namespace Previgesst.Services
 
         public Boolean DepassementAdminAnalyse(UtilisateurIndexViewModel model)
         {
-          
+
             var client = clientRepository.AsQueryable().Where(x => x.ClientId == model.ClientId).FirstOrDefault();
-           if (model.AdmAnalyseRisque)
+            if (model.AdmAnalyseRisque)
             {
                 var nbDejaPrevi = utilisateurRepository.AsQueryable().Count(x => x.ClientId == model.ClientId && x.UtilisateurId != model.UtilisateurId && x.AdmAnalyseRisque == true);
                 if (client.NbAdminsAnalyseRisqueMax < nbDejaPrevi + 1)
@@ -824,7 +826,7 @@ namespace Previgesst.Services
 
         //public Boolean DepassementAdminDocuments(UtilisateurIndexViewModel model)
         //{
-         
+
         //    var client = clientRepository.AsQueryable().Where(x => x.ClientId == model.ClientId).FirstOrDefault();
 
         //    if (model.AdmDocuments)
@@ -869,7 +871,7 @@ namespace Previgesst.Services
             }
             return false;
         }
-        
+
 
         /*
         public Boolean verificationNbTotalCadenassage(UtilisateurIndexViewModel model)
@@ -901,13 +903,13 @@ namespace Previgesst.Services
 
             var session = GetSession();
 
-            if (appClient.Contains(codeGeneral) && (session.RODocuments ))
+            if (appClient.Contains(codeGeneral) && (session.RODocuments))
                 vm.AccessDocuments = true;
-            if (appClient.Contains(codeCadenassage) && ( session.AdmPrevicad || session.ROPrevicad || session.Auditeur))
+            if (appClient.Contains(codeCadenassage) && (session.AdmPrevicad || session.ROPrevicad || session.Auditeur))
                 vm.AccessCadenassage = true;
             if (appClient.Contains(codeAnalyse) && (session.AdmAnalyseRisque || session.ROAnalyseRisque))
                 vm.AccessAnalyse = true;
-            
+
 
             return vm;
         }
@@ -942,16 +944,19 @@ namespace Previgesst.Services
 
         public void SaveParametersCadAdmin(EditCadenassageViewModel model, int UtilisateurId)
         {
-          
+
             var item = utilisateurRepository.Get(UtilisateurId);
 
 
             if (item != null)
-
             {
                 var session = GetSession();
                 session.NotificationDebutCad = model.NotificationDebutCad;
                 item.NotificationDebutCad = model.NotificationDebutCad;
+
+                session.NotificationNonConformite = model.NotificationNonConformite;
+                item.NotificationNonConformite = model.NotificationNonConformite;
+
                 utilisateurRepository.Update(item);
                 utilisateurRepository.SaveChanges();
             }
@@ -964,19 +969,25 @@ namespace Previgesst.Services
         {
             var session = GetSession();
 
-            var accountDetails = utilisateurRepository.AsQueryable().Where(x => x.UtilisateurId == session.UtilisateurId).Where(x => x.ClientId == clientId).FirstOrDefault();
-            var verificationUtilisateurEnLigne = new UtilisateurIndexViewModel
+            if (session != null)
             {
-                NomUtilisateur = accountDetails.NomUtilisateur,
-                MotDePasse = accountDetails.Password,
-                Nom = accountDetails.Nom,
-                Courriel = accountDetails.Courriel,
-                UtilisateurId = accountDetails.UtilisateurId,
-                ClientId = accountDetails.ClientId,
-                NotificationDebutCad = accountDetails.NotificationDebutCad
-            };
+                var accountDetails = utilisateurRepository.AsQueryable().Where(x => x.UtilisateurId == session.UtilisateurId).Where(x => x.ClientId == clientId).FirstOrDefault();
+                var verificationUtilisateurEnLigne = new UtilisateurIndexViewModel
+                {
+                    NomUtilisateur = accountDetails.NomUtilisateur,
+                    MotDePasse = accountDetails.Password,
+                    Nom = accountDetails.Nom,
+                    Courriel = accountDetails.Courriel,
+                    UtilisateurId = accountDetails.UtilisateurId,
+                    ClientId = accountDetails.ClientId,
+                    NotificationDebutCad = accountDetails.NotificationDebutCad,
+                    NotificationNonConformite = accountDetails.NotificationNonConformite
+                };
 
-            return verificationUtilisateurEnLigne;
+                return verificationUtilisateurEnLigne;
+            }
+
+            return null;
         }
 
 

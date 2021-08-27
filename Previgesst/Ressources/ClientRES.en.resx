@@ -152,6 +152,9 @@
   <data name="NotificationDebutCad" xml:space="preserve">
     <value>Lockout start notifications</value>
   </data>
+  <data name="NotificationNonConformite" xml:space="preserve">
+    <value>Notification of Non-Compliance</value>
+  </data>
   <data name="PasAdminEtLecture" xml:space="preserve">
     <value>The user cannot had Admin and Read rights for the same application</value>
     <comment>The user cannot had Admin and Read rights for the same application</comment>

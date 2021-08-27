@@ -110,11 +110,15 @@
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.NotificationDebutCad, new { @class = "control-label pull-left" })
-
-
                         @Html.CheckBoxFor(model => model.NotificationDebutCad, new { @style = "margin-left:10px;" })
                         @Html.ValidationMessageFor(model => model.NotificationDebutCad)
 
+                        <br />
+                        <div class="clearfix"></div>
+
+                        @Html.LabelFor(model => model.NotificationNonConformite, new { @class = "control-label pull-left" })
+                        @Html.CheckBoxFor(model => model.NotificationNonConformite, new { @style = "margin-left:10px;" })
+                        @Html.ValidationMessageFor(model => model.NotificationNonConformite)
                     </div>
 
                     <hr />

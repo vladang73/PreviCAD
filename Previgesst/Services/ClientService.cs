@@ -121,6 +121,7 @@ namespace Previgesst.Services
 
                 Actif = u.Actif,
                 NotificationDebutCad = u.NotificationDebutCad,
+                NotificationNonConformite = u.NotificationNonConformite,
                 Suppressible = true,
                 AdmAnalyseRisque = u.AdmAnalyseRisque,
                 //AdmDocuments=u.AdmDocuments,

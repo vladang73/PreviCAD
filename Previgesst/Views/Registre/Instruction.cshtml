@@ -1,0 +1,180 @@
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Cadenassage
+@model Previgesst.ViewModels.EditFicheViewModel
+
+<div class="panel panel-danger">
+
+
+
+    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+
+
+    <div class="panel-body">
+        <div style="margin-bottom:10px;">
+            <input type="button" class="btn btn-success" value="@CadLigneCadRES.Renumeroter" onclick="RenumeroterLignes()" />
+        </div>
+
+        <div id="Documents" class="tab-pane">
+
+
+
+            @Html.AntiForgeryToken()
+
+            @(Html.Kendo().Grid<LigneInstructionViewModel>()
+                                    .Name("listCAD")
+                                    .Columns(columns =>
+                                    {
+
+                                        columns.Bound(e => e.LigneInstructionId).Hidden();
+                                        columns.Bound(e => e.FicheCadenassageId).Hidden();
+
+                                        columns.Bound(c => c.NoLigne).Filterable(f => f.Extra(false)).Title("#").Width("50px");
+
+                                        columns.Bound(c => c.TexteInstruction)
+                                                .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                    .ForString(str => str.Clear()
+                                                    .Contains(GridRES.Contains)
+                                                    .StartsWith(GridRES.StartsWith)
+                                                    .IsEqualTo(GridRES.Egale)
+                                                    .IsNotEqualTo(GridRES.NotEquals)
+                                                 )))
+                                                .Title(CadLigneCadRES.Instruction);
+
+                                        columns.Bound(c => c.TexteSupplementaireInstruction).Width("150")
+                                                 .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                    .ForString(str => str.Clear()
+                                                    .Contains(GridRES.Contains)
+                                                    .StartsWith(GridRES.StartsWith)
+                                                    .IsEqualTo(GridRES.Egale)
+                                                    .IsNotEqualTo(GridRES.NotEquals)
+                                                 )))
+                                                 .Title(CadLigneCadRES.AutresInstructions);
+
+                                        columns.Bound(c => c.TexteSupplementaireDispositif)
+                                                 .Filterable(f => f.Extra(false).Operators(operators => operators
+                                                    .ForString(str => str.Clear()
+                                                    .Contains(GridRES.Contains)
+                                                    .StartsWith(GridRES.StartsWith)
+                                                    .IsEqualTo(GridRES.Egale)
+                                                    .IsNotEqualTo(GridRES.NotEquals)
+                                                 ))).Title(CadLigneCadRES.Dispositif).Width("120px");
+                                  
+
+
+                                        columns.Bound(e => e.Thumbnail).ClientTemplate("<img src='#=Thumbnail#'/>").EditorTemplateName("VideView").Title(CadLigneCadRES.Image).Filterable(false).Sortable(false);
+                                    })
+
+                                    .DataSource(ds => ds.Ajax()
+                                                        .Sort(x => x.Add(c => c.NoLigne))
+                                                        .PageSize(20)
+                                                        .Model(m => { m.Id(e => e.LigneInstructionId); })
+                                                        .Read(r => r.Action("ReadListCadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                                    )
+                                    .Scrollable(s => s.Enabled(true).Height("auto"))
+            )
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+
+    $("#EtapCadFich").click(function () {
+
+        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        $("a.k-grid-add").addClass("btn btn-success btn-sectioncad");
+        $("span.k-add").removeClass("k-icon");
+        $("a.btn-sectioncad").text("@CadLigneCadRES.Ajouter");
+
+        // ADD ICONE "+"
+        setTimeout(function () { $("#Cadenassage").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+    });
+
+    function EndLC(e) {
+        if (e.type == "update" || e.type == "destroy" || e.type == "create") {
+
+            var grid = $("#listPhoto").data("kendoGrid")
+            grid.dataSource.read();
+        }
+    }
+
+
+    var imageWindow;
+    var timer;
+    function Edit(e) {
+        var item = $(e.container).find('[value=Image]').hide();
+    }
+
+    function changerImage(e) {
+
+        var config = {
+            //contextPath: '@Url.Content("~")'
+            path: '@Url.Content("~/upload/setInstrPic/")'
+        };
+
+        imageWindow = PopupCenter(config.path + e, "@CadLigneCadRES.ChangerImage", 600, 300);
+
+        timer = setInterval(checkWindow, 100);
+    }
+
+    function checkWindow() {
+
+        if (imageWindow.closed) {
+            $('#listCAD').data('kendoGrid').dataSource.read();
+            $('#listCAD').data('kendoGrid').refresh();
+            clearInterval(timer);
+        }
+    }
+
+
+    function ListeErreurCAD(args) {
+
+        var selecteurGrid = "#listCAD";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("@CadLigneCadRES.Erreur",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
+    }
+
+    function ListeDataBoundCAD(e) {
+
+        var selecteurGrid = "#listCAD";
+        var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        //Selects all delete buttons
+        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+            //Check in the current dataItem if the row is deletable
+            if (!currentDataItem.Suppressible) {
+
+                $(this).remove();
+            }
+        })
+    }
+
+
+    function CadenassageSync(e) {
+        if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
+        if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
+
+        GetUpdateInfo();
+    }
+
+
+</script>

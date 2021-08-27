@@ -1108,9 +1108,9 @@ table tr th {
 }
 
 .registreEmploye #TabFiches #list table tbody tr td:nth-child(5) {
-    color: #FFF;
+    /*color: #FFF;
     font-size: 0px;
-    text-align: center;
+    text-align: center;*/
 }
 
 .registreEmploye .k-grid-edit {
