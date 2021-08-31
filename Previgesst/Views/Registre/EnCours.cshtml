@@ -1,5 +1,6 @@
 ﻿@model Previgesst.ViewModels.EmployeRegistreViewModel
 @using Previgesst.Ressources.Previcad
+@using Previgesst.Ressources.Cadenassage
 @using Previgesst.Ressources
 
 
@@ -10,11 +11,37 @@
     }
 </style>
 
+<style scoped>
+    .armchair {
+        overflow: auto;
+        height: calc(100% - 70px);
+        padding: 10px
+    }
+
+    .window-footer {
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 95%;
+        margin-top: 150px;
+        padding: 10px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+    .armchair.fullheight {
+        height: auto;
+    }
+
+        .armchair.fullheight .statusdropDownTemplate {
+            pointer-events: none;
+        }
+
+</style>
+
 <div class="panel panel-danger">
 
     <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-
 
     <div class="panel-body">
 
@@ -78,10 +105,9 @@
 
                         columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette +"></a>").Title("").Filterable(false).Sortable(false).Width(55);
 
-                        columns.Command(command => command.Custom("étapes").Click("showDetailsNew")).Width(100);
+                        columns.Command(e => e.Custom("étapes").Click("showDetails").HtmlAttributes(new { @data_viewonly = "false" })).Width(100);
 
                         columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier)).Width(20);
-
                     })
                     .DataSource(ds => ds
                     .Ajax()
@@ -101,10 +127,9 @@
 
                     .DisplayDeleteConfirmation(false)
                     )
-                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
-                        { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                        .Filterable()
-                        .DataSource(ds => ds
+                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                    .Filterable()
+                    .DataSource(ds => ds
                         .Ajax().Events(e=>e.RequestEnd("doRefresh"))
                         .Filter(f =>
                         {
@@ -119,10 +144,9 @@
                         .Create(c => c.Action("SaveLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
                         .Update(u => u.Action("SaveLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
                         .Destroy(d => d.Action("DeleteLigneRegistreUnEmploye", "Registre", new { client = Model.ClientId }))
-
-
-
-                        ).Events(e => e.DataBound("dataBoundEnCours")).Events(e=>e.Edit("onEditEnCours"))
+                    )
+                    .Events(e => e.DataBound("dataBoundEnCours"))
+                    .Events(e => e.Edit("onEditEnCours"))
 
         )
 
@@ -132,83 +156,12 @@
 </div>
 
 
-@(Html.Kendo().Window().Name("EqDetails")
-        .Title("étape de cadenassage et décadenassage et non-conformité")
-        .Visible(false)
-        .Modal(true)
-        .Width(650)
-        .Height(300)
-)
-
-
-<script type="text/x-kendo-template" id="eqTemplate">
-    <div id="details-contaner">
-
-        <input type="hidden" id="EquipementId" value="#=EquipementId#" />
-
-
-        <div class="form-group">
-            <label for="Manufacturer">Fabricant</label>
-            <input type="text" class="form-control petit" id="Manufacturer" name="Manufacturer" value="#= (Manufacturer == null) ? '' : Manufacturer #" />
-        </div>
-
-        <div class="form-group">
-            <label for="Model">Modèle</label>
-            <input type="text" class="form-control petit" id="Model" name="Model" value="#= (Model == null) ? '' : Model #" />
-        </div>
-
-        <div class="form-group">
-            <label for="NumberOfSerie">Numéro de série</label>
-            <input type="text" class="form-control petit" id="NumberOfSerie" name="NumberOfSerie" value="#= (NumberOfSerie == null) ? '' : NumberOfSerie #" />
-        </div>
-
-        <div class="form-group">
-            <label for="YearOfProduction">Année de fabrication</label>
-            <input type="text" class="form-control petit" id="YearOfProduction" name="YearOfProduction" value="#= (YearOfProduction == null) ? '' : YearOfProduction #" />
-        </div>
-
-        <div class="form-group">
-            <label for="Function">Fonction</label>
-            <input type="text" class="form-control petit" id="Function" name="Function" value="#= (Function == null) ? '' : Function #" />
-        </div>
-
-        <div class="form-group">
-            <label for="Model">Tâches</label>
-            <select id="Task" multiple="multiple" data-placeholder="Sélectionner des tâches">
-                <option value="1">Empty</option>
-                <option value="2">Completed</option>
-                <option value="3">Non-Compliant</option>
-                <option value="4">Not Applicable</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <input type="checkbox" id="RiskAnalysis" name="RiskAnalysis" # if (RiskAnalysis) { # checked=\"checked\" # } # />
-            <label for="RiskAnalysis">Analyse de risque complétée</label>
-        </div>
-
-        <div class="form-group">
-            <input type="checkbox" id="LockoutProcedure" name="LockoutProcedure" # if (LockoutProcedure) { # checked=\"checked\" # } # />
-            <label for="LockoutProcedure">Procédure de cadenassage complétée</label>
-        </div>
-
-        <div class="form-group">
-            <input type="checkbox" id="SafeWorkProcedure" name="SafeWorkProcedure" # if (SafeWorkProcedure) { # checked=\"checked\" # } # />
-            <label for="SafeWorkProcedure">Procédure de travail sécuritaire complétée</label>
-        </div>
-
-        <div class="form-group text-right">
-            <a class="k-button k-button-icontext k-primary k-grid-update" onclick="SaveEquipementsInfo()">
-                <span class="k-icon k-update"></span>Mettre à jour
-            </a>
-
-            <a class="k-button k-button-icontext k-grid-cancel" onclick="closeDetailsNew()">
-                <span class="k-icon k-cancel"></span>Annuler
-            </a>
-        </div>
-
+<div id="wnd">
+    <div id="wrapped-grid" class="armchair"></div>
+    <div class="window-footer">
+        <input type="button" class="btn btn-info" id="btnSaveInstructionStatus" value="@CadEditRES.Enregistrer" />
     </div>
-</script>
+</div>
 
 
 <script>
@@ -221,17 +174,13 @@
         var classe = $(selecteurGrid + " .k-grid-edit").attr("class");
         classe = "btn btn-success " + classe;
         $(selecteurGrid + " .k-grid-edit").removeAttr("class").addClass(classe).removeClass("k-button").removeClass("k-button-icontext");
-
     }
 
     function onEditEnCours(e) {
-
         e.container.find(".k-grid-cancel").bind("click", function () {
             $("#listEnCours").data("kendoGrid").dataSource.read();
             $("#listTermines").data("kendoGrid").dataSource.read();
-
         })
-
     }
 
     function doRefresh(e) {
@@ -239,7 +188,6 @@
             $("#listEnCours").data("kendoGrid").dataSource.read();
             $("#listTermines").data("kendoGrid").dataSource.read();
         }
-
     }
 
     // Add img title
@@ -249,36 +197,158 @@
         });
     }, 3000);
 
-
-    function showDetailsNew(e) {
-        e.preventDefault();
+    function showDetails(e) {
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-        console.log(dataItem);
-        //var wind = $("#EqDetails").data("kendoWindow");
+        var url = "@Url.Action("Instruction", "Registre")?ficheId=" + dataItem.FicheCadenassageId;
 
-        ////wind.content(detailsTemplate(dataItem));
-        //wind.center().open();
-        ////var multiselect = $('#details-contaner').find("#Task").kendoMultiSelect().data("kendoMultiSelect");
+        var viewonly =  $(e.currentTarget).data("viewonly");
 
-        ////if (dataItem.Task != null) {
-        ////    multiselect.value(dataItem.Task.split(','));
-        ////    multiselect.trigger("change");
-        ////}
+        $('.window-footer').show();
+        $('.armchair').removeClass('fullheight');
+
+        if (viewonly == "yes") {
+            $('.window-footer').hide();
+            $('.armchair').addClass('fullheight');
+        }
+        
+        $("#wrapped-grid").empty();
+
+        $("#wrapped-grid").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: url,
+                        dataType: "json"
+                    }
+                }
+            },
+
+            /*height: "465px",*/
+            scrollable: false,
+            sortable: false,
+            resizable: false,
+            columns: [
+                { field: "PKType", hidden: true },
+                { field: "PKId", hidden: true },
+                { field: "FicheCadenassageId", hidden: true },
+                { field: "NoLigne", width: "60px", title: "#" },
+                {
+                    field: "TexteInstruction", title: "@CadLigneCadRES.Instruction",
+                    template: "<b>#= TexteInstruction # </b><br> #= TexteSupplementaireInstruction == null ? '' : TexteSupplementaireInstruction #"
+                },
+                {
+                    field: "TexteSupplementaireDispositif", title: "@CadLigneCadRES.Dispositif",
+                    template: "<b>#= TexteDispositif # </b><br> #= TexteSupplementaireDispositif == null ? '' : TexteSupplementaireDispositif #"
+                },
+                { field: "TexteAccessoire", width: "100px", title: "@CadLigneCadRES.Accessoire" },
+
+                {
+                    field: "Thumbnail", title: "@CadLigneCadRES.Image",
+                    template: "<img src='#=Thumbnail#'/>"
+                },
+
+                { field: "StepStatus", width: "80px", title: "@CadLigneCadRES.StepStatus", template: StatusTemplateFunction },
+            ],
+
+            dataBound: function (e) {
+                var grid = e.sender;
+                var items = e.sender.items();
+
+                items.each(function (e) {
+                    var dataItem = grid.dataItem(this);
+                    var ddt = $(this).find('.statusdropDownTemplate');
+                    //console.log('ddt dateItem', dataItem);
+
+                    $(ddt).kendoDropDownList({
+                        value: dataItem.StepStatus,
+                        dataSource: ddlDataSource,
+                        dataTextField: "displayValue",
+                        dataValueField: "StepStatus",
+                        change: onDDLStatusChange
+                    });
+
+                    if (viewonly == "yes") {
+                        $(ddt).data("kendoDropDownList").enable(false);
+                    }
+                });
+            }
+        });
 
 
+        var wnd = $("#wnd").kendoWindow({
+            height: 500,
+            width: 950,
+            visible: false
+        }).data("kendoWindow");
 
-        var url = "@Url.Action("Instruction", "Registre")";
-        ur = url + '?ficheId=' + dataItem.FicheCadenassageId;
-
-        console.log(url);
-
-        var temp = $("#EqDetails").data("kendoWindow");
-
-        temp.refresh({ url: url })
+        wnd.title("@PrevFicheRES.OptionWindowTitle")
             .center()
-            .open()
-            ;
+            .open();
     }
+
+    var ddlDataSource = [
+        { StepStatus: 1, displayValue: "@PrevFicheRES.Option1" },
+        { StepStatus: 2, displayValue: "@PrevFicheRES.Option2" },
+        { StepStatus: 3, displayValue: "@PrevFicheRES.Option3" },
+        { StepStatus: 4, displayValue: "@PrevFicheRES.Option4" }
+    ];
+
+    function onDDLStatusChange(e) {
+        var element = e.sender.element;
+        var row = element.closest("tr");
+        var grid = $("#wrapped-grid").data("kendoGrid");
+        var dataItem = grid.dataItem(row);
+
+        /*dataItem.set("value", e.sender.value());*/
+        dataItem.set("StepStatus", e.sender.value());
+    };
+
+    function StatusTemplateFunction(dataItem) {
+        var input = '<input class="statusdropDownTemplate"/>'
+
+        return input
+    };
+
+    $(document).on('click', '#btnSaveInstructionStatus', function () {
+
+        var entityGrid = $("#wrapped-grid").data("kendoGrid");
+        var data = entityGrid.dataSource.data();
+        var totalNumber = data.length;
+        var allData = [];
+
+        for (var i = 0; i < totalNumber; i++) {
+            var currentDataItem = data[i];
+
+            //console.log('StepStatus ddl', entityGrid.dataSource._data[i]);
+
+            allData.push({
+                PKId: 0,
+                InstructionId: currentDataItem.PKId,
+                InstructionType: currentDataItem.PKType,
+                StepStatus: currentDataItem.StepStatus,
+                FicheCadenassageId: currentDataItem.FicheCadenassageId
+            });
+        }
+
+        console.log(allData);
+
+
+        $.ajax({
+            url: "@Url.Action("SaveInstructions", "Registre")",
+            type: 'POST',
+            data: { model: allData },
+            dataType: 'json',
+            cache: false,
+            success: function (result) {
+                if (result.isSuccess == true) {
+                    $('#wrapped-grid').data('kendoGrid').dataSource.read();
+                }
+            },
+            error: function (req, status, errorObj) {
+            }
+        });
+    });
+
 
 </script>
 

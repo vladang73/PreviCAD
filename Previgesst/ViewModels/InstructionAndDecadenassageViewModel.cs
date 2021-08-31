@@ -1,22 +1,25 @@
-﻿using Previgesst.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+
+using Previgesst.Models;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Previgesst.Ressources.Cadenassage;
 
 namespace Previgesst.ViewModels
 {
-    public class LigneInstructionViewModel
+    public class InstructionAndDecadenassageViewModel
     {
-        public int LigneInstructionId { get; set; }
+        public int PKId { get; set; }
+        public string PKType  { get; set; }
+
 
         public int FicheCadenassageId { get; set; }
         public virtual FicheCadenassage FicheCadenassage { get; set; }
 
-        [Required]      
+        [Required]
         [Display(ResourceType = typeof(CadLigneCadRES), Name = "NoLigne")]
         public decimal NoLigne { get; set; }
 
@@ -26,10 +29,10 @@ namespace Previgesst.ViewModels
         public int? InstructionId { get; set; }
         public virtual Instruction Instruction { get; set; }
 
-   
-        
+
+
         [Display(ResourceType = typeof(CadLigneCadRES), Name = "TexteSUPInstruction")]
-        [MaxLength(250, ErrorMessageResourceType = typeof(CadLigneCadRES), ErrorMessageResourceName = "ErrTexteSUPInstruction")]   
+        [MaxLength(250, ErrorMessageResourceType = typeof(CadLigneCadRES), ErrorMessageResourceName = "ErrTexteSUPInstruction")]
         [StringLength(250)]
         public string TexteSupplementaireInstruction { get; set; }
 
@@ -75,15 +78,18 @@ namespace Previgesst.ViewModels
 
         [Display(ResourceType = typeof(CadLigneCadRES), Name = "Realiser")]
         public Boolean Realiser { get; set; }
-  
+
         public Boolean Suppressible { get; set; }
 
         public string TexteInstruction { get; set; }
         public string TexteDispositif { get; set; }
         public string TexteAccessoire { get; set; }
 
+        [UIHint("StatusValues")]
+        public string StepStatus { get; set; }
 
-        [Display(ResourceType = typeof(CadLigneCadRES), Name = "Telecharger" )]
+
+        [Display(ResourceType = typeof(CadLigneCadRES), Name = "Telecharger")]
         public string Thumbnail { get; set; }
 
         [Display(ResourceType = typeof(CadLigneCadRES), Name = "Image")]

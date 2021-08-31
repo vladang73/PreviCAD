@@ -13,7 +13,7 @@ namespace Previgesst.DataContexts.DbContextMigrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202108262227146_Previg_80"; }
+            get { return "202108302118106_Previg_80"; }
         }
         
         string IMigrationMetadata.Source

@@ -192,6 +192,9 @@
   <data name="Option4" xml:space="preserve">
     <value>Sans objet</value>
   </data>
+  <data name="OptionWindowTitle" xml:space="preserve">
+    <value>étape de cadenassage et décadenassage et non-conformité</value>
+  </data>
   <data name="Oui" xml:space="preserve">
     <value>Oui</value>
   </data>

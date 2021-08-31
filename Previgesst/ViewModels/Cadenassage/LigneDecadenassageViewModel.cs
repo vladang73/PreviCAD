@@ -74,6 +74,8 @@ namespace Previgesst.ViewModels
         public Boolean Suppressible { get; set; }
 
         public string TexteInstruction { get; set; }
+        public string TexteDispositif { get; set; }
+        public string TexteAccessoire { get; set; }
 
 
         [Display(ResourceType = typeof(CadLigneCadRES), Name = "Telecharger")]

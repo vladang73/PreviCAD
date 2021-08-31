@@ -27,6 +27,7 @@ namespace Previgesst.Controllers
 
         private LigneInstructionService ligneInstructionService;
         private LigneDecadenassageService ligneDecadenassageService;
+        private SavedInstructionService savedInstructionService;
 
         private string Layout;
 
@@ -38,7 +39,9 @@ namespace Previgesst.Controllers
                DocumentClientService documentClientService,
                ParametresAppService parametresAppService,
                ParametresAppController parametresAppController,
-               LigneInstructionService ligneInstructionService, LigneDecadenassageService ligneDecadenassageService)
+               LigneInstructionService ligneInstructionService,
+               LigneDecadenassageService ligneDecadenassageService,
+               SavedInstructionService savedInstructionService)
         {
             this.employeRegistreService = employeRegistreService;
             this.ficheCadenassageService = ficheCadenassageService;
@@ -51,6 +54,7 @@ namespace Previgesst.Controllers
 
             this.ligneInstructionService = ligneInstructionService;
             this.ligneDecadenassageService = ligneDecadenassageService;
+            this.savedInstructionService = savedInstructionService;
         }
 
         [HttpGet]
@@ -268,26 +272,102 @@ namespace Previgesst.Controllers
 
         public ActionResult Instruction(int ficheId)
         {
-            return View();
+            var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+
+            // Empty / Completed / Non-Compliant / Not Applicable
+            // Vide/Complété/Non-conforme/Sans objet
+
+            ViewData["StepStatuses"] = new List<SelectListItem> {
+                new SelectListItem { Value = "1", Text = (langue == "fr" ? "Vide" : "Empty") } ,
+                new SelectListItem { Value = "2", Text = (langue == "fr" ? "Complété" : "Completed") } ,
+                new SelectListItem { Value = "3", Text = (langue == "fr" ? "Non-conforme" : "Non-Compliant") } ,
+                new SelectListItem { Value = "4", Text = (langue == "fr" ? "Sans objet" : "Not Applicable") }
+            };
+
+            // get already saved instructions
+            var alreadySaved = savedInstructionService.GetSavedInstructions(ficheId);
+
+            // all instructions
+            var model1 = ligneInstructionService.GetListeLignesInstruction(ficheId).ToList()
+                        .Select(x => new InstructionAndDecadenassageViewModel
+                        {
+                            PKId = x.LigneInstructionId,
+                            PKType = "Instruction",
+
+                            FicheCadenassageId = x.FicheCadenassageId,
+
+                            NoLigne = x.NoLigne,
+                            Suppressible = x.Suppressible,
+                            CocherColonneCadenas = x.CocherColonneCadenas,
+                            InstructionId = x.InstructionId,
+                            Realiser = x.Realiser,
+
+                            //TexteSupplementaireDispositifEN = x.TexteSupplementaireDispositifEN,
+                            //TexteSupplementaireInstructionEN = x.TexteSupplementaireInstructionEN,
+
+                            TexteSupplementaireDispositif = langue == "fr" ? x.TexteSupplementaireDispositif : x.TexteSupplementaireDispositifEN,
+                            TexteSupplementaireInstruction = langue == "fr" ? x.TexteSupplementaireInstruction : x.TexteSupplementaireInstructionEN,
+
+                            TexteInstruction = x.TexteInstruction,
+                            TexteDispositif = x.TexteDispositif,
+                            TexteAccessoire = x.TexteAccessoire,
+
+                            Thumbnail = x.Thumbnail,
+
+                            TexteRealiser = x.TexteRealiser,
+                            PhotoFicheCadenassageId = x.PhotoFicheCadenassageId,
+
+                            StepStatus = ""
+                        });
+
+            var model2 = ligneDecadenassageService.GetListeLignesDecadenassage(ficheId).ToList()
+                        .Select(x => new InstructionAndDecadenassageViewModel
+                        {
+                            PKId = x.LigneDecadenassageId,
+                            PKType = "Decadenassage",
+
+                            FicheCadenassageId = x.FicheCadenassageId,
+
+                            NoLigne = x.NoLigne,
+
+                            Suppressible = x.Suppressible,
+                            CocherColonneCadenas = x.CocherColonneCadenas,
+                            InstructionId = x.InstructionId,
+                            Realiser = x.Realiser,
+                            //TexteSupplementaireDispositifEN = x.TexteSupplementaireDispositifEN,
+                            //TexteSupplementaireInstructionEN = x.TexteSupplementaireInstructionEN,
+                            TexteSupplementaireDispositif = langue == "fr" ? x.TexteSupplementaireDispositif : x.TexteSupplementaireDispositifEN,
+                            TexteSupplementaireInstruction = langue == "fr" ? x.TexteSupplementaireInstruction : x.TexteSupplementaireInstructionEN,
+
+                            TexteInstruction = x.TexteInstruction,
+                            TexteDispositif = x.TexteDispositif,
+                            TexteAccessoire = x.TexteAccessoire,
+
+                            Thumbnail = x.Thumbnail,
+
+                            TexteRealiser = x.TexteRealiser,
+                            PhotoFicheCadenassageId = x.PhotoFicheCadenassageId,
+
+                            StepStatus = ""
+                        });
+
+            var model = model1.Concat(model2).ToList();
+
+            // set already saved status
+            model.ForEach(x =>
+            {
+                x.StepStatus = alreadySaved.FirstOrDefault(i => i.InstructionId == x.PKId && i.InstructionType == x.PKType)?.StepStatus;
+            });
+
+            //return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-
-        public ActionResult ReadListCadenassage([DataSourceRequest] DataSourceRequest request, int ficheId)
+        [HttpPost]
+        public JsonResult SaveInstructions(List<Models.SavedInstruction> model)
         {
-            if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
-                return Json(ligneInstructionService.GetListeLignesInstruction(request, ficheId), JsonRequestBehavior.AllowGet);
-            else
-                return Json("");
+            savedInstructionService.SaveInstructions(model);
+            return Json(new { isSuccess = true }, JsonRequestBehavior.AllowGet);
         }
-
-
-        public ActionResult ReadListDecadenassage([DataSourceRequest] DataSourceRequest request, int ficheId)
-        {
-            if (utilisateurService.VerifierBonClientCadenassage_Fiche(ficheId, false))
-                return Json(ligneDecadenassageService.GetListeLignesDecadenassage(request, ficheId), JsonRequestBehavior.AllowGet);
-            else
-                return Json("");
-        }
-
     }
 }

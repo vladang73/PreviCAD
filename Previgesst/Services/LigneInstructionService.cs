@@ -41,7 +41,7 @@ namespace Previgesst.Services
                 // TexteLocalisation = x.TexteLocalisation,
                 TexteSupplementaireDispositif = x.TexteSupplementaireDispositif,
                 TexteSupplementaireInstruction = x.TexteSupplementaireInstruction,
-                TexteSupplementaireInstructionEN= x.TexteSupplementaireInstructionEN,
+                TexteSupplementaireInstructionEN = x.TexteSupplementaireInstructionEN,
                 TexteSupplementaireDispositifEN = x.TexteSupplementaireDispositifEN,
                 TexteInstruction = x.Instruction.TexteInstruction,
                 TexteRealiser = x.TexteSupplementaireRealiser,
@@ -54,42 +54,54 @@ namespace Previgesst.Services
             return ligne;
 
         }
-        internal DataSourceResult GetListeLignesInstruction(DataSourceRequest request, int FicheCadenassageId)
-        {// il se peut qu'on ait une instruction vide: l'usager ajoute un fichier et ne sauve pas la fiche... on ne doit pas la considérer
+
+        internal IQueryable<LigneInstructionViewModel> GetListeLignesInstruction(int FicheCadenassageId)
+        {
+            var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+
+
+            // il se peut qu'on ait une instruction vide: l'usager ajoute un fichier et ne sauve pas la fiche... on ne doit pas la considérer
             var time = DateTime.Now.ToLongTimeString();
             var baseURL = Helpers.URLHelper.GetBaseUrl();
             if (baseURL.Right(1) != "/" && baseURL.Right(1) != @"\")
                 baseURL += "/";
 
-            var result = ligneInstructionRepository.AsQueryable().Where(x => x.FicheCadenassageId == FicheCadenassageId && x.InstructionId != null).OrderBy(x => x.NoLigne).
-              Select(x => new LigneInstructionViewModel()
-              {
-                  NoLigne = x.NoLigne ?? 0,
-                  FicheCadenassageId = x.FicheCadenassageId,
+            var result = ligneInstructionRepository.AsQueryable()
+                .Where(x => x.FicheCadenassageId == FicheCadenassageId && x.InstructionId != null)
+                .OrderBy(x => x.NoLigne)
+                .Select(x => new LigneInstructionViewModel()
+                {
+                    NoLigne = x.NoLigne ?? 0,
+                    FicheCadenassageId = x.FicheCadenassageId,
 
-                  Suppressible = true,
-                  CocherColonneCadenas = x.CocherColonneCadenas,
-                  InstructionId = x.InstructionId,
-                  LigneInstructionId = x.LigneInstructionId,
-                  //  NomFichier = x.NomFichier,
-                  Realiser = x.Realiser,
-                  //  TexteLocalisation = x.TexteLocalisation,
-                  TexteSupplementaireDispositif = x.TexteSupplementaireDispositif,
-                  TexteSupplementaireInstruction = x.TexteSupplementaireInstruction,
-                  TexteSupplementaireDispositifEN= x.TexteSupplementaireDispositifEN,
-                  TexteSupplementaireInstructionEN= x.TexteSupplementaireInstructionEN,   
-                  TexteInstruction = x.Instruction.TexteInstruction,
-                  Thumbnail = baseURL + "Images/Cadenassage/Photos/" + (x.PhotoFicheCadenassageId == null ? "vide" : x.PhotoFicheCadenassageId.ToString()) + "/thumb.jpg?time=" + time,
-                  PhotoFicheCadenassageId = x.PhotoFicheCadenassageId,
-                  TexteRealiser = x.TexteSupplementaireRealiser
+                    Suppressible = true,
+                    CocherColonneCadenas = x.CocherColonneCadenas,
+                    InstructionId = x.InstructionId,
+                    LigneInstructionId = x.LigneInstructionId,
+                    //  NomFichier = x.NomFichier,
+                    Realiser = x.Realiser,
+                    //  TexteLocalisation = x.TexteLocalisation,
+                    TexteSupplementaireDispositif = x.TexteSupplementaireDispositif,
+                    TexteSupplementaireInstruction = x.TexteSupplementaireInstruction,
+                    TexteSupplementaireDispositifEN = x.TexteSupplementaireDispositifEN,
+                    TexteSupplementaireInstructionEN = x.TexteSupplementaireInstructionEN,
+                    
+                    TexteInstruction = langue == "fr" ? x.Instruction.TexteInstruction : x.Instruction.TexteInstructionEN,
+                    TexteDispositif = langue == "fr" ? x.Instruction.Dispositif.Description : x.Instruction.Dispositif.DescriptionEN,
+                    TexteAccessoire = langue == "fr" ? x.Instruction.Accessoire.Description : x.Instruction.Accessoire.DescriptionEN,
 
-
-
-              }).ToDataSourceResult(request);
+                    Thumbnail = baseURL + "Images/Cadenassage/Photos/" + (x.PhotoFicheCadenassageId == null ? "vide" : x.PhotoFicheCadenassageId.ToString()) + "/thumb.jpg?time=" + time,
+                    PhotoFicheCadenassageId = x.PhotoFicheCadenassageId,
+                    TexteRealiser = x.TexteSupplementaireRealiser                     
+                });
 
             return result;
+        }
 
 
+        internal DataSourceResult GetListeLignesInstruction(DataSourceRequest request, int FicheCadenassageId)
+        {
+            return GetListeLignesInstruction(FicheCadenassageId).ToDataSourceResult(request);
         }
 
 

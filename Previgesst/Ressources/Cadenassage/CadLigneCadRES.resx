@@ -189,4 +189,10 @@
   <data name="AutresInstructions" xml:space="preserve">
     <value>Autres instructions</value>
   </data>
+  <data name="Accessoire" xml:space="preserve">
+    <value>Accessoire</value>
+  </data>
+  <data name="StepStatus" xml:space="preserve">
+    <value>Statut de l'étape</value>
+  </data>
 </root>

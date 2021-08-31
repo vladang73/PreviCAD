@@ -192,6 +192,9 @@
   <data name="Option4" xml:space="preserve">
     <value>Not Applicable</value>
   </data>
+  <data name="OptionWindowTitle" xml:space="preserve">
+    <value>Padlocking and Unlocking and Non-Compliance Step</value>
+  </data>
   <data name="Oui" xml:space="preserve">
     <value>Oui</value>
   </data>

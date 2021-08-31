@@ -286,6 +286,15 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to étape de cadenassage et décadenassage et non-conformité.
+        /// </summary>
+        public static string OptionWindowTitle {
+            get {
+                return ResourceManager.GetString("OptionWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oui.
         /// </summary>
         public static string Oui {
