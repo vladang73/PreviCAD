@@ -365,10 +365,10 @@
     }
 
     var ddlDataSource = [
-        { StepStatus: 1, displayValue: "@PrevFicheRES.Option1" },
-        { StepStatus: 2, displayValue: "@PrevFicheRES.Option2" },
-        { StepStatus: 3, displayValue: "@PrevFicheRES.Option3" },
-        { StepStatus: 4, displayValue: "@PrevFicheRES.Option4" }
+        { StepStatus: 1, displayValue: "@Html.Raw(PrevFicheRES.Option1)" },
+        { StepStatus: 2, displayValue: "@Html.Raw(PrevFicheRES.Option2)" },
+        { StepStatus: 3, displayValue: "@Html.Raw(PrevFicheRES.Option3)" },
+        { StepStatus: 4, displayValue: "@Html.Raw(PrevFicheRES.Option4)" }
     ];
 
     function onDDLStatusChange(e) {
