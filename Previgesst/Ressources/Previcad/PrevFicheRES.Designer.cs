@@ -295,7 +295,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to étape de cadenassage et décadenassage et non-conformité.
+        ///   Looks up a localized string similar to Étape de cadenassage et décadenassage et non-conformité.
         /// </summary>
         public static string OptionWindowTitle {
             get {
@@ -349,7 +349,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to étapes.
+        ///   Looks up a localized string similar to Étapes.
         /// </summary>
         public static string Steps {
             get {

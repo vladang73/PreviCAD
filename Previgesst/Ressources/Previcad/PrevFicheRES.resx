@@ -196,7 +196,7 @@
     <value>Sans objet</value>
   </data>
   <data name="OptionWindowTitle" xml:space="preserve">
-    <value>étape de cadenassage et décadenassage et non-conformité</value>
+    <value>Étape de cadenassage et décadenassage et non-conformité</value>
   </data>
   <data name="Oui" xml:space="preserve">
     <value>Oui</value>
@@ -214,7 +214,7 @@
     <value>Envoyer un e-mail</value>
   </data>
   <data name="Steps" xml:space="preserve">
-    <value>étapes</value>
+    <value>Étapes</value>
   </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Telecharger</value>
