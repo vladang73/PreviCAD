@@ -28,6 +28,7 @@ namespace Previgesst.Controllers
         private LigneInstructionService ligneInstructionService;
         private LigneDecadenassageService ligneDecadenassageService;
         private SavedInstructionService savedInstructionService;
+        private ClientService clientService;
 
         private string Layout;
 
@@ -41,7 +42,8 @@ namespace Previgesst.Controllers
                ParametresAppController parametresAppController,
                LigneInstructionService ligneInstructionService,
                LigneDecadenassageService ligneDecadenassageService,
-               SavedInstructionService savedInstructionService)
+               SavedInstructionService savedInstructionService,
+               ClientService clientService)
         {
             this.employeRegistreService = employeRegistreService;
             this.ficheCadenassageService = ficheCadenassageService;
@@ -55,6 +57,7 @@ namespace Previgesst.Controllers
             this.ligneInstructionService = ligneInstructionService;
             this.ligneDecadenassageService = ligneDecadenassageService;
             this.savedInstructionService = savedInstructionService;
+            this.clientService = clientService;
         }
 
         [HttpGet]
@@ -364,10 +367,56 @@ namespace Previgesst.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveInstructions(List<Models.SavedInstruction> model)
+        public JsonResult SaveInstructions(List<Models.SavedInstruction> model, string note)
         {
-            savedInstructionService.SaveInstructions(model);
+            savedInstructionService.SaveInstructions(model, note);
             return Json(new { isSuccess = true }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetEmailAddressForWarning(int client)
+        {
+            var model = utilisateurService.NotificationNonConformiteActive(client)
+                        .Select(x => new { x.Nom, x.Courriel })
+                        .ToList();
+
+            return Json(new { isSuccess = true, Users = model }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SendWarningEmails(int client, string subject, string emails, string body)
+        {
+            try
+            {
+                // split all emails 
+                var allEmails = emails.Split(';');
+
+                // get client logo
+                var logoClient = clientService.getClientVM(client);
+
+                // send emails one at a time
+                foreach (var Courriel in allEmails)
+                {
+                    var membreCourriel = Courriel;
+
+                    GeneralService.SendMail(body, subject, membreCourriel, client, logoClient.Logo);
+                }
+
+                // return true
+                return Json(new { isSuccess = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { isSuccess = false, ErrorMessage = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult GetInstructionNote(int ficheId)
+        {
+            var result = savedInstructionService.GetSavedInstructionNote(ficheId);
+
+            return Json(new { isSuccess = true, Note = result }, JsonRequestBehavior.AllowGet);
         }
     }
 }

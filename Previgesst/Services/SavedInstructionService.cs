@@ -13,11 +13,12 @@ namespace Previgesst.Services
     public class SavedInstructionService
     {
         SavedInstructionRepository instructionRepository;
+        SavedInstructionNoteRepository instructionNoteRepository;
 
-        public SavedInstructionService(SavedInstructionRepository instructionRepository)
+        public SavedInstructionService(SavedInstructionRepository instructionRepository, SavedInstructionNoteRepository instructionNoteRepository)
         {
             this.instructionRepository = instructionRepository;
-
+            this.instructionNoteRepository = instructionNoteRepository;
         }
 
 
@@ -30,8 +31,13 @@ namespace Previgesst.Services
             return result;
         }
 
+        internal SavedInstructionNote GetSavedInstructionNote(int ficheId)
+        {
+            return instructionNoteRepository.Get(ficheId);
+        }
 
-        public void SaveInstructions(List<SavedInstruction> allItems)
+
+        public void SaveInstructions(List<SavedInstruction> allItems, string note)
         {
             foreach (var model in allItems)
             {
@@ -56,6 +62,23 @@ namespace Previgesst.Services
                 else
                     instructionRepository.Add(item);
             }
+
+            // add | update notes
+            if (!string.IsNullOrEmpty(note))
+            {
+                var ficheId = allItems.FirstOrDefault().FicheCadenassageId;
+                var existingNote = instructionNoteRepository.Get(ficheId);
+
+                if (existingNote == null)
+                {
+                    instructionNoteRepository.Add(new SavedInstructionNote { Notes = note, FicheCadenassageId = ficheId });
+                }
+                else
+                {
+                    existingNote.Notes = note;
+                }
+            }
+
             instructionRepository.SaveChanges();
         }
     }

@@ -18,7 +18,9 @@ namespace Previgesst.Services
         private EmployeRegistreRepository employeRegistreRepository;
         private EmployeRegistreService employeRegistreService;
         private ClientRepository clientRepository;
-        public LignesRegistreService(LigneRegistreRepository ligneRegistreRepository, UtilisateurService utilisateurService, UtilisateurRepository utilisateurRepository, EmployeRegistreRepository employeRegistreRepository, EmployeRegistreService employeRegistreService, ClientRepository clientRepository)
+        private SavedInstructionRepository saveInsRepository;
+
+        public LignesRegistreService(LigneRegistreRepository ligneRegistreRepository, UtilisateurService utilisateurService, UtilisateurRepository utilisateurRepository, EmployeRegistreRepository employeRegistreRepository, EmployeRegistreService employeRegistreService, ClientRepository clientRepository, SavedInstructionRepository saveInsRepository)
         {
             this.ligneRegistreRepository = ligneRegistreRepository;
             this.utilisateurService = utilisateurService;
@@ -26,6 +28,7 @@ namespace Previgesst.Services
             this.employeRegistreRepository = employeRegistreRepository;
             this.employeRegistreService = employeRegistreService;
             this.clientRepository = clientRepository;
+            this.saveInsRepository = saveInsRepository;
         }
 
         public void SaveLigneAudit(LigneRegistreViewModel model)
@@ -257,28 +260,34 @@ namespace Previgesst.Services
         internal DataSourceResult GetListeLignesRegistreParEmploye(DataSourceRequest request, int employeRegistreId)
         {
             var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-            var result = ligneRegistreRepository.AsQueryable().OrderByDescending(x => x.DateDebut).Where(x => x.EmployeRegistre.EmployeRegistreId == employeRegistreId).Select(x => new LigneRegistreViewModel()
-            {
-                BonDeTravail = x.BonDeTravail,
-                DateDebut = x.DateDebut,
-                DateFin = x.DateFin,
+            var result = ligneRegistreRepository.AsQueryable()
+                .OrderByDescending(x => x.DateDebut)
+                .Where(x => x.EmployeRegistre.EmployeRegistreId == employeRegistreId)
+                .Select(x => new LigneRegistreViewModel()
+                {
+                    BonDeTravail = x.BonDeTravail,
+                    DateDebut = x.DateDebut,
+                    DateFin = x.DateFin,
 
 
-                NoCadenas = x.EmployeRegistre.NoCadenas,
-                NoEmploye = x.EmployeRegistre.NoEmploye,
-                Nom = x.EmployeRegistre.Nom,
-                NomDepartement = langue == "fr" ? x.FicheCadenassage.Departement.NomDepartement : x.FicheCadenassage.Departement.NomDepartementEN,
-                Note = x.Note,
-                NomEquipement = langue == "fr" ? x.FicheCadenassage.Equipement.NomEquipement : x.FicheCadenassage.Equipement.NomEquipementEN,
-                Termine = x.DateFin != null,
-                NoFicheCadenassage = x.FicheCadenassage.NoFiche,
-                FinPrevue = x.FinPrevue,
-                LigneRegistreId = x.LigneRegistreId,
-                EmployeRegistreId = x.EmployeRegistreId,
-                FicheCadenassageId = x.FicheCadenassageId
+                    NoCadenas = x.EmployeRegistre.NoCadenas,
+                    NoEmploye = x.EmployeRegistre.NoEmploye,
+                    Nom = x.EmployeRegistre.Nom,
+                    NomDepartement = langue == "fr" ? x.FicheCadenassage.Departement.NomDepartement : x.FicheCadenassage.Departement.NomDepartementEN,
+                    Note = x.Note,
+                    NomEquipement = langue == "fr" ? x.FicheCadenassage.Equipement.NomEquipement : x.FicheCadenassage.Equipement.NomEquipementEN,
+                    Termine = x.DateFin != null,
+                    NoFicheCadenassage = x.FicheCadenassage.NoFiche,
+                    FinPrevue = x.FinPrevue,
+                    LigneRegistreId = x.LigneRegistreId,
+                    EmployeRegistreId = x.EmployeRegistreId,
+                    FicheCadenassageId = x.FicheCadenassageId,
+
+                    //PendingSteps = saveInsRepository.AsQueryable().Where(i => i.FicheCadenassageId == x.FicheCadenassageId).Count()
+                    //PendingSteps = saveInsRepository.SqlQuery<int>("Select Count(*) From SavedInstructions Where FicheCadenassageId =" + x.FicheCadenassageId)
 
 
-            }).ToDataSourceResult(request);
+                }).ToDataSourceResult(request);
 
             return result;
         }

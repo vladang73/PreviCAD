@@ -180,6 +180,9 @@
   <data name="Non" xml:space="preserve">
     <value>Non</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Commentaires</value>
+  </data>
   <data name="Option1" xml:space="preserve">
     <value>Vide</value>
   </data>
@@ -207,6 +210,12 @@
   <data name="ScanQREquip" xml:space="preserve">
     <value>Scannez le code QR de l'équipement</value>
   </data>
+  <data name="SendEmail" xml:space="preserve">
+    <value>Envoyer un e-mail</value>
+  </data>
+  <data name="Steps" xml:space="preserve">
+    <value>étapes</value>
+  </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Telecharger</value>
   </data>
@@ -215,5 +224,26 @@
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="WarningBodyLabel" xml:space="preserve">
+    <value>Corps de l'e-mail</value>
+  </data>
+  <data name="WarningDescr" xml:space="preserve">
+    <value>Une ou des erreurs ont été signalé par un utilisateur.</value>
+  </data>
+  <data name="WarningEmailSubject" xml:space="preserve">
+    <value>Avertissement!</value>
+  </data>
+  <data name="WarningFileId" xml:space="preserve">
+    <value># de la fiche:</value>
+  </data>
+  <data name="WarningTexts" xml:space="preserve">
+    <value>Ligne(s) d’instruction visée(s):</value>
+  </data>
+  <data name="WarningToEmails" xml:space="preserve">
+    <value>Au(x) e-mail(s)</value>
+  </data>
+  <data name="WarningUser" xml:space="preserve">
+    <value>Utilisateur:</value>
   </data>
 </root>

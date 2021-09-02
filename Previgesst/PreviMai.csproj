@@ -599,6 +599,10 @@
     <Compile Include="DataContexts\DbContextMigrations\202108302118106_Previg_80.Designer.cs">
       <DependentUpon>202108302118106_Previg_80.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\DbContextMigrations\202109021530147_Previg_81.cs" />
+    <Compile Include="DataContexts\DbContextMigrations\202109021530147_Previg_81.Designer.cs">
+      <DependentUpon>202109021530147_Previg_81.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\DbContextMigrations\Configuration.cs" />
     <Compile Include="DataContexts\Extensions\MigrationExtensions.cs" />
     <Compile Include="Enums\Applications.cs" />
@@ -647,6 +651,7 @@
     <Compile Include="Models\Frequence.cs" />
     <Compile Include="Models\Gravite.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SavedInstructionNote.cs" />
     <Compile Include="Models\SavedInstruction.cs" />
     <Compile Include="Models\Instruction.cs" />
     <Compile Include="Models\LigneAnalyseRisque.cs" />
@@ -690,6 +695,7 @@
     <Compile Include="Repositories\InstructionRepository.cs" />
     <Compile Include="Repositories\LigneAnalyseRisqueRepository.cs" />
     <Compile Include="Repositories\LigneDecadenassageRepository.cs" />
+    <Compile Include="Repositories\SavedInstructionNoteRepository.cs" />
     <Compile Include="Repositories\SavedInstructionRepository.cs" />
     <Compile Include="Repositories\LigneInstructionRepository.cs" />
     <Compile Include="Repositories\LigneRegistreRepository.cs" />
@@ -2434,6 +2440,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\DbContextMigrations\202108302118106_Previg_80.resx">
       <DependentUpon>202108302118106_Previg_80.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DbContextMigrations\202109021530147_Previg_81.resx">
+      <DependentUpon>202109021530147_Previg_81.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\Analyse\ARCreateRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

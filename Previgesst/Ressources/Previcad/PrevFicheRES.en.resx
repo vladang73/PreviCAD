@@ -180,6 +180,9 @@
   <data name="Non" xml:space="preserve">
     <value>Non</value>
   </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Comments</value>
+  </data>
   <data name="Option1" xml:space="preserve">
     <value>Empty</value>
   </data>
@@ -207,6 +210,12 @@
   <data name="ScanQREquip" xml:space="preserve">
     <value>Scan Equipment QR Code</value>
   </data>
+  <data name="SendEmail" xml:space="preserve">
+    <value>Send Email</value>
+  </data>
+  <data name="Steps" xml:space="preserve">
+    <value>Steps</value>
+  </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Download</value>
   </data>
@@ -215,5 +224,26 @@
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="WarningBodyLabel" xml:space="preserve">
+    <value>Email Body</value>
+  </data>
+  <data name="WarningDescr" xml:space="preserve">
+    <value>One or more errors have been reported by a user.</value>
+  </data>
+  <data name="WarningEmailSubject" xml:space="preserve">
+    <value>Warning!</value>
+  </data>
+  <data name="WarningFileId" xml:space="preserve">
+    <value>File #:</value>
+  </data>
+  <data name="WarningTexts" xml:space="preserve">
+    <value>Concerned Instruction line(s):</value>
+  </data>
+  <data name="WarningToEmails" xml:space="preserve">
+    <value>To Email(s)</value>
+  </data>
+  <data name="WarningUser" xml:space="preserve">
+    <value>User:</value>
   </data>
 </root>

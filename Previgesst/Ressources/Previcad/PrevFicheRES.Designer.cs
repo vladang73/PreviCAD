@@ -250,6 +250,15 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Commentaires.
+        /// </summary>
+        public static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vide.
         /// </summary>
         public static string Option1 {
@@ -331,6 +340,24 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Envoyer un e-mail.
+        /// </summary>
+        public static string SendEmail {
+            get {
+                return ResourceManager.GetString("SendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to étapes.
+        /// </summary>
+        public static string Steps {
+            get {
+                return ResourceManager.GetString("Steps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telecharger.
         /// </summary>
         public static string Telecharger {
@@ -354,6 +381,69 @@ namespace Previgesst.Ressources.Previcad {
         public static string Type {
             get {
                 return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Corps de l&apos;e-mail.
+        /// </summary>
+        public static string WarningBodyLabel {
+            get {
+                return ResourceManager.GetString("WarningBodyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Une ou des erreurs ont été signalé par un utilisateur..
+        /// </summary>
+        public static string WarningDescr {
+            get {
+                return ResourceManager.GetString("WarningDescr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avertissement!.
+        /// </summary>
+        public static string WarningEmailSubject {
+            get {
+                return ResourceManager.GetString("WarningEmailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to # de la fiche:.
+        /// </summary>
+        public static string WarningFileId {
+            get {
+                return ResourceManager.GetString("WarningFileId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ligne(s) d’instruction visée(s):.
+        /// </summary>
+        public static string WarningTexts {
+            get {
+                return ResourceManager.GetString("WarningTexts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Au(x) e-mail(s).
+        /// </summary>
+        public static string WarningToEmails {
+            get {
+                return ResourceManager.GetString("WarningToEmails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Utilisateur:.
+        /// </summary>
+        public static string WarningUser {
+            get {
+                return ResourceManager.GetString("WarningUser", resourceCulture);
             }
         }
     }

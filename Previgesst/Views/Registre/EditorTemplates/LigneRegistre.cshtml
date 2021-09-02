@@ -35,6 +35,7 @@
                 <div class="col-md-10" style="padding-left:0px;">
                     @Html.HiddenFor(model => model.FicheCadenassageId)
                     @Html.HiddenFor(model => model.LigneRegistreId)
+                    @Html.HiddenFor(model => model.PendingSteps)
 
                     <div class="form-group" style="margin-bottom:5px;">
                         @Html.LabelFor(model => model.BonDeTravail, new { @class = "control-label" })
@@ -82,13 +83,13 @@
                     </div>
 
                     @*<div class="form-group" style="margin-bottom:5px;">
-                        @Html.Label(@PrevFicheRES.LuEtDecadenasse, new { @class = "control-label" })
+            @Html.Label(@PrevFicheRES.LuEtDecadenasse, new { @class = "control-label" })
 
 
-                        @(Html.Kendo().CheckBoxFor(model => model.LuEtDecadenasse).HtmlAttributes(new { style = "width:100%" })
-                        )
-                        @Html.ValidationMessageFor(model => model.LuEtDecadenasse)
-                    </div>*@
+            @(Html.Kendo().CheckBoxFor(model => model.LuEtDecadenasse).HtmlAttributes(new { style = "width:100%" })
+            )
+            @Html.ValidationMessageFor(model => model.LuEtDecadenasse)
+        </div>*@
                 </div>
             </div>
         </div>
@@ -97,6 +98,12 @@
 <script>
     jQuery(document).ready(function () {
         "use strict";
+
+        var pendingSteps = $('#PendingSteps').val();
+
+        if (pendingSteps != "0") {
+            jQuery('.k-grid-update').hide();
+        }
 
         if (jQuery('#LuEtDecadenasse').prop("checked") == false) {
             jQuery("#DateFin").prop("disabled", true);

@@ -3,11 +3,44 @@
 @using Previgesst.Ressources.Cadenassage
 @using Previgesst.Ressources
 
+@{ 
+    string nomUtilisateur = "";
+
+    if (Request.IsAuthenticated)
+    {
+        Previgesst.Sessions.sessionInfo session = (Previgesst.Sessions.sessionInfo)Session["utilisateur"];
+        nomUtilisateur = session?.Nom;
+    }
+
+    if (HttpContext.Current.Session["EmployeCadenassage"] != null)
+    {
+        EmployeRegistreViewModel employe = (EmployeRegistreViewModel)HttpContext.Current.Session["EmployeCadenassage"];
+        nomUtilisateur = employe.Nom;
+    }
+}
 
 <style>
 
     .k-grid-content {
         overflow-x: scroll !important;
+    }
+
+    .k-grid-steps {
+        background-image: url(/Images/cadenas-ferme-previ.png);
+        background-repeat: no-repeat;
+        background-size: 40px;
+        color: transparent;
+        height: 40px;
+        display: block; 
+    }
+        .k-grid-steps:hover {
+            background-size: 45px;
+            height: 45px;
+            animation: ease-in;
+        }
+
+    #wndEmail label{
+        padding: 5px;
     }
 </style>
 
@@ -36,7 +69,6 @@
         .armchair.fullheight .statusdropDownTemplate {
             pointer-events: none;
         }
-
 </style>
 
 <div class="panel panel-danger">
@@ -93,6 +125,9 @@
 
                         columns.Bound(e => e.EmployeRegistreId).Hidden(true);
                         columns.Bound(e => e.FicheCadenassageId).Hidden(true);
+
+                        columns.Bound(e => e.PendingSteps).HtmlAttributes(new { @class = "PendingSteps" }).Hidden(true); //.ClientTemplate("<span class='PendingSteps'>#=PendingSteps#</span>");
+
                         columns.Bound(e => e.DateDebut).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Debut).Width(70);
 
                         columns.Bound(e => e.DateFin).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Fin).Width(70);
@@ -105,7 +140,7 @@
 
                         columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette +"></a>").Title("").Filterable(false).Sortable(false).Width(55);
 
-                        columns.Command(e => e.Custom("étapes").Click("showDetails").HtmlAttributes(new { @data_viewonly = "false" })).Width(100);
+                        columns.Command(e => e.Custom("steps").Click("showDetails").HtmlAttributes(new { @data_viewonly = "false" }).Text(" ")).Width(100);
 
                         columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier)).Width(20);
                     })
@@ -122,8 +157,8 @@
                     .Sortable(s => s.AllowUnsort(false))
                     .Scrollable(e => e.Enabled(true))
                     .ToolBar(tools => tools.Excel())
-                    .Editable(e => e
-                    .Mode(GridEditMode.PopUp)).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistre").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600))
+                    .Editable(e => e.Mode(GridEditMode.PopUp))
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistre").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600))
 
                     .DisplayDeleteConfirmation(false)
                     )
@@ -156,24 +191,53 @@
 </div>
 
 
-<div id="wnd">
-    <div id="wrapped-grid" class="armchair"></div>
+<div id="wnd" style="display: none;">
+    <div class="armchair">
+        <div id="wrapped-grid"></div>
+        <div>
+            <label>@PrevFicheRES.Notes</label>
+            <textarea id="StepComments" name="StepComments" class="form-control" rows="5" style="width:97%"></textarea>
+        </div>
+    </div>
     <div class="window-footer">
         <input type="button" class="btn btn-info" id="btnSaveInstructionStatus" value="@CadEditRES.Enregistrer" />
     </div>
 </div>
 
 
+<div id="wndEmail" style="display: none;">
+    <div style="width:97%">
+        <div>
+            <label>@PrevFicheRES.WarningToEmails</label>
+            <input type="text" id="WarningToEmails" name="WarningToEmails" class="form-control" />
+        </div>
+        <div>
+            <label>@PrevFicheRES.WarningBodyLabel</label>
+            <textarea class="form-control" id="WarningEmailText" name="WarningEmailText" rows="15">
+            </textarea>
+        </div>
+
+        <div class="d-block">
+            <br />
+            <input type="button" class="btn btn-info pull-right" id="btnSendInsWarningEmail" value="@PrevFicheRES.SendEmail" />
+        </div>
+    </div>
+</div>
+
+
+
 <script>
     function dataBoundEnCours(e) {
         var selecteurGrid = "#listEnCours";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
 
         $(selecteurGrid + " .k-grid-edit").find("span").remove();
         var classe = $(selecteurGrid + " .k-grid-edit").attr("class");
         classe = "btn btn-success " + classe;
+
         $(selecteurGrid + " .k-grid-edit").removeAttr("class").addClass(classe).removeClass("k-button").removeClass("k-button-icontext");
+        $(selecteurGrid + " .k-grid-steps").removeAttr("class").addClass("k-grid-steps");
     }
 
     function onEditEnCours(e) {
@@ -181,6 +245,17 @@
             $("#listEnCours").data("kendoGrid").dataSource.read();
             $("#listTermines").data("kendoGrid").dataSource.read();
         })
+        e.container.data().kendoWindow.bind("deactivate", deactivateEdit)
+    }
+
+    function deactivateEdit() {
+        $("#listEnCours .k-grid-steps").each(function () {
+            $(this).removeAttr("class").addClass("k-grid-steps");
+        });
+
+        $("#listEnCours .k-grid-edit").each(function () {
+            $(this).removeAttr("class").addClass("btn btn-success k-grid-edit");
+        });
     }
 
     function doRefresh(e) {
@@ -205,13 +280,15 @@
 
         $('.window-footer').show();
         $('.armchair').removeClass('fullheight');
+        $('#StepComments').removeAttr('readonly');
 
         if (viewonly == "yes") {
             $('.window-footer').hide();
             $('.armchair').addClass('fullheight');
+            $('#StepComments').attr('readonly', 'readonly');
         }
-        
-        $("#wrapped-grid").empty();
+
+        /*$("#wrapped-grid").empty();*/
 
         $("#wrapped-grid").kendoGrid({
             dataSource: {
@@ -274,6 +351,7 @@
             }
         });
 
+        GetComments(dataItem.FicheCadenassageId);
 
         var wnd = $("#wnd").kendoWindow({
             height: 500,
@@ -315,6 +393,7 @@
         var data = entityGrid.dataSource.data();
         var totalNumber = data.length;
         var allData = [];
+        var allWarnings = [];
 
         for (var i = 0; i < totalNumber; i++) {
             var currentDataItem = data[i];
@@ -328,20 +407,32 @@
                 StepStatus: currentDataItem.StepStatus,
                 FicheCadenassageId: currentDataItem.FicheCadenassageId
             });
+
+            // Empty and Non-conforme
+            if (currentDataItem.StepStatus == "1" || currentDataItem.StepStatus == "3") {
+                if (currentDataItem.NoLigne == "1" && currentDataItem.PKType == "Decadenassage") {
+                    allWarnings.push('\n\n');
+                }
+                allWarnings.push(currentDataItem.NoLigne + '. '+ currentDataItem.TexteInstruction);
+            }
         }
 
-        console.log(allData);
-
+        var insNotes = $('#StepComments').val();
 
         $.ajax({
             url: "@Url.Action("SaveInstructions", "Registre")",
             type: 'POST',
-            data: { model: allData },
+            data: { model: allData, note: insNotes },
             dataType: 'json',
             cache: false,
             success: function (result) {
                 if (result.isSuccess == true) {
-                    $('#wrapped-grid').data('kendoGrid').dataSource.read();
+                    //$('#wrapped-grid').data('kendoGrid').dataSource.read();
+
+                    $("#wnd").data("kendoWindow").close();
+                    if (allWarnings.length > 0) {
+                        OpenWarningEmail(allData[0].FicheCadenassageId, allWarnings);
+                    }
                 }
             },
             error: function (req, status, errorObj) {
@@ -349,6 +440,117 @@
         });
     });
 
+    function OpenWarningEmail(ficheID, allWarnings) {
+        console.log(allWarnings);
+        //client
+
+        var warSubject = '@PrevFicheRES.WarningEmailSubject' + "\n" + "\n";
+        var warDescr = '@PrevFicheRES.WarningDescr' + "\n" + "\n";
+        var warFildId = '@PrevFicheRES.WarningFileId' + ' ' + ficheID ;
+        var warUser = '@PrevFicheRES.WarningUser' + ' @nomUtilisateur';
+        var warTexts = '@PrevFicheRES.WarningTexts';
+        var allWarningText = allWarnings.join("\n");
+
+
+
+        //var text = $('#WarningEmailText').html();
+        //text = text.replace("[FILE_NO]", ficheID);
+        //text = text.replace("[WARNING_INS_LINES]", allWarnings.join("\n"));
+
+        $('#WarningEmailText').html(warSubject + "\n" + warDescr + "\n" + warFildId + "\n" + warUser + "\n" + warTexts + "\n" + allWarningText);
+
+        $.ajax({
+            url: "@Url.Action("GetEmailAddressForWarning", "Registre", new { @client = Model.ClientId })",
+            type: 'POST',
+            //data: { model: allData },
+            dataType: 'json',
+            cache: false,
+            success: function (result) {
+                if (result.isSuccess == true) {
+
+                    var allEmails = [];
+
+                    $(result.Users).each(function (i, item) {
+                        allEmails.push(item.Courriel);
+                    });
+
+                    $('#WarningToEmails').val(allEmails.join(';'));
+
+                    var wndEmail = $("#wndEmail").kendoWindow({
+                        height: 500,
+                        width: 950,
+                        visible: false
+                    }).data("kendoWindow");
+
+                    wndEmail.title("@PrevFicheRES.WarningEmailSubject")
+                        .center()
+                        .open();
+                }
+            },
+            error: function (req, status, errorObj) {
+            }
+        });
+
+
+    }
+
+
+    $(document).on('click', '#btnSendInsWarningEmail', function () {
+
+        var warningEmails = $("#WarningToEmails").val();
+
+        if (warningEmails == '') {
+            //alert('Missing Emails');
+            ShowNotification("Required", "Email Address are missing.", "errorTemplate");
+            return;
+        }
+
+        var warningBody = $("#WarningEmailText").val();
+
+
+        var model = { client: @Model.ClientId, subject: "@PrevFicheRES.WarningEmailSubject", emails: warningEmails, body: warningBody };
+
+        $.ajax({
+            url: "@Url.Action("SendWarningEmails", "Registre")",
+            type: 'POST',
+            data: model,
+            dataType: 'json',
+            cache: false,
+            success: function (result) {
+                if (result.isSuccess == true) {
+                    //$('#wrapped-grid').data('kendoGrid').dataSource.read();
+
+                    $("#wndEmail").data("kendoWindow").close();
+                }
+                else {
+                    ShowNotification("Error", result.ErrorMessage, "errorTemplate");
+                }
+            },
+            error: function (req, status, errorObj) {
+            }
+        });
+    });
+
+    function GetComments(ficheId) {
+        $('#StepComments').val('');
+
+        $.ajax({
+            url: "@Url.Action("GetInstructionNote", "Registre")?ficheId=" + ficheId,
+            type: 'POST',
+            //data: { model: allData, note: insNotes },
+            dataType: 'json',
+            cache: false,
+            success: function (result) {
+                if (result.isSuccess == true) {
+                    if (result.Note != null) {
+                        $('#StepComments').val(result.Note.Notes);
+                    }
+                }
+            },
+            error: function (req, status, errorObj) {
+            }
+        });
+    }
 
 </script>
 

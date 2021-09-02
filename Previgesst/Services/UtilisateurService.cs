@@ -1025,5 +1025,25 @@ namespace Previgesst.Services
             return equipements;
         }*/
 
+
+        internal List<UtilisateurIndexViewModel> NotificationNonConformiteActive(int client)
+        {
+            // Get compagny ID
+            var compagnieId = client;
+
+            // Get all contact by compagny ID when the notification is activate
+            var resultContacts = utilisateurRepository.AsQueryable()
+                                                      .Where(x => x.ClientId == compagnieId)
+                                                      .Where(x => x.Actif == true)
+                                                      .Where(x => x.NotificationNonConformite== true)
+                                                      .Select(x => new UtilisateurIndexViewModel()
+                                                      {
+                                                          Nom = x.Nom,
+                                                          Courriel = x.Courriel
+                                                      })
+                                                      .ToList();
+
+            return resultContacts;
+        }
     }
 }

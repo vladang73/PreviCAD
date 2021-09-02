@@ -25,11 +25,11 @@ namespace Previgesst.ViewModels
 
         [Display(ResourceType = typeof(PrevFicheRES), Name = "Fin")]
         public DateTime? DateFin { get; set; }
-       
+
         public string NoCadenas { get; set; }
 
         [Display(ResourceType = typeof(PrevFicheRES), Name = "Details")]
-       
+
         public string Note { get; set; }
 
         public bool Termine { get; set; }
@@ -51,7 +51,7 @@ namespace Previgesst.ViewModels
 
         public string NomAuditeur { get; set; }
 
-  
+
         [Display(ResourceType = typeof(CadAuditRES), Name = "Rep1")]
         [StringLength(3)]
         public string Rep1 { get; set; }
@@ -73,5 +73,31 @@ namespace Previgesst.ViewModels
         public string BonDeTravail { get; set; }
 
         public int EquipementId { get; set; }
+
+        public int PendingSteps
+        {
+            get
+            {
+                int count = 1;
+
+                using (var dbContext = DataContexts.AppDbContext.Create())
+                {
+                    var query = dbContext.SavedInstruction
+                                    .Where(x => x.FicheCadenassageId == FicheCadenassageId)
+                                    ;
+
+                    if (query.Any())
+                    {
+                        count = dbContext.SavedInstruction
+                                        .Where(x => x.FicheCadenassageId == FicheCadenassageId)
+                                        .Where(x => x.StepStatus == "1" || x.StepStatus == "3")
+                                        .Count()
+                                        ;
+                    }
+                }
+
+                return count;
+            }
+        }
     }
 }
