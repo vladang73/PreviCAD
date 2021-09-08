@@ -259,7 +259,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vide.
+        ///   Looks up a localized string similar to -- Sélectionnez un Statut --.
         /// </summary>
         public static string Option1 {
             get {
@@ -277,7 +277,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non-conforme.
+        ///   Looks up a localized string similar to Non-Conforme.
         /// </summary>
         public static string Option3 {
             get {
@@ -286,7 +286,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sans objet.
+        ///   Looks up a localized string similar to Non Applicable.
         /// </summary>
         public static string Option4 {
             get {
@@ -354,6 +354,24 @@ namespace Previgesst.Ressources.Previcad {
         public static string Steps {
             get {
                 return ResourceManager.GetString("Steps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MISE HORS TENSION ET VERROUILLAGE.
+        /// </summary>
+        public static string SwitchOff {
+            get {
+                return ResourceManager.GetString("SwitchOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DÉVERROUILLAGE ET MISE EN MARCHE.
+        /// </summary>
+        public static string SwitchOn {
+            get {
+                return ResourceManager.GetString("SwitchOn", resourceCulture);
             }
         }
         

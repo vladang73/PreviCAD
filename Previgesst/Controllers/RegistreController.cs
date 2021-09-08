@@ -280,12 +280,12 @@ namespace Previgesst.Controllers
             // Empty / Completed / Non-Compliant / Not Applicable
             // Vide/Complété/Non-conforme/Sans objet
 
-            ViewData["StepStatuses"] = new List<SelectListItem> {
-                new SelectListItem { Value = "1", Text = (langue == "fr" ? "Vide" : "Empty") } ,
-                new SelectListItem { Value = "2", Text = (langue == "fr" ? "Complété" : "Completed") } ,
-                new SelectListItem { Value = "3", Text = (langue == "fr" ? "Non-conforme" : "Non-Compliant") } ,
-                new SelectListItem { Value = "4", Text = (langue == "fr" ? "Sans objet" : "Not Applicable") }
-            };
+            //ViewData["StepStatuses"] = new List<SelectListItem> {
+            //    new SelectListItem { Value = "1", Text = (langue == "fr" ? "Vide" : "Empty") } ,
+            //    new SelectListItem { Value = "2", Text = (langue == "fr" ? "Complété" : "Completed") } ,
+            //    new SelectListItem { Value = "3", Text = (langue == "fr" ? "Non-conforme" : "Non-Compliant") } ,
+            //    new SelectListItem { Value = "4", Text = (langue == "fr" ? "Sans objet" : "Not Applicable") }
+            //};
 
             // get already saved instructions
             var alreadySaved = savedInstructionService.GetSavedInstructions(ficheId);
@@ -354,7 +354,60 @@ namespace Previgesst.Controllers
                             StepStatus = ""
                         });
 
-            var model = model1.Concat(model2).ToList();
+            var switchOn = PrevFicheRES.SwitchOn;
+            var switchOff = PrevFicheRES.SwitchOff;
+
+
+            var seperators = new List<InstructionAndDecadenassageViewModel>
+            {
+                new InstructionAndDecadenassageViewModel
+                {
+                    PKId = 0,
+                    PKType = "Decadenassage",
+
+                    FicheCadenassageId = 0,
+                    NoLigne = 0,
+
+                    InstructionId = 0,
+                    TexteSupplementaireDispositif = "",
+                    TexteSupplementaireInstruction = "",
+                    TexteAccessoire = "",
+                    TexteDispositif = "",
+                    TexteRealiser = "",
+
+                    TexteInstruction = "",
+                    PhotoFicheCadenassageId = null,
+                    StepStatus = ""
+                },
+                new InstructionAndDecadenassageViewModel
+                {
+                    PKId = 0,
+                    PKType = "Decadenassage",
+
+                    FicheCadenassageId = 0,
+                    NoLigne = 0,
+
+                    InstructionId = 0,
+                    TexteSupplementaireDispositif = "",
+                    TexteSupplementaireInstruction = "",
+                    TexteAccessoire = "",
+                    TexteDispositif = "",
+                    TexteRealiser = "",
+
+                    TexteInstruction = switchOff,
+                    PhotoFicheCadenassageId = null,
+                    StepStatus = ""
+                }
+            };
+
+            //model1.ToList().Add(seperator);
+            //var model = model1.Concat(model2).ToList();
+
+
+            var temp = model1.ToList();
+            temp.AddRange(seperators);
+
+            var model = temp.Concat(model2).ToList();
 
             // set already saved status
             model.ForEach(x =>

@@ -69,6 +69,10 @@
         .armchair.fullheight .statusdropDownTemplate {
             pointer-events: none;
         }
+
+    .statusdropDownTemplate{
+        width: 210px;
+    }
 </style>
 
 <div class="panel panel-danger">
@@ -308,23 +312,18 @@
                 { field: "PKType", hidden: true },
                 { field: "PKId", hidden: true },
                 { field: "FicheCadenassageId", hidden: true },
-                { field: "NoLigne", width: "60px", title: "#" },
+                { field: "NoLigne", width: "60px", title: "#", template: "# if(NoLigne > 0) {# #=NoLigne# #}#" },
                 {
                     field: "TexteInstruction", title: "@CadLigneCadRES.Instruction",
-                    template: "<b>#= TexteInstruction # </b><br> #= TexteSupplementaireInstruction == null ? '' : TexteSupplementaireInstruction #"
+                    template: "<b # if(NoLigne == 0) {# style='color:red;' #}#> #= TexteInstruction # </b><br> #= TexteSupplementaireInstruction == null ? '' : TexteSupplementaireInstruction #"
                 },
                 {
                     field: "TexteSupplementaireDispositif", title: "@CadLigneCadRES.Dispositif",
                     template: "<b>#= TexteDispositif # </b><br> #= TexteSupplementaireDispositif == null ? '' : TexteSupplementaireDispositif #"
                 },
                 { field: "TexteAccessoire", width: "100px", title: "@CadLigneCadRES.Accessoire" },
-
-                {
-                    field: "Thumbnail", title: "@CadLigneCadRES.Image",
-                    template: "<img src='#=Thumbnail#'/>"
-                },
-
-                { field: "StepStatus", width: "80px", title: "@CadLigneCadRES.StepStatus", template: StatusTemplateFunction },
+                { field: "Thumbnail", title: "@CadLigneCadRES.Image", template: "# if(PhotoFicheCadenassageId != null) {# <img src='#=Thumbnail#'/> #}#" },
+                { field: "StepStatus", width: "150px", title: "@CadLigneCadRES.StepStatus", template: StatusTemplateFunction },
             ],
 
             dataBound: function (e) {
@@ -355,8 +354,9 @@
 
         var wnd = $("#wnd").kendoWindow({
             height: 500,
-            width: 950,
-            visible: false
+            width: 975,
+            visible: false,
+            modal: true
         }).data("kendoWindow");
 
         wnd.title("@PrevFicheRES.OptionWindowTitle")
@@ -382,9 +382,12 @@
     };
 
     function StatusTemplateFunction(dataItem) {
-        var input = '<input class="statusdropDownTemplate"/>'
-
-        return input
+        if (dataItem.PKId > 0) {
+            return '<input class="statusdropDownTemplate"/>'
+        }
+        else {
+            return '';
+        }
     };
 
     $(document).on('click', '#btnSaveInstructionStatus', function () {
@@ -395,10 +398,12 @@
         var allData = [];
         var allWarnings = [];
 
+        var switchOn = "@PrevFicheRES.SwitchOn";
+        var switchOff = "@PrevFicheRES.SwitchOff";
+
+
         for (var i = 0; i < totalNumber; i++) {
             var currentDataItem = data[i];
-
-            //console.log('StepStatus ddl', entityGrid.dataSource._data[i]);
 
             allData.push({
                 PKId: 0,
@@ -412,6 +417,7 @@
             if (currentDataItem.StepStatus == "1" || currentDataItem.StepStatus == "3") {
                 if (currentDataItem.NoLigne == "1" && currentDataItem.PKType == "Decadenassage") {
                     allWarnings.push('\n\n');
+                    allWarnings.push(switchOff + '\n');
                 }
                 allWarnings.push(currentDataItem.NoLigne + '. '+ currentDataItem.TexteInstruction);
             }
@@ -429,8 +435,12 @@
                 if (result.isSuccess == true) {
                     //$('#wrapped-grid').data('kendoGrid').dataSource.read();
 
+                    $("#listEnCours").data("kendoGrid").dataSource.read();
+                    $("#listTermines").data("kendoGrid").dataSource.read();
+
                     $("#wnd").data("kendoWindow").close();
                     if (allWarnings.length > 0) {
+                        allWarnings.unshift('\n' + switchOn + '\n');
                         OpenWarningEmail(allData[0].FicheCadenassageId, allWarnings);
                     }
                 }
@@ -479,7 +489,8 @@
                     var wndEmail = $("#wndEmail").kendoWindow({
                         height: 500,
                         width: 950,
-                        visible: false
+                        visible: false,
+                        modal: true
                     }).data("kendoWindow");
 
                     wndEmail.title("@PrevFicheRES.WarningEmailSubject")

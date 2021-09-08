@@ -184,16 +184,16 @@
     <value>Commentaires</value>
   </data>
   <data name="Option1" xml:space="preserve">
-    <value>Vide</value>
+    <value>-- Sélectionnez un Statut --</value>
   </data>
   <data name="Option2" xml:space="preserve">
     <value>Complété</value>
   </data>
   <data name="Option3" xml:space="preserve">
-    <value>Non-conforme</value>
+    <value>Non-Conforme</value>
   </data>
   <data name="Option4" xml:space="preserve">
-    <value>Sans objet</value>
+    <value>Non Applicable</value>
   </data>
   <data name="OptionWindowTitle" xml:space="preserve">
     <value>Étape de cadenassage et décadenassage et non-conformité</value>
@@ -215,6 +215,12 @@
   </data>
   <data name="Steps" xml:space="preserve">
     <value>Étapes</value>
+  </data>
+  <data name="SwitchOff" xml:space="preserve">
+    <value>MISE HORS TENSION ET VERROUILLAGE</value>
+  </data>
+  <data name="SwitchOn" xml:space="preserve">
+    <value>DÉVERROUILLAGE ET MISE EN MARCHE</value>
   </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Telecharger</value>

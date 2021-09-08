@@ -326,6 +326,7 @@ namespace Previgesst.Controllers
                 if (sessionUtilisateur != null)
                 {
                     vm.NotificationDebutCad = sessionUtilisateur.NotificationDebutCad;
+                    vm.NotificationNonConformite = sessionUtilisateur.NotificationNonConformite;
                 }
 
                 // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
