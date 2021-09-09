@@ -358,7 +358,7 @@ namespace Previgesst.Controllers
             var switchOff = PrevFicheRES.SwitchOff;
 
 
-            var seperators = new List<InstructionAndDecadenassageViewModel>
+            var seperatorsDec = new List<InstructionAndDecadenassageViewModel>
             {
                 new InstructionAndDecadenassageViewModel
                 {
@@ -400,23 +400,49 @@ namespace Previgesst.Controllers
                 }
             };
 
+            var finalModel = new List<InstructionAndDecadenassageViewModel>
+            {
+                new InstructionAndDecadenassageViewModel
+                {
+                    PKId = 0,
+                    PKType = "Instruction",
+
+                    FicheCadenassageId = 0,
+                    NoLigne = 0,
+
+                    InstructionId = 0,
+                    TexteSupplementaireDispositif = "",
+                    TexteSupplementaireInstruction = "",
+                    TexteAccessoire = "",
+                    TexteDispositif = "",
+                    TexteRealiser = "",
+
+                    TexteInstruction = switchOn,
+                    PhotoFicheCadenassageId = null,
+                    StepStatus = ""
+                }
+            };
+
             //model1.ToList().Add(seperator);
             //var model = model1.Concat(model2).ToList();
 
+            finalModel.AddRange(model1);
+            finalModel.AddRange(seperatorsDec);
+            finalModel.AddRange(model2);
 
-            var temp = model1.ToList();
-            temp.AddRange(seperators);
-
-            var model = temp.Concat(model2).ToList();
+            //var temp = model1.ToList();
+            //temp.AddRange(seperatorsDec);
+            //var model = temp.Concat(model2).ToList();
 
             // set already saved status
-            model.ForEach(x =>
+            finalModel.ForEach(x =>
             {
                 x.StepStatus = alreadySaved.FirstOrDefault(i => i.InstructionId == x.PKId && i.InstructionType == x.PKType)?.StepStatus;
+                x.StepStatus = x.StepStatus == null ? "" : x.StepStatus;
             });
 
             //return View(model);
-            return Json(model, JsonRequestBehavior.AllowGet);
+            return Json(finalModel, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

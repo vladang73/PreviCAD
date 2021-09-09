@@ -68,6 +68,8 @@
 
                     columns.Bound(e => e.EmployeRegistreId).Hidden(true);
                     columns.Bound(e => e.FicheCadenassageId).Hidden(true);
+                    columns.Bound(e => e.PendingSteps).HtmlAttributes(new { @class = "PendingSteps" }).Hidden(true); 
+
                     columns.Bound(e => e.DateDebut).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Debut).Width(70);
 
                     columns.Bound(e => e.DateFin).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Fin).Width(70);

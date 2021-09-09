@@ -344,7 +344,9 @@
                     });
 
                     if (viewonly == "yes") {
-                        $(ddt).data("kendoDropDownList").enable(false);
+                        if (ddt.length > 0) {
+                            $(ddt).data("kendoDropDownList").enable(false);
+                        }
                     }
                 });
             }
@@ -388,7 +390,7 @@
         else {
             return '';
         }
-    };
+    }
 
     $(document).on('click', '#btnSaveInstructionStatus', function () {
 
@@ -396,12 +398,14 @@
         var data = entityGrid.dataSource.data();
         var totalNumber = data.length;
         var allData = [];
-        var allWarnings = [];
+        var allWarnings1 = [];
+        var allWarnings2 = [];
 
-        var switchOn = "@PrevFicheRES.SwitchOn";
-        var switchOff = "@PrevFicheRES.SwitchOff";
+        @*var switchOn = "@Html.Raw(PrevFicheRES.SwitchOn)";
+        var switchOff = "@Html.Raw(PrevFicheRES.SwitchOff)";
 
-
+        allWarnings1.push('\n' + switchOn + '\n');
+        *@
         for (var i = 0; i < totalNumber; i++) {
             var currentDataItem = data[i];
 
@@ -415,11 +419,18 @@
 
             // Empty and Non-conforme
             if (currentDataItem.StepStatus == "1" || currentDataItem.StepStatus == "3") {
-                if (currentDataItem.NoLigne == "1" && currentDataItem.PKType == "Decadenassage") {
-                    allWarnings.push('\n\n');
-                    allWarnings.push(switchOff + '\n');
+                //if (currentDataItem.NoLigne == "1" && currentDataItem.PKType == "Decadenassage") {
+                //    allWarnings.push('\n\n');
+                //    allWarnings.push(switchOff + '\n');
+                //}
+                //allWarnings.push(currentDataItem.NoLigne + '. '+ currentDataItem.TexteInstruction);
+
+                if (currentDataItem.PKType == "Decadenassage") {
+                    allWarnings1.push(currentDataItem.NoLigne + '. ' + currentDataItem.TexteInstruction);
                 }
-                allWarnings.push(currentDataItem.NoLigne + '. '+ currentDataItem.TexteInstruction);
+                else {
+                    allWarnings2.push(currentDataItem.NoLigne + '. ' + currentDataItem.TexteInstruction);
+                }
             }
         }
 
@@ -439,9 +450,11 @@
                     $("#listTermines").data("kendoGrid").dataSource.read();
 
                     $("#wnd").data("kendoWindow").close();
-                    if (allWarnings.length > 0) {
-                        allWarnings.unshift('\n' + switchOn + '\n');
-                        OpenWarningEmail(allData[0].FicheCadenassageId, allWarnings);
+                    if (allWarnings1.length > 0 || allWarnings2.length > 0) {
+                        //allWarnings.unshift('\n' + switchOn + '\n');
+                        //console.log('allWarnings', allWarnings);
+
+                        OpenWarningEmail(allData[0].FicheCadenassageId, allWarnings1, allWarnings2);
                     }
                 }
             },
@@ -450,18 +463,33 @@
         });
     });
 
-    function OpenWarningEmail(ficheID, allWarnings) {
-        console.log(allWarnings);
+    function OpenWarningEmail(ficheID, allWarnings1, allWarnings2) {
         //client
 
-        var warSubject = '@PrevFicheRES.WarningEmailSubject' + "\n" + "\n";
-        var warDescr = '@PrevFicheRES.WarningDescr' + "\n" + "\n";
-        var warFildId = '@PrevFicheRES.WarningFileId' + ' ' + ficheID ;
-        var warUser = '@PrevFicheRES.WarningUser' + ' @nomUtilisateur';
-        var warTexts = '@PrevFicheRES.WarningTexts';
-        var allWarningText = allWarnings.join("\n");
+        var warSubject = '@Html.Raw(PrevFicheRES.WarningEmailSubject)' + "\n" + "\n";
+        var warDescr = '@Html.Raw(PrevFicheRES.WarningDescr)' + "\n" + "\n";
+        var warFildId = '@Html.Raw(PrevFicheRES.WarningFileId)' + ' ' + ficheID ;
+        var warUser = '@Html.Raw(PrevFicheRES.WarningUser)' + ' @nomUtilisateur';
+        var warTexts = '@Html.Raw(PrevFicheRES.WarningTexts)';
+
+        var switchOn = "@Html.Raw(PrevFicheRES.SwitchOn)";
+        var switchOff = "@Html.Raw(PrevFicheRES.SwitchOff)";
 
 
+        var allWarningText = '';
+        if (allWarnings1.length > 0) {
+            allWarningText += '\n' + switchOn + '\n';
+            allWarningText += allWarnings1.join("\n");
+        }
+
+        allWarningText += '\n\n';
+
+        if (allWarnings2.length > 0) {
+            allWarningText += '\n' + switchOff + '\n';
+            allWarningText += allWarnings2.join("\n");
+        }
+
+        console.log(allWarningText);
 
         //var text = $('#WarningEmailText').html();
         //text = text.replace("[FILE_NO]", ficheID);
