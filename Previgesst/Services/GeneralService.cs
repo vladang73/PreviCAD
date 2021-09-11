@@ -89,6 +89,58 @@ namespace Previgesst.Services
             return true;
         }
 
+        public static bool SendMail_v2(string body, string subject, string courriel, int ClientId, string Logo)
+        {
+            SmtpClient client = new SmtpClient();
+            ////client.Port = 587;
+            ////client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            ////client.UseDefaultCredentials = false;
+
+
+            ////client.Credentials = new System.Net.NetworkCredential("no-reply@applications.previgesst.com", "59bXXcyUBEVf");
+            ////// La ligne ci-dessous correspond à l'ancienne façon de faire avec Nexucom, qui sera a determiner si elle encore fonctionnelle en local
+            //////client.Host = "applications.previgesst.com";
+            ////client.Host = "127.0.0.1";
+
+            //MailMessage mail = new MailMessage("no-reply@applications.previgesst.com", courriel);
+
+            MailMessage mail = new MailMessage();
+
+            mail.To.Add(courriel);
+            mail.Subject = subject;
+            mail.IsBodyHtml = true;
+
+            // Client logo
+            LinkedResource logoClient = new LinkedResource(HttpContext.Current.Server.MapPath("~/Images/Cadenassage/Clients/" + ClientId + "/" + Logo), "image/jpg");
+            logoClient.ContentId = Logo;
+            logoClient.TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
+            logoClient.ContentLink = new Uri("cid:" + Logo + "");
+
+            AlternateView htmlView = AlternateView.CreateAlternateViewFromString(body, System.Text.Encoding.UTF8, "text/html");
+            htmlView.LinkedResources.Add(logoClient);
+            htmlView.TransferEncoding = System.Net.Mime.TransferEncoding.QuotedPrintable;
+            mail.AlternateViews.Add(htmlView);
+
+
+            // Previgesst logo
+            LinkedResource logo = new LinkedResource(HttpContext.Current.Server.MapPath("~/Images/dark_logo.png"), "image/png");
+            logo.ContentId = "dark_logo.png";
+            logo.TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
+            logo.ContentLink = new Uri("cid:dark_logo.png");
+
+            htmlView.LinkedResources.Add(logo);
+            htmlView.TransferEncoding = System.Net.Mime.TransferEncoding.QuotedPrintable;
+            mail.AlternateViews.Add(htmlView);
+
+
+
+            mail.Body = body;
+
+            client.Send(mail);
+
+            return true;
+        }
+
         /*internal List<ClientListViewModel> GetCieInformation()
         {
             var session = employeRegistreService.getEmployeRegistre();

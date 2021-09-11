@@ -478,7 +478,7 @@ namespace Previgesst.Controllers
                 {
                     var membreCourriel = Courriel;
 
-                    GeneralService.SendMail(body, subject, membreCourriel, client, logoClient.Logo);
+                    GeneralService.SendMail_v2(body, subject, membreCourriel, client, logoClient.Logo);
                 }
 
                 // return true
