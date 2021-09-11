@@ -235,7 +235,7 @@
     <value>Corps de l'e-mail</value>
   </data>
   <data name="WarningDescr" xml:space="preserve">
-    <value>Une ou des erreurs ont été signalé par un utilisateur.</value>
+    <value>Une ou des erreurs ont été signalées par un utilisateur.</value>
   </data>
   <data name="WarningEmailSubject" xml:space="preserve">
     <value>Avertissement!</value>

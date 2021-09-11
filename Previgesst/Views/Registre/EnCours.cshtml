@@ -491,11 +491,13 @@
 
         console.log(allWarningText);
 
-        //var text = $('#WarningEmailText').html();
-        //text = text.replace("[FILE_NO]", ficheID);
-        //text = text.replace("[WARNING_INS_LINES]", allWarnings.join("\n"));
+        var insNotes = $('#StepComments').val();
+        if (insNotes != '') {
 
-        $('#WarningEmailText').html(warSubject + "\n" + warDescr + "\n" + warFildId + "\n" + warUser + "\n" + warTexts + "\n" + allWarningText);
+            insNotes = '@Html.Raw(PrevFicheRES.Notes)' +'\n' +insNotes;
+        }
+
+        $('#WarningEmailText').html(warSubject + "\n" + warDescr + "\n" + warFildId + "\n" + warUser + "\n" + warTexts + "\n" + allWarningText + '\n\n' + insNotes);
 
         $.ajax({
             url: "@Url.Action("GetEmailAddressForWarning", "Registre", new { @client = Model.ClientId })",

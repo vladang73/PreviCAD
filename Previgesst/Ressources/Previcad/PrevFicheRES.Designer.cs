@@ -412,7 +412,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Une ou des erreurs ont été signalé par un utilisateur..
+        ///   Looks up a localized string similar to Une ou des erreurs ont été signalées par un utilisateur..
         /// </summary>
         public static string WarningDescr {
             get {

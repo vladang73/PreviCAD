@@ -388,6 +388,9 @@
     function Edit(e)
     {
         var item = $(e.container).find('[value=Image]').hide();
+        $(e.container).find('.k-grid-Détails').hide();
+        $(e.container).find('.k-grid-Énergie').hide();
+        $(e.container).find('.k-grid-QR').hide();
     }
 
     function changerImage(e) {
