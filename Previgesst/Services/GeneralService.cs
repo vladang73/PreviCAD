@@ -94,7 +94,7 @@ namespace Previgesst.Services
             SmtpClient client = new SmtpClient();
             ////client.Port = 587;
             ////client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            ////client.UseDefaultCredentials = false;
+            //client.UseDefaultCredentials = false;
 
 
             ////client.Credentials = new System.Net.NetworkCredential("no-reply@applications.previgesst.com", "59bXXcyUBEVf");
@@ -108,8 +108,13 @@ namespace Previgesst.Services
 
             mail.To.Add(courriel);
             mail.Subject = subject;
-            mail.IsBodyHtml = true;
+            //mail.IsBodyHtml = true;
 
+            /*
+            //AlternateView plainView = AlternateView.CreateAlternateViewFromString(body);
+            //mail.AlternateViews.Add(plainView);
+
+            
             // Client logo
             LinkedResource logoClient = new LinkedResource(HttpContext.Current.Server.MapPath("~/Images/Cadenassage/Clients/" + ClientId + "/" + Logo), "image/jpg");
             logoClient.ContentId = Logo;
@@ -131,10 +136,13 @@ namespace Previgesst.Services
             htmlView.LinkedResources.Add(logo);
             htmlView.TransferEncoding = System.Net.Mime.TransferEncoding.QuotedPrintable;
             mail.AlternateViews.Add(htmlView);
+            */
 
 
 
-            mail.Body = body;
+            mail.Body = body.Replace("\n", Environment.NewLine);
+            mail.IsBodyHtml = false;
+
 
             client.Send(mail);
 
