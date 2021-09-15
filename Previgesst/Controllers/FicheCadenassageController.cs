@@ -1112,7 +1112,7 @@ namespace Previgesst.Controllers
 
         #region ----- Equipement Articuloe -----
 
-        public ActionResult EquipementArticuloes(int id)
+        public ActionResult EquipementArticuloes(int id, int? client)
         {
             PopulateMateriel();
             PopulateDispositifs();
@@ -1126,6 +1126,10 @@ namespace Previgesst.Controllers
             if (session != null)
             {
                 ViewData["LeClient"] = session.ClientId;
+            }
+            else if (client.HasValue)
+            {
+                ViewData["LeClient"] = client.Value;
             }
             return View();
         }

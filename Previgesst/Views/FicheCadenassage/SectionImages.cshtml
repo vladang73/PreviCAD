@@ -112,6 +112,9 @@
         item.set('Suppressible', e.response.Suppressible)
         item.set('Localisation', e.response.Localisation)
         item.set('LocalisationEN', e.response.LocalisationEN)
+
+        // hide cancel option once image is selected
+        $('tr.k-grid-edit-row .k-grid-cancel').hide();
     }
 
 

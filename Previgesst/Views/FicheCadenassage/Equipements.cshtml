@@ -99,7 +99,7 @@
 
                                     //columns.Bound(bt => bt.EquipementId).ClientTemplate("<a href='/EquipementArticuloe/Index/#= " + nameof(EquipementViewModel.EquipementId) + " #' class='btn btn-primary btn-edit-force k-cde-edit'></a>").Title("Énergie").Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
 
-                                    columns.Bound(e => e.Thumbnail).ClientTemplate("<img src='#=Thumbnail#'/>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false);
+                                    columns.Bound(e => e.Thumbnail).ClientTemplate("# if(Thumbnail != null) {# <img src='#=Thumbnail#'/> #}#").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false);
                                     columns.Bound(e => e.Thumbnail).ClientTemplate("<input type=button onclick='changerImage(#=EquipementId#)' value='Image' class='cadenassageImageDownload'/>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false).Width(80);
                                     columns.Command(c =>
                                     {
@@ -367,8 +367,7 @@
         e.preventDefault();
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
 
-        window.location.href = "/FicheCadenassage/EquipementArticuloes/" + dataItem.EquipementId;
-
+        window.location.href = "/FicheCadenassage/EquipementArticuloes/" + dataItem.EquipementId + "?client=" + @Model.ClientId;
         @*var wind = $("#EngDetails").data("kendoWindow");
 
         wind.content(energieTemplate(dataItem));

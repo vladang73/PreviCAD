@@ -117,7 +117,8 @@
             <a class='shieldLogoCadenassage' href='@if (this.Layout.EndsWith("_Layout.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/dark_logo.png'></a>
         </div>
     </div>
-    <script type="text/javascript">
+
+<script type="text/javascript">
         // White background for the body ID
         jQuery('#body').css('background', '#FFF');
 
@@ -147,4 +148,17 @@
 
         //$(document).ready(GridResize);
         //$(window).resize(GridResize);
-    </script>
+
+    $(document).ready(function () {
+        ///////////////////////////////////////
+        // navigate Equipement Articuloe to edit page, and select equipment tab
+
+        var area = '@Request.QueryString["area"]';
+
+        if (area != null && area.toUpperCase() == 'EQ') {
+            $('#Equip').click();
+        }
+
+        ///////////////////////////////////////
+    });
+</script>
