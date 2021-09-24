@@ -43,9 +43,23 @@
                             }
 
 
+                            string nomUtilisateur = "";
+                            if (Request.IsAuthenticated)
+                            {
+                                Previgesst.Sessions.sessionInfo session = (Previgesst.Sessions.sessionInfo)Session["utilisateur"];
+                                nomUtilisateur = session?.Nom;
+                            }
+
+                            if (HttpContext.Current.Session["EmployeCadenassage"] != null)
+                            {
+                                EmployeRegistreViewModel employe = (EmployeRegistreViewModel)HttpContext.Current.Session["EmployeCadenassage"];
+
+                                nomUtilisateur = employe.Nom;
+                            }
+
                             <div class="dropdown  d-flex justify-content-end ">
                                 <a class="text-decoration-none  fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Tommy Lupien
+                                    @nomUtilisateur
                                     <i class="ri-arrow-down-s-line position-relative" style="top: 3px"></i>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -64,7 +78,7 @@
         </div>
     </header>
 
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         <main>
             @RenderBody()
 

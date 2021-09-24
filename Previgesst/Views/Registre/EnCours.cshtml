@@ -144,7 +144,7 @@
 
                         columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette +"></a>").Title("").Filterable(false).Sortable(false).Width(55);
 
-                        columns.Command(e => e.Custom("steps").Click("showDetails").HtmlAttributes(new { @data_viewonly = "false" }).Text(" ")).Width(100);
+                        columns.Command(e => e.Custom("steps").Click("showInsDetails").HtmlAttributes(new { @data_viewonly = "false" }).Text(" ")).Width(100);
 
                         columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier)).Width(20);
                     })
@@ -276,7 +276,7 @@
         });
     }, 3000);
 
-    function showDetails(e) {
+    function showInsDetails(e) {
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
         var url = "@Url.Action("Instruction", "Registre")?ficheId=" + dataItem.FicheCadenassageId;
 
