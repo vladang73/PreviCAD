@@ -1,0 +1,107 @@
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Previcad
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prévigesst - @ViewBag.Title</title>
+    @Styles.Render("~/Content/mobile/css")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/mobile/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <header class="white-light-bg py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-6"><a href="/RegistreMobile"> <img src="/content/mobile/images/logo.png" alt="Previcad Logo" /></a> </div>
+                <div class="col-6">
+
+
+                    @{
+                        using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            string path = Request.Url.PathAndQuery;
+
+                            path = path.Replace("/en/", "");
+                            path = path.Replace("/fr/", "");
+                            if (path.Length == 0)
+                            {
+                                path = "ClientLogin/Index";
+                            }
+                            if (path.Substring(0, 1) == "/")
+                            {
+                                path = path.Substring(1);
+                            }
+                            //utilisé pour prévicad client
+                            if (Session["ClientID"] != null && !path.Contains("?"))
+                            {
+                                path = path + "?ClientID=" + Session["ClientID"];
+                            }
+
+
+                            <div class="dropdown  d-flex justify-content-end ">
+                                <a class="text-decoration-none  fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tommy Lupien
+                                    <i class="ri-arrow-down-s-line position-relative" style="top: 3px"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">@LayoutRES.SeDeconnecter</a></li>
+
+                                    <li><hr /></li>
+                                    <li><a class="dropdown-item" onclick="location.href='/fr/@path'">FR</a></li>
+                                    <li><a class="dropdown-item" onclick="location.href='/en/@path'">EN</a></li>
+                                </ul>
+                            </div>
+
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container body-content">
+        <main>
+            @RenderBody()
+
+
+            <section>
+                <div class="container white-light-bg rounded-2 mt-3 mt-md-5">
+                    <div class="text-center p-3 p-md-4">
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-6 col-lg-3 text-center">
+                                <img src="/content/mobile/images/image-4.png" alt="previcad" />
+                                <a href="###" class="text-uppercase d-block fw-bold mt-4 text-decoration-none">@PrevIndexRES.Programme</a>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3 text-center">
+                                <img src="/content/mobile/images/image-5.png" alt="previcad" />
+                                <a href="###" class="text-uppercase d-block fw-bold mt-4 text-decoration-none">@PrevIndexRES.EnCours</a>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3 text-center">
+                                <img src="/content/mobile/images/image-6.png" alt="previcad" />
+                                <a href="###" class="text-uppercase d-block fw-bold mt-4 text-decoration-none">@PrevIndexRES.Termines</a>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-3 text-center">
+                                <i class="ri-settings-4-fill fs-2"></i>
+                                <a target="_blank" href="https://previgesst.com/centre-de-support/" class="text-uppercase d-block fw-bold mt-2 pt-1 text-decoration-none">@PrevIndexRES.CentreSupport</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <hr />
+        <footer>
+            <p>Prévigesst @DateTime.Now.Year, Prévigesst. Tous droits réservés</p>
+        </footer>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

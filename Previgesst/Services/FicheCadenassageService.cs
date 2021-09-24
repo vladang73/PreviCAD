@@ -943,6 +943,38 @@ namespace Previgesst.Services
 
             return result;
         }
+
+        internal DataSourceResult GetReadCadenasForRegistre(DataSourceRequest request, int clientId, int equipementId)
+        {
+            //Boolean droitSuppressionClient = false;
+            Boolean droitSuppressionPrevi = false;
+            var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+            var droits = Helpers.GetDroitsPrevi.ObtenirDroits();
+            droitSuppressionPrevi = droits.EstAdminPrevi || droits.EstUpdatePrevi;
+            //droitSuppressionClient = false;
+
+            var result = ficheCadenassageRepository.AsQueryable()
+                        .Where(x => x.ClientId == clientId && x.IsApproved == true)
+                        .Where(x => x.EquipementId == equipementId)
+                        .Select(x => new LigneRegistreViewModel()
+                        {
+                            FicheCadenassageId = x.FicheCadenassageId,
+                            NoFicheCadenassage = x.NoFiche,
+                            NomEquipement = langue == "fr" ? x.Equipement.NomEquipement : x.Equipement.NomEquipementEN,
+                            NomDepartement = langue == "fr" ? x.Departement.NomDepartement : x.Departement.NomDepartementEN,
+                            TravailAEffectuer = langue == "fr" ? x.TravailAEffectuer : x.TravailAEffectuerEN,
+                            TitreFiche = langue == "fr" ? x.TitreFiche : x.TitreFicheEN,
+                            LigneRegistreId = 0,
+                            DateDebut = DateTime.Today,
+
+                            TexteMateriel = x.MaterielsRequisCadenassage.Select(z => langue == "fr" ? z.Materiel.Description + " (" + z.Quantite.ToString() + ")" : z.Materiel.DescriptionEN + " (" + z.Quantite.ToString() + ")").ToList(),
+                            EquipementId = x.EquipementId
+
+                        }).ToDataSourceResult(request);
+
+            return result;
+        }
+
         public EditFicheViewModel getFicheVM(int FicheCadenassageId)
         {
             var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;

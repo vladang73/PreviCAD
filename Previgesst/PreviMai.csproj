@@ -254,6 +254,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MesApplicationsController.cs" />
     <Compile Include="Controllers\ParametresAppController.cs" />
+    <Compile Include="Controllers\RegistreMobileController.cs" />
     <Compile Include="Controllers\RegistreController.cs" />
     <Compile Include="Controllers\SCAnalysesController.cs" />
     <Compile Include="Controllers\SCCadenassageController.cs" />
@@ -1480,6 +1481,21 @@
     <Content Include="Content\kendo\2016.2.714\Uniform\sprite_2x.png" />
     <Content Include="Content\kendo\2016.2.714\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2016.2.714\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Content\mobile\boostrap_override.css" />
+    <Content Include="Content\mobile\bootstrap.min.css" />
+    <Content Include="Content\mobile\fonts\remixicon.svg" />
+    <Content Include="Content\mobile\fonts\remixicon.symbol.svg" />
+    <Content Include="Content\mobile\images\help.png" />
+    <Content Include="Content\mobile\images\image-1.png" />
+    <Content Include="Content\mobile\images\image-2.png" />
+    <Content Include="Content\mobile\images\image-3.png" />
+    <Content Include="Content\mobile\images\image-4.png" />
+    <Content Include="Content\mobile\images\image-5.png" />
+    <Content Include="Content\mobile\images\image-6.png" />
+    <Content Include="Content\mobile\images\loginbg.jpg" />
+    <Content Include="Content\mobile\images\logo.png" />
+    <Content Include="Content\mobile\remixicon.css" />
+    <Content Include="Content\mobile\style.css" />
     <Content Include="Content\Site.after.css" />
     <Content Include="DataContexts\ProcedureMigration.txt" />
     <Content Include="EtapesDeploiement.txt" />
@@ -1688,6 +1704,10 @@
     <Content Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </Content>
+    <Content Include="Content\mobile\fonts\remixicon.eot" />
+    <Content Include="Content\mobile\fonts\remixicon.ttf" />
+    <Content Include="Content\mobile\fonts\remixicon.woff" />
+    <Content Include="Content\mobile\fonts\remixicon.woff2" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1893,6 +1913,8 @@
     <Content Include="Scripts\kendo\2016.2.714\pako_deflate.min.js" />
     <Content Include="Scripts\kendo\Cultures\kendo.culture.en-US.min.js" />
     <Content Include="Scripts\kendo\Cultures\kendo.culture.fr-CA.min.js" />
+    <Content Include="Scripts\mobile\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\mobile\bootstrap.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\MvcReportViewer.js" />
@@ -2166,6 +2188,11 @@
     <Content Include="Views\FicheCadenassage\PrintQR.cshtml" />
     <Content Include="Views\FicheCadenassage\OnlyWithQR.cshtml" />
     <Content Include="Views\AdminPrevi\Errors.cshtml" />
+    <Content Include="Views\RegistreMobile\Index.cshtml" />
+    <Content Include="Views\RegistreMobile\RegistreEmploye.cshtml" />
+    <Content Include="Views\RegistreMobile\ScanQR.cshtml" />
+    <Content Include="Views\Shared\_LayoutClientMobile.cshtml" />
+    <Content Include="Views\RegistreMobile\Fiches.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />

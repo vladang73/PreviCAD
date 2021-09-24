@@ -1,0 +1,135 @@
+﻿@model Previgesst.ViewModels.EmployeRegistreViewModel
+@using Previgesst.Ressources.Previcad
+
+
+@{
+    ViewBag.Title = "QR";
+    Layout = "~/Views/Shared/_LayoutClientMobile.cshtml";
+}
+
+
+<section>
+    <div class="container white-light-bg rounded-2 mt-3 mt-md-5">
+        <div class="text-center p-3 p-md-5">
+            <h3 class="fw-bold heading-color">@PrevFicheRES.ScanQREquip</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                <br> ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                <br> exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+
+                    <div id="qr-reader" style="/*width:300px*/"></div>
+                    <div id="qr-reader-results"></div>
+
+                    <a href="" id="linkQRDownload" style="visibility: hidden; width:0px; height:0px;"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/html5-qrcode.min.js"></script>
+
+    <script type="text/javascript">
+        //var resultContainer = document.getElementById('qr-reader-results');
+        var lastResult, countResults = 0;
+
+        $(document).ready(function () {
+            InitScan();
+        });
+
+
+        function onScanSuccess(decodedText, decodedResult) {
+            ++countResults;
+            lastResult = decodedText;
+            // Handle on success condition with the decoded message.
+            console.log('Scan result ' + decodedText, decodedResult, new Date());
+
+
+            var qrEqID = decodedText.split('#')[1];
+
+            var qrFilter = new Array();
+            qrFilter.push({ field: "EquipementId", operator: "eq", value: qrEqID });
+
+            GetFicheDetails(qrEqID);
+        }
+
+        function InitScan() {
+            console.log('starting scan');
+            //var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
+            //html5QrcodeScanner.render(onScanSuccess);
+            //$('#qr-reader').removeAttr('style');
+
+            const config = { fps: 10 /*, qrbox: 200 */ };
+            const html5QrCode = new Html5Qrcode("qr-reader");
+            const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                /* handle success */
+                onScanSuccess(decodedText, decodedResult);
+
+                console.log('stoping scan');
+                $('#qrModal').modal('hide');
+
+                html5QrCode.stop();
+                html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+            };
+            // If you want to prefer back camera
+            html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+
+            //$('#btnCloseQRPopup').off('click').click(function () { html5QrCode.stop(); });
+        };
+
+        //$('#btnClearQRFilter').click(function () {
+        //    var qrFilter = new Array();
+        //    //var grid = $("#list").data("kendoGrid");
+        //    //grid.dataSource.filter(qrFilter);
+        //    //grid.dataSource.read();
+        //});
+
+        function GetFicheDetails(id) {
+            $.ajax({
+                url: "@Url.Action("GetFicheDetails", "RegistreMobile")/" + id,
+                type: 'POST',
+                //data: { model: allData, note: insNotes },
+                dataType: 'json',
+                cache: false,
+                success: function (result) {
+                    console.log(result);
+                    if (result != undefined) {
+                        if (result.isSuccess == true) {
+                            if (result.TotalRecords == 1) {
+                                GetFiche(result.Id);
+                            } else if (result.TotalRecords > 1) {
+                                location.href = '@Url.Action("Fiches", "RegistreMobile")/' + id;
+                            }
+                        }
+                    }
+                },
+                error: function (req, status, errorObj) {
+                }
+            });
+        }
+
+        function GetFiche(id) {
+            var fileUrl = '';
+
+            if ('@Model.Langue' == 'fr') {
+                fileUrl = '/RegistreMobile/GetFiche/' + id;
+            } else {
+                fileUrl = '/RegistreMobile/GetFicheEN/' + id;
+            }
+
+            if (fileUrl != undefined && fileUrl != '') {
+                console.log('downloading ....', fileUrl);
+                $('#linkQRDownload').attr('href', fileUrl);
+                $('#linkQRDownload')[0].click();
+            }
+        }
+    </script>
+}

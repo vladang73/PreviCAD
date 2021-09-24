@@ -83,6 +83,16 @@ namespace Previgesst
             bundles.Add(new StyleBundle("~/content/cssAfter").Include(
                       "~/Content/site.after.css"));   // Toujours garder site.css en dernier
 
+
+
+
+            bundles.Add(new StyleBundle("~/Content/mobile/css").Include(
+                      "~/Content/mobile/remixicon.css",
+                      "~/Content/mobile/bootstrap.min.css",
+                      "~/Content/mobile/boostrap_override.css",
+                      "~/Content/mobile/style.css"));
+
+
             BundleTable.EnableOptimizations = true;
             
         }
