@@ -18,9 +18,13 @@ body {
     font-family: 'Nunito', sans-serif;
     margin: 0;
     padding: 0;
-    background: url("/content/mobile/images/loginbg.jpg");
+    background: url("/content/mobile/images/loginbg.jpg")no-repeat center center fixed;
     background-size: cover;
-    background-repeat: no-repeat;
+    --webkit-background-size: cover;
+    --moz-background-size: cover;
+    --o--background-size: cover;
+
+    /*background-repeat: no-repeat;*/
 }
 
 .primary-color {
@@ -223,4 +227,13 @@ header a, header a:hover, header a:focus {
     header img {
         width: 150px;
     }
+}
+
+
+.footer{
+    color: #FFF;
+    position: fixed;
+    height: 100px;
+    bottom:0;
+    width: 100%;
 }

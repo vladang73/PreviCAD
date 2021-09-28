@@ -17,7 +17,7 @@
             <h4>@PrevFicheRES.Equipement: @ViewBag.EquipmentName</h4>
 
             <div class="row mt-4">
-                <div class="col-12">
+                <div class="col-12 p-0">
 
                     @Html.AntiForgeryToken()
 
@@ -28,15 +28,15 @@
                             columns.Bound(e => e.EquipementId).Hidden();
                             columns.Bound(e => e.FicheCadenassageId).Hidden();
 
-                            columns.Bound(c => c.NoFicheCadenassage).Title(PrevFicheRES.NoFiche).Width(80).HtmlAttributes(new {  @style = "white-space: nowrap" });
+                            columns.Bound(c => c.NoFicheCadenassage).Title(PrevFicheRES.NoFiche).HtmlAttributes(new { @class = "text-start" }).Width(50);
 
                             //columns.Bound(e => e.NomEquipement).Title(PrevFicheRES.Equipement).Width(140);
                             //columns.Bound(e => e.NomDepartement).Title(PrevFicheRES.Departement).Width(110);
 
                             //columns.Bound(e => e.TitreFiche).Title(PrevFicheRES.Type).ClientTemplate("").Width(70);
                             columns.Bound(e => e.TravailAEffectuer).Title(PrevFicheRES.Travaux).ClientTemplate("").HtmlAttributes(new { @class = "text-start" });
-                            columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  class='downloadButton text-decoration-none' style='text-align:center' title=" + PrevFicheRES.Telecharger + "><i class='ri-file-download-line'></i></a>").Title("").Filterable(false).Sortable(false).Hidden( @Model.Langue!="fr").Width(50);
-                            columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  class='downloadButton text-decoration-none' title=" + PrevFicheRES.Telecharger + "><i class='ri-file-download-line'></i></a>").Title("").Filterable(false).Sortable(false).Hidden(@Model.Langue !="en").Width(50);
+                            columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  class='downloadButton text-decoration-none' style='text-align:center' title=" + PrevFicheRES.Telecharger + "><i class='ri-file-download-line'></i></a>").Title("").Filterable(false).Sortable(false).Hidden( @Model.Langue!="fr").Width(30);
+                            columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  class='downloadButton text-decoration-none' title=" + PrevFicheRES.Telecharger + "><i class='ri-file-download-line'></i></a>").Title("").Filterable(false).Sortable(false).Hidden(@Model.Langue !="en").Width(30);
                         })
 
                         .Sortable(s => s.AllowUnsort(false))
