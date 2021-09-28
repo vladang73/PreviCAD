@@ -21,19 +21,22 @@ namespace Previgesst.Controllers
         private ParametresAppController parametresAppController;
 
         private FicheCadenassageRepository ficheCadenassageRepository;
+        private EquipementRepository equipementRepository;
 
         public RegistreMobileController(
             EmployeRegistreService employeRegistreService,
             FicheCadenassageService ficheCadenassageService,
             ParametresAppService parametresAppService,
             ParametresAppController parametresAppController,
-            FicheCadenassageRepository ficheCadenassageRepository)
+            FicheCadenassageRepository ficheCadenassageRepository,
+            EquipementRepository equipementRepository)
         {
             this.employeRegistreService = employeRegistreService;
             this.parametresAppService = parametresAppService;
             this.ficheCadenassageService = ficheCadenassageService;
             this.ficheCadenassageRepository = ficheCadenassageRepository;
             this.parametresAppController = parametresAppController;
+            this.equipementRepository = equipementRepository;
         }
 
         [HttpGet]
@@ -187,10 +190,10 @@ namespace Previgesst.Controllers
                                         ;
 
             if (allRecords == null)
-                return Json(new { isSuccess = false, ErrorMessage = Ressources.Analyse.AREditClientRES.AucunDocument }, JsonRequestBehavior.AllowGet);
+                return Json(new { isSuccess = false, ErrorMessage = PrevIndexRES.MobileNoEquipment }, JsonRequestBehavior.AllowGet);
 
             if (allRecords != null && allRecords.Count() == 0)
-                return Json(new { isSuccess = false, ErrorMessage = Ressources.Analyse.AREditClientRES.AucunDocument }, JsonRequestBehavior.AllowGet);
+                return Json(new { isSuccess = false, ErrorMessage = PrevIndexRES.MobileNoEquipment }, JsonRequestBehavior.AllowGet);
 
 
             var ficheCadenassageId = allRecords.FirstOrDefault().FicheCadenassageId;
@@ -205,7 +208,10 @@ namespace Previgesst.Controllers
 
             if (currentEMP.ClientId != 0)
             {
+                var equip = equipementRepository.Get(id);
+
                 ViewBag.EquipmentID = id;
+                ViewBag.EquipmentName = currentEMP.Langue.ToLower() == "en" ? equip.NomEquipementEN : equip.NomEquipement;
                 return View(currentEMP);
             }
 

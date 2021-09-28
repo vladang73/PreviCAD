@@ -43,17 +43,20 @@ namespace Previgesst.Services
         public static bool SendMail(string body, string subject, string courriel, int ClientId, string Logo)
         {
             SmtpClient client = new SmtpClient();
-            client.Port = 587;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.UseDefaultCredentials = false;
+            //client.Port = 587;
+            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //client.UseDefaultCredentials = false;
 
 
-            client.Credentials = new System.Net.NetworkCredential("no-reply@applications.previgesst.com", "59bXXcyUBEVf");
-            // La ligne ci-dessous correspond à l'ancienne façon de faire avec Nexucom, qui sera a determiner si elle encore fonctionnelle en local
-            //client.Host = "applications.previgesst.com";
-            client.Host = "127.0.0.1";
+            //client.Credentials = new System.Net.NetworkCredential("no-reply@applications.previgesst.com", "59bXXcyUBEVf");
+            //// La ligne ci-dessous correspond à l'ancienne façon de faire avec Nexucom, qui sera a determiner si elle encore fonctionnelle en local
+            ////client.Host = "applications.previgesst.com";
+            //client.Host = "127.0.0.1";
 
-            MailMessage mail = new MailMessage("no-reply@applications.previgesst.com", courriel);
+            //MailMessage mail = new MailMessage("no-reply@applications.previgesst.com", courriel);
+            MailMessage mail = new MailMessage();
+
+            mail.To.Add(courriel);
 
             mail.Subject = subject;
             mail.IsBodyHtml = true;

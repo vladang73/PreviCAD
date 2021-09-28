@@ -81,5 +81,18 @@ namespace Previgesst.Services
 
             instructionRepository.SaveChanges();
         }
+
+        public void ClearInstructions(int ficheId)
+        {
+            var allItems = GetSavedInstructions(ficheId);
+
+
+            foreach (var item in allItems)
+            {
+                instructionRepository.Delete(item.PKId);
+            }
+
+            instructionRepository.SaveChanges();
+        }
     }
 }

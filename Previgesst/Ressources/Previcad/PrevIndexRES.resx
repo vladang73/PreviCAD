@@ -135,6 +135,12 @@
   <data name="Fiches" xml:space="preserve">
     <value>Procédures de contrôle des sources d'énergie</value>
   </data>
+  <data name="MobileGridTile" xml:space="preserve">
+    <value>Fiches De Cadenssage</value>
+  </data>
+  <data name="MobileNoEquipment" xml:space="preserve">
+    <value>Pas de fiche associée a cet équipement</value>
+  </data>
   <data name="MotPasse" xml:space="preserve">
     <value>Mot de passe</value>
   </data>

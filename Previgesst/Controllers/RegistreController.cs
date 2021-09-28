@@ -224,7 +224,6 @@ namespace Previgesst.Controllers
 
         public ActionResult SaveLigneRegistreUnEmploye([DataSourceRequest] DataSourceRequest request, LigneRegistreViewModel item, int client)
         {
-
             var loginInfo = employeRegistreService.getEmployeRegistre();
 
             if (loginInfo == null)
@@ -237,13 +236,15 @@ namespace Previgesst.Controllers
                 {
 
                     ligneRegistreService.SaveLigneRegistre(item);
+
+                    // once saved then reset all status
+                    savedInstructionService.ClearInstructions(item.FicheCadenassageId);
+
                     return Json(new[] { item }.ToDataSourceResult(request, ModelState));
                 }
             }
 
             return Json("");
-
-
         }
 
         public ActionResult SaveAudit([DataSourceRequest] DataSourceRequest request, LigneRegistreViewModel item)

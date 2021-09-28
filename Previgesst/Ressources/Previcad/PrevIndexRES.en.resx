@@ -141,6 +141,12 @@
   <data name="LuEtEffectue" xml:space="preserve">
     <value>I have reed and accepted</value>
   </data>
+  <data name="MobileGridTile" xml:space="preserve">
+    <value>Locking Sheets</value>
+  </data>
+  <data name="MobileNoEquipment" xml:space="preserve">
+    <value>No associated procedure to this equipment</value>
+  </data>
   <data name="MotPasse" xml:space="preserve">
     <value>Password</value>
   </data>
