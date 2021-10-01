@@ -274,7 +274,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult Instruction(int ficheId)
+        public ActionResult Instruction(int ficheId, int ligneRegistreId)
         {
             var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
@@ -289,7 +289,7 @@ namespace Previgesst.Controllers
             //};
 
             // get already saved instructions
-            var alreadySaved = savedInstructionService.GetSavedInstructions(ficheId);
+            var alreadySaved = savedInstructionService.GetSavedInstructions(ficheId, ligneRegistreId);
 
             // all instructions
             var model1 = ligneInstructionService.GetListeLignesInstruction(ficheId).ToList()
@@ -299,6 +299,7 @@ namespace Previgesst.Controllers
                             PKType = "Instruction",
 
                             FicheCadenassageId = x.FicheCadenassageId,
+                            LigneRegistreId = ligneRegistreId,
 
                             NoLigne = x.NoLigne,
                             Suppressible = x.Suppressible,
@@ -331,6 +332,7 @@ namespace Previgesst.Controllers
                             PKType = "Decadenassage",
 
                             FicheCadenassageId = x.FicheCadenassageId,
+                            LigneRegistreId = ligneRegistreId,
 
                             NoLigne = x.NoLigne,
 
@@ -368,6 +370,7 @@ namespace Previgesst.Controllers
 
                     FicheCadenassageId = 0,
                     NoLigne = 0,
+                    LigneRegistreId = 0,
 
                     InstructionId = 0,
                     TexteSupplementaireDispositif = "",
@@ -387,6 +390,7 @@ namespace Previgesst.Controllers
 
                     FicheCadenassageId = 0,
                     NoLigne = 0,
+                    LigneRegistreId = 0,
 
                     InstructionId = 0,
                     TexteSupplementaireDispositif = "",
@@ -410,6 +414,7 @@ namespace Previgesst.Controllers
 
                     FicheCadenassageId = 0,
                     NoLigne = 0,
+                    LigneRegistreId = 0,
 
                     InstructionId = 0,
                     TexteSupplementaireDispositif = "",
@@ -492,9 +497,9 @@ namespace Previgesst.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetInstructionNote(int ficheId)
+        public JsonResult GetInstructionNote(int ficheId, int ligneRegistreId)
         {
-            var result = savedInstructionService.GetSavedInstructionNote(ficheId);
+            var result = savedInstructionService.GetSavedInstructionNote(ficheId, ligneRegistreId);
 
             return Json(new { isSuccess = true, Note = result }, JsonRequestBehavior.AllowGet);
         }

@@ -278,7 +278,7 @@
 
     function showInsDetails(e) {
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-        var url = "@Url.Action("Instruction", "Registre")?ficheId=" + dataItem.FicheCadenassageId;
+        var url = "@Url.Action("Instruction", "Registre")?ficheId=" + dataItem.FicheCadenassageId + '&ligneRegistreId=' + dataItem.LigneRegistreId;
 
         var viewonly =  $(e.currentTarget).data("viewonly");
 
@@ -312,6 +312,7 @@
                 { field: "PKType", hidden: true },
                 { field: "PKId", hidden: true },
                 { field: "FicheCadenassageId", hidden: true },
+                { field: "LigneRegistreId", hidden: true },
                 { field: "NoLigne", width: "60px", title: "#", template: "# if(NoLigne > 0) {# #=NoLigne# #}#" },
                 {
                     field: "TexteInstruction", title: "@CadLigneCadRES.Instruction",
@@ -352,7 +353,7 @@
             }
         });
 
-        GetComments(dataItem.FicheCadenassageId);
+        GetComments(dataItem.FicheCadenassageId, dataItem.LigneRegistreId);
 
         var wnd = $("#wnd").kendoWindow({
             height: 500,
@@ -414,7 +415,8 @@
                 InstructionId: currentDataItem.PKId,
                 InstructionType: currentDataItem.PKType,
                 StepStatus: currentDataItem.StepStatus,
-                FicheCadenassageId: currentDataItem.FicheCadenassageId
+                FicheCadenassageId: currentDataItem.FicheCadenassageId,
+                LigneRegistreId: currentDataItem.LigneRegistreId
             });
 
             // Empty and Non-conforme
@@ -572,11 +574,11 @@
         });
     });
 
-    function GetComments(ficheId) {
+    function GetComments(ficheId, ligneRegistreId) {
         $('#StepComments').val('');
 
         $.ajax({
-            url: "@Url.Action("GetInstructionNote", "Registre")?ficheId=" + ficheId,
+            url: "@Url.Action("GetInstructionNote", "Registre")?ficheId=" + ficheId + '&ligneRegistreId=' + ligneRegistreId,
             type: 'POST',
             //data: { model: allData, note: insNotes },
             dataType: 'json',

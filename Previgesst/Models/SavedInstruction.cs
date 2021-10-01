@@ -24,5 +24,8 @@ namespace Previgesst.Models
 
         [Required]
         public int FicheCadenassageId { get; set; }
+
+        [Required]
+        public int LigneRegistreId { get; set; }
     }
 }

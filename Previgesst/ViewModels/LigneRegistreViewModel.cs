@@ -84,6 +84,7 @@ namespace Previgesst.ViewModels
                 {
                     var query = dbContext.SavedInstruction
                                     .Where(x => x.FicheCadenassageId == FicheCadenassageId)
+                                    .Where(x => x.LigneRegistreId == LigneRegistreId)
                                     ;
 
                     if (query.Any())
@@ -91,6 +92,7 @@ namespace Previgesst.ViewModels
                         count = dbContext.SavedInstruction
                                         .Where(x => x.FicheCadenassageId == FicheCadenassageId)
                                         .Where(x => x.StepStatus == "1" || x.StepStatus == "3")
+                                        .Where(x => x.LigneRegistreId == LigneRegistreId)
                                         .Count()
                                         ;
                     }

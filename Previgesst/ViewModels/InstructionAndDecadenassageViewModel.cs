@@ -15,6 +15,7 @@ namespace Previgesst.ViewModels
         public int PKId { get; set; }
         public string PKType  { get; set; }
 
+        public int LigneRegistreId { get; set; }
 
         public int FicheCadenassageId { get; set; }
         public virtual FicheCadenassage FicheCadenassage { get; set; }

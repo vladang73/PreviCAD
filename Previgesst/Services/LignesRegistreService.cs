@@ -222,7 +222,10 @@ namespace Previgesst.Services
         internal DataSourceResult GetListeLignesRegistre(DataSourceRequest request, int ClientId)
         {
 
-            var result = ligneRegistreRepository.AsQueryable().OrderByDescending(x => x.DateDebut).Where(x => x.EmployeRegistre.ClientId == ClientId).Select(x => new LigneRegistreViewModel()
+            var result = ligneRegistreRepository.AsQueryable()
+                .OrderByDescending(x => x.DateDebut)
+                .Where(x => x.EmployeRegistre.ClientId == ClientId)
+                .Select(x => new LigneRegistreViewModel()
             {
                 DateDebut = x.DateDebut,
                 DateFin = x.DateFin,
@@ -263,6 +266,7 @@ namespace Previgesst.Services
             var result = ligneRegistreRepository.AsQueryable()
                 .OrderByDescending(x => x.DateDebut)
                 .Where(x => x.EmployeRegistre.EmployeRegistreId == employeRegistreId)
+                .Where(x => x.FicheCadenassage.IsApproved)
                 .Select(x => new LigneRegistreViewModel()
                 {
                     BonDeTravail = x.BonDeTravail,

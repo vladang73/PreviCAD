@@ -22,18 +22,24 @@ namespace Previgesst.Services
         }
 
 
-        internal List<SavedInstruction> GetSavedInstructions(int ficheId)
+        internal List<SavedInstruction> GetSavedInstructions(int ficheId, int ligneRegistreId)
         {
             var result = instructionRepository.AsQueryable()
                 .Where(x => x.FicheCadenassageId == ficheId)
+                .Where(x => x.LigneRegistreId == ligneRegistreId)
                 .ToList();
 
             return result;
         }
 
-        internal SavedInstructionNote GetSavedInstructionNote(int ficheId)
+        internal SavedInstructionNote GetSavedInstructionNote(int ficheId, int ligneRegistreId)
         {
-            return instructionNoteRepository.Get(ficheId);
+            return 
+            instructionNoteRepository.GetAll()
+                                        .Where(x => x.FicheCadenassageId == ficheId)
+                                        .Where(x => x.LigneRegistreId == ligneRegistreId)
+                                        .FirstOrDefault()
+                                        ;
         }
 
 
@@ -42,36 +48,44 @@ namespace Previgesst.Services
             foreach (var model in allItems)
             {
                 if (string.IsNullOrEmpty(model.StepStatus)) model.StepStatus = "1";
+                if (model.FicheCadenassageId > 0)
+                {
+                    var item = instructionRepository.AsQueryable()
+                                                    .Where(x => x.InstructionId == model.InstructionId)
+                                                    .Where(x => x.InstructionType == model.InstructionType)
 
-                var item = instructionRepository.AsQueryable()
-                                                .Where(x => x.InstructionId == model.InstructionId)
-                                                .Where(x => x.InstructionType == model.InstructionType)
-                                                .FirstOrDefault();
+                                                    .Where(x => x.LigneRegistreId == model.LigneRegistreId)
+                                                    .Where(x => x.FicheCadenassageId == model.FicheCadenassageId)
+                                                    .FirstOrDefault();
 
-                if (item == null)
-                    item = new Models.SavedInstruction();
+                    if (item == null)
+                        item = new Models.SavedInstruction();
 
-                item.InstructionId = model.InstructionId;
-                item.InstructionType = model.InstructionType;
-                item.FicheCadenassageId = model.FicheCadenassageId;
-                item.StepStatus = model.StepStatus;
+                    item.InstructionId = model.InstructionId;
+                    item.InstructionType = model.InstructionType;
+                    item.FicheCadenassageId = model.FicheCadenassageId;
+                    item.StepStatus = model.StepStatus;
+                    item.LigneRegistreId = model.LigneRegistreId;
 
-
-                if (item.PKId > 0)
-                    instructionRepository.Update(item);
-                else
-                    instructionRepository.Add(item);
+                    if (item.PKId > 0)
+                        instructionRepository.Update(item);
+                    else
+                        instructionRepository.Add(item);
+                }
             }
 
             // add | update notes
             if (!string.IsNullOrEmpty(note))
             {
-                var ficheId = allItems.FirstOrDefault().FicheCadenassageId;
-                var existingNote = instructionNoteRepository.Get(ficheId);
+                var ficheId = allItems.FirstOrDefault(x => x.FicheCadenassageId > 0).FicheCadenassageId;
+                var ligneRegistreId = allItems.FirstOrDefault(x => x.FicheCadenassageId > 0).LigneRegistreId;
+
+                // get existing note for the line
+                var existingNote = GetSavedInstructionNote(ficheId, ligneRegistreId);
 
                 if (existingNote == null)
                 {
-                    instructionNoteRepository.Add(new SavedInstructionNote { Notes = note, FicheCadenassageId = ficheId });
+                    instructionNoteRepository.Add(new SavedInstructionNote { Notes = note, FicheCadenassageId = ficheId, LigneRegistreId = ligneRegistreId });
                 }
                 else
                 {
@@ -84,15 +98,15 @@ namespace Previgesst.Services
 
         public void ClearInstructions(int ficheId)
         {
-            var allItems = GetSavedInstructions(ficheId);
+            //var allItems = GetSavedInstructions(ficheId);
 
 
-            foreach (var item in allItems)
-            {
-                instructionRepository.Delete(item.PKId);
-            }
+            //foreach (var item in allItems)
+            //{
+            //    instructionRepository.Delete(item.PKId);
+            //}
 
-            instructionRepository.SaveChanges();
+            //instructionRepository.SaveChanges();
         }
     }
 }
