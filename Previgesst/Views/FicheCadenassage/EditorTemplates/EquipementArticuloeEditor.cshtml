@@ -1,4 +1,6 @@
 ﻿@model EquipementArticuloViewModel
+@using Previgesst.Ressources.Cadenassage
+
 <style>
     div.k-edit-form-container {
         width: auto;
@@ -38,11 +40,11 @@
 
             <div class="panel panel-info">
 
-                <div class="panel-heading">Equipement Articulo</div>
+                <div class="panel-heading">@CadEquipRES.EquipmentMgmtEnergy</div>
                 <div class="panel-body">
 
                     <div class="form-group" style="margin-bottom:5px;">
-                        <label for="Model">Source d’énergie</label>
+                        <label for="Model">@CadEquipRES.SourceEnergie</label>
 
                         @(Html.Kendo().DropDownListFor(m => m.Energy)
                                                     .DataValueField("SourceEnergieId")
@@ -55,7 +57,7 @@
 
 
                     <div class="form-group" style="margin-bottom:5px;">
-                        <label for="Model">Dispositif</label>
+                        <label for="Model">@CadEquipRES.Dispositif</label>
 
                         @(Html.Kendo().DropDownListFor(m => m.Deposit)
                                                     .DataValueField("DispositifId")
@@ -68,7 +70,7 @@
 
 
                     <div class="form-group" style="margin-bottom:5px;">
-                        <label for="Model">Accessoires</label>
+                        <label for="Model">@CadEquipRES.Accessoires</label>
 
                         @(Html.Kendo().DropDownListFor(m => m.Accessories)
                                                     .DataValueField("MaterielId")

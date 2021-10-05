@@ -61,6 +61,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accessoires.
+        /// </summary>
+        public static string Accessoires {
+            get {
+                return ResourceManager.GetString("Accessoires", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ajouter.
         /// </summary>
         public static string Ajouter {
@@ -97,11 +106,38 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dispositif.
+        /// </summary>
+        public static string Dispositif {
+            get {
+                return ResourceManager.GetString("Dispositif", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Édition d&apos;équipements énergétiques.
+        /// </summary>
+        public static string EditTitle {
+            get {
+                return ResourceManager.GetString("EditTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Effacer.
         /// </summary>
         public static string Effacer {
             get {
                 return ResourceManager.GetString("Effacer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestion d&apos;énergie.
+        /// </summary>
+        public static string EnergyManagement {
+            get {
+                return ResourceManager.GetString("EnergyManagement", resourceCulture);
             }
         }
         
@@ -115,11 +151,56 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Énergie Gestion des équipements.
+        /// </summary>
+        public static string EquipmentMgmtEnergy {
+            get {
+                return ResourceManager.GetString("EquipmentMgmtEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Le champ Accessoires est obligatoire..
+        /// </summary>
+        public static string ErreurNoAccessories {
+            get {
+                return ResourceManager.GetString("ErreurNoAccessories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Le champ Dépôt est obligatoire..
+        /// </summary>
+        public static string ErreurNoDeposit {
+            get {
+                return ResourceManager.GetString("ErreurNoDeposit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Le champ Énergie est obligatoire..
+        /// </summary>
+        public static string ErreurNoEnergy {
+            get {
+                return ResourceManager.GetString("ErreurNoEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erreurs.
         /// </summary>
         public static string Erreurs {
             get {
                 return ResourceManager.GetString("Erreurs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erreur - Gestions.
+        /// </summary>
+        public static string ErrorTitle {
+            get {
+                return ResourceManager.GetString("ErrorTitle", resourceCulture);
             }
         }
         
@@ -156,6 +237,15 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string MissingOrientation {
             get {
                 return ResourceManager.GetString("MissingOrientation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nouvelle énergie.
+        /// </summary>
+        public static string NewEnergy {
+            get {
+                return ResourceManager.GetString("NewEnergy", resourceCulture);
             }
         }
         
@@ -273,6 +363,15 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string SelectQRToPrint {
             get {
                 return ResourceManager.GetString("SelectQRToPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source d’énergie.
+        /// </summary>
+        public static string SourceEnergie {
+            get {
+                return ResourceManager.GetString("SourceEnergie", resourceCulture);
             }
         }
         

@@ -390,6 +390,12 @@
         $(e.container).find('.k-grid-Détails').hide();
         $(e.container).find('.k-grid-Énergie').hide();
         $(e.container).find('.k-grid-QR').hide();
+
+        //e.container.find(".k-grid-cancel").bind("click", function () {
+        //    console.log(e);
+        //    //your code here
+        //    ListeDataBoundEQ();
+        //});
     }
 
     function changerImage(e) {
@@ -506,6 +512,7 @@
     }
 
     function ListeDataBoundEQ(e) {
+        console.log('Calling ListeDataBoundEQ ...');
         var selecteurGrid = "#listEquipement";
         var grid = $(selecteurGrid).data("kendoGrid");
 

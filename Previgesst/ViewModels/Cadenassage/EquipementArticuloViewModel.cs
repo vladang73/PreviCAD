@@ -13,10 +13,16 @@ namespace Previgesst.ViewModels
 
         public int EquipementId { get; set; }
 
+
+        [Required(ErrorMessageResourceType = typeof(CadEquipRES), ErrorMessageResourceName = "ErreurNoAccessories")]
         public int Accessories { get; set; }
 
+
+        [Required(ErrorMessageResourceType = typeof(CadEquipRES), ErrorMessageResourceName = "ErreurNoEnergy")]
         public int Energy { get; set; }
 
+
+        [Required(ErrorMessageResourceType = typeof(CadEquipRES), ErrorMessageResourceName = "ErreurNoDeposit")]
         public int Deposit { get; set; }
 
         public string Nomenclature { get; set; }

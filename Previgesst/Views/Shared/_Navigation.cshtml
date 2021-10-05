@@ -16,22 +16,49 @@
                 <div style="margin-right:0px;margin-left:auto;padding:30px;width:300px;position: absolute;right: 0;top: 0;">
                     <nav>
                         <ul id="menu">
-
-                            @if (Request.IsAuthenticated)
-                            {
+                            @{
                                 using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                                 {
-                                    @Html.AntiForgeryToken()
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;margin-top:50px" data-toggle="dropdown" role="button">  @User.Identity.Name<span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
-                                            <li>@Html.ActionLink("Mon compte", "MyAccount", "Manage")</li>
-                                            <li role="separator" class="divider"></li>
-                                            <li><a href="javascript:document.getElementById('logoutForm').submit()">@LayoutRES.SeDeconnecter</a></li>
-                                        </ul>
-                                    </li>
+                                    string path = Request.Url.PathAndQuery;
+
+                                    path = path.Replace("/en/", "");
+                                    path = path.Replace("/fr/", "");
+                                    if (path.Length == 0)
+                                    {
+                                        path = "ClientLogin/Index";
+                                    }
+                                    if (path.Substring(0, 1) == "/")
+                                    {
+                                        path = path.Substring(1);
+                                    }
+                                    //utilisé pour prévicad client
+                                    if (Session["ClientID"] != null && !path.Contains("?"))
+                                    {
+                                        path = path + "?ClientID=" + Session["ClientID"];
+                                    }
+
+
+                                    <li style="padding:1px;"><a onclick="/*setCookie('langue','fr',365);*/location.href='/fr/@path'" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;">Fr</a></li>
+                                    <li style="padding:0px;">-</li>
+                                    <li style="padding-left:1px;"><a onclick="/*setCookie('langue','en',365);*/location.href='/en/@path'" class="dropdown-toggle" style="color: #1d65ac; font-size: smaller;">En</a></li>
+
+
+                                    if (Request.IsAuthenticated)
+                                    {
+
+                                        Html.AntiForgeryToken();
+
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" style="color:#1d65ac;font-size:smaller;margin-top:50px" data-toggle="dropdown" role="button">  @User.Identity.Name<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li>@Html.ActionLink("Mon compte", "MyAccount", "Manage")</li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">@LayoutRES.SeDeconnecter</a></li>
+                                            </ul>
+                                        </li>
+                                        }
+                                    }
                                 }
-                            }
                         </ul>
                     </nav>
                 </div>

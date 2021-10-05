@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accessoires" xml:space="preserve">
+    <value>Accessoires</value>
+  </data>
   <data name="Ajouter" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -129,14 +132,38 @@
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="Dispositif" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="EditTitle" xml:space="preserve">
+    <value>Editing of Energy Equipment</value>
+  </data>
   <data name="Effacer" xml:space="preserve">
     <value>Delete</value>
+  </data>
+  <data name="EnergyManagement" xml:space="preserve">
+    <value>Energy management</value>
   </data>
   <data name="EquipmentMgmt" xml:space="preserve">
     <value>Equipment Management</value>
   </data>
+  <data name="EquipmentMgmtEnergy" xml:space="preserve">
+    <value>Energy Equipment Management</value>
+  </data>
+  <data name="ErreurNoAccessories" xml:space="preserve">
+    <value>The Accessories field is required.</value>
+  </data>
+  <data name="ErreurNoDeposit" xml:space="preserve">
+    <value>The Deposit field is required.</value>
+  </data>
+  <data name="ErreurNoEnergy" xml:space="preserve">
+    <value>The Energy field is required.</value>
+  </data>
   <data name="Erreurs" xml:space="preserve">
     <value>Errors</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error - Management</value>
   </data>
   <data name="Landscape" xml:space="preserve">
     <value>Landscape</value>
@@ -149,6 +176,9 @@
   </data>
   <data name="MissingOrientation" xml:space="preserve">
     <value>Please select page orientation</value>
+  </data>
+  <data name="NewEnergy" xml:space="preserve">
+    <value>New Energy</value>
   </data>
   <data name="Nom" xml:space="preserve">
     <value>Equipment Name</value>
@@ -188,6 +218,9 @@
   </data>
   <data name="SelectQRToPrint" xml:space="preserve">
     <value>Select QR Codes to Print</value>
+  </data>
+  <data name="SourceEnergie" xml:space="preserve">
+    <value>Energy Source</value>
   </data>
   <data name="Vide" xml:space="preserve">
     <value> </value>
