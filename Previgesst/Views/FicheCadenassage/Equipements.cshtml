@@ -134,9 +134,7 @@
                                     .Create(c => c.Action("SaveEquipement", "Equipement", new { client = Model.ClientId }))
                                     .Update(u => u.Action("SaveEquipement", "Equipement", new { client = Model.ClientId }))
                                     .Destroy(d => d.Action("DeleteEquipement", "Equipement"))
-                                    .Events(e => e
-                                        .Error("ListeErreurEQ")
-                                    )
+                                    .Events(e => e.Error("ListeErreurEQ"))
                                 )
                                 .Events(e => e
                                     .DataBound("ListeDataBoundEQ").Edit("Edit")
@@ -391,11 +389,43 @@
         $(e.container).find('.k-grid-Énergie').hide();
         $(e.container).find('.k-grid-QR').hide();
 
-        //e.container.find(".k-grid-cancel").bind("click", function () {
-        //    console.log(e);
-        //    //your code here
-        //    ListeDataBoundEQ();
-        //});
+        e.container.find(".k-grid-cancel").bind("click", function () {
+            //console.log(e);
+            
+            if (!e.model.Suppressible) {
+                $('#listEquipement').data('kendoGrid').dataSource.read();
+                /*
+
+                var selecteurGrid = "#listEquipement";
+                var grid = $(selecteurGrid).data("kendoGrid");
+
+                var row = grid.tbody.find("tr[data-uid='" + e.model.uid + "']");
+
+
+                //var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+                console.log(e);
+                console.log('e.model.uid', e.model.uid);
+                console.log('e.model.Suppressible', e.model.Suppressible);
+
+                console.log('this', this);
+
+                //console.log(row);
+                //console.log(row.find(".k-grid-effacer"));
+
+                //console.log(e.target.closest('tr'));
+
+                //if (!currentDataItem.Suppressible) {
+                //    //$(this).remove();
+                //    //$(e.container.find(".k-grid-effacer")).remove();
+                //    //$(this).closest("tr").find(".k-grid-effacer").remove();
+                //    //console.log($(this).closest("tr"));
+                //    //console.log($($(this).closest("tr")[0]));
+                //    //console.log($($(this).closest("tr")[0]).find(".k-grid-effacer"));
+                //}
+                */
+            }
+        });
     }
 
     function changerImage(e) {
@@ -495,19 +525,22 @@
 
     function ListeErreurEQ(args) {
         var selecteurGrid = "#listEquipement";
+        var grid = $(selecteurGrid).data("kendoGrid");
         if (args.errors) {
-            var grid = $(selecteurGrid).data("kendoGrid");
             var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
             grid.one("dataBinding", function (e) {
                 e.preventDefault();
 
                 $.each(args.errors, function (propertyName) {
                     var errorList = validationTemplate({ field: propertyName, messages: this.errors });
-                    ShowNotification("@CadEquipRES.Erreurs",
-                        errorList,
-                        "errorListTemplate");
+                    ShowNotification("@CadEquipRES.Erreurs", errorList, "errorListTemplate");
                 });
             });
+        }
+        else if (args.xhr) {
+            console.log('There was some error', args);
+            ShowNotification("@CadEquipRES.Erreurs", args.xhr.statusText, "errorTemplate");
+            grid.dataSource.read();
         }
     }
 

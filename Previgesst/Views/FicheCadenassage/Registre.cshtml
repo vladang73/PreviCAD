@@ -67,7 +67,6 @@
                 columns.Command(c =>
                 {
                     c.Edit().Text(CadRegRES.Audit).HtmlAttributes("");
-
                 })
                 .Width(30).Hidden(!@Model.estAudit);
             })
@@ -77,8 +76,7 @@
             .ToolBar(tools => tools.Excel()).Editable(e => e.DisplayDeleteConfirmation(false)).
             Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneRegistre").Window(w => w.Title(CadRegRES.Audit).Width(600)))
 
-            .Pageable(s => s.PageSizes(true).PageSizes(new List<int>
-            { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
             .Filterable()
             .DataSource(ds => ds
 
@@ -89,14 +87,10 @@
                     //})
 
                     .Sort(x => x.Add(c => c.DateDebut).Descending())
-
-                    .PageSize(20).Model(
-                        e =>
-                        { e.Id(z => z.LigneRegistreId); }
-                    )
-
+                    .PageSize(20).Model(e => { e.Id(z => z.LigneRegistreId); })
                     .Read(r => r.Action("ReadLignesRegistreCadenassage", "FicheCadenassage", new { client = Model.ClientId }))
                     .Update(u => u.Action("SaveAudit", "Registre"))
+                    .Events(e => e.RequestEnd("EndRegistre"))
                 )
             )
         </div>
@@ -115,6 +109,14 @@
         }, 1);*/
 
     }
+    function EndRegistre(e) {
+        if (e.type == "update" || e.type == "destroy" || e.type == "create") {
+
+            var grid = $("#listLignesRegistre").data("kendoGrid")
+            grid.dataSource.read();
+        }
+    }
+
     var exportFlag = false;
     function excelExport(e) {
            
@@ -142,8 +144,8 @@
 
         // By pass the width bug of the table
         jQuery('#Employes table').css('width', '100%');
-        setTimeout(function () {
-            location.reload(true);
-        }, 4000);
+        //setTimeout(function () {
+        //    location.reload(true);
+        //}, 4000);
     }
 </script>

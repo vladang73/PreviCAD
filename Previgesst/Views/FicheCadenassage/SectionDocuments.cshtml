@@ -44,9 +44,9 @@
                                    .Encoded(false).Sortable(false).Filterable(false);
 
                             columns.Bound(e => e.Bidon).EditorTemplateName("Vide")
-                                    .ClientTemplate("<a href='#=BasePath#' class='btn btn-info downloadButton' style='float:right'></a>")
+                                    .ClientTemplate("<a href='#=BasePath#' class='btn btn-info downloadButton'></a>")
                                     .Title("")
-                                    .Filterable(false).Sortable(false).Width(200);
+                                    .Filterable(false).Sortable(false).Width(100);
 
                             columns.Command(c =>
                             {
@@ -56,7 +56,7 @@
                                       .HtmlAttributes(new { @class = "k-grid-effacer" });
 
                             }).Hidden(!Model.estUpdate)
-                               .Width(200);
+                               .Width(25);
                         })
 
                         .Sortable(s => s.AllowUnsort(false))

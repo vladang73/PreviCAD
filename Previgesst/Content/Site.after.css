@@ -971,9 +971,9 @@ body .EditAnalyseDeRisque .analyseContent .k-grid-add {
     font-size: 0px;
 }
 
-.cadenassageContent #liste-doc .btn-edit-previ, .cadenassageContent #liste-doc .k-grid-edit {
+/*.cadenassageContent #liste-doc .btn-edit-previ, .cadenassageContent #liste-doc .k-grid-edit {
     left: 30% !important;
-}
+}*/
 
 .cadenassageContent #liste-doc .k-grid-Effacer {
     left: 30%;
@@ -1053,10 +1053,10 @@ table tr th {
     top: 60%;
 }
 
-.cadenassageContent #listCAD .k-grid-edit {
+/*.cadenassageContent #listCAD .k-grid-edit, .cadenassageContent #listCAD k-grid-effacer {
     left: 50%;
     bottom: 50%;
-}
+}*/
 
 .cadenassageContent #listCAD .k-grid-add, .cadenassageContent #listDEC .k-grid-add {
     top: -58px;
@@ -1072,10 +1072,10 @@ table tr th {
     top: 60%;
 }
 
-.cadenassageContent #listDEC .k-grid-edit {
+/*.cadenassageContent #listDEC .k-grid-edit {
     left: 81%;
     top: 30%;
-}
+}*/
 
 .cadenassageContent #listCAD .k-grid-Effacer {
     left: 63%;
@@ -1163,10 +1163,10 @@ table tr th {
 }
 /* End Liste de nos clients */
 /* Liste documents */
-#liste-doc .btn-edit-previ, #liste-doc .k-grid-edit {
+/*#liste-doc .btn-edit-previ, #liste-doc .k-grid-edit {
     right: initial;
     left: 50%;
-}
+}*/
 
 #liste-doc .k-grid-Effacer {
     left: 50%;
@@ -1770,8 +1770,16 @@ display: inline-block;
     margin-top: 5px;
 }
 
+#liste-doc .k-grid-effacer, #liste-doc .k-grid-Effacer, #liste-doc .k-grid-dupliquer {
+    right: 25px;
+}
 
-/*
+/*    #liste-doc .k-grid-effacer:hover, #liste-doc .k-grid-Effacer:hover, #liste-doc .k-grid-dupliquer:hover {
+        width: auto;
+    }*/
+
+
+    /*
 
     https://stackoverflow.com/questions/8738072/forcing-web-site-to-show-in-landscape-mode-only
 html {
