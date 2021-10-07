@@ -15,11 +15,12 @@ namespace Previgesst.ViewModels
 
 
         public int FicheCadenassageId { get; set; }
-        [Required]
+
+        [Required(ErrorMessageResourceType = typeof(CadMaterielRES), ErrorMessageResourceName = "ErreurNoMateriel")]
         [Display(ResourceType = typeof(CadMaterielRES), Name = "Materiel")]
         public int MaterielId { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(CadMaterielRES), ErrorMessageResourceName = "ErreurNoQuantity")]
         [Display(ResourceType = typeof(CadMaterielRES), Name = "Quantite")]
 
         public int Quantite { get; set; }

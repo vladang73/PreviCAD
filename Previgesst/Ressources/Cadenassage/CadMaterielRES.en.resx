@@ -129,6 +129,12 @@
   <data name="Erreur" xml:space="preserve">
     <value>Errors</value>
   </data>
+  <data name="ErreurNoMateriel" xml:space="preserve">
+    <value>The Matériel field is required.</value>
+  </data>
+  <data name="ErreurNoQuantity" xml:space="preserve">
+    <value>The Quantité field is required.</value>
+  </data>
   <data name="Materiel" xml:space="preserve">
     <value>Material</value>
   </data>

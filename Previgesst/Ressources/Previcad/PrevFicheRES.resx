@@ -217,10 +217,10 @@
     <value>Étapes</value>
   </data>
   <data name="SwitchOff" xml:space="preserve">
-    <value>MISE HORS TENSION ET VERROUILLAGE</value>
+    <value>MISE À L'ARRÊT ET CADENASSAGE</value>
   </data>
   <data name="SwitchOn" xml:space="preserve">
-    <value>DÉVERROUILLAGE ET MISE EN MARCHE</value>
+    <value>DÉCADENASSAGE ET REMISE EN FONCTION</value>
   </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Telecharger</value>

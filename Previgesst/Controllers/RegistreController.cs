@@ -399,7 +399,7 @@ namespace Previgesst.Controllers
                     TexteDispositif = "",
                     TexteRealiser = "",
 
-                    TexteInstruction = switchOff,
+                    TexteInstruction = switchOn,
                     PhotoFicheCadenassageId = null,
                     StepStatus = ""
                 }
@@ -423,7 +423,7 @@ namespace Previgesst.Controllers
                     TexteDispositif = "",
                     TexteRealiser = "",
 
-                    TexteInstruction = switchOn,
+                    TexteInstruction = switchOff,
                     PhotoFicheCadenassageId = null,
                     StepStatus = ""
                 }

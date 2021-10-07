@@ -358,7 +358,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MISE HORS TENSION ET VERROUILLAGE.
+        ///   Looks up a localized string similar to MISE À L&apos;ARRÊT ET CADENASSAGE.
         /// </summary>
         public static string SwitchOff {
             get {
@@ -367,7 +367,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DÉVERROUILLAGE ET MISE EN MARCHE.
+        ///   Looks up a localized string similar to DÉCADENASSAGE ET REMISE EN FONCTION.
         /// </summary>
         public static string SwitchOn {
             get {
