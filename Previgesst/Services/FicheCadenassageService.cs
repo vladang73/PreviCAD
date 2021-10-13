@@ -1100,10 +1100,10 @@ namespace Previgesst.Services
             //item.DateRevision = model.DateRevision;
 
 
-            if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout card")
+            if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout procedure")
             {
                 item.TitreFiche = "Fiche de cadenassage";
-                item.TitreFicheEN = "Lockout card";
+                item.TitreFicheEN = "Lockout procedure";
             }
             else
             {
@@ -1150,10 +1150,10 @@ namespace Previgesst.Services
             item.DateApproved = model.DateApproved;
             item.IsApproved = true;
 
-            if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout card")
+            if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout procedure")
             {
                 item.TitreFiche = "Fiche de cadenassage";
-                item.TitreFicheEN = "Lockout card";
+                item.TitreFicheEN = "Lockout procedure";
             }
             else
             {

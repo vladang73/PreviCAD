@@ -220,7 +220,7 @@
     <value>SWITCH OFF AND LOCKOUT</value>
   </data>
   <data name="SwitchOn" xml:space="preserve">
-    <value>UNLOCKING AND SWITCHING ON</value>
+    <value>SAFELY UNLOCKING AND REOPERATING</value>
   </data>
   <data name="Telecharger" xml:space="preserve">
     <value>Download</value>

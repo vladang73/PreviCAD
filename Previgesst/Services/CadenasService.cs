@@ -37,7 +37,7 @@ namespace Previgesst.Services
             var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
             var list = new List<TitreFicheDDLViewModel>();
-            list.Add(new TitreFicheDDLViewModel { Texte = langue=="fr"? "Fiche de cadenassage": "Lockout card" });
+            list.Add(new TitreFicheDDLViewModel { Texte = langue=="fr"? "Fiche de cadenassage": "Lockout procedure" });
             list.Add(new TitreFicheDDLViewModel { Texte = langue=="fr"? "Procédure de travail sécuritaire":"Safe work procedure" });
             return list;
         }

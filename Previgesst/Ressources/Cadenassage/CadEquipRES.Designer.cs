@@ -79,6 +79,33 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Détails.
+        /// </summary>
+        public static string ButtonDetails {
+            get {
+                return ResourceManager.GetString("ButtonDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Énergie.
+        /// </summary>
+        public static string ButtonEnergy {
+            get {
+                return ResourceManager.GetString("ButtonEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QR.
+        /// </summary>
+        public static string ButtonQR {
+            get {
+                return ResourceManager.GetString("ButtonQR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Changer l&apos;image.
         /// </summary>
         public static string ChangerImage {
@@ -142,7 +169,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gestion des équipements.
+        ///   Looks up a localized string similar to Gestion des Équipements.
         /// </summary>
         public static string EquipmentMgmt {
             get {
@@ -151,7 +178,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Énergie Gestion des équipements.
+        ///   Looks up a localized string similar to Énergie Gestion des Équipements.
         /// </summary>
         public static string EquipmentMgmtEnergy {
             get {
@@ -169,7 +196,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Le champ Dépôt est obligatoire..
+        ///   Looks up a localized string similar to Le champ Dispositif est obligatoire..
         /// </summary>
         public static string ErreurNoDeposit {
             get {
@@ -183,6 +210,33 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string ErreurNoEnergy {
             get {
                 return ResourceManager.GetString("ErreurNoEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nom de l&apos;équipement (EN) est obligatoire.
+        /// </summary>
+        public static string ErreurNoNomEN {
+            get {
+                return ResourceManager.GetString("ErreurNoNomEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nom de l&apos;équipement (FR) est obligatoire.
+        /// </summary>
+        public static string ErreurNoNomFR {
+            get {
+                return ResourceManager.GetString("ErreurNoNomFR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to # Équipement est obligatoire.
+        /// </summary>
+        public static string ErreurNoNum {
+            get {
+                return ResourceManager.GetString("ErreurNoNum", resourceCulture);
             }
         }
         

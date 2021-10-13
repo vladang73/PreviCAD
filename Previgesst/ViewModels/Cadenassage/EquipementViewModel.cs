@@ -11,17 +11,17 @@ namespace Previgesst.ViewModels
     {
         public int EquipementId { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(CadEquipRES), ErrorMessageResourceName = "ErreurNoNomFR")]
         [StringLength(250)]
         [Display(ResourceType = typeof(CadEquipRES), Name = "NomFR")]
         public string NomEquipement { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(CadEquipRES), ErrorMessageResourceName = "ErreurNoNomEN")]
         [StringLength(250)]
         [Display(ResourceType = typeof(CadEquipRES), Name = "NomEN")]
         public string NomEquipementEN { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(CadEquipRES), ErrorMessageResourceName = "ErreurNoNum")]
         [StringLength(250)]
         [Display(ResourceType = typeof(CadEquipRES), Name = "Num")]
         public string NumeroEquipment { get; set; }

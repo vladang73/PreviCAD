@@ -91,11 +91,11 @@
                                         )
                                     )); ;
 
-                                    columns.Command(command => command.Custom("Détails").Click("showDetailsNew")).Width(100);
+                                    columns.Command(command => command.Custom("Détails").Click("showDetailsNew").Text(CadEquipRES.ButtonDetails)).Width(100);
 
-                                    columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie")).Width(100);
+                                    columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie").Text(CadEquipRES.ButtonEnergy)).Width(100);
 
-                                    columns.Command(command => command.Custom("QR").Click("showDetailsQR")).Width(100);
+                                    columns.Command(command => command.Custom("QR").Click("showDetailsQR").Text(CadEquipRES.ButtonQR)).Width(100);
 
                                     //columns.Bound(bt => bt.EquipementId).ClientTemplate("<a href='/EquipementArticuloe/Index/#= " + nameof(EquipementViewModel.EquipementId) + " #' class='btn btn-primary btn-edit-force k-cde-edit'></a>").Title("Énergie").Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
 

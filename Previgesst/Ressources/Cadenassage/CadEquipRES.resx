@@ -123,6 +123,15 @@
   <data name="Ajouter" xml:space="preserve">
     <value>Ajouter</value>
   </data>
+  <data name="ButtonDetails" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="ButtonEnergy" xml:space="preserve">
+    <value>Énergie</value>
+  </data>
+  <data name="ButtonQR" xml:space="preserve">
+    <value>QR</value>
+  </data>
   <data name="ChangerImage" xml:space="preserve">
     <value>Changer l'image</value>
   </data>
@@ -145,19 +154,28 @@
     <value>Gestion d'énergie</value>
   </data>
   <data name="EquipmentMgmt" xml:space="preserve">
-    <value>Gestion des équipements</value>
+    <value>Gestion des Équipements</value>
   </data>
   <data name="EquipmentMgmtEnergy" xml:space="preserve">
-    <value>Énergie Gestion des équipements</value>
+    <value>Énergie Gestion des Équipements</value>
   </data>
   <data name="ErreurNoAccessories" xml:space="preserve">
     <value>Le champ Accessoires est obligatoire.</value>
   </data>
   <data name="ErreurNoDeposit" xml:space="preserve">
-    <value>Le champ Dépôt est obligatoire.</value>
+    <value>Le champ Dispositif est obligatoire.</value>
   </data>
   <data name="ErreurNoEnergy" xml:space="preserve">
     <value>Le champ Énergie est obligatoire.</value>
+  </data>
+  <data name="ErreurNoNomEN" xml:space="preserve">
+    <value>Nom de l'équipement (EN) est obligatoire</value>
+  </data>
+  <data name="ErreurNoNomFR" xml:space="preserve">
+    <value>Nom de l'équipement (FR) est obligatoire</value>
+  </data>
+  <data name="ErreurNoNum" xml:space="preserve">
+    <value># Équipement est obligatoire</value>
   </data>
   <data name="Erreurs" xml:space="preserve">
     <value>Erreurs</value>

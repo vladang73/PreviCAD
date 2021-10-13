@@ -118,31 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Cadenassage" xml:space="preserve">
-    <value>Lockout sheet</value>
+    <value>Lockout Sheet</value>
   </data>
   <data name="CadParamAdmin" xml:space="preserve">
-    <value>Account settings</value>
+    <value>Account Settings</value>
   </data>
   <data name="CentreSupport" xml:space="preserve">
-    <value>Support center</value>
+    <value>Support Center</value>
   </data>
   <data name="Departements" xml:space="preserve">
-    <value>Department management</value>
+    <value>Department Management</value>
   </data>
   <data name="Employes" xml:space="preserve">
-    <value>Access management</value>
+    <value>Access Management</value>
   </data>
   <data name="Enregistrer" xml:space="preserve">
     <value>Save</value>
   </data>
   <data name="Equipements" xml:space="preserve">
-    <value>Equipment management</value>
+    <value>Equipment Management</value>
   </data>
   <data name="FichesCadenassage" xml:space="preserve">
-    <value>Energy source control procedures</value>
+    <value>Energy control method</value>
   </data>
   <data name="Gestion" xml:space="preserve">
-    <value>Lockout management</value>
+    <value>Lockout Management</value>
   </data>
   <data name="LienUtilisateur" xml:space="preserve">
     <value>User hyperlink</value>
@@ -154,12 +154,12 @@
     <value>Notification of Non-Compliance</value>
   </data>
   <data name="Programme" xml:space="preserve">
-    <value>Lockout program</value>
+    <value>Lockout Program</value>
   </data>
   <data name="Registre" xml:space="preserve">
-    <value>Intervention register</value>
+    <value>Intervention Register</value>
   </data>
   <data name="TitreSectionCadenassage" xml:space="preserve">
-    <value>Previcad - Lockout management</value>
+    <value>Previcad - Lockout Management</value>
   </data>
 </root>

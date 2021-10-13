@@ -135,7 +135,7 @@
     <comment>Equals</comment>
   </data>
   <data name="NePasSupprimer" xml:space="preserve">
-    <value>No, do not suppress</value>
+    <value>No, do not delete</value>
   </data>
   <data name="NePasDupliquer" xml:space="preserve">
     <value>No, do not duplicate</value>

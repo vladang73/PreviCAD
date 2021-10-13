@@ -121,7 +121,7 @@
     <value>Active</value>
   </data>
   <data name="AfficherClient" xml:space="preserve">
-    <value>Post on premises</value>
+    <value>Display on premises</value>
   </data>
   <data name="Approuve" xml:space="preserve">
     <value>Approve</value>
@@ -130,10 +130,10 @@
     <value>Approved by</value>
   </data>
   <data name="Createur" xml:space="preserve">
-    <value>Creator</value>
+    <value>Created by</value>
   </data>
   <data name="DateCreation" xml:space="preserve">
-    <value>Creata the</value>
+    <value>Created date</value>
   </data>
   <data name="DateCreationObligatoire" xml:space="preserve">
     <value>The field Creation on is mandatory </value>
@@ -169,7 +169,7 @@
     <value>Update</value>
   </data>
   <data name="NoFiche" xml:space="preserve">
-    <value>Sheet #</value>
+    <value>Procedure #</value>
   </data>
   <data name="SelectionnerDepartement" xml:space="preserve">
     <value>Select a department</value>
@@ -190,12 +190,12 @@
     <value>Type of sheet</value>
   </data>
   <data name="UpdatedBy" xml:space="preserve">
-    <value>Updated By</value>
+    <value>Updated by</value>
   </data>
   <data name="UpdatedDate" xml:space="preserve">
-    <value>Updarted Date</value>
+    <value>Updated date</value>
   </data>
   <data name="DateApproved" xml:space="preserve">
-    <value>Date approbation</value>
+    <value>Approbation date</value>
   </data>
 </root>
