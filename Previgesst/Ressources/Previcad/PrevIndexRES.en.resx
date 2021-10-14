@@ -171,4 +171,7 @@
   <data name="Termines" xml:space="preserve">
     <value>Completed</value>
   </data>
+  <data name="Titre" xml:space="preserve">
+    <value>Employee access to PRÉVIGESST Intranet</value>
+  </data>
 </root>

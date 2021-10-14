@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="IdentificateurCIE" xml:space="preserve">
-    <value>CO identification</value>
+    <value>Client name</value>
   </data>
   <data name="MotPasse" xml:space="preserve">
     <value>Password</value>
@@ -131,5 +131,8 @@
   </data>
   <data name="Titre" xml:space="preserve">
     <value>Administrator access to PRÉVIGESST Intranet</value>
+  </data>
+  <data name="TitreCorporate" xml:space="preserve">
+    <value>Corporate access to PRÉVIGESST Intranet</value>
   </data>
 </root>

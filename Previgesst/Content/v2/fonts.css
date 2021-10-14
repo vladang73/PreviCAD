@@ -1,0 +1,84 @@
+@font-face {
+  font-family: IBMPlexSans-Bold;
+  src: url(fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: IBMPlexSans-BoldItalic;
+  src: url(fonts/IBM_Plex_Sans/IBMPlexSans-BoldItalic.ttf);
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: IBMPlexSans-ExtraLight;
+  src: url(fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLight.ttf);
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: IBMPlexSans-ExtraLightItalic;
+  src: url(fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLightItalic.ttf);
+  font-weight: lighter;
+   font-style: italic;
+}
+@font-face {
+  font-family: IBMPlexSans-Medium;
+  src: url(fonts/IBM_Plex_Sans/IBMPlexSans-Medium.ttf);
+  font-weight: 400;
+
+}
+@font-face {
+  font-family: IBMPlexSans-Regular;
+  src: url(fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: IBMPlexSans-SemiBold;
+  src: url(fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf);
+  font-weight: 600;
+}
+
+
+@font-face {
+  font-family: HKGrotesk-Bold;
+  src: url(fonts/hk-grotesk/HKGrotesk-Bold.otf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: HKGrotesk-BoldItalic;
+  src: url(fonts/hk-grotesk/HKGrotesk-BoldItalic.otf);
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: HKGrotesk-ExtraLight;
+  src: url(fonts/hk-grotesk/HKGrotesk-ExtraLight.otf);
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: HKGrotesk-ExtraLightItalic;
+  src: url(fonts/hk-grotesk/HKGrotesk-ExtraLightItalic.otf);
+  font-weight: lighter;
+   font-style: italic;
+}
+@font-face {
+  font-family: HKGrotesk-Medium;
+  src: url(fonts/hk-grotesk/HKGrotesk-Medium.otf);
+  font-weight: 400;
+
+}
+@font-face {
+  font-family: HKGrotesk-Regular;
+  src: url(fonts/hk-grotesk/HKGrotesk-Regular.otf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: HKGrotesk-SemiBold;
+  src: url(fonts/hk-grotesk/HKGrotesk-SemiBold.otf);
+  font-weight: 600;
+}

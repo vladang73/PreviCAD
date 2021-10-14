@@ -80,7 +80,7 @@ namespace Previgesst.Controllers
                 }
             }
 
-            return View("Login", Layout, model);
+            return View("Login", null, model);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

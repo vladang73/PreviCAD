@@ -30,7 +30,6 @@ namespace Previgesst.Controllers
         private SavedInstructionService savedInstructionService;
         private ClientService clientService;
 
-        private string Layout;
 
         public RegistreController(EmployeRegistreService employeRegistreService,
                FicheCadenassageService ficheCadenassageService,
@@ -91,16 +90,13 @@ namespace Previgesst.Controllers
                 loginInfo.NextUpdateTextEn = NextUpdateTextEn;
                 loginInfo.Langue = langue;
 
-                return View("Index", Layout, loginInfo);
+                return View("Index", loginInfo);
             }
             else
             {
                 loginInfo.MaintenancePrevue = false;
-                return View("Index", Layout, loginInfo);
+                return View("Index", loginInfo);
             }
-
-            //return View("Index", Layout, loginInfo);
-            //return View(loginInfo);
         }
 
         public ActionResult ReadListFiches([DataSourceRequest] DataSourceRequest request, int client)

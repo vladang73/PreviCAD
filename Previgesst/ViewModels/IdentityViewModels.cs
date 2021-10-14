@@ -10,7 +10,7 @@ namespace Previgesst.ViewModels
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Vous devez entrer votre nom d'utilisateur.")]
-        [Display(Name = "Nom d'utilisateur")]
+        [Display(Name = "Numéro d'utilisateur")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Vous devez entrer votre mot de passe.")]

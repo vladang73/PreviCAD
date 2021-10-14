@@ -1,0 +1,244 @@
+p{
+  font-family: IBMPlexSans-Regular;
+  font-size: 16px;
+}
+
+.form-control-primary {
+  margin: 10px;
+  opacity: 0.2;
+  border-radius: 2px;
+}
+.navbar-bg{
+  background-color: #fff;
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 100;
+  padding: 70px 0 0 0px;
+
+  width: 70px;
+}
+
+.left-sidebar {
+  position: sticky;
+  top:0;
+  height: calc(100vh - 70px);
+  background:#060144;
+}
+
+.sidebar-nav li .nav-link {
+  color: #333;
+  font-weight: 500;
+}
+.nav-link .nav-link-text{
+  color: #fff;
+  font-size: 12px;
+}
+.setting-navlink img {
+  width: 18px;
+}
+.home-navlink img {
+  width: 18px;
+}
+.power-navlink img {
+  width: 18px;
+}
+main {
+  padding-top: 90px;
+}
+
+.navbar-brand{
+  margin:10px;
+}
+.setting-navlink{
+  border-top:2px solid #329FFD;
+  border-bottom: 2px solid #329FFD;
+}
+
+.wellcome-custom{
+  background: #0835B0;
+}
+
+.lang-dropdown select {
+  border: unset;
+  border-radius: 14px;
+  background: #EBE9E8;
+}
+
+.lang-dropdown select::-ms-expand {
+  display: none; 
+}
+
+.lang-dropdown {
+  position: relative;
+  display: flex;
+  width: 4.7em;
+  height: 2em;
+  margin-top: 2px;
+  line-height: 2.4;
+  background: transparent;
+  border-radius: 0.60em;
+}
+.lang-dropdown select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #000;
+  cursor: pointer; 
+}
+
+.lang-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 4px 1em;
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+  font-size: 12px;
+}
+.main-container .previcad-main-cards .card{
+  background-color: transparent;
+  border:unset;
+}
+.previcad-main-cards .card-wrapper{
+  border: 1px solid #329FFD;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding: 0;
+  background: transparent;
+}
+.card-wrapper .card-top-img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.ml-5{
+  margin-left: 40px;
+}
+.previcad-card-icons img{
+ width: 56px;
+ height: unset;
+ display: block;
+ margin: auto;
+ margin-top: -29px;
+}
+.previcad-copyright-sec {
+  color: white;
+  font-size: 12px;
+}
+.previcad-copyright-sec ul li{
+  list-style: none;
+}
+.nav-item.text-nowrap{
+  display: flex;
+  margin-top: 2px;
+
+  padding: 0 20px;
+}
+.top-right-nav{
+
+  margin-right: 32px;
+}
+.top-right-nav a{ 
+  display: inline-block;
+  color: #0835B0;
+}
+
+.nav-bottom{
+  position: absolute; 
+  bottom:0;
+  width: 100%;
+  padding: 0 10px;
+}
+.main-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 85%;
+}
+.main-container-wrapper{
+  background-color: #0835B0;
+  height: 100vh;
+}
+.main-container{
+  width: 740px;
+}
+.main-heading{
+  text-align: left;
+}
+.main-heading h1{
+  font-family: HKGrotesk-Bold;
+  color: #fff;
+  font-size: 45px;
+}
+.main-subheading{
+  display: flex;
+  align-items: start;
+}
+.main-subheading p {
+  color: #fff;
+}
+.main-subheading img{
+  margin-right: 10px;
+}
+.previcad-main-cards h4{
+  color: #fff;
+  font-family: HKGrotesk-Bold;
+  text-align: center;
+}
+.previcad-main-cards p{
+  color: #fff;
+  font-family: IBMPlexSans-Regular;
+  text-align: center;
+}
+.card-enter-arrow {
+  font-family: IBMPlexSans-Regular;
+  text-align: right;
+  font-size: 16px;
+  color: #329FFD;
+  line-height: 1;
+  padding: 8px 12px;
+  font-weight: 600;
+}
+.card-enter-arrow img{
+  width: 18px;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.previcad-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+}
+.company-tagline-wrapper{
+  display: block;
+  width: 100%;
+  margin:auto;
+  text-align: center;
+  padding: 10px;
+}
+.company-tagline-wrapper img{
+  width: 30px;
+  margin-right: 8px;
+  display: inline;
+}
+.company-tagline-wrapper p{
+  display: inline;
+}
+.copyright-text{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 41px;
+  color: #8B8B8B;
+  font-size: 13px;
+}

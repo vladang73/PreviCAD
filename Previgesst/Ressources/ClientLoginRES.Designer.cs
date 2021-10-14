@@ -61,7 +61,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Identificateur CIE.
+        ///   Looks up a localized string similar to Nom de l&apos;enterprise.
         /// </summary>
         public static string IdentificateurCIE {
             get {
@@ -79,7 +79,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nom d&apos;usager.
+        ///   Looks up a localized string similar to Nom d&apos;utilisateur.
         /// </summary>
         public static string NomUsager {
             get {
@@ -97,11 +97,20 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accès de l&apos;administrateur à l&apos;intranet de PRÉVICAD.
+        ///   Looks up a localized string similar to Plateforme des administrateurs.
         /// </summary>
         public static string Titre {
             get {
                 return ResourceManager.GetString("Titre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plateforme corporative.
+        /// </summary>
+        public static string TitreCorporate {
+            get {
+                return ResourceManager.GetString("TitreCorporate", resourceCulture);
             }
         }
     }

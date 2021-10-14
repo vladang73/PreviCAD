@@ -185,5 +185,14 @@ namespace Previgesst.Ressources.Previcad {
                 return ResourceManager.GetString("Termines", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plateforme des employés.
+        /// </summary>
+        public static string Titre {
+            get {
+                return ResourceManager.GetString("Titre", resourceCulture);
+            }
+        }
     }
 }

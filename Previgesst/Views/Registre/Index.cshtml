@@ -2,95 +2,200 @@
 @using Previgesst.Ressources.Previcad
 @model LoginCadenassageViewModel
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    ViewBag.Title = "Applications Prévigesst";
+    //Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    Layout = null;
 }
-@if (Model.MaintenancePrevue == true)
-{
-    <div>
-        <div class="nextUpdateApp">
-            <div class="nextUpdateApp-content">
-                <h4><img src="/Images/update.png" alt="mise à jour à venir"> @ParametresAppRES.NextUpdateLabel</h4>
-                <p>
-                    @if (Model.Langue == "fr")
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/content/v2/fonts.css" />
+    <link rel="stylesheet" href="/content/v2/bootstrap/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/content/v2/login.css" type="text/css" />
+</head>
+
+
+<body>
+    <div class="login-wrapper">
+        <div class="login-image">
+            <img src="/content/v2/images/bg-image.png" alt="...">
+        </div>
+
+        <div class="row m-0 login-content">
+            <div class="col-lg-4 col-md-6 col-sm-12 login-form-wrapper p-0">
+                <div class="previcad-login-form">
+                    @using (Html.BeginForm("Index", "Registre", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
-                        <span>@Model.NextUpdateTextFr</span>
+                        @Html.HiddenFor(m => m.Identificateur)
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.NoEmploye, new { @class = "form-label previcad-form-label" })
+
+                            @Html.TextBoxFor(m => m.NoEmploye, new { @class = "form-control previcad-form-control" })
+                            @Html.ValidationMessageFor(m => m.NoEmploye, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Password, new { @class = "form-label previcad-form-label" })
+
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control previcad-form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="mb-3">
+                            @Html.ValidationMessageFor(m => m.Identificateur, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="login-form-footer">
+                            <div class="login-btn-wrapper">
+                                <button type="submit" class="btn btn-primary previcad-login-btn">@PrevIndexRES.SeConnecter</button>
+                            </div>
+                            <div class="forgot-pass">
+                                <span>Mot de passe oublié?</span>
+                            </div>
+                        </div>
+
+                        <br />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     }
-                    else
-                    {
-                        <span>@Model.NextUpdateTextEn</span>
-                    }
-                </p>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-12 p-0">
+                <div class="previcad-platform-section">
+                    <div class="login-heading">
+                        <h2><span>La</span><span style="color:#329FFD"> prévention</span> <span><br>en application.</span></h2>
+                    </div>
+                    <div class="login-side-content">
+                        <div class="previcad-administrators">
+                            <h4>@PrevIndexRES.Titre</h4>
+                        </div>
+                        <div class="row m-0  previcad-platform-section-footer">
+                            <div class="col-md-8 previcad-copyright-sec p-0">
+                                <ul class="p-0 m-0">
+                                    <li>Version 2.0</li>
+                                    <li>Copyright @DateTime.Now.Year Prévigesst</li>
+                                    <li>Tour drroit réservés</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="/content/v2/images/Groupe.png" class="logo">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
-}
+
+    @Scripts.Render("~/bundles/globalize")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="/Scripts/v2/bootstrap.min.js"></script>
+</body>
+</html>
 
 
-<div class="container loginPage">
-
-    <div class="row">
-
-        <div class="col-md-9" style="float:initial;margin:0 auto;">
-
-            <div class="panel panel-danger">
-
-                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">@PrevIndexRES.Acces</div>
-                <div class="panel-body">
 
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <section id="loginForm">
-                                @using (Html.BeginForm("Index", "Registre", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                {
-                                    //@Html.AntiForgeryToken()
+@*
 
-                                    <hr />
-                                    @Html.HiddenFor(m => m.Identificateur)
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @if (Model.MaintenancePrevue == true)
+    {
+        <div>
+            <div class="nextUpdateApp">
+                <div class="nextUpdateApp-content">
+                    <h4><img src="/Images/update.png" alt="mise à jour à venir"> @ParametresAppRES.NextUpdateLabel</h4>
+                    <p>
+                        @if (Model.Langue == "fr")
+                        {
+                            <span>@Model.NextUpdateTextFr</span>
+                        }
+                        else
+                        {
+                            <span>@Model.NextUpdateTextEn</span>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
 
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.NoEmploye, new { @class = "col-md-4 control-label" })
-                                        <div class="col-md-8">
-                                            @Html.TextBoxFor(m => m.NoEmploye, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(m => m.NoEmploye, "", new { @class = "text-danger" })
+
+    <div class="container loginPage">
+
+        <div class="row">
+
+            <div class="col-md-9" style="float:initial;margin:0 auto;">
+
+                <div class="panel panel-danger">
+
+                    <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">@PrevIndexRES.Acces</div>
+                    <div class="panel-body">
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <section id="loginForm">
+                                    @using (Html.BeginForm("Index", "Registre", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                    {
+                                        //@Html.AntiForgeryToken()
+
+                                        <hr />
+                                        @Html.HiddenFor(m => m.Identificateur)
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.NoEmploye, new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-8">
+                                                @Html.TextBoxFor(m => m.NoEmploye, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.NoEmploye, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
-                                    </div>
 
 
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
-                                        <div class="col-md-8">
-                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+                                            <div class="col-md-8">
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
-                                    </div>
 
 
 
-                                    <div class="form-group">
+                                        <div class="form-group">
 
-                                        <div class="col col-md-12">
+                                            <div class="col col-md-12">
 
-                                            @Html.ValidationMessageFor(m => m.Identificateur, "", new { @class = "text-danger" })
+                                                @Html.ValidationMessageFor(m => m.Identificateur, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
-                                        <div class="col col-md-12">
-                                            <input type="submit" value="@PrevIndexRES.SeConnecter" class="btn btn-primary" />
+                                        <div class="form-group">
+                                            <div class="col col-md-12">
+                                                <input type="submit" value="@PrevIndexRES.SeConnecter" class="btn btn-primary" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <br />
+                                        <br />
 
-                                }
-                            </section>
+                                    }
+                                </section>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+*@

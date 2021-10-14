@@ -55,18 +55,14 @@ namespace Previgesst.Controllers
                 vm.Langue = langue;
 
 
-                return View("Index", Layout, vm);
+                return View("Index", null, vm);
             }
             else
             {
                 utilisateurService.LogOff();
                 vm.MaintenancePrevue = false;
-                return View("Index", Layout, vm);
+                return View("Index", null, vm);
             }
-
-            //return View("Index", Layout, vm);
-            //return View();
-
         }
 
         [HttpPost]

@@ -159,4 +159,7 @@
   <data name="Termines" xml:space="preserve">
     <value>Terminés</value>
   </data>
+  <data name="Titre" xml:space="preserve">
+    <value>Plateforme des employés</value>
+  </data>
 </root>
