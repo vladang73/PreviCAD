@@ -4,7 +4,7 @@
 
 .login-image {
 	padding: 0 !important;
-	height: 50%;
+	height: 60%;
 }
 
 	.login-image img {
@@ -14,16 +14,16 @@
 	}
 
 .login-content {
-	height: 50%;
+	height: 40%;
 }
 
-.login-top-max .login-image {
+/*.login-top-max .login-image {
 	height: 60%;
 }
 
 .login-top-max .login-content {
 	height: 40%;
-}
+}*/
 
 .login-top-max .previcad-platform-section {
 	padding: 30px 140px;
