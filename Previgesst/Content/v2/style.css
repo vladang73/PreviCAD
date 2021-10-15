@@ -1,0 +1,18 @@
+﻿
+.card-wrapper-link{
+    cursor: pointer;
+}
+
+.link-no-style {
+    text-decoration: none; 
+    color: #FFF;
+}
+
+    .link-no-style:hover {
+        text-decoration: none;
+        color: #FFF;
+    }
+
+.validation-summary-errors ul li {
+    list-style-type: none;
+}

@@ -17,6 +17,14 @@
 	height: 40%;
 }
 
+.login-top-half .login-image {
+	height: 50%;
+}
+
+.login-top-half .login-content {
+	height: 50%;
+}
+
 /*.login-top-max .login-image {
 	height: 60%;
 }
@@ -191,3 +199,9 @@
 	.previcad-login-form-dark .previcad-form-label-dark {
 		color: #fff;
 	}*/
+
+
+
+.validation-summary-errors ul li {
+	list-style-type: none;
+}

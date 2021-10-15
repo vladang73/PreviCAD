@@ -46,10 +46,11 @@
                             <div class="forgot-pass">
                                 <span>Mot de passe oublié?</span>
                             </div>
+                            <br />
+                            <br />
+                            <br />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger d-block" })
                         </div>
-
-                        <br />
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     }
                 </div>
             </div>

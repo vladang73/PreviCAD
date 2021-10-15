@@ -2,202 +2,186 @@
 @model  ClientAccessVM
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    Layout = "~/Views/Shared/_LayoutClient_v2.cshtml";
 
 }
 
-<div class="container">
 
-    <div class="row">
-
-        <div class="col-md-12">
-
-            <div class="container-fluid">
-                <hr />
-                @Html.Raw(File.ReadAllText(Server.MapPath("~/Notification/Notifier.html")))
-
-                <div class="row">
-
-                    @if (Model.AccessDocuments)
-                    {
-                        <div class="col-md-4">
-                            <a href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/SCDocuments/Index" target="_blank" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    @*   <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Documents</div>*@
-                                    <div class="panel-body"><img src="~/Images/Images2019/documents.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-                    }
-                    else
-
-                    {
-                        <div class="col-md-4">
-                            <a href="#" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Documents</div>*@
-                                    <div class="panel-body"><img src="~/Images/Images2019/documents_grisé.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-                    }
-
-
-                    <div class="col-md-4">
-                        @if (Model.AccessCadenassage)
-                        {
-                            <a href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/MesApplications/GetClientCadenassage" target="_blank" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-
-
-                                    @*<div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Cadenassage</div>*@
-                                    <div class="panel-body">
-
-                                        <img src="~/Images/Images2019/Previcad.jpg" class="img-responsive center-block" />
-
-                                    </div>
-                                </div>
-                            </a>
-                        }
-                        else
-                        {
-                            <a href="#" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-
-
-                                    @*<div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Cadenassage</div>*@
-                                    <div class="panel-body">
-
-                                        <img src="~/Images/Images2019/Previcad_grisé.jpg" class="img-responsive center-block" />
-
-                                    </div>
-                                </div>
-                            </a>
-                        }
-
-
+<main class="main-container-wrapper">
+    <div class="main-container container">
+        <div class="main-heading ">
+            <h1> Bienvenue, <span style="color:#329FFD;">Prénom<br /> de l'administrateur</span></h1>
+        </div>
+        <div class="main-subheading">
+            <img src="/content/v2/images/i-icon.png">
+            <p> Espace pour message personnalisé à vos clients - Vide s’il y a rien. Lorem ipsum dolor sit amet,consectetur adipiscing elit. </p>
+        </div>
+        <div class="row previcad-main-cards">
+            <div class="col-md-5 card">
+                <div class="card-wrapper card-wrapper-link" onclick='window.location="@string.Format("/{0}/MesApplications/GetClientCadenassage", Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)"'>
+                    <img class="card-top-img" src="/content/v2/images/1.png" alt="badge">
+                    <div class="previcad-card-icons">
+                        <img src="/content/v2/images/icn1.png" class="icn" alt="badge">
                     </div>
-                    @if (Model.AccessAnalyse)
-                    {
-                        <div class="col-md-4">
-                            <a href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/MesApplications/GetClientAnalyse" target="_blank" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Analyses de risques</div>*@
-                                    <div class="panel-body"><img src="~/Images/Images2019/Analyse-risque.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="col-md-4">
-                            <a href="#" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">Analyses de risques</div>*@
-                                    <div class="panel-body"><img src="~/Images/Images2019/Analyse-risque_grisé.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-                    }
-
-
+                    <h4>Cadenassage</h4>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="card-enter-arrow">Enter <img src="/content/v2/images/arw.svg"></div>
                 </div>
+            </div>
 
-                @*<div class="row">
+            <div class="col-md-5 card ml-5">
+                <div class="card-wrapper card-wrapper-link" onclick='window.location = "@string.Format("/{0}/MesApplications/GetClientAnalyse", Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)"'>
+                    <img class="card-top-img" src="/content/v2/images/2.png" alt="badge">
+                    <div class="previcad-card-icons">
+                        <img src="/content/v2/images/icn2.png" class="icn" alt="badge">
+                    </div>
+                    <h4>
+                        Analyse de risque
+                        en sécurité
+                    </h4>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
 
-                    <div class="col-md-4">
-                        <a href="#" style="text-decoration:none;">
-                            <div class="panel panel-danger">
-                                <div class="panel-body"><img src="~/Images/Images2019/Simdut_grisé.jpg" class="img-responsive center-block" /></div>
+        <div class="row autries-action-wrapper">
+            <div class="col col-md-11">
+                <div class="autries-actions horizontal-oriented-actions">
+                    <div class="autries-title">Autries Actions</div>
+                    <ul>
+                        <li>
+                            <div class="autries-actions-icon">
+                                <img src="/content/v2/images/gest.svg">
                             </div>
-                        </a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a href="#" style="text-decoration:none;">
-                            <div class="panel panel-danger">
-                                <div class="panel-body"><img src="~/Images/Images2019/Formation_gris.jpg" class="img-responsive center-block" /></div>
+                            <div class="autries-actions-title">
+                                <a class="link-no-style" target="_blank" href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/Client/Details?id=@ViewBag.idClient">
+                                    Gestion des administration
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                </div>*@
+                        </li>
 
-
-                @if (Model.AccessUtilisateurs)
-                {
-
-                    <hr />
-                    <div class="row">
-
-
-
-
-                        <div class="col-md-2">
-                            <a target="_blank" href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/Client/Details?id=@ViewBag.idClient" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    @* <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;background-color: #0c5c82;color:white;">Utilisateurs</div>*@
-                                    <div class="panel-body"><img src="~/Images/Images2019/Utilisateurs.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-
-
-                    </div>
-                }
-
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-@**@
+</main>
 
 
 
-@*<div class="row">
-
-                    <div class="col-md-12">
-                        <div class="panel panel panel-danger">
-                            <div class="panel-heading">Quelques liens d'intérêt</div>
-                            <div class="panel-body">
 
 
-                                <div class="col-md-3" style="width:155px;">
-                                    <a href="/fr/entreprise.html">Entreprise</a><br />
-                                    <a href="/fr/comparez-votre-taux-de-cotisation.html">Taux de cotisation</a><br />
-                                    <a href="/fr/temoignages.html">Témoignages </a><br />
-                                    <a href="/fr/contactez-nous.html" style="display:block; float:left;">Contactez-nous</a>
-                                </div>
-                                <div class="col-md-3" style="width:245px;">
-                                    <a href="/fr/mutuelle/performance.html" style="line-height:20px;">Mutuelle</a><br />
-                                    <a href="/fr/mutuelle/performance.html" class="suite" style="line-height:20px;">Performance</a><br />
-                                    <a href="/fr/mutuelle/tarification.html" class="suite" style="line-height:20px;">Tarification</a><br />
-                                    <a href="/fr/mutuelle/philosophie.html" class="suite" style="line-height:20px;">Philosophie</a><br />
-                                    <a href="/fr/mutuelle/services-adaptes-et-avantages.html" class="suite" style="line-height:20px;">Services adaptés</a>
-                                </div>
-                                <div class="col-md-3" style="width:150px;">
-                                    <a href="/fr/financement.html">Financement</a><br />
-                                    <a href="/fr/formation-sst.html">Formation SST</a><br />
-                                    <a href="/fr/prevention.html">Prévention</a><br />
-                                    <a href="/fr/reclamation.html">Réclamation</a>
-                                </div>
-                                <div class="col-md-3" style="width:200px;">
-                                    <a href="/fr/demande-de-renseignements.html">Demande d'information</a><br />
-                                    <a href="/fr/nouvelles.html?view=nouvelles">Nouvelles</a><br />
-                                    <a href="/fr/emplois.html">Emplois</a><br />
-                                    <a href="/fr/extranet-connexion.html">Extranet</a>
-                                </div>
-                                <div class="col-md-3" style="width:140px;">
-                                    <a href="/fr/confidentialite.html">Confidentialité</a><br />
-                                    <a href="/fr/conditions-dutilisation.html">Conditions</a><br />
-                                    <a href="/fr/plan-du-site.html">Plan du site</a>
-                                </div>
+@*
+    <div class="container">
 
+        <div class="row">
 
+            <div class="col-md-12">
+
+                <div class="container-fluid">
+                    <hr />
+                    @Html.Raw(File.ReadAllText(Server.MapPath("~/Notification/Notifier.html")))
+
+                    <div class="row">
+
+                        @if (Model.AccessDocuments)
+                        {
+                            <div class="col-md-4">
+                                <a href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/SCDocuments/Index" target="_blank" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body"><img src="~/Images/Images2019/documents.jpg" class="img-responsive center-block" /></div>
+                                    </div>
+                                </a>
                             </div>
+                        }
+                        else
+
+                        {
+                            <div class="col-md-4">
+                                <a href="#" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body"><img src="~/Images/Images2019/documents_grisé.jpg" class="img-responsive center-block" /></div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+
+
+                        <div class="col-md-4">
+                            @if (Model.AccessCadenassage)
+                            {
+                                <a href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/MesApplications/GetClientCadenassage" target="_blank" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body">
+
+                                            <img src="~/Images/Images2019/Previcad.jpg" class="img-responsive center-block" />
+
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body">
+                                            <img src="~/Images/Images2019/Previcad_grisé.jpg" class="img-responsive center-block" />
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+
+
                         </div>
+                        @if (Model.AccessAnalyse)
+                        {
+                            <div class="col-md-4">
+                                <a href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/MesApplications/GetClientAnalyse" target="_blank" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body"><img src="~/Images/Images2019/Analyse-risque.jpg" class="img-responsive center-block" /></div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-4">
+                                <a href="#" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body"><img src="~/Images/Images2019/Analyse-risque_grisé.jpg" class="img-responsive center-block" /></div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+
+
                     </div>
+
+
+                    @if (Model.AccessUtilisateurs)
+                    {
+
+                        <hr />
+                        <div class="row">
+
+
+
+
+                            <div class="col-md-2">
+                                <a target="_blank" href="~/@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/Client/Details?id=@ViewBag.idClient" style="text-decoration:none;">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body"><img src="~/Images/Images2019/Utilisateurs.jpg" class="img-responsive center-block" /></div>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
-    </div>*@
+    </div>
+
+*@
