@@ -212,7 +212,14 @@ namespace Previgesst.Controllers
 
                 ViewBag.EquipmentID = id;
                 ViewBag.EquipmentName = currentEMP.Langue.ToLower() == "en" ? equip.NomEquipementEN : equip.NomEquipement;
-                return View(currentEMP);
+
+                var model = new EmployeRegistreMobileViewModel
+                {
+                    Employe = currentEMP,
+                    Data = ficheCadenassageService.GetReadCadenasForRegistre(currentEMP.ClientId, id).ToList()
+                };
+
+                return View(model);
             }
 
             return RedirectToAction("Index", new { @ClientID = "" });
@@ -226,7 +233,9 @@ namespace Previgesst.Controllers
             if (client != loginInfo.ClientId)
                 return Json("");
             else
+            {
                 return Json(ficheCadenassageService.GetReadCadenasForRegistre(request, client, equipment), JsonRequestBehavior.AllowGet);
+            }
 
         }
 

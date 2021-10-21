@@ -1078,6 +1078,7 @@
     <Compile Include="ViewModels\Cadenassage\DepartementViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\EditCadenassageViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\EditFicheViewModel.cs" />
+    <Compile Include="ViewModels\Cadenassage\EmployeRegistreMobileViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\EquipementArticuloViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\EquipementQRViewModel.cs" />
     <Compile Include="ViewModels\Cadenassage\LigneCadenassageGridViewModel.cs" />
@@ -1546,6 +1547,9 @@
     <Content Include="Content\v2\images\icn1.png" />
     <Content Include="Content\v2\images\icn2.png" />
     <Content Include="Content\v2\images\icon-home.png" />
+    <Content Include="Content\v2\images\icons-delete.svg" />
+    <Content Include="Content\v2\images\icons-menu.svg" />
+    <Content Include="Content\v2\images\logo-white.png" />
     <Content Include="Content\v2\images\logo.png" />
     <Content Include="Content\v2\images\bg-image.png" />
     <Content Include="Content\v2\images\bg-image1.png" />
@@ -1569,6 +1573,8 @@
     <Content Include="Content\v2\images\search.svg" />
     <Content Include="Content\v2\images\setting-icon.png" />
     <Content Include="Content\v2\images\tick.svg" />
+    <Content Include="Content\v2\mobile\index.css" />
+    <Content Include="Content\v2\mobile\login.css" />
     <Content Include="Content\v2\style.css" />
     <Content Include="Scripts\v2\bootstrap.bundle.min.js" />
     <Content Include="Scripts\v2\bootstrap.min.js" />

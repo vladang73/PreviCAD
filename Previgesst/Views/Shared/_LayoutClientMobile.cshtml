@@ -5,15 +5,136 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    @*<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />*@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
     <title>Prévigesst - @ViewBag.Title</title>
-    @Styles.Render("~/Content/mobile/css")
-    @*@Scripts.Render("~/bundles/modernizr")*@
 
+    <link href="/Content/v2/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/v2/mobile/index.css" rel="stylesheet" />
+    <link href="/Content/v2/fonts.css" rel="stylesheet" />
+
+
+    @*@Styles.Render("~/Content/mobile/css")*@
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/mobile/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body class="light-blue-theme">
+    <!-- Following classes for light and dark theme
+    1) light-theme
+    2) dark-theme
+    -->
+
+    <nav class="navbar navbar-light fixed-top navbar-bg flex-md-nowrap">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 white-logo" href="/RegistreMobile"><img src="/content/v2/images/logo-white.png"></a>
+        <button class="navbar-toggler" type="button">
+            <img class="my-1 mx-2 close" src="/content/v2/images/icons-delete.svg">
+
+            <img class="navbar-toggler-icon" src="/content/v2/images/icons-menu.svg">
+        </button>
+    </nav>
+
+
+
+    <!-- Sidebar -->
+    <sidebar class="collapse navbar-collapse" id="navbarText">
+        <div class="sidebar">
+            <div class="left-sidebar">
+                <ul class="nav flex-column sidebar-nav ">
+                    <li class="nav-item text-center">
+                        <a class="nav-link home-navlink active" href="#">
+                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Procédres de contrôle</p>
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link home-navlink" href="#">
+                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Cadenassage en cours</p>
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link home-navlink" href="#">
+                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Cadenassage terminés</p>
+                        </a>
+                    </li>
+                    <li class="nav-item text-center">
+                        <a class="nav-link home-navlink" href="#">
+                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Programme de cadenassage</p>
+                        </a>
+                    </li>
+                </ul>
+                <div class="nav-bottom">
+                    <ul class="nav-bottom-wrapper">
+                        <li class="nav-item text-center nav-bottom-submenu">
+                            <a class="nav-link setting-navlink" href="#">
+                                <img src="/content/v2/images/setting-icon.png">
+                                <span class="nav-title">Paramétres</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-chevron-right navbar-bottom-icon" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </a>
+                            <ul class="submenu">
+                                <li><a class="submenu-dropdown-item" href="#">Utilisateurs</a></li>
+                                <li><a class="submenu-dropdown-item" href="#">Mon compte</a></li>
+                                <li><a class="submenu-dropdown-item" href="#">Centre de support</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item text-center mt-2">
+
+                            @{
+                                using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    string path = Request.Url.PathAndQuery;
+
+                                    path = path.Replace("/en/", "");
+                                    path = path.Replace("/fr/", "");
+                                    if (path.Length == 0)
+                                    {
+                                        path = "ClientLogin/Index";
+                                    }
+                                    if (path.Substring(0, 1) == "/")
+                                    {
+                                        path = path.Substring(1);
+                                    }
+                                    //utilisé pour prévicad client
+                                    if (Session["ClientID"] != null && !path.Contains("?"))
+                                    {
+                                        path = path + "?ClientID=" + Session["ClientID"];
+                                    }
+
+
+                                    
+                                    <a class="nav-link  power-navlink active tex" href="javascript:document.getElementById('logoutForm').submit()">
+                                        <img src="/content/v2/images/power-icon.png">
+                                        <span class="nav-title">@LayoutRES.SeDeconnecter</span>
+                                    </a>
+                                }
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="nav-footer">
+                <div class="nav-footer-logo">
+                    <img src="/content/v2/images/brand-logo.png">
+                </div>
+                <div class="nav-footer-content">
+                    <span class="app-prevention" style="color:#0835B0">La prevention en application.</span>
+                    <p><span style="color:#329FFD">Plateforme des employés </span>Version 2.0 <br /> Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés.</p>
+
+                </div>
+            </div>
+        </div>
+
+    </sidebar>
+
+
+
+    @RenderBody()
+
+
+    @*
+
     <header class="white-light-bg py-3">
         <div class="container">
             <div class="row">
@@ -81,33 +202,6 @@
     <div class="container-fluid body-content">
         <main>
             @RenderBody()
-
-
-            @*<section>
-                <div class="container white-light-bg rounded-2 mt-3 mt-md-5">
-                    <div class="text-center p-3 p-md-4">
-                        <div class="row mt-4">
-                            <div class="col-12 col-md-6 col-lg-3 text-center">
-                                <img src="/content/mobile/images/image-4.png" alt="previcad" />
-                                <a href="###" class="text-uppercase d-block fw-bold mt-4 text-decoration-none">@PrevIndexRES.Programme</a>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3 text-center">
-                                <img src="/content/mobile/images/image-5.png" alt="previcad" />
-                                <a href="###" class="text-uppercase d-block fw-bold mt-4 text-decoration-none">@PrevIndexRES.EnCours</a>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3 text-center">
-                                <img src="/content/mobile/images/image-6.png" alt="previcad" />
-                                <a href="###" class="text-uppercase d-block fw-bold mt-4 text-decoration-none">@PrevIndexRES.Termines</a>
-                            </div>
-                            <div class="col-12 col-md-6 col-lg-3 text-center">
-                                <i class="ri-settings-4-fill fs-2"></i>
-                                <a target="_blank" href="https://previgesst.com/centre-de-support/" class="text-uppercase d-block fw-bold mt-2 pt-1 text-decoration-none">@PrevIndexRES.CentreSupport</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>*@
-
         </main>
 
         <footer class="footer mt-auto py-3">
@@ -116,7 +210,30 @@
         </footer>
     </div>
 
+    *@
 
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.nav-bottom-submenu .nav-link').click(function () {
+                $(this).parents('.nav-bottom-submenu').toggleClass('active');
+            })
+            $('.navbar-toggler').click(function () {
+                if ($(this).parents('.navbar').hasClass('show')) {
+                    $(this).parents('.navbar').addClass('light-theme');
+                    $(this).parents('.navbar').removeClass('dark-theme');
+
+                } else {
+                    $(this).parents('.navbar').removeClass('light-theme');
+                    $(this).parents('.navbar').addClass('dark-theme');
+                }
+                $(this).parents('.navbar').toggleClass('show');
+                $('#navbarText').slideToggle();
+                $('#navbarText').toggleClass('show');
+            });
+        });
+
+    </script>
 </body>
 </html>
