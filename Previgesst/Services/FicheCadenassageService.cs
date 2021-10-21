@@ -946,6 +946,11 @@ namespace Previgesst.Services
 
         internal DataSourceResult GetReadCadenasForRegistre(DataSourceRequest request, int clientId, int equipementId)
         {
+            return GetReadCadenasForRegistre(clientId, equipementId).ToDataSourceResult(request);
+        }
+
+        internal IQueryable<LigneRegistreViewModel> GetReadCadenasForRegistre(int clientId, int equipementId)
+        {
             //Boolean droitSuppressionClient = false;
             Boolean droitSuppressionPrevi = false;
             var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
@@ -970,7 +975,7 @@ namespace Previgesst.Services
                             TexteMateriel = x.MaterielsRequisCadenassage.Select(z => langue == "fr" ? z.Materiel.Description + " (" + z.Quantite.ToString() + ")" : z.Materiel.DescriptionEN + " (" + z.Quantite.ToString() + ")").ToList(),
                             EquipementId = x.EquipementId
 
-                        }).ToDataSourceResult(request);
+                        });
 
             return result;
         }

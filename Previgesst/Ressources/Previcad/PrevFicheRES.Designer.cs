@@ -232,7 +232,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to #.
+        ///   Looks up a localized string similar to # Fiche.
         /// </summary>
         public static string NoFiche {
             get {
@@ -385,7 +385,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to À effectuer.
+        ///   Looks up a localized string similar to Travail à effectuer.
         /// </summary>
         public static string Travaux {
             get {

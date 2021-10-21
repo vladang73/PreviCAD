@@ -8,7 +8,28 @@
 }
 
 
-<section>
+<main class="main-container-wrapper">
+    <div class="main-container-content">
+        <div class="main-section-tile">
+            <img src="/content/v2/images/scanner.svg">
+            <h2>@PrevFicheRES.ScanQREquip</h2>
+        </div>
+        <div class="text-danger d-block" id="divError"></div>
+        <div class="main-section-content">
+            <div class="scanner-card">
+                @*<div id="scanner-bar"></div>*@
+                <div id="qr-reader" style="/*width:300px*/"></div>
+                <div id="qr-reader-results"></div>
+
+                <a href="" id="linkQRDownload" style="visibility: hidden; width:0px; height:0px;"></a>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+@*<section>
     <div class="container white-light-bg rounded-2 mt-3 mt-md-5">
         <div class="text-center p-3 p-md-5">
             <h3 class="fw-bold heading-color">@PrevFicheRES.ScanQREquip</h3>
@@ -25,7 +46,7 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@
 
 
 
@@ -42,6 +63,9 @@
             InitScan();
         });
 
+        //$(window).on('resize', function (e) {
+        //    InitScan();
+        //});
 
         function onScanSuccess(decodedText, decodedResult) {
             ++countResults;
@@ -90,6 +114,11 @@
         //});
 
         function GetFicheDetails(id) {
+            if (id == undefined) {
+                $('#divError').text('@Html.Raw(PrevIndexRES.ErreurConnection)');
+                return;
+            }
+
             $.ajax({
                 url: "@Url.Action("GetFicheDetails", "RegistreMobile")/" + id,
                 type: 'POST',

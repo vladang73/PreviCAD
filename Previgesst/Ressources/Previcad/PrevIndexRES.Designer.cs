@@ -106,7 +106,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Procédures de contrôle des sources d&apos;énergie.
+        ///   Looks up a localized string similar to Procédures de contrôle des source d’énergie.
         /// </summary>
         public static string Fiches {
             get {

@@ -175,7 +175,7 @@
     <value>Modifier</value>
   </data>
   <data name="NoFiche" xml:space="preserve">
-    <value>#</value>
+    <value># Fiche</value>
   </data>
   <data name="Non" xml:space="preserve">
     <value>Non</value>
@@ -226,7 +226,7 @@
     <value>Telecharger</value>
   </data>
   <data name="Travaux" xml:space="preserve">
-    <value>À effectuer</value>
+    <value>Travail à effectuer</value>
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
