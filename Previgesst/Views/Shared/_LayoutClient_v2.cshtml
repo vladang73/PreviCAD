@@ -37,7 +37,29 @@
         @Scripts.Render("~/bundles/site")
     *@
 
+    @{ 
+        string path = Request.Url.PathAndQuery;
+        string selectedLang = string.Empty;
 
+        if (path.Contains("/en/")) { selectedLang = "en"; }
+        else if (path.Contains("/fr/")) { selectedLang = "fr"; }
+
+        path = path.Replace("/en/", "");
+        path = path.Replace("/fr/", "");
+        if (path.Length == 0)
+        {
+            path = "ClientLogin/Index";
+        }
+        if (path.Substring(0, 1) == "/")
+        {
+            path = path.Substring(1);
+        }
+        //utilisé pour prévicad client
+        if (Session["ClientID"] != null && !path.Contains("?"))
+        {
+            path = path + "?ClientID=" + Session["ClientID"];
+        }
+    }
 </head>
 <body>
 
@@ -48,8 +70,8 @@
                 <div class="top-right-nav"> <a class="nav-link" href="#">Plateforme des administrateurs</a></div>
                 <div class="lang-dropdown header-dropdown edit-profile-select ">
                     <select name="name_privacy" id="slct">
-                        <option>Fr</option>
-                        <option>En</option>
+                        <option value="/fr/@path" @if (selectedLang == "fr") { <text>selected="selected"</text> } >Fr</option>
+                        <option value="/en/@path" @if (selectedLang == "en") { <text>selected="selected"</text> } >En</option>
                     </select>
                 </div>
             </li>
@@ -116,5 +138,10 @@
     <script src="~/Scripts/v2/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/v2/feather.min.js"></script>
     <script src="~/Scripts/v2/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('#slct').change(function () {
+            location.href = $(this).val();
+        });
+    </script>
 </body>
 </html>

@@ -132,4 +132,7 @@
   <data name="Tel" xml:space="preserve">
     <value>Tél.</value>
   </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bienvenue</value>
+  </data>
 </root>

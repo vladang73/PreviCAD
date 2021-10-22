@@ -104,5 +104,14 @@ namespace Previgesst.Ressources {
                 return ResourceManager.GetString("Tel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bienvenue.
+        /// </summary>
+        public static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
     }
 }

@@ -1,16 +1,31 @@
-﻿@using System.Threading
+﻿@using Previgesst.Ressources
+@using System.Threading
+
 @model  ClientAccessVM
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutClient_v2.cshtml";
 
+    string nomUtilisateur = "Prénom<br /> de l'administrateur";
+}
+
+@if (Request.IsAuthenticated)
+{
+    Previgesst.Sessions.sessionInfo session = (Previgesst.Sessions.sessionInfo)Session["utilisateur"];
+    nomUtilisateur = session?.Nom;
+
+    if (HttpContext.Current.Session["EmployeCadenassage"] != null)
+    {
+        EmployeRegistreViewModel employe = (EmployeRegistreViewModel)HttpContext.Current.Session["EmployeCadenassage"];
+        nomUtilisateur = employe.Nom;
+    }
 }
 
 
 <main class="main-container-wrapper">
     <div class="main-container container">
         <div class="main-heading ">
-            <h1> Bienvenue, <span style="color:#329FFD;">Prénom<br /> de l'administrateur</span></h1>
+            <h1> @LayoutRES.Welcome, <span style="color:#329FFD;">@Html.Raw(nomUtilisateur)</span></h1>
         </div>
         <div class="main-subheading">
             <img src="/content/v2/images/i-icon.png">
