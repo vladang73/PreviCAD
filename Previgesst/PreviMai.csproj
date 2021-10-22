@@ -1554,9 +1554,6 @@
     <Content Include="Content\v2\images\bg-image.png" />
     <Content Include="Content\v2\images\bg-image1.png" />
     <Content Include="Content\v2\images\bg-image2.png" />
-    <Content Include="Content\v2\images\MicrosoftTeams-image.png" />
-    <Content Include="Content\v2\images\MicrosoftTeams-image1.png" />
-    <Content Include="Content\v2\images\MicrosoftTeams-image2.png" />
     <Content Include="Content\v2\images\Path 179%402x.png" />
     <Content Include="Content\v2\images\Path 179.png" />
     <Content Include="Content\v2\images\plus-icon.svg" />
