@@ -33,7 +33,7 @@
         <div class="row m-0 login-content">
             <div class="col-lg-4 col-md-6 col-sm-12 login-form-wrapper p-0">
                 <div class="previcad-login-form">
-                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("Login", "Corporate", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         <div class="mb-3">
                             @Html.LabelFor(m => m.UserName, new { @class = "form-label previcad-form-label" })
@@ -60,6 +60,8 @@
                             </div>
                         </div>
 
+                        <br />
+                        <br />
                         <br />
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     }

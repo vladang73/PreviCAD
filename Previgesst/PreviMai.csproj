@@ -1516,6 +1516,7 @@
     <Content Include="Content\v2\images\brand-logo.png" />
     <Content Include="Content\v2\images\bread-arrow.svg" />
     <Content Include="Content\v2\images\burger-icon.svg" />
+    <Content Include="Content\v2\images\Clients.svg" />
     <Content Include="Content\v2\images\cross.svg" />
     <Content Include="Content\v2\images\delete.svg" />
     <Content Include="Content\v2\images\departments.svg" />
@@ -1554,6 +1555,8 @@
     <Content Include="Content\v2\images\bg-image.png" />
     <Content Include="Content\v2\images\bg-image1.png" />
     <Content Include="Content\v2\images\bg-image2.png" />
+    <Content Include="Content\v2\images\menu-down.svg" />
+    <Content Include="Content\v2\images\Messages.svg" />
     <Content Include="Content\v2\images\Path 179%402x.png" />
     <Content Include="Content\v2\images\Path 179.png" />
     <Content Include="Content\v2\images\plus-icon.svg" />
@@ -1570,6 +1573,7 @@
     <Content Include="Content\v2\images\search.svg" />
     <Content Include="Content\v2\images\setting-icon.png" />
     <Content Include="Content\v2\images\tick.svg" />
+    <Content Include="Content\v2\images\Tracage-de-bogues.svg" />
     <Content Include="Content\v2\mobile\index.css" />
     <Content Include="Content\v2\mobile\login.css" />
     <Content Include="Content\v2\style.css" />
@@ -2312,6 +2316,7 @@
     <Content Include="Views\Shared\_LayoutClientMobile.cshtml" />
     <Content Include="Views\RegistreMobile\Fiches.cshtml" />
     <Content Include="Views\Shared\_LayoutClient_v2.cshtml" />
+    <Content Include="Views\Shared\_Layout_v2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />

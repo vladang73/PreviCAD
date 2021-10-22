@@ -1,0 +1,346 @@
+﻿@using Previgesst.Ressources
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications Prévigesst</title>
+
+    <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
+
+    <link rel="stylesheet" href="/content/v2/bootstrap/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/content/v2/fonts.css" />
+    <link rel="stylesheet" href="/content/v2/index.css" type="text/css" />
+    <link rel="stylesheet" href="/Content/v2/style.css" />
+
+
+    <script type="text/javascript">
+        var CONFIGPATH = '@Url.Content("~/Scripts/cldr/")'
+    </script>
+
+
+    @Scripts.Render("~/bundles/cldr")
+    @Scripts.Render("~/bundles/globalize")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/site")
+
+
+    @{
+        string path = Request.Url.PathAndQuery;
+        string selectedLang = string.Empty;
+        string plateformMessage = "des administrateurs";
+
+        if (path.Contains("/en/")) { selectedLang = "en"; }
+        else if (path.Contains("/fr/")) { selectedLang = "fr"; }
+
+        path = path.Replace("/en/", "");
+        path = path.Replace("/fr/", "");
+        if (path.Length == 0)
+        {
+            path = "ClientLogin/Index";
+        }
+        if (path.Substring(0, 1) == "/")
+        {
+            path = path.Substring(1);
+        }
+        //utilisé pour prévicad client
+        if (Session["ClientID"] != null && !path.Contains("?"))
+        {
+            path = path + "?ClientID=" + Session["ClientID"];
+        }
+
+        bool IsCorporate = false;
+        bool.TryParse(Convert.ToString(HttpContext.Current.Session["IsCorporate"]), out IsCorporate);
+
+        if (IsCorporate)
+        {
+            plateformMessage = "corporative";
+        }
+    }
+
+</head>
+<body>
+    <nav class="navbar navbar-light fixed-top navbar-bg flex-md-nowrap shadow light-theme p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 dark-logo" href='@Url.Action("Index", "AdminPrevi")'><img src="/content/v2/images/logo.png"></a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 white-logo" href="#"><img src="/content/v2/images/logo-white.png"></a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <div class="top-right-nav"> <a class="nav-link" href="#">Plateforme @plateformMessage</a></div>
+                <div class="lang-dropdown header-dropdown edit-profile-select ">
+                    <select name="name_privacy" id="slct">
+                        <option value="/fr/@path" @if (selectedLang == "fr") { <text> selected="selected" </text> }>Fr</option>
+                        <option value="/en/@path" @if (selectedLang == "en") { <text> selected="selected" </text> }>En</option>
+                    </select>
+                </div>
+            </li>
+        </ul>
+
+        <button class="navbar-toggler" type="button">
+            <span class="my-1 mx-2 close">X</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+
+    <!-- Sidebar -->
+    <sidebar>
+        <div class="bg-light d-none d-md-block sidebar">
+            <div class="left-sidebar">
+                <ul class="nav flex-column sidebar-nav ">
+                    <li class="nav-item text-center mt-2">
+                        <a class="nav-link home-navlink active" href='@Url.Action("Index", "AdminPrevi")'>
+                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                        </a>
+                    </li>
+                </ul>
+                <div class="nav-bottom">
+
+                    <ul class="nav-bottom-wrapper">
+                        <li class="nav-item text-center mt-2 nav-bottom-submenu">
+                            <a class="nav-link setting-navlink" href="#">
+                                <img src="/content/v2/images/setting-icon.png">
+                                <span class="nav-title">Paramétres</span>
+                            </a>
+                            <ul class="submenu">
+                                @if (User.IsInRole("Administrateur") && HttpContext.Current.Session["IsCorporate"] != null)
+                                {
+                                    if (!IsCorporate)
+                                    {
+                                        <li><a class="submenu-dropdown-item" href="~/Manage/Index">Utilisateurs</a></li>
+                                    }
+                                }
+
+                                <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
+                                <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">Centre de support</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item text-center mt-2">
+                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <a class="nav-link power-navlink active tex" href="javascript:document.getElementById('logoutForm').submit()">
+                                    <img src="/content/v2/images/power-icon.png">
+                                    <span class="nav-title">Déonnexion</span>
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </sidebar>
+
+
+    @RenderBody()
+
+
+
+    <footer class="previcad-footer">
+        <div class="company-tagline-wrapper">
+            <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
+        </div>
+        <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>
+    </footer>
+
+
+    @* Popup générique pour la suppression *@
+    <div id="delete-generic-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="delete-generic-title">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="delete-generic-title">@GridRES.Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        @GridRES.DeleteMessage
+                        <span class="text-danger">'<span class="element-to-delete"></span>'</span>?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-danger" value="@GridRES.Oui" onclick="deleteGenericResult(true)" data-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasSupprimer" onclick="deleteGenericResult(false)" data-dismiss="modal" />
+                    <input type="hidden" class="delete-generic-result" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Popup générique pour dupliquer *@
+    <div id="duplicate-generic-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="duplicate-generic-title">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="duplicate-generic-title">@GridRES.Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        @GridRES.DuplicateMessage
+                        <span class="text-danger">'<span class="element-to-duplicate"></span>'</span>?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-success" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" />
+                    <input type="hidden" class="duplicate-generic-result" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="infoTemplate" type="text/x-kendo-template">
+        <div class="alert alert-info">
+            <h3>
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="warningTemplate" type="text/x-kendo-template">
+        <div class="alert alert-warning">
+            <h3>
+                <span class="glyphicon glyphicon-warning-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="errorTemplate" type="text/x-kendo-template">
+        <div class="alert alert-danger">
+            <h3>
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="centeredErrorTemplate" type="text/x-kendo-template">
+        <div class="alert alert-danger">
+            <h3>
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+
+    <script id="errorListTemplate" type="text/x-kendo-template">
+        <div class="alert alert-danger">
+            <h3>
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                #= title #
+            </h3>
+            <ul>#= message #</ul>
+        </div>
+    </script>
+
+    <script id="successTemplate" type="text/x-kendo-template">
+        <div class="alert alert-success">
+            <h3>
+                <span class="glyphicon glyphicon-ok-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script type="text/x-kendo-template" id="gridValidationMessageTemplate">
+        # if (field) { #
+        <li>
+            #=field#
+            <ul>
+                # } #
+                # for (var i = 0; i < messages.length; ++i) { #
+                <li>#= messages[i] #</li>
+                # } #
+                # if (field) { #
+            </ul>
+        </li>
+        # } #
+    </script>
+
+
+
+    @(Html.Kendo().Notification()
+                .Name("notification")
+                .Position(p => p.Pinned(true).Top(75).Left(30))
+                .Stacking(NotificationStackingSettings.Down)
+                .AutoHideAfter(15 * 1000)
+                .HideOnClick(true)
+                .Button(false)
+                .Templates(t =>
+                {
+                    t.Add().Type("infoTemplate").ClientTemplateID("infoTemplate");
+                    t.Add().Type("errorTemplate").ClientTemplateID("errorTemplate");
+                    t.Add().Type("warningTemplate").ClientTemplateID("warningTemplate");
+                    t.Add().Type("successTemplate").ClientTemplateID("successTemplate");
+
+                })
+    )
+
+    @if (ViewBag.NotiticationTemplate != null && ViewBag.NotificationTitle != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                ShowNotification("@ViewBag.NotificationTitle",
+                ShowNotification("@ViewBag.NotificationTitle",
+                                 "@ViewBag.NotificationMessage",
+                                 "@ViewBag.NotiticationTemplate");
+            });
+        </script>
+    }
+
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/v2/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/v2/feather.min.js"></script>
+    <script src="~/Scripts/v2/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.nav-bottom-submenu .nav-link').click(function () {
+                $(this).parents('.nav-bottom-submenu').toggleClass('active');
+            })
+            $('.navbar-toggler').click(function () {
+                if ($(this).parents('.navbar').hasClass('show')) {
+                    $(this).parents('.navbar').addClass('light-theme');
+                    $(this).parents('.navbar').removeClass('dark-theme');
+
+                } else {
+                    $(this).parents('.navbar').removeClass('light-theme');
+                    $(this).parents('.navbar').addClass('dark-theme');
+                }
+                $(this).parents('.navbar').toggleClass('show');
+                $('#navbarText').slideToggle();
+                $('#navbarText').toggleClass('show');
+            });
+        });
+
+        $('#slct').change(function () {
+            location.href = $(this).val();
+        });
+   
+
+        $(document).ready(function () {
+            kendo.culture("fr-CA");
+        });
+    </script>
+
+</body>
+</html>

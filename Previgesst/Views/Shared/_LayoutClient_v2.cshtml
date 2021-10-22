@@ -37,7 +37,7 @@
         @Scripts.Render("~/bundles/site")
     *@
 
-    @{ 
+    @{
         string path = Request.Url.PathAndQuery;
         string selectedLang = string.Empty;
 
@@ -63,19 +63,26 @@
 </head>
 <body>
 
-    <nav class="navbar fixed-top navbar-bg flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href='@Url.Action("Index", "MesApplications")'><img src="/content/v2/images/logo.png"></a>
+    @*<nav class="navbar fixed-top navbar-bg flex-md-nowrap p-0 shadow">*@
+    <nav class="navbar navbar-light fixed-top navbar-bg flex-md-nowrap shadow light-theme p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 dark-logo" href='@Url.Action("Index", "MesApplications")'><img src="/content/v2/images/logo.png"></a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0 white-logo" href="#"><img src="/content/v2/images/logo-white.png"></a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <div class="top-right-nav"> <a class="nav-link" href="#">Plateforme des administrateurs</a></div>
                 <div class="lang-dropdown header-dropdown edit-profile-select ">
                     <select name="name_privacy" id="slct">
-                        <option value="/fr/@path" @if (selectedLang == "fr") { <text>selected="selected"</text> } >Fr</option>
-                        <option value="/en/@path" @if (selectedLang == "en") { <text>selected="selected"</text> } >En</option>
+                        <option value="/fr/@path" @if (selectedLang == "fr") { <text> selected="selected" </text> }>Fr</option>
+                        <option value="/en/@path" @if (selectedLang == "en") { <text> selected="selected" </text> }>En</option>
                     </select>
                 </div>
             </li>
         </ul>
+
+        <button class="navbar-toggler" type="button">
+            <span class="my-1 mx-2 close">X</span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </nav>
 
     <!-- Sidebar -->
@@ -90,19 +97,25 @@
                     </li>
                 </ul>
                 <div class="nav-bottom">
-                    <ul class="nav flex-column sidebar-nav">
-                        <li class="nav-item text-center mt-2">
-                            <a class="nav-link setting-navlink active" href="#">
+
+                    <ul class="nav-bottom-wrapper">
+                        <li class="nav-item text-center mt-2 nav-bottom-submenu">
+                            <a class="nav-link setting-navlink" href="#">
                                 <img src="/content/v2/images/setting-icon.png">
+                                <span class="nav-title">Paramétres</span>
                             </a>
+                            <ul class="submenu">
+                                <li><a class="submenu-dropdown-item" href="#">Utilisateurs</a></li>
+                                <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
+                                <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">Centre de support</a></li>
+                            </ul>
                         </li>
-                    </ul>
-                    <ul class="nav flex-column text-center sidebar-nav">
-                        <li class="nav-item text-center mt-2 mb-3">
+                        <li class="nav-item text-center mt-2">
                             @using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
                             {
-                            <a class="nav-link  power-navlink active tex" href="javascript:document.getElementById('logoutForm').submit()">
+                            <a class="nav-link power-navlink active tex" href="javascript:document.getElementById('logoutForm').submit()">
                                 <img src="/content/v2/images/power-icon.png">
+                                <span class="nav-title">Déonnexion</span>
                             </a>
                             }
                         </li>
@@ -123,22 +136,32 @@
     </footer>
 
 
-    @*<header>
-                @Html.Partial("_NavigationClient")
-            </header>
-
-        <div id="body">
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-    *@
 
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/v2/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/v2/feather.min.js"></script>
     <script src="~/Scripts/v2/bootstrap.min.js"></script>
+
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('.nav-bottom-submenu .nav-link').click(function () {
+                $(this).parents('.nav-bottom-submenu').toggleClass('active');
+            })
+            $('.navbar-toggler').click(function () {
+                if ($(this).parents('.navbar').hasClass('show')) {
+                    $(this).parents('.navbar').addClass('light-theme');
+                    $(this).parents('.navbar').removeClass('dark-theme');
+
+                } else {
+                    $(this).parents('.navbar').removeClass('light-theme');
+                    $(this).parents('.navbar').addClass('dark-theme');
+                }
+                $(this).parents('.navbar').toggleClass('show');
+                $('#navbarText').slideToggle();
+                $('#navbarText').toggleClass('show');
+            });
+        });
+
         $('#slct').change(function () {
             location.href = $(this).val();
         });

@@ -177,6 +177,8 @@ namespace Previgesst.Controllers
         public ActionResult MyAccount()
         {
             var vm = ManageService.GetMyAccountVM();
+                
+            this.Layout = this.Layout.Replace(".cshtml", "_v2.cshtml");
             return View("MyAccount", Layout, vm);
         }
 

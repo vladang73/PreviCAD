@@ -16,3 +16,34 @@
 .validation-summary-errors ul li {
     list-style-type: none;
 }
+
+.previcad-form-label {
+    color: #0835B0;
+    font-size: 18px;
+    font-family: HKGrotesk-SemiBold;
+}
+
+
+.previcad-form-label-white {
+    color: #fff;
+    font-family: HKGrotesk-SemiBold;
+}
+
+
+.main-container-wrapper .main-container-content {
+    background-color: #ebe9e8;
+    padding: 11px 25px;
+    height: calc(100vh - 85px);
+    border-radius: 25px;
+    overflow: auto;
+}
+
+.main-container-wrapper {
+    /*margin-top: 60px;*/
+    padding: 5px 18px;
+}
+
+
+    .main-container-wrapper-grid {
+        margin-top: 60px;
+    }
