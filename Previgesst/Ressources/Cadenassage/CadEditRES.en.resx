@@ -147,6 +147,12 @@
   <data name="LienUtilisateur" xml:space="preserve">
     <value>User hyperlink</value>
   </data>
+  <data name="MenuDepartment" xml:space="preserve">
+    <value>Departements</value>
+  </data>
+  <data name="MenuEquipment" xml:space="preserve">
+    <value>Equipments</value>
+  </data>
   <data name="NotificationDebutCad" xml:space="preserve">
     <value>Lockout start notifications</value>
   </data>
@@ -158,6 +164,12 @@
   </data>
   <data name="Registre" xml:space="preserve">
     <value>Intervention Register</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search by card #</value>
+  </data>
+  <data name="SearchReset" xml:space="preserve">
+    <value>Reset</value>
   </data>
   <data name="TitreSectionCadenassage" xml:space="preserve">
     <value>Previcad - Lockout Management</value>

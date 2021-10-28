@@ -127,10 +127,10 @@
     <value>Erreur</value>
   </data>
   <data name="NomEN" xml:space="preserve">
-    <value>Nom du département (EN)</value>
+    <value>Département (EN)</value>
   </data>
   <data name="NomFR" xml:space="preserve">
-    <value>Nom du département (FR)</value>
+    <value>Département (FR)</value>
   </data>
   <data name="Vide" xml:space="preserve">
     <value> </value>

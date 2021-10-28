@@ -4,16 +4,25 @@
 
 
 
-<div class="panel panel-danger">
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@CadEditRES.Programme</h3>
+    </div>
+    <div class="page-table-meta">
+        <div class="add-icon">
+            <a id="btnAddDoc">
+                <img src="/content/v2/images/plus-icon.svg" />
+            </a>
+        </div>
+    </div>
+</div>
 
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-    <div class="panel-body">
 
-        <div id="Documents" class="tab-pane">
+<div id="Documents">
 
-            @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
-            @(Html.Kendo().Grid<DocumentClientViewModel>()
+    @(Html.Kendo().Grid<DocumentClientViewModel>()
                 .Name("liste-doc")
                 .Columns(columns =>
                 {
@@ -21,36 +30,45 @@
                     columns.Bound(e => e.DocumentClientId).Hidden();
                     columns.Bound(c => c.ApplicationPreviId).Hidden();
                     columns.Bound(c => c.ClientId).Hidden();
+
                     columns.Bound(c => c.Titre).Filterable(f => f.Extra(false).Operators(operators => operators
-        .ForString(str => str.Clear()
-                  .Contains(GridRES.Contains)
+                        .ForString(str => str.Clear()
+                        .Contains(GridRES.Contains)
                         .StartsWith(GridRES.StartsWith)
                         .IsEqualTo(GridRES.Egale)
                         .IsNotEqualTo(GridRES.NotEquals)
-           ))).Hidden();
+                    )))
+                    .Hidden();
 
 
                     columns.Bound(c => c.Titre).Width(320)
                          .Filterable(f => f.Extra(false).Operators(operators => operators
-                      .ForString(str => str.Clear()
-                               .Contains(GridRES.Contains)
-                        .StartsWith(GridRES.StartsWith)
-                        .IsEqualTo(GridRES.Egale)
-                        .IsNotEqualTo(GridRES.NotEquals)
-                         )));
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                    )))
+                    .HtmlAttributes(new { @class = "td-round-left-border" })
+                    ;
 
                     columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false).Width(500);
 
-                    columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='#=BasePath#' class='FicheClientDownload' style='float:right'><img style='width:40px;' src='/Images/dl.png' title='"+ CadProgRES.Telecharger +"'></a>").Title("").Filterable(false).Sortable(false).Width(100);
+                    columns.Bound(e => e.Bidon).EditorTemplateName("Vide")
+                           //.ClientTemplate("<a href='#=BasePath#' class='FicheClientDownload' style='float:right'><img style='width:40px;' src='/Images/dl.png' title='"+ CadProgRES.Telecharger +"'></a>")
+                           .ClientTemplate("<a href='#=BasePath#' class='FicheClientDownload'><img src='/content/v2/images/fr-icon.svg' title='" + CadProgRES.Telecharger + "'></a>")
+                           .Title("").Filterable(false).Sortable(false).Width(100);
+
                     columns.Command(c =>
                     {
-                        c.Edit();
-                        c.Custom(CadProgRES.Effacer)
+                        c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                        c.Custom(CadProgRES.Vide)
                               .Click("ConfirmDeleteRow")
-                              .HtmlAttributes(new { @class = "k-grid-effacer kendoDanger" });
+                              .Text("")
+                              .HtmlAttributes(new { @class = "k-grid-effacer kendoDanger btn-del" });
 
                     })
-                       .Width(50).Hidden(!Model.estUpdate);
+                    .Width(120).Hidden(!Model.estUpdate);
 
                 })
 
@@ -59,15 +77,11 @@
                 .Filterable()
                 .DataSource(ds => ds
                     .Ajax()
-                    //.Sort( x=> x.Add (c => c.DisplaySection))
-                    //.Sort(x => x.Add(c => c.Ordre))
-                    //.Group(g => g.Add(c => c.DisplaySection))
                     .PageSize(20)
                     .Model(m =>
                     {
                         m.Id(e => e.DocumentClientId);
                         m.Field(e => e.Bidon).Editable(true);
-
                     })
 
                 .Read(r => r.Action("ReadListDocClientCadenassage", "Documents", new { id = Model.ClientId }))
@@ -76,16 +90,12 @@
                 .Destroy(u => u.Action("DeleteDocumentClient", "Documents"))
 
 
-                .Events(e => e
-                    .Error("docListeErreur")
-                )
+                .Events(e => e.Error("docListeErreur"))
             )
 
-            .Events(e => e
-                .DataBound("docListeDataBound")
-
-            ).Editable(e => e.DisplayDeleteConfirmation(false)).
-            Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentClientEditor").Window(w => w.Title(CadProgRES.MiseAJour).Width(600).Name("editWindow")))
+            .Events(e => e.DataBound("docListeDataBound"))
+            .Editable(e => e.DisplayDeleteConfirmation(false))
+            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentClientEditor").Window(w => w.Title(CadProgRES.MiseAJour).Width(600).Name("editWindow")))
 
            @*.ToolBar(tb =>
                 {
@@ -94,20 +104,16 @@
 
             .ToolBar(t =>
             {
-                t.Create();
+                t.Create().HtmlAttributes(new { @class = "d-none"});
             })
             )
 
 
-        </div>
-    </div>
 </div>
 
 <script>
 
     $('#DocCli').click(function () {
-
-        
         $("#liste-doc").find("a.k-grid-add" ).removeClass("k-button  k-button-icontext");
         $("#liste-doc").find("a.k-grid-add").addClass("btn btn-success btn-docClient");
         $("#liste-doc").find("span.k-add").removeClass("k-icon");
@@ -116,10 +122,8 @@
          var estUpdate = '@Model.estUpdate';
         if (estUpdate == 'False') {
             $("#liste-doc").find("a.btn-docClient").hide();
-
-  
-
         }
+
         $("a.btn-docClient").text("@CadProgRES.Ajouter");
 
         // ADD ICONE "+"
@@ -128,135 +132,104 @@
     });
 
 
-    
-            function ConfirmDeleteRow(e) {
 
+    function ConfirmDeleteRow(e) {
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.FileName, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+    function docListeErreur(args) {
+        var selecteurGrid = "#liste-doc";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
                 e.preventDefault();
 
-                var grid = this;
-                var row = $(e.currentTarget).closest("tr");
-                var dataItem = this.dataItem(row);
-
-                ShowDeleteConfirm(dataItem.FileName, function (args) {
-                    if (args.confirmed === true) {
-                        grid.removeRow(row);
-                    }
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("@CadProgRES.Erreur",
+                        errorList,
+                        "errorListTemplate");
                 });
-                //debugger;
+            });
+        }
+    }
+
+    function docListeDataBound(e) {
+    }
+
+
+    function fileSelect(e) {
+
+        var extension = e.files[0].extension.toLowerCase().trim();
+        var size = e.files[0].size;
+        var estClient = '@Model.estClient';
+
+        if (extension != ".xlsx" && extension != ".docx" && extension != ".pdf" && extension != ".xls" && extension != ".doc") {
+            e.preventDefault();
+
+            ShowNotification("@CadProgRES.AttentionEntete", "@CadProgRES.AttentionType", "errorTemplate")
+        }
+        else {
+            if (estClient == 'True' && size > 3 * 1024 * 1024) {
+                e.preventDefault();
+
+                ShowNotification("@CadProgRES.AttentionEntete", "@CadProgRES.AttentionTaille", "errorTemplate")
             }
+        }
+    }
 
+    function fileSuccess(e) {
+        var z = $('.k-popup-edit-form');
 
-            function docListeErreur(args) {
-                //debugger;
-                var selecteurGrid = "#liste-doc";
-                if (args.errors) {
-                    var grid = $(selecteurGrid).data("kendoGrid");
-                    var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
-                    grid.one("dataBinding", function (e) {
-                        e.preventDefault();
+        var gview = $("#liste-doc").data("kendoGrid");
 
-                        $.each(args.errors, function (propertyName) {
-                            var errorList = validationTemplate({ field: propertyName, messages: this.errors });
-                            alert(this.errors);
-                            ShowNotification("@CadProgRES.Erreur",
-                                errorList,
-                               "errorListTemplate");
-                        });
-                    });
-                }
+        var row = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
 
+        var item = gview.dataItem(row);
 
+        item.set('Titre', e.response.Titre);
 
-            }
+        item.set('DocumentClientId', e.response.DocumentClientId);
 
-            function docListeDataBound(e)
-            {
-            }
+        item.set('FileName', e.response.NomFichier);
+        item.set('BasePath', e.response.BasePath);
 
-</script>
-
-<script>
-
-
-            function fileSelect(e) {
-
-                var extension = e.files[0].extension.toLowerCase().trim();
-                var size = e.files[0].size;
-                var estClient = '@Model.estClient';
-
-                if (extension != ".xlsx" && extension != ".docx" && extension != ".pdf" && extension != ".xls" && extension != ".doc") {
-                    e.preventDefault();
-
-                    ShowNotification("@CadProgRES.AttentionEntete", "@CadProgRES.AttentionType", "errorTemplate")
-                }
-                else {
-                    if (estClient == 'True' && size > 3 * 1024 * 1024) {
-                        e.preventDefault();
-
-                        ShowNotification("@CadProgRES.AttentionEntete", "@CadProgRES.AttentionTaille", "errorTemplate")
-                    }
-                }
-            }
-
-            function fileSuccess(e) {
-
-
-                //debugger;
-                var z = $('.k-popup-edit-form');
-
-                var gview = $("#liste-doc").data("kendoGrid");
-
-
-                var row = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
-
-
-                var item = gview.dataItem(row);
-
-            //    dataItem.FileName = e.response.FileName;
-             //   if (e.response.Section.trim() != "")
-
-                {
-
-                    item.set('Titre', e.response.Titre);
-                  
-                    item.set('DocumentClientId', e.response.DocumentClientId);
-                 
-                    item.set('FileName', e.response.NomFichier);
-                    item.set('BasePath', e.response.BasePath);
-
-                }
-
-            }
+    }
 
 
 
-            function fileUpload(e) {
-                //   alert (this.dataItem)
+    function fileUpload(e) {
+        //   alert (this.dataItem)
 
-                var z = $('.k-popup-edit-form');
+        var z = $('.k-popup-edit-form');
 
-                var gview = $("#liste-doc").data("kendoGrid");
+        var gview = $("#liste-doc").data("kendoGrid");
 
+        var item = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
 
-                var item = $("#liste-doc").find("[data-uid='" + z.attr('data-uid') + "']");
+        var selectedItem = gview.dataItem(item);
 
+        selectedItem.dirty = true;
 
-
-                var selectedItem = gview.dataItem(item);
-
-
-
-                selectedItem.dirty = true;
+        e.data = { DocumentClientId: selectedItem.DocumentClientId, ClientId:@Model.ClientId, Titre: selectedItem.Titre };
+    }
 
 
-                e.data = { DocumentClientId: selectedItem.DocumentClientId, ClientId:@Model.ClientId, Titre: selectedItem.Titre };
-
-            }
-
-
-
-    
-   
-
+    $('#btnAddDoc').click(function () {
+        $("#Documents").find("a.k-grid-add").click();
+    });
 
 </script>

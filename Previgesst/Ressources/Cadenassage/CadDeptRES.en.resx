@@ -127,10 +127,10 @@
     <value>Error</value>
   </data>
   <data name="NomEN" xml:space="preserve">
-    <value>Department name (EN)</value>
+    <value>Department (EN)</value>
   </data>
   <data name="NomFR" xml:space="preserve">
-    <value>Department name (FR)</value>
+    <value>Department (FR)</value>
   </data>
   <data name="Vide" xml:space="preserve">
     <value> </value>

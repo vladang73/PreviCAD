@@ -124,13 +124,13 @@
     <value>Auditeur</value>
   </data>
   <data name="BonDeTravail" xml:space="preserve">
-    <value>#BT</value>
+    <value># BT</value>
   </data>
   <data name="Debut" xml:space="preserve">
     <value>Début</value>
   </data>
   <data name="Departement" xml:space="preserve">
-    <value>Dépt.</value>
+    <value>Département</value>
   </data>
   <data name="Details" xml:space="preserve">
     <value>Détails</value>
@@ -139,7 +139,7 @@
     <value>Employé</value>
   </data>
   <data name="Equipement" xml:space="preserve">
-    <value>Équip.</value>
+    <value>Équipement</value>
   </data>
   <data name="Fiche" xml:space="preserve">
     <value>#</value>

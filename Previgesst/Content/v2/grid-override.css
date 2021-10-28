@@ -1,0 +1,65 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.k-filter {
+    background-position: 0px -288px;
+}
+
+.k-header>.k-grid-filter {
+	float: left;
+	padding: 3px 0.2em 0.4em;
+}
+
+.k-grid-header th.k-with-icon .k-link {
+    margin-right: 0px;
+}
+
+.k-grid-header th.k-header>.k-link {
+    margin: -.5em -.6em -.4em 10px;
+	    font-size: 13px;
+	color: var(--linkcolor);
+	font-weight: 600;
+}
+.k-gantt-toolbar .k-state-default, .k-grid .k-grouping-header, .k-grid-header, .k-grid-header-wrap, .k-grouping-header .k-group-indicator, .k-header, .k-pager-wrap, .k-pager-wrap .k-link, .k-pager-wrap .k-textbox, .k-widget{
+	border-color: transparent !important;
+	background-color: transparent !important;
+}
+.k-alt {
+    background-color: transparent;
+}
+.k-grid tr td {
+    border: none;
+	padding: 20px 0.6em;
+;
+}
+.k-grid tbody tr {
+        background: #fff;
+}
+.k-grid tbody tr:hover {
+        background: #F0F0F0;
+	border: 1px solid var(--white);
+}
+.k-grid tbody tr td:first-child {
+    border-radius: 50px 0px 0px 0px !important;
+}
+.k-pager-wrap{
+	background-color: #fff !important;
+	border-top: 1px solid var(--brandlightblue) !important;
+}
+.k-i-arrow-e {
+    border: 2px solid var(--branddarkblue);
+    border-radius: 5px;
+}
+.k-i-arrow-w{
+	border: 2px solid var(--branddarkblue);
+    border-radius: 5px;
+}
+.k-i-seek-w{
+	border: 2px solid var(--branddarkblue);
+    border-radius: 5px;
+}
+.k-i-seek-e{
+	border: 2px solid var(--branddarkblue);
+    border-radius: 5px;
+}

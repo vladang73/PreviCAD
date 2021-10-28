@@ -3,25 +3,28 @@
 @model Previgesst.ViewModels.EditCadenassageViewModel
 
 
-<div class="panel panel-danger">
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@CadEditRES.Departements</h3>
+    </div>
+    <div class="page-table-meta">
+        <div class="add-icon">
+            <a id="btnAddDep">
+                <img src="/content/v2/images/plus-icon.svg" />
+            </a>
+        </div>
+    </div>
+</div>
 
-    @*<div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#E39901;color:white">Équipements </div>
-        <div class="panel-body">*@
 
+@Html.AntiForgeryToken()
 
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-
-    <div class="panel-body">
-
-        
-        @Html.AntiForgeryToken()
-
-        @(Html.Kendo().Grid<DepartementViewModel>()
+@(Html.Kendo().Grid<DepartementViewModel>()
             .Name("listDEPT")
             .Columns(columns =>
             {
                 columns.Bound(e => e.DepartementId).Hidden();
+
                 columns.Bound(c => c.NomDepartement)//.EditorTemplateName("MyView")
                 .Filterable(f => f.Extra(false).Operators(operators => operators
                 .ForString(str => str.Clear()
@@ -30,27 +33,27 @@
                 .IsEqualTo(GridRES.Egale)
                 .IsNotEqualTo(GridRES.NotEquals)
             )));
-            columns.Bound(c => c.NomDepartementEN)//.EditorTemplateName("MyView")
-            .Filterable(f => f.Extra(false).Operators(operators => operators
-                .ForString(str => str.Clear()
-                .Contains(GridRES.Contains)
-                .StartsWith(GridRES.StartsWith)
-                .IsEqualTo(GridRES.Egale)
-                .IsNotEqualTo(GridRES.NotEquals)
-            )));
-            columns.Command(c =>
+                columns.Bound(c => c.NomDepartementEN)//.EditorTemplateName("MyView")
+                .Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                )));
+                columns.Command(c =>
                 {
-                    c.Edit();
+                    c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
                     c.Custom(CadDeptRES.Vide)
                     .Click("ConfirmDeleteRowDEPT")
-                    .HtmlAttributes(new { @class = "k-grid-effacer" });
+                    .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
                 }
-            ).Width(250);
+                ).Width(200);
             })
             .Sortable(s => s.AllowUnsort(false))
             .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
             .Filterable()
-            //.AutoBind(false)
+
             .DataSource(ds => ds
                 .Ajax()
                 .PageSize(10).Sort(x => x.Add(c => c.NomDepartement)
@@ -79,11 +82,9 @@
             )
             .ToolBar(t =>
             {
-                t.Create();
+                t.Create().HtmlAttributes(new { @class = "d-none"});
             })
         )
-    </div>
-</div>
 
 
 <script type="text/javascript">
@@ -97,7 +98,7 @@
         $("#listDEPT").find("span.k-add").removeClass("k-icon");
         $("#listDEPT").find("a.btn-test").text("@CadDeptRES.Ajouter");
 
-        
+
         // ADD ICONE "+"
         setTimeout(function(){ $("#listDEPT").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
     });
@@ -156,18 +157,21 @@
 
 
 
-        //Selects all delete buttons
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-                $(this).remove();
-            }
-        })
+        //        $(this).remove();
+        //    }
+        //})
     }
 
 
+    $('#btnAddDep').click(function () {
+        $("#Departements").find("a.k-grid-add").click();
+    });
 
 </script>

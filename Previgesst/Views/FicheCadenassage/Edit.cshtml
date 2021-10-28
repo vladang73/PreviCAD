@@ -3,32 +3,154 @@
 
 @{
     ViewBag.Title = "Edit";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
-    if (ViewData["Layout"] != null)
-    {
-        Layout = (string)ViewData["Layout"];
-    }
+    Layout = "~/Views/Shared/_Layout_v2.cshtml";
+
+    //if (ViewData["Layout"] != null)
+    //{
+    //    Layout = (string)ViewData["Layout"];
+    //}
+}
+
+
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+    <link href="~/Content/v2/buttons.css" rel="stylesheet" />
+}
+
+
+@section sidebar{
+
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "MesApplications")'>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+
+        <li class="nav-item text-center active">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#Fiches" id="Fich">
+                <img src="/content/v2/images/Procédures.svg">
+                <p class="nav-link-text">@CadEditRES.FichesCadenassage</p>
+            </a>
+        </li>
+        <li class="nav nav-item text-center">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#Equipements" id="Equip">
+                <img src="/content/v2/images/equiment.svg"><p class="nav-link-text">@CadEditRES.MenuEquipment</p>
+            </a>
+        </li>
+        <li class="nav-item text-center">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#Departements" id="Dep">
+                <img src="/content/v2/images/departments.svg"><p class="nav-link-text">@CadEditRES.MenuDepartment</p>
+            </a>
+        </li>
+        <li class="nav-item text-center">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#EmployesCadenassage" id="Emp">
+                <img src="/content/v2/images/gest.svg"><p class="nav-link-text">@CadEditRES.Employes</p>
+            </a>
+        </li>
+        <li class="nav-item text-center">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#RegistreCadenassage" id="Registre">
+                <img src="/content/v2/images/registre.svg"><p class="nav-link-text">@CadEditRES.Registre</p>
+            </a>
+        </li>
+        <li class="nav-item text-center">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#DocClients" id="DocCli">
+                <img src="/content/v2/images/attach.svg"><p class="nav-link-text">@CadEditRES.Programme</p>
+            </a>
+        </li>
+
+    </ul>
 }
 
 
 
-<div class="container-fluid">
-    <div class="cadenassageContent cadenassageAdmin row">
-        <div class="cadenassageContent--header col col-sm-12 col-md-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><h1>@CadEditRES.TitreSectionCadenassage</h1></li>
-                </ol>
-            </nav>
-            <hr />
-        </div>
-        <ul class="nav nav-tabs col-md-1" role="tablist">
-            <li role="presentation" class="active">
-                <a id="Fich" href="#Fiches" aria-controls="general" role="tab" data-toggle="tab"><img src="~/Images/fiche-de-cadenassage.png" class="menu-icon icon-noactive" title="@CadEditRES.FichesCadenassage" /><img src="~/Images/fiche-de-cadenassage-previ.png" class="menu-icon icon-active" title="@CadEditRES.FichesCadenassage" /><!--@CadEditRES.FichesCadenassage--></a>
-            </li>
 
-            @if (Model.estUpdate)
-            {
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@Url.Action("Index", "MesApplications")'>Accueil</a></li>
+            <li class="active">@CadEditRES.TitreSectionCadenassage</li>
+        </ul>
+    </div>
+
+    <div class="main-page-content">
+
+
+
+                <div class="tab-content">
+
+                    <div id="Fiches" class="tab-pane active">
+                        @Html.Partial("Fiches", @Model)
+                    </div>
+
+                    <div id="Equipements" class="tab-pane">
+                        @Html.Partial("Equipements", @Model)
+                    </div>
+
+                    <div id="Departements" class="tab-pane">
+
+                        @Html.Partial("Departements", @Model)
+                    </div>
+
+                    <div id="EmployesCadenassage" class="tab-pane">
+
+                        @Html.Partial("EmployesCadenassage", @Model)
+                    </div>
+                    
+                    <div id="RegistreCadenassage" class="tab-pane">
+                        @Html.Partial("Registre", @Model)
+                    </div>
+
+                    <div id="DocClients" class="tab-pane">
+                        @Html.Partial("DocClients", @Model)
+                    </div>
+
+
+
+
+                    @*<div id="Previcad" class="tab-pane">
+                        @Html.Partial("Previcad", @Model)
+                    </div>               
+
+                    <div id="CadParamAdmin" class="tab-pane">
+                        @Html.Partial("CadParamAdmin", @Model)
+                    </div>*@
+
+                </div>
+
+
+    </div>
+
+</main>
+
+
+@*
+
+    <div class="container-fluid">
+        <div class="cadenassageContent cadenassageAdmin row">
+            <div class="cadenassageContent--header col col-sm-12 col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page"><h1>@CadEditRES.TitreSectionCadenassage</h1></li>
+                    </ol>
+                </nav>
+                <hr />
+            </div>
+            <ul class="nav nav-tabs col-md-1" role="tablist">
+                <li role="presentation" class="active">
+                    <a id="Fich" href="#Fiches" aria-controls="general" role="tab" data-toggle="tab"><img src="~/Images/fiche-de-cadenassage.png" class="menu-icon icon-noactive" title="@CadEditRES.FichesCadenassage" /><img src="~/Images/fiche-de-cadenassage-previ.png" class="menu-icon icon-active" title="@CadEditRES.FichesCadenassage" /><!--@CadEditRES.FichesCadenassage--></a>
+                </li>
+
+
+
+                @if (Model.estUpdate)
+                {
                 <li role="presentation">
                     <a id="Equip" href="#Equipements" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/equipements.png" class="menu-icon icon-noactive" title="@CadEditRES.Equipements" /><img src="/Images/equipements-previ.png" class="menu-icon icon-active" title="@CadEditRES.Equipements" /><!--@CadEditRES.Equipements--></a>
                 </li>
@@ -37,20 +159,21 @@
                     <a id="Dep" href="#Departements" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/departements.png" class="menu-icon icon-noactive" title="@CadEditRES.Departements" /><img src="/Images/departements-previ.png" class="menu-icon icon-active" title="@CadEditRES.Departements" /><!--@CadEditRES.Departements--></a>
                 </li>
 
-
-
                 <li role="presentation">
                     <a id="Emp" href="#EmployesCadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/employes.png" class="menu-icon icon-noactive" title="@CadEditRES.Employes" /><img src="/Images/employes-previ.png" class="menu-icon icon-active" title="@CadEditRES.Employes" /><!--@CadEditRES.Employes--></a>
                 </li>
-            }
 
-            @if (Model.estUpdate || Model.estAudit)
-            {
+                }
+
+                @if (Model.estUpdate || Model.estAudit)
+                {
                 <li role="presentation">
                     <a id="Registre" href="#RegistreCadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/registre.png" class="menu-icon icon-noactive" title="@CadEditRES.Registre" /><img src="/Images/registre-previ.png" class="menu-icon icon-active" title="@CadEditRES.Registre" /><!--@CadEditRES.Registre--></a>
                 </li>
 
-            }
+
+
+                }
 
 
                 <li role="presentation">
@@ -63,9 +186,11 @@
                 </li>
 
 
+
                 <li role="presentation">
                     <a href="#CadParamAdmin" aria-controls="pratiques" role="tab" data-toggle="tab" style="margin-left: 5px;"><img src="/Images/settings-admin.png" class="menu-icon icon-noactive" title="@CadEditRES.CadParamAdmin" /><img src="/Images/settings-admin-previ.png" class="menu-icon icon-active" title="@CadEditRES.CadParamAdmin" /><!--@CadEditRES.CadParamAdmin--></a>
                 </li>
+
 
             </ul>
 
@@ -113,12 +238,16 @@
                     </div>
                 </div>
             </div>
-            @*<a class='shieldLogoCadenassage' href='@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/shield.png'></a>*@
             <a class='shieldLogoCadenassage' href='@if (this.Layout.EndsWith("_Layout.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/dark_logo.png'></a>
         </div>
     </div>
 
+
+*@
+
+@section scripts{
 <script type="text/javascript">
+    /*
         // White background for the body ID
         jQuery('#body').css('background', '#FFF');
 
@@ -130,7 +259,7 @@
 
         // HIDE CURRENT LOGO
         jQuery('.content-wrapper .float-left img').css('display', 'none');
-
+    */
         //function GridResize() {
         //    var windowHeight = $(window).height();
         //    var gridHeight = $('.fix-grid-height').find('.k-grid-content').height();
@@ -161,4 +290,12 @@
 
         ///////////////////////////////////////
     });
+
+
+    $(".sidebar-nav li a").click(function () {
+        $(".sidebar-nav li a").removeClass("active");
+        $(this).addClass("active");
+    });
 </script>
+
+}

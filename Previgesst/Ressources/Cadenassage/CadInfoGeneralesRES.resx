@@ -169,7 +169,7 @@
     <value>Mettre à jour</value>
   </data>
   <data name="NoFiche" xml:space="preserve">
-    <value>No Fiche</value>
+    <value>Numéro de fiche</value>
   </data>
   <data name="SelectionnerDepartement" xml:space="preserve">
     <value>Sélectionner un département</value>
@@ -181,10 +181,10 @@
     <value>Sélectionner un type de fiche</value>
   </data>
   <data name="TravailAEffectuer" xml:space="preserve">
-    <value>Travail à effectuer (français)</value>
+    <value>Travail à effectuer (Français)</value>
   </data>
   <data name="TravailAEffectuerEN" xml:space="preserve">
-    <value>Travail à effectuer (anglais)</value>
+    <value>Travail à effectuer (Anglais)</value>
   </data>
   <data name="TypeFiche" xml:space="preserve">
     <value>Type de fiche</value>

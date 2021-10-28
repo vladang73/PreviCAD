@@ -147,4 +147,7 @@
   <data name="Titre" xml:space="preserve">
     <value>Titre</value>
   </data>
+  <data name="Vide" xml:space="preserve">
+    <value> </value>
+  </data>
 </root>

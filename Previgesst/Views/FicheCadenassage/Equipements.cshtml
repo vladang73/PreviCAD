@@ -2,157 +2,175 @@
 @using Previgesst.Ressources.Cadenassage
 @model Previgesst.ViewModels.EditCadenassageViewModel
 
-<style>
-    .petit {
-        max-height: 20px;
-        width: 90%;
-    }
-
-    .k-multiselect {
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        width: 95%;
-    }
-
-    .eq-grid-class {
-        background-color: transparent;
-    }
 
 
-    @@media screen and (max-width: 1400px) {
-        .eq-grid-class {
-            background-color: transparent;
-            overflow-x: scroll;
-        }
-
-            .eq-grid-class table {
-                transform: translate(10px);
-            }
-    }
-
-</style>
-
-
-<div class="panel panel-danger">
-
-    @*<div class="panel-heading" style="font-
-            size:larger;font-weight:500;background-color:#E39901;color:white">Équipements </div>
-        <div class="panel-body">*@
-
-
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-    <div class="panel-body">
-
-        @*<a class="btn btn-info btn-print-qr" href="@Url.Action("PrintQR", "FicheCadenassage", new { @id = Model.ClientId })" style="position: absolute; top: 3px; left: 425px;" target="_blank">
-                @CadEquipRES.PrintQRCode
-            </a>*@
-
-        <input type="button" class="btn btn-info btn-print-qr" style="position: absolute; top: 3px; left: 425px;" value="@CadEquipRES.PrintQRCode" />
-        @*<div id="EqWithQR"></div>*@
-
-
-        @Html.AntiForgeryToken()
-
-        @(Html.Kendo().Grid<EquipementViewModel>()
-                                .Name("listEquipement")
-                                .HtmlAttributes(new { @class = "eq-grid-class fix-grid-height-na" })
-                                .Columns(columns =>
-                                {
-                                    columns.Bound(e => e.EquipementId).Hidden();
-                                    columns.Bound(e => e.QRCode).Hidden();
-
-                                    //NomEquipement
-                                    columns.Bound(c => c.NumeroEquipment)//.EditorTemplateName("MyView")
-                                    .Filterable(f => f.Extra(false).Operators(operators => operators
-                                        .ForString(str => str.Clear()
-                                            .Contains(GridRES.Contains)
-                                            .StartsWith(GridRES.StartsWith)
-                                            .IsEqualTo(GridRES.Egale)
-                                            .IsNotEqualTo(GridRES.NotEquals)
-                                        )
-                                    ));
-                                    columns.Bound(c => c.NomEquipement)//.EditorTemplateName("MyView")
-                                    .Filterable(f => f.Extra(false).Operators(operators => operators
-                                        .ForString(str => str.Clear()
-                                            .Contains(GridRES.Contains)
-                                            .StartsWith(GridRES.StartsWith)
-                                            .IsEqualTo(GridRES.Egale)
-                                            .IsNotEqualTo(GridRES.NotEquals)
-                                        )
-                                    ));
-                                    columns.Bound(c => c.NomEquipementEN)//.EditorTemplateName("MyView")
-                                    .Filterable(f => f.Extra(false).Operators(operators => operators
-                                        .ForString(str => str.Clear()
-                                            .Contains(GridRES.Contains)
-                                            .StartsWith(GridRES.StartsWith)
-                                            .IsEqualTo(GridRES.Egale)
-                                            .IsNotEqualTo(GridRES.NotEquals)
-                                        )
-                                    )); ;
-
-                                    columns.Command(command => command.Custom("Détails").Click("showDetailsNew").Text(CadEquipRES.ButtonDetails)).Width(100);
-
-                                    columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie").Text(CadEquipRES.ButtonEnergy)).Width(100);
-
-                                    columns.Command(command => command.Custom("QR").Click("showDetailsQR").Text(CadEquipRES.ButtonQR)).Width(100);
-
-                                    //columns.Bound(bt => bt.EquipementId).ClientTemplate("<a href='/EquipementArticuloe/Index/#= " + nameof(EquipementViewModel.EquipementId) + " #' class='btn btn-primary btn-edit-force k-cde-edit'></a>").Title("Énergie").Filterable(false).Sortable(false).Width(1).Hidden(!Model.estUpdate);
-
-                                    columns.Bound(e => e.Thumbnail).ClientTemplate("# if(Thumbnail != null) {# <img src='#=Thumbnail#'/> #}#").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false);
-                                    columns.Bound(e => e.Thumbnail).ClientTemplate("<input type=button onclick='changerImage(#=EquipementId#)' value='Image' class='cadenassageImageDownload'/>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false).Width(80);
-                                    columns.Command(c =>
-                                    {
-                                        c.Edit().Text("");
-                                        c.Custom(CadEquipRES.Vide)
-                                            .Click("ConfirmDeleteRowEQ")
-                                            .HtmlAttributes(new { @class = "k-grid-effacer" });
-                                    })
-                                    .Width(50);
-                                    columns.Bound(e => e.Model).Hidden();
-                                    columns.Bound(e => e.Manufacturer).Hidden();
-                                    columns.Bound(e => e.Task).Hidden();
-                                    columns.Bound(e => e.RiskAnalysis).Hidden();
-                                    columns.Bound(e => e.LockoutProcedure).Hidden();
-                                    columns.Bound(e => e.SafeWorkProcedure).Hidden();
-                                })
-                                .Sortable(s => s.AllowUnsort(false))
-                                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
-                                .Filterable()
-                                //.Scrollable()
-                                //.AutoBind(false)
-                                .DataSource(ds => ds
-                                    .Ajax()
-                                    .PageSize(10).Sort(x => x.Add(c => c.NomEquipement))
-                                    .Model(m =>
-                                    {
-                                        m.Id(e => e.EquipementId);
-                                        m.Field(e => e.Suppressible).DefaultValue(true);
-                                        m.Field(e => e.Thumbnail).Editable(false);
-                                    })
-                                    .Read(r => r.Action("ReadListEquipement", "Equipement", new { client = Model.ClientId }))
-                                    .Create(c => c.Action("SaveEquipement", "Equipement", new { client = Model.ClientId }))
-                                    .Update(u => u.Action("SaveEquipement", "Equipement", new { client = Model.ClientId }))
-                                    .Destroy(d => d.Action("DeleteEquipement", "Equipement"))
-                                    .Events(e => e.Error("ListeErreurEQ"))
-                                )
-                                .Events(e => e
-                                    .DataBound("ListeDataBoundEQ").Edit("Edit")
-                                )
-                                .Editable(e => e
-                                    .Mode(GridEditMode.InLine)
-                                    .CreateAt(GridInsertRowPosition.Top)
-                                    .DisplayDeleteConfirmation(false)
-                                )
-                                .ToolBar(t =>
-                                {
-                                    t.Create();
-                                })
-                            )
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@CadEditRES.Equipements</h3>
+    </div>
+    <div class="page-table-meta">
+        <div class="add-icon">
+            <a id="btnAddEquip">
+                <img src="/content/v2/images/plus-icon.svg" />
+            </a>
+        </div>
+        <div class="search-qr-code">
+            <a class="text-decoration-none text-white btn-print-qr">
+                <img src="/content/v2/images/scanner.svg">
+                <span>@CadEquipRES.PrintQRCode</span>
+            </a>
+        </div>
     </div>
 </div>
 
 
+
+
+
+
+@Html.AntiForgeryToken()
+
+@(Html.Kendo().Grid<EquipementViewModel>()
+                .Name("listEquipement")
+                .HtmlAttributes(new { @class = "eq-grid-class fix-grid-height-na" })
+                .Columns(columns =>
+                {
+                    columns.Bound(e => e.EquipementId).Hidden();
+                    columns.Bound(e => e.QRCode).Hidden();
+
+                    columns.Bound(e => e.Thumbnail).ClientTemplate("# if(Thumbnail != null) {# <img src='#=Thumbnail#'/> #}#")
+                    .EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false)
+                    .HtmlAttributes(new { @class = "td-round-left-border" })
+                    .Width(60)
+                    ;
+
+                    //NomEquipement
+                    columns.Bound(c => c.NumeroEquipment)
+                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                        .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                    )));
+
+                    columns.Bound(c => c.NomEquipement)
+                        .Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                    )));
+
+                    columns.Bound(c => c.NomEquipementEN)
+                        .Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        )));
+
+                    columns.Bound(e => e.Thumbnail).ClientTemplate("<input type=button onclick='changerImage(#=EquipementId#)' value='Image' class='cadenassageImageDownload'/>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false).Width(80);
+
+                    columns.Command(command => command.Custom("Détails").Click("showDetailsNew").Text(CadEquipRES.ButtonDetails).HtmlAttributes(new { @class = "btn-table btn-grid-blue" })).Width(100);
+
+                    columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie").Text(CadEquipRES.ButtonEnergy).HtmlAttributes(new { @class = "btn-table btn-grid-blue" })).Width(100);
+
+                    columns.Command(command => command.Custom("QR").Click("showDetailsQR").Text(CadEquipRES.ButtonQR).HtmlAttributes(new { @class = "btn-table btn-grid-blue" })).Width(100);
+
+
+                    columns.Command(c =>
+                    {
+                        c.Edit().Text(CadEquipRES.ButtonEdit).HtmlAttributes(new { @class = "btn-table btn-edit"});
+                        c.Custom(CadEquipRES.Vide)
+                            .Click("ConfirmDeleteRowEQ")
+                            .HtmlAttributes(new { @class = "k-grid-effacer" });
+                    })
+                    .Width(120);
+                    columns.Bound(e => e.Model).Hidden();
+                    columns.Bound(e => e.Manufacturer).Hidden();
+                    columns.Bound(e => e.Task).Hidden();
+                    columns.Bound(e => e.RiskAnalysis).Hidden();
+                    columns.Bound(e => e.LockoutProcedure).Hidden();
+                    columns.Bound(e => e.SafeWorkProcedure).Hidden();
+                })
+                .Sortable(s => s.AllowUnsort(false))
+                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
+                .Filterable()
+                .DataSource(ds => ds
+                    .Ajax()
+                    .PageSize(10).Sort(x => x.Add(c => c.NomEquipement))
+                    .Model(m =>
+                    {
+                        m.Id(e => e.EquipementId);
+                        m.Field(e => e.Suppressible).DefaultValue(true);
+                        m.Field(e => e.Thumbnail).Editable(false);
+                    })
+                    .Read(r => r.Action("ReadListEquipement", "Equipement", new { client = Model.ClientId }))
+                    .Create(c => c.Action("SaveEquipement", "Equipement", new { client = Model.ClientId }))
+                    .Update(u => u.Action("SaveEquipement", "Equipement", new { client = Model.ClientId }))
+                    .Destroy(d => d.Action("DeleteEquipement", "Equipement"))
+                    .Events(e => e.Error("ListeErreurEQ"))
+                )
+                .Events(e => e
+                    .DataBound("ListeDataBoundEQ").Edit("Edit")
+                )
+                .Editable(e => e
+                    .Mode(GridEditMode.InLine)
+                    .CreateAt(GridInsertRowPosition.Top)
+                    .DisplayDeleteConfirmation(false)
+                )
+                .ToolBar(t =>
+                {
+                    t.Create().HtmlAttributes(new { @class = "d-none"});
+                })
+            )
+
+@*<style>
+            .petit {
+                max-height: 20px;
+                width: 90%;
+            }
+
+            .k-multiselect {
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                width: 95%;
+            }
+
+            .eq-grid-class {
+                background-color: transparent;
+            }
+
+
+            @@media screen and (max-width: 1400px) {
+                .eq-grid-class {
+                    background-color: transparent;
+                    overflow-x: scroll;
+                }
+
+                    .eq-grid-class table {
+                        transform: translate(10px);
+                    }
+            }
+
+        </style>
+
+
+    <div class="panel panel-danger">
+
+
+        <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+
+        <div class="panel-body">
+            <input type="button" class="btn btn-info btn-print-qr" style="position: absolute; top: 3px; left: 425px;" value="@CadEquipRES.PrintQRCode" />
+
+        </div>
+    </div>
+
+*@
 
 
 @(Html.Kendo().Window().Name("EqDetails")
@@ -348,16 +366,18 @@
 
     $("#Equip").click(function () {
 
-        $("#listEquipement").find("a.k-grid-add").removeClass("k-button  k-button-icontext");
-        $("#listEquipement").find("a.k-grid-add").addClass("btn btn-success btn-test");
+        $("#listEquipement").find("a.k-grid-add").removeClass("k-button  k-button-icontext").addClass("btn-test d-none");
 
         $("#listEquipement").find("span.k-grid-add").addClass("btn btn-success btn-test");
 
-        $("#listEquipement").find("a.btn-test").text("@CadEquipRES.Ajouter");
+        $("#listEquipement").find("a.btn-test").text("");
 
 
         // ADD ICONE "+"
-        setTimeout(function(){ $("#listEquipement").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+        setTimeout(function () {
+            $("#listEquipement").find(".btn-test").append('<img class="addButtonImg" src="/content/v2/images/plus-icon.svg">');
+            //$("#Equipements").find('div.add-icon').append($("#listEquipement").find("a.btn-test"))
+        }, 50);
     });
 
     function showDetailsEnergie(e) {
@@ -366,17 +386,6 @@
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
 
         window.location.href = "/FicheCadenassage/EquipementArticuloes/" + dataItem.EquipementId + "?client=" + @Model.ClientId;
-        @*var wind = $("#EngDetails").data("kendoWindow");
-
-        wind.content(energieTemplate(dataItem));
-
-        GetDropdownForPopup('#Energy', dataItem.Energy, '@Url.Action("GetListReadForMultiselect", "Listes", new { @iditem = Previgesst.Enums.TypeListe.sourceEnergie })');
-        GetDropdownForPopup('#Deposit', dataItem.Deposit, '@Url.Action("GetListReadForMultiselect", "Listes", new { @iditem = Previgesst.Enums.TypeListe.dispositif })');
-        GetDropdownForPopup('#Accessories', dataItem.Accessories, '@Url.Action("GetListReadForMultiselect", "Listes", new { @iditem = Previgesst.Enums.TypeListe.materiel })');
-
-        GetGridForPopup('#gridEnergy', dataItem.EquipementId, '/Equipement/GetEquipementArticuloes');
-
-        wind.center().open();*@
     }
 
 
@@ -391,39 +400,9 @@
 
         e.container.find(".k-grid-cancel").bind("click", function () {
             //console.log(e);
-            
+
             if (!e.model.Suppressible) {
                 $('#listEquipement').data('kendoGrid').dataSource.read();
-                /*
-
-                var selecteurGrid = "#listEquipement";
-                var grid = $(selecteurGrid).data("kendoGrid");
-
-                var row = grid.tbody.find("tr[data-uid='" + e.model.uid + "']");
-
-
-                //var currentDataItem = grid.dataItem($(this).closest("tr"));
-
-                console.log(e);
-                console.log('e.model.uid', e.model.uid);
-                console.log('e.model.Suppressible', e.model.Suppressible);
-
-                console.log('this', this);
-
-                //console.log(row);
-                //console.log(row.find(".k-grid-effacer"));
-
-                //console.log(e.target.closest('tr'));
-
-                //if (!currentDataItem.Suppressible) {
-                //    //$(this).remove();
-                //    //$(e.container.find(".k-grid-effacer")).remove();
-                //    //$(this).closest("tr").find(".k-grid-effacer").remove();
-                //    //console.log($(this).closest("tr"));
-                //    //console.log($($(this).closest("tr")[0]));
-                //    //console.log($($(this).closest("tr")[0]).find(".k-grid-effacer"));
-                //}
-                */
             }
         });
     }
@@ -550,8 +529,8 @@
         var grid = $(selecteurGrid).data("kendoGrid");
 
 
-        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
         $(selecteurGrid + " .k-grid-effacer");
+        $(selecteurGrid +' .btn-table').removeClass("k-button  k-button-icontext");
 
 
 
@@ -599,7 +578,6 @@
             cache: false,
             success: function (result) {
                 if (result.isSuccess == true) {
-                    //closeDetailsEQ();
                     $('#listEquipement').data('kendoGrid').dataSource.read();
 
                     $('#details-container-qr').find("#QRCode").attr('src', result.QRCode);
@@ -628,11 +606,7 @@
                             dataType: "json"
                         }
                     }
-                    //pageSize: 10,
                 },
-                //pageable: {
-                //    buttonCount: 5
-                //},
                 filterable: {
                     extra: false,
                     operators: {
@@ -722,4 +696,8 @@
     }
 
     $(document).on('click', '.selected-equi', function () { $('.selected-equi-all').prop('checked', false); });
+
+    $('#btnAddEquip').click(function () {
+        $("#listEquipement").find("a.btn-test.k-grid-add").click();
+    });
 </script>

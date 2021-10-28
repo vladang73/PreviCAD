@@ -88,6 +88,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modifier.
+        /// </summary>
+        public static string ButtonEdit {
+            get {
+                return ResourceManager.GetString("ButtonEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Énergie.
         /// </summary>
         public static string ButtonEnergy {

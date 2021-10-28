@@ -47,3 +47,26 @@
     .main-container-wrapper-grid {
         margin-top: 60px;
     }
+
+.td-round-left-border {
+    border-radius: 50px 0px 0px 0px !important;
+    border: none;
+    padding: 20px 0.6em;
+    border-left-width: 0
+}
+
+.btn-grid-blue {
+    color: var(--white);
+    background-color: #060144;
+    border-color: var(--editbtnbg);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+}
+    .btn-grid-blue:hover {
+        color: var(--white);
+    }
+
+.k-icon{
+    background-image: none;
+}

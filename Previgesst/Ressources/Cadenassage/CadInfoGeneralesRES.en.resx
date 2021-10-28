@@ -181,10 +181,10 @@
     <value>Select a sheet type</value>
   </data>
   <data name="TravailAEffectuer" xml:space="preserve">
-    <value>Tasks to perform (french)</value>
+    <value>Tasks to perform (French)</value>
   </data>
   <data name="TravailAEffectuerEN" xml:space="preserve">
-    <value>Tasks to perform (english)</value>
+    <value>Tasks to perform (English)</value>
   </data>
   <data name="TypeFiche" xml:space="preserve">
     <value>Type of sheet</value>

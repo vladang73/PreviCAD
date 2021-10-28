@@ -3,39 +3,43 @@
 @using Previgesst.Ressources.Cadenassage
 
 
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@CadEditRES.Registre</h3>
+    </div>
+</div>
 
+<div id="LignesRegistre">
 
-<div class="panel panel-danger">
+    @Html.AntiForgeryToken()
 
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-    <div class="panel-body">
-
-        @*<h3>Copiez le lien du client <a href="/Registre/Index?ClientID=@Model.IdentificateurUnique">ICI</a></h3>*@
-        <div id="Employes" class="tab-pane">
-
-            @Html.AntiForgeryToken()
-
-            @(Html.Kendo().Grid<LigneRegistreViewModel>()
+    @(Html.Kendo().Grid<LigneRegistreViewModel>()
             .Name("listLignesRegistre")
             .Columns(columns =>
             {
                 columns.Bound(e => e.LigneRegistreId).Hidden();
-                columns.Bound(e => e.NoEmploye).Title(CadRegRES.NoEmploye).Width(70);
+
+                columns.Bound(e => e.NoEmploye).Title(CadRegRES.NoEmploye).Hidden();
+
+
                 columns.Bound(e => e.Nom).Title(CadRegRES.Employe).Filterable(f => f.Extra(false).Operators(operators => operators
-                    .ForString(str => str.Clear()
-                    .Contains(GridRES.Contains)
-                    .StartsWith(GridRES.StartsWith)
-                    .IsEqualTo(GridRES.Egale)
-                    .IsNotEqualTo(GridRES.NotEquals)
-                ))).Width(105);
-                columns.Bound(e => e.NoFicheCadenassage).Title(CadRegRES.Fiche).Filterable(f => f.Extra(false).Operators(operators => operators
-                    .ForString(str => str.Clear()
-                    .Contains(GridRES.Contains)
-                    .StartsWith(GridRES.StartsWith)
-                    .IsEqualTo(GridRES.Egale)
-                    .IsNotEqualTo(GridRES.NotEquals)
-                ))).Width(40);
+                        .ForString(str => str.Clear()
+                        .Contains(GridRES.Contains)
+                        .StartsWith(GridRES.StartsWith)
+                        .IsEqualTo(GridRES.Egale)
+                        .IsNotEqualTo(GridRES.NotEquals)
+                    )))
+                    .HtmlAttributes(new { @class = "td-round-left-border" })
+                    .Width(105);
+
+                //columns.Bound(e => e.NoFicheCadenassage).Title(CadRegRES.Fiche).Filterable(f => f.Extra(false).Operators(operators => operators
+                //    .ForString(str => str.Clear()
+                //    .Contains(GridRES.Contains)
+                //    .StartsWith(GridRES.StartsWith)
+                //    .IsEqualTo(GridRES.Egale)
+                //    .IsNotEqualTo(GridRES.NotEquals)
+                //))).Width(40);
+
                 columns.Bound(e => e.NomDepartement).Title(CadRegRES.Departement).Filterable(f => f.Extra(false).Operators(operators => operators
                     .ForString(str => str.Clear()
                     .Contains(GridRES.Contains)
@@ -43,6 +47,7 @@
                     .IsEqualTo(GridRES.Egale)
                     .IsNotEqualTo(GridRES.NotEquals)
                 ))).Width(100);
+
                 columns.Bound(e => e.NomEquipement).Title(CadRegRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
                     .ForString(str => str.Clear()
                     .Contains(GridRES.Contains)
@@ -50,42 +55,38 @@
                     .IsEqualTo(GridRES.Egale)
                     .IsNotEqualTo(GridRES.NotEquals)
                 ))).Width(110);
+
                 columns.Bound(e => e.BonDeTravail).Title(CadRegRES.BonDeTravail).Width(50);
                 columns.Bound(e => e.DateDebut).Format("{0:yy-MMM-dd 0:HH:mm}").Filterable(f => f.Extra(false)).Title(CadRegRES.Debut).Width(90);
                 columns.Bound(e => e.FinPrevue).Format("{0:yy-MMM-dd}").Filterable(f => f.Enabled(false)).Title(CadRegRES.FinPrevueLe).Width(90);
                 columns.Bound(e => e.DateFin).Format("{0:yy-MMM-dd }").Filterable(f => f.Extra(false)).Title(CadRegRES.Fin).Width(90);
 
                 columns.Bound(e => e.Note).Title(CadRegRES.Details).Width(120);
-                //columns.Bound(e => e.Termine).Filterable(f => f.Extra(false)).ClientTemplate("<center><input disabled type='checkbox' #= Termine ? checked='checked' :'' #  /></center>").Title(CadRegRES.Termine);
                 columns.Bound(e => e.NomAuditeur).Title(CadRegRES.Auditeur).Width(105);
-                columns.Bound(e => e.Rep1).Title("Q1");
-                columns.Bound(e => e.Rep2).Title("Q2");
-                columns.Bound(e => e.Rep3).Title("Q3");
-                //columns.Bound(e => e.Rep1).Title("Rep1").Hidden();
-                //columns.Bound(e => e.Rep1).Title("Rep1").Hidden();
+
+                //columns.Bound(e => e.Rep1).Title("Q1");
+                //columns.Bound(e => e.Rep2).Title("Q2");
+                //columns.Bound(e => e.Rep3).Title("Q3");
+
                 columns.Bound(e => e.NoteAudit).Title(CadRegRES.NoteAudit).Hidden().Title("Commentaires");
                 columns.Command(c =>
                 {
-                    c.Edit().Text(CadRegRES.Audit).HtmlAttributes("");
+                    c.Edit().Text(CadRegRES.Audit).HtmlAttributes(new { @class = "btn-table btn-edit" });
                 })
                 .Width(30).Hidden(!@Model.estAudit);
             })
 
             .Sortable(s => s.AllowUnsort(false))
             .Events(e=>e.DataBound("onRegistreDataBound").Cancel("onRegistreDataBound").ExcelExport("excelExport"))
-            .ToolBar(tools => tools.Excel()).Editable(e => e.DisplayDeleteConfirmation(false)).
-            Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneRegistre").Window(w => w.Title(CadRegRES.Audit).Width(600)))
+            .ToolBar(tools => tools.Excel())
+            .Editable(e => e.DisplayDeleteConfirmation(false))
+            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneRegistre").Window(w => w.Title(CadRegRES.Audit).Width(600)))
 
             .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
             .Filterable()
             .DataSource(ds => ds
 
                 .Ajax()
-                    //.Filter(f =>
-                    //{
-                    //    f.Add(b => b.Termine).IsEqualTo(false);
-                    //})
-
                     .Sort(x => x.Add(c => c.DateDebut).Descending())
                     .PageSize(20).Model(e => { e.Id(z => z.LigneRegistreId); })
                     .Read(r => r.Action("ReadLignesRegistreCadenassage", "FicheCadenassage", new { client = Model.ClientId }))
@@ -93,19 +94,16 @@
                     .Events(e => e.RequestEnd("EndRegistre"))
                 )
             )
-        </div>
-    </div>
+
 </div>
-
-
 
 
 <script type="text/javascript">
     function onRegistreDataBound(e) {
-     
+
         /*setTimeout(function () {
             $("#listLignesRegistre .k-grid-edit").find("span").removeClass("k-icon k-edit");
-            $("#listLignesRegistre .k-grid-edit").removeClass("k-button k-button-icontext").addClass("btn btn-success");   
+            $("#listLignesRegistre .k-grid-edit").removeClass("k-button k-button-icontext").addClass("btn btn-success");
         }, 1);*/
 
     }
@@ -119,7 +117,7 @@
 
     var exportFlag = false;
     function excelExport(e) {
-           
+
         if (!exportFlag) {
             e.sender.showColumn(12);
             e.sender.showColumn(13);
@@ -143,9 +141,10 @@
         }
 
         // By pass the width bug of the table
-        jQuery('#Employes table').css('width', '100%');
-        //setTimeout(function () {
-        //    location.reload(true);
-        //}, 4000);
+        jQuery('#LignesRegistre table').css('width', '100%');
     }
+
+    $('#btnAddLignesRegistre').click(function () {
+        $("#LignesRegistre").find("a.k-grid-add").click();
+    });
 </script>

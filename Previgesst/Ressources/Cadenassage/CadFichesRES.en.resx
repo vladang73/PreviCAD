@@ -169,6 +169,9 @@
   <data name="IsApproved" xml:space="preserve">
     <value>Approved</value>
   </data>
+  <data name="Modifier" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="NoFiche" xml:space="preserve">
     <value>#</value>
   </data>
@@ -187,6 +190,9 @@
   <data name="ScanQREquip" xml:space="preserve">
     <value>Scan Equipment QR Code</value>
   </data>
+  <data name="Statut" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value>EN</value>
   </data>
@@ -202,5 +208,8 @@
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="Vide" xml:space="preserve">
+    <value> </value>
   </data>
 </root>

@@ -1,0 +1,147 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*buttons custom code*/
+.btn-table {
+  padding: 12px;
+  outline: none;
+	text-decoration: none;
+}
+.btn-table:focus {
+  outline: none;
+}
+.btn-edit {
+  color: var(--white);
+  background-color: var(--editbtnbg);
+  border-color: var(--editbtnbg);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 30px;
+
+}
+.btn-edit:hover {
+  color: var(--white);
+  background-color: var(--editbtnbg);
+  border-color: var(--editbtnbg);
+}
+.btn-edit.focus, .btn-edit:focus {
+  color: var(--white);
+  background-color: var(--editbtnbg);
+  border-color: var(--editbtnbg);
+  box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+}
+.btn-edit:not(:disabled):not(.disabled).active, .btn-edit:not(:disabled):not(.disabled):active, .show > .btn-edit.dropdown-toggle {
+  color: var(--white);
+  background-color: var(--editbtnbg);
+  border-color: var(--editbtnbg);
+}
+.btn-edit:not(:disabled):not(.disabled).active:focus, .btn-edit:not(:disabled):not(.disabled):active:focus, .show > .btn-edit.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+}
+
+.btn-duplicate {
+  color: var(--white);
+  background-color: var(--dupbtnbg);
+  border-color: var(--dupbtnbg);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 30px;
+
+}
+.btn-duplicate:hover {
+  color: var(--white);
+  background-color: var(--dupbtnbg);
+  border-color: var(--dupbtnbg);
+}
+.btn-duplicate.focus, .btn-duplicate:focus {
+  color: var(--white);
+  background-color: var(--dupbtnbg);
+  border-color: var(--dupbtnbg);
+  box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+}
+.btn-duplicate:not(:disabled):not(.disabled).active, .btn-duplicate:not(:disabled):not(.disabled):active, .show > .btn-duplicate.dropdown-toggle {
+  color: var(--white);
+  background-color: var(--dupbtnbg);
+  border-color: var(--dupbtnbg);
+}
+.btn-duplicate:not(:disabled):not(.disabled).active:focus, .btn-duplicate:not(:disabled):not(.disabled):active:focus, .show > .btn-duplicate.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+}
+.btn-duplicate {
+  color: var(--white);
+  background-color: var(--dupbtnbg);
+  border-color: var(--dupbtnbg);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 30px;
+
+}
+.btn-duplicate:hover {
+  color: var(--white);
+  background-color: var(--dupbtnbg);
+  border-color: var(--dupbtnbg);
+}
+.btn-duplicate.focus, .btn-duplicate:focus {
+  color: var(--white);
+  background-color: var(--dupbtnbg);
+  border-color: var(--dupbtnbg);
+  box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+}
+.btn-duplicate:not(:disabled):not(.disabled).active, .btn-duplicate:not(:disabled):not(.disabled):active, .show > .btn-duplicate.dropdown-toggle {
+  color: var(--white);
+  background-color: var(--dupbtnbg);
+  border-color: var(--dupbtnbg);
+}
+.btn-duplicate:not(:disabled):not(.disabled).active:focus, .btn-duplicate:not(:disabled):not(.disabled):active:focus, .show > .btn-duplicate.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+}
+
+
+.btn-del {
+	color: var(--white);
+	background-color: transparent;
+	border-color: var(--delbtnbg);
+	font-size: 15px;
+	font-weight: 600;
+	border-radius: 50%;
+	padding: 12px 14px;
+	line-height: 0px;
+}
+	.btn-del:before {
+		content: url("images/delete.svg");
+	}
+.btn-del:hover {
+  color: var(--white);
+  background-color: transparent;
+  border-color: var(--delbtnbg);
+}
+.btn-del.focus, .btn-del:focus {
+  color: var(--white);
+  background-color: transparent;
+  border-color: var(--delbtnbg);
+  box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+}
+.btn-del:not(:disabled):not(.disabled).active, .btn-del:not(:disabled):not(.disabled):active, .show > .btn-del.dropdown-toggle {
+  color: var(--white);
+  background-color: transparent;
+  border-color: var(--delbtnbg);
+}
+.btn-del:not(:disabled):not(.disabled).active:focus, .btn-del:not(:disabled):not(.disabled):active:focus, .show > .btn-del.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+}
+.btn-edit img, .btn-duplicate img, .btn-del img{
+	position: relative;
+    top: -3px;
+}
+.btn-edit{
+	width: 90px;
+}
+.btn-duplicate{
+	width: 110px;
+}
+
+
+.k-grid tbody .k-button {
+	min-width: auto !important;
+}

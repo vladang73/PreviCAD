@@ -7,20 +7,37 @@
 <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
 
+<link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+
+<link href="~/Content/v2/grid-override.css" rel="stylesheet" />
 
 <main class="main-container-wrapper main-container-wrapper-grid">
 
     <div class="main-container-content">
-        <div class="main-section-tile">
+        @*<div class="main-section-tile">
             <h2>
                 Liste des Utilisateurs
                 @Html.ActionLink("Ajouter", "EditUser", new { }, new { @class = "btn btn-success" })
             </h2>
+        </div>*@
+
+
+        <div class="table-top-header">
+            <div class="page-title">
+                <h3>Liste des Utilisateurs</h3>
+            </div>
+            <div class="page-table-meta">
+                <div class="add-icon" onclick="window.location.href='@Url.Action("Ajouter", "EditUser", new { })'">
+                    <img src="/content/v2/images/plus-icon.svg" />
+                </div>
+                @Html.ActionLink("Ajouter", "EditUser", new { }, new { @class = "add-icon" })
+            </div>
         </div>
 
-        <div class="row">
 
-            <div class="col-md-12 ">
+
+
 
 
                 @(Html.Kendo().Grid<UserListViewModel>()
@@ -58,12 +75,11 @@
                                                     .ColumnReorder("columnReorderKendo"))
                     )
             </div>
-        </div>
-    </div>
 </main>
 
 @section Scripts
 {
+
     <script type="text/javascript">
 
         $(document).ready(function () {

@@ -124,7 +124,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Procédures de contrôle des sources d&apos;énergie.
+        ///   Looks up a localized string similar to Procédures de contrôle.
         /// </summary>
         public static string FichesCadenassage {
             get {
@@ -147,6 +147,24 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string LienUtilisateur {
             get {
                 return ResourceManager.GetString("LienUtilisateur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Départements.
+        /// </summary>
+        public static string MenuDepartment {
+            get {
+                return ResourceManager.GetString("MenuDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Équipements.
+        /// </summary>
+        public static string MenuEquipment {
+            get {
+                return ResourceManager.GetString("MenuEquipment", resourceCulture);
             }
         }
         
@@ -187,7 +205,25 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prévicad - Gestion du cadenassage.
+        ///   Looks up a localized string similar to Rechercher par # de fiche.
+        /// </summary>
+        public static string SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Réinitialiser.
+        /// </summary>
+        public static string SearchReset {
+            get {
+                return ResourceManager.GetString("SearchReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Procédures de contrôle des sources d&apos;énergie.
         /// </summary>
         public static string TitreSectionCadenassage {
             get {

@@ -142,7 +142,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copier.
+        ///   Looks up a localized string similar to Duppliquer.
         /// </summary>
         public static string Dupliquer {
             get {
@@ -210,6 +210,15 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string IsApproved {
             get {
                 return ResourceManager.GetString("IsApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modifier.
+        /// </summary>
+        public static string Modifier {
+            get {
+                return ResourceManager.GetString("Modifier", resourceCulture);
             }
         }
         
@@ -282,6 +291,15 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string Sheet {
             get {
                 return ResourceManager.GetString("Sheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statut.
+        /// </summary>
+        public static string Statut {
+            get {
+                return ResourceManager.GetString("Statut", resourceCulture);
             }
         }
         

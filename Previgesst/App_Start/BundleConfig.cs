@@ -93,7 +93,7 @@ namespace Previgesst
                       "~/Content/mobile/style.css"));
 
 
-            BundleTable.EnableOptimizations = true;
+            //BundleTable.EnableOptimizations = true;
             
         }
     }

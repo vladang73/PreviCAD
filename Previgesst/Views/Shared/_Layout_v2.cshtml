@@ -29,6 +29,8 @@
     @Scripts.Render("~/bundles/kendo")
     @Scripts.Render("~/bundles/site")
 
+    @RenderSection("styles", required: false)
+
 
     @{
         string path = Request.Url.PathAndQuery;
@@ -98,6 +100,9 @@
                         </a>
                     </li>
                 </ul>
+
+                @RenderSection("sidebar", required: false)
+
                 <div class="nav-bottom">
 
                     <ul class="nav-bottom-wrapper">
@@ -140,12 +145,27 @@
     @RenderBody()
 
 
-
     <footer class="previcad-footer">
-        <div class="company-tagline-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 ">
+
+                </div>
+                <div class="col-12 col-lg-4 text-center">
+                    <div class="company-tagline-wrapper">
+                        <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <p class="copyright-text">Copyright 2021 Prévigesst. Tout droit réservés. Version 2.0</p>
+                </div>
+            </div>
+        </div>
+    
+        @*<div class="company-tagline-wrapper">
             <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
         </div>
-        <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>
+        <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>*@
     </footer>
 
 
@@ -335,7 +355,7 @@
         $('#slct').change(function () {
             location.href = $(this).val();
         });
-   
+
 
         $(document).ready(function () {
             kendo.culture("fr-CA");

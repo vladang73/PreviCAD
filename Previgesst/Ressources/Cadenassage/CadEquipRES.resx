@@ -126,6 +126,9 @@
   <data name="ButtonDetails" xml:space="preserve">
     <value>Détails</value>
   </data>
+  <data name="ButtonEdit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
   <data name="ButtonEnergy" xml:space="preserve">
     <value>Énergie</value>
   </data>

@@ -223,7 +223,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No Fiche.
+        ///   Looks up a localized string similar to Numéro de fiche.
         /// </summary>
         public static string NoFiche {
             get {
@@ -259,7 +259,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Travail à effectuer (français).
+        ///   Looks up a localized string similar to Travail à effectuer (Français).
         /// </summary>
         public static string TravailAEffectuer {
             get {
@@ -268,7 +268,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Travail à effectuer (anglais).
+        ///   Looks up a localized string similar to Travail à effectuer (Anglais).
         /// </summary>
         public static string TravailAEffectuerEN {
             get {

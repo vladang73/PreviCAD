@@ -16,26 +16,28 @@
     <link rel="stylesheet" href="/content/v2/index.css" type="text/css" />
     <link rel="stylesheet" href="/Content/v2/style.css" />
 
+    @RenderSection("styles", required: false)
+
     <script type="text/javascript">
 
         var CONFIGPATH = '@Url.Content("~/Scripts/cldr/")'
 
     </script>
 
-    @*@Styles.Render("~/content/css")
-        @Styles.Render("~/Content/csskendo")
-        @Styles.Render("~/content/cssAfter")*@
-
     @Scripts.Render("~/bundles/cldr")
     @Scripts.Render("~/bundles/globalize")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/site")
 
-    @*@Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/kendo")
-        @Scripts.Render("~/bundles/site")
-    *@
+    <script src="~/Scripts/v2/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/v2/feather.min.js"></script>
+    <script src="~/Scripts/v2/bootstrap.min.js"></script>
+
+
+
 
     @{
         string path = Request.Url.PathAndQuery;
@@ -54,6 +56,7 @@
         {
             path = path.Substring(1);
         }
+
         //utilisé pour prévicad client
         if (Session["ClientID"] != null && !path.Contains("?"))
         {
@@ -89,13 +92,11 @@
     <sidebar>
         <div class="bg-light d-none d-md-block sidebar">
             <div class="left-sidebar">
-                <ul class="nav flex-column sidebar-nav ">
-                    <li class="nav-item text-center mt-2">
-                        <a class="nav-link home-navlink active" href="#">
-                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
-                        </a>
-                    </li>
-                </ul>
+
+                @RenderSection("sidebar", required: false)
+
+
+
                 <div class="nav-bottom">
 
                     <ul class="nav-bottom-wrapper">
@@ -105,18 +106,22 @@
                                 <span class="nav-title">Paramétres</span>
                             </a>
                             <ul class="submenu">
-                                <li><a class="submenu-dropdown-item" href="#">Utilisateurs</a></li>
-                                <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
+                                <li><a class="submenu-dropdown-item" href="#">Hyperlien Utilisateur</a></li>
+                                <li><a class="submenu-dropdown-item" href="#">Préférences</a></li>
                                 <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">Centre de support</a></li>
+
+                                @*<li><a class="submenu-dropdown-item" href="#">Utilisateurs</a></li>
+                                    <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
+                                    <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">Centre de support</a></li>*@
                             </ul>
                         </li>
                         <li class="nav-item text-center mt-2">
                             @using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
                             {
-                            <a class="nav-link power-navlink active tex" href="javascript:document.getElementById('logoutForm').submit()">
-                                <img src="/content/v2/images/power-icon.png">
-                                <span class="nav-title">Déonnexion</span>
-                            </a>
+                                <a class="nav-link power-navlink active tex" href="javascript:document.getElementById('logoutForm').submit()">
+                                    <img src="/content/v2/images/power-icon.png">
+                                    <span class="nav-title">Déonnexion</span>
+                                </a>
                             }
                         </li>
                     </ul>
@@ -128,19 +133,33 @@
     @RenderBody()
 
 
-    <footer class="previcad-footer">
-        <div class="company-tagline-wrapper">
+<footer class="previcad-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 ">
+
+            </div>
+            <div class="col-12 col-lg-4 text-center">
+                <div class="company-tagline-wrapper">
+                    <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <p class="copyright-text">Copyright 2021 Prévigesst. Tout droit réservés. Version 2.0</p>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="company-tagline-wrapper">
             <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
         </div>
-        <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>
-    </footer>
+        <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>*@
+</footer>
+
 
 
 
     @RenderSection("scripts", required: false)
-    <script src="~/Scripts/v2/bootstrap.bundle.min.js"></script>
-    <script src="~/Scripts/v2/feather.min.js"></script>
-    <script src="~/Scripts/v2/bootstrap.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {

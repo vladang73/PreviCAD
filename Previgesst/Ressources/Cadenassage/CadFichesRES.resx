@@ -146,7 +146,7 @@
     <value>Département</value>
   </data>
   <data name="Dupliquer" xml:space="preserve">
-    <value>Copier</value>
+    <value>Duppliquer</value>
   </data>
   <data name="Editer" xml:space="preserve">
     <value>Éditer</value>
@@ -168,6 +168,9 @@
   </data>
   <data name="IsApproved" xml:space="preserve">
     <value>Approuvée</value>
+  </data>
+  <data name="Modifier" xml:space="preserve">
+    <value>Modifier</value>
   </data>
   <data name="NoFiche" xml:space="preserve">
     <value># Fiche</value>
@@ -192,6 +195,9 @@
   </data>
   <data name="Sheet" xml:space="preserve">
     <value>EN</value>
+  </data>
+  <data name="Statut" xml:space="preserve">
+    <value>Statut</value>
   </data>
   <data name="TailleMaximale" xml:space="preserve">
     <value>La taille maximale est de 3 Mo.</value>

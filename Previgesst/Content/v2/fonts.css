@@ -1,3 +1,6 @@
+@charset "utf-8";
+/* CSS Document */
+
 @font-face {
     font-family: IBMPlexSans-Bold;
     src: url(fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf);
@@ -97,4 +100,333 @@
     font-family: HKGrotesk-SemiBold;
     src: url(fonts/hk-grotesk/HKGrotesk-SemiBold.otf);
     font-weight: 500;
+}
+
+
+
+
+
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url("fonts/IBM_Plex_Sans/IBMPlexSans-Bold.eot");
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Bold.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Bold.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Bold.svg#IBMPlexSans-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLight.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLight.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLight.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLight.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLight.svg#IBMPlexSans-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-BoldItalic.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-BoldItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-BoldItalic.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-BoldItalic.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-BoldItalic.svg#IBMPlexSans-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLightItalic.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLightItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLightItalic.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLightItalic.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ExtraLightItalic.svg#IBMPlexSans-ExtraLightItalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Italic.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Italic.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Italic.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Italic.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Italic.svg#IBMPlexSans-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Light.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Light.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Light.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Light.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Light.svg#IBMPlexSans-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-LightItalic.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-LightItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-LightItalic.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-LightItalic.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-LightItalic.svg#IBMPlexSans-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Medium.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Medium.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Medium.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Medium.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Medium.svg#IBMPlexSans-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-MediumItalic.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-MediumItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-MediumItalic.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-MediumItalic.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-MediumItalic.svg#IBMPlexSans-MediumItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Regular.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Regular.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Regular.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Regular.svg#IBMPlexSans-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.svg#IBMPlexSans-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBoldItalic.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBoldItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBoldItalic.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBoldItalic.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-SemiBoldItalic.svg#IBMPlexSans-SemiBoldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Thin.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-Thin.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Thin.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Thin.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-Thin.svg#IBMPlexSans-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IBM Plex Sans';
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-ThinItalic.eot');
+    src: url('fonts/IBM_Plex_Sans/IBMPlexSans-ThinItalic.eot?#iefix') format('embedded-opentype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ThinItalic.woff') format('woff'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ThinItalic.ttf') format('truetype'), url('fonts/IBM_Plex_Sans/IBMPlexSans-ThinItalic.svg#IBMPlexSans-ThinItalic') format('svg');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-Bold.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-Bold.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-Bold.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-Bold.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-Bold.svg#HKGrotesk-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-BoldLegacy.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-BoldLegacy.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-BoldLegacy.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-BoldLegacy.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-BoldLegacy.svg#HKGrotesk-BoldLegacy') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-Black.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-Black.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-Black.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-Black.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-Black.svg#HKGrotesk-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-BoldItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-BoldItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-BoldItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-BoldItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-BoldItalic.svg#HKGrotesk-BoldItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-BoldLegacyItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-BoldLegacyItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-BoldLegacyItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-BoldLegacyItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-BoldLegacyItalic.svg#HKGrotesk-BoldLegacyItalic') format('svg');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-ExtraBold.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-ExtraBold.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-ExtraBold.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-ExtraBold.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-ExtraBold.svg#HKGrotesk-ExtraBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-Italic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-Italic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-Italic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-Italic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-Italic.svg#HKGrotesk-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-Light.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-Light.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-Light.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-Light.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-Light.svg#HKGrotesk-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-LegacyItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-LegacyItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-LegacyItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-LegacyItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-LegacyItalic.svg#HKGrotesk-LegacyItalic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-LightItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-LightItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-LightItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-LightItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-LightItalic.svg#HKGrotesk-LightItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk Light Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-LightLegacyItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-LightLegacyItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-LightLegacyItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-LightLegacyItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-LightLegacyItalic.svg#HKGrotesk-LightLegacyItalic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk Light Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-LightLegacy.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-LightLegacy.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-LightLegacy.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-LightLegacy.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-LightLegacy.svg#HKGrotesk-LightLegacy') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-Medium.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-Medium.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-Medium.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-Medium.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-Medium.svg#HKGrotesk-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk Medium Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-MediumLegacy.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-MediumLegacy.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-MediumLegacy.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-MediumLegacy.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-MediumLegacy.svg#HKGrotesk-MediumLegacy') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-MediumItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-MediumItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-MediumItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-MediumItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-MediumItalic.svg#HKGrotesk-MediumItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-Regular.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-Regular.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-Regular.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-Regular.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-Regular.svg#HKGrotesk-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk Medium Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-MediumLegacyItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-MediumLegacyItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-MediumLegacyItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-MediumLegacyItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-MediumLegacyItalic.svg#HKGrotesk-MediumLegacyItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-RegularLegacy.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-RegularLegacy.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-RegularLegacy.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-RegularLegacy.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-RegularLegacy.svg#HKGrotesk-RegularLegacy') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-SemiBold.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-SemiBold.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-SemiBold.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-SemiBold.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-SemiBold.svg#HKGrotesk-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk';
+    src: url('fonts/hk-grotesk/HKGrotesk-SemiBoldItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-SemiBoldItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldItalic.svg#HKGrotesk-SemiBoldItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk SemiBold Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacy.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacy.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacy.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacy.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacy.svg#HKGrotesk-SemiBoldLegacy') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HK Grotesk SmBold Legacy';
+    src: url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacyItalic.eot');
+    src: url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacyItalic.eot?#iefix') format('embedded-opentype'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacyItalic.woff') format('woff'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacyItalic.ttf') format('truetype'), url('fonts/hk-grotesk/HKGrotesk-SemiBoldLegacyItalic.svg#HKGrotesk-SemiBoldLegacyItalic') format('svg');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
 }
