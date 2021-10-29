@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout_v2.cshtml";
+    //Layout = "~/Views/Shared/_Layout_v2.cshtml";
 
     if (ViewData["Layout"] != null)
     {
@@ -95,37 +95,6 @@
 }
 
 
-
-
-
-@*@if (Model.DroitAjout == false)
-{
-    string paramDroitAjout = Request.QueryString["DroitAjout"];
-
-    if (paramDroitAjout != "true")
-    {
-        <div class="tryDone">
-            <div class="tryDone--content">
-                <h1>@CadEditFicheRES.PeriodeDEssaieTitre</h1>
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>@CadEditFicheRES.PeriodeDEssaieTexte</p>
-                        <p>@CadEditFicheRES.PeriodeDEssaieContact</p>
-                        <div class="tryDone--button">
-                            <a href="mailto:mferland@previgesst.com">@CadEditFicheRES.PeriodeDEssaieBouton</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="https://previgesst.com/wp-content/uploads/2020/09/maintenance.png" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-}*@
-
-
-
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
@@ -145,71 +114,6 @@
 
     <div class="main-page-content">
 
-
-        @*<div class="cadenassageContent--header col col-sm-12 col-md-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/Edit/@Model.ClientId">@CadEditFicheRES.Retour </a></li>
-
-                    @if (Model.FicheCadenassageId == 0)
-                    {
-                        <li class="breadcrumb-item active" aria-current="page">@CadEditFicheRES.CreationFiche</li>
-                    }
-                    else
-                    {
-                        <li class="breadcrumb-item active" aria-current="page">@CadEditFicheRES.EditionFiche @Model.NoFiche</li>
-                    }
-
-                </ol>
-            </nav>
-            <hr />
-        </div>
-
-        <ul class="nav nav-tabs col-md-1" role="tablist">
-            <li role="presentation" class="active">
-                <a href="#InfosGenerales" aria-controls="general" role="tab" data-toggle="tab"><img src="/Images/infosgenerales.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.InformationsGenerales" /><img src="/Images/infosgenerales-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.InformationsGenerales" /><!--@CadEditFicheRES.InformationsGenerales--></a>
-            </li>
-
-            @if (Model.FicheCadenassageId != 0)
-            {
-                <li role="presentation">
-                    <a id="MatFich" href="#Materiel" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/materielrequis.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.MaterielRequis" /><img src="/Images/materielrequis-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.MaterielRequis" /><!--@CadEditFicheRES.MaterielRequis--></a>
-                </li>
-
-                <li role="presentation">
-                    <a href="#Sources" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/Sourcedenergie.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.SourcesEnergie" /><img src="/Images/Sourcedenergie-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.SourcesEnergie" /><!--@CadEditFicheRES.SourcesEnergie--></a>
-                </li>
-
-                <li role="presentation">
-                    <a id="ImageCadFich" href="#ImagesFiche" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/Images.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.Images" /><img src="/Images/Images-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.Images" /><!--@CadEditFicheRES.Images--></a>
-                </li>
-
-
-
-                <li role="presentation">
-                    <a id="EtapCadFich" href="#Cadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/etapesdecadenassage.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.EtapesCadenassage" /><img src="/Images/etapesdecadenassage-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.EtapesCadenassage" /><!--@CadEditFicheRES.EtapesCadenassage--></a>
-                </li>
-
-                <li role="presentation">
-                    <a id="EtapdecFich" href="#Decadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/etapesdedecadenassage.png.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.EtapesDecadenassage" /><img src="/Images/etapesdedecadenassage.png-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.EtapesDecadenassage" /><!--@CadEditFicheRES.EtapesDecadenassage--></a>
-                </li>
-
-                <li role="presentation">
-                    <a id="DocFicheCadenassage" href="#DocFiche" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="~/Images/analyse-de-risque-doc.png" class="menu-icon icon-noactive" title="@CadEditFicheRES.Documents" /><img src="~/Images/analyse-de-risque-doc-previ.png" class="menu-icon icon-active" title="@CadEditFicheRES.Documents" /><!--@CadEditFicheRES.Documents--></a>
-                </li>
-            }
-        </ul>
-
-
-        *@
-
-
-            @*<div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">
-                <span class="currentTitleCadenassage">@CadEditFicheRES.GestionCadenassage</span>
-                <a href="https://previgesst.com/centre-de-support/" class="supportLink" target="_blank">
-                <img src="/Images/help.png" class="help-icon" title="Centre support" /> @CadEditRES.CentreSupport
-                </a>
-            </div>*@
 
                 <div class="tab-content">
 
@@ -332,24 +236,24 @@
 
 
 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict'
+    //// Example starter JavaScript for disabling form submissions if there are invalid fields
+    //(function () {
+    //    'use strict'
 
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation')
+    //    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    //    var forms = document.querySelectorAll('.needs-validation')
 
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
+    //    // Loop over them and prevent submission
+    //    Array.prototype.slice.call(forms)
+    //        .forEach(function (form) {
+    //            form.addEventListener('submit', function (event) {
+    //                if (!form.checkValidity()) {
+    //                    event.preventDefault()
+    //                    event.stopPropagation()
+    //                }
 
-                    form.classList.add('was-validated')
-                }, false)
-            })
-    })()
+    //                form.classList.add('was-validated')
+    //            }, false)
+    //        })
+    //})()
 </script>

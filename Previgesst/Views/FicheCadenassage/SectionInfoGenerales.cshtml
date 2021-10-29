@@ -7,19 +7,22 @@
     string editFicheUrl = "EditFiche";
     string creerFicheUrl = "CreerFiche";
     string currentUrl = System.Web.HttpContext.Current.Request.Url.AbsoluteUri;
-    var vm = new EditFicheViewModel();
+    string sauvegarderMaFicheDeCadenassage = string.Empty;
+
+
+    //var vm = new EditFicheViewModel();
 
     if (currentUrl.Contains(editFicheUrl))
     {
-        vm.sauvegarderMaFicheDeCadenassage = "EditerFiche";
+        sauvegarderMaFicheDeCadenassage = "EditerFiche";
     }
     else if (currentUrl.Contains(creerFicheUrl))
     {
-        vm.sauvegarderMaFicheDeCadenassage = "SaveFiche";
+        sauvegarderMaFicheDeCadenassage = "SaveFiche";
     }
     else
     {
-        vm.sauvegarderMaFicheDeCadenassage = "SaveFiche";
+        sauvegarderMaFicheDeCadenassage = "SaveFiche";
     }
 }
 
@@ -40,27 +43,23 @@
 </div>
 
 
-@using (Html.BeginForm(vm.sauvegarderMaFicheDeCadenassage, "FicheCadenassage", FormMethod.Post, new { @class = "form-horizontal needs-validation", role = "form" }))
+@using (Html.BeginForm(sauvegarderMaFicheDeCadenassage, "FicheCadenassage", FormMethod.Post, new { @class = "form-horizontal needs-validation", role = "form" }))
 {
-    @Html.AntiForgeryToken();
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     @Html.HiddenFor(model => model.ClientId)
     @Html.HiddenFor(model => model.FicheCadenassageId)
     @Html.HiddenFor(model => model.EstDocumentPrevigesst)
     @Html.HiddenFor(model => model.NomClient)
 
-    @Html.HiddenFor(model => model.CreatedPar)
-    @Html.HiddenFor(model => model.UpdatedPar)
+    <input type="hidden" id="CreatedPar" name="CreatedPar" value="@Convert.ToString(Model.CreatedPar)" />
+    <input type="hidden" id="UpdatedPar" name="UpdatedPar" value="@Convert.ToString(Model.UpdatedPar)" />
 
-    @*@Html.HiddenFor(model => model.DateCreation)*@
+    <input type="hidden" id="DateCreation" name="DateCreation" value="@(Model.DateCreation.HasValue ? Model.DateCreation.Value.ToString("yyyy-MM-dd H:mm:ss") : "")" />
+    <input type="hidden" id="DateUpdated" name="DateUpdated" value="@(Model.DateUpdated.HasValue ? Model.DateUpdated.Value.ToString("yyyy-MM-dd H:mm:ss") : "")" />
 
-    <input type="hidden" id="DateCreation" name="DateCreation" value="@Model.DateCreation.Value.ToString("yyyy-MM-dd H:mm:ss")" />
-    <input type="hidden" id="DateUpdated" name="DateUpdated" value="@Model.DateUpdated.Value.ToString("yyyy-MM-dd H:mm:ss")" />
 
-    @*
-
-        @Html.HiddenFor(model => model.DateUpdated)*@
 
     <div class="row">
         <div class="form-group">
@@ -87,6 +86,8 @@
                 <span class="create-value">@Model.DateCreation</span>
             </p>
         </div>
+
+
         <div class="col-12 col-md-10">
             <p>
                 @Html.LabelFor(m => m.UpdatedPar, new { @class = "create-title" })
@@ -182,10 +183,9 @@
             <div class="mt-5">
                 @Html.LabelFor(m => m.AfficherClient, new { @class = "form-label d-block" })
 
-                @*@Html.CheckBoxFor(m => m.AfficherClient, new { @style = "vertical-align:middle;margin-left:5px" })*@
 
                 <div class="squaredThree squaredThree-blue">
-                    <input type="checkbox" id="squaredone" name="AfficherClient" @(Model.AfficherClient ? "checked": "") />
+                    <input type="checkbox" id="squaredone" name="AfficherClient" @(Model.AfficherClient ? "checked" : "") value="@Convert.ToString(Model.AfficherClient).ToLower()" />
                     <label for="squaredone"><span> </span></label>
                 </div>
 
@@ -234,7 +234,6 @@
         }
 
 
-
         <div class="col-12 d-flex justify-content-end pt-5">
             <input type="submit" class="btn btn-primary" name="save" value="@CadInfoGeneralesRES.Enregistrer" />
 
@@ -256,87 +255,3 @@
 }
 
 
-
-
-
-
-@*<div class="form-group">
-            <div class="col-md-3">
-                @Html.LabelFor(m => m.CreatedPar, new { @class = "create-title" })
-            </div>
-            <div class="col-md-6">
-                @Html.TextBoxFor(m => m.CreatedPar, new { @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(m => m.CreatedPar, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-3">
-                @Html.LabelFor(m => m.DateCreation, new { @class = "create-title" })
-            </div>
-            <div class="col-md-6">
-                <input name="DateCreation" id="DateCreation" class="form-control" readonly="readonly" value="@Model.DateCreation" />
-
-                @Html.ValidationMessageFor(m => m.DateCreation, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(m => m.UpdatedPar, new { @class = "control-label" })
-        </div>
-        <div class="col-md-6">
-            @Html.TextBoxFor(m => m.UpdatedPar, new { @class = "form-control", @readonly = "readonly" })
-            @Html.ValidationMessageFor(m => m.UpdatedPar, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-3">
-            @Html.LabelFor(m => m.DateUpdated, new { @class = "control-label" })
-        </div>
-        <div class="col-md-6">
-            <input name="DateUpdated" id="DateUpdated" class="form-control" readonly="readonly" value="@Model.DateUpdated" />
-
-            @Html.ValidationMessageFor(m => m.DateUpdated, "", new { @class = "text-danger" })
-        </div>
-    </div>
-*@
-
-
-
-
-
-@*<div class="form-group">
-            @Html.LabelFor(m => m.ApprouvePar, new { @class = "control-label" })
-
-            @Html.TextBoxFor(m => m.ApprouvePar, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.ApprouvePar, "", new { @class = "text-danger" })
-
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.DateCreation, new { @class = "control-label" })
-
-            @(Html.Kendo().DatePickerFor(m => m.DateCreation).HtmlAttributes(new { @class = "form-control", @style = "margin-left:5px" }))
-            @Html.ValidationMessageFor(m => m.BidonErreurCreation, "", new { @class = "text-danger" })
-
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.DateRevision, new { @class = "control-label" })
-
-            @(Html.Kendo().DatePickerFor(m => m.DateRevision).HtmlAttributes(new { @class = "form-control", @style = "margin-left:5px" }))
-            @Html.ValidationMessageFor(m => m.DateRevision, "", new { @class = "text-danger" })
-
-        </div>
-    <div class="form-group hidden">
-            @Html.LabelFor(m => m.RevisionCourante, new { @class = "control-label" })
-
-            @Html.CheckBoxFor(m => m.RevisionCourante, new { @style = "vertical-align:middle;margin-left:5px" })
-            @Html.ValidationMessageFor(m => m.RevisionCourante, "", new { @class = "text-danger" })
-
-        </div>*@
