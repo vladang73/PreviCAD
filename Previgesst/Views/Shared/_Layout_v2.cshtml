@@ -360,6 +360,19 @@
         $(document).ready(function () {
             kendo.culture("fr-CA");
         });
+
+        function SetCheckbox(ctrl) {
+            if ($(ctrl).val() == 'on' || $(ctrl).prop("checked")) {
+                $(ctrl).val(true);
+            }
+            else {
+                $(ctrl).val(false);
+            }
+        }
+
+        $('input:checkbox').click(function () {
+            SetCheckbox($(this));
+        });
     </script>
 
 </body>

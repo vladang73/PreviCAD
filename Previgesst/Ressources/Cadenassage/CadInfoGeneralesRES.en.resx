@@ -198,4 +198,13 @@
   <data name="DateApproved" xml:space="preserve">
     <value>Approbation date</value>
   </data>
+  <data name="ValidatedButton" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="ValidatedBy" xml:space="preserve">
+    <value>Valider par</value>
+  </data>
+  <data name="ValidatedDate" xml:space="preserve">
+    <value>Date de validation</value>
+  </data>
 </root>

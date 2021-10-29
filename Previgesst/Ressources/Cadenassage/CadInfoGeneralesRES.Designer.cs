@@ -79,7 +79,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Approuver.
+        ///   Looks up a localized string similar to Approuver la fiche.
         /// </summary>
         public static string Approuve {
             get {
@@ -151,7 +151,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enregistrer.
+        ///   Looks up a localized string similar to Enregistrer la fiche.
         /// </summary>
         public static string Enregistrer {
             get {
@@ -300,6 +300,33 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string UpdatedDate {
             get {
                 return ResourceManager.GetString("UpdatedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valider.
+        /// </summary>
+        public static string ValidatedButton {
+            get {
+                return ResourceManager.GetString("ValidatedButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valider par.
+        /// </summary>
+        public static string ValidatedBy {
+            get {
+                return ResourceManager.GetString("ValidatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date de validation.
+        /// </summary>
+        public static string ValidatedDate {
+            get {
+                return ResourceManager.GetString("ValidatedDate", resourceCulture);
             }
         }
     }

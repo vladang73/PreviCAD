@@ -71,6 +71,13 @@ namespace Previgesst.ViewModels
         public List<string> TexteMateriel { get; set; }
 
 
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "ValidatedDate")]
+        public DateTime? DateValidated { get; set; }
+
+        [StringLength(250)]
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "ValidatedBy")]
+        public string ValidatedPar { get; set; }
+
         //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
         //public bool IsApproved
         //{

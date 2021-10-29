@@ -70,3 +70,23 @@
 .k-icon{
     background-image: none;
 }
+
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #EBE9E8;
+    border: 2px solid #ccc;
+}
+
+.btn-success {
+    color: var(--white);
+    /*background-color: var(--brandlightblue);
+    border-color: var(--brandlightblue);*/
+    font-family: "IBM Plex Sans";
+    font-size: 15px;
+    padding: 11px 25px;
+    border-radius: 30px;
+}
+
+.squaredThree-blue label {
+    border: 1px solid #0835B0 !important;
+}

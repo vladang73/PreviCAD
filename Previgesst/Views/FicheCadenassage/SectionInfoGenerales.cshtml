@@ -40,7 +40,7 @@
 </div>
 
 
-@using (Html.BeginForm(vm.sauvegarderMaFicheDeCadenassage, "FicheCadenassage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm(vm.sauvegarderMaFicheDeCadenassage, "FicheCadenassage", FormMethod.Post, new { @class = "form-horizontal needs-validation", role = "form" }))
 {
     @Html.AntiForgeryToken();
     @Html.ValidationSummary(true, "", new { @class = "text-danger" });
@@ -51,9 +51,16 @@
     @Html.HiddenFor(model => model.NomClient)
 
     @Html.HiddenFor(model => model.CreatedPar)
-    @Html.HiddenFor(model => model.DateCreation)
     @Html.HiddenFor(model => model.UpdatedPar)
-    @Html.HiddenFor(model => model.DateUpdated)
+
+    @*@Html.HiddenFor(model => model.DateCreation)*@
+
+    <input type="hidden" id="DateCreation" name="DateCreation" value="@Model.DateCreation.Value.ToString("yyyy-MM-dd H:mm:ss")" />
+    <input type="hidden" id="DateUpdated" name="DateUpdated" value="@Model.DateUpdated.Value.ToString("yyyy-MM-dd H:mm:ss")" />
+
+    @*
+
+        @Html.HiddenFor(model => model.DateUpdated)*@
 
     <div class="row">
         <div class="form-group">
@@ -92,51 +99,6 @@
         </div>
 
 
-        @*<div class="form-group">
-                    <div class="col-md-3">
-                        @Html.LabelFor(m => m.CreatedPar, new { @class = "create-title" })
-                    </div>
-                    <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.CreatedPar, new { @class = "form-control", @readonly = "readonly" })
-                        @Html.ValidationMessageFor(m => m.CreatedPar, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <div class="col-md-3">
-                        @Html.LabelFor(m => m.DateCreation, new { @class = "create-title" })
-                    </div>
-                    <div class="col-md-6">
-                        <input name="DateCreation" id="DateCreation" class="form-control" readonly="readonly" value="@Model.DateCreation" />
-
-                        @Html.ValidationMessageFor(m => m.DateCreation, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    @Html.LabelFor(m => m.UpdatedPar, new { @class = "control-label" })
-                </div>
-                <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.UpdatedPar, new { @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(m => m.UpdatedPar, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="col-md-3">
-                    @Html.LabelFor(m => m.DateUpdated, new { @class = "control-label" })
-                </div>
-                <div class="col-md-6">
-                    <input name="DateUpdated" id="DateUpdated" class="form-control" readonly="readonly" value="@Model.DateUpdated" />
-
-                    @Html.ValidationMessageFor(m => m.DateUpdated, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        *@
-
-
         <div class="col-12 col-md-6">
             <div class="mt-5">
                 @Html.LabelFor(m => m.EquipementId, new { @class = "form-label d-block" })
@@ -147,7 +109,7 @@
                     .DataValueField(nameof(EquipementDDLViewModel.EquipementId))
                     .DataTextField(nameof(EquipementDDLViewModel.NomEquipement))
                     .BindTo((System.Collections.IEnumerable)ViewData["Equipements"])
-            )
+                )
 
 
                 @Html.ValidationMessageFor(m => m.EquipementId, "", new { @class = "text-danger" })
@@ -215,53 +177,134 @@
             </div>
         </div>
 
+
         <div class="col-12 col-md-6">
             <div class="mt-5">
                 @Html.LabelFor(m => m.AfficherClient, new { @class = "form-label d-block" })
 
-                @Html.CheckBoxFor(m => m.AfficherClient, new { @style = "vertical-align:middle;margin-left:5px" })
+                @*@Html.CheckBoxFor(m => m.AfficherClient, new { @style = "vertical-align:middle;margin-left:5px" })*@
+
+                <div class="squaredThree squaredThree-blue">
+                    <input type="checkbox" id="squaredone" name="AfficherClient" @(Model.AfficherClient ? "checked": "") />
+                    <label for="squaredone"><span> </span></label>
+                </div>
+
                 @Html.ValidationMessageFor(m => m.AfficherClient, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
-
-
-
         @if (currentUrl.Contains(editFicheUrl))
         {
-            <div class="form-group">
-                <div class="col-md-3">
-                    @Html.LabelFor(m => m.ApprouvePar, new { @class = "form-label d-block" })
-                </div>
-                <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.ApprouvePar, new { @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(m => m.ApprouvePar, "", new { @class = "text-danger" })
-                </div>
-            </div>
+            <div class="col-12 col-md-6">
+                <div class="mt-5">
+                    <div class="row">
+                        <div class="col">
+                            @Html.LabelFor(m => m.ValidatedPar, new { @class = "form-label d-block" })
 
+                            @Html.TextBoxFor(m => m.ValidatedPar, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(m => m.ValidatedPar, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col">
+                            @Html.LabelFor(m => m.DateValidated, new { @class = "form-label d-block" })
 
-            <div class="form-group">
-                <div class="col-md-3">
-                    <label for="DateApproved">Date d'approbation</label>
-                </div>
-                <div class="col-md-6">
-                    <input name="DateUpdated" id="DateApproved" class="form-control" readonly="readonly" value="@Model.DateApproved" />
-                    @Html.ValidationMessageFor(m => m.DateApproved, "", new { @class = "text-danger" })
+                            <input name="DateValidated" id="DateValidated" class="form-control" readonly="readonly" value="@Model.DateValidated" />
+                            @Html.ValidationMessageFor(m => m.DateValidated, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col">
+                            @Html.LabelFor(m => m.ApprouvePar, new { @class = "form-label d-block" })
+
+                            @Html.TextBoxFor(m => m.ApprouvePar, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(m => m.ApprouvePar, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col">
+                            @Html.LabelFor(m => m.DateApproved, new { @class = "form-label d-block" })
+
+                            <input name="DateApproved" id="DateApproved" class="form-control" readonly="readonly" value="@Model.DateApproved" />
+                            @Html.ValidationMessageFor(m => m.DateApproved, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
         }
 
-        <div class="form-group">
+
+
+        <div class="col-12 d-flex justify-content-end pt-5">
             <input type="submit" class="btn btn-primary" name="save" value="@CadInfoGeneralesRES.Enregistrer" />
 
             @if (currentUrl.Contains(editFicheUrl))
             {
-                <input type="submit" class="btn btn-info" name="approve" value="@CadInfoGeneralesRES.Approuve" />
+                @:&nbsp;
+
+                <input type="submit" class="btn btn-primary" name="validate" value="@CadInfoGeneralesRES.ValidatedButton" />
+
+                if (!string.IsNullOrEmpty(Model.ValidatedPar))
+                {
+                    @:&nbsp;
+                    <input type="submit" class="btn btn-success" name="approve" value="@CadInfoGeneralesRES.Approuve" />
+                }
             }
         </div>
+
     </div>
 }
+
+
+
+
+
+
+@*<div class="form-group">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.CreatedPar, new { @class = "create-title" })
+            </div>
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.CreatedPar, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.CreatedPar, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.DateCreation, new { @class = "create-title" })
+            </div>
+            <div class="col-md-6">
+                <input name="DateCreation" id="DateCreation" class="form-control" readonly="readonly" value="@Model.DateCreation" />
+
+                @Html.ValidationMessageFor(m => m.DateCreation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    <div class="form-group">
+        <div class="col-md-3">
+            @Html.LabelFor(m => m.UpdatedPar, new { @class = "control-label" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.UpdatedPar, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(m => m.UpdatedPar, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-3">
+            @Html.LabelFor(m => m.DateUpdated, new { @class = "control-label" })
+        </div>
+        <div class="col-md-6">
+            <input name="DateUpdated" id="DateUpdated" class="form-control" readonly="readonly" value="@Model.DateUpdated" />
+
+            @Html.ValidationMessageFor(m => m.DateUpdated, "", new { @class = "text-danger" })
+        </div>
+    </div>
+*@
+
+
 
 
 

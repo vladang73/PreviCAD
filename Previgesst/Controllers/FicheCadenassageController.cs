@@ -193,7 +193,7 @@ namespace Previgesst.Controllers
                 return Json("");
         }
 
-        public ActionResult EditerFiche(EditFicheViewModel item, string save, string approve)
+        public ActionResult EditerFiche(EditFicheViewModel item, string save, string approve, string validate)
         {
             if (utilisateurService.VerifierBonClientCadenassage_Client(item.ClientId, true))
             {
@@ -219,7 +219,14 @@ namespace Previgesst.Controllers
                     var user = GetCurrentUser();
 
 
-                    if (!string.IsNullOrEmpty(approve))
+                    if (!string.IsNullOrEmpty(validate))
+                    {
+                        item.ValidatedPar = user;
+                        item.DateValidated = DateTime.Now;
+
+                        ficheCadenassageService.ValidateFiche(item);
+                    }
+                    else if (!string.IsNullOrEmpty(approve))
                     {
                         item.ApprouvePar = user;
                         item.DateApproved = DateTime.Now;
@@ -237,7 +244,7 @@ namespace Previgesst.Controllers
                     ViewData["idFiche"] = item.FicheCadenassageId;
                     // return View("EditFiche", item);
                     return RedirectToAction("EditFiche", new { Id = item.FicheCadenassageId, DroitAjout = "true" });
-                };
+                }
                 return View("EditFiche", Layout, vm);
             }
             else

@@ -184,6 +184,19 @@
         $('#slct').change(function () {
             location.href = $(this).val();
         });
+
+        function SetCheckbox(ctrl) {
+            if ($(ctrl).val() == 'on' || $(ctrl).prop("checked")) {
+                $(ctrl).val(true);
+            }
+            else {
+                $(ctrl).val(false);
+            }
+        }
+
+        $('input:checkbox').click(function () {
+            SetCheckbox($(this));
+        });
     </script>
 </body>
 </html>

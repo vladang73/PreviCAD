@@ -1,12 +1,13 @@
 :root {
 	--white: #fff;
-  --linkcolor: #0835B0;
-  --editbtnbg: #F9D600;
+    --linkcolor: #0835B0;
+    --editbtnbg: #F9D600;
 	--dupbtnbg: #7DCC5D;
 	--delbtnbg: #FB5507;
 	--brandlightblue: #329FFD;
 	--branddarkblue: #0835B0;
 }
+
 *{
 	font-family: 'HK Grotesk';
 }

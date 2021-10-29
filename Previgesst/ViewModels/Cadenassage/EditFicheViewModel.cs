@@ -60,6 +60,7 @@ namespace Previgesst.ViewModels
         [MaxLength(250, ErrorMessageResourceType = typeof(CadInfoGeneralesRES), ErrorMessageResourceName = "ErreurApprouvePar")]
         public string ApprouvePar { get; set; }
 
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "DateApproved")]
         public DateTime? DateApproved { get; set; }
 
 
@@ -119,5 +120,13 @@ namespace Previgesst.ViewModels
         public Boolean estUpdate { get; set; }
 
         public Boolean estClient { get; set; }
+
+
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "ValidatedDate")]
+        public DateTime? DateValidated { get; set; }
+
+        [StringLength(250)]
+        [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "ValidatedBy")]
+        public string ValidatedPar { get; set; }
     }
 }

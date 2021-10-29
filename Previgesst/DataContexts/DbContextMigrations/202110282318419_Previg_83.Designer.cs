@@ -7,13 +7,13 @@ namespace Previgesst.DataContexts.DbContextMigrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Previg_73 : IMigrationMetadata
+    public sealed partial class Previg_83 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Previg_73));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Previg_83));
         
         string IMigrationMetadata.Id
         {
-            get { return "202009291431503_Previg_73"; }
+            get { return "202110282318419_Previg_83"; }
         }
         
         string IMigrationMetadata.Source

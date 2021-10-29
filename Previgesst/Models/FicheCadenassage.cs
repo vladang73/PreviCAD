@@ -61,8 +61,6 @@ namespace Previgesst.Models
         public string UpdatedPar { get; set; }
 
 
-        //public DateTime? DateRevision { get; set; }
-
         public virtual ICollection<MaterielRequisCadenassage> MaterielsRequisCadenassage { get; set; }
         public virtual ICollection<SourceEnergieCadenassage> SourcesEnergieCadenassage { get; set; }
 
@@ -82,7 +80,13 @@ namespace Previgesst.Models
 
         public Boolean IsApproved { get; set; }
 
+        //public DateTime? DateRevision { get; set; }
         //public Boolean RevisionCourante { get; set; }
+
+        public DateTime? DateValidated { get; set; }
+
+        [StringLength(250)]
+        public string ValidatedPar { get; set; }
     }
 
     public class MaterielRequisCadenassage
@@ -122,18 +126,18 @@ namespace Previgesst.Models
         public int? InstructionId { get; set; }
         public virtual Instruction Instruction { get; set; }
 
-       
+
         [StringLength(250)]
         public string TexteSupplementaireInstruction { get; set; }
-       
+
         [StringLength(250)]
 
         public string TexteSupplementaireDispositif { get; set; }
-       
+
         //[StringLength(250)]
         //public string TexteLocalisation { get; set; }
 
-       
+
         public bool CocherColonneCadenas { get; set; }
         public Boolean Realiser { get; set; }
 
@@ -186,9 +190,9 @@ namespace Previgesst.Models
         //[StringLength(500)]
         //public string NomFichier { get; set; }
 
-        public string TexteSupplementaireRealiser { get; set;  }
+        public string TexteSupplementaireRealiser { get; set; }
 
-        
+
         public int? PhotoFicheCadenassageId { get; set; }
         public virtual PhotoFicheCadenassage PhotoFicheCadenassage { get; set; }
 

@@ -124,7 +124,7 @@
     <value>Afficher chez le client</value>
   </data>
   <data name="Approuve" xml:space="preserve">
-    <value>Approuver</value>
+    <value>Approuver la fiche</value>
   </data>
   <data name="ApprouvePar" xml:space="preserve">
     <value>Approuvé par</value>
@@ -145,7 +145,7 @@
     <value>Département</value>
   </data>
   <data name="Enregistrer" xml:space="preserve">
-    <value>Enregistrer</value>
+    <value>Enregistrer la fiche</value>
   </data>
   <data name="Equipement" xml:space="preserve">
     <value>Équipement</value>
@@ -197,5 +197,14 @@
   </data>
   <data name="DateApproved" xml:space="preserve">
     <value>Date d'approbation</value>
+  </data>
+  <data name="ValidatedButton" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="ValidatedBy" xml:space="preserve">
+    <value>Valider par</value>
+  </data>
+  <data name="ValidatedDate" xml:space="preserve">
+    <value>Date de validation</value>
   </data>
 </root>
