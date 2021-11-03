@@ -3,86 +3,48 @@
 <script>
 
     var path = '@Url.Content("~/Images/Cadenassage/Photos")';
-  
+
 </script>
-<style>
-    div.k-edit-form-container {
-        width: auto;
-    }
 
-        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
-            width: 100%;
-            max-width: none;
-            padding-left: 0px;
-        }
+<div class="main-page-content p-3">
 
-    .form-control {
-        width: 95%;
-    }
-
-    .petit {
-        max-height: 20px;
-    }
-
-    .row {
-        margin-right: 15px;
-        margin-left: 15px;
-    }
-
-    .col {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-
-    .imagedd .k-dropdown .k-dropdown-wrap .k-input {
-        height: 70px;
-    }
-    
-</style>
-
-
-<div class="container" style="width:600px;">
-
-
-    <div class="panel panel-default" style="margin-left:15px;margin-right:30px;">
-
-        <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-        <div class="panel-body">
+    <div class="row">
+        <div class="col-11">
             @Html.HiddenFor(model => model.LigneInstructionId)
             @Html.HiddenFor(model => model.FicheCadenassageId)
 
 
 
-            <div class="form-group" style="margin-bottom:5px;">
-                @Html.LabelFor(model => model.InstructionId, new { @class = "control-label" })
+            <div class="form-group mt-3">
+                @Html.LabelFor(model => model.InstructionId, new { @class = "form-label d-block" })
 
                 @(Html.Kendo().DropDownListFor(m => m.InstructionId)
-                                                                                    .DataValueField("InstructionId")
-                                                                                    .DataTextField("Identificateur")
-                                                                                    .Template("<div class=\"drop-down-list-item\" title=\"#=Description#-#=Dispositif#-#=Accessoire#\">#=Identificateur#</div>")
-                                                                                    .BindTo((System.Collections.IEnumerable)ViewData["Instructions"])
-                                                                                    .HtmlAttributes(new { data_value_primitive = "true" })
-                                                                                     .OptionLabel("-- "+ CadLigneCadRES.SelectInstruction + "  --")
+                    .DataValueField("InstructionId")
+                    .DataTextField("Identificateur")
+                    .Template("<div class=\"drop-down-list-item\" title=\"#=Description#-#=Dispositif#-#=Accessoire#\">#=Identificateur#</div>")
+                    .BindTo((System.Collections.IEnumerable)ViewData["Instructions"])
+                    .HtmlAttributes(new { data_value_primitive = "true" })
+                    .OptionLabel("-- "+ CadLigneCadRES.SelectInstruction + "  --")
                 )
                 @Html.ValidationMessageFor(model => model.InstructionId)
             </div>
 
 
-            <div class="form-group imagedd" style="margin-bottom:5px;">
-                @Html.LabelFor(model => model.PhotoFicheCadenassageId, new { @class = "control-label" })
+            <div class="form-group mt-3 imagedd">
+                @Html.LabelFor(model => model.PhotoFicheCadenassageId, new { @class = "form-label d-block" })
 
                 @(Html.Kendo().DropDownListFor(m => m.PhotoFicheCadenassageId)
-                                                                                    .DataValueField("PhotoFicheCadenassageId")
-                                                                                    .DataTextField("Rang")
-                                .BindTo((System.Collections.IEnumerable)ViewData["Photos"])
-                                .DataSource(c =>
-                                {
-                                    c.Read(k => k.Action("getPhotos", "FicheCadenassage", new { FicheCadenassageId = ViewData["idFiche"] }));
-                                })
-                                        .HtmlAttributes(new { data_value_primitive = "true" })
-                                            .OptionLabel("-- "+ CadLigneCadRES.SelectImage +"  --")
-                                            .Template("<img style='height:65px' class='imgDropDown' src='" + Url.Content("~/Images/Cadenassage/Photos/") + "#:data.PhotoFicheCadenassageId#/thumb.jpg' /><span class='txtImgDropDown'>#:data.Rang#</span>")
-                                                  .ValueTemplate("<img style='height:65px' class='imgDropDown' src='" + Url.Content("~/Images/Cadenassage/Photos/") + "#:data.PhotoFicheCadenassageId#/thumb.jpg' /><span class='txtImgDropDown'>#:data.Rang#</span>")
+                        .DataValueField("PhotoFicheCadenassageId")
+                        .DataTextField("Rang")
+                        .BindTo((System.Collections.IEnumerable)ViewData["Photos"])
+                        .DataSource(c =>
+                        {
+                            c.Read(k => k.Action("getPhotos", "FicheCadenassage", new { FicheCadenassageId = ViewData["idFiche"] }));
+                        })
+                        .HtmlAttributes(new { data_value_primitive = "true" })
+                        .OptionLabel("-- "+ CadLigneCadRES.SelectImage +"  --")
+                        .Template("<img style='height:65px' class='imgDropDown' src='" + Url.Content("~/Images/Cadenassage/Photos/") + "#:data.PhotoFicheCadenassageId#/thumb.jpg' /><span class='txtImgDropDown'>#:data.Rang#</span>")
+                        .ValueTemplate("<img style='height:65px' class='imgDropDown' src='" + Url.Content("~/Images/Cadenassage/Photos/") + "#:data.PhotoFicheCadenassageId#/thumb.jpg' /><span class='txtImgDropDown'>#:data.Rang#</span>")
 
                 )
                 @Html.ValidationMessageFor(model => model.PhotoFicheCadenassageId)
@@ -90,13 +52,13 @@
 
 
 
-            <div class="form-group">
+            <div class="form-group mt-3">
 
 
-                @Html.LabelFor(m => m.NoLigne, new { @class = "control-label" })
+                @Html.LabelFor(m => m.NoLigne, new { @class = "form-label d-block" })
 
                 @(Html.Kendo().NumericTextBoxFor(m => m.NoLigne)
-                .HtmlAttributes(new { @class = "form-control", style = "width:100%", type="text" })
+                .HtmlAttributes(new { @class = "form-control lh-50", type="text" })
                 .Min(0)
                 .Decimals(1)
                 .Format("N1")
@@ -108,72 +70,38 @@
 
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.TexteSupplementaireInstruction, new { @class = "control-label" })
+            <div class="form-group mt-3">
+                @Html.LabelFor(m => m.TexteSupplementaireInstruction, new { @class = "form-label d-block" })
 
-                @Html.TextAreaFor(m => m.TexteSupplementaireInstruction, new { @class = "form-control", @rows = 2 })
+                @Html.TextAreaFor(m => m.TexteSupplementaireInstruction, new { @class = "form-control lh-50", @rows = 2 })
                 @Html.ValidationMessageFor(m => m.TexteSupplementaireInstruction, "", new { @class = "text-danger" })
 
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.TexteSupplementaireInstructionEN, new { @class = "control-label" })
+            <div class="form-group mt-3">
+                @Html.LabelFor(m => m.TexteSupplementaireInstructionEN, new { @class = "form-label d-block" })
 
-                @Html.TextAreaFor(m => m.TexteSupplementaireInstructionEN, new { @class = "form-control", @rows = 2 })
+                @Html.TextAreaFor(m => m.TexteSupplementaireInstructionEN, new { @class = "form-control lh-50", @rows = 2 })
                 @Html.ValidationMessageFor(m => m.TexteSupplementaireInstructionEN, "", new { @class = "text-danger" })
 
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.TexteSupplementaireDispositif, new { @class = "control-label" })
+            <div class="form-group mt-3">
+                @Html.LabelFor(m => m.TexteSupplementaireDispositif, new { @class = "form-label d-block" })
 
-                @Html.TextAreaFor(m => m.TexteSupplementaireDispositif, new { @class = "form-control", @rows = 2 })
+                @Html.TextAreaFor(m => m.TexteSupplementaireDispositif, new { @class = "form-control lh-50", @rows = 2 })
                 @Html.ValidationMessageFor(m => m.TexteSupplementaireDispositif, "", new { @class = "text-danger" })
 
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.TexteSupplementaireDispositifEN, new { @class = "control-label" })
+            <div class="form-group mt-3">
+                @Html.LabelFor(m => m.TexteSupplementaireDispositifEN, new { @class = "form-label d-block" })
 
-                @Html.TextAreaFor(m => m.TexteSupplementaireDispositifEN, new { @class = "form-control", @rows = 2 })
+                @Html.TextAreaFor(m => m.TexteSupplementaireDispositifEN, new { @class = "form-control lh-50", @rows = 2 })
                 @Html.ValidationMessageFor(m => m.TexteSupplementaireDispositifEN, "", new { @class = "text-danger" })
 
             </div>
 
-            @*<div class="form-group">
-            @Html.LabelFor(m => m.TexteLocalisation, new { @class = "control-label" })
-
-            @Html.TextAreaFor(m => m.TexteLocalisation, new { @class = "form-control", @rows = 3 })
-            @Html.ValidationMessageFor(m => m.TexteLocalisation, "", new { @class = "text-danger" })
-
-        </div>*@
-
-            @*
-        <div class="form-group">
-            @Html.LabelFor(m => m.TexteRealiser, new { @class = "control-label" })
-
-            @Html.TextAreaFor(m => m.TexteRealiser, new { @class = "form-control", @rows = 3 })
-            @Html.ValidationMessageFor(m => m.TexteRealiser, "", new { @class = "text-danger" })
-
-        </div>*@
-
-            @*
-            <div class="form-group">
-                @Html.LabelFor(m => m.CocherColonneCadenas, new { @class = "control-label" })
-
-                @Html.CheckBoxFor(m => m.CocherColonneCadenas)
-                @Html.ValidationMessageFor(m => m.CocherColonneCadenas, "", new { @class = "text-danger" })
-
-            </div>
-            *@
-
-            @*<div class="form-group">
-            @Html.LabelFor(m => m.Realiser, new { @class = "control-label" })
-
-            @Html.CheckBoxFor(m => m.Realiser)
-            @Html.ValidationMessageFor(m => m.Realiser, "", new { @class = "text-danger" })
-
-        </div>*@
         </div>
     </div>
 </div>
@@ -182,7 +110,10 @@
 
 <script type="text/javascript">
     $(document).ready(() => {
-       
+
+        $('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        $('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+
         var dataInput = {
             id: $('#FicheCadenassageId').val()
         };
@@ -214,4 +145,4 @@
         });
 
     });
-    </script>
+</script>

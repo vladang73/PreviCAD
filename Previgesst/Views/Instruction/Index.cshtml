@@ -1,262 +1,276 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_v2.cshtml";
+}
+
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
 }
 
 
-<div class="container">
 
-    <div class="row">
+@section sidebar{
 
-        <div class="col-md-12">
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "AdminPrevi")'>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
 
-            <hr />
-
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-
-
-                    <li class="breadcrumb-item active" aria-current="page">Gestion des instructions</li>
-                </ol>
-            </nav>
-
-
-            <div class="panel panel-danger">
-
-                <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Instructions</div>
-                <div class="panel-body">
-
-                    <div id="Documents" class="tab-pane">
-
-                        @Html.AntiForgeryToken()
-
-                        @(Html.Kendo().Grid<InstructionViewModel>()
-                                .Name("list")
-                                .Columns(columns =>
-                                {
-
-                                    columns.Bound(e => e.InstructionId).Hidden();
-
-                                    columns.Bound(c => c.Identificateur).Filterable(f => f.Extra(false).Operators(operators => operators
-                            .ForString(str => str.Clear()
-                            .Contains("Contient")
-                            .StartsWith("Commence par")
-                            .IsEqualTo("Égal")
-                            .IsNotEqualTo("Différent")
-                            )));
-
-                                    columns.Bound(c => c.IdentificateurEN).Filterable(f => f.Extra(false).Operators(operators => operators
-.ForString(str => str.Clear()
-.Contains("Contient")
-.StartsWith("Commence par")
-.IsEqualTo("Égal")
-.IsNotEqualTo("Différent")
-)));
-
-                                    columns.Bound(c => c.Accessoire)
-                                         .Filterable(f => f.Extra(false).Operators(operators => operators
-                                      .ForString(str => str.Clear()
-                                      .Contains("Contient")
-                                          .StartsWith("Commence par")
-                                          .IsEqualTo("Égal")
-                                          .IsNotEqualTo("Différent")
-                                         )));
-
-
-                                    columns.Bound(c => c.Dispositif)
-                                         .Filterable(f => f.Extra(false).Operators(operators => operators
-                                      .ForString(str => str.Clear()
-                                      .Contains("Contient")
-                                          .StartsWith("Commence par")
-                                          .IsEqualTo("Égal")
-                                          .IsNotEqualTo("Différent")
-                                         )));
-
-
-                                    columns.Bound(c => c.TexteInstruction)
-                                 .Filterable(f => f.Extra(false).Operators(operators => operators
-                              .ForString(str => str.Clear()
-                              .Contains("Contient")
-                                  .StartsWith("Commence par")
-                                  .IsEqualTo("Égal")
-                                  .IsNotEqualTo("Différent")
-                                 )));
-
-                                    columns.Bound(c => c.TexteInstructionEN)
-                                 .Filterable(f => f.Extra(false).Operators(operators => operators
-                              .ForString(str => str.Clear()
-                              .Contains("Contient")
-                                  .StartsWith("Commence par")
-                                  .IsEqualTo("Égal")
-                                  .IsNotEqualTo("Différent")
-                                 )));
-
-
-                                    columns.Command(c =>
-                                    {
-                                        c.Edit();
-                                        c.Custom("Effacer")
-                                              .Click("ConfirmDeleteRow")
-                                              .HtmlAttributes(new { @class = "k-grid-effacer" });
-
-                                    })
-                                       .Width(250);
-
-                                })
-
-                                .Sortable(s => s.AllowUnsort(false))
-                                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                                .Filterable()
-                                .DataSource(ds => ds
-                                    .Ajax()
-                                       //.Sort( x=> x.Add (c => c.DisplaySection))
-                                       .Sort(x => x.Add(c => c.Identificateur))
-
-                                    .PageSize(20)
-                                    .Model(m =>
-                                    {
-                                        m.Id(e => e.InstructionId);
+        <li class="nav-item text-center active">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#tab">
+                <img src="/content/v2/images/Procédures.svg">
+                <p class="nav-link-text">Instructions</p>
+            </a>
+        </li>
+    </ul>
+}
 
 
 
-                                    })
 
-                                .Read(r => r.Action("ReadListInstructions", "Instruction"))
-                                .Create(c => c.Action("SaveInstruction", "Instruction"))
-                                .Update(u => u.Action("SaveInstruction", "Instruction"))
-                                .Destroy(u => u.Action("DeleteInstruction", "Instruction"))
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@Url.Action("Index", "AdminPrevi")'>Accueil</a></li>
+            <li class="active">Instructions</li>
+        </ul>
+    </div>
 
+    <div class="main-page-content">
 
-                                .Events(e => e
-                                    .Error("ListeErreur").RequestEnd("end")
-                                )
-                                )
-
-                                .Events(e => e
-                                    .DataBound("ListeDataBound")
-
-                                ).Editable(e => e.DisplayDeleteConfirmation(false)).
-                                Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("InstructionEditor").Window(w => w.Title("Édition d'une instruction").Width(600).Name("editWindow").Events(e => e.Close("doRefresh"))))
-
-
-                                                @*.ToolBar(tb =>
-                                                    {
-                                                    tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
-                                                    }*@
-
-                                .ToolBar(t =>
-                                {
-                                    t.Create();
-                                    t.Excel();
-                                })
-                                .Excel(excel => excel.FileName("Instructions.xlsx").AllPages(true))
-                        )
-
-
-                    </div>
-                </div>
+        <div class="table-top-header">
+            <div class="page-title d-flex justify-content-center align-items-center">
+                <h3>Gestion des instructions</h3>
             </div>
+            <div class="page-table-meta">
+                <div class="add-icon">
+                    <a id="btnAddList">
+                        <img src="/content/v2/images/plus-icon.svg" />
+                    </a>
+                </div>
+                &nbsp;&nbsp;
+                <a class="btn-table btn-excel pt-0 card-wrapper-link" id="btnExcel">Exporter vers Excel</a>
+            </div>
+        </div>
+
+
+
+        <div id="tab" class="tab-pane">
+
+            @Html.AntiForgeryToken()
+
+            @(Html.Kendo().Grid<InstructionViewModel>()
+                    .Name("list")
+                    .Columns(columns =>
+                    {
+
+                        columns.Bound(e => e.InstructionId).Hidden();
+
+                        columns.Bound(c => c.Identificateur).Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains("Contient")
+                                .StartsWith("Commence par")
+                                .IsEqualTo("Égal")
+                                .IsNotEqualTo("Différent")
+                                )))
+                                .HtmlAttributes(new { @class = "td-round-left-border" })
+                                ;
+
+                        columns.Bound(c => c.IdentificateurEN).Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains("Contient")
+                                .StartsWith("Commence par")
+                                .IsEqualTo("Égal")
+                                .IsNotEqualTo("Différent")
+                                )));
+
+                        columns.Bound(c => c.Accessoire)
+                                .Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains("Contient")
+                                .StartsWith("Commence par")
+                                .IsEqualTo("Égal")
+                                .IsNotEqualTo("Différent")
+                                )));
+
+
+                        columns.Bound(c => c.Dispositif)
+                                .Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains("Contient")
+                                .StartsWith("Commence par")
+                                .IsEqualTo("Égal")
+                                .IsNotEqualTo("Différent")
+                                )));
+
+
+                        columns.Bound(c => c.TexteInstruction)
+                                .Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains("Contient")
+                                .StartsWith("Commence par")
+                                .IsEqualTo("Égal")
+                                .IsNotEqualTo("Différent")
+                                )));
+
+                        columns.Bound(c => c.TexteInstructionEN)
+                                .Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains("Contient")
+                                .StartsWith("Commence par")
+                                .IsEqualTo("Égal")
+                                .IsNotEqualTo("Différent")
+                                )));
+
+
+                        columns.Command(c =>
+                        {
+                            c.Edit().Text(" ").HtmlAttributes(new { @class = "btn-table btn-editicon" });
+                            c.Custom(" ")
+                                .Click("ConfirmDeleteRow")
+                                .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+
+                        })
+                        .Width("150px");
+
+                    })
+
+                    .Sortable(s => s.AllowUnsort(false))
+                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                    .Filterable()
+                    .DataSource(ds => ds
+                        .Ajax()
+                        .Sort(x => x.Add(c => c.Identificateur))
+                        .PageSize(20)
+                        .Model(m =>
+                        {
+                            m.Id(e => e.InstructionId);
+                        })
+                    .Read(r => r.Action("ReadListInstructions", "Instruction"))
+                    .Create(c => c.Action("SaveInstruction", "Instruction"))
+                    .Update(u => u.Action("SaveInstruction", "Instruction"))
+                    .Destroy(u => u.Action("DeleteInstruction", "Instruction"))
+                    .Events(e => e.Error("ListeErreur").RequestEnd("end"))
+                    )
+
+                    .Events(e => e.DataBound("ListeDataBound"))
+                    .Editable(e => e.DisplayDeleteConfirmation(false))
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("InstructionEditor").Window(w => w.Title("Édition d'une instruction").Width(600).Name("editWindow").Events(e => e.Close("doRefresh"))))
+
+                    .ToolBar(t =>
+                    {
+                        t.Create().HtmlAttributes(new { @class = "d-none btn-instruction" });
+                        t.Excel().HtmlAttributes(new { @class = "d-none" });
+                    })
+                    .Excel(excel => excel.FileName("Instructions.xlsx").AllPages(true))
+            )
+
 
         </div>
     </div>
-</div>
-            <script>
+</main>
+
+<script>
 
 
-                    $("a.k-grid-add").removeClass("k-button  k-button-icontext");
-                    $("a.k-grid-add").addClass("btn btn-success btn-instruction");
-                    $("span.k-add").removeClass("k-icon");
-                $("a.btn-instruction").text("Nouvelle instruction");
+    //$("a.k-grid-add").removeClass("k-button  k-button-icontext");
+    //$("a.k-grid-add").addClass("btn btn-success btn-instruction");
+    //$("span.k-add").removeClass("k-icon");
+    //$("a.btn-instruction").text("Nouvelle instruction");
 
-             
+    function end(e) {
+        // reload de la grille car pas de refresh sur application mise à jour
 
+        if (e.type == "update") {
+            var grid = $("#list").data("kendoGrid");
+            grid.dataSource.read();
 
+        }
+    }
 
-
-                function end(e) {
-                    // reload de la grille car pas de refresh sur application mise à jour
-                   
-                   if (e.type == "update" ) {
-                        var grid = $("#list").data("kendoGrid");
-                        grid.dataSource.read();
-
-                    }
-
-                }
-                function doRefresh(e) {
-                    var grid = $("#list").data("kendoGrid");
-                    grid.dataSource.read();
-                }
-               
-
-                function ConfirmDeleteRow(e) {
-
-                    e.preventDefault();
-
-                    var grid = this;
-                    var row = $(e.currentTarget).closest("tr");
-                    var dataItem = this.dataItem(row);
-
-                    ShowDeleteConfirm(dataItem.Identificateur, function (args) {
-                        if (args.confirmed === true) {
-                            grid.removeRow(row);
-                        }
-                    });
-
-                }
+    function doRefresh(e) {
+        var grid = $("#list").data("kendoGrid");
+        grid.dataSource.read();
+    }
 
 
-                function ListeErreur(args) {
+    function ConfirmDeleteRow(e) {
 
-                    var selecteurGrid = "#list";
-                    if (args.errors) {
-                        var grid = $(selecteurGrid).data("kendoGrid");
-                        var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
-                        grid.one("dataBinding", function (e) {
-                            e.preventDefault();
+        e.preventDefault();
 
-                            $.each(args.errors, function (propertyName) {
-                                var errorList = validationTemplate({ field: propertyName, messages: this.errors });
-                                alert(this.errors);
-                                ShowNotification("Erreur - Gestions",
-                                    errorList,
-                                    "errorListTemplate");
-                            });
-                        });
-                    }
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.Identificateur, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+
+    }
+
+
+    function ListeErreur(args) {
+
+        var selecteurGrid = "#list";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("Erreur - Gestions",
+                        errorList,
+                        "errorListTemplate");
+                });
+            });
+        }
 
 
 
-                }
-
-              
-
-                function ListeDataBound(e) {
+    }
 
 
 
-                    var selecteurGrid = "#list";
-                    var grid = $(selecteurGrid).data("kendoGrid");
+    function ListeDataBound(e) {
+        //var selecteurGrid = "#list";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
 
-                    //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-                   
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-                    //Selects all delete buttons
-                    $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-                        var currentDataItem = grid.dataItem($(this).closest("tr"));
-                 
-                        //Check in the current dataItem if the row is deletable
-                        if (!currentDataItem.Suppressible) {
+        //        $(this).remove();
+        //    }
+        //})
+    }
 
-                            $(this).remove();
-                        }
-                    })
-                   
-                }
 
-            </script>
+    $('#btnAddList').click(function () {
+        $("#list").find("a.d-none.k-grid-add").click();
+    });
+
+    $('#btnExcel').click(function () {
+        $("#list").find(".d-none.k-grid-excel").click();
+    });
+
+</script>
 
 

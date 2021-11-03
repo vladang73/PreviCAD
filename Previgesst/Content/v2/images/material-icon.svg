@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16.839" height="18.086" viewBox="0 0 16.839 18.086">
+  <g id="material-icon" transform="translate(-1595 -298)">
+    <g id="Rectangle_410" data-name="Rectangle 410" transform="translate(1595 298)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="16.839" height="18.086" rx="4" stroke="none"/>
+      <rect x="1" y="1" width="14.839" height="16.086" rx="3" fill="none"/>
+    </g>
+    <circle id="Ellipse_60" data-name="Ellipse 60" cx="1.247" cy="1.247" r="1.247" transform="translate(1598.118 301.742)" fill="#fff"/>
+    <circle id="Ellipse_63" data-name="Ellipse 63" cx="1.247" cy="1.247" r="1.247" transform="translate(1598.118 306.108)" fill="#fff"/>
+    <circle id="Ellipse_65" data-name="Ellipse 65" cx="1.247" cy="1.247" r="1.247" transform="translate(1598.118 309.85)" fill="#fff"/>
+    <line id="Line_55" data-name="Line 55" x2="4.989" transform="translate(1602.796 302.989)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <line id="Line_56" data-name="Line 56" x2="4.989" transform="translate(1602.796 307.043)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+    <line id="Line_57" data-name="Line 57" x2="4.989" transform="translate(1602.796 311.097)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="2"/>
+  </g>
+</svg>

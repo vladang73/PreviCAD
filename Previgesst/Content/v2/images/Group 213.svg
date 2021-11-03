@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38.383" height="38.44" viewBox="0 0 38.383 38.44">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="Path_217" data-name="Path 217" d="M0,0H38.383V-38.44H0Z" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_213" data-name="Group 213" transform="translate(0 38.44)" clip-path="url(#clip-path)">
+    <g id="Group_210" data-name="Group 210" transform="translate(19.191 -0.6)">
+      <path id="Path_214" data-name="Path 214" d="M0,0A18.6,18.6,0,0,0,18.591-18.62,18.6,18.6,0,0,0,0-37.239,18.6,18.6,0,0,0-18.591-18.62,18.6,18.6,0,0,0,0,0" fill="#fff"/>
+    </g>
+    <g id="Group_211" data-name="Group 211" transform="translate(19.191 -0.6)">
+      <path id="Path_215" data-name="Path 215" d="M0,0A18.6,18.6,0,0,0,18.591-18.62,18.6,18.6,0,0,0,0-37.239,18.6,18.6,0,0,0-18.591-18.62,18.6,18.6,0,0,0,0,0Z" fill="none" stroke="#ebe9e8" stroke-width="1.2"/>
+    </g>
+    <g id="tick-icon" transform="translate(27.337 -22.683)">
+      <path id="Path_216" data-name="Path 216" d="M0,0-9.484,8.415a2.6,2.6,0,0,1-3.328,0L-16.336,5.4" fill="none" stroke="#7ccc5d" stroke-miterlimit="10" stroke-width="4.8"/>
+    </g>
+  </g>
+</svg>

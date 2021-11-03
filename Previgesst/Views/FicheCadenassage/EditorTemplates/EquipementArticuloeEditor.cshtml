@@ -1,103 +1,73 @@
 ﻿@model EquipementArticuloViewModel
 @using Previgesst.Ressources.Cadenassage
 
-<style>
-    div.k-edit-form-container {
-        width: auto;
-    }
 
-        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
-            width: 100%;
-            max-width: none;
-            padding-left: 0px;
-        }
-
-
-
-    .petit {
-        max-height: 20px;
-        padding-right: 0px;
-    }
-
-    .row {
-        margin-right: 15px;
-        margin-left: 15px;
-    }
-
-    .col {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-</style>
-
-<div class="container" style="width:600px; margin:0px;padding:0px;">
+<div class="p-3">
 
     <div class="row">
-        <div class="col-md-12" style="padding-left:0px;">
+        <div class="col-11">
 
             @Html.HiddenFor(model => model.EquipementId)
             @Html.HiddenFor(model => model.EquipementArticuloID)
 
-            <div class="panel panel-info">
 
-                <div class="panel-heading">@CadEquipRES.EquipmentMgmtEnergy</div>
-                <div class="panel-body">
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                        <label for="Model">@CadEquipRES.SourceEnergie</label>
-
-                        @(Html.Kendo().DropDownListFor(m => m.Energy)
-                                                    .DataValueField("SourceEnergieId")
-                                                    .DataTextField("Description")
-                                                    .BindTo((System.Collections.IEnumerable)ViewData["Sources"])
-                                                    .HtmlAttributes(new { data_value_primitive = "true" })
-                        )
-                        @Html.ValidationMessageFor(model => model.Energy)
-                    </div>
+            @*<div class="panel-heading">@CadEquipRES.EquipmentMgmtEnergy</div>*@
 
 
-                    <div class="form-group" style="margin-bottom:5px;">
-                        <label for="Model">@CadEquipRES.Dispositif</label>
+            <div class="form-group">
+                <label for="Model" class="form-label">@CadEquipRES.SourceEnergie</label>
 
-                        @(Html.Kendo().DropDownListFor(m => m.Deposit)
-                                                    .DataValueField("DispositifId")
-                                                    .DataTextField("Description")
-                                                    .BindTo((System.Collections.IEnumerable)ViewData["Dispositifs"])
-                                                    .HtmlAttributes(new { data_value_primitive = "true" })
-                        )
-                        @Html.ValidationMessageFor(model => model.Deposit)
-                    </div>
-
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                        <label for="Model">@CadEquipRES.Accessoires</label>
-
-                        @(Html.Kendo().DropDownListFor(m => m.Accessories)
-                                                    .DataValueField("MaterielId")
-                                                    .DataTextField("Description")
-                                                    .BindTo((System.Collections.IEnumerable)ViewData["Materiel"])
-                                                    .HtmlAttributes(new { data_value_primitive = "true" })
-                        )
-                        @Html.ValidationMessageFor(model => model.Accessories)
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                        <label for="Model">Nomenclature</label>
-
-
-                        @Html.TextBoxFor(model => model.Nomenclature, new { @class = "form-control petit", @style = "width:95%;" })
-                        @Html.ValidationMessageFor(model => model.Nomenclature)
-
-                    </div>
-
-                </div>
+                @(Html.Kendo().DropDownListFor(m => m.Energy)
+                        .DataValueField("SourceEnergieId")
+                        .DataTextField("Description")
+                        .BindTo((System.Collections.IEnumerable)ViewData["Sources"])
+                        .HtmlAttributes(new { data_value_primitive = "true" })
+                )
+                @Html.ValidationMessageFor(model => model.Energy)
             </div>
+
+
+            <div class="form-group mt-3">
+                <label for="Model" class="form-label">@CadEquipRES.Dispositif</label>
+
+                @(Html.Kendo().DropDownListFor(m => m.Deposit)
+                        .DataValueField("DispositifId")
+                        .DataTextField("Description")
+                        .BindTo((System.Collections.IEnumerable)ViewData["Dispositifs"])
+                        .HtmlAttributes(new { data_value_primitive = "true" })
+                )
+                @Html.ValidationMessageFor(model => model.Deposit)
+            </div>
+
+
+            <div class="form-group mt-3">
+                <label for="Model" class="form-label">@CadEquipRES.Accessoires</label>
+
+                @(Html.Kendo().DropDownListFor(m => m.Accessories)
+                        .DataValueField("MaterielId")
+                        .DataTextField("Description")
+                        .BindTo((System.Collections.IEnumerable)ViewData["Materiel"])
+                        .HtmlAttributes(new { data_value_primitive = "true" })
+                )
+                @Html.ValidationMessageFor(model => model.Accessories)
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="Model" class="form-label">Nomenclature</label>
+
+                @Html.TextBoxFor(model => model.Nomenclature, new { @class = "form-control petit", @style = "width:95%;" })
+                @Html.ValidationMessageFor(model => model.Nomenclature)
+            </div>
+
         </div>
     </div>
 </div>
 
 
+<script type="text/javascript">
+    $(document).ready(() => {
 
-
-
-
+        $('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        $('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+    });
+</script>

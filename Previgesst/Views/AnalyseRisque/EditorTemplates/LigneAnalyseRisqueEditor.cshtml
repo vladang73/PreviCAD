@@ -2,30 +2,6 @@
 @using Previgesst.Ressources.Analyse
 
 <style>
-    div.k-edit-form-container {
-        width: auto;
-    }
-
-    div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
-        width: 100%;
-        max-width: none;
-        padding-left: 0px;
-    }
-
-    .petit {
-        max-height: 20px;
-    }
-
-    .row {
-        margin-right: 15px;
-        margin-left: 15px;
-    }
-
-    .col {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-
     .autocomplete {
         display: inline-block !important;
         border: 1px solid #ccc !important;
@@ -36,121 +12,67 @@
         max-width: none;
         padding-right: 6px !important;
     }
-
-    .form-row {
-        margin-bottom: 5px;
-    }
 </style>
 
-<div class="container" style="width:950px; margin:0px;padding:0px;">
-    <div class="row" style="margin-bottom:5px;padding-bottom:0px">
-        <div class="col-md-12" style="padding-left:0px;padding-right:0px;">
-            <div class="panel panel-info" style="margin-bottom:0px;padding-bottom:0px">
+<div class="p-3">
+    <div class="row">
+        <div class="col-11">
+            @*<div class="panel-heading">@ARLignesRES.TacheOP</div>*@
 
-                <div class="panel-heading">@ARLignesRES.TacheOP</div>
-                <div class="panel-body">
-
-                    @* <div class="form-group">*@
-
-                    @*<div class="form-row" style="margin-bottom:5px;">
-                            <div class="col-md-6 form-inline">
-                                <div class="col-md-2 form-inline">
-                                    @Html.LabelFor(model => model.NoReference, new { @class = "control-label pull-left" })
-                                </div>
-                                <div class="col-md-4 form-inline">
-                                    @Html.TextBoxFor(model => model.NoReference, new { @class = "form-control petit", @style = "width:100%" })
-                                    @Html.ValidationMessageFor(model => model.NoReference)
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 form-inline">
-                                <div class="col-md-2">
-                                    @Html.LabelFor(model => model.Rang, new { @class = "control-label pull-left" })
-                                </div>
-                                <div class="col-md-4">
-                                    @Html.TextBoxFor(model => model.Rang, new { @type = "number", @class = "form-control petit", @style = "width:100%" })
-                                    @Html.ValidationMessageFor(model => model.Rang)
-                                </div>
-                            </div>
-
-                        </div>*@
-
-                    @*<div class="row" style="margin-bottom:14px;">
-                        <div class="col-md-4 form-inline">
-                            <div class="col-md-2">
-                                @Html.LabelFor(model => model.NoReference, new { @class = "control-label pull-left" })
-                            </div>
-                            <div class="col-md-6">
-                                @Html.TextBoxFor(model => model.NoReference, new { @class = "autocomplete form-control petit", @style = "width:100%" })
-                                @Html.ValidationMessageFor(model => model.NoReference)
-                            </div>
-                        </div>
-                        <div class="col-md-6 form-inline">
-                            <div class="col-md-2">
-                                @Html.LabelFor(model => model.Equipement, new { @class = "control-label pull-left" })
-                            </div>
-                            <div class="col-md-8">
-                                @Html.TextBoxFor(model => model.Equipement, new { @class = "autocomplete form-control petit", @style = "width:100%" })
-                                @Html.ValidationMessageFor(model => model.Equipement)
-                            </div>
-                        </div>
-                    </div>*@
-
-                    <div class="row" style="margin-bottom:5px">
-                        <div class="col-md-4">
-                            <div class="col-md-2">
-                                @Html.LabelFor(model => model.Rang, new { @class = "control-label pull-left" })
-                            </div>
-                            <div class="col-md-6">
-                                @(Html.Kendo().NumericTextBoxFor(m => m.Rang)
-                                    .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
+            <div class="row mt-3">
+                <div class="col-md-4">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Rang, new { @class = "form-label d-block" })
+                    </div>
+                    <div class="col-md-6">
+                        @(Html.Kendo().NumericTextBoxFor(m => m.Rang)
+                                    .HtmlAttributes(new { @class = "form-control" })
                                     .Min(0)
                                     .Decimals(1)
                                     .Format("N1")
-                                    .Culture("fr-CA") 
+                                    .Culture("fr-CA")
                                 )
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 form-inline">
-                            <div class="col-md-2">
-                                @Html.LabelFor(model => model.Zone, new { @class = "control-label pull-left" })
-                            </div>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(model => model.Zone, new { @class = "autocomplete form-control petit", @style = "width:100%" })
-                                @Html.ValidationMessageFor(model => model.Zone)
-                            </div>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-4"></div>
-
-                        <div class="col-md-6 form-inline">
-                            <div class="col-md-2">
-                                @Html.LabelFor(model => model.Operation, new { @class = "control-label pull-left" })
-                            </div>
-                            <div class="col-md-7">
-                                @Html.TextBoxFor(model => model.Operation, new { @class = "autocomplete form-control petit", @style = "width:100%" })
-                                @Html.ValidationMessageFor(model => model.Operation)
-                            </div>
-                        </div>
+                <div class="col-md-6 form-inline">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Zone, new { @class = "form-label d-block" })
                     </div>
-                    @*</div>*@
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.Zone, new { @class = "autocomplete form-control petit" })
+                        @Html.ValidationMessageFor(model => model.Zone)
+                    </div>
                 </div>
             </div>
 
+            <div class="row mt-3">
+                <div class="col-md-4"></div>
+
+                <div class="col-md-6 form-inline">
+                    <div class="col-md-2">
+                        @Html.LabelFor(model => model.Operation, new { @class = "form-label d-block" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(model => model.Operation, new { @class = "autocomplete form-control petit" })
+                        @Html.ValidationMessageFor(model => model.Operation)
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row" style="padding-top:0px">
-        <div class="col-md-6" style="margin-left:0px;padding-left:0px;padding-right:0px;padding-top:0px">
-            <div class="panel panel-danger" style="margin-left:0px;margin-right:10px">
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-danger">
                 <div class="panel-heading">@ARLignesRES.EvalSansProtection</div>
 
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.PhenomeneId, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.PhenomeneId, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @(Html.Kendo().DropDownListFor(m => m.PhenomeneId)
@@ -165,7 +87,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.SituationId, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.SituationId, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @(Html.Kendo().DropDownListFor(m => m.SituationId)
@@ -180,7 +102,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.EvenementId, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.EvenementId, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @(Html.Kendo().DropDownListFor(m => m.EvenementId)
@@ -195,7 +117,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.DommagePossibleId, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.DommagePossibleId, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @(Html.Kendo().DropDownListFor(m => m.DommagePossibleId)
@@ -210,7 +132,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.GraviteAvantId, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.GraviteAvantId, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @(Html.Kendo().DropDownListFor(m => m.GraviteAvantId)
@@ -226,7 +148,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.FrequenceAvantId, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.FrequenceAvantId, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @(Html.Kendo().DropDownListFor(m => m.FrequenceAvantId)
@@ -242,7 +164,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.ProbabiliteAvantId, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.ProbabiliteAvantId, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @(Html.Kendo().DropDownListFor(m => m.ProbabiliteAvantId)
@@ -258,7 +180,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.PossibiliteAvantId, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.PossibiliteAvantId, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @(Html.Kendo().DropDownListFor(m => m.PossibiliteAvantId)
@@ -275,7 +197,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.IndiceFinalAvant, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.IndiceFinalAvant, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @Html.TextBoxFor(model => model.IndiceFinalAvantTEXTE, new { @class = "form-control petit", @style = "width:90%;", @disabled = "disabled" })
@@ -285,7 +207,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.NbPersonnesExposees, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.NbPersonnesExposees, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @Html.TextBoxFor(model => model.NbPersonnesExposees, new { @type = "number", @class = "form-control petit", @style = "width:20%" })
@@ -295,7 +217,7 @@
 
                     <div class="row">
                         <div class="col-4">
-                            @Html.LabelFor(model => model.SystemeCommandeAvant, new { @class = "control-label" })
+                            @Html.LabelFor(model => model.SystemeCommandeAvant, new { @class = "form-label d-block" })
                         </div>
                         <div class="col">
                             @Html.TextBoxFor(model => model.SystemeCommandeAvant, new { @class = "form-control petit", @style = "width:90%" })
@@ -305,24 +227,12 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6" style="margin-left:0px;padding-left:0px;padding-right:0px;">
-            <div class="panel panel-success" style="margin-left:10px;margin-right:0px;">
+        <div class="col-md-6">
+            <div class="panel panel-success">
                 <div class="panel-heading">@ARLignesRES.MesuresReduction</div>
 
                 <div class="panel-body">
                     <div class="row">
-                        @*<div class="col-4">
-                @Html.LabelFor(model => model.ReglementId, new { @class = "control-label" })
-            </div>
-            <div class="col">
-                @(Html.Kendo().DropDownListFor(m => m.ReglementId)
-                    .DataValueField("ReglementId")
-                    .DataTextField("Description")
-                    .BindTo((System.Collections.IEnumerable)ViewData["Reglements"])
-                    .HtmlAttributes(new { data_value_primitive = "true" })
-                )
-                @Html.ValidationMessageFor(model => model.ReglementId)
-            </div>*@
 
                         <div class="col-4">
                             @Html.LabelFor(model => model.ReglesEtNormes, new { @class = "control-label" })
@@ -486,9 +396,10 @@
             </div>
         </div>
     </div>
-</div>
 
-@Html.HiddenFor(m => m.IdLigneAnalyseRisqueEditor)
+    @Html.HiddenFor(m => m.IdLigneAnalyseRisqueEditor)
+
+</div>
 
 <script type="text/javascript">
     $(document).ready(() => {
@@ -501,7 +412,7 @@
         var dataInput = {
             id: $('#Id').val()
         };
-        
+
         $.ajax({
             data: JSON.stringify(dataInput),
             url: '@Url.Action("GetNewValue")',
@@ -512,7 +423,7 @@
                 if ($('#IdLigneAnalyseRisqueEditor').val() == 0) {
                     var numericBox = $("#Rang").data("kendoNumericTextBox");
                     numericBox.value(result);
-                   
+
                     var z = $('.k-popup-edit-form');
                     var gview = $("#list").data("kendoGrid");
                     var item = $("#list").find("[data-uid='" + z.attr('data-uid') + "']");

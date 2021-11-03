@@ -2,164 +2,158 @@
 @model ClientEditDetailsViewModel
 
 
-
-<div class="panel panel-danger">
-
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-    <div class="panel-body">
-
-        <div class="tab-pane">
-
-            @Html.AntiForgeryToken()
-
-            @(
-                                Html.Kendo().Grid<UtilisateurIndexViewModel>()
-                                .Name("list")
-                                .Columns(columns =>
-                                {
-                                    columns.Bound(e => e.ClientId).Hidden();
-                                    columns.Bound(e => e.UtilisateurId).Hidden();
-
-                                    columns.Bound(e => e.NomUtilisateur).Filterable(f => f.Extra(false).Operators(op => op
-                                .ForString(str => str
-                                    .Clear()
-                                    .Contains(GridRES.Contains)
-                                    .StartsWith(GridRES.StartsWith)
-                                    .IsEqualTo(GridRES.Egale)
-                                    .IsNotEqualTo(GridRES.NotEquals)
-                                    )
-                            ));
-
-                                    columns.Bound(e => e.Nom).Filterable(f => f.Extra(false).Operators(op => op
-                                            .ForString(str => str
-                                                .Clear()
-                                                 .Contains(GridRES.Contains)
-                                    .StartsWith(GridRES.StartsWith)
-                                    .IsEqualTo(GridRES.Egale)
-                                    .IsNotEqualTo(GridRES.NotEquals)
-                                                )
-                                        ));
-
-
-                                    columns.Bound(e => e.Actif).Filterable(f => f.Extra(false)).ClientTemplate("<center><input disabled type='checkbox' #= Actif ? checked='checked' :'' # /></center>");
-
-                                    columns.Command(c =>
-                                    {
-                                        c.Edit();
-                                        c.Custom(ClientRES.Effacer)
-                                                .Click("ConfirmDeleteRow")
-                                                .HtmlAttributes(new { @class = "k-grid-effacer" });
-
-                                    }).Width(250);
-                                }
-
-                            )
-                            .Sortable(s => s.AllowUnsort(false))
-                            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                            .Filterable()
-                            .DataSource(ds => ds
-                                .Ajax()
-                                .PageSize(20)
-                                .Model(m =>
-                                {
-                                    m.Id(e => e.UtilisateurId);
-                                })
-                                .Read(r => r.Action("ReadListUtilisateurs", "Client", new { clientId = Model.ClientId }))
-                                .Create(c => c.Action("SaveUser", "Client", new { z = Model.ClientId }))
-                                .Update(c => c.Action("SaveUser", "Client", new { z = Model.ClientId }))
-                                .Destroy(d => d.Action("DeleteUser", "Client"))
-                                .Events(e => e
-                                .Error("error"))
-
-                            )
-                            .Events(e => e.DataBound("ListeDataBound"))
-
-                            .Editable(e => e.DisplayDeleteConfirmation(false))
-                            .Editable(e => e.Mode(GridEditMode.PopUp).TemplateName("EditUser").Window(w => w.Title(ClientRES.Edition).Width(600).Name("editWindow")))
-
-                            .ToolBar(t => t.Create())
-            )
-
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">Utilisateur</h3>
+    </div>
+    <div class="page-table-meta">
+        <div class="add-icon">
+            <a id="btnAddUser">
+                <img src="/content/v2/images/plus-icon.svg" />
+            </a>
         </div>
-
-        <script type="text/javascript">
-
-            function ListeDataBound(e) {
-
-
-
-                var selecteurGrid = "#list";
-                var grid = $(selecteurGrid).data("kendoGrid");
-
-                //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
-
-                //Selects all delete buttons
-                $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-                    var currentDataItem = grid.dataItem($(this).closest("tr"));
-
-                    //Check in the current dataItem if the row is deletable
-                    if (!currentDataItem.Suppressible) {
-
-                        $(this).remove();
-                    }
-                })
-            }
-
-            function ConfirmDeleteRow(e) {
-
-                e.preventDefault();
-
-                var grid = this;
-                var row = $(e.currentTarget).closest("tr");
-                var dataItem = this.dataItem(row);
-
-                ShowDeleteConfirm(dataItem.Nom, function (args) {
-                    if (args.confirmed === true) {
-                        grid.removeRow(row);
-                    }
-                });
-
-            }
-
-
-
-
-
-
-
-        </script>
-
-
-
-        <script type="text/kendo-template" id="message">
-            <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
-                 style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage">
-                <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
-            </div>
-        </script>
-
-        <script type="text/javascript">
-            var validationMessageTmpl = kendo.template($("#message").html());
-
-            function error(args) {
-                if (args.errors) {
-                    var grid = $("#list").data("kendoGrid");
-                    grid.one("dataBinding", function (e) {
-                        e.preventDefault();   // cancel grid rebind if error occurs
-
-                        for (var error in args.errors) {
-                            showMessage(grid.editable.element, error, args.errors[error].errors);
-                        }
-                    });
-                }
-            }
-
-            function showMessage(container, name, errors) {
-                //add the validation message to the form
-                container.find("[data-valmsg-for=" + name + "],[data-val-msg-for=" + name + "]")
-                    .replaceWith(validationMessageTmpl({ field: name, message: errors[0] }))
-            }
-
-        </script>
     </div>
 </div>
+
+
+
+@Html.AntiForgeryToken()
+
+@(
+        Html.Kendo().Grid<UtilisateurIndexViewModel>()
+        .Name("list")
+        .Columns(columns =>
+        {
+            columns.Bound(e => e.ClientId).Hidden();
+            columns.Bound(e => e.UtilisateurId).Hidden();
+
+            columns.Bound(e => e.NomUtilisateur).Filterable(f => f.Extra(false).Operators(op => op
+                .ForString(str => str
+                .Clear()
+                .Contains(GridRES.Contains)
+                .StartsWith(GridRES.StartsWith)
+                .IsEqualTo(GridRES.Egale)
+                .IsNotEqualTo(GridRES.NotEquals)
+                )
+            ))
+            .HtmlAttributes(new { @class = "td-round-left-border" })
+            ;
+
+            columns.Bound(e => e.Nom).Filterable(f => f.Extra(false).Operators(op => op
+                    .ForString(str => str
+                    .Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals))
+            ));
+
+            columns.Bound(e => e.Actif).Filterable(f => f.Extra(false))
+                    //.ClientTemplate("<center><input disabled type='checkbox' #= Actif ? checked='checked' :'' # /></center>")
+                    .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' disabled id='squaredone' name='check' #= Actif ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
+                    .Width("90px")
+                    ;
+
+            columns.Command(c =>
+            {
+                c.Edit().Text("Modifier").HtmlAttributes(new { @class = "btn-table btn-edit" });
+                c.Custom(" ")
+                        .Click("ConfirmDeleteRow")
+                        .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+
+            }).Width("200px");
+        }
+    )
+    .Sortable(s => s.AllowUnsort(false))
+    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+    .Filterable()
+    .DataSource(ds => ds
+        .Ajax()
+        .PageSize(20)
+        .Model(m =>
+        {
+            m.Id(e => e.UtilisateurId);
+        })
+        .Read(r => r.Action("ReadListUtilisateurs", "Client", new { clientId = Model.ClientId }))
+        .Create(c => c.Action("SaveUser", "Client", new { z = Model.ClientId }))
+        .Update(c => c.Action("SaveUser", "Client", new { z = Model.ClientId }))
+        .Destroy(d => d.Action("DeleteUser", "Client"))
+        .Events(e => e
+        .Error("error"))
+
+    )
+    .Events(e => e.DataBound("ListeDataBound"))
+
+    .Editable(e => e.DisplayDeleteConfirmation(false))
+    .Editable(e => e.Mode(GridEditMode.PopUp).TemplateName("EditUser").Window(w => w.Title(ClientRES.Edition).Width(600).Name("editWindow")))
+
+    .ToolBar(t => t.Create().HtmlAttributes(new { @class = "btn-test d-none" }))
+)
+
+<script type="text/kendo-template" id="message">
+    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
+         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage">
+        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
+    </div>
+</script>
+
+<script type="text/javascript">
+
+    function ListeDataBound(e) {
+        //var selecteurGrid = "#list";
+        //var grid = $(selecteurGrid).data("kendoGrid");
+
+
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
+
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
+
+        //        $(this).remove();
+        //    }
+        //})
+    }
+
+    function ConfirmDeleteRow(e) {
+        e.preventDefault();
+
+        var grid = this;
+        var row = $(e.currentTarget).closest("tr");
+        var dataItem = this.dataItem(row);
+
+        ShowDeleteConfirm(dataItem.Nom, function (args) {
+            if (args.confirmed === true) {
+                grid.removeRow(row);
+            }
+        });
+    }
+
+
+    var validationMessageTmpl = kendo.template($("#message").html());
+
+    function error(args) {
+        if (args.errors) {
+            var grid = $("#list").data("kendoGrid");
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();   // cancel grid rebind if error occurs
+
+                for (var error in args.errors) {
+                    showMessage(grid.editable.element, error, args.errors[error].errors);
+                }
+            });
+        }
+    }
+
+    function showMessage(container, name, errors) {
+        //add the validation message to the form
+        container.find("[data-valmsg-for=" + name + "],[data-val-msg-for=" + name + "]")
+            .replaceWith(validationMessageTmpl({ field: name, message: errors[0] }))
+    }
+
+    $('#btnAddUser').click(function () {
+        $("#list").find("a.d-none.k-grid-add").click();
+    });
+
+</script>

@@ -1,112 +1,71 @@
 ﻿@model DocumentViewModel
-<style>
-    div.k-edit-form-container {
-        width: auto;
-    }
-
-        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
-            width: 100%;
-            max-width: none;
-            padding-left: 0px;
-        }
 
 
-
-    .petit {
-        max-height: 20px;
-    }
-
-    .row {
-        margin-right: 15px;
-        margin-left: 15px;
-    }
-
-    .col {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-</style>
-
-<div class="container" style="width:600px; margin:0px;padding:0px;">
+<div class="p-3">
 
     <div class="row">
-        <div class="col-md-12" style="padding-left:0px;">
+        <div class="col-11">
             @Html.HiddenFor(model => model.DocumentId)
-            <div class="panel panel-info">
-
-                <div class="panel-heading">Document </div>
-                <div class="panel-body">
 
 
-                    <div class="form-group" style="margin-bottom:5px;">
-                        @Html.LabelFor(model => model.SectionId, new { @class = "control-label" })
+            <div class="form-group mt-3">
+                @Html.LabelFor(model => model.SectionId, new { @class = "form-label d-block" })
 
-                        @(Html.Kendo().DropDownListFor(m => m.SectionId)
+                @(Html.Kendo().DropDownListFor(m => m.SectionId)
                                             .DataValueField("SectionId")
                                             .DataTextField("Description")
                                             .BindTo((System.Collections.IEnumerable)ViewData["Sections"])
                                             .HtmlAttributes(new { data_value_primitive = "true" })
                         )
-                        @Html.ValidationMessageFor(model => model.SectionId)
-                    </div>
+                @Html.ValidationMessageFor(model => model.SectionId)
+            </div>
 
-                    <div class="form-group" style="margin-bottom:5px;">
-
-
-                        @Html.LabelFor(model => model.Titre, new { @class = "control-label pull-left" })
+            <div class="form-group mt-3">
 
 
-                        @Html.TextBoxFor(model => model.Titre, new { @class = "form-control petit", @style = "width:95%" })
-                        @Html.ValidationMessageFor(model => model.Titre)
-
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:30px;">
+                @Html.LabelFor(model => model.Titre, new { @class = "form-label d-block pull-left" })
 
 
-                        @Html.LabelFor(m => m.Ordre, new { @class = "control-label pull-left" })
-                        @(Html.Kendo().NumericTextBoxFor(m => m.Ordre)
-.HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
-.Min(0)
-.Decimals(0)
-.Format("N0")
+                @Html.TextBoxFor(model => model.Titre, new { @class = "form-control petit", @style = "width:95%" })
+                @Html.ValidationMessageFor(model => model.Titre)
 
+            </div>
+
+            <div class="form-group mt-3">
+
+
+                @Html.LabelFor(m => m.Ordre, new { @class = "form-label d-block pull-left" })
+                @(Html.Kendo().NumericTextBoxFor(m => m.Ordre)
+                            .HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
+                            .Min(0)
+                            .Decimals(0)
+                            .Format("N0")
                         )
-                        @Html.ValidationMessageFor(model => model.Ordre)
 
-                        @Html.LabelFor(model => model.FileName, new { @class = "control-label pull-left", style = "width:100%;margin-top:5px" })
-                    </div>
+                @Html.ValidationMessageFor(model => model.Ordre)
 
-                    <div class="form-group" style="margin-bottom:5px;">
+                @Html.LabelFor(model => model.FileName, new { @class = "form-label d-block pull-left", style = "width:100%;margin-top:5px" })
+            </div>
 
-
-
-
-
-
-
-                        @(Html.Kendo().Upload()
+            <div class="form-group mt-3">
+                @(Html.Kendo().Upload()
                         .Name("file")
                         .HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
-                                            .Multiple(false)
-                                            .Async(a => a
-                                                .Save("SaveLink", "Documents")
-                                                .AutoUpload(true)
-                                            )
-                                            .Events(
-                                            e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelect")
-                                            ))
-                        @Html.ValidationMessageFor(model => model.Ordre)
+                                .Multiple(false)
+                                .Async(a => a
+                                    .Save("SaveLink", "Documents")
+                                    .AutoUpload(true)
+                                )
+                                .Events(e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelect"))
+                        )
+                @Html.ValidationMessageFor(model => model.Ordre)
 
 
-                    </div>
-
-                </div>
             </div>
+
         </div>
     </div>
 </div>
 
 
 
- 

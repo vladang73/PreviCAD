@@ -38,7 +38,7 @@
                                 .IsNotEqualTo(GridRES.NotEquals)
                             )))
                             .HtmlAttributes(new { @class = "td-round-left-border" })
-                            .Width(90);
+                            .Width("90px");
 
                         columns.Bound(c => c.Nom)
                             .Filterable(f => f.Extra(false).Operators(operators => operators
@@ -47,7 +47,7 @@
                             .StartsWith(GridRES.StartsWith)
                             .IsEqualTo(GridRES.Egale)
                             .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(250);
+                        ))).Width("200px");
 
                         columns.Bound(c => c.NomDepartement)
                             .Filterable(f => f.Extra(false).Operators(operators => operators
@@ -56,7 +56,7 @@
                             .StartsWith(GridRES.StartsWith)
                             .IsEqualTo(GridRES.Egale)
                             .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(250);
+                        ))).Width("200px");
 
                         columns.Bound(c => c.NoCadenas)
                             .Filterable(f => f.Extra(false).Operators(operators => operators
@@ -65,19 +65,20 @@
                             .StartsWith(GridRES.StartsWith)
                             .IsEqualTo(GridRES.Egale)
                             .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(100);
+                        ))).Width("100px");
 
                         columns.Bound(e => e.Actif).Filterable(f => f.Extra(false))
                         //.ClientTemplate("<center><input disabled type='checkbox' #= Actif ? checked='checked' :'' # /></center>")
                         .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' value='None' id='squaredone' name='check' #=Actif ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
-                        .Width(30);
+                        .Width("30px");
+
                         columns.Command(c =>
                         {
                             c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
                             c.Custom(CadEmpRES.Vide)
                             .Click("ConfirmDeleteEmploye")
                             .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
-                        }).Width(30);
+                        }).Width("100px");
                     })
 
                         .Sortable(s => s.AllowUnsort(false))
@@ -102,17 +103,24 @@
                             .Events(e => e.Error("errorEmployes").RequestEnd("EndEmp")
                             )
                         )
-                        .Events(e => e .DataBound("ListeDataBoundEMP"))
+                        .Events(e => e .DataBound("ListeDataBoundEMP").Edit("OnEditEMP"))
                         .Editable(e => e.DisplayDeleteConfirmation(false))
                         .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneEmploye").Window(w => w.Title(CadEmpRES.Employe).Width(600)))
 
                     .ToolBar(t =>
                     {
-                        t.Create().HtmlAttributes(new { @class = "d-none" });
+                        t.Create().HtmlAttributes(new { @class = "btn-sectionEmp d-none" });
                     })
                 )
 </div>
 
+
+<script type="text/kendo-template" id="messageEmployes">
+    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
+         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage">
+        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
+    </div>
+</script>
 
 <script>
 
@@ -126,14 +134,14 @@
 
 
     $("#Emp").click(function () {
-        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        @*$("a.k-grid-add").removeClass("k-button  k-button-icontext");
         $("a.k-grid-add").addClass("btn btn-success btn-sectionEmp");
         $("span.k-add").removeClass("k-icon");
-        $("a.btn-sectionEmp").text("@CadEmpRES.Ajouter");
+        $("a.btn-sectionEmp").text("@CadEmpRES.Ajouter");*@
 
 
         // ADD ICONE "+"
-        setTimeout(function(){ $("#EmployesCadenassage").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+        /*setTimeout(function(){ $("#EmployesCadenassage").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);*/
     });
 
     function ConfirmDeleteEmploye(e) {
@@ -151,12 +159,9 @@
     }
 
 
-
-
-
     function ListeDataBoundEMP(e) {
-        var selecteurGrid = "#listEMP";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //var selecteurGrid = "#listEMP";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
         //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
 
@@ -171,18 +176,8 @@
         //    }
         //})
     }
-</script>
 
 
-
-<script type="text/kendo-template" id="messageEmployes">
-    <div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg field-validation-error"
-         style="margin: 0.5em; display: block; " data-for="#=field#" data-valmsg-for="#=field#" id="#=field#_validationMessage">
-        <span class="k-icon k-warning"> </span>#=message#<div class="k-callout k-callout-n"></div>
-    </div>
-</script>
-
-<script type="text/javascript">
     var validationMessageTmpl = kendo.template($("#messageEmployes").html());
 
     function errorEmployes(args) {
@@ -204,8 +199,13 @@
     }
 
     $('#btnAddEmp').click(function () {
-        $("#Employes").find("a.k-grid-add").click();
+        $("#Employes").find("a.k-grid-add.d-none").click();
     });
+
+    function OnEditEMP(e) {
+        $('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        $('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+    }
 </script>
 
 

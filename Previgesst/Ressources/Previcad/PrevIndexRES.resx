@@ -127,13 +127,16 @@
     <value>Centre de support</value>
   </data>
   <data name="EnCours" xml:space="preserve">
-    <value>En cours</value>
+    <value>Cadenassage En cours</value>
   </data>
   <data name="ErreurConnection" xml:space="preserve">
     <value>Tentative de connexion non valide.</value>
   </data>
   <data name="Fiches" xml:space="preserve">
     <value>Procédures de contrôle des source d’énergie</value>
+  </data>
+  <data name="MenuFiche" xml:space="preserve">
+    <value>Procédures de contrôle</value>
   </data>
   <data name="MobileGridTile" xml:space="preserve">
     <value>Fiches De Cadenssage</value>
@@ -157,7 +160,7 @@
     <value>Se connecter</value>
   </data>
   <data name="Termines" xml:space="preserve">
-    <value>Terminés</value>
+    <value>Cadenassage Terminés</value>
   </data>
   <data name="Titre" xml:space="preserve">
     <value>Plateforme des employés</value>

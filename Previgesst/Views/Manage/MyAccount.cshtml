@@ -1,82 +1,88 @@
 ﻿@model MyAccountViewModel
 @{
     ViewBag.Title = "Gérer mon compte";
-
     Layout = "~/Views/Shared/_Layout_v2.cshtml";
 }
 
-<main class="main-container-wrapper">
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
 
-    <div class="container">
+    <link href="~/Content/v2/buttons.css" rel="stylesheet" />
+}
+
+
+@section sidebar{
+
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" href='@Url.Action("Index", "AdminPrevi")'>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+    </ul>
+}
+
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@Url.Action("Index", "AdminPrevi")'>Accueil</a></li>
+            <li class="active" aria-current="page">Mon compte</li>
+        </ul>
+    </div>
+
+
+    <div class="main-page-content">
 
         <div class="row">
+            <div class="col-md-6">
+                <section id="monCompteForm">
 
-            <div class="col-md-12 ">
-
-                @*<nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>
-
-                        <li class="breadcrumb-item active" aria-current="page">Gestion du compte</li>
-                    </ol>
-                </nav>
-                <h3 style="margin-left:10px">Mon compte</h3>
-                <hr />*@
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <section id="monCompteForm">
-                            @using (Html.BeginForm("MyAccount", "Manage", FormMethod.Post, new { @class = "form-horizontal col-md-9", role = "form" }))
-                            {
-                                @Html.AntiForgeryToken()
+                    @using (Html.BeginForm("MyAccount", "Manage", FormMethod.Post, new { @class = "form-horizontal col-md-9", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
 
 
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mt-3">
+                            @Html.LabelFor(m => m.OldPassword, new { @class = "form-label" })
+
+                            @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mt-3">
+                            @Html.LabelFor(m => m.NewPassword, new { @class = "form-label" })
+
+                            @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mt-3">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label" })
+
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
 
 
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Email, new { @class = "form-label previcad-form-label-white" })
-                                    <div class="col-md-6">
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.OldPassword, new { @class = "form-label previcad-form-label-white" })
-                                    <div class="col-md-4">
-                                        @Html.PasswordFor(m => m.OldPassword, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.OldPassword, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.NewPassword, new { @class = "form-label previcad-form-label-white" })
-                                    <div class="col-md-4">
-                                        @Html.PasswordFor(m => m.NewPassword, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "form-label previcad-form-label-white" })
-                                    <div class="col-md-4">
-                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                        <div class="form-group mt-3 float-end">
+                                <input type="submit" class="btn btn-mettre m-1" value="Enregistrer" />
+                        </div>
 
-                                <div class="form-group">
-                                    <div class="col-md-5 col-md-offset-3">
-                                        <input type="submit" class="btn btn-primary" value="Enregistrer" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-5 col-md-offset-3">
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            }
+                        <div class="form-group  mt-3">
+                            <div class="col-md-5 col-md-offset-3">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
 
-                        </section>
-                    </div>
-                </div>
+                </section>
             </div>
         </div>
     </div>

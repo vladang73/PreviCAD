@@ -14,160 +14,194 @@
     int.TryParse(Convert.ToString(ViewData["LeClient"]), out clientId);
 }
 
-<style>
-    .k-grid-effacer {
-        left: 80%;
-    }
-</style>
 
-<div class="container">
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
 
-    <div class="row">
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
 
-        <div class="col-md-12">
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+    <link href="~/Content/v2/buttons.css" rel="stylesheet" />
+}
 
-            <hr />
+@section sidebar{
 
-            <nav aria-label="breadcrumb">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        @if (clientId > 0)
-                        {
-                            <li class="breadcrumb-item"><a href="~/FicheCadenassage/Edit/@clientId?area=Eq">@CadEquipRES.EquipmentMgmt</a></li>
-                        }
-                        else
-                        {
-                            <li class="breadcrumb-item"><a href="~/FicheCadenassage/Index">@CadEquipRES.EquipmentMgmt</a></li>
-                        }
-                        <li class="breadcrumb-item active" aria-current="page">@CadEquipRES.EquipmentMgmtEnergy</li>
-                    </ol>
-                </nav>
-            </nav>
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "MesApplications")'>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
 
+        @if (clientId > 0)
+        {
+            <li class="nav-item text-center">
+                <a class="nav-link home-navlink" href="~/FicheCadenassage/Edit/@clientId?area=Eq">
+                    <img src="/content/v2/images/equiment.svg">
+                    <p class="nav-link-text">@CadEditRES.MenuEquipment</p>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item text-center">
+                <a class="nav-link home-navlink" href="~/FicheCadenassage/Index">
+                    <img src="/content/v2/images/equiment.svg">
+                    <p class="nav-link-text">@CadEditRES.FichesCadenassage</p>
+                </a>
+            </li>
+        }
 
-            <div class="panel panel-danger">
-
-                <div class="panel-heading" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">@CadEquipRES.EnergyManagement</div>
-                <div class="panel-body">
-
-                    <div id="Documents" class="tab-pane">
-
-                        @Html.AntiForgeryToken()
-
-                        @(Html.Kendo().Grid<EquipementArticuloViewModel>()
-                                .Name("list")
-                                .Columns(columns =>
-                                {
-
-                                    columns.Bound(e => e.EquipementId).Hidden();
-                                    columns.Bound(e => e.EquipementArticuloID).Hidden();
-
-                                    columns.Bound(c => c.AccessoriesDescription).Title(@CadEquipRES.Accessoires)
-                                            .Filterable(f => f.Extra(false).Operators(operators => operators
-                                                .ForString(str => str.Clear()
-                                                    .Contains(GridRES.Contains)
-                                                    .StartsWith(GridRES.StartsWith)
-                                                    .IsEqualTo(GridRES.Egale)
-                                                    .IsNotEqualTo(GridRES.NotEquals)
-                                                )
-                                            ));
-
-                                    columns.Bound(c => c.EnergyDescription).Title(@CadEquipRES.SourceEnergie)
-                                            .Filterable(f => f.Extra(false).Operators(operators => operators
-                                                .ForString(str => str.Clear()
-                                                    .Contains(GridRES.Contains)
-                                                    .StartsWith(GridRES.StartsWith)
-                                                    .IsEqualTo(GridRES.Egale)
-                                                    .IsNotEqualTo(GridRES.NotEquals)
-                                                )
-                                            ));
-
-                                    columns.Bound(c => c.DepositDescription).Title(@CadEquipRES.Dispositif)
-                                            .Filterable(f => f.Extra(false).Operators(operators => operators
-                                                .ForString(str => str.Clear()
-                                                    .Contains(GridRES.Contains)
-                                                    .StartsWith(GridRES.StartsWith)
-                                                    .IsEqualTo(GridRES.Egale)
-                                                    .IsNotEqualTo(GridRES.NotEquals)
-                                                )
-                                            ));
-
-                                    columns.Bound(c => c.Nomenclature)
-                                            .Filterable(f => f.Extra(false).Operators(operators => operators
-                                                .ForString(str => str.Clear()
-                                                    .Contains(GridRES.Contains)
-                                                    .StartsWith(GridRES.StartsWith)
-                                                    .IsEqualTo(GridRES.Egale)
-                                                    .IsNotEqualTo(GridRES.NotEquals)
-                                                )
-                                            ));
-
-                                    columns.Command(c =>
-                                    {
-                                        c.Edit();
-                                        c.Custom("Effacer")
-                                              .Click("ConfirmDeleteRow")
-                                              .HtmlAttributes(new { @class = "k-grid-effacer" })
-                                              ;
-
-                                    })
-                                       .Width(250);
-                                })
-
-                                .Sortable(s => s.AllowUnsort(false))
-                                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                                .Filterable()
-                                .DataSource(ds => ds
-                                                    .Ajax()
-                                                    .Sort(x => x.Add(c => c.AccessoriesDescription))
-
-                                                    .PageSize(20)
-                                                    .Model(m =>
-                                                    {
-                                                        m.Id(e => e.EquipementArticuloID);
-                                                    })
-
-                                                    .Read(r => r.Action("ReadListArticuloe", "FicheCadenassage", new { equipementId = ViewData["EqID"] }))
-                                                    .Create(c => c.Action("SaveArticuloe", "FicheCadenassage"))
-                                                    .Update(u => u.Action("SaveArticuloe", "FicheCadenassage"))
-                                                    .Destroy(u => u.Action("DeleteArticuloe", "FicheCadenassage"))
+        <li class="nav nav-item text-center active">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#">
+                <img src="/content/v2/images/equiment.svg"><p class="nav-link-text">@CadEquipRES.EnergyManagement</p>
+            </a>
+        </li>
+    </ul>
+}
 
 
-                                                    .Events(e => e.Error("ListeErreur").RequestEnd("end"))
-                                                    .Model(model => {
-                                                        model.Id(m => m.EquipementArticuloID);
-                                                        model.Field(m => m.EquipementId).DefaultValue(ViewData["EqID"]);
-                                                    })
-                                )
 
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@Url.Action("Index", "MesApplications")'>Accueil</a></li>
+            @if (clientId > 0)
+            {
+                <li><a href="~/FicheCadenassage/Edit/@clientId?area=Eq">@CadEditRES.MenuEquipment</a></li>
+            }
+            else
+            {
+                <li><a href="~/FicheCadenassage/Index">@CadEditRES.MenuEquipment</a></li>
+            }
+            <li class="active">@CadEquipRES.EquipmentMgmtEnergy</li>
+        </ul>
+    </div>
 
-                                //.Events(e => e .DataBound("ListeDataBound"))
-                                .Editable(e => e.DisplayDeleteConfirmation(false))
-                                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EquipementArticuloeEditor").Window(w => w.Title(@CadEquipRES.EditTitle).Width(600).Name("editWindow").Events(e => e.Close("doRefresh"))))
+    <div class="main-page-content">
 
-
-                                .ToolBar(t =>
-                                {
-                                    t.Create();
-                                })
-
-                        )
-
-
-                    </div>
+        <div class="table-top-header">
+            <div class="page-title d-flex justify-content-center align-items-center">
+                <h3 class="m-0">@CadEquipRES.EquipmentMgmtEnergy</h3>
+            </div>
+            <div class="page-table-meta">
+                <div class="add-icon">
+                    <a id="btnAddEnergy" class="card-wrapper-link">
+                        <img src="/content/v2/images/plus-icon.svg" />
+                    </a>
                 </div>
             </div>
-
         </div>
+
+
+
+
+        @Html.AntiForgeryToken()
+
+        @(Html.Kendo().Grid<EquipementArticuloViewModel>()
+                .Name("list")
+                .Columns(columns =>
+                {
+
+                    columns.Bound(e => e.EquipementId).Hidden();
+                    columns.Bound(e => e.EquipementArticuloID).Hidden();
+
+                    columns.Bound(c => c.AccessoriesDescription).Title(@CadEquipRES.Accessoires)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                        )
+                    ))
+                    .HtmlAttributes(new { @class = "td-round-left-border" })
+                    ;
+
+                    columns.Bound(c => c.EnergyDescription).Title(@CadEquipRES.SourceEnergie)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
+                    )));
+
+                    columns.Bound(c => c.DepositDescription).Title(@CadEquipRES.Dispositif)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
+                    )));
+
+                    columns.Bound(c => c.Nomenclature)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                                .ForString(str => str.Clear()
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
+                    )));
+
+                    columns.Command(c =>
+                    {
+                        c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                        c.Custom(" ")
+                                .Click("ConfirmDeleteRow")
+                                .HtmlAttributes(new { @class = "k-grid-effacer btn-del" })
+                                ;
+
+                    })
+                    .Width("230px");
+                })
+
+                .Sortable(s => s.AllowUnsort(false))
+                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                .Filterable()
+                .DataSource(ds => ds
+                        .Ajax()
+                        .Sort(x => x.Add(c => c.AccessoriesDescription))
+                        .PageSize(20)
+                        .Model(m =>
+                        {
+                            m.Id(e => e.EquipementArticuloID);
+                        })
+
+                        .Read(r => r.Action("ReadListArticuloe", "FicheCadenassage", new { equipementId = ViewData["EqID"] }))
+                        .Create(c => c.Action("SaveArticuloe", "FicheCadenassage"))
+                        .Update(u => u.Action("SaveArticuloe", "FicheCadenassage"))
+                        .Destroy(u => u.Action("DeleteArticuloe", "FicheCadenassage"))
+                        .Events(e => e.Error("ListeErreur").RequestEnd("end"))
+                        .Model(model => {
+                            model.Id(m => m.EquipementArticuloID);
+                            model.Field(m => m.EquipementId).DefaultValue(ViewData["EqID"]);
+                        })
+                )
+                //.Events(e => e .DataBound("ListeDataBound"))
+                .Editable(e => e.DisplayDeleteConfirmation(false))
+                .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EquipementArticuloeEditor").Window(w => w.Title(@CadEquipRES.EditTitle).Width(600).Name("editWindow").Events(e => e.Close("doRefresh"))))
+                .ToolBar(t =>
+                {
+                    t.Create().HtmlAttributes(new { @class = "btn-instruction d-none" });
+                })
+
+        )
+
+
     </div>
-</div>
+</main>
+
+
 <script>
 
-
-    $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+    @*$("a.k-grid-add").removeClass("k-button  k-button-icontext");
     $("a.k-grid-add").addClass("btn btn-success btn-instruction");
     $("span.k-add").removeClass("k-icon");
-    $("a.btn-instruction").text('@Html.Raw(CadEquipRES.NewEnergy)');
+    $("a.btn-instruction").text('@Html.Raw(CadEquipRES.NewEnergy)');*@
 
 
 
@@ -238,6 +272,11 @@
         //    }
         //})
     }
+
+    $('#btnAddEnergy').click(function () {
+        $("#list").find("a.d-none.k-grid-add").click();
+    });
+
 
 </script>
 

@@ -93,7 +93,7 @@
                 .Events(e => e.Error("docListeErreur"))
             )
 
-            .Events(e => e.DataBound("docListeDataBound"))
+            .Events(e => e.DataBound("docListeDataBound").Edit("OnDocEdit"))
             .Editable(e => e.DisplayDeleteConfirmation(false))
             .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentClientEditor").Window(w => w.Title(CadProgRES.MiseAJour).Width(600).Name("editWindow")))
 
@@ -104,7 +104,7 @@
 
             .ToolBar(t =>
             {
-                t.Create().HtmlAttributes(new { @class = "d-none"});
+                t.Create().HtmlAttributes(new { @class = "btn-docClient d-none" });
             })
             )
 
@@ -114,10 +114,9 @@
 <script>
 
     $('#DocCli').click(function () {
-        $("#liste-doc").find("a.k-grid-add" ).removeClass("k-button  k-button-icontext");
+        @*$("#liste-doc").find("a.k-grid-add" ).removeClass("k-button  k-button-icontext");
         $("#liste-doc").find("a.k-grid-add").addClass("btn btn-success btn-docClient");
         $("#liste-doc").find("span.k-add").removeClass("k-icon");
-       // $("a.btn-test").hide();/*text("Ajouter");*/
 
          var estUpdate = '@Model.estUpdate';
         if (estUpdate == 'False') {
@@ -127,7 +126,7 @@
         $("a.btn-docClient").text("@CadProgRES.Ajouter");
 
         // ADD ICONE "+"
-        setTimeout(function(){ $("#liste-doc").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+        setTimeout(function(){ $("#liste-doc").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);*@
 
     });
 
@@ -231,5 +230,11 @@
     $('#btnAddDoc').click(function () {
         $("#Documents").find("a.k-grid-add").click();
     });
+
+    function OnDocEdit(e) {
+        console.log('changing buttons');
+        jQuery('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        jQuery('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+    }
 
 </script>

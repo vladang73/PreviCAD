@@ -2,154 +2,135 @@
 @using Previgesst.Ressources
 @using Previgesst.Ressources.Cadenassage
 
-<div class="panel panel-danger">
 
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-
-
-    <div class="panel-body">
-
-
-        <div style="margin-bottom:10px;">
-            <input type="button" class="btn btn-success" value="@CadLigneCadRES.Renumeroter" onclick="RenumeroterLignesDEC()" />
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@CadEditFicheRES.EtapesDecadenassage</h3>
+    </div>
+    <div class="page-table-meta">
+        <div class="add-icon card-wrapper-link">
+            <a id="btnAddLignesDcad" href="#">
+                <img src="/content/v2/images/plus-icon.svg" />
+            </a>
         </div>
-
-        <div id="Documents" class="tab-pane">
-
-            @Html.AntiForgeryToken()
-
-            @(Html.Kendo().Grid<LigneDecadenassageViewModel>()
-                    .Name("listDEC")
-                    .Columns(columns =>
-                    {
-
-                        columns.Bound(e => e.LigneDecadenassageId).Hidden();
-                        columns.Bound(e => e.FicheCadenassageId).Hidden();
-
-                        columns.Bound(c => c.NoLigne).Filterable(f => f.Extra(false)).Width("30px").Title("#");
-
-
-                        columns.Bound(c => c.TexteInstruction)
-                        .Filterable(f => f.Extra(false).Operators(operators => operators
-                        .ForString(str => str.Clear()
-                        .Contains(GridRES.Contains)
-                        .StartsWith(GridRES.StartsWith)
-                        .IsEqualTo(GridRES.Egale)
-                        .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Title(CadLigneCadRES.Instruction);
-
-
-                        columns.Bound(c => c.TexteSupplementaireInstruction).Title("Instruction").Width("150px")
-                        .Filterable(f => f.Extra(false).Operators(operators => operators
-                        .ForString(str => str.Clear()
-                        .Contains(GridRES.Contains)
-                        .StartsWith(GridRES.StartsWith)
-                        .IsEqualTo(GridRES.Egale)
-                        .IsNotEqualTo(GridRES.NotEquals)
-                         ))).Title(CadLigneCadRES.AutresInstructions);
-
-                        columns.Bound(c => c.TexteSupplementaireDispositif)
-                        .Filterable(f => f.Extra(false).Operators(operators => operators
-                        .ForString(str => str.Clear()
-                        .Contains(GridRES.Contains)
-                        .StartsWith(GridRES.StartsWith)
-                        .IsEqualTo(GridRES.Egale)
-                        .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Title(CadLigneCadRES.Dispositif).Width("120px");
-
-                        /*         columns.Bound(c => c.TexteLocalisation)
-                          .Filterable(f => f.Extra(false).Operators(operators => operators
-                       .ForString(str => str.Clear()
-                       .Contains("Contient")
-                           .StartsWith("Commence par")
-                           .IsEqualTo("Égal")
-                           .IsNotEqualTo("Différent")
-                          ))).Title("Localisation");*/
-                        /*  columns.Bound(c => c.TexteRealiser)
-                      .Filterable(f => f.Extra(false).Operators(operators => operators
-                      .ForString(str => str.Clear()
-                      .Contains("Contient")
-                      .StartsWith("Commence par")
-                      .IsEqualTo("Égal")
-                      .IsNotEqualTo("Différent")
-                      ))).Title("Réaliser").Width("120px");*/
-                columns.Bound(e => e.Thumbnail).ClientTemplate("<img src='#=Thumbnail#'/>").EditorTemplateName("VideView").Title(CadLigneCadRES.Image).Filterable(false).Sortable(false);
-                columns.Command(c =>
-                {
-                    c.Edit();
-                    c.Custom(CadLigneCadRES.Effacer)
-                    .Click("ConfirmDeleteRowCAD")
-                    .HtmlAttributes(new { @class = "k-grid-effacer" });
-                })
-                    .Width(25);
-
-                })
-                .Sortable(s => s.AllowUnsort(false))
-                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                .Filterable()
-                .DataSource(ds => ds
-                    .Ajax()
-                        .Sort(x => x.Add(c => c.NoLigne))
-
-                    .PageSize(20)
-                    .Model(m =>
-                    {
-                        m.Id(e => e.LigneDecadenassageId);
-                    })
-
-                    .Read(r => r.Action("ReadListDecadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                    .Create(c => c.Action("SaveItemDecadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                    .Update(u => u.Action("SaveItemDecadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                    .Destroy(u => u.Action("DeleteItemDecadenassage", "FicheCadenassage"))
-
-                    .Events(e => e.Error("ListeErreurDEC").RequestEnd("EndDC").Sync("DecadenassageSync"))
-                )
-
-                .Events(e => e
-                    .DataBound("ListeDataBoundDEC").Edit("EditDEC")
-
-                ).
-                Editable(e => e.DisplayDeleteConfirmation(false)).
-                Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneDecadenassage").Window(w => w.Title(CadLigneCadRES.Edition).Width(600)))
-
-
-                @*.ToolBar(tb =>
-                    {
-                    tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
-                    }*@
-
-                .ToolBar(t =>
-                {
-                    t.Create();
-                })
-            )
-        </div>
+        &nbsp;
+        <input type="button" class="text-decoration-none text-white btn btn-primary" value="@CadLigneCadRES.Renumeroter" onclick="RenumeroterLignesDEC()" />
     </div>
 </div>
 
+@Html.AntiForgeryToken()
+
+@(Html.Kendo().Grid<LigneDecadenassageViewModel>()
+        .Name("listDEC")
+        .Columns(columns =>
+        {
+
+            columns.Bound(e => e.LigneDecadenassageId).Hidden();
+            columns.Bound(e => e.FicheCadenassageId).Hidden();
+
+            columns.Bound(e => e.Thumbnail).ClientTemplate("<img class='img-ins' src='#=Thumbnail#'/>")
+                    .EditorTemplateName("VideView").Title("")
+                    .Filterable(false).Sortable(false)
+                    .HtmlAttributes(new { @class = "td-round-left-border" })
+                    .Width("135px");
+
+            columns.Bound(c => c.NoLigne).Filterable(f => f.Extra(false)).Width("80px").Title("#");
+
+
+            columns.Bound(c => c.TexteInstruction)
+            .Filterable(f => f.Extra(false).Operators(operators => operators
+            .ForString(str => str.Clear()
+            .Contains(GridRES.Contains)
+            .StartsWith(GridRES.StartsWith)
+            .IsEqualTo(GridRES.Egale)
+            .IsNotEqualTo(GridRES.NotEquals)
+            ))).Title(CadLigneCadRES.Instruction);
+
+
+            columns.Bound(c => c.TexteSupplementaireInstruction).Title("Instruction").Width("150px")
+            .Filterable(f => f.Extra(false).Operators(operators => operators
+            .ForString(str => str.Clear()
+            .Contains(GridRES.Contains)
+            .StartsWith(GridRES.StartsWith)
+            .IsEqualTo(GridRES.Egale)
+            .IsNotEqualTo(GridRES.NotEquals)
+                ))).Title(CadLigneCadRES.AutresInstructions);
+
+            columns.Bound(c => c.TexteSupplementaireDispositif)
+            .Filterable(f => f.Extra(false).Operators(operators => operators
+            .ForString(str => str.Clear()
+            .Contains(GridRES.Contains)
+            .StartsWith(GridRES.StartsWith)
+            .IsEqualTo(GridRES.Egale)
+            .IsNotEqualTo(GridRES.NotEquals)
+            ))).Title(CadLigneCadRES.Dispositif).Width("150px");
+
+
+            columns.Command(c =>
+            {
+                c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                c.Custom(" ")
+                .Click("ConfirmDeleteRowCAD")
+                .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+            })
+            .Width("175px");
+
+        })
+        .Sortable(s => s.AllowUnsort(false))
+        .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+        .Filterable()
+        .DataSource(ds => ds
+        .Ajax()
+        .Sort(x => x.Add(c => c.NoLigne))
+        .PageSize(20)
+        .Model(m =>
+        {
+            m.Id(e => e.LigneDecadenassageId);
+        })
+
+        .Read(r => r.Action("ReadListDecadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+        .Create(c => c.Action("SaveItemDecadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+        .Update(u => u.Action("SaveItemDecadenassage", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+        .Destroy(u => u.Action("DeleteItemDecadenassage", "FicheCadenassage"))
+
+        .Events(e => e.Error("ListeErreurDEC").RequestEnd("EndDC").Sync("DecadenassageSync"))
+    )
+
+    .Events(e => e.DataBound("ListeDataBoundDEC").Edit("EditDEC"))
+    .Editable(e => e.DisplayDeleteConfirmation(false))
+    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneDecadenassage").Window(w => w.Title(CadLigneCadRES.Edition).Width(600)))
+
+
+    @*.ToolBar(tb =>
+        {
+        tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
+        }*@
+
+    .ToolBar(t =>
+    {
+        t.Create().HtmlAttributes(new { @class = "d-none btn-sectiondeca" });
+    })
+)
+
 <script>
     function EndDC(e) {
-
         if (e.type == "update" || e.type == "destroy" || e.type == "create") {
-
             var grid = $("#listPhoto").data("kendoGrid")
             grid.dataSource.read();
-
         }
     }
 
 
     $("#EtapdecFich").click(function () {
 
-        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        @*$("a.k-grid-add").removeClass("k-button  k-button-icontext");
         $("a.k-grid-add").addClass("btn btn-success btn-sectiondeca");
         $("span.k-add").removeClass("k-icon");
         $("a.btn-sectiondeca").text("@CadLigneCadRES.Ajouter");
 
 
         // ADD ICONE "+"
-        setTimeout(function () { $("#Decadenassage").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+        setTimeout(function () { $("#Decadenassage").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);*@
 
     });
 
@@ -257,21 +238,19 @@
     }
 
     function ListeDataBoundDEC(e) {
-        var selecteurGrid = "#listDEC";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //var selecteurGrid = "#listDEC";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
-        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
-        //Selects all delete buttons
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
-
-                $(this).remove();
-            }
-        })
+        //        $(this).remove();
+        //    }
+        //})
     }
 
 
@@ -302,6 +281,10 @@
         GetUpdateInfo();
         //window.location.reload();
     }
+
+    $('#btnAddLignesDcad').click(function () {
+        $("#listDEC").find("a.d-none.k-grid-add").click();
+    });
 </script>
 
 

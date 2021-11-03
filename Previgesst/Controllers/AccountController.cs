@@ -97,7 +97,9 @@ namespace Previgesst.Controllers
             {
                 Token = token
             };
-            return View("ResetPassword", "_Layout", vm);
+            //return View("ResetPassword", "_Layout", vm);
+
+            return View("ResetPassword", vm);
         }
 
         [HttpPost]
@@ -119,6 +121,7 @@ namespace Previgesst.Controllers
 
             return View(model);
         }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

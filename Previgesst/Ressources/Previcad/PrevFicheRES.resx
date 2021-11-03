@@ -210,6 +210,12 @@
   <data name="ScanQREquip" xml:space="preserve">
     <value>Scannez le code QR de l'équipement</value>
   </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Rechercher par # de fiche</value>
+  </data>
+  <data name="SearchReset" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
   <data name="SendEmail" xml:space="preserve">
     <value>Envoyer un e-mail</value>
   </data>

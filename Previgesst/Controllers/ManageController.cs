@@ -40,11 +40,11 @@ namespace Previgesst.Controllers
 
             if (utilisateurService.GetSession() != null)
             {
-                this.Layout = "~/Views/Shared/_LayoutClient.cshtml";
+                this.Layout = "~/Views/Shared/_LayoutClient_v2.cshtml";
 
             }
             else
-                this.Layout = "~/Views/Shared/_Layout.cshtml";
+                this.Layout = "~/Views/Shared/_Layout_v2.cshtml";
 
         }
 
@@ -74,7 +74,7 @@ namespace Previgesst.Controllers
         public ActionResult GenerateResetPassword(string id)
         {
             var vm = ManageService.GeneratePasswordResetVM(id);
-            return View("GenerateResetPassword", "_Layout", vm);
+            return View("GenerateResetPassword", "_Layout_v2", vm);
         }
 
         [HttpPost]
@@ -178,7 +178,6 @@ namespace Previgesst.Controllers
         {
             var vm = ManageService.GetMyAccountVM();
                 
-            this.Layout = this.Layout.Replace(".cshtml", "_v2.cshtml");
             return View("MyAccount", Layout, vm);
         }
 

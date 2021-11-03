@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/Content/v2/style.css" />
 
     @RenderSection("styles", required: false)
+    <link rel="stylesheet" href="~/Content/v2/buttons.css" />
 
     <script type="text/javascript">
 
@@ -106,13 +107,11 @@
                                 <span class="nav-title">Paramétres</span>
                             </a>
                             <ul class="submenu">
-                                <li><a class="submenu-dropdown-item" href="#">Hyperlien Utilisateur</a></li>
-                                <li><a class="submenu-dropdown-item" href="#">Préférences</a></li>
-                                <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">Centre de support</a></li>
+                                @RenderSection("sidebarChilds", required: false)
+                                
 
-                                @*<li><a class="submenu-dropdown-item" href="#">Utilisateurs</a></li>
-                                    <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
-                                    <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">Centre de support</a></li>*@
+                                <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
+                                <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">Centre de support</a></li>
                             </ul>
                         </li>
                         <li class="nav-item text-center mt-2">
@@ -133,28 +132,28 @@
     @RenderBody()
 
 
-<footer class="previcad-footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4 ">
+    <footer class="previcad-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 ">
 
-            </div>
-            <div class="col-12 col-lg-4 text-center">
-                <div class="company-tagline-wrapper">
-                    <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
+                </div>
+                <div class="col-12 col-lg-4 text-center">
+                    <div class="company-tagline-wrapper">
+                        <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <p class="copyright-text">Copyright 2021 Prévigesst. Tout droit réservés. Version 2.0</p>
                 </div>
             </div>
-            <div class="col-12 col-lg-4">
-                <p class="copyright-text">Copyright 2021 Prévigesst. Tout droit réservés. Version 2.0</p>
-            </div>
         </div>
-    </div>
 
-    @*<div class="company-tagline-wrapper">
-            <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
-        </div>
-        <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>*@
-</footer>
+        @*<div class="company-tagline-wrapper">
+                <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
+            </div>
+            <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>*@
+    </footer>
 
 
 
@@ -164,6 +163,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.nav-bottom-submenu .nav-link').click(function () {
+                console.log('bottom sub 1 - layout cl');
                 $(this).parents('.nav-bottom-submenu').toggleClass('active');
             })
             $('.navbar-toggler').click(function () {
@@ -197,6 +197,30 @@
         $('input:checkbox').click(function () {
             SetCheckbox($(this));
         });
+
+        $('.left-sidebar .nav a').on('click', function () {
+            $('.left-sidebar .nav').find('li.active').removeClass('active');
+            $(this).parent('li').addClass('active');
+        });
+
+        $('.left-sidebar a.submenu-dropdown-item').on('click', function () {
+            var target = $($(this).attr('href'))
+
+            if (target != undefined && target.length > 0) {
+                console.log(target);
+
+                $('.left-sidebar .nav').find('li.active').removeClass('active');
+                $('.main-page-content div.tab-pane').removeClass('active');
+
+                $(this).parent('li').addClass('active');
+                $($(this).attr('href')).addClass('active');
+            }
+        });
+
+        $(document).on('click', '.squaredThree', function () {
+            $(this).find('input[type=checkbox]').click();
+        });
+
     </script>
 </body>
 </html>

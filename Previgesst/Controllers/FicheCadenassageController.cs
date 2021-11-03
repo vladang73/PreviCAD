@@ -329,6 +329,8 @@ namespace Previgesst.Controllers
 
                 vm.estAudit = (sessionUtilisateur != null && sessionUtilisateur.Auditeur);
                 vm.LienPrevicad = getLienPrevicad(Id);
+                vm.LienPrevicadMobile = getLienPrevicadMobile(Id);
+
                 vm.IdentificateurUnique = client.IdentificateurUnique;
                 if (sessionUtilisateur != null)
                 {
@@ -347,6 +349,25 @@ namespace Previgesst.Controllers
 
 
             return Json("");
+        }
+
+        public string getLienPrevicadMobile(int id)
+        {
+            var client = this.clientRepository.Get(id);
+
+
+            var urlBuilder =
+            new System.UriBuilder(Request.Url.AbsoluteUri)
+            {
+                Path = Url.Content("~/RegistreMobile/Index?ClientID=" + client.IdentificateurUnique.ToString()),
+                Query = null,
+            };
+
+            Uri uri = urlBuilder.Uri;
+            string url = urlBuilder.ToString().Replace("%3F", "?");
+
+
+            return url;
         }
 
         public string getLienPrevicad(int id)

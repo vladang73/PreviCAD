@@ -40,6 +40,14 @@
             }
         </h3>
     </div>
+    <div class="page-table-meta">
+
+            @if (Model.FicheCadenassageId != 0)
+            {
+                <a href='~/FicheCadenassage/GetFiche?id=@Model.FicheCadenassageId' class='btn-table btn-view buttonView'>@CadInfoGeneralesRES.Fiche</a>
+
+            }
+    </div>
 </div>
 
 
@@ -62,16 +70,6 @@
 
 
     <div class="row">
-        <div class="form-group">
-            @if (Model.FicheCadenassageId != 0)
-            {
-                <div>
-                    <a href='~/FicheCadenassage/GetFiche?id=@Model.FicheCadenassageId' class='btn btn-info buttonView'>@CadInfoGeneralesRES.Fiche</a>
-                </div>
-            }
-        </div>
-
-
         <div class="col-12 col-md-2">
             <p>
                 @Html.LabelFor(m => m.CreatedPar, new { @class = "create-title" })
@@ -241,12 +239,12 @@
             {
                 @:&nbsp;
 
-                <input type="submit" class="btn btn-primary" name="validate" value="@CadInfoGeneralesRES.ValidatedButton" />
+                <input type="submit" class="btn btn-Annuler" name="validate" value="@CadInfoGeneralesRES.ValidatedButton" />
 
                 if (!string.IsNullOrEmpty(Model.ValidatedPar))
                 {
                     @:&nbsp;
-                    <input type="submit" class="btn btn-success" name="approve" value="@CadInfoGeneralesRES.Approuve" />
+                    <input type="submit" class="btn btn-tick" name="approve" value="@CadInfoGeneralesRES.Approuve" />
                 }
             }
         </div>

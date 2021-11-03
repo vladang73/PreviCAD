@@ -39,68 +39,78 @@
                     .Name("list")
                     .Columns(columns =>
                     {
-                        columns.Bound(e => e.IsApproved).Title(CadFichesRES.Statut)
-                        .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' " + Model.RCDisabled + " value='None' id='squaredone' name='check' #=IsApproved ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
-                        .Width(30);
 
                         columns.Bound(e => e.EquipementId).Hidden();
                         columns.Bound(e => e.FicheCadenassageId).Hidden();
 
+                        columns.Bound(e => e.IsApproved).Title(CadFichesRES.Statut)
+                            .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' " + Model.RCDisabled + " value='None' id='squaredone' name='check' #=IsApproved ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
+                            .HtmlAttributes(new { @class = "td-round-left-border" })
+                            .Width("50px");
 
-                        columns.Bound(c => c.NoFiche).Width(80).Title(CadFichesRES.NoFiche)
+                        columns.Bound(c => c.NoFiche).Title(CadFichesRES.NoFiche)
                             .Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
                             .StartsWith(GridRES.StartsWith)
                             .IsEqualTo(GridRES.Egale)
                             .IsNotEqualTo(GridRES.NotEquals)
-                        )));
+                        )))
+                        .Width("80px");
 
-                        columns.Bound(e => e.TitreFiche).Title(CadFichesRES.Type).ClientTemplate("").Width(75);
+                        columns.Bound(e => e.TitreFiche).Title(CadFichesRES.Type).ClientTemplate("").Width("80px");
 
-                        columns.Bound(e => e.NumeroEquipment).Title(CadFichesRES.Num).Width(100)
+                        columns.Bound(e => e.NumeroEquipment).Title(CadFichesRES.Num)
                             .Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
                             .StartsWith(GridRES.StartsWith)
                             .IsEqualTo(GridRES.Egale)
                             .IsNotEqualTo(GridRES.NotEquals)
-                        )));
+                        )))
+                        .Width("120px");
 
-                        columns.Bound(e => e.NomEquipement).Width(170).Title(CadFichesRES.Equipement)
+                        columns.Bound(e => e.NomEquipement).Title(CadFichesRES.Equipement)
                             .Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
                             .StartsWith(GridRES.StartsWith)
                             .IsEqualTo(GridRES.Egale)
                             .IsNotEqualTo(GridRES.NotEquals)
-                        )));
+                        )))
+                        .Width("170px");
 
-                        columns.Bound(e => e.Departement).Title(CadFichesRES.Departement).Width(115)
+                        columns.Bound(e => e.Departement).Title(CadFichesRES.Departement)
                             .Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
                             .StartsWith(GridRES.StartsWith)
                             .IsEqualTo(GridRES.Egale)
                             .IsNotEqualTo(GridRES.NotEquals)
-                        )));
+                        )))
+                        .Width("115px");
 
-                        columns.Bound(e => e.TravailAEffectuer).Title(CadFichesRES.AEffectuer).ClientTemplate("").Width(300);
+                        columns.Bound(e => e.TravailAEffectuer).Title(CadFichesRES.AEffectuer).ClientTemplate("").Width("300px");
 
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title='" + CadFichesRES.Telecharger +"'><img src='/content/v2/images/fr-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Width(30);
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title='"+ CadFichesRES.Telecharger + "'><img src='/content/v2/images/en-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Width(30);
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title='" + CadFichesRES.Telecharger +"'><img src='/content/v2/images/fr-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Width("30px");
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title='"+ CadFichesRES.Telecharger + "'><img src='/content/v2/images/en-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Width("30px");
 
-                        if (User.IsInRole("Administrateur")) { columns.Bound(e => e.estDocumentPrevigesst).ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>").Title("Prévi").Width(65); }
+                        if (User.IsInRole("Administrateur")) { 
+                            columns.Bound(e => e.estDocumentPrevigesst)
+                            //.ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>")
+                            .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' value='None' id='squaredone' name='check' #=estDocumentPrevigesst ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
+                            .Title("Prévi").Width("65px"); 
+                        }
 
-                        columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/EditFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-edit'><img src='/content/v2/images/edit-icon.svg' alt='edit icon'/> "+ Html.Raw(CadFichesRES.Modifier) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width(125);
-                        columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/DuplicateFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-duplicate'><img src='/content/v2/images/dup-icon.svg' alt='dup icon'/> " + Html.Raw(CadFichesRES.Dupliquer) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width(150);
+                        columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/EditFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-edit'> " + Html.Raw(CadFichesRES.Modifier) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width("125px");
+                        columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/DuplicateFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-duplicate'><img src='/content/v2/images/dup-icon.svg' alt='dup icon'/> " + Html.Raw(CadFichesRES.Dupliquer) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width("130px");
 
                         columns.Command(c =>
                         {
                             c.Custom(CadFichesRES.Vide)
                             .Click("ConfirmDeleteRowFiche")
                             .HtmlAttributes(new { @class = "k-grid-effacer12 btn btn-del" });
-                        }).Title(CadFichesRES.Vide).Hidden(!Model.estUpdate).Width(20);
+                        }).Title(CadFichesRES.Vide).Hidden(!Model.estUpdate).Width("50px");
                     })
 
                     .Sortable(s => s.AllowUnsort(false))
@@ -132,79 +142,9 @@
                     )
                     .Editable(e => e.DisplayDeleteConfirmation(false))
                 )
-@*
-    <div class="panel panel-danger">
 
-        <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-        <div class="panel-body">
-            <div class="actionButton" style="padding-bottom:10px;padding-top:10px">
-
-
-                            @if (Model.estUpdate)
-                            {
-                                <a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/CreerFiche/@Model.ClientId" class="btn btn-success">@CadFichesRES.Ajouter<img class="addButtonImg" src="~/Images/addWhite.png" /></a>
-                                <br />
-
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 515px;">
-                                    @CadFichesRES.ScanQR
-                                </button>
-
-                                <button type="button" class="btn btn-primary" id="btnClearQRFilter" style="position: absolute; top: 3px; left: 645px;">
-                                    @CadFichesRES.ClearQRFilter
-                                </button>
-
-                                <span id="lblResolution" style="font-weight:bold; position: absolute; top: 10px; left: 850px;">
-
-                                </span>
-                            }
-
-                        </div>
-                    <div class="fichesCadenassage">
-                        <!-- was  here -->
-                    </div>
-                </div>
-            </div>
-
-*@
 <script>
-    // TODO MAX : FILTRE PAR DEPARTEMENT ET ÉQUIPEMENT EN STAND BY
-    @*jQuery('.filterButton').click(function () {
-        // CLEAR KENDO FILTERS
-        jQuery('.k-animation-container input').val('');
-
-        var dataFilter = [];
-        if (jQuery(this).hasClass('activeFilter')) {
-            jQuery(this).removeClass('activeFilter');
-        } else {
-            jQuery(this).addClass('activeFilter');
-
-            jQuery('.filterButton').each(function () {
-                filterName = jQuery(this).text();
-                if (jQuery(this).hasClass('activeFilter')) {
-                    filterValue = "activeFilter";
-                } else {
-                    filterValue = "";
-                }
-                filterInfos = filterName + " " + filterValue;
-                dataFilter.push(filterInfos);
-            });
-
-            jQuery.ajax({
-                url: '@Url.Action("activeFilter")',
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                data: dataFilter,
-
-                success: function (result) {
-                    console.log('good');
-                },
-                error: function (data) {
-                    console.log('not good');
-                }
-            })
-        }
-    *@
-
+   
     function doCheck(ficheCadenassage, e) {
         //call ajax pour activer/désactiver la fiche
         var dataInput = {

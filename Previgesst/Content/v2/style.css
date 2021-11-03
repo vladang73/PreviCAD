@@ -20,15 +20,7 @@
 .previcad-form-label {
     color: #0835B0;
     font-size: 18px;
-    font-family: HKGrotesk-SemiBold;
 }
-
-
-.previcad-form-label-white {
-    color: #fff;
-    font-family: HKGrotesk-SemiBold;
-}
-
 
 .main-container-wrapper .main-container-content {
     background-color: #ebe9e8;
@@ -89,4 +81,157 @@
 
 .squaredThree-blue label {
     border: 1px solid #0835B0 !important;
+}
+
+
+.k-button.k-button-icontext .k-icon.k-edit, .btn-table.btn-edit .k-icon.k-edit, .btn-table.k-grid-cancel .k-icon.k-cancel, .btn-table.k-grid-update .k-icon.k-update, .btn-table.btn-excel .k-icon.k-i-excel {
+    display: none;
+}
+
+.btn-table.k-grid-update .k-icon.k-update {
+    display: none;
+}
+
+.img-eq, .img-ins{
+    width: 108px;
+    height: 108px;
+}
+/*.btn-edit.buttonView::before{
+    content:" ";
+    padding:0;
+}*/
+
+.k-grid tbody .k-button {
+    min-width: auto !important;
+}
+
+.modal.show, .k-overlay {
+    background-color: var(--branddarkblue) !important;
+    opacity: 1 !important;
+}
+
+/*.k-multiselect .k-button {
+    border-radius: 30px !important;
+    padding-right: 5px;
+}*/
+
+/* popup fix - start */
+
+/*div.k-edit-form-container {
+    width: auto !important;
+    overflow: hidden !important;
+}
+
+
+    div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
+        width: 100% !important;
+        max-width: none !important;
+    }*/
+
+/* popup fix - end */
+
+
+.lh-50{
+    line-height: 50px !important;
+}
+
+.k-upload-button.btn-img span{
+    display: none;
+}
+.imagedd .k-dropdown .k-dropdown-wrap .k-input {
+    height: 70px;
+}
+
+
+
+
+/* Image only Upload Override - Start */
+
+.btn-image-upload-only .k-button.k-upload-button {
+    color: var(--white);
+    background-color: #fff;
+    border-color: var(--branddarkblue);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 50%;
+    padding: 12px 11px;
+    line-height: 0px;
+    min-width: auto !important
+}
+
+    .btn-image-upload-only .k-button.k-upload-button:before {
+        content: url("images/image-icon.svg");
+    }
+
+    .btn-image-upload-only .k-button.k-upload-button:hover {
+        color: var(--white);
+        background-color: #fff;
+        border-color: var(--branddarkblue);
+    }
+
+    .btn-image-upload-only .k-button.k-upload-button.focus, .btn-image-upload-only .k-button.k-upload-button:focus {
+        color: var(--white);
+        background-color: #fff;
+        border-color: var(--branddarkblue);
+        box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+    }
+
+    .btn-image-upload-only .k-button.k-upload-button:not(:disabled):not(.disabled).active,
+    .btn-image-upload-only .k-button.k-upload-button:not(:disabled):not(.disabled):active, 
+    .show > .btn-image-upload-only .k-button.k-upload-button.dropdown-toggle {
+        color: var(--white);
+        background-color: #fff;
+        border-color: var(--branddarkblue);
+    }
+
+        .btn-image-upload-only .k-button.k-upload-button:not(:disabled):not(.disabled).active:focus,
+        .btn-image-upload-only .k-button.k-upload-button:not(:disabled):not(.disabled):active:focus,
+        .show > .btn-image-upload-only .k-button.k-upload-button.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+        }
+
+/* Image only Upload Override - end */
+
+
+.btn-image-upload-only .k-button.k-upload-button span{
+    display: none;
+}
+
+/* Image only Upload Override */
+.k-widget.k-dropdown.k-header, .k-widget.k-numerictextbox.form-control {
+    width: 100%;
+}
+.k-grid-pager .k-widget.k-dropdown.k-header, .k-grid-pager .k-widget.k-numerictextbox.form-control {
+    width: auto;
+}
+
+
+.form-control.petit {
+    width: 95% !important;
+}
+
+
+.left-sidebar .nav li.nav-item.active p {
+    color: var(--brandlightblue);
+    font-style:italic;
+}
+
+.k-widget.k-tooltip-validation {
+    color: var(--annulerbtnbg) !important;
+}
+    .k-widget.k-tooltip-validation:after {
+        clear: both;
+    }
+
+/*    .k-widget.k-tooltip-validation .k-callout.k-callout-n {
+        color: var(--annulerbtnbg) !important;
+    }*/
+
+.home-navlink.big img {
+    width: 40px;
+    margin-bottom: -5px;
+}
+
+.bg-white{
+    background-color: #FFF;
 }

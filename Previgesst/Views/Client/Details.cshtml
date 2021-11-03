@@ -1,100 +1,138 @@
 ﻿@using Previgesst.Ressources;
 @model ClientEditDetailsViewModel
-@*@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}*@
-
-
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-md-12 ">
-
-
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-
-
-                    <li class="breadcrumb-item active" aria-current="page">@ClientRES.Administration - @Model.Nom </li>
-
-                </ol>
-            </nav>
 
 
 
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+}
 
 
-            <hr />
+@section sidebar{
+
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" href="~/AdminPrevi/Index">
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+
+        @*<li class="nav-item text-center">
+            <a class="nav-link home-navlink" href="/Client/Index">
+                <img src="/content/v2/images/left-icon-12.svg" title="Gestion des clients" />
+                <p class="nav-link-text">Gestion des clients</p>
+            </a>
+        </li>*@
+
+        <li class="nav-item text-center @Model.classDefault">
+            <a class="nav-link home-navlink" href="#Utilisateurs" aria-controls="general" role="tab" data-toggle="tab" data-bs-toggle="tab">
+                <img src="/content/v2/images/left-icon-12.svg" title="Details" />
+                <p class="nav-link-text">@ClientRES.Utilisateurs</p>
+            </a>
+        </li>
 
 
+        @if (User.IsInRole("Administrateur"))
+        {
+            <li class="nav-item text-center">
+                <a class="nav-link home-navlink" href="#Applications" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
+                    <img src="/content/v2/images/left-icon-12.svg" title="Applications permises" />
+                    <p class="nav-link-text">Applications permises</p>
+                </a>
+            </li>
 
-            <div class="panel panel-danger">
+            <li class="nav-item text-center @Model.classMaximums">
+                <a class="nav-link home-navlink" href="#Maximums" aria-controls="Maximums" role="tab" data-toggle="tab" data-bs-toggle="tab">
+                    <img src="/content/v2/images/left-icon-12.svg" title="Maximums" />
+                    <p class="nav-link-text">Maximums</p>
+                </a>
+            </li>
+        }
 
-                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white">@ClientRES.Administration </div>
-                <div class="panel-body">
-
-
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class=@Model.classDefault>
-                            <a href="#Utilisateurs" aria-controls="general" role="tab" data-toggle="tab">@ClientRES.Utilisateurs</a>
-                        </li>
-
-
-                        @*<li role="presentation">
-                                <a href="#Previcad" aria-controls="previcad" role="tab" data-toggle="tab">PREVICAD</a>
-                            </li>*@
-
-
-                        @if (User.IsInRole("Administrateur"))
-                        {
-                            <li role="presentation">
-                                <a href="#Applications" aria-controls="pratiques" role="tab" data-toggle="tab">Applications permises</a>
-                            </li>
-
-
-                            <li role="presentation" class=@Model.classMaximums>
-                                <a href="#Maximums" aria-controls="Maximums" role="tab" data-toggle="tab">Maximums</a>
-                            </li>
-
-                        }
-
-
-
-
-                    </ul>
-
-                    <div class="tab-content">
-
-
-                        <div id="Utilisateurs" class="tab-pane @Model.classDefault">
-                            @Html.Partial("Utilisateurs", @Model)
-                        </div>
-
-
-                        @*<div id="Previcad" class="tab-pane">
-                                @Html.Partial("Previcad", @Model)
-                            </div>*@
-
-                        @if (User.IsInRole("Administrateur"))
-                        {
-                            <div id="Applications" class="tab-pane">
-                                @Html.Partial("Applications", @Model)
-
-                            </div>
-
-                            <div id="Maximums" class="tab-pane @Model.classMaximums">
-                                @Html.Partial("Maximums", @Model)
-                            </div>
-                        }
-
-
-                    </div>
+    </ul>
+}
 
 
 
-                </div>
+@*@ClientRES.Administration
+    @ClientRES.Administration - @Model.Nom*@
+
+
+
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href="~/AdminPrevi/Index">Accueil</a></li>
+            <li><a href="/Client/Index">Gestion des clients</a></li>
+            <li class="active" aria-current="page">@ClientRES.Administration - @Model.Nom</li>
+        </ul>
+    </div>
+
+    <div class="main-page-content">
+
+        @*
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class=@Model.classDefault>
+                    <a href="#Utilisateurs" aria-controls="general" role="tab" data-toggle="tab">@ClientRES.Utilisateurs</a>
+                </li>
+
+
+
+                <li role="presentation">
+                    <a href="#Previcad" aria-controls="previcad" role="tab" data-toggle="tab">PREVICAD</a>
+                </li>
+
+
+                @if (User.IsInRole("Administrateur"))
+                {
+                    <li role="presentation">
+                        <a href="#Applications" aria-controls="pratiques" role="tab" data-toggle="tab">Applications permises</a>
+                    </li>
+
+
+                    <li role="presentation" class=@Model.classMaximums>
+                        <a href="#Maximums" aria-controls="Maximums" role="tab" data-toggle="tab">Maximums</a>
+                    </li>
+
+                }
+
+            </ul>
+        *@
+
+        <div class="tab-content">
+
+
+            <div id="Utilisateurs" class="tab-pane @Model.classDefault">
+                @Html.Partial("Utilisateurs", @Model)
             </div>
 
-</div></div></div>
+
+            @*<div id="Previcad" class="tab-pane">
+                    @Html.Partial("Previcad", @Model)
+                </div>*@
+
+            @if (User.IsInRole("Administrateur"))
+            {
+                <div id="Applications" class="tab-pane">
+                    @Html.Partial("Applications", @Model)
+
+                </div>
+
+                <div id="Maximums" class="tab-pane @Model.classMaximums">
+                    @Html.Partial("Maximums", @Model)
+                </div>
+            }
+
+
+        </div>
+
+
+
+    </div>
+</main>

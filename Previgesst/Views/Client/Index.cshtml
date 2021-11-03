@@ -2,128 +2,155 @@
 @{
     ViewBag.Title = "Index";
     //  Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
 
-<div class="container">
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
 
-    <div class="row">
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
 
-        <div class="col-md-12 ">
-
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>
-
-                    <li class="breadcrumb-item active" aria-current="page">Gestion des clients</li>
-                </ol>
-            </nav>
-
-            <hr />
-
-
-            <div class="panel panel-danger previgesstClient">
-
-                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Clients</div>
-                <div class="panel-body">
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+}
 
 
 
+@section sidebar{
 
-                    @Html.AntiForgeryToken()
-
-                    @(Html.Kendo().Grid<ClientListViewModel>()
-                        .Name("list")
-                        .Columns(columns =>
-                        {
-                            columns.Bound(e => e.ClientId).Hidden();
-                            columns.Bound(e => e.Logo).Hidden();
-                            columns.Bound(c => c.Nom)
-                                .Filterable(f => f
-                                    .Extra(false));
-                            columns.Bound(c => c.Identificateur).Filterable(f => f
-                            .Extra(false));
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" href="~/AdminPrevi/Index">
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+    </ul>
+}
 
 
 
 
-                            columns.Bound(c => c.Actif).Filterable(f => f
-                           .Extra(false)).ClientTemplate("<center><input disabled type='checkbox' #= Actif ? checked='checked' :'' # /></center>");
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href="~/AdminPrevi/Index">Accueil</a></li>
+            <li class="active">Gestion des clients</li>
+        </ul>
+    </div>
 
+    <div class="main-page-content">
 
-                            columns.Bound(e => e.Thumb).ClientTemplate("<img src='#=Thumb#'/>").EditorTemplateName("VideView").Title("Image").Filterable(false).Sortable(false);
-                            columns.Bound(e => e.Thumb).ClientTemplate("<input type=button onclick='changerImage(#=ClientId#)' value='Image' class='btn btn-primary'/>").EditorTemplateName("VideView").Filterable(false).Sortable(false).Title("");
-
-
-                            columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a target='_blank' href='../Client/Details?id=#= ClientId #' class='btn btn-primary'>Détails</a>").Title("").Filterable(false).Sortable(false);
-                            columns.Command(c =>
-                            {
-                                c.Edit();
-                                c.Custom("Effacer")
-                                    .Click("ConfirmDeleteRow")
-                                    .HtmlAttributes(new { @class = "k-grid-effacer" });
-                            })
-                            .Width(250);
-                        })
-                        .Sortable(s => s.AllowUnsort(false))
-                        .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
-                        .Filterable()
-                        //.AutoBind(false)
-                        .DataSource(ds => ds
-
-                            .Ajax()
-                            .PageSize(10)
-                            .Sort(s =>
-                            {
-                                s.Add(nameof(ClientListViewModel.Nom)).Ascending();
-                            })
-                            .Filter(f =>
-                            {
-                                f.Add(b => b.Actif).IsEqualTo(true);
-                            })
-                            .Model(m =>
-                            {
-                                m.Id(e => e.ClientId);
-
-                                m.Field(e => e.Bidon).Editable(true);
-                                m.Field(e => e.Thumb).Editable(false);
-                                m.Field(e => e.Lien).Editable(false);
-
-                            })
-                            .Read(r => r.Action("ReadListClients", "Client"))
-                            .Create(c => c.Action("Save", "Client").Data("sendAntiForgeryToken"))
-                            .Update(u => u.Action("Save", "Client").Data("sendAntiForgeryToken"))
-                            .Destroy(d => d.Action("Delete", "Client").Data("sendAntiForgeryToken"))
-                            .Events(e => e
-                                .Error("ListErreur")
-                            )
-                        )
-                        .Events(e => e
-                            .DataBound("ListDataBound").Edit("Edit")
-
-                        )
-                        .Editable(e => e
-                            .Mode(GridEditMode.InLine)
-                            .CreateAt(GridInsertRowPosition.Top)
-                            .DisplayDeleteConfirmation(false)
-                        )
-                        .ToolBar(t =>
-                        {
-                            t.Create().Text("Ajouter").HtmlAttributes(new { @class = "btn btn-success" });
-                        })
-                    )
+        <div class="table-top-header">
+            <div class="page-title d-flex justify-content-center align-items-center">
+                <h3>Clients</h3>
+            </div>
+            <div class="page-table-meta">
+                <div class="add-icon">
+                    <a id="btnAddList">
+                        <img src="/content/v2/images/plus-icon.svg" />
+                    </a>
                 </div>
             </div>
         </div>
+
+
+
+
+        @Html.AntiForgeryToken()
+
+        @(Html.Kendo().Grid<ClientListViewModel>()
+            .Name("list")
+            .Columns(columns =>
+            {
+                columns.Bound(e => e.ClientId).Hidden();
+                columns.Bound(e => e.Logo).Hidden();
+
+                columns.Bound(e => e.Thumb).ClientTemplate("<img class='img-ins' src='#=Thumb#'/>").EditorTemplateName("VideView")
+                    .Title("").Filterable(false).Sortable(false)
+                    .HtmlAttributes(new { @class = "td-round-left-border" })
+                ;
+
+                columns.Bound(c => c.Nom).Filterable(f => f.Extra(false));
+
+                columns.Bound(c => c.Identificateur).Filterable(f => f.Extra(false));
+
+
+
+
+                columns.Bound(c => c.Actif).Filterable(f => f.Extra(false))
+                        //.ClientTemplate("<center><input disabled type='checkbox' #= Actif ? checked='checked' :'' # /></center>")
+                        .ClientTemplate("<center><div class='squaredThree'><input type='checkbox'id='Actif' name='Actif' #= Actif ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
+                        .Width("100px");
+
+
+                columns.Bound(e => e.Thumb).ClientTemplate("<a onclick='changerImage(#=ClientId#)' value='Image' class='k-button btn-img mx-1'></a>")
+                        .EditorTemplateName("VideView").Filterable(false).Sortable(false).Title("")
+                        .Width("60px");
+
+
+                columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a target='_blank' href='../Client/Details?id=#= ClientId #' class='k-button btn-detail mx-1'>Détails</a>")
+                        .Title("").Filterable(false).Sortable(false)
+                        .Width("140px");
+
+                columns.Command(c =>
+                {
+                    c.Edit().Text("Modifier").HtmlAttributes(new { @class = "btn-table btn-edit" });
+                    c.Custom(" ")
+                        .Click("ConfirmDeleteRow")
+                        .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+                })
+                .Width("200px");
+            })
+            .Sortable(s => s.AllowUnsort(false))
+            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
+            .Filterable()
+            .DataSource(ds => ds
+                .Ajax()
+                .PageSize(10)
+                .Sort(s =>
+                {
+                    s.Add(nameof(ClientListViewModel.Nom)).Ascending();
+                })
+                .Filter(f =>
+                {
+                    f.Add(b => b.Actif).IsEqualTo(true);
+                })
+                .Model(m =>
+                {
+                    m.Id(e => e.ClientId);
+
+                    m.Field(e => e.Bidon).Editable(true);
+                    m.Field(e => e.Thumb).Editable(false);
+                    m.Field(e => e.Lien).Editable(false);
+
+                })
+                .Read(r => r.Action("ReadListClients", "Client"))
+                .Create(c => c.Action("Save", "Client").Data("sendAntiForgeryToken"))
+                .Update(u => u.Action("Save", "Client").Data("sendAntiForgeryToken"))
+                .Destroy(d => d.Action("Delete", "Client").Data("sendAntiForgeryToken"))
+                .Events(e => e.Error("ListErreur"))
+            )
+            .Events(e => e.DataBound("ListDataBound").Edit("Edit"))
+            .Editable(e => e
+                .Mode(GridEditMode.InLine)
+                .CreateAt(GridInsertRowPosition.Top)
+                .DisplayDeleteConfirmation(false)
+            )
+            .ToolBar(t =>
+            {
+                t.Create().Text("Ajouter").HtmlAttributes(new { @class = "d-none" });
+            })
+        )
     </div>
-</div>
+
+</main>
 
 <script type="text/javascript">
 
 
-    $("a.k-grid-add").removeClass("k-button  k-button-icontext");
-    $("span.k-add").removeClass("k-icon");
+    //$("a.k-grid-add").removeClass("k-button  k-button-icontext");
+    //$("span.k-add").removeClass("k-icon");
 
 
     function ConfirmDeleteRow(e) {
@@ -168,6 +195,7 @@
                     gridElement.find("input[name=" + key + "]").focus();
                 }
             });
+
             grid.one("dataBinding", function (e) {
                 e.preventDefault();   // cancel grid rebind
             });
@@ -176,108 +204,101 @@
 
 
     function ListDataBound(e) {
-        var selecteurGrid = "#list";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //var selecteurGrid = "#list";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
-        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.EstSupprimable) {
 
-
-        //Selects all delete buttons
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
-
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.EstSupprimable) {
-
-                $(this).remove();
-            }
-        })
+        //        $(this).remove();
+        //    }
+        //})
     }
 
-</script>
 
-<script>
+    var imageWindow;
+    var timer;
 
+    function Edit(e) {
+        var item = $(e.container).find('[value=Image]').hide();
+        // add save and cancel classes
+        $(e.container).find('.k-grid-update.btn-table').removeClass('btn-edit').addClass('btn-mettre');
+        $(e.container).find('.k-grid-cancel.btn-table').removeClass('btn-edit').addClass('btn-Annuler');
+    }
 
-            var imageWindow;
-            var timer;
-            function Edit(e) {
-                var item = $(e.container).find('[value=Image]').hide();
-
-                //debugger;
-            }
-            function changerImage(e) {
-
-
-                var path = '@Url.Content("~/upload/SetClientPic/")';
-                path = path + e;
-
-                  var config = {contextPath: path };
+    function changerImage(e) {
 
 
-          //      imageWindow = PopupCenter( config.contextPath + "/upload/setClientPic/" + e, "Charger l'image", 600, 300);
+        var path = '@Url.Content("~/upload/SetClientPic/")';
+        path = path + e;
 
-                imageWindow = PopupCenter( config.contextPath, "Charger l'image", 600, 300);
+        var config = { contextPath: path };
 
-                timer = setInterval(checkWindow, 100);
+        imageWindow = PopupCenter(config.contextPath, "Charger l'image", 600, 300);
 
-            }
+        timer = setInterval(checkWindow, 100);
 
-            function checkWindow() {
+    }
 
-                if (imageWindow.closed) {
+    function checkWindow() {
 
-                    $('#list').data('kendoGrid').dataSource.read();
-                    $('#list').data('kendoGrid').refresh();
-                    clearInterval(timer);
-                }
+        if (imageWindow.closed) {
 
-            }
+            $('#list').data('kendoGrid').dataSource.read();
+            $('#list').data('kendoGrid').refresh();
+            clearInterval(timer);
+        }
+    }
 
-            function PopupCenter(url, title, w, h) {
-                var userAgent = navigator.userAgent,
-                    mobile = function () {
-                        return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
-                            /\b(iP[ao]d)/.test(userAgent) ||
-                            /Android/i.test(userAgent) ||
-                            /Mobile/i.test(userAgent);
-                    },
-                    screenX = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
-                    screenY = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
-                    outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
-                    outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : document.documentElement.clientHeight - 22,
-                    targetWidth = mobile() ? null : w,
-                    targetHeight = mobile() ? null : h,
-                    V = screenX < 0 ? window.screen.width + screenX : screenX,
-                    left = parseInt(V + (outerWidth - targetWidth) / 2, 10),
-                    right = parseInt(screenY + (outerHeight - targetHeight) / 2.5, 10),
-                    features = [];
-                if (targetWidth !== null) {
-                    features.push('width=' + targetWidth);
-                }
-                if (targetHeight !== null) {
-                    features.push('height=' + targetHeight);
-                }
-                features.push('left=' + left);
-                features.push('top=' + right);
-                features.push('scrollbars=0');
-                features.push('location=0');
-                features.push('menubar=0');
-                features.push('title=0');
-                features.push('resizable=0');
+    function PopupCenter(url, title, w, h) {
+        var userAgent = navigator.userAgent,
+            mobile = function () {
+                return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
+                    /\b(iP[ao]d)/.test(userAgent) ||
+                    /Android/i.test(userAgent) ||
+                    /Mobile/i.test(userAgent);
+            },
+            screenX = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+            screenY = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+            outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth,
+            outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : document.documentElement.clientHeight - 22,
+            targetWidth = mobile() ? null : w,
+            targetHeight = mobile() ? null : h,
+            V = screenX < 0 ? window.screen.width + screenX : screenX,
+            left = parseInt(V + (outerWidth - targetWidth) / 2, 10),
+            right = parseInt(screenY + (outerHeight - targetHeight) / 2.5, 10),
+            features = [];
+        if (targetWidth !== null) {
+            features.push('width=' + targetWidth);
+        }
+        if (targetHeight !== null) {
+            features.push('height=' + targetHeight);
+        }
+        features.push('left=' + left);
+        features.push('top=' + right);
+        features.push('scrollbars=0');
+        features.push('location=0');
+        features.push('menubar=0');
+        features.push('title=0');
+        features.push('resizable=0');
 
 
 
-                var newWindow = window.open(url, title, features.join(','));
+        var newWindow = window.open(url, title, features.join(','));
 
-                if (window.focus) {
-                    newWindow.focus();
-                }
+        if (window.focus) {
+            newWindow.focus();
+        }
 
-                return newWindow;
-            }
+        return newWindow;
+    }
 
-
+    $('#btnAddList').click(function () {
+        $("#list").find("a.d-none.k-grid-add").click();
+    });
 
 </script>

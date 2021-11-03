@@ -33,5 +33,6 @@ namespace Previgesst.ViewModels
         public Boolean NotificationNonConformite { get; set; }
 
         public DataSourceResult departements { get; internal set; }
+        public string LienPrevicadMobile { get; set; }
     }
 }

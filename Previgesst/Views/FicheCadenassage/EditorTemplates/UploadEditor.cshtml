@@ -5,8 +5,20 @@
         .Async(a => a
             .Save("SaveLinkPhoto", "FicheCadenassage")
             .AutoUpload(true)
-
         )
         .Events(e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelectJpg"))
     )
 </div>
+
+<script>
+    jQuery(document).ready(function () {
+        "use strict";
+        console.log('creation material');
+
+        // add btn-img class UI-v2
+        jQuery('.k-button.k-upload-button').addClass('btn-img m-1');
+
+        // hide span and em tag with btn-img UI-v2
+        jQuery('.k-button.k-upload-button').parent().find('em').addClass('d-none');
+    });
+</script>

@@ -4,23 +4,44 @@
     Layout = "~/Views/Shared/_Layout_v2.cshtml";
 }
 
-<link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
 
-<link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
-<link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
 
-<link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+}
 
-<main class="main-container-wrapper main-container-wrapper-grid">
+@section sidebar{
 
-    <div class="main-container-content">
-        @*<div class="main-section-tile">
-            <h2>
-                Liste des Utilisateurs
-                @Html.ActionLink("Ajouter", "EditUser", new { }, new { @class = "btn btn-success" })
-            </h2>
-        </div>*@
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "AdminPrevi")'>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+
+        @*<li class="nav-item text-center active">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#Fiches" id="Fich">
+                <img src="/content/v2/images/Procédures.svg">
+                <p class="nav-link-text">@Model.Type</p>
+            </a>
+        </li>*@
+    </ul>
+}
+
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@Url.Action("Index", "AdminPrevi")'>Accueil</a></li>
+            <li class="active">Liste des Utilisateurs</li>
+        </ul>
+    </div>
+
+
+    <div class="main-page-content">
 
 
         <div class="table-top-header">
@@ -28,10 +49,9 @@
                 <h3>Liste des Utilisateurs</h3>
             </div>
             <div class="page-table-meta">
-                <div class="add-icon" onclick="window.location.href='@Url.Action("Ajouter", "EditUser", new { })'">
+                <div class="add-icon" onclick="window.location.href='@Url.Action("EditUser", "Manage", new { })'">
                     <img src="/content/v2/images/plus-icon.svg" />
                 </div>
-                @Html.ActionLink("Ajouter", "EditUser", new { }, new { @class = "add-icon" })
             </div>
         </div>
 
@@ -40,41 +60,40 @@
 
 
 
-                @(Html.Kendo().Grid<UserListViewModel>()
-                                                .Name("user-list")
-                                                .Columns(columns =>
-                                                {
-                                                    columns.Bound(u => u.UserName)
-                                                        .Filterable(f => f
-                                                            .Extra(false));
-                                                    columns.Bound(u => u.Email)
-                                                        .Filterable(f => f
-                                                            .Extra(false));
-                                                    columns.Bound(u => u.Inactive)
-                                                           .ClientTemplate("<input type='checkbox' ${ " + nameof(UserListViewModel.Inactive) + " == true ? 'checked' : ''} disabled />")
-                                                           .HtmlAttributes(new { @class = "text-center" })
-                                                           .HeaderHtmlAttributes(new { @class = "text-center" });
-                                                    columns.Bound(u => u.UserId)
-                                                        .ClientTemplate(
-                                                            "<a href='" + Url.Action("EditUser", "Manage") + "/#= " + nameof(UserListViewModel.UserId) + " #' class='btn btn-default btn-xs'>" +
-                                                            "Accéder" + "</a>").Title("").Filterable(false).Sortable(false);
-                                                })
-                                                .Sortable()
-                                                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 10, 25, 50, 100 }).Input(true).Info(false).Numeric(false))
-                                                .Filterable()
-                                                .DataSource(ds => ds
-                                                    .Ajax()
-                                                    .PageSize(50)
-                                                    .Sort(s => s.Add(nameof(UserListViewModel.UserName)).Ascending())
-                                                    .Read(r => r.Action("UserRead", "Manage")))
-                                                .Events(e => e      //Garder les filtres pour la durée de la session du client
-                                                    .DataBound("dataBoundKendo")
-                                                    .Change("changeKendo")
-                                                    .ColumnHide("columnHideKendo")
-                                                    .ColumnShow("columnShowKendo")
-                                                    .ColumnReorder("columnReorderKendo"))
-                    )
-            </div>
+        @(Html.Kendo().Grid<UserListViewModel>()
+            .Name("user-list")
+            .Columns(columns =>
+            {
+                columns.Bound(u => u.UserName).Filterable(f => f.Extra(false));
+
+                columns.Bound(u => u.Email).Filterable(f => f.Extra(false));
+
+                columns.Bound(u => u.Inactive)
+                        //.ClientTemplate("<input type='checkbox' ${ " + nameof(UserListViewModel.Inactive) + " == true ? 'checked' : ''} disabled />")
+                        .ClientTemplate("<center><div class='squaredThree'><input type='checkbox'id='squaredone' name='check' ${ " + nameof(UserListViewModel.Inactive) + " == true ? 'checked' : ''} disabled /><label for='squaredone'><span> </span></label></div></center>")
+                        .HtmlAttributes(new { @class = "text-center" })
+                        .HeaderHtmlAttributes(new { @class = "text-center" });
+
+                columns.Bound(u => u.UserId)
+                    .ClientTemplate("<a href='" + Url.Action("EditUser", "Manage") + "/#= " + nameof(UserListViewModel.UserId) + " #' class='btn btn-editicon'></a>")
+                    .Title("").Filterable(false).Sortable(false).Width("70px");
+            })
+            .Sortable()
+            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 10, 25, 50, 100 }).Input(true).Info(false).Numeric(false))
+            .Filterable()
+            .DataSource(ds => ds
+                .Ajax()
+                .PageSize(50)
+                .Sort(s => s.Add(nameof(UserListViewModel.UserName)).Ascending())
+                .Read(r => r.Action("UserRead", "Manage")))
+                .Events(e => e      //Garder les filtres pour la durée de la session du client
+                .DataBound("dataBoundKendo")
+                .Change("changeKendo")
+                .ColumnHide("columnHideKendo")
+                .ColumnShow("columnShowKendo")
+                .ColumnReorder("columnReorderKendo"))
+        )
+    </div>
 </main>
 
 @section Scripts
@@ -82,9 +101,9 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $('sidebar').hide();
-        });
+        //$(document).ready(function () {
+        //    $('sidebar').hide();
+        //});
 
         var uniqueName = '@ViewContext.RouteData.Values["controller"]' + '@ViewContext.RouteData.Values["action"]' + '1_';
         var colState = uniqueName + "columnState";

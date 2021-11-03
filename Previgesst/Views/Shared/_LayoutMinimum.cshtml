@@ -48,7 +48,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title" id="delete-generic-title">@GridRES.Confirmation</h4>
@@ -60,8 +60,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-danger" value="@GridRES.Oui" onclick="deleteGenericResult(true)" data-dismiss="modal" />
-                    <input type="button" class="btn btn-primary" value="@GridRES.NePasSupprimer" onclick="deleteGenericResult(false)" data-dismiss="modal" />
+                    <input type="button" class="btn btn-danger" value="@GridRES.Oui" onclick="deleteGenericResult(true)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasSupprimer" onclick="deleteGenericResult(false)" data-dismiss="modal" data-bs-dismiss="modal" />
                     <input type="hidden" class="delete-generic-result" />
                 </div>
             </div>
@@ -73,7 +73,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                    <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title" id="duplicate-generic-title">@GridRES.ConfirmationDuplication</h4>
@@ -85,8 +85,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-success" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" />
-                    <input type="button" class="btn btn-primary" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" />
+                    <input type="button" class="btn btn-success" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" data-bs-dismiss="modal" />
                     <input type="hidden" class="duplicate-generic-result" />
                 </div>
             </div>

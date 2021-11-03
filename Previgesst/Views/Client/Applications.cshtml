@@ -1,44 +1,38 @@
 ﻿@model ClientEditDetailsViewModel
 
-
-<div class="panel panel-default">
-
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white"></div>
-    <div class="panel-body" style="padding:30px">
-
-
-
-
-
-        @using (Html.BeginForm("SaveApplications", "Client", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            @Html.AntiForgeryToken();
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" });
-
-
-            @Html.HiddenFor(model => model.ClientId)
-
-            <div class="form-group">
-
-                @Html.LabelFor(m => m.ApplicationIds, new { @class = "control-label" })
-
-                @(Html.Kendo().MultiSelectFor(m => m.ApplicationIds).HtmlAttributes(new { @class = "form-control" })
-                    .DataTextField("Nom")
-                    .DataValueField("ApplicationPreviId")
-                    .AutoClose(true)
-                     .BindTo((System.Collections.IEnumerable)ViewData["Applications"])
-                    .AutoBind(true))
-
-
-            </div>
-
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Enregistrer" />
-            </div>
-
-
-        }
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">Applications permises</h3>
     </div>
 </div>
 
+
+@using (Html.BeginForm("SaveApplications", "Client", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+
+
+    @Html.HiddenFor(model => model.ClientId)
+
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.ApplicationIds, new { @class = "form-label" })
+
+        @(Html.Kendo().MultiSelectFor(m => m.ApplicationIds).HtmlAttributes(new { @class = "form-control" })
+                    .DataTextField("Nom")
+                    .DataValueField("ApplicationPreviId")
+                    .AutoClose(true)
+                    .BindTo((System.Collections.IEnumerable)ViewData["Applications"])
+                    .AutoBind(true)
+        )
+
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-mettre m-1" value="Enregistrer" />
+    </div>
+
+
+}
 

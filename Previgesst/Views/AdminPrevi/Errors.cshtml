@@ -1,32 +1,53 @@
-﻿@{
+﻿@using Previgesst.Ressources.Cadenassage
+@using Previgesst.Ressources
+
+@{
     ViewBag.Title = "Errors";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_v2.cshtml";
 }
 
 
-@using Previgesst.Ressources.Cadenassage
-@using Previgesst.Ressources
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+}
 
 
-<div class="container">
-    <div class="row">
+@section sidebar{
 
-        <div class="col-md-12 ">
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" href='@Url.Action("Index", "AdminPrevi")'>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+    </ul>
+}
 
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Journaux d'erreurs</li>
-                </ol>
-            </nav>
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href="~/AdminPrevi/Index">Accueil</a></li>
+            <li class="active" aria-current="page">Journaux d'erreurs</li>
+        </ul>
+    </div>
 
-            <hr />
+    <div class="main-page-content">
 
+        <div class="table-top-header">
+            <div class="page-title d-flex justify-content-center align-items-center">
+                <h3 class="m-0">Journaux</h3>
+            </div>
+        </div>
 
-            <div class="panel panel-danger previgesstClient">
-
-                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Journaux</div>
-                <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="previgesstClient">
 
                     @Html.AntiForgeryToken()
 
@@ -35,8 +56,8 @@
                         .Columns(columns =>
                         {
                             columns.Bound(e => e.LogEntryId).Hidden();
-                            columns.Bound(e => e.Date).Filterable(f => f.Extra(false)).Width(180).Format("{0:G}");
-                            columns.Bound(c => c.Level).Filterable(f => f.Extra(false)).Width(80);
+                            columns.Bound(e => e.Date).Filterable(f => f.Extra(false)).Width("180px").Format("{0:G}");
+                            columns.Bound(c => c.Level).Filterable(f => f.Extra(false)).Width("80px");
                             columns.Bound(c => c.MachineName).Filterable(f => f.Extra(false));
                             columns.Bound(e => e.Message).Filterable(f => f.Extra(false));
 
@@ -46,7 +67,7 @@
                             columns.Bound(e => e.StackTrace).Hidden();
 
 
-                            columns.Command(command => command.Custom("Détails").Click("showDetailsNew")).Width(100);
+                            columns.Command(command => command.Custom("Détails").Click("showDetailsNew").HtmlAttributes(new { @class = "btn-detail mx-1" })).Width("130px");
                         })
                         .Sortable(s => s.AllowUnsort(false))
                         .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
@@ -59,47 +80,51 @@
                             .Read(r => r.Action("ReadListLogs", "AdminPrevi"))
                             )
                         )
-                    
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+</main>
 
 
 @(Html.Kendo().Window().Name("EqDetails")
-        .Title("Journaux")
-        .Visible(false)
-        .Modal(true)
-        .Width(650)
+    .Title("Journaux")
+    .Visible(false)
+    .Modal(true)
+    .Width(650)
 )
 
 
 <script type="text/x-kendo-template" id="eqTemplate">
-    <div id="details-contaner" style="max-height:500px;overflow:scroll;">
+    <div id="row">
+        <div id="col-11">
+            <div id="details-contaner" class="p-3" style="max-height:500px;">
 
-        <div class="form-group">
-            <label>Exception</label>
-            <p> #= Exception # </p>
+                    <div class="form-group">
+                        <label class="control-label">Exception</label>
+                        <p> #= Exception # </p>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="control-label">Logger</label>
+                        <p> #= Logger # </p>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="control-label">Message</label>
+                        <p> #= Message # </p>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label class="control-label">StackTrace</label>
+                        <p> #= StackTrace # </p>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <label>Logger</label>
-            <p> #= Logger # </p>
-        </div>
-
-        <div class="form-group">
-            <label>Message</label>
-            <p> #= Message # </p>
-        </div>
-
-        <div class="form-group">
-            <label>StackTrace</label>
-            <p> #= StackTrace # </p>
-        </div>
-
-
-    </div>
 </script>
 
 

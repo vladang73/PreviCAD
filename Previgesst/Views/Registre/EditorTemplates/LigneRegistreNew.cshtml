@@ -1,130 +1,100 @@
 ﻿@model Previgesst.ViewModels.LigneRegistreViewModel
 @using Previgesst.Ressources.Previcad
-<style>
-    div.k-edit-form-container {
-        width: auto;
-    }
-
-    div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
-        width: 100%;
-        max-width: none;
-        padding-left: 0px;
-    }
-
-    .petit {
-        max-height: 20px;
-    }
-
-    .row {
-        margin-right: 15px;
-        margin-left: 15px;
-    }
-
-    .col {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-</style>
-
-<div class="container" style="width:600px;">
-    <div class="panel panel-default" style="margin-left:15px;margin-right:30px;">
-        <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-10" style="padding-left:0px;">
-                    @Html.HiddenFor(model => model.FicheCadenassageId)
-                    @Html.HiddenFor(model => model.LigneRegistreId)
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                        @Html.LabelFor(model => model.BonDeTravail, new { @class = "control-label" })
 
 
-                        @(Html.Kendo().TextBoxFor(model => model.BonDeTravail).HtmlAttributes(new { style = "width:100%" })
-                        )
-                        @Html.ValidationMessageFor(model => model.BonDeTravail)
-                    </div>
+<div class="p-3">
+    <div class="row">
+        <div class="col-11">
+            @Html.HiddenFor(model => model.FicheCadenassageId)
+            @Html.HiddenFor(model => model.LigneRegistreId)
 
-                    <div class="form-group" style="margin-bottom:5px;">
-                        @Html.LabelFor(model => model.DateDebut, new { @class = "control-label" })
-
-
-                        @(Html.Kendo().DateTimePickerFor(model => model.DateDebut).HtmlAttributes(new { style = "width:100%" })
-                        )
-                        @Html.ValidationMessageFor(model => model.DateDebut)
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                        @Html.Label(@PrevFicheRES.FinPrevue.Replace("<br>", " "), new { @class = "control-label" })
-
-                        @(Html.Kendo().DateTimePickerFor(model => model.FinPrevue).HtmlAttributes(new { style = "width:100%" })
-                        )
-                        @Html.ValidationMessageFor(model => model.FinPrevue)
-                    </div>
-
-                    @*<div class="form-group" style="margin-bottom:5px;">
-            @Html.LabelFor(model => model.DateFin, new { @class = "control-label" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.BonDeTravail, new { @class = "form-label d-block" })
 
 
-            @(Html.Kendo().DatePickerFor(model => model.DateFin).HtmlAttributes(new { style = "width:100%" })
-            )
-            @Html.ValidationMessageFor(model => model.DateFin)
-        </div>
+                @(Html.Kendo().TextBoxFor(model => model.BonDeTravail).HtmlAttributes(new { @class = "form-control w-100" }))
+                @Html.ValidationMessageFor(model => model.BonDeTravail)
+            </div>
 
-        <div class="form-group" style="margin-bottom:5px;">
-            @Html.LabelFor(model => model.HeureFin, new { @class = "control-label" })
+            <div class="form-group mt-3">
+                @Html.LabelFor(model => model.DateDebut, new { @class = "form-label d-block" })
 
 
-            @(Html.Kendo().TimePickerFor(model => model.HeureFin).HtmlAttributes(new { style = "width:100%" })
-            )
-            @Html.ValidationMessageFor(model => model.HeureFin)
-        </div>*@
+                @(Html.Kendo().DateTimePickerFor(model => model.DateDebut).HtmlAttributes(new { @class = "form-control w-100" }))
+                @Html.ValidationMessageFor(model => model.DateDebut)
+            </div>
 
-                    <div class="form-group" style="margin-bottom:5px;">
-                        @Html.LabelFor(model => model.Note, new { @class = "control-label", @style = "width:100%" })
+            <div class="form-group mt-3">
+                @Html.Label(@PrevFicheRES.FinPrevue.Replace("<br>", " "), new { @class = "form-label d-block" })
 
-                        @(Html.TextAreaFor(model => model.Note, 3, 40, new { @style = "width:100%" })
-                        )
-                        @Html.ValidationMessageFor(model => model.Note)
-                    </div>
+                @(Html.Kendo().DateTimePickerFor(model => model.FinPrevue).HtmlAttributes(new { @class = "form-control w-100" }))
+                @Html.ValidationMessageFor(model => model.FinPrevue)
+            </div>
 
-                    <div class="form-group" style="margin-bottom:5px;">
-                        @Html.Label(@PrevFicheRES.LuEtEffectue, new { @class = "control-label" })
+            @*<div class="form-group" style="margin-bottom:5px;">
+                    @Html.LabelFor(model => model.DateFin, new { @class = "control-label" })
 
-                        @(Html.Kendo().CheckBoxFor(model => model.LuEtEffectue).HtmlAttributes(new { style = "width:100%" })
-                        )
-                        @Html.ValidationMessageFor(model => model.LuEtEffectue)
-                    </div>
+
+                    @(Html.Kendo().DatePickerFor(model => model.DateFin).HtmlAttributes(new { style = "width:100%" })
+                    )
+                    @Html.ValidationMessageFor(model => model.DateFin)
                 </div>
+
+                <div class="form-group" style="margin-bottom:5px;">
+                    @Html.LabelFor(model => model.HeureFin, new { @class = "control-label" })
+
+
+                    @(Html.Kendo().TimePickerFor(model => model.HeureFin).HtmlAttributes(new { style = "width:100%" })
+                    )
+                    @Html.ValidationMessageFor(model => model.HeureFin)
+                </div>*@
+
+            <div class="form-group mt-3">
+                @Html.LabelFor(model => model.Note, new { @class = "form-label d-block" })
+
+                @(Html.TextAreaFor(model => model.Note, 3, 40, new { @class = "form-control w-100" }))
+                @Html.ValidationMessageFor(model => model.Note)
+            </div>
+
+            <div class="form-group mt-3">
+                @Html.Label(@PrevFicheRES.LuEtEffectue, new { @class = "form-label d-block" })
+
+                @(Html.Kendo().CheckBoxFor(model => model.LuEtEffectue))
+                @Html.ValidationMessageFor(model => model.LuEtEffectue)
             </div>
         </div>
     </div>
 </div>
+
+
 <script>
     jQuery(document).ready(function () {
         "use strict";
         console.log('creation cadenassage');
         jQuery('.k-grid-update').css('display', 'none');
 
+        jQuery('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        jQuery('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+
         if (jQuery('#LuEtEffectue').prop("checked") == false) {
             jQuery('.k-grid-update').css('display', 'none');
             jQuery('.k-grid-update').css('cursor', 'initial');
-        } else if(jQuery('#LuEtEffectue').prop("checked") == true) {
+        } else if (jQuery('#LuEtEffectue').prop("checked") == true) {
             jQuery('.k-grid-update').css('display', 'inline-block');
             jQuery('.k-grid-update').css('cursor', 'pointer');
         }
 
-        jQuery('#LuEtEffectue').click(function() {
+        jQuery('#LuEtEffectue').click(function () {
             if (jQuery(this).prop("checked") == false) {
                 jQuery('.k-grid-update').css('display', 'none');
                 jQuery('.k-grid-update').css('cursor', 'initial');
-            } else if(jQuery(this).prop("checked") == true) {
+            } else if (jQuery(this).prop("checked") == true) {
                 jQuery('.k-grid-update').css('display', 'inline-block');
                 jQuery('.k-grid-update').css('cursor', 'pointer');
             }
         });
 
-        jQuery('.k-grid-update').click(function() {
+        jQuery('.k-grid-update').click(function () {
             var luEtEffectue = jQuery(this).parents('.k-edit-form-container').find('#LuEtEffectue');
             if (luEtEffectue.prop("checked") == false) {
                 jQuery(this).css('display', 'none');

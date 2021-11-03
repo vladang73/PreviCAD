@@ -1,92 +1,64 @@
 ﻿@using Previgesst.Ressources.Cadenassage
 @model MaterielRequisCadenassageViewModel
-<style>
-    div.k-edit-form-container {
-        width: auto;
-    }
-
-        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
-            width: 100%;
-            max-width: none;
-            padding-left: 0px;
-        }
 
 
 
-    .petit {
-        max-height: 20px;
-    }
-
-    .row {
-        margin-right: 15px;
-        margin-left: 15px;
-    }
-
-    .col {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-</style>
-
-<div class="container" style="width:600px;">
-
-
-    <div class="panel panel-default" style="margin-left:15px;margin-right:30px;">
-
-        <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-        <div class="panel-body">
-
-
-
-            <div class="row">
-                <div class="col-md-10" style="padding-left:0px;">
-                    @Html.HiddenFor(model => model.MaterielRequisCadenassageId)
-                    @Html.HiddenFor(model => model.FicheCadenassageId)
-
-                    <div class="form-group">
+<div class="p-3">
 
 
 
 
+    <div class="row">
+        <div class="col-11">
+            @Html.HiddenFor(model => model.MaterielRequisCadenassageId)
+            @Html.HiddenFor(model => model.FicheCadenassageId)
 
 
-                        <div class="form-group" style="margin-bottom:5px;">
-                            @Html.LabelFor(model => model.MaterielId, new { @class = "control-label" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MaterielId, new { @class = "form-label d-block" })
 
-                            @(Html.Kendo().DropDownListFor(m => m.MaterielId)
+                    @(Html.Kendo().DropDownListFor(m => m.MaterielId)
                                             .DataValueField("MaterielId")
                                             .DataTextField("Description")
                                             .BindTo((System.Collections.IEnumerable)ViewData["Materiel"])
                                             .HtmlAttributes(new { data_value_primitive = "true" })
                                               .OptionLabel("-- " + CadMaterielRES.SelectMateriel + " --")
                             )
-                            @Html.ValidationMessageFor(model => model.MaterielId)
-                        </div>
+                    @Html.ValidationMessageFor(model => model.MaterielId)
+                </div>
 
 
-                        <div class="form-group" style="margin-bottom:5px;">
-                            @Html.LabelFor(model => model.Quantite, new { @class = "control-label" })
+                <div class="form-group mt-2">
+                    @Html.LabelFor(model => model.Quantite, new { @class = "form-label d-block" })
 
 
-                            @(Html.Kendo().NumericTextBoxFor(m => m.Quantite)
+                    @(Html.Kendo().NumericTextBoxFor(m => m.Quantite)
                                         .HtmlAttributes(new { @class = "form-control", style = "width:100%" })
                                         .Min(0)
                                         .Decimals(0)
                                         .Format("N0")
                             )
 
-                            @Html.ValidationMessageFor(m => m.Quantite, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(m => m.Quantite, "", new { @class = "text-danger" })
 
 
-                        </div>
-
-
-
-                    </div>
                 </div>
-            </div>
+
+
 
         </div>
     </div>
 
-    </div>
+
+</div>
+
+
+<script>
+    jQuery(document).ready(function () {
+        "use strict";
+        console.log('creation material');
+
+        jQuery('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        jQuery('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+    });
+</script>

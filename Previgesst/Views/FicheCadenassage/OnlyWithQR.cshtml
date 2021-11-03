@@ -9,7 +9,7 @@
 
 <style>
     #gridTest .k-grid-content{
-        height: 388px !important;
+        height: 378px !important;
         overflow: scroll;
     }
 
@@ -19,51 +19,61 @@
         float: left !important;
         margin-right: 5px;
     }
+
+    .squaredThree .selected-equi{ width: 0; }
 </style>
 
-<div class="container-fluid">
-    @if (Model != null && Model.Count() > 0)
-    {
-        <div style="display: block;min-height: 100px;">
-            <div style="display: inline-block; float: left;">
-                <label>
-                    <input type="radio" name="RadioType" value="60503" /> @CadEquipRES.QROption1
-                </label>
-                <br />
-                <label>
-                    <input type="radio" name="RadioType" value="60505" /> @CadEquipRES.QROption2
-                </label>
-                <br />
-                <label>
-                    <input type="radio" name="RadioType" value="5524" /> @CadEquipRES.QROption3
-                </label>
+<div class="p-3">
+    <div class="row">
+        <div class="col-11">
+
+            @if (Model != null && Model.Count() > 0)
+            {
+                <div style="display: block;min-height: 100px;">
+                    <div style="display: inline-block; float: left;">
+                        <label class="form-label">
+                            <input type="radio" name="RadioType" value="60503" /> @CadEquipRES.QROption1
+                        </label>
+                        <br />
+                        <label class="form-label">
+                            <input type="radio" name="RadioType" value="60505" /> @CadEquipRES.QROption2
+                        </label>
+                        <br />
+                        <label class="form-label">
+                            <input type="radio" name="RadioType" value="5524" /> @CadEquipRES.QROption3
+                        </label>
+
+                        <br />
+                        <br />
+                    </div>
+                    <div style="display: inline-block; float: right;">
+                        <label class="form-label">
+                            <input type="radio" name="QRPageOrientation" value="L" /> @CadEquipRES.Landscape
+                        </label>
+                        <br />
+                        <label class="form-label">
+                            <input type="radio" name="QRPageOrientation" value="P" /> @CadEquipRES.Portrait
+                        </label>
+                    </div>
+                </div>
+
+
+                <div id="gridTest"></div>
+
 
                 <br />
-                <br />
-            </div>
-            <div style="display: inline-block; float: right;">
-                <label>
-                    <input type="radio" name="QRPageOrientation" value="L" /> @CadEquipRES.Landscape
-                </label>
-                <br />
-                <label>
-                    <input type="radio" name="QRPageOrientation" value="P" /> @CadEquipRES.Portrait
-                </label>
-            </div>
+                @*<input type="button" value="@CadEquipRES.PrintQRCode" class="btn btn-qr pull-right pull-end" id="btnPrintSelected" />*@
+                <a class="btn btn-qr pull-right float-end" id="btnPrintSelected" href="#" >@CadEquipRES.PrintQRCode</a>
+            }
+            else
+            {
+                <p>
+                    @CadEquipRES.NoQRAvailable
+                </p>
+            }
+
+
         </div>
-
-
-        <div id="gridTest"></div>
-
-
-        <br />
-        <input type="button" value="@CadEquipRES.PrintQRCode" class="btn btn-primary pull-right" id="btnPrintSelected" />
-    }
-    else
-    {
-        <p>
-            @CadEquipRES.NoQRAvailable
-        </p>
-    }
+    </div>
 </div>
 

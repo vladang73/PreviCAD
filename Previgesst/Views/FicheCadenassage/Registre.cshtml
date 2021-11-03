@@ -71,14 +71,14 @@
                 columns.Bound(e => e.NoteAudit).Title(CadRegRES.NoteAudit).Hidden().Title("Commentaires");
                 columns.Command(c =>
                 {
-                    c.Edit().Text(CadRegRES.Audit).HtmlAttributes(new { @class = "btn-table btn-edit" });
+                    c.Edit().Text(" ").HtmlAttributes(new { @class = "btn-table btn-edit" });
                 })
                 .Width(30).Hidden(!@Model.estAudit);
             })
 
             .Sortable(s => s.AllowUnsort(false))
             .Events(e=>e.DataBound("onRegistreDataBound").Cancel("onRegistreDataBound").ExcelExport("excelExport"))
-            .ToolBar(tools => tools.Excel())
+            .ToolBar(tools => tools.Excel().HtmlAttributes(new { @class = "btn-excel float-end" }))
             .Editable(e => e.DisplayDeleteConfirmation(false))
             .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneRegistre").Window(w => w.Title(CadRegRES.Audit).Width(600)))
 

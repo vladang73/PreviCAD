@@ -3,116 +3,118 @@
 @model Previgesst.ViewModels.EmployeRegistreViewModel
 
 
-<style>
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@PrevIndexRES.Fiches</h3>
+    </div>
+    <div class="page-table-meta">
 
-    .k-grid-content {
-        overflow-x: scroll !important;
-    }
-</style>
-
-<div class="panel panel-danger">
-
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-    <div class="panel-body">
-        <div style="padding-bottom:10px;padding-top:10px">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#qrModal" id="btnScanQR" style="position: absolute; top: 3px; left: 500px; ">
-                @PrevFicheRES.ScanQR
-            </button>
-
-            <button type="button" class="btn btn-primary" id="btnClearQRFilter" style="position: absolute; top: 3px; left: 750px;">
-                @PrevFicheRES.ClearQRFilter
-            </button>
+        <div class="search-qr-code bg-transparent">
+            <a class="text-decoration-none text-white btn-primary" id="btnClearQRFilter" href="#">
+                <span>@PrevFicheRES.ClearQRFilter</span>
+            </a>
         </div>
-        <div>
-            
-
-            @Html.AntiForgeryToken()
-
-            @(Html.Kendo().Grid<LigneRegistreViewModel>()
-                    .Name("list")
-                    .Columns(columns =>
-                    {
-                        columns.Bound(e => e.EquipementId).Hidden();
-                        columns.Bound(e => e.FicheCadenassageId).Hidden();
-
-                        columns.Bound(c => c.NoFicheCadenassage).Title(PrevFicheRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
-                            .ForString(str => str.Clear()
-                            .Contains(GridRES.Contains)
-                            .StartsWith(GridRES.StartsWith)
-                            .IsEqualTo(GridRES.Egale)
-                            .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(40);
-
-                        columns.Bound(e => e.NomEquipement).Title(PrevFicheRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
-                            .ForString(str => str.Clear()
-                            .Contains(GridRES.Contains)
-                            .StartsWith(GridRES.StartsWith)
-                            .IsEqualTo(GridRES.Egale)
-                            .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(140);
-                        columns.Bound(e => e.NomDepartement).Title(PrevFicheRES.Departement).Filterable(f => f.Extra(false).Operators(operators => operators
-                            .ForString(str => str.Clear()
-                            .Contains(GridRES.Contains)
-                            .StartsWith(GridRES.StartsWith)
-                            .IsEqualTo(GridRES.Egale)
-                            .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(110);
-
-                        columns.Bound(e => e.TitreFiche).Title(PrevFicheRES.Type).ClientTemplate("").Width(70);
-                        columns.Bound(e => e.TravailAEffectuer).Title(PrevFicheRES.Travaux).ClientTemplate("").Width(140);
-                        columns.Command(command => command.Custom(PrevFicheRES.Materiel).Click("showDetails").HtmlAttributes(new {@class="btn materialButton", @style="text-align:center"})).Width(50);
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  class='btn downloadButton' style='text-align:center' title="+PrevFicheRES.Telecharger+"></a>").Title("").Filterable(false).Sortable(false).Hidden( @Model.Langue!="fr").Width(43);
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  class='btn downloadButton' title="+PrevFicheRES.Telecharger+"></a>").Title("").Filterable(false).Sortable(false).Hidden(@Model.Langue !="en").Width(43);
-
-                        columns.Command(e => e.Edit().Text(PrevFicheRES.Cadenasser)).Width(65);
-
-                    })
-
-                    .Sortable(s => s.AllowUnsort(false))
-                    .Scrollable(e => e.Enabled(true))
-                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                    .Filterable()
-
-                    .DataSource(ds => ds
-                        .Ajax()
-
-                        //.Sort( x=> x.Add (c => c.DisplaySection))
-                        //.Sort(x => x.Add(c => c.Ordre))
-                        .Filter(f =>
-                        {
-                            //f.Add(b => b.estDocumentPrevigesst).IsEqualTo(true);
-
-                        })
-
-                        .PageSize(20)
-                        .Model(m => {
-                            m.Id(e => e.FicheCadenassageId);
-                        })
-                        .Read(r => r.Action("ReadListFiches", "Registre", new { client = Model.ClientId }))
-                        .Update(r => r.Action("AddNewLine", "Registre", new { client = Model.ClientId }))
-                    )
-                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistreNew").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600)))
-                    .Events( e=> e.Edit("onEditFiches"))
-                    .Events(e=>e.DataBound("dataBoundFiches"))
-            )
-
+        <div class="search-qr-code">
+            <a class="text-decoration-none text-white card-wrapper-link" data-toggle="modal" data-target="#qrModal" id="btnScanQR" data-bs-toggle="modal" data-bs-target="#qrModal">
+                <img src="/content/v2/images/scanner.svg">
+                <span>@PrevFicheRES.ScanQR</span>
+            </a>
         </div>
-
+        <div class="table-search">
+            <div class="table-search-field">
+                <img class='table-search-icon' src="/content/v2/images/search.svg">
+                <input type="text" name="search" value="" class="search" placeholder="@PrevFicheRES.SearchPlaceholder">
+            </div>
+            <div class="search-note">
+                <img src="/content/v2/images/reset.svg"><span class="search-note-text">@PrevFicheRES.SearchReset</span>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+@Html.AntiForgeryToken()
+
+@(Html.Kendo().Grid<LigneRegistreViewModel>()
+            .Name("list")
+            .Columns(columns =>
+            {
+                columns.Bound(e => e.EquipementId).Hidden();
+                columns.Bound(e => e.FicheCadenassageId).Hidden();
+
+                columns.Bound(c => c.NoFicheCadenassage).Title(PrevFicheRES.NoFiche).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                )))
+                .HtmlAttributes(new { @class = "td-round-left-border" })
+                .Width("85px");
+
+                columns.Bound(e => e.TitreFiche).Title(PrevFicheRES.Type).ClientTemplate("").Width("200px");
+
+
+                columns.Bound(e => e.NomEquipement).Title(PrevFicheRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                ))).Width("200px");
+
+                columns.Bound(e => e.NomDepartement).Title(PrevFicheRES.Departement).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                ))).Width("160px");
+
+                columns.Bound(e => e.TravailAEffectuer).Title(PrevFicheRES.Travaux).ClientTemplate("");
+
+                columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title=" + PrevFicheRES.Telecharger + "><img src='/content/v2/images/download-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@Model.Langue != "fr").Width("65px");
+                columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title=" + PrevFicheRES.Telecharger + "><img src='/content/v2/images/download-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@Model.Langue != "en").Width("65px");
+
+
+                columns.Command(command => command.Custom(PrevFicheRES.Materiel).Click("showDetails").HtmlAttributes(new {@class= "materialButton btn-material mx-1", @style="text-align:center"})).Width("140px");
+
+                columns.Command(e => e.Edit().Text(PrevFicheRES.Cadenasser).HtmlAttributes(new { @class = "btn-table btn-edit" })).Width("160px");
+
+            })
+
+            .Sortable(s => s.AllowUnsort(false))
+            .Scrollable(e => e.Enabled(true))
+            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+            .Filterable()
+
+            .DataSource(ds => ds
+                .Ajax()
+
+                .PageSize(20)
+                .Model(m => { m.Id(e => e.FicheCadenassageId); })
+                .Read(r => r.Action("ReadListFiches", "Registre", new { client = Model.ClientId }))
+                .Update(r => r.Action("AddNewLine", "Registre", new { client = Model.ClientId }))
+            )
+            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistreNew").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600)))
+            .Events( e=> e.Edit("onEditFiches"))
+            .Events(e=>e.DataBound("dataBoundFiches"))
+    )
 
 @(Html.Kendo().Window().Name("Materiel")
     .Title(PrevFicheRES.Materiel)
     .Visible(false)
     .Modal(true)
     .Draggable(true)
-    .Width(300)
+    .Width(400)
+    .Height(300)
 )
 
 <hidden id="ficheId"></hidden>
 
 <script type="text/x-kendo-template" id="template">
-    <div id="details-container">
+    <div id="details-container" class="p-3">
         #= TexteMateriel.length ==0 ? "@PrevFicheRES.Aucun" :TexteMateriel.join("<br />") #
     </div>
 </script>
@@ -126,50 +128,33 @@
 
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
         var wnd = $("#Materiel").data("kendoWindow");
-        //debugger;
+
         wnd.content(detailsTemplate(dataItem));
         wnd.center().open();
     }
 
     function addNew(e) {
-
         $('.k-grid-add').trigger('click');
         var t = $('.k-popup-edit-form').find("#FicheCadenassageId");
         t.val(e);
-
     }
 
     function onInitNewRow(e) {
-
     }
 
     function navigate(e) {
-
     }
 
-
-</script>
-
-
-
-<style type="text/css">
-    #details-container {
-        padding: 10px;
-    }
-</style>
-
-
-<script>
     function dataBoundFiches(e) {
-        var selecteurGrid = "#list";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //var selecteurGrid = "#list";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
 
-        $(selecteurGrid + " .k-grid-edit").find("span").remove();
-        var classe = $(selecteurGrid + " .k-grid-edit").attr("class");
-        classe = "btn btn-success " + classe;
-        $(selecteurGrid + " .k-grid-edit").removeAttr("class").addClass(classe).removeClass("k-button").removeClass("k-button-icontext");
-        $(selecteurGrid + " .k-button").removeClass("k-button").removeClass("k-button-icontext");
+        //$(selecteurGrid + " .k-grid-edit").find("span").remove();
+        //var classe = $(selecteurGrid + " .k-grid-edit").attr("class");
+        //classe = "btn btn-success " + classe;
+        //$(selecteurGrid + " .k-grid-edit").removeAttr("class").addClass(classe).removeClass("k-button").removeClass("k-button-icontext");
+        //$(selecteurGrid + " .k-button").removeClass("k-button").removeClass("k-button-icontext");
 
     }
 
@@ -233,17 +218,17 @@
 </script>
 
 
-<div class="modal" tabindex="-1" role="dialog" id="qrModal" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog" role="document">
+<div class="modal" tabindex="-1" role="dialog" id="qrModal" data-backdrop="static" data-keyboard="false" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" style="display: inline-block;">@PrevFicheRES.ScanQREquip</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnCloseQRPopup">
+                <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" id="btnCloseQRPopup">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div id="qr-reader" style="width:300px"></div>
+                <div id="qr-reader" style="width:750px"></div>
                 <div id="qr-reader-results"></div>
             </div>
         </div>
@@ -258,35 +243,26 @@
     var lastResult, countResults = 0;
 
     function onScanSuccess(decodedText, decodedResult) {
-        /*if (decodedText !== lastResult)*/
-        {
-            ++countResults;
-            lastResult = decodedText;
-            // Handle on success condition with the decoded message.
-            console.log('Scan result ' + decodedText, decodedResult, new Date());
+        ++countResults;
+        lastResult = decodedText;
+        // Handle on success condition with the decoded message.
+        console.log('Scan result ' + decodedText, decodedResult, new Date());
 
 
 
-            $('#qrModal').modal('hide');
-            var qrEqID = decodedText.split('#')[1];
+        $('#qrModal').modal('hide');
+        var qrEqID = decodedText.split('#')[1];
 
-            var qrFilter = new Array();
-            qrFilter.push({ field: "EquipementId", operator: "eq", value: qrEqID });
+        var qrFilter = new Array();
+        qrFilter.push({ field: "EquipementId", operator: "eq", value: qrEqID });
 
 
-            var grid = $("#list").data("kendoGrid");
-            grid.dataSource.filter(qrFilter);
-            grid.dataSource.read();
-
-            //alert('filtered ' + decodedText);
-        }
+        var grid = $("#list").data("kendoGrid");
+        grid.dataSource.filter(qrFilter);
+        grid.dataSource.read();
     }
 
-    $('#btnScanQR').click(function() {
-        //var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
-        //html5QrcodeScanner.render(onScanSuccess);
-        //$('#qr-reader').removeAttr('style');
-
+    $('#btnScanQR').click(function () {
         const html5QrCode = new Html5Qrcode("qr-reader");
         const qrCodeSuccessCallback = (decodedText, decodedResult) => {
             /* handle success */
@@ -296,7 +272,7 @@
             $('#qrModal').modal('hide');
             html5QrCode.stop();
         };
-        const config = { fps: 10, qrbox: 200 };
+        const config = { fps: 10, qrbox: 500 };
         // If you want to prefer back camera
         html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
 

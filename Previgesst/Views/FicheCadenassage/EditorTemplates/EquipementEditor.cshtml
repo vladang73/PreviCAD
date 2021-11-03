@@ -1,81 +1,32 @@
 ﻿@using Previgesst.Ressources.Cadenassage
 @model EquipementViewModel
-<style>
-    div.k-edit-form-container {
-        width: auto;
-    }
-
-        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
-            width: 100%;
-            max-width: none;
-            padding-left: 0px;
-        }
 
 
-
-    .petit {
-        max-height: 20px;
-    }
-
-    .row {
-        margin-right: 15px;
-        margin-left: 15px;
-    }
-
-    .col {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-</style>
-
-<div class="container" style="width:600px;">
+<div class="p-3">
+    <div class="row">
+        <div class="col-11">
+            @Html.HiddenFor(model => model.EquipementId)
+            @Html.HiddenFor(model => model.ClientId)
 
 
-    <div class="panel panel-default" style="margin-left:15px;margin-right:30px;">
+            <div class="form-group" style="margin-bottom:5px;">
+                @Html.LabelFor(model => model.NomEquipement, new { @class = "form-label" })
+                @Html.LabelFor(model => model.NomEquipementEN, new { @class = "form-label" })
+                @Html.LabelFor(model => model.NumeroEquipment, new { @class = "form-label" })
 
-        <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-        <div class="panel-body">
+                @Html.EditorFor(model => model.Model)
+                @Html.EditorFor(model => model.Manufacturer)
+
+            </div>
+
+
+            <div class="form-group mt-3">
 
 
 
-            <div class="row">
-                <div class="col-md-10" style="padding-left:0px;">
-                    @Html.HiddenFor(model => model.EquipementId)
-                    @Html.HiddenFor(model => model.ClientId)
-
-                    <div class="form-group">
-
-
-
-
-
-
-                        <div class="form-group" style="margin-bottom:5px;">
-                            @Html.LabelFor(model => model.NomEquipement, new { @class = "control-label" })
-                            @Html.LabelFor(model => model.NomEquipementEN, new { @class = "control-label" })
-                            @Html.LabelFor(model => model.NumeroEquipment, new { @class = "control-label" })
-
-                            @Html.EditorFor(model => model.Model)
-                            @Html.EditorFor(model => model.Manufacturer)
-
-                            
-                            
-                        </div>
-
-
-                        <div class="form-group" style="margin-bottom:5px;">
-                            
-
-
-                        </div>
-
-
-
-                    </div>
-                </div>
             </div>
 
         </div>
     </div>
 
-    </div>
+</div>

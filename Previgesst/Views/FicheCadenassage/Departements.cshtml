@@ -82,7 +82,7 @@
             )
             .ToolBar(t =>
             {
-                t.Create().HtmlAttributes(new { @class = "d-none"});
+                t.Create().HtmlAttributes(new { @class = "d-none btn-test" });
             })
         )
 
@@ -93,14 +93,14 @@
 
     $("#Dep").click(function () {
 
-        $("#listDEPT").find("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        @*$("#listDEPT").find("a.k-grid-add").removeClass("k-button  k-button-icontext");
         $("#listDEPT").find("a.k-grid-add").addClass("btn btn-success btn-test ");
         $("#listDEPT").find("span.k-add").removeClass("k-icon");
         $("#listDEPT").find("a.btn-test").text("@CadDeptRES.Ajouter");
 
 
         // ADD ICONE "+"
-        setTimeout(function(){ $("#listDEPT").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+        setTimeout(function(){ $("#listDEPT").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);*@
     });
 
 

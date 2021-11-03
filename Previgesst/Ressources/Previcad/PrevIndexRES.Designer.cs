@@ -88,7 +88,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to En cours.
+        ///   Looks up a localized string similar to Cadenassage En cours.
         /// </summary>
         public static string EnCours {
             get {
@@ -111,6 +111,15 @@ namespace Previgesst.Ressources.Previcad {
         public static string Fiches {
             get {
                 return ResourceManager.GetString("Fiches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Procédures de contrôle.
+        /// </summary>
+        public static string MenuFiche {
+            get {
+                return ResourceManager.GetString("MenuFiche", resourceCulture);
             }
         }
         
@@ -178,7 +187,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Terminés.
+        ///   Looks up a localized string similar to Cadenassage Terminés.
         /// </summary>
         public static string Termines {
             get {

@@ -3,31 +3,19 @@
 @model SourceEnergieCadenassageViewModel
 
 
-<div class="panel panel-danger">
+@using (Html.BeginForm("SaveSources", "FicheCadenassage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
 
 
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
+    @Html.HiddenFor(model => model.FicheCadenassageId);
 
-   
-    <div class="panel-body" style="padding:30px">
+    <div class="form-group">
 
+        @Html.LabelFor(m => m.SourcesEnergieId, new { @class = "form-label" })
 
-
-
-
-        @using (Html.BeginForm("SaveSources", "FicheCadenassage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-        {
-            @Html.AntiForgeryToken();
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" });
-
-
-            @Html.HiddenFor(model => model.FicheCadenassageId);
-
-            <div class="form-group">
-
-                @Html.LabelFor(m => m.SourcesEnergieId, new { @class = "control-label" })
-
-                @(Html.Kendo().MultiSelectFor(m => m.SourcesEnergieId).HtmlAttributes(new { @class = "form-control" })
+        @(Html.Kendo().MultiSelectFor(m => m.SourcesEnergieId).HtmlAttributes(new { @class = "form-control" })
                                             .DataTextField("Description")
                                             .DataValueField("SourceEnergieId")
                                             .AutoClose(true)
@@ -35,18 +23,13 @@
                                             .AutoBind(true))
 
 
-            </div>
-
-            <div class="form-group">
-                <input type="button" id="saveSources" class="btn btn-primary" value="@CadSourcesRES.Enregistrer" />
-
-
-            </div>
-
-
-        }
     </div>
-</div>
+
+    <div class="form-group">
+        <input type="button" id="saveSources" class="btn btn-mettre m-1" value="@CadSourcesRES.Enregistrer" />
+    </div>
+
+}
 
 
 <script>
@@ -54,37 +37,34 @@
     $(document).ready(function () {
         $('#saveSources').click(function (e) {
 
-            {
+            var dataInput = {
+                Sources: $("#@Html.IdFor(m => m.SourcesEnergieId)").val(),
+                FicheCadenassageId: $("#@Html.IdFor(m => m.FicheCadenassageId)").val()
+            };
 
-                var dataInput = {
-                    Sources: $("#@Html.IdFor(m => m.SourcesEnergieId)").val(),
-                    FicheCadenassageId:  $("#@Html.IdFor(m => m.FicheCadenassageId)").val()
-                };
+            $.ajax({
+                url: '@Url.Action("SaveSourcesAjax")',
+                type: "POST",
+                data: JSON.stringify(dataInput),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    ShowNotification("@CadSourcesRES.Succes", "@CadSourcesRES.SourcesEnregistrees", "successTemplate")
 
-                $.ajax({
-                    url: '@Url.Action("SaveSourcesAjax")',
-                    type: "POST",
-                    data: JSON.stringify(dataInput),
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (result) {
-                        ShowNotification("@CadSourcesRES.Succes", "@CadSourcesRES.SourcesEnregistrees", "successTemplate")
-
-                        if (result == 1) {
-                            SourcesSync();
-                        }
-                    },
-                    error: function (data) {
-                        ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")
-
+                    if (result == 1) {
+                        SourcesSync();
                     }
-                })
+                },
+                error: function (data) {
+                    ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")
 
-            }
+                }
+            })
+
         })
         // ADD ICONE "+"
         setTimeout(function () { $("#Sources").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
-    })
+    });
 
     function SourcesSync(e) {
         if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }

@@ -1,95 +1,96 @@
 ﻿@using Previgesst.Ressources.Cadenassage
 @model Previgesst.ViewModels.EditFicheViewModel
 
-<div class="panel panel-danger">
-
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-
-
-    <div class="panel-body">
-
-
-        <div id="Documents" class="tab-pane">
-
-            @Html.AntiForgeryToken()
-
-            @(Html.Kendo().Grid<PhotoFicheCadenassageViewModel>()
-                                    .Name("listPhoto")
-                                    .Columns(columns =>
-                                    {
-
-                                        columns.Bound(e => e.PhotoFicheCadenassageId).Hidden();
-                                        columns.Bound(e => e.FicheCadenassageId).Hidden();
-
-
-                                        columns.Bound(c => c.Localisation);
-                                        columns.Bound(c => c.LocalisationEN);
-                                        columns.Bound(c => c.Rang).Filterable(f => f.Extra(false));
-                                        columns.Bound(c => c.URL).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false).Title(CadImageRES.Image);
-
-
-
-
-                                        columns.Command(c =>
-                                        {
-                                            c.Edit();
-                                            c.Custom(CadImageRES.Effacer)
-                                                  .Click("ConfirmDeleteRowPhoto")
-                                                  .HtmlAttributes(new { @class = "k-grid-effacer" });
-
-                                        })
-                                           .Width(250);
-
-                                    })
-
-                                    .Sortable(s => s.AllowUnsort(false))
-                                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                                    .Filterable()
-                                    .DataSource(ds => ds
-                                        .Ajax()
-                                           .Sort(x => x.Add(c => c.Rang))
-
-                                        .PageSize(20)
-                                        .Model(m =>
-                                        {
-                                            m.Id(e => e.PhotoFicheCadenassageId);
-                                        })
-
-                                    .Read(r => r.Action("ReadListPhoto", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                                    .Create(c => c.Action("SaveItemPhoto", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                                    .Update(u => u.Action("SaveItemPhoto", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                                    .Destroy(u => u.Action("DeleteItemPhoto", "FicheCadenassage"))
-                                    
-                                    .Events(e => e.Error("ListeErreurPhoto").RequestEnd("EndPhoto").Sync("ImagesSync"))
-                                    )
-
-                                    .Events(e => e.DataBound("ListeDataBoundPhoto"))
-                                    .Editable(e => e.DisplayDeleteConfirmation(false))
-
-
-                                    @*.ToolBar(tb =>
-                                        {
-                                        tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
-                                        }*@
-
-                                    .ToolBar(t =>
-                                    {
-                                        t.Create();
-                                    })
-            )
-
-
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@CadEditFicheRES.Images</h3>
+    </div>
+    <div class="page-table-meta">
+        <div class="add-icon">
+            <a id="btnAddImage">
+                <img src="/content/v2/images/plus-icon.svg" />
+            </a>
         </div>
     </div>
 </div>
 
 
+@Html.AntiForgeryToken()
+
+@(Html.Kendo().Grid<PhotoFicheCadenassageViewModel>()
+    .Name("listPhoto")
+    .Columns(columns =>
+    {
+
+        columns.Bound(e => e.PhotoFicheCadenassageId).Hidden();
+        columns.Bound(e => e.FicheCadenassageId).Hidden();
+        
+        columns.Bound(c => c.URL).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false)
+               .Filterable(false).Title("")
+               .HtmlAttributes(new { @class = "td-round-left-border" })
+               .Width("135px")
+               ;
+
+        columns.Bound(c => c.Rang).Filterable(f => f.Extra(false));
+        columns.Bound(c => c.Localisation);
+        columns.Bound(c => c.LocalisationEN);
+
+
+        columns.Command(c =>
+        {
+            c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+            c.Custom(" ")
+                    .Click("ConfirmDeleteRowPhoto")
+                    .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+        })
+        .Width("250px");
+
+    })
+
+    .Sortable(s => s.AllowUnsort(false))
+    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+    .Filterable()
+    .DataSource(ds => ds
+        .Ajax()
+        .Sort(x => x.Add(c => c.Rang))
+
+        .PageSize(20)
+        .Model(m =>
+        {
+            m.Id(e => e.PhotoFicheCadenassageId);
+        })
+
+    .Read(r => r.Action("ReadListPhoto", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+    .Create(c => c.Action("SaveItemPhoto", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+    .Update(u => u.Action("SaveItemPhoto", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+    .Destroy(u => u.Action("DeleteItemPhoto", "FicheCadenassage"))
+
+    .Events(e => e.Error("ListeErreurPhoto").RequestEnd("EndPhoto").Sync("ImagesSync"))
+    )
+
+    .Events(e => e.DataBound("ListeDataBoundPhoto").Edit("OnImageEdit"))
+    .Editable(e => e.DisplayDeleteConfirmation(false))
+
+
+    @*.ToolBar(tb =>
+        {
+        tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
+        }*@
+
+    .ToolBar(t =>
+    {
+        t.Create().HtmlAttributes(new { @class = "d-none" });
+    })
+)
+
+
+
+
 <script>
     $("#ImageCadFich").click(function () {
         // ADD ICONE "+"
-        $('.cadenassageContent #listPhoto .k-grid-add img').remove();
-        setTimeout(function () { $("#ImagesFiche").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
+        //$('.cadenassageContent #listPhoto .k-grid-add img').remove();
+        //setTimeout(function () { $("#ImagesFiche").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
     });
 
     function EndPhoto(e) {
@@ -181,20 +182,22 @@
 
     function ListeDataBoundPhoto(e) {
         var selecteurGrid = "#listPhoto";
-        var grid = $(selecteurGrid).data("kendoGrid");
 
+        $(selecteurGrid).find(".td-round-left-border img").addClass("img-ins");
+
+        //var grid = $(selecteurGrid).data("kendoGrid");
         //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
 
-        //Selects all delete buttons
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-                $(this).remove();
-            }
-        })
+        //        $(this).remove();
+        //    }
+        //})
     }
 
 // reload pour masquer le bouton de suppression qui réapparait comme par magie sur Undo.
@@ -202,7 +205,6 @@
         $("#listPhoto").on("mousedown", ".k-grid-cancel", function (e) {
             e.preventDefault = false;
             $("#listPhoto").data("kendoGrid").dataSource.read();
-
         });
     });
 
@@ -212,5 +214,11 @@
 
         GetUpdateInfo();
         //window.location.reload();
+    }
+
+    function OnImageEdit(e) {
+        console.log('changing buttons');
+        jQuery('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        jQuery('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
     }
 </script>

@@ -127,7 +127,7 @@
     <value>Support center</value>
   </data>
   <data name="EnCours" xml:space="preserve">
-    <value>In progress</value>
+    <value>Lockout In progress</value>
   </data>
   <data name="ErreurConnection" xml:space="preserve">
     <value>Invalid connexion attempt</value>
@@ -140,6 +140,9 @@
   </data>
   <data name="LuEtEffectue" xml:space="preserve">
     <value>I have reed and accepted</value>
+  </data>
+  <data name="MenuFiche" xml:space="preserve">
+    <value>Control procedures</value>
   </data>
   <data name="MobileGridTile" xml:space="preserve">
     <value>Locking Sheets</value>
@@ -169,7 +172,7 @@
     <value>Sign In</value>
   </data>
   <data name="Termines" xml:space="preserve">
-    <value>Completed</value>
+    <value>Lockout Completed</value>
   </data>
   <data name="Titre" xml:space="preserve">
     <value>Employee access to PRÉVIGESST Intranet</value>

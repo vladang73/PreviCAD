@@ -2,105 +2,113 @@
 @using Previgesst.Ressources.Cadenassage
 @model Previgesst.ViewModels.EditFicheViewModel
 
-<div class="panel panel-danger">
 
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-
-
-    <div class="panel-body">
-
-        <div id="Documents" class="tab-pane">
-
-            @Html.AntiForgeryToken()
-
-            @(Html.Kendo().Grid<DocumentFicheViewModel>()
-                        .Name("liste-doc")
-                        .Columns(columns =>
-                        {
-
-                            columns.Bound(e => e.DocumentFicheId).Hidden();
-                            columns.Bound(c => c.ApplicationPreviId).Hidden();
-                            columns.Bound(c => c.FicheCadenassageId).Hidden();
-                            columns.Bound(c => c.Titre).Filterable(f => f.Extra(false).Operators(operators => operators
-                                .ForString(str => str.Clear()
-                                .Contains(GridRES.Contains)
-                                .StartsWith(GridRES.StartsWith)
-                                .IsEqualTo(GridRES.Egale)
-                                .IsNotEqualTo(GridRES.NotEquals)
-                               ))).Hidden();
-
-
-                            columns.Bound(c => c.Titre)
-                                   .Filterable(f => f.Extra(false).Operators(operators => operators
-                                   .ForString(str => str.Clear()
-                                   .Contains(GridRES.Contains)
-                                   .StartsWith(GridRES.StartsWith)
-                                   .IsEqualTo(GridRES.Egale)
-                                   .IsNotEqualTo(GridRES.NotEquals)
-                                 ))).Width(140);
-
-                            columns.Bound(c => c.FileName).EditorTemplateName("UploadEditorDoc")
-                                   .Encoded(false).Sortable(false).Filterable(false);
-
-                            columns.Bound(e => e.Bidon).EditorTemplateName("Vide")
-                                    .ClientTemplate("<a href='#=BasePath#' class='btn btn-info downloadButton'></a>")
-                                    .Title("")
-                                    .Filterable(false).Sortable(false).Width(100);
-
-                            columns.Command(c =>
-                            {
-                                c.Edit();
-                                c.Custom(CadFichesRES.Effacer)
-                                      .Click("ConfirmDeleteRowDoc")
-                                      .HtmlAttributes(new { @class = "k-grid-effacer" });
-
-                            }).Hidden(!Model.estUpdate)
-                               .Width(25);
-                        })
-
-                        .Sortable(s => s.AllowUnsort(false))
-                        .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                        .Filterable()
-                        .DataSource(ds => ds
-                            .Ajax()
-                            .PageSize(20)
-                            .Model(m =>
-                            {
-                                m.Id(e => e.DocumentFicheId);
-                                m.Field(e => e.Bidon).Editable(true);
-                            })
-
-                        .Read(r => r.Action("ReadListDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
-                        .Create(c => c.Action("SaveDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
-                        .Update(u => u.Action("SaveDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
-                        .Destroy(u => u.Action("DeleteDocumentFiche", "DocumentsFiche"))
-
-
-                        .Events(e => e.Error("docListeErreur").Sync("DocumentsSync"))
-                    )
-
-                    .Events(e => e.DataBound("docListeDataBound"))
-                    .Editable(e => e.DisplayDeleteConfirmation(false))
-                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentFicheEditor").Window(w => w.Title(CadFichesRES.Edition).Width(600).Name("editWindow")))
-                    .NoRecords(CadFichesRES.AucunDocument)
-                    .ToolBar(t =>
-                    {
-                        t.Create();
-                        t.Custom().Text("Archiver").Name("Archive")
-                                      .HtmlAttributes(new { @class = "k-grid-archive btn-info" });
-                    })
-            )
-
-            <div class="">
-                <br />
-                <label>Commentaires</label>
-                <textarea id="DocNotes" name="DocNotes" class="form-control" rows="5">@ViewBag.Comments</textarea>
-                <br />
-                <input type="button" class="btn btn-info" value="Enregistrer" onclick="SaveDocNotes()" />
-            </div>
-        </div>
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@CadEditFicheRES.Documents</h3>
     </div>
+    <div class="page-table-meta">
+        <div class="add-icon card-wrapper-link">
+            <a id="btnAddDoc" href="#">
+                <img src="/content/v2/images/plus-icon.svg" />
+            </a>
+        </div>
+        &nbsp;
+        <input type="button" class="text-decoration-none text-white btn btn-primary" value="Archiver" onclick="ArchiveDoc()" />
+    </div>
+</div>
+
+
+@Html.AntiForgeryToken()
+
+@(Html.Kendo().Grid<DocumentFicheViewModel>()
+            .Name("liste-doc")
+            .Columns(columns =>
+            {
+
+                columns.Bound(e => e.DocumentFicheId).Hidden();
+                columns.Bound(c => c.ApplicationPreviId).Hidden();
+                columns.Bound(c => c.FicheCadenassageId).Hidden();
+
+                columns.Bound(c => c.Titre).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                    ))).Hidden();
+
+
+                columns.Bound(c => c.Titre)
+                        .Filterable(f => f.Extra(false).Operators(operators => operators
+                        .ForString(str => str.Clear()
+                        .Contains(GridRES.Contains)
+                        .StartsWith(GridRES.StartsWith)
+                        .IsEqualTo(GridRES.Egale)
+                        .IsNotEqualTo(GridRES.NotEquals)
+                        )))
+                        .HtmlAttributes(new { @class = "td-round-left-border" })
+                        ;
+
+                columns.Bound(c => c.FileName).EditorTemplateName("UploadEditorDoc")
+                        .Encoded(false).Sortable(false).Filterable(false);
+
+                columns.Bound(e => e.Bidon).EditorTemplateName("Vide")
+                        .ClientTemplate("<a href='#=BasePath#' class='card-wrapper-link'><img src='/content/v2/images/download-icon.svg'></a>")
+                        .Title("")
+                        .Filterable(false).Sortable(false).Width("100px");
+
+                columns.Command(c =>
+                {
+                    c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                    c.Custom(" ")
+                            .Click("ConfirmDeleteRowDoc")
+                            .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+
+                })
+                .Hidden(!Model.estUpdate)
+                .Width("175px");
+            })
+
+            .Sortable(s => s.AllowUnsort(false))
+            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+            .Filterable()
+            .DataSource(ds => ds
+                .Ajax()
+                .PageSize(20)
+                .Model(m =>
+                {
+                    m.Id(e => e.DocumentFicheId);
+                    m.Field(e => e.Bidon).Editable(true);
+                })
+
+            .Read(r => r.Action("ReadListDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
+            .Create(c => c.Action("SaveDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
+            .Update(u => u.Action("SaveDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
+            .Destroy(u => u.Action("DeleteDocumentFiche", "DocumentsFiche"))
+
+
+            .Events(e => e.Error("docListeErreur").Sync("DocumentsSync"))
+        )
+
+        .Events(e => e.DataBound("docListeDataBound").Edit("OnDocEdit"))
+        .Editable(e => e.DisplayDeleteConfirmation(false))
+        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentFicheEditor").Window(w => w.Title(CadFichesRES.Edition).Width(600).Name("editWindow")))
+        .NoRecords(CadFichesRES.AucunDocument)
+        .ToolBar(t =>
+        {
+            t.Create().HtmlAttributes(new { @class = "d-none btn-sectioncad" });
+            t.Custom().Text("Archiver").Name("Archive")
+                      .HtmlAttributes(new { @class = "k-grid-archive d-none" });
+        })
+)
+
+<div class="">
+    <br />
+    <label>Commentaires</label>
+    <textarea id="DocNotes" name="DocNotes" class="form-control" rows="5">@ViewBag.Comments</textarea>
+    <br />
+    <input type="button" class="btn btn-mettre m-1" value="Enregistrer" onclick="SaveDocNotes()" />
 </div>
 
 <script>
@@ -108,20 +116,20 @@
 
     $("#DocFicheCadenassage").click(function () {
 
-        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        @*$("a.k-grid-add").removeClass("k-button  k-button-icontext");
         $("a.k-grid-add").addClass("btn btn-success btn-analyse");
         $("span.k-add").removeClass("k-icon");
 
 
-        $("a.btn-analyse").text("@CadFichesRES.Ajouter");
+        $("a.btn-analyse").text("@CadFichesRES.Ajouter");*@
 
         var estUpdate = '@Model.estUpdate';
         if (estUpdate == 'False') {
             $("a.btn-analyse").hide();
         }
 
-        $("a.k-grid-archive").removeClass("k-button  k-button-icontext");
-        $("a.k-grid-archive").addClass("btn");
+        //$("a.k-grid-archive").removeClass("k-button  k-button-icontext");
+        //$("a.k-grid-archive").addClass("btn");
     });
 
 
@@ -268,5 +276,23 @@
                 ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")
             }
         });
+    }
+
+    function ArchiveDoc() {
+        $("#liste-doc").find("a.d-none.k-grid-archive").click();
+    }
+
+
+    $('#btnAddDoc').click(function () {
+        $("#liste-doc").find("a.d-none.k-grid-add").click();
+    });
+
+
+    function OnDocEdit(e) {
+        console.log('changing buttons');
+        jQuery('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        jQuery('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+
+        jQuery('.k-button.k-upload-button').addClass('btn-img m-1');
     }
 </script>

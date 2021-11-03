@@ -21,7 +21,6 @@
     <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
 
     <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
-    <link href="~/Content/v2/buttons.css" rel="stylesheet" />
 }
 
 
@@ -34,10 +33,10 @@
             </a>
         </li>
 
-        <li class="nav-item text-center">
+        <li class="nav-item text-center active">
             <a class="nav-link home-navlink" href="#InfosGenerales" aria-controls="general" role="tab" data-toggle="tab" data-bs-toggle="tab">
-                <img src="/content/v2/images/Procédures.svg" title="@CadEditFicheRES.InformationsGenerales" />
-                <p class="nav-link-text"></p>
+                <img src="/content/v2/images/left-icon-12.svg" title="@CadEditFicheRES.InformationsGenerales" />
+                <p class="nav-link-text">@CadEditFicheRES.InformationsGenerales</p>
             </a>
         </li>
 
@@ -45,7 +44,7 @@
         {
             <li class="nav-item text-center">
                 <a class="nav-link home-navlink" id="MatFich" href="#Materiel" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
-                    <img src="/Images/materielrequis.png" title="@CadEditFicheRES.MaterielRequis" />
+                    <img src="/content/v2/Images/left-icon13.svg" title="@CadEditFicheRES.MaterielRequis" />
                     <p class="nav-link-text">@CadEditFicheRES.MaterielRequis</p>
                 </a>
             </li>
@@ -54,14 +53,14 @@
 
             <li class="nav-item text-center">
                 <a class="nav-link home-navlink" href="#Sources" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
-                    <img src="/Images/Sourcedenergie.png" title="@CadEditFicheRES.SourcesEnergie" />
+                    <img src="/content/v2/Images/left-icon14.svg" title="@CadEditFicheRES.SourcesEnergie" />
                     <p class="nav-link-text">@CadEditFicheRES.SourcesEnergie</p>
                 </a>
             </li>
 
             <li class="nav-item text-center">
                 <a class="nav-link home-navlink" id="ImageCadFich" href="#ImagesFiche" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
-                    <img src="/content/v2/images/Procédures.svg" title="@CadEditFicheRES.Images" />
+                    <img src="/content/v2/Images/left-icon15.svg" title="@CadEditFicheRES.Images" />
                     <p class="nav-link-text">@CadEditFicheRES.Images</p>
                 </a>
             </li>
@@ -77,14 +76,14 @@
 
             <li class="nav-item text-center">
                 <a class="nav-link home-navlink" id="EtapdecFich" href="#Decadenassage" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
-                    <img src="/content/v2/images/Procédures.svg" title="@CadEditFicheRES.EtapesDecadenassage" />
+                    <img src="/content/v2/images/left-icon20.svg" title="@CadEditFicheRES.EtapesDecadenassage" />
                     <p class="nav-link-text">@CadEditFicheRES.EtapesDecadenassage</p>
                 </a>
             </li>
 
             <li class="nav-item text-center">
                 <a class="nav-link home-navlink" id="DocFicheCadenassage" href="#DocFiche" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
-                    <img src="/content/v2/images/Procédures.svg" title="@CadEditFicheRES.Documents" />
+                    <img src="/content/v2/images/left-icon2.svg" title="@CadEditFicheRES.Documents" />
                     <p class="nav-link-text">@CadEditFicheRES.Documents</p>
                 </a>
             </li>
@@ -125,7 +124,7 @@
                     }
                     else
                     {
-                        <div id="InfosGenerales" class="tab-pane">
+                        <div id="InfosGenerales" class="tab-pane active">
                             @Html.Partial("SectionInfoGenerales", @Model)
                         </div>
                     }
@@ -143,18 +142,14 @@
 
                         if (Model.DisplaySourceTab)
                         {
-                            <div id="Sources" class="tab-pane active">
-                                @Html.Partial("SectionSources", new
-                                    SourceEnergieCadenassageViewModel
-                                { FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
+                            <div id="Sources" class="tab-pane">
+                                @Html.Partial("SectionSources", new SourceEnergieCadenassageViewModel{ FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
                             </div>
                         }
                         else
                         {
                             <div id="Sources" class="tab-pane">
-                                @Html.Partial("SectionSources", new
-                                    SourceEnergieCadenassageViewModel
-                            { FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
+                                @Html.Partial("SectionSources", new SourceEnergieCadenassageViewModel { FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
                             </div>
                         }
 

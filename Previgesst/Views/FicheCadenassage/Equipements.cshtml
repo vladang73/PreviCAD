@@ -15,7 +15,7 @@
             </a>
         </div>
         <div class="search-qr-code">
-            <a class="text-decoration-none text-white btn-print-qr">
+            <a class="text-decoration-none text-white btn-print-qr" href="#">
                 <img src="/content/v2/images/scanner.svg">
                 <span>@CadEquipRES.PrintQRCode</span>
             </a>
@@ -38,10 +38,10 @@
                     columns.Bound(e => e.EquipementId).Hidden();
                     columns.Bound(e => e.QRCode).Hidden();
 
-                    columns.Bound(e => e.Thumbnail).ClientTemplate("# if(Thumbnail != null) {# <img src='#=Thumbnail#'/> #}#")
+                    columns.Bound(e => e.Thumbnail).ClientTemplate("# if(Thumbnail != null) {# <img class='mx-3 img-eq' src='#=Thumbnail#'/> #}#")
                     .EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false)
                     .HtmlAttributes(new { @class = "td-round-left-border" })
-                    .Width(60)
+                    .Width("60px")
                     ;
 
                     //NomEquipement
@@ -72,13 +72,13 @@
                             .IsNotEqualTo(GridRES.NotEquals)
                         )));
 
-                    columns.Bound(e => e.Thumbnail).ClientTemplate("<input type=button onclick='changerImage(#=EquipementId#)' value='Image' class='cadenassageImageDownload'/>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false).Width(80);
+                    columns.Bound(e => e.Thumbnail).ClientTemplate("<a onclick='changerImage(#=EquipementId#)' class='k-button btn-img mx-1 cadenassageImageDownload' href='\\#'></a>").EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false).Width("75px");
 
-                    columns.Command(command => command.Custom("Détails").Click("showDetailsNew").Text(CadEquipRES.ButtonDetails).HtmlAttributes(new { @class = "btn-table btn-grid-blue" })).Width(100);
+                    columns.Command(command => command.Custom("Détails").Click("showDetailsNew").Text(CadEquipRES.ButtonDetails).HtmlAttributes(new { @class = "btn-detail mx-1" })).Width("135px");
 
-                    columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie").Text(CadEquipRES.ButtonEnergy).HtmlAttributes(new { @class = "btn-table btn-grid-blue" })).Width(100);
+                    columns.Command(command => command.Custom("Énergie").Click("showDetailsEnergie").Text(CadEquipRES.ButtonEnergy).HtmlAttributes(new { @class = "btn-energy mx-1" })).Width("140px");
 
-                    columns.Command(command => command.Custom("QR").Click("showDetailsQR").Text(CadEquipRES.ButtonQR).HtmlAttributes(new { @class = "btn-table btn-grid-blue" })).Width(100);
+                    columns.Command(command => command.Custom("QR").Click("showDetailsQR").Text(CadEquipRES.ButtonQR).HtmlAttributes(new { @class = "btn-qr mx-1" })).Width("105px");
 
 
                     columns.Command(c =>
@@ -86,9 +86,10 @@
                         c.Edit().Text(CadEquipRES.ButtonEdit).HtmlAttributes(new { @class = "btn-table btn-edit"});
                         c.Custom(CadEquipRES.Vide)
                             .Click("ConfirmDeleteRowEQ")
-                            .HtmlAttributes(new { @class = "k-grid-effacer" });
+                            .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
                     })
-                    .Width(120);
+                    .Width("200px");
+
                     columns.Bound(e => e.Model).Hidden();
                     columns.Bound(e => e.Manufacturer).Hidden();
                     columns.Bound(e => e.Task).Hidden();
@@ -114,9 +115,7 @@
                     .Destroy(d => d.Action("DeleteEquipement", "Equipement"))
                     .Events(e => e.Error("ListeErreurEQ"))
                 )
-                .Events(e => e
-                    .DataBound("ListeDataBoundEQ").Edit("Edit")
-                )
+                .Events(e => e.DataBound("ListeDataBoundEQ").Edit("Edit"))
                 .Editable(e => e
                     .Mode(GridEditMode.InLine)
                     .CreateAt(GridInsertRowPosition.Top)
@@ -124,53 +123,9 @@
                 )
                 .ToolBar(t =>
                 {
-                    t.Create().HtmlAttributes(new { @class = "d-none"});
+                    t.Create().HtmlAttributes(new { @class = "btn-test d-none" });
                 })
             )
-
-@*<style>
-            .petit {
-                max-height: 20px;
-                width: 90%;
-            }
-
-            .k-multiselect {
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                width: 95%;
-            }
-
-            .eq-grid-class {
-                background-color: transparent;
-            }
-
-
-            @@media screen and (max-width: 1400px) {
-                .eq-grid-class {
-                    background-color: transparent;
-                    overflow-x: scroll;
-                }
-
-                    .eq-grid-class table {
-                        transform: translate(10px);
-                    }
-            }
-
-        </style>
-
-
-    <div class="panel panel-danger">
-
-
-        <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-        <div class="panel-body">
-            <input type="button" class="btn btn-info btn-print-qr" style="position: absolute; top: 3px; left: 425px;" value="@CadEquipRES.PrintQRCode" />
-
-        </div>
-    </div>
-
-*@
 
 
 @(Html.Kendo().Window().Name("EqDetails")
@@ -183,50 +138,52 @@
         .Title(@CadEquipRES.CreateEquipmentQR)
         .Visible(false)
         .Modal(true)
-        .Width(250)
+        .Width(300)
 )
 @(Html.Kendo().Window().Name("EqWithQR")
         .Title(CadEquipRES.SelectQRToPrint)
         .Visible(false)
         .Modal(true)
-        .Width(600)
+        .Width(700)
         .Height(650)
 )
 
 
 <script type="text/x-kendo-template" id="eqTemplate">
-    <div id="details-contaner">
+<div id="row">
+<div id="col-11">
+    <div id="details-contaner" class="p-3">
 
         <input type="hidden" id="EquipementId" value="#=EquipementId#" />
 
 
-        <div class="form-group">
-            <label for="Manufacturer">Fabricant</label>
+        <div class="form-group mt-3">
+            <label for="Manufacturer" class="form-label d-block">Fabricant</label>
             <input type="text" class="form-control petit" id="Manufacturer" name="Manufacturer" value="#= (Manufacturer == null) ? '' : Manufacturer #" />
         </div>
 
-        <div class="form-group">
-            <label for="Model">Modèle</label>
+        <div class="form-group mt-3">
+            <label for="Model" class="form-label d-block">Modèle</label>
             <input type="text" class="form-control petit" id="Model" name="Model" value="#= (Model == null) ? '' : Model #" />
         </div>
 
-        <div class="form-group">
-            <label for="NumberOfSerie">Numéro de série</label>
+        <div class="form-group mt-3">
+            <label for="NumberOfSerie" class="form-label d-block">Numéro de série</label>
             <input type="text" class="form-control petit" id="NumberOfSerie" name="NumberOfSerie" value="#= (NumberOfSerie == null) ? '' : NumberOfSerie #" />
         </div>
 
-        <div class="form-group">
-            <label for="YearOfProduction">Année de fabrication</label>
+        <div class="form-group mt-3">
+            <label for="YearOfProduction" class="form-label d-block">Année de fabrication</label>
             <input type="text" class="form-control petit" id="YearOfProduction" name="YearOfProduction" value="#= (YearOfProduction == null) ? '' : YearOfProduction #" />
         </div>
 
-        <div class="form-group">
-            <label for="Function">Fonction</label>
+        <div class="form-group mt-3">
+            <label for="Function" class="form-label d-block">Fonction</label>
             <input type="text" class="form-control petit" id="Function" name="Function" value="#= (Function == null) ? '' : Function #" />
         </div>
 
-        <div class="form-group">
-            <label for="Model">Tâches</label>
+        <div class="form-group mt-3">
+            <label for="Model" class="form-label d-block">Tâches</label>
             <select id="Task" multiple="multiple" data-placeholder="Sélectionner des tâches">
                 <option>Montage</option>
                 <option>Installation</option>
@@ -245,52 +202,54 @@
             </select>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-3">
             <input type="checkbox" id="RiskAnalysis" name="RiskAnalysis" # if (RiskAnalysis) { # checked=\"checked\" # } # />
             <label for="RiskAnalysis">Analyse de risque complétée</label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-3">
             <input type="checkbox" id="LockoutProcedure" name="LockoutProcedure" # if (LockoutProcedure) { # checked=\"checked\" # } # />
             <label for="LockoutProcedure">Procédure de cadenassage complétée</label>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mt-3">
             <input type="checkbox" id="SafeWorkProcedure" name="SafeWorkProcedure" # if (SafeWorkProcedure) { # checked=\"checked\" # } # />
             <label for="SafeWorkProcedure">Procédure de travail sécuritaire complétée</label>
         </div>
 
-        <div class="form-group text-right">
-            <a class="k-button k-button-icontext k-primary k-grid-update" onclick="SaveEquipementsInfo()">
-                <span class="k-icon k-update"></span>Mettre à jour
+        <div class="form-group mt-3 text-right text-end">
+            <a class="k-button k-button-icontext k-grid-update btn-mettre" onclick="SaveEquipementsInfo()">
+                Mettre à jour
             </a>
 
-            <a class="k-button k-button-icontext k-grid-cancel" onclick="closeDetailsNew()">
-                <span class="k-icon k-cancel"></span>Annuler
+            <a class="k-button k-button-icontext k-grid-cancel btn-Annuler" onclick="closeDetailsNew()">
+                Annuler
             </a>
         </div>
 
     </div>
+</div>
+</div>
 </script>
 
 <script type="text/x-kendo-template" id="qrTemplate">
-    <div id="details-container-qr">
+    <div id="details-container-qr" class="p-3">
 
         <input type="hidden" id="EquipementId" value="#=EquipementId#" />
 
 
         <div class="form-group">
-            <img class="img-responsive" id="QRCode" name="QRCode" style="width: 200px;" />
+            <img class="img-responsive" id="QRCode" name="QRCode" style="width: 240px;" />
         </div>
 
 
-        <div class="form-group text-right">
-            <a class="k-button k-button-icontext k-primary k-grid-update" onclick="SaveQRInfo()">
-                <span class="k-icon k-update"></span>Mettre à jour
+        <div class="form-group text-end mt-3">
+            <a class="k-button k-button-icontext k-grid-update btn-mettre" onclick="SaveQRInfo()">
+                Mettre à jour
             </a>
 
-            <a class="k-button k-button-icontext k-grid-cancel" onclick="closeDetailsQR()">
-                <span class="k-icon k-cancel"></span>Annuler
+            <a class="k-button k-button-icontext k-grid-cancel btn-Annuler" onclick="closeDetailsQR()">
+                Annuler
             </a>
         </div>
 
@@ -366,18 +325,18 @@
 
     $("#Equip").click(function () {
 
-        $("#listEquipement").find("a.k-grid-add").removeClass("k-button  k-button-icontext").addClass("btn-test d-none");
+        //$("#listEquipement").find("a.k-grid-add").removeClass("k-button  k-button-icontext").addClass("btn-test d-none");
 
-        $("#listEquipement").find("span.k-grid-add").addClass("btn btn-success btn-test");
+        //$("#listEquipement").find("span.k-grid-add").addClass("btn btn-success btn-test");
 
-        $("#listEquipement").find("a.btn-test").text("");
+        //$("#listEquipement").find("a.btn-test").text("");
 
 
-        // ADD ICONE "+"
-        setTimeout(function () {
-            $("#listEquipement").find(".btn-test").append('<img class="addButtonImg" src="/content/v2/images/plus-icon.svg">');
-            //$("#Equipements").find('div.add-icon').append($("#listEquipement").find("a.btn-test"))
-        }, 50);
+        //// ADD ICONE "+"
+        //setTimeout(function () {
+        //    $("#listEquipement").find(".btn-test").append('<img class="addButtonImg" src="/content/v2/images/plus-icon.svg">');
+        //    //$("#Equipements").find('div.add-icon').append($("#listEquipement").find("a.btn-test"))
+        //}, 50);
     });
 
     function showDetailsEnergie(e) {
@@ -397,6 +356,11 @@
         $(e.container).find('.k-grid-Détails').hide();
         $(e.container).find('.k-grid-Énergie').hide();
         $(e.container).find('.k-grid-QR').hide();
+
+        // add save and cancel classes
+        $(e.container).find('.k-grid-update.btn-table').removeClass('btn-edit').addClass('btn-mettre');
+        $(e.container).find('.k-grid-cancel.btn-table').removeClass('btn-edit').addClass('btn-Annuler');
+
 
         e.container.find(".k-grid-cancel").bind("click", function () {
             //console.log(e);
@@ -524,26 +488,26 @@
     }
 
     function ListeDataBoundEQ(e) {
-        console.log('Calling ListeDataBoundEQ ...');
-        var selecteurGrid = "#listEquipement";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //console.log('Calling ListeDataBoundEQ ...');
+        //var selecteurGrid = "#listEquipement";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
 
-        $(selecteurGrid + " .k-grid-effacer");
-        $(selecteurGrid +' .btn-table').removeClass("k-button  k-button-icontext");
+        ////$(selecteurGrid + " .k-grid-effacer");
+        ////$(selecteurGrid +' .btn-table').removeClass("k-button  k-button-icontext");
 
 
 
-        //Selects all delete buttons
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        ////Selects all delete buttons
+        ////$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        ////    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
+        ////    //Check in the current dataItem if the row is deletable
+        ////    if (!currentDataItem.Suppressible) {
 
-                $(this).remove();
-            }
-        })
+        ////        $(this).remove();
+        ////    }
+        ////})
     }
 
 
@@ -619,15 +583,15 @@
                     }
                 },
 
-                height: "465px",
-                scrollable: true,
+                height: "430px",
+                /*scrollable: true,*/
                 sortable: true,
                 resizable: true,
                 columns: [
                     {
-                        field: "EquipementId", filterable: false, sortable: false, width: "45px",
-                        template: "<input type='checkbox' name='selected-equi' class='selected-equi' data-eqid='#: EquipementId #' />",
-                        headerTemplate: "<input type='checkbox' onClick='toggleOnlyWithQR(this)' class='selected-equi-all' />"
+                        field: "EquipementId", filterable: false, sortable: false, width: "55px",
+                        template: "<center><div class='squaredThree squaredThree-blue'><input type='checkbox' id='squaredone' name='selected-equi' class='selected-equi'  data-eqid='#: EquipementId #' /><label for='squaredone'><span> </span></label></div></center>",
+                        headerTemplate: "<center><div class='squaredThree squaredThree-blue'><input type='checkbox' class='selected-equi-all' onClick='toggleOnlyWithQR(this)' /><label for='squaredone'><span> </span></label></div></center>",
                     },
                     { field: "NumeroEquipment", width: "150px", title: "@CadEquipRES.Num" },
                     { field: "NomEquipement", title: "@CadEquipRES.Nom" }
@@ -635,6 +599,9 @@
             });
         };
 
+/*        template: "<input type='checkbox' name='selected-equi' class='selected-equi' data-eqid='#: EquipementId #' />",
+                        headerTemplate: "<input type='checkbox' onClick='toggleOnlyWithQR(this)' class='selected-equi-all' />"
+ */
 
         temp.unbind("refresh");
         temp.bind("refresh", evt);
@@ -695,9 +662,13 @@
         });
     }
 
+    
+
     $(document).on('click', '.selected-equi', function () { $('.selected-equi-all').prop('checked', false); });
 
     $('#btnAddEquip').click(function () {
-        $("#listEquipement").find("a.btn-test.k-grid-add").click();
+        $("#listEquipement").find("a.d-none.k-grid-add").click();
     });
+
+
 </script>

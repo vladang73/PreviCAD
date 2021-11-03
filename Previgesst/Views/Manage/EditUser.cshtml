@@ -4,12 +4,43 @@
     Layout = "~/Views/Shared/_Layout_v2.cshtml";
 }
 
-<link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+}
 
-<main class="main-container-wrapper">
-    <div class="container">
 
+
+@section sidebar{
+
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" href='@Url.Action("Index", "AdminPrevi")'>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+
+        <li class="nav-item text-center active">
+            <a class="nav-link home-navlink" href='@Url.Action("Index", "Manage", new { })'>
+                <img src="/content/v2/images/Procédures.svg">
+                <p class="nav-link-text">Utilisateurs</p>
+            </a>
+        </li>
+    </ul>
+}
+
+
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@Url.Action("Index", "AdminPrevi")'>Accueil</a></li>
+            <li><a href='@Url.Action("Index", "Manage", new { })'>Utilisateurs</a></li>
+            <li class="active" aria-current="page">Create/Edit</li>
+        </ul>
+    </div>
+
+
+    <div class="main-page-content">
 
         @using (Html.BeginForm("EditUser", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
@@ -24,8 +55,10 @@
                 <div class="col-md-12">
                     @Html.HiddenFor(m => m.IsCreate)
                     @Html.HiddenFor(m => m.CanDelete)
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.UserName, new { @class = "form-label previcad-form-label-white" })
+                    
+                    
+                    <div class="form-group m-3">
+                        @Html.LabelFor(m => m.UserName, new { @class = "form-label" })
                         <div class="col-md-6">
                             @if (Model.IsCreate)
                             {
@@ -39,15 +72,17 @@
                             }
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "form-label previcad-form-label-white" })
+
+                    <div class="form-group m-3">
+                        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
                         <div class="col-md-6">
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })
                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.RoleNames, new { @class = "form-label previcad-form-label-white" })
+
+                    <div class="form-group m-3">
+                        @Html.LabelFor(m => m.RoleNames, new { @class = "form-label" })
                         <div class="col-md-6">
                             @(Html.Kendo().MultiSelectFor(m => m.RoleNames)
                                 .Placeholder("Sélectionner le rôle")
@@ -58,24 +93,39 @@
                             @Html.ValidationMessageFor(m => m.RoleNames, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Inactive, new { @class = "col-md-2  text-right previcad-form-label-white" })
+
+                    <div class="form-group m-3">
+                        @*@Html.LabelFor(m => m.Inactive, new { @class = "col-md-2  text-right" })*@
                         <div class="col-md-6">
-                            @Html.CheckBoxFor(m => m.Inactive)
+                            @*@Html.CheckBoxFor(m => m.Inactive)*@
+
+                            <div class="squaredThree squaredThree-blue d-inline-block">
+                                <input type="checkbox" id="Inactive" name="Inactive" @(Model.Inactive ? "checked" : "") value="@Convert.ToString(Model.Inactive).ToLower()" />
+                                <label for="squaredone"><span>Inactive </span></label>
+                            </div>
+
                             @Html.ValidationMessageFor(m => m.Inactive, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.IsCorporate, new { @class = "col-md-2 text-right previcad-form-label-white" })
+                    <div class="form-group m-3">
+                        @*@Html.LabelFor(m => m.IsCorporate, new { @class = "col-md-2 text-right" })*@
                         <div class="col-md-6">
-                            @Html.CheckBoxFor(m => m.IsCorporate, new { @id = "IsCorporate", @onclick = "ShowHideCorporate(this);" })
+                            @*@Html.CheckBoxFor(m => m.IsCorporate, new { @id = "IsCorporate", @onclick = "ShowHideCorporate(this);" })*@
+
+
+                            <div class="squaredThree squaredThree-blue d-inline-block">
+                                <input type="checkbox" id="IsCorporate" name="IsCorporate" @(Model.IsCorporate ? "checked" : "") value="@Convert.ToString(Model.IsCorporate).ToLower()" onclick="ShowHideCorporate(this);" />
+                                <label for="squaredone"><span>@Html.DisplayNameFor(x => x.IsCorporate) </span></label>
+                            </div>
+
+
                             @Html.ValidationMessageFor(m => m.IsCorporate, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
-                    <div class="form-group" id="divCorporate" style="display: none">
-                        @Html.LabelFor(m => m.CorporateClients, new { @class = "form-label previcad-form-label-white" })
+                    <div class="form-group m-3" id="divCorporate" style="display: none">
+                        @Html.LabelFor(m => m.CorporateClients, new { @class = "form-label" })
                         <div class="col-md-6">
                             @(Html.Kendo().MultiSelectFor(m => m.CorporateClients)
                                   .Name("CorporateClients")
@@ -100,15 +150,15 @@
 
                         <div class="col-md-2"></div>
                         <div class="col-md-6">
-                            <input type="submit" class="btn btn-primary" value="Enregistrer" />
-                            <!--<a href="#" class="btn btn-primary reload-link">Annuler</a>-->
+                            <input type="submit" class="btn btn-mettre m-1" value="Enregistrer" />
+                            
                             @if (Model.CanDelete)
                             {
-                                <button id="btnDelete" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-popup">Supprimer</button>
+                                <button id="btnDelete" type="button" class="btn btn-Annuler m-1" data-toggle="modal" data-target="#delete-popup">Supprimer</button>
                             }
                             @if (!Model.IsCreate)
                             {
-                                @Html.ActionLink("Réinitialiser le mot de passe...", "GenerateResetPassword", new { id = Model.UserId }, new { @class = "btn btn-info", @target = "_blank" })
+                                @Html.ActionLink("Réinitialiser le mot de passe...", "GenerateResetPassword", new { id = Model.UserId }, new { @class = "btn btn-primary", @target = "_blank" })
 
                             }
                         </div>
@@ -120,46 +170,46 @@
 
 
         }
-</div>
+    </div>
 </main>
 
-    @if (Model.CanDelete)
-    {
-        <div id="delete-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="delete-title">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    @using (Html.BeginForm("DeleteConfirmed", "Manage", FormMethod.Post, new { @class = "" }))
-                    {
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title" id="delete-title">Confirmation de la suppression</h4>
-                        </div>
-                        <div class="modal-body">
-                            @Html.AntiForgeryToken()
-                            @Html.HiddenFor(m => m.UserId)
-                            <div>Voulez-vous vraiment supprimer l'utilisateur <span class="text-danger">'@Html.DisplayTextFor(m => m.UserName)'</span>?</div>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="submit" class="btn btn-danger" value="Oui" />
-                            <input type="button" class="btn btn-primary" value="Non, ne pas supprimer" data-dismiss="modal" />
-                        </div>
-                    }
-                </div>
+@if (Model.CanDelete)
+{
+    <div id="delete-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="delete-title">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @using (Html.BeginForm("DeleteConfirmed", "Manage", FormMethod.Post, new { @class = "" }))
+                {
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="delete-title">Confirmation de la suppression</h4>
+                    </div>
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.UserId)
+                        <div>Voulez-vous vraiment supprimer l'utilisateur <span class="text-danger">'@Html.DisplayTextFor(m => m.UserName)'</span>?</div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-danger" value="Oui" />
+                        <input type="button" class="btn btn-primary" value="Non, ne pas supprimer" data-dismiss="modal" data-bs-dismiss="modal" />
+                    </div>
+                }
             </div>
         </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function ShowHideCorporate(ctrl) {
+        console.log('ShowHideCorporate', $(ctrl));
+
+        $('#divCorporate').hide();
+        if ($(ctrl).is(':checked')) {
+            $('#divCorporate').show();
+        }
     }
 
-    <script type="text/javascript">
-        function ShowHideCorporate(ctrl) {
-            console.log('ShowHideCorporate', $(ctrl));
-
-            $('#divCorporate').hide();
-            if ($(ctrl).is(':checked')) {
-                $('#divCorporate').show();
-            }
-        }
-
-        $(document).ready(function () { ShowHideCorporate('#IsCorporate'); });
-    </script>
+    $(document).ready(function () { ShowHideCorporate('#IsCorporate'); });
+</script>

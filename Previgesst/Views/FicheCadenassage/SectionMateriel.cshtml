@@ -2,96 +2,89 @@
 @using Previgesst.Ressources.Cadenassage
 @model Previgesst.ViewModels.EditFicheViewModel
 
-<div class="panel panel-danger">
 
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-
-
-    <div class="panel-body">
-
-
-        <div id="Documents" class="tab-pane">
-
-            @Html.AntiForgeryToken()
-
-            @(Html.Kendo().Grid<MaterielRequisCadenassageViewModel>()
-                                    .Name("listMAT")
-                                    .Columns(columns =>
-                                    {
-
-                                        columns.Bound(e => e.MaterielRequisCadenassageId).Hidden();
-                                        columns.Bound(e => e.FicheCadenassageId).Hidden();
-
-                                        columns.Bound(c => c.NomMateriel)
-                                             .Filterable(f => f.Extra(false).Operators(operators => operators
-                                          .ForString(str => str.Clear()
-                                            .Contains(GridRES.Contains)
-                                            .StartsWith(GridRES.StartsWith)
-                                            .IsEqualTo(GridRES.Egale)
-                                            .IsNotEqualTo(GridRES.NotEquals)
-                                             )));
-
-                                        columns.Bound(c => c.Quantite).Filterable(f => f.Extra(false));
-
-
-
-
-                                        columns.Command(c =>
-                                        {
-                                            c.Edit();
-                                            c.Custom(CadMaterielRES.Effacer)
-                                                  .Click("ConfirmDeleteRowMAT")
-                                                  .HtmlAttributes(new { @class = "k-grid-effacer" });
-
-                                        })
-                                           .Width(25);
-
-                                    })
-
-                                    .Sortable(s => s.AllowUnsort(false))
-                                    .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                                    .Filterable()
-                                    .DataSource(ds => ds
-                                        .Ajax()
-                                           .Sort(x => x.Add(c => c.NomMateriel))
-
-                                        .PageSize(20)
-                                        .Model(m =>
-                                        {
-                                            m.Id(e => e.MaterielRequisCadenassageId);
-                                        })
-
-                                    .Read(r => r.Action("ReadListMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                                    .Create(c => c.Action("SaveItemMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                                    .Update(u => u.Action("SaveItemMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
-                                    .Destroy(u => u.Action("DeleteItemMateriel", "FicheCadenassage"))
-
-
-                                    .Events(e => e.Error("ListeErreurMAT").Sync("MaterialSync"))
-                                    )
-
-                                    .Events(e => e.DataBound("ListeDataBoundMAT")
-                                    ).
-                                    Editable(e => e.DisplayDeleteConfirmation(false)).
-                                    Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneMateriel").Window(w => w.Title(CadMaterielRES.Edition).Width(600)))
-
-
-                                    @*.ToolBar(tb =>
-                                        {
-                                        tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
-                                        }*@
-
-                                    .ToolBar(t =>
-                                    {
-                                        t.Create();
-                                    })
-            )
-
-
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@CadEditFicheRES.MaterielRequis</h3>
+    </div>
+    <div class="page-table-meta">
+        <div class="add-icon">
+            <a id="btnAddMaterial" class="card-wrapper-link">
+                <img src="/content/v2/images/plus-icon.svg" />
+            </a>
         </div>
     </div>
 </div>
+
+
+@Html.AntiForgeryToken()
+
+@(Html.Kendo().Grid<MaterielRequisCadenassageViewModel>()
+            .Name("listMAT")
+            .Columns(columns =>
+            {
+
+                columns.Bound(e => e.MaterielRequisCadenassageId).Hidden();
+                columns.Bound(e => e.FicheCadenassageId).Hidden();
+
+                columns.Bound(c => c.NomMateriel)
+                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                )))
+                .HtmlAttributes(new { @class = "td-round-left-border" })
+                ;
+
+                columns.Bound(c => c.Quantite).Filterable(f => f.Extra(false));
+
+                columns.Command(c =>
+                {
+                    c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                    c.Custom(" ")
+                            .Click("ConfirmDeleteRowMAT")
+                            .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+                })
+                .Width("180px");
+            })
+
+            .Sortable(s => s.AllowUnsort(false))
+            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+            .Filterable()
+            .DataSource(ds => ds
+                .Ajax()
+                .Sort(x => x.Add(c => c.NomMateriel))
+                .PageSize(20)
+                .Model(m => { m.Id(e => e.MaterielRequisCadenassageId); })
+
+                .Read(r => r.Action("ReadListMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                .Create(c => c.Action("SaveItemMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                .Update(u => u.Action("SaveItemMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
+                .Destroy(u => u.Action("DeleteItemMateriel", "FicheCadenassage"))
+
+
+                .Events(e => e.Error("ListeErreurMAT").Sync("MaterialSync"))
+            )
+
+            .Events(e => e.DataBound("ListeDataBoundMAT"))
+            .Editable(e => e.DisplayDeleteConfirmation(false))
+            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneMateriel").Window(w => w.Title(CadMaterielRES.Edition).Width(600)))
+
+
+            @*.ToolBar(tb =>
+                {
+                tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
+                }*@
+
+            .ToolBar(t =>
+            {
+                t.Create().HtmlAttributes(new { @class = "d-none btn-sectionMat" }).Text(@CadMaterielRES.Ajouter);
+            })
+)
+
+
 
 
 <script>
@@ -111,14 +104,13 @@
 
     $("#MatFich").click(function () {
 
-        $("a.k-grid-add").removeClass("k-button  k-button-icontext");
+        @*$("a.k-grid-add").removeClass("k-button  k-button-icontext");
         $("a.k-grid-add").addClass("btn btn-success btn-sectionMat");
         $("span.k-add").removeClass("k-icon");
-        $("a.btn-sectionMat").text("@CadMaterielRES.Ajouter");
+        $("a.btn-sectionMat").text("@CadMaterielRES.Ajouter");*@
 
         // ADD ICONE "+"
-        setTimeout(function () { $("#Materiel").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);
-
+        /*setTimeout(function () { $("#Materiel").find(".btn-success").append('<img class="addButtonImg" src="/Images/addWhite.png">'); }, 50);*/
     });
 
     function ConfirmDeleteRowMAT(e) {
@@ -163,20 +155,20 @@
 
     function ListeDataBoundMAT(e) {
 
-        var selecteurGrid = "#listMAT";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //var selecteurGrid = "#listMAT";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
 
-        //Selects all delete buttons
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-                $(this).remove();
-            }
-        })
+        //        $(this).remove();
+        //    }
+        //})
     }
 
     function MaterialSync(e) {
@@ -186,4 +178,8 @@
         GetUpdateInfo();
         //window.location.reload();
     }
+
+    $('#btnAddMaterial').click(function () {
+        $("#btnAddMaterial").find("a.d-none.k-grid-add").click();
+    });
 </script>

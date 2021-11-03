@@ -3,7 +3,7 @@
 @using Previgesst.Ressources.Cadenassage
 @using Previgesst.Ressources
 
-@{ 
+@{
     string nomUtilisateur = "";
 
     if (Request.IsAuthenticated)
@@ -19,74 +19,23 @@
     }
 }
 
-<style>
 
-    .k-grid-content {
-        overflow-x: scroll !important;
-    }
-
-    .k-grid-steps {
-        background-image: url(/Images/cadenas-ferme-previ.png);
-        background-repeat: no-repeat;
-        background-size: 40px;
-        color: transparent;
-        height: 40px;
-        display: block; 
-    }
-        .k-grid-steps:hover {
-            background-size: 45px;
-            height: 45px;
-            animation: ease-in;
-        }
-
-    #wndEmail label{
-        padding: 5px;
-    }
-</style>
-
-<style scoped>
-    .armchair {
-        overflow: auto;
-        height: calc(100% - 70px);
-        padding: 10px
-    }
-
-    .window-footer {
-        position: absolute;
-        bottom: 0;
-        display: block;
-        width: 95%;
-        margin-top: 150px;
-        padding: 10px;
-        text-align: right;
-        border-top: 1px solid #e5e5e5;
-    }
-
-    .armchair.fullheight {
-        height: auto;
-    }
-
-        .armchair.fullheight .statusdropDownTemplate {
-            pointer-events: none;
-        }
-
-    .statusdropDownTemplate{
-        width: 210px;
-    }
-</style>
-
-<div class="panel panel-danger">
-
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-
-    <div class="panel-body">
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@PrevIndexRES.EnCours</h3>
+    </div>
+    <div class="page-table-meta">
+        <button id="btnExportEnCours" class="btn-table btn-excel float-end k-button" type="button">Exporter vers Excel</button>
+    </div>
+</div>
 
 
-        <div id="Employes" class="tab-pane">
 
-            @Html.AntiForgeryToken()
+<div id="Employes" class="tab-pane">
 
-            @(Html.Kendo().Grid<LigneRegistreViewModel>()
+    @Html.AntiForgeryToken()
+
+    @(Html.Kendo().Grid<LigneRegistreViewModel>()
                     .Name("listEnCours")
                     .Columns(columns =>
                     {
@@ -100,7 +49,7 @@
                                         .StartsWith(GridRES.StartsWith)
                                         .IsEqualTo(GridRES.Egale)
                                         .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(40);
+                        ))).Width("85px");
 
 
                         columns.Bound(e => e.NomDepartement)
@@ -112,7 +61,7 @@
                                         .StartsWith(GridRES.StartsWith)
                                         .IsEqualTo(GridRES.Egale)
                                         .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(100);
+                        ))).Width("180px");
 
 
                         columns.Bound(e => e.NomEquipement)
@@ -124,29 +73,28 @@
                                         .StartsWith(GridRES.StartsWith)
                                         .IsEqualTo(GridRES.Egale)
                                         .IsNotEqualTo(GridRES.NotEquals)
-                        ))).Width(100);
+                        ))).Width("110px");
 
 
                         columns.Bound(e => e.EmployeRegistreId).Hidden(true);
                         columns.Bound(e => e.FicheCadenassageId).Hidden(true);
-
                         columns.Bound(e => e.PendingSteps).HtmlAttributes(new { @class = "PendingSteps" }).Hidden(true); //.ClientTemplate("<span class='PendingSteps'>#=PendingSteps#</span>");
 
-                        columns.Bound(e => e.DateDebut).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Debut).Width(70);
+                        columns.Bound(e => e.DateDebut).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Debut).Width("110px");
 
-                        columns.Bound(e => e.DateFin).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Fin).Width(70);
+                        columns.Bound(e => e.DateFin).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.Fin).Width("110px");
 
-                        columns.Bound(e => e.FinPrevue).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.FinPrevueEmploye).Width(70);
-                        columns.Bound(e => e.Note).Width(100);
-                        columns.Bound(e => e.BonDeTravail).Title(PrevFicheRES.BonDeTravail).Width(50);
+                        columns.Bound(e => e.FinPrevue).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Extra(false)).Title(PrevFicheRES.FinPrevueEmploye).Width("110px");
+                        columns.Bound(e => e.Note);
+                        columns.Bound(e => e.BonDeTravail).Title(PrevFicheRES.BonDeTravail).Width("120px");
 
 
 
-                        columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette +"></a>").Title("").Filterable(false).Sortable(false).Width(55);
+                        columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette + "><img src='/content/v2/images/download-icon.svg' alt='download'/></a>").Title("").Filterable(false).Sortable(false).Width("100px");
 
-                        columns.Command(e => e.Custom("steps").Click("showInsDetails").HtmlAttributes(new { @data_viewonly = "false" }).Text(" ")).Width(100);
+                        columns.Command(e => e.Custom("steps").Click("showInsDetails").HtmlAttributes(new { @data_viewonly = "false", @class = "btn-material mx-1" }).Text(@PrevFicheRES.Steps)).Width("130px");
 
-                        columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier)).Width(20);
+                        columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier).HtmlAttributes(new { @class = "btn-table btn-edit" })).Width("140px");
                     })
                     .DataSource(ds => ds
                     .Ajax()
@@ -160,7 +108,7 @@
 
                     .Sortable(s => s.AllowUnsort(false))
                     .Scrollable(e => e.Enabled(true))
-                    .ToolBar(tools => tools.Excel())
+                    .ToolBar(tools => tools.Excel().HtmlAttributes(new { @class = "d-none" }))
                     .Editable(e => e.Mode(GridEditMode.PopUp))
                     .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistre").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600))
 
@@ -190,8 +138,6 @@
         )
 
 
-        </div>
-    </div>
 </div>
 
 
@@ -204,7 +150,7 @@
         </div>
     </div>
     <div class="window-footer">
-        <input type="button" class="btn btn-info" id="btnSaveInstructionStatus" value="@CadEditRES.Enregistrer" />
+        <input type="button" class="btn btn-mettre m-1" id="btnSaveInstructionStatus" value="@CadEditRES.Enregistrer" />
     </div>
 </div>
 
@@ -232,16 +178,16 @@
 
 <script>
     function dataBoundEnCours(e) {
-        var selecteurGrid = "#listEnCours";
-        //var grid = $(selecteurGrid).data("kendoGrid");
+        //var selecteurGrid = "#listEnCours";
+        ////var grid = $(selecteurGrid).data("kendoGrid");
 
 
-        $(selecteurGrid + " .k-grid-edit").find("span").remove();
-        var classe = $(selecteurGrid + " .k-grid-edit").attr("class");
-        classe = "btn btn-success " + classe;
+        //$(selecteurGrid + " .k-grid-edit").find("span").remove();
+        //var classe = $(selecteurGrid + " .k-grid-edit").attr("class");
+        //classe = "btn btn-success " + classe;
 
-        $(selecteurGrid + " .k-grid-edit").removeAttr("class").addClass(classe).removeClass("k-button").removeClass("k-button-icontext");
-        $(selecteurGrid + " .k-grid-steps").removeAttr("class").addClass("k-grid-steps");
+        //$(selecteurGrid + " .k-grid-edit").removeAttr("class").addClass(classe).removeClass("k-button").removeClass("k-button-icontext");
+        //$(selecteurGrid + " .k-grid-steps").removeAttr("class").addClass("k-grid-steps");
     }
 
     function onEditEnCours(e) {
@@ -253,13 +199,13 @@
     }
 
     function deactivateEdit() {
-        $("#listEnCours .k-grid-steps").each(function () {
-            $(this).removeAttr("class").addClass("k-grid-steps");
-        });
+        //$("#listEnCours .k-grid-steps").each(function () {
+        //    $(this).removeAttr("class").addClass("k-grid-steps");
+        //});
 
-        $("#listEnCours .k-grid-edit").each(function () {
-            $(this).removeAttr("class").addClass("btn btn-success k-grid-edit");
-        });
+        //$("#listEnCours .k-grid-edit").each(function () {
+        //    $(this).removeAttr("class").addClass("btn btn-success k-grid-edit");
+        //});
     }
 
     function doRefresh(e) {
@@ -313,7 +259,7 @@
                 { field: "PKId", hidden: true },
                 { field: "FicheCadenassageId", hidden: true },
                 { field: "LigneRegistreId", hidden: true },
-                { field: "NoLigne", width: "60px", title: "#", template: "# if(NoLigne > 0) {# #=NoLigne# #}#" },
+                { field: "NoLigne", width: "60px", title: "#", template: "# if(NoLigne > 0) {# #=NoLigne# #}#", attributes: { "class": "td-round-left-border" } },
                 {
                     field: "TexteInstruction", title: "@CadLigneCadRES.Instruction",
                     template: "<b # if(NoLigne == 0) {# style='color:red;' #}#> #= TexteInstruction # </b><br> #= TexteSupplementaireInstruction == null ? '' : TexteSupplementaireInstruction #"
@@ -323,7 +269,7 @@
                     template: "<b>#= TexteDispositif # </b><br> #= TexteSupplementaireDispositif == null ? '' : TexteSupplementaireDispositif #"
                 },
                 { field: "TexteAccessoire", width: "100px", title: "@CadLigneCadRES.Accessoire" },
-                { field: "Thumbnail", title: "@CadLigneCadRES.Image", template: "# if(PhotoFicheCadenassageId != null) {# <img src='#=Thumbnail#'/> #}#" },
+                { field: "Thumbnail", title: "@CadLigneCadRES.Image", template: "# if(PhotoFicheCadenassageId != null) {# <img class='img-ins' src='#=Thumbnail#'/> #}#" },
                 { field: "StepStatus", width: "150px", title: "@CadLigneCadRES.StepStatus", template: StatusTemplateFunction },
             ],
 
@@ -402,11 +348,7 @@
         var allWarnings1 = [];
         var allWarnings2 = [];
 
-        @*var switchOn = "@Html.Raw(PrevFicheRES.SwitchOn)";
-        var switchOff = "@Html.Raw(PrevFicheRES.SwitchOff)";
-
-        allWarnings1.push('\n' + switchOn + '\n');
-        *@
+     
         for (var i = 0; i < totalNumber; i++) {
             var currentDataItem = data[i];
 
@@ -421,12 +363,6 @@
 
             // Empty and Non-conforme
             if (currentDataItem.StepStatus == "1" || currentDataItem.StepStatus == "3") {
-                //if (currentDataItem.NoLigne == "1" && currentDataItem.PKType == "Decadenassage") {
-                //    allWarnings.push('\n\n');
-                //    allWarnings.push(switchOff + '\n');
-                //}
-                //allWarnings.push(currentDataItem.NoLigne + '. '+ currentDataItem.TexteInstruction);
-
                 if (currentDataItem.PKType == "Decadenassage") {
                     allWarnings1.push(currentDataItem.NoLigne + '. ' + currentDataItem.TexteInstruction);
                 }
@@ -446,16 +382,11 @@
             cache: false,
             success: function (result) {
                 if (result.isSuccess == true) {
-                    //$('#wrapped-grid').data('kendoGrid').dataSource.read();
-
                     $("#listEnCours").data("kendoGrid").dataSource.read();
                     $("#listTermines").data("kendoGrid").dataSource.read();
 
                     $("#wnd").data("kendoWindow").close();
                     if (allWarnings1.length > 0 || allWarnings2.length > 0) {
-                        //allWarnings.unshift('\n' + switchOn + '\n');
-                        //console.log('allWarnings', allWarnings);
-
                         OpenWarningEmail(allData[0].FicheCadenassageId, allWarnings1, allWarnings2);
                     }
                 }
@@ -466,7 +397,6 @@
     });
 
     function OpenWarningEmail(ficheID, allWarnings1, allWarnings2) {
-        //client
 
         var warSubject = '@Html.Raw(PrevFicheRES.WarningEmailSubject)' + "\n" + "\n";
         var warDescr = '@Html.Raw(PrevFicheRES.WarningDescr)' + "\n" + "\n";
@@ -594,6 +524,10 @@
             }
         });
     }
+
+    $('#btnExportEnCours').off().on('click', function () {
+        $("#listEnCours").find(".k-grid-excel.d-none").click();
+    });
 
 </script>
 

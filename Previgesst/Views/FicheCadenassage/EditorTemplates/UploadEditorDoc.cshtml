@@ -5,7 +5,6 @@
         .Async(a => a
             .Save("SaveDocumentFicheLink", "DocumentsFiche")
             .AutoUpload(true)
-
         )
         .Events(e => e.Success("docSuccess").Upload("docUpload").Select("docSelect"))
     )

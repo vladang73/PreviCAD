@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="/content/v2/index.css" type="text/css" />
     <link rel="stylesheet" href="/Content/v2/style.css" />
 
+    @RenderSection("styles", required: false)
+    <link rel="stylesheet" href="~/Content/v2/buttons.css" />
 
     <script type="text/javascript">
         var CONFIGPATH = '@Url.Content("~/Scripts/cldr/")'
@@ -29,7 +31,7 @@
     @Scripts.Render("~/bundles/kendo")
     @Scripts.Render("~/bundles/site")
 
-    @RenderSection("styles", required: false)
+
 
 
     @{
@@ -93,13 +95,13 @@
     <sidebar>
         <div class="bg-light d-none d-md-block sidebar">
             <div class="left-sidebar">
-                <ul class="nav flex-column sidebar-nav ">
+                @*<ul class="nav flex-column sidebar-nav ">
                     <li class="nav-item text-center mt-2">
                         <a class="nav-link home-navlink active" href='@Url.Action("Index", "AdminPrevi")'>
                             <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
                         </a>
                     </li>
-                </ul>
+                </ul>*@
 
                 @RenderSection("sidebar", required: false)
 
@@ -112,6 +114,8 @@
                                 <span class="nav-title">Paramétres</span>
                             </a>
                             <ul class="submenu">
+                                @RenderSection("sidebarChilds", required: false)
+
                                 @if (User.IsInRole("Administrateur") && HttpContext.Current.Session["IsCorporate"] != null)
                                 {
                                     if (!IsCorporate)
@@ -174,10 +178,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
+                    <h4 class="modal-title" id="delete-generic-title">
+                    @GridRES.Confirmation</h4>
+                    @*<button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
                         <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="delete-generic-title">@GridRES.Confirmation</h4>
+                    </button>*@
                 </div>
                 <div class="modal-body">
                     <div>
@@ -186,8 +191,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-danger" value="@GridRES.Oui" onclick="deleteGenericResult(true)" data-dismiss="modal" />
-                    <input type="button" class="btn btn-primary" value="@GridRES.NePasSupprimer" onclick="deleteGenericResult(false)" data-dismiss="modal" />
+                    <input type="button" class="btn btn-Annuler" value="@GridRES.Oui" onclick="deleteGenericResult(true)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasSupprimer" onclick="deleteGenericResult(false)" data-dismiss="modal" data-bs-dismiss="modal" />
                     <input type="hidden" class="delete-generic-result" />
                 </div>
             </div>
@@ -199,10 +204,10 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                     <h4 class="modal-title" id="duplicate-generic-title">@GridRES.Confirmation</h4>
+                    @*<button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
                 </div>
                 <div class="modal-body">
                     <div>
@@ -211,8 +216,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-success" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" />
-                    <input type="button" class="btn btn-primary" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" />
+                    <input type="button" class="btn btn-mettre" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" data-bs-dismiss="modal" />
                     <input type="hidden" class="duplicate-generic-result" />
                 </div>
             </div>
@@ -335,9 +340,12 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.nav-bottom-submenu .nav-link').click(function () {
+                console.log('bottom sub 1 - layout');
                 $(this).parents('.nav-bottom-submenu').toggleClass('active');
             })
+
             $('.navbar-toggler').click(function () {
+                console.log('bottom sub 2 - layout');
                 if ($(this).parents('.navbar').hasClass('show')) {
                     $(this).parents('.navbar').addClass('light-theme');
                     $(this).parents('.navbar').removeClass('dark-theme');
@@ -373,6 +381,37 @@
         $('input:checkbox').click(function () {
             SetCheckbox($(this));
         });
+
+
+        $('.left-sidebar .nav a').on('click', function () {
+            $('.left-sidebar .nav').find('li.active').removeClass('active');
+            $(this).parent('li').addClass('active');
+        });
+
+        $('.left-sidebar a.submenu-dropdown-item').on('click', function () {
+            var target = $($(this).attr('href'))
+
+            if (target != undefined && target.length > 0) {
+                console.log(target);
+
+                $('.left-sidebar .nav').find('li.active').removeClass('active');
+                $('.main-page-content div.tab-pane').removeClass('active');
+
+                $(this).parent('li').addClass('active');
+                $($(this).attr('href')).addClass('active');
+            }
+        });
+
+
+        $(document)
+            .off('click', '.squaredThree label')
+            .on('click', '.squaredThree label', function () {
+                console.log('squaredThree checkbox click');
+
+                //$(this).find('input[type=checkbox]').click();
+                $(this).parent().find('input[type=checkbox]').click();
+            });
+
     </script>
 
 </body>

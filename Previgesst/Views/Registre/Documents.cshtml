@@ -2,94 +2,81 @@
 @using Previgesst.Ressources
 @using Previgesst.Ressources.Previcad
 
-<style>
-
-    .k-grid-content {
-        overflow-x: scroll !important;
-    }
-</style>
-
-<div class="panel panel-danger">
-
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-    <div class="panel-body">
-
-        <div id="Documents" class="tab-pane">
-
-            @Html.AntiForgeryToken()
-
-            @(Html.Kendo().Grid<DocumentClientViewModel>()
-                                .Name("liste-doc")
-                                .Columns(columns =>
-                                {
-
-                                    columns.Bound(e => e.DocumentClientId).Hidden();
-                                    columns.Bound(c => c.ApplicationPreviId).Hidden();
-                                    columns.Bound(c => c.ClientId).Hidden();
-                                    columns.Bound(c => c.Titre).Filterable(f => f.Extra(false).Operators(operators => operators
-                        .ForString(str => str.Clear()
-                        .Contains(GridRES.Contains)
-                        .StartsWith(GridRES.StartsWith)
-                        .IsEqualTo(GridRES.Egale)
-                        .IsNotEqualTo(GridRES.NotEquals)
-                           ))).Hidden();
-
-
-                                    columns.Bound(c => c.Titre)
-                                         .Filterable(f => f.Extra(false).Operators(operators => operators
-                                      .ForString(str => str.Clear()
-                         .Contains(GridRES.Contains)
-                        .StartsWith(GridRES.StartsWith)
-                        .IsEqualTo(GridRES.Egale)
-                        .IsNotEqualTo(GridRES.NotEquals)
-                                         ))).Width(200);
-
-                                    columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
-
-                                    columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='#=BasePath#' class='btn downloadButton' style='float:left' title="+ PrevDocRES.Telecharger + "></a>").Title("").Filterable(false).Sortable(false).Width(120);
-                                })
-
-                                .Sortable(s => s.AllowUnsort(false))
-                                .Scrollable(e => e.Enabled(true))
-                                .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                                .Filterable()
-                                .DataSource(ds => ds
-                                    .Ajax()
-                                    //.Sort( x=> x.Add (c => c.DisplaySection))
-                                    //.Sort(x => x.Add(c => c.Ordre))
-                                    //.Group(g => g.Add(c => c.DisplaySection))
-                                    .PageSize(20)
-                                    .Model(m =>
-                                    {
-                                        m.Id(e => e.DocumentClientId);
-                                        m.Field(e => e.Bidon).Editable(true);
-
-                                    })
-
-                                .Read(r => r.Action("ReadListDocClientCadenassage", "Registre", new { id = Model.ClientId }))
-                                
-  
-                            )
-
-                         
-                           
-            )
-
-
-        </div>
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">@PrevIndexRES.Programme</h3>
     </div>
 </div>
 
+<div id="Documents" class="tab-pane">
 
-   
+    @Html.AntiForgeryToken()
+
+    @(Html.Kendo().Grid<DocumentClientViewModel>()
+            .Name("liste-doc")
+            .Columns(columns =>
+            {
+
+                columns.Bound(e => e.DocumentClientId).Hidden();
+                columns.Bound(c => c.ApplicationPreviId).Hidden();
+                columns.Bound(c => c.ClientId).Hidden();
+
+                columns.Bound(c => c.Titre).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                ))).Hidden();
+
+
+                columns.Bound(c => c.Titre)
+                       .Filterable(f => f.Extra(false).Operators(operators => operators
+                       .ForString(str => str.Clear()
+                       .Contains(GridRES.Contains)
+                        .StartsWith(GridRES.StartsWith)
+                        .IsEqualTo(GridRES.Egale)
+                        .IsNotEqualTo(GridRES.NotEquals)
+                )))
+                .HtmlAttributes(new { @class = "td-round-left-border" })
+                .Width("250px");
+
+                columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
+
+                columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='#=BasePath#' class='btn downloadButton' title="+ PrevDocRES.Telecharger + "><img src='/content/v2/images/download-icon.svg' alt='download'/></a>").Title("").Filterable(false).Sortable(false).Width("120px");
+            })
+
+            .Sortable(s => s.AllowUnsort(false))
+            .Scrollable(e => e.Enabled(true))
+            .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+            .Filterable()
+            .DataSource(ds => ds
+                .Ajax()
+                .PageSize(20)
+                .Model(m =>
+                {
+                    m.Id(e => e.DocumentClientId);
+                    m.Field(e => e.Bidon).Editable(true);
+                })
+
+            .Read(r => r.Action("ReadListDocClientCadenassage", "Registre", new { id = Model.ClientId }))
+        )
+
+    )
+
+
+</div>
 
 
 
-          
-
-
-            
 
 
 
-           
+
+
+
+
+
+
+
+

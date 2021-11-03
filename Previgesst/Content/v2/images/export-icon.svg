@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22.124" height="28.465" viewBox="0 0 22.124 28.465">
+  <g id="export-icon" transform="translate(-1578.876 -150.535)">
+    <g id="Group_1004" data-name="Group 1004" transform="translate(1569.181 150.536)">
+      <path id="Path_477" data-name="Path 477" d="M28.562,26.206H11.953a2.261,2.261,0,0,1-2.258-2.258V2.258A2.261,2.261,0,0,1,11.953,0H24.87a.776.776,0,0,1,.546.225L30.594,5.4a.77.77,0,0,1,.225.546v18A2.261,2.261,0,0,1,28.562,26.206ZM11.953,1.541a.717.717,0,0,0-.717.717V23.947a.718.718,0,0,0,.717.717H28.56a.727.727,0,0,0,.717-.717V6.263L24.551,1.541Z" transform="translate(0 0)" fill="#329ffd"/>
+      <path id="Path_478" data-name="Path 478" d="M70.622,6.715H65.449a.771.771,0,0,1-.771-.771V.77A.772.772,0,0,1,65.995.224L71.168,5.4a.772.772,0,0,1-.546,1.317Zm-4.4-1.542h2.542L66.219,2.631Z" transform="translate(-40.574 0)" fill="#329ffd"/>
+    </g>
+    <rect id="Rectangle_519" data-name="Rectangle 519" width="14" height="14" transform="translate(1587 164)" fill="#fff"/>
+    <text id="x" transform="translate(1590 175)" fill="#329ffd" font-size="15" font-family="IBMPlexSans-Bold, IBM Plex Sans" font-weight="700"><tspan x="0" y="0">x</tspan></text>
+  </g>
+</svg>

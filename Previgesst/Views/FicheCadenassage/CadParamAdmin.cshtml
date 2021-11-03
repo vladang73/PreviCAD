@@ -2,41 +2,62 @@
 @using Previgesst.Ressources
 @model EditCadenassageViewModel
 
-
-
-<div class="panel panel-danger">
-
-    <div class="panel-heading back-panel-light" style="font-size:larger;font-weight:500;color:white"></div>
-    <div class="panel-body">
-
-        <div id="CadParamAdminContent" class="tab-pane">
-            <!-- First paramet : function; second function : current folder name of this file -->
-            @using (Html.BeginForm("SaveParametersCadAdmin", "FicheCadenassage", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken();
-
-            <div class="form-group CadParamAdminContent--form">
-
-                @Html.HiddenFor(model => model.ClientId, new { @style = "margin-left:10px;" })
-
-
-                @Html.LabelFor(model => model.NotificationDebutCad, new { @class = "control-label" })
-                @Html.CheckBoxFor(model => model.NotificationDebutCad, new { @style = "margin-left:10px;" })
-
-                <br />
-                <br />
-
-                @Html.LabelFor(model => model.NotificationNonConformite, new { @class = "control-label" })
-                @Html.CheckBoxFor(model => model.NotificationNonConformite, new { @style = "margin-left:10px;" })
-
-            </div>
-
-                <div class="form-group">
-                    <div class="col col-md-12 CadParamAdminContent--submit">
-                        <input type="submit" value="@CadEditRES.Enregistrer" class="btn btn-primary" />
-                    </div>
-                </div>
-            }
-        </div>
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">Préférences</h3>
     </div>
 </div>
+
+
+<div id="CadParamAdminContent" class="tab-pane">
+    <!-- First paramet : function; second function : current folder name of this file -->
+    @using (Html.BeginForm("SaveParametersCadAdmin", "FicheCadenassage", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(model => model.ClientId)
+
+        <div class="td-round-left-border mt-5 pt-5 bg-white">
+            <div class="row">
+                <div class="col-12">
+                    <div class="squaredThree squaredThree-blue d-inline-block">
+                        <input type="checkbox" id="NotificationDebutCad" name="NotificationDebutCad" @(Model.NotificationDebutCad ? "checked" : "") value="@Convert.ToString(Model.NotificationDebutCad).ToLower()" />
+                        <label for="squaredone" class="form-label"><span>@Html.DisplayNameFor(model => model.NotificationDebutCad) </span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="td-round-left-border mt-5 pt-5 bg-white">
+            <div class="row">
+                <div class="col-12">
+                    <div class="squaredThree squaredThree-blue d-inline-block">
+                        <input type="checkbox" id="NotificationNonConformite" name="NotificationNonConformite" @(Model.NotificationNonConformite ? "checked" : "") value="@Convert.ToString(Model.NotificationNonConformite).ToLower()" />
+                        <label for="squaredone" class="form-label"><span>@Html.DisplayNameFor(model => model.NotificationNonConformite) </span></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group mt-3">
+            <div class="col col-md-12 text-end CadParamAdminContent--submit">
+                <input type="submit" value="@CadEditRES.Enregistrer" class="k-button btn-mettre m-1" />
+            </div>
+        </div>
+    }
+</div>
+
+
+@*<div class="form-group mt-3 CadParamAdminContent--form">
+
+        @Html.LabelFor(model => model.NotificationDebutCad, new { @class = "form-label d-block" })
+        @Html.CheckBoxFor(model => model.NotificationDebutCad)
+
+        <br />
+        <br />
+
+        @Html.LabelFor(model => model.NotificationNonConformite, new { @class = "form-label d-block" })
+        @Html.CheckBoxFor(model => model.NotificationNonConformite)
+    </div>*@

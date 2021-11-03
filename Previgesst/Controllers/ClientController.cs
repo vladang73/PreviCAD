@@ -46,11 +46,11 @@ namespace Previgesst.Controllers
 
             if (utilisateurService.GetSession() != null)
             {
-                this.Layout = "~/Views/Shared/_LayoutClient.cshtml";
+                this.Layout = "~/Views/Shared/_LayoutClient_v2.cshtml";
 
             }
             else
-                this.Layout = "~/Views/Shared/_Layout.cshtml";
+                this.Layout = "~/Views/Shared/_Layout_v2.cshtml";
         }
 
 

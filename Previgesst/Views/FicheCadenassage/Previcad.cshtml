@@ -1,12 +1,67 @@
 ﻿@using Previgesst.Ressources.Cadenassage
 @model Previgesst.ViewModels.EditCadenassageViewModel
 
-<!--<h3>@CadDeptPrevicad.Lien </h3>-->
-<br />
-<button type="button" class="btn btn-primary"><a style="color:#fff" href="mailto:?subject=@CadDeptPrevicad.EmailSubject&body=@CadDeptPrevicad.EmailContent : @Model.LienPrevicad"><img src='/Images/email.png' style='width: 40px;'> @CadDeptPrevicad.Send</a></button>
-<p style="margin:10px 0;">@CadDeptPrevicad.Or</p>
-<button onclick="copieClientUrl()" type="button" class="btn btn-info"><img src='/Images/lien-partage.png' style='width: 40px;'><a style="color:#fff">@CadDeptPrevicad.Copy</a></button>
-<input type="text" style="width:560px;" id="urlClient" value="@Model.LienPrevicad">
+
+
+<div class="table-top-header">
+    <div class="page-title d-flex justify-content-center align-items-center">
+        <h3 class="m-0">Hyperlien Utilisateur</h3>
+    </div>
+</div>
+
+<div class="td-round-left-border mt-5 pt-5 bg-white">
+    <div class="row">
+        <div class="col-8">
+            <label class="form-label ps-2">@CadDeptPrevicad.Lien</label>
+        </div>
+        <div class="col-4 float-end">
+
+            <a class="btn-table btn-link m-1 card-wrapper-link" onclick="copieClientUrl()">
+                @CadDeptPrevicad.Copy
+            </a>
+
+            &nbsp;
+
+
+
+            <a class="k-button btn-mettre m-1" style="width: 225px;" href="mailto:?subject=@CadDeptPrevicad.EmailSubject&body=@CadDeptPrevicad.EmailContent : @Model.LienPrevicad">
+                @CadDeptPrevicad.Send
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<div class="td-round-left-border mt-5 pt-5 bg-white">
+    <div class="row">
+        <div class="col-12">
+            <label class="form-label ps-2">Desktop Version</label>
+            <input type="text" id="urlClient" value="@Model.LienPrevicad" class="form-control" />
+        </div>
+    </div>
+</div>
+
+<div class="td-round-left-border mt-5 pt-5 bg-white">
+    <div class="row">
+        <div class="col-12">
+            <label class="form-label ps-2">Mobile Version</label>
+            <input type="text" id="urlClient" value="@Model.LienPrevicadMobile" class="form-control" />
+        </div>
+    </div>
+</div>
+
+@*<button type="button" class="btn btn-primary">
+    </button>
+
+    <p style="margin:10px 0;">@CadDeptPrevicad.Or</p>
+
+            <img src='/Images/lien-partage.png' style='width: 40px;'>
+            <img src='/Images/email.png' style='width: 40px;'>
+
+*@
+
+
+
 
 
 

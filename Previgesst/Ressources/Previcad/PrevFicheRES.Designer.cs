@@ -340,6 +340,24 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rechercher par # de fiche.
+        /// </summary>
+        public static string SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Réinitialiser.
+        /// </summary>
+        public static string SearchReset {
+            get {
+                return ResourceManager.GetString("SearchReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Envoyer un e-mail.
         /// </summary>
         public static string SendEmail {

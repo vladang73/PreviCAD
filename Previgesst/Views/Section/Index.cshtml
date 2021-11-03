@@ -1,74 +1,105 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_v2.cshtml";
 }
 
-<div class="container">
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
 
-    <div class="row">
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
 
-        <div class="col-md-12 ">
-
-
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="~/AdminPrevi/Index">Accueil</a></li>
-
-                    <li class="breadcrumb-item active" aria-current="page">Sections des documents</li>
-                </ol>
-            </nav>
-
-            <hr />
-            <div class="panel panel-danger sectionEdition">
-
-                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;background-color:#0c5c82;color:white">Édition des sections</div>
-                <div class="panel-body">
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+}
 
 
-                    <div id="Documents" class="tab-pane">
 
-                        @Html.AntiForgeryToken()
+@section sidebar{
 
-                        @(Html.Kendo().Grid<SectionViewModel>()
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "AdminPrevi")'>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+    </ul>
+}
+
+
+
+
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href="~/AdminPrevi/Index">Accueil</a></li>
+            <li class="active">Sections des documents</li>
+        </ul>
+    </div>
+
+    <div class="main-page-content">
+
+        <div class="table-top-header">
+            <div class="page-title d-flex justify-content-center align-items-center">
+                <h3>Édition des sections</h3>
+            </div>
+            <div class="page-table-meta">
+                <div class="add-icon">
+                    <a id="btnAddList">
+                        <img src="/content/v2/images/plus-icon.svg" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12 sectionEdition">
+
+                @Html.AntiForgeryToken()
+
+                @(Html.Kendo().Grid<SectionViewModel>()
                         .Name("list")
                         .Columns(columns =>
                         {
+                            columns.Bound(c => c.Ordre).Filterable(false)
+                                   .HtmlAttributes(new { @class = "td-round-left-border" })
+                            ;
 
                             columns.Bound(e => e.SectionId).Hidden();
 
                             columns.Bound(c => c.ApplicationName).Filterable(f => f.Extra(false).Operators(operators => operators
-                    .ForString(str => str.Clear()
-                    .Contains("Contient")
-                    .StartsWith("Commence par")
-                    .IsEqualTo("Égal")
-                    .IsNotEqualTo("Différent")
-                    ))).Hidden();
+                                    .ForString(str => str.Clear()
+                                    .Contains("Contient")
+                                    .StartsWith("Commence par")
+                                    .IsEqualTo("Égal")
+                                    .IsNotEqualTo("Différent")
+                            )))
+                            .Hidden();
 
 
                             columns.Bound(c => c.Nom)
-                                 .Filterable(f => f.Extra(false).Operators(operators => operators
-                              .ForString(str => str.Clear()
-                              .Contains("Contient")
-                                  .StartsWith("Commence par")
-                                  .IsEqualTo("Égal")
-                                  .IsNotEqualTo("Différent")
-                                 )));
+                                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                                    .ForString(str => str.Clear()
+                                    .Contains("Contient")
+                                    .StartsWith("Commence par")
+                                    .IsEqualTo("Égal")
+                                    .IsNotEqualTo("Différent")
+                                )))
+                                ;
 
 
-                            columns.Bound(c => c.Ordre)
-                            .Filterable(false);
 
                             columns.Command(c =>
                             {
-                                c.Edit();
-                                c.Custom("Effacer")
+                                c.Edit().Text(" ").HtmlAttributes(new { @class = "btn-table btn-editicon" });
+                                c.Custom(" ")
                                       .Click("ConfirmDeleteRow")
-                                      .HtmlAttributes(new { @class = "k-grid-effacer" });
+                                      .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
 
                             })
-                               .Width(250);
-
+                            .Width("160px");
                         })
 
                         .Sortable(s => s.AllowUnsort(false))
@@ -76,16 +107,11 @@
                         .Filterable()
                         .DataSource(ds => ds
                             .Ajax()
-                               //.Sort( x=> x.Add (c => c.DisplaySection))
-                               //.Sort(x => x.Add(c => c.Ordre))
-                               .Group(g => g.Add(c => c.ApplicationName))
+                            .Group(g => g.Add(c => c.ApplicationName))
                             .PageSize(20)
                             .Model(m =>
                             {
                                 m.Id(e => e.SectionId);
-
-
-
                             })
 
                         .Read(r => r.Action("ReadListSections", "Section"))
@@ -94,41 +120,30 @@
                         .Destroy(u => u.Action("DeleteSection", "Section"))
 
 
-                        .Events(e => e
-                            .Error("ListeErreur").RequestEnd("end")
-                        )
+                        .Events(e => e.Error("ListeErreur").RequestEnd("end"))
                         )
 
-                        .Events(e => e
-                            .DataBound("ListeDataBound")
+                        .Events(e => e.DataBound("ListeDataBound"))
+                        .Editable(e => e.DisplayDeleteConfirmation(false))
+                        .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditSection").Window(w => w.Title("Édition d'un document").Width(600).Name("editWindow")))
 
-                        ).
-                        Editable(e => e.DisplayDeleteConfirmation(false)).
-                        Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditSection").Window(w => w.Title("Édition d'un document").Width(600).Name("editWindow")))
-
-
-                @*.ToolBar(tb =>
-                    {
-                    tb.Template(@<a href="/File/CreateARDoc" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter un nouveau document</a>);
-                    }*@
 
                 .ToolBar(t =>
                 {
-                t.Create().Text("Ajouter").HtmlAttributes(new { @class = "btn btn-success" });
+                    t.Create().Text("Ajouter").HtmlAttributes(new { @class = "d-none" });
                 })
-                        )
+            )
 
 
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-</div>
+</main>
+
 <script>
 
-    $("a.k-grid-add").removeClass("k-button  k-button-icontext");
-    $("span.k-add").removeClass("k-icon");
+    //$("a.k-grid-add").removeClass("k-button  k-button-icontext");
+    //$("span.k-add").removeClass("k-icon");
 
     function end(e) {
         // reload de la grille car pas de refresh sur application mise à jour
@@ -136,9 +151,7 @@
         if (e.type == "update") {
             var grid = $("#list").data("kendoGrid");
             grid.dataSource.read();
-
         }
-
     }
 
     function ConfirmDeleteRow(e) {
@@ -159,7 +172,6 @@
 
 
     function ListeErreur(args) {
-
         var selecteurGrid = "#list";
         if (args.errors) {
             var grid = $(selecteurGrid).data("kendoGrid");
@@ -182,27 +194,25 @@
     }
 
     function ListeDataBound(e) {
+        //var selecteurGrid = "#list";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
 
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-        var selecteurGrid = "#list";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-
-        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
-
-
-
-        //Selects all delete buttons
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
-
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
-
-                $(this).remove();
-            }
-        })
+        //        $(this).remove();
+        //    }
+        //})
     }
+
+    $('#btnAddList').click(function () {
+        $("#list").find("a.d-none.k-grid-add").click();
+    });
+
 
 </script>

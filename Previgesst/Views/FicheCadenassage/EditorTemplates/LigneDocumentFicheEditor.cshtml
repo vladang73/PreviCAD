@@ -1,76 +1,43 @@
 ﻿@model DocumentFicheViewModel
 
-<style>
-    div.k-edit-form-container {
-        width: auto;
-    }
 
-        div.k-edit-form-container div.editor-field textarea, input.k-textbox, .k-dropdown {
-            width: 100%;
-            max-width: none;
-            padding-left: 0px;
-        }
-
-
-
-    .petit {
-        max-height: 20px;
-    }
-
-    .row {
-        margin-right: 15px;
-        margin-left: 15px;
-    }
-
-    .col {
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-</style>
-
-<div class="container" style="width:600px; margin:0px;padding:0px;">
+<div class="p-3">
 
     <div class="row">
-        <div class="col-md-12" style="padding-left:0px;">
+        <div class="col-11">
             @Html.HiddenFor(model => model.DocumentFicheId)
             @Html.HiddenFor(model => model.FicheCadenassageId)
             @Html.HiddenFor(model => model.ApplicationPreviId)
 
-            <div class="panel panel-info">
+            <div class="form-group mt-3">
 
-                <div class="panel-heading">Document </div>
-                <div class="panel-body">
-                    <div class="form-group" style="margin-bottom:5px;">
+                @Html.LabelFor(model => model.Titre, new { @class = "form-label d-block" })
 
-                        @Html.LabelFor(model => model.Titre, new { @class = "control-label pull-left" })
+                @Html.TextBoxFor(model => model.Titre, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Titre)
 
-                        @Html.TextBoxFor(model => model.Titre, new { @class = "form-control petit", @style = "width:95%" })
-                        @Html.ValidationMessageFor(model => model.Titre)
-
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:30px;">
-                        @Html.LabelFor(model => model.FileName, new { @class = "control-label pull-left", style = "width:100%; margin-top:5px" })
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-
-                        @(Html.Kendo().Upload()
-                              .Name("file")
-                              .HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
-                              .Multiple(false)
-                              .Async(a => a
-                                        .Save("SaveDocumentFicheLinkCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId })
-                                        .AutoUpload(true)
-                              )
-                              .Events(e => e.Success("docSuccess").Upload("docUpload").Select("docSelect"))
-                        )
-
-
-                    </div>
-
-                </div>
             </div>
+
+            <div class="form-group mt-3">
+                @Html.LabelFor(model => model.FileName, new { @class = "form-label d-block" })
+            </div>
+
+            <div class="form-group mt-3 btn-image-upload-only">
+
+                @(Html.Kendo().Upload()
+                        .Name("file")
+                        .HtmlAttributes(new { @class = "form-control" })
+                        .Multiple(false)
+                        .Async(a => a
+                                .Save("SaveDocumentFicheLinkCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId })
+                                .AutoUpload(true)
+                        )
+                        .Events(e => e.Success("docSuccess").Upload("docUpload").Select("docSelect"))
+                )
+
+
+            </div>
+
         </div>
     </div>
 </div>
@@ -78,5 +45,15 @@
 
 
 
+@*<script>
+    jQuery(document).ready(function () {
+        "use strict";
+        console.log('creation document');
 
+        // add btn-img class UI-v2
+        jQuery('.k-button.k-upload-button').addClass('btn-img m-1');
 
+        // hide span and em tag with btn-img UI-v2
+        //jQuery('.k-button.k-upload-button').parent().find('em').addClass('d-none');
+    });
+</script>*@

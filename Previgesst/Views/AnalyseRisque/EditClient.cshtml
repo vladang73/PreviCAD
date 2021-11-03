@@ -2,7 +2,7 @@
 @using Previgesst.Ressources.Analyse
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    Layout = "~/Views/Shared/_LayoutClient_v2.cshtml";
 
     if (ViewData["Layout"] != null)
     {
@@ -11,78 +11,70 @@
 }
 
 
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.dataviz.bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
+    <link href="~/Content/v2/buttons.css" rel="stylesheet" />
+}
+
+@section sidebar{
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+
+        <li class="nav-item text-center active">
+            <a id="AnalysFich" class="nav-link home-navlink" href="#Fiches" aria-controls="general" role="tab" data-toggle="tab" data-bs-toggle="tab">
+                <img src="~/content/v2/images/material-icon.svg" title="@AREditClientRES.Analyses" />
+                <p class="nav-link-text">@AREditClientRES.Analyses</p>
+            </a>
+        </li>
+        <li class="nav-item text-center">
+            <a id="DocCliAnalyse" class="nav-link home-navlink" href="#DocClients" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
+                <img src="/content/v2/images/left-icon2.svg" title="@AREditClientRES.Documents" />
+                <p class="nav-link-text">@AREditClientRES.Documents</p>
+            </a>
+        </li>
+    </ul>
+}
 
 
-<div class="container-fluid">
-    <div class="cadenassageContent analyseContent row">
-        <div class="cadenassageContent--header col col-sm-12 col-md-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page"><h1>@AREditClientRES.GestionAnalyses</h1></li>
-                </ol>
-            </nav>
-            <hr />
-        </div>
-        <ul class="nav nav-tabs col-md-1" role="tablist">
-            <li role="presentation" class="active">
-                <a id="AnalysFich" href="#Fiches" aria-controls="general" role="tab" data-toggle="tab"><img src="~/Images/analyse-de-risque.png" class="menu-icon icon-noactive" title="@AREditClientRES.Analyses" /><img src="~/Images/analyse-de-risque-previ.png" class="menu-icon icon-active" title="@AREditClientRES.Analyses" /><!--@AREditClientRES.Analyses--></a>
-            </li>
-            <li role="presentation">
-                <a id="DocCliAnalyse" href="#DocClients" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="~/Images/analyse-de-risque-doc.png" class="menu-icon icon-noactive" title="@AREditClientRES.Documents" /><img src="~/Images/analyse-de-risque-doc-previ.png" class="menu-icon icon-active" title="@AREditClientRES.Documents" /><!--@AREditClientRES.Documents--></a>
-            </li>
+<main class="main-container-wrapper page-container">
+
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>Accueil</a></li>
+            <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AnalyseRisque/Index">Analyses de risques</a></li>
+            <li>@AREditClientRES.GestionAnalyses</li>
         </ul>
+    </div>
 
-        <div class="panel panel-danger col col-xs-12 col-sm-12 col-md-10">
-            <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white"><span class="currentTitleAnalyse">@AREditClientRES.Analyses</span> <a href="https://previgesst.com/centre-de-support/" class="supportLink" target="_blank"><img src="/Images/help.png" class="help-icon" title="Centre support" /> @AREditClientRES.CentreSupport</a></div>
-            <div class="panel-body">
-                @*<ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active">
-                        <a href="#Fiches" aria-controls="general" role="tab" data-toggle="tab">Analyses</a>
-                    </li>
 
-                    <li role="presentation">
-                        <a href="#Documents" aria-controls="general" role="tab" data-toggle="tab">Documents du client</a>
-                    </li>
-                </ul>
+    <div class="main-page-content">
 
-                <div class="tab-content">
+        @*
+            <h1>@AREditClientRES.GestionAnalyses</h1>
+            title="@AREditClientRES.Analyses"
+            title="@AREditClientRES.Documents"
+        *@
 
-                    <div id="Fiches" class="tab-pane active">
-                        @Html.Partial("Analyses", @Model)
-                    </div>
 
-                    <div id="Documents" class="tab-pane active">
-                        @Html.Partial("DocClients", @Model)
-                    </div>
-                </div>*@
+        <div class="tab-content">
+            <div id="Fiches" class="tab-pane active">
+                @Html.Partial("Analyses", @Model)
+            </div>
 
-                <div class="tab-content">
-                    <div id="Fiches" class="tab-pane active">
-                        @Html.Partial("Analyses", @Model)
-                    </div>
-
-                    <div id="DocClients" class="tab-pane">
-
-                        @Html.Partial("DocClients", @Model)
-                    </div>
-                </div>
+            <div id="DocClients" class="tab-pane">
+                @Html.Partial("DocClients", @Model)
             </div>
         </div>
-        @*<a class='shieldLogoCadenassage' href='@if (User.IsInRole("Administrateur")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/shield.png'></a>*@
-        <a class='shieldLogoCadenassage' href='@if (this.Layout.EndsWith("_Layout.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/dark_logo.png'></a>
-
     </div>
-</div>
-<script type="text/javascript">
-    // White background for the body ID
-    jQuery('#body').css('background', '#FFF');
 
-    // Get and inject the li name selected
-    jQuery(document).on('click', '.nav-tabs li', function () {
-        let liSelected = jQuery(this).find('.icon-noactive').attr('title');
-        jQuery('.currentTitleAnalyse').html(liSelected);
-    });
-
-    // HIDE CURRENT LOGO
-    jQuery('.content-wrapper .float-left img').css('display', 'none');
-</script>
+</main>
