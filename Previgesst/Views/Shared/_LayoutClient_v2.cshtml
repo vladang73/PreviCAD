@@ -200,6 +200,7 @@
 
         $('.left-sidebar .nav a').on('click', function () {
             $('.left-sidebar .nav').find('li.active').removeClass('active');
+            $('.left-sidebar a.nav-link.home-navlink').removeClass('active');
             $(this).parent('li').addClass('active');
         });
 
@@ -210,6 +211,7 @@
                 console.log(target);
 
                 $('.left-sidebar .nav').find('li.active').removeClass('active');
+                $('.left-sidebar a.nav-link.home-navlink').removeClass('active');
                 $('.main-page-content div.tab-pane').removeClass('active');
 
                 $(this).parent('li').addClass('active');

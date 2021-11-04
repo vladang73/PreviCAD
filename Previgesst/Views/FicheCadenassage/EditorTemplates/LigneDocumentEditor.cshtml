@@ -8,7 +8,7 @@
             @Html.HiddenFor(model => model.DocumentId)
 
 
-            <div class="form-group mt-3">
+            <div class="form-group">
                 @Html.LabelFor(model => model.SectionId, new { @class = "form-label d-block" })
 
                 @(Html.Kendo().DropDownListFor(m => m.SectionId)

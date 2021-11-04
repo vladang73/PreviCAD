@@ -216,8 +216,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-mettre" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" data-bs-dismiss="modal" />
-                    <input type="button" class="btn btn-primary" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="button" class="btn btn-mettre m-1" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="button" class="btn btn-primary m-1" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" data-bs-dismiss="modal" />
                     <input type="hidden" class="duplicate-generic-result" />
                 </div>
             </div>
@@ -383,8 +383,10 @@
         });
 
 
-        $('.left-sidebar .nav a').on('click', function () {
+        $('.left-sidebar .nav a').off().on('click', function () {
             $('.left-sidebar .nav').find('li.active').removeClass('active');
+
+            $('.left-sidebar a.nav-link.home-navlink').removeClass('active');
             $(this).parent('li').addClass('active');
         });
 
@@ -392,9 +394,8 @@
             var target = $($(this).attr('href'))
 
             if (target != undefined && target.length > 0) {
-                console.log(target);
-
                 $('.left-sidebar .nav').find('li.active').removeClass('active');
+                $('.left-sidebar a.nav-link.home-navlink').removeClass('active');
                 $('.main-page-content div.tab-pane').removeClass('active');
 
                 $(this).parent('li').addClass('active');

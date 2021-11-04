@@ -150,86 +150,86 @@
 
 
 <script type="text/x-kendo-template" id="eqTemplate">
-<div id="row">
-<div id="col-11">
-    <div id="details-contaner" class="p-3">
+    <div id="row">
+    <div id="col-11">
+        <div id="details-contaner" class="p-3">
 
-        <input type="hidden" id="EquipementId" value="#=EquipementId#" />
+            <input type="hidden" id="EquipementId" value="#=EquipementId#" />
 
 
-        <div class="form-group mt-3">
-            <label for="Manufacturer" class="form-label d-block">Fabricant</label>
-            <input type="text" class="form-control petit" id="Manufacturer" name="Manufacturer" value="#= (Manufacturer == null) ? '' : Manufacturer #" />
+            <div class="form-group mt-3">
+                <label for="Manufacturer" class="form-label d-block">Fabricant</label>
+                <input type="text" class="form-control petit" id="Manufacturer" name="Manufacturer" value="#= (Manufacturer == null) ? '' : Manufacturer #" />
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="Model" class="form-label d-block">Modèle</label>
+                <input type="text" class="form-control petit" id="Model" name="Model" value="#= (Model == null) ? '' : Model #" />
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="NumberOfSerie" class="form-label d-block">Numéro de série</label>
+                <input type="text" class="form-control petit" id="NumberOfSerie" name="NumberOfSerie" value="#= (NumberOfSerie == null) ? '' : NumberOfSerie #" />
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="YearOfProduction" class="form-label d-block">Année de fabrication</label>
+                <input type="text" class="form-control petit" id="YearOfProduction" name="YearOfProduction" value="#= (YearOfProduction == null) ? '' : YearOfProduction #" />
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="Function" class="form-label d-block">Fonction</label>
+                <input type="text" class="form-control petit" id="Function" name="Function" value="#= (Function == null) ? '' : Function #" />
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="Model" class="form-label d-block">Tâches</label>
+                <select id="Task" multiple="multiple" data-placeholder="Sélectionner des tâches">
+                    <option>Montage</option>
+                    <option>Installation</option>
+                    <option>D’ajustement</option>
+                    <option>Inspection</option>
+                    <option>Décoinçage</option>
+                    <option>Réglage</option>
+                    <option>Mise hors d’usage</option>
+                    <option>Entretien</option>
+                    <option>Désassemblage</option>
+                    <option>Nettoyage</option>
+                    <option>Maintenance</option>
+                    <option>Remise à neuf</option>
+                    <option>Réparation</option>
+                    <option>Modification ou de déblocage</option>
+                </select>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="checkbox" id="RiskAnalysis" name="RiskAnalysis" # if (RiskAnalysis) { # checked=\"checked\" # } # />
+                <label for="RiskAnalysis">Analyse de risque complétée</label>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="checkbox" id="LockoutProcedure" name="LockoutProcedure" # if (LockoutProcedure) { # checked=\"checked\" # } # />
+                <label for="LockoutProcedure">Procédure de cadenassage complétée</label>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="checkbox" id="SafeWorkProcedure" name="SafeWorkProcedure" # if (SafeWorkProcedure) { # checked=\"checked\" # } # />
+                <label for="SafeWorkProcedure">Procédure de travail sécuritaire complétée</label>
+            </div>
+
+            <div class="form-group mt-3 text-right text-end">
+                <a class="k-button k-button-icontext k-grid-update btn-mettre m-1" onclick="SaveEquipementsInfo()">
+                    Mettre à jour
+                </a>
+
+                <a class="k-button k-button-icontext k-grid-cancel btn-Annuler m-1" onclick="closeDetailsNew()">
+                    Annuler
+                </a>
+            </div>
+
         </div>
-
-        <div class="form-group mt-3">
-            <label for="Model" class="form-label d-block">Modèle</label>
-            <input type="text" class="form-control petit" id="Model" name="Model" value="#= (Model == null) ? '' : Model #" />
-        </div>
-
-        <div class="form-group mt-3">
-            <label for="NumberOfSerie" class="form-label d-block">Numéro de série</label>
-            <input type="text" class="form-control petit" id="NumberOfSerie" name="NumberOfSerie" value="#= (NumberOfSerie == null) ? '' : NumberOfSerie #" />
-        </div>
-
-        <div class="form-group mt-3">
-            <label for="YearOfProduction" class="form-label d-block">Année de fabrication</label>
-            <input type="text" class="form-control petit" id="YearOfProduction" name="YearOfProduction" value="#= (YearOfProduction == null) ? '' : YearOfProduction #" />
-        </div>
-
-        <div class="form-group mt-3">
-            <label for="Function" class="form-label d-block">Fonction</label>
-            <input type="text" class="form-control petit" id="Function" name="Function" value="#= (Function == null) ? '' : Function #" />
-        </div>
-
-        <div class="form-group mt-3">
-            <label for="Model" class="form-label d-block">Tâches</label>
-            <select id="Task" multiple="multiple" data-placeholder="Sélectionner des tâches">
-                <option>Montage</option>
-                <option>Installation</option>
-                <option>D’ajustement</option>
-                <option>Inspection</option>
-                <option>Décoinçage</option>
-                <option>Réglage</option>
-                <option>Mise hors d’usage</option>
-                <option>Entretien</option>
-                <option>Désassemblage</option>
-                <option>Nettoyage</option>
-                <option>Maintenance</option>
-                <option>Remise à neuf</option>
-                <option>Réparation</option>
-                <option>Modification ou de déblocage</option>
-            </select>
-        </div>
-
-        <div class="form-group mt-3">
-            <input type="checkbox" id="RiskAnalysis" name="RiskAnalysis" # if (RiskAnalysis) { # checked=\"checked\" # } # />
-            <label for="RiskAnalysis">Analyse de risque complétée</label>
-        </div>
-
-        <div class="form-group mt-3">
-            <input type="checkbox" id="LockoutProcedure" name="LockoutProcedure" # if (LockoutProcedure) { # checked=\"checked\" # } # />
-            <label for="LockoutProcedure">Procédure de cadenassage complétée</label>
-        </div>
-
-        <div class="form-group mt-3">
-            <input type="checkbox" id="SafeWorkProcedure" name="SafeWorkProcedure" # if (SafeWorkProcedure) { # checked=\"checked\" # } # />
-            <label for="SafeWorkProcedure">Procédure de travail sécuritaire complétée</label>
-        </div>
-
-        <div class="form-group mt-3 text-right text-end">
-            <a class="k-button k-button-icontext k-grid-update btn-mettre" onclick="SaveEquipementsInfo()">
-                Mettre à jour
-            </a>
-
-            <a class="k-button k-button-icontext k-grid-cancel btn-Annuler" onclick="closeDetailsNew()">
-                Annuler
-            </a>
-        </div>
-
     </div>
-</div>
-</div>
+    </div>
 </script>
 
 <script type="text/x-kendo-template" id="qrTemplate">
@@ -244,11 +244,11 @@
 
 
         <div class="form-group text-end mt-3">
-            <a class="k-button k-button-icontext k-grid-update btn-mettre" onclick="SaveQRInfo()">
+            <a class="k-button k-button-icontext k-grid-update btn-mettre m-1" onclick="SaveQRInfo()">
                 Mettre à jour
             </a>
 
-            <a class="k-button k-button-icontext k-grid-cancel btn-Annuler" onclick="closeDetailsQR()">
+            <a class="k-button k-button-icontext k-grid-cancel btn-Annuler m-1" onclick="closeDetailsQR()">
                 Annuler
             </a>
         </div>
@@ -323,21 +323,21 @@
     }
 
 
-    $("#Equip").click(function () {
+    //$("#Equip").click(function () {
 
-        //$("#listEquipement").find("a.k-grid-add").removeClass("k-button  k-button-icontext").addClass("btn-test d-none");
+    //    //$("#listEquipement").find("a.k-grid-add").removeClass("k-button  k-button-icontext").addClass("btn-test d-none");
 
-        //$("#listEquipement").find("span.k-grid-add").addClass("btn btn-success btn-test");
+    //    //$("#listEquipement").find("span.k-grid-add").addClass("btn btn-success btn-test");
 
-        //$("#listEquipement").find("a.btn-test").text("");
+    //    //$("#listEquipement").find("a.btn-test").text("");
 
 
-        //// ADD ICONE "+"
-        //setTimeout(function () {
-        //    $("#listEquipement").find(".btn-test").append('<img class="addButtonImg" src="/content/v2/images/plus-icon.svg">');
-        //    //$("#Equipements").find('div.add-icon').append($("#listEquipement").find("a.btn-test"))
-        //}, 50);
-    });
+    //    //// ADD ICONE "+"
+    //    //setTimeout(function () {
+    //    //    $("#listEquipement").find(".btn-test").append('<img class="addButtonImg" src="/content/v2/images/plus-icon.svg">');
+    //    //    //$("#Equipements").find('div.add-icon').append($("#listEquipement").find("a.btn-test"))
+    //    //}, 50);
+    //});
 
     function showDetailsEnergie(e) {
 
@@ -358,8 +358,8 @@
         $(e.container).find('.k-grid-QR').hide();
 
         // add save and cancel classes
-        $(e.container).find('.k-grid-update.btn-table').removeClass('btn-edit').addClass('btn-mettre');
-        $(e.container).find('.k-grid-cancel.btn-table').removeClass('btn-edit').addClass('btn-Annuler');
+        $(e.container).find('.k-grid-update.btn-table').removeClass('btn-edit').addClass('btn-mettre m-1');
+        $(e.container).find('.k-grid-cancel.btn-table').removeClass('btn-edit').addClass('btn-Annuler m-1');
 
 
         e.container.find(".k-grid-cancel").bind("click", function () {
@@ -459,6 +459,7 @@
 
         ShowDeleteConfirm(dataItem.NomEquipement, function (args) {
             if (args.confirmed === true) {
+                console.log('deleting', args);
                 grid.removeRow(row);
             }
         });

@@ -7,6 +7,9 @@
     <div class="page-title d-flex justify-content-center align-items-center">
         <h3 class="m-0">@CadEditRES.Registre</h3>
     </div>
+    <div class="page-table-meta">
+        <button id="btnExportRegistre" class="btn-table btn-excel float-end k-button" type="button">Exporter vers Excel</button>
+    </div>
 </div>
 
 <div id="LignesRegistre">
@@ -78,7 +81,7 @@
 
             .Sortable(s => s.AllowUnsort(false))
             .Events(e=>e.DataBound("onRegistreDataBound").Cancel("onRegistreDataBound").ExcelExport("excelExport"))
-            .ToolBar(tools => tools.Excel().HtmlAttributes(new { @class = "btn-excel float-end" }))
+            .ToolBar(tools => tools.Excel().HtmlAttributes(new { @class = "d-none" }))
             .Editable(e => e.DisplayDeleteConfirmation(false))
             .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneRegistre").Window(w => w.Title(CadRegRES.Audit).Width(600)))
 
@@ -146,5 +149,9 @@
 
     $('#btnAddLignesRegistre').click(function () {
         $("#LignesRegistre").find("a.k-grid-add").click();
+    });
+
+    $('#btnExportRegistre').off().on('click', function () {
+        $("#listLignesRegistre").find(".k-grid-excel.d-none").click();
     });
 </script>
