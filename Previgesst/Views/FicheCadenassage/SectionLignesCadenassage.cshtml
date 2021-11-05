@@ -260,6 +260,9 @@
                 });
             });
         }
+        else if (args.xhr) {
+            ShowGridError("@Html.Raw(CadLigneCadRES.Erreur)", selecteurGrid, args);
+        }
     }
 
     function ListeDataBoundCAD(e) {

@@ -182,15 +182,13 @@
                 $.each(args.errors, function (propertyName) {
                     var errorList = validationTemplate({ field: propertyName, messages: this.errors });
                     alert(this.errors);
-                    ShowNotification("Erreur - Gestions",
-                        errorList,
-                        "errorListTemplate");
+                    ShowNotification("Erreur - Gestions", errorList, "errorListTemplate");
                 });
             });
         }
-
-
-
+        else if (args.xhr) {
+            ShowGridError("Erreur - Gestions", selecteurGrid, args);
+        }
     }
 
     function ListeDataBound(e) {

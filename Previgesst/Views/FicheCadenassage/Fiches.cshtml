@@ -109,7 +109,7 @@
                         {
                             c.Custom(CadFichesRES.Vide)
                             .Click("ConfirmDeleteRowFiche")
-                            .HtmlAttributes(new { @class = "k-grid-effacer12 btn btn-del" });
+                            .HtmlAttributes(new { @class = "k-grid-effacer btn btn-del" });
                         }).Title(CadFichesRES.Vide).Hidden(!Model.estUpdate).Width("50px");
                     })
 
@@ -144,7 +144,7 @@
                 )
 
 <script>
-   
+
     function doCheck(ficheCadenassage, e) {
         //call ajax pour activer/désactiver la fiche
         var dataInput = {
@@ -178,7 +178,6 @@
 
 
     function ConfirmDeleteRowFiche(e) {
-        //debugger;
         e.preventDefault();
 
         var grid = this;
@@ -194,7 +193,6 @@
 
 
     function ListeErreurFiche(args) {
-        //debugger;
         var selecteurGrid = "#list";
         if (args.errors) {
             var grid = $(selecteurGrid).data("kendoGrid");
@@ -211,40 +209,37 @@
                 });
             });
         }
+        else if (args.xhr) {
+            ShowGridError("@Html.Raw(CadEquipRES.Erreurs)", selecteurGrid, args);
+        }
     }
 
     function ListeDataBoundFiche(e) {
-        var selecteurGrid = "#list";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //var selecteurGrid = "#list";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
-        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-        //Selects all delete buttons
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
-
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
-
-                    $(this).remove();
-            }
-        })
-
-        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
+        //            $(this).remove();
+        //    }
+        //})
 
 
+        ////Selects all delete buttons
+        //$("#list tbody tr .k-cde-edit").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-        //Selects all delete buttons
-        $("#list tbody tr .k-cde-edit").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
-
-                $(this).remove();
-            }
-        })
+        //        $(this).remove();
+        //    }
+        //})
     }
 
         // FICHE/PROCÉDURE : Check and replace the string by an image

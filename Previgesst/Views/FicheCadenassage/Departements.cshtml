@@ -143,6 +143,9 @@
                 });
             });
         }
+        else if (args.xhr) {
+            ShowGridError("@Html.Raw(CadDeptRES.Erreur)", selecteurGrid, args);
+        }
     }
 
     function ListeDataBoundDEPT(e) {

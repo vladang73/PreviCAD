@@ -235,3 +235,8 @@
 .bg-white{
     background-color: #FFF;
 }
+
+
+#generic-popup pre{
+    display: none;
+}

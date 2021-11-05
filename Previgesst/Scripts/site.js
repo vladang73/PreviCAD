@@ -68,8 +68,9 @@ function ShowDeleteConfirm(elementToDelete, callback) {
     $('#delete-generic-popup .element-to-delete').text(elementToDelete);
     $('#delete-generic-popup .delete-generic-result').val(false);
     $('#delete-generic-popup').modal('show');
-    $('#delete-generic-popup').on('hide.bs.modal', function (e) {
-        $('#delete-generic-popup').off('hide.bs.modal');
+
+    $('#delete-generic-popup').on('hidden.bs.modal', function (e) {
+        $('#delete-generic-popup').off('hidden.bs.modal');
         var args = {
             confirmed: $('#delete-generic-popup .delete-generic-result').val() == 'true'
         };
@@ -91,3 +92,16 @@ $(document).ready(function () {
         show: false
     });
 });
+
+function ShowGridError(title, selecteurGrid, args) {
+    console.log('There was some error in ' + selecteurGrid, args);
+    ShowNotification(title, args.xhr.statusText, "errorTemplate");
+
+    var grid = $(selecteurGrid).data("kendoGrid");
+    grid.dataSource.read();
+
+    $('#generic-popup').modal('show');
+    $('#generic-popup #generic-title').text(args.xhr.statusText);
+    $('#generic-popup .text-danger').text('');
+    $('#generic-popup .text-danger').append(args.xhr.responseText);
+}

@@ -141,9 +141,7 @@
         })
         .Read(r => r.Action("ReadListCadenas", "Documents"))
         .Create(c => c.Action("Save", "Listes"))
-        .Events(e => e
-            .Error("ListeErreur")
-        )
+        .Events(e => e.Error("ListeErreur"))
     )
    
    
@@ -157,10 +155,6 @@
 
 
 <script type="text/javascript">
-
-
-
-
 
     function ConfirmDeleteRow(e) {
         e.preventDefault();
@@ -188,43 +182,30 @@
 
                 $.each(args.errors, function (propertyName) {
                     var errorList = validationTemplate({ field: propertyName, messages: this.errors });
-                    ShowNotification("Erreur - Gestions",
-                        errorList,
-                        "errorListTemplate");
+                    ShowNotification("Erreur - Gestions", errorList, "errorListTemplate");
                 });
             });
+        }
+        else if (args.xhr) {
+            ShowGridError("Erreur - Gestions", selecteurGrid, args);
         }
     }
 
     function ListeDataBound(e) {
+        //var selecteurGrid = "#list";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
 
+        ////Selects all delete buttons
+        //$(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
+        //    var currentDataItem = grid.dataItem($(this).closest("tr"));
 
-        var selecteurGrid = "#list";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //    //Check in the current dataItem if the row is deletable
+        //    if (!currentDataItem.Suppressible) {
 
-
-        //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");
-
-
-
-        //Selects all delete buttons
-        $(selecteurGrid + " tbody tr .k-grid-effacer").each(function () {
-            var currentDataItem = grid.dataItem($(this).closest("tr"));
-
-            //Check in the current dataItem if the row is deletable
-            if (!currentDataItem.Suppressible) {
-
-                $(this).remove();
-            }
-        })
+        //        $(this).remove();
+        //    }
+        //})
     }
-
-
-
-
-
-
-
 
 </script>

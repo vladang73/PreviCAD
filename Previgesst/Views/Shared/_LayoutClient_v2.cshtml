@@ -108,7 +108,7 @@
                             </a>
                             <ul class="submenu">
                                 @RenderSection("sidebarChilds", required: false)
-                                
+
 
                                 <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
                                 <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">Centre de support</a></li>
@@ -156,6 +156,168 @@
     </footer>
 
 
+
+    @* Popup générique pour la suppression *@
+    <div id="delete-generic-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="delete-generic-title">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="delete-generic-title">@GridRES.Confirmation</h4>
+                    @*<button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
+                </div>
+                <div class="modal-body">
+                    <div>
+                        @GridRES.DeleteMessage
+                        <span class="text-danger">'<span class="element-to-delete"></span>'</span>?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-Annuler" value="@GridRES.Oui" onclick="deleteGenericResult(true)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="button" class="btn btn-primary" value="@GridRES.NePasSupprimer" onclick="deleteGenericResult(false)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="hidden" class="delete-generic-result" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Popup générique pour dupliquer *@
+    <div id="duplicate-generic-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="duplicate-generic-title">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="duplicate-generic-title">@GridRES.Confirmation</h4>
+                    @*<button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
+                </div>
+                <div class="modal-body">
+                    <div>
+                        @GridRES.DuplicateMessage
+                        <span class="text-danger">'<span class="element-to-duplicate"></span>'</span>?
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-mettre m-1" value="@GridRES.Oui" onclick="duplicateGenericResult(true)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="button" class="btn btn-primary m-1" value="@GridRES.NePasDupliquer" onclick="duplicateGenericResult(false)" data-dismiss="modal" data-bs-dismiss="modal" />
+                    <input type="hidden" class="duplicate-generic-result" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script id="infoTemplate" type="text/x-kendo-template">
+        <div class="alert alert-info">
+            <h3>
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="warningTemplate" type="text/x-kendo-template">
+        <div class="alert alert-warning">
+            <h3>
+                <span class="glyphicon glyphicon-warning-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="errorTemplate" type="text/x-kendo-template">
+        <div class="alert alert-danger">
+            <h3>
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script id="errorListTemplate" type="text/x-kendo-template">
+        <div class="alert alert-danger">
+            <h3>
+                <span class="glyphicon glyphicon-remove-sign"></span>
+                #= title #
+            </h3>
+            <ul>#= message #</ul>
+        </div>
+    </script>
+
+    <script id="successTemplate" type="text/x-kendo-template">
+        <div class="alert alert-success">
+            <h3>
+                <span class="glyphicon glyphicon-ok-sign"></span>
+                #= title #
+            </h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+
+    <script type="text/x-kendo-template" id="gridValidationMessageTemplate">
+        # if (field) { #
+        <li>
+            #=field#
+            <ul>
+                # } #
+                # for (var i = 0; i < messages.length; ++i) { #
+                <li>#= messages[i] #</li>
+                # } #
+                # if (field) { #
+            </ul>
+        </li>
+        # } #
+    </script>
+
+    @(Html.Kendo().Notification()
+                        .Name("notification")
+                        .Position(p => p.Pinned(true).Top(75).Left(30))
+                        .Stacking(NotificationStackingSettings.Down)
+                        .AutoHideAfter(3 * 1000)
+                        .HideOnClick(true)
+                        .Button(false)
+                        .Templates(t =>
+                        {
+                            t.Add().Type("infoTemplate").ClientTemplateID("infoTemplate");
+                            t.Add().Type("errorTemplate").ClientTemplateID("errorTemplate");
+                            t.Add().Type("warningTemplate").ClientTemplateID("warningTemplate");
+                            t.Add().Type("successTemplate").ClientTemplateID("successTemplate");
+                        })
+    )
+
+    @if (ViewBag.NotiticationTemplate != null && ViewBag.NotificationTitle != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                ShowNotification("@ViewBag.NotificationTitle",
+                                 "@ViewBag.NotificationMessage",
+                                 "@ViewBag.NotiticationTemplate");
+
+            });
+        </script>
+    }
+
+
+    <div id="generic-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="generic-title">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="generic-title">Error</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-Annuler" value="Close" data-dismiss="modal" data-bs-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     @RenderSection("scripts", required: false)

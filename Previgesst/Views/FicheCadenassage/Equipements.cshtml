@@ -482,9 +482,7 @@
             });
         }
         else if (args.xhr) {
-            console.log('There was some error', args);
-            ShowNotification("@CadEquipRES.Erreurs", args.xhr.statusText, "errorTemplate");
-            grid.dataSource.read();
+            ShowGridError("@Html.Raw(CadEquipRES.Erreurs)", selecteurGrid, args);
         }
     }
 
@@ -663,7 +661,7 @@
         });
     }
 
-    
+
 
     $(document).on('click', '.selected-equi', function () { $('.selected-equi-all').prop('checked', false); });
 

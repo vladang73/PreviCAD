@@ -101,9 +101,9 @@
 </div>
 
 <script type="text/javascript">
-  
 
- 
+
+
 
 
 
@@ -139,6 +139,9 @@
                 });
             });
         }
+        else if (args.xhr) {
+            ShowGridError("Erreur - Gestions", selecteurGrid, args);
+        }
     }
 
     function ListeDataBoundFC(e) {
@@ -163,8 +166,8 @@
                 $(this).remove();
             }
 
-         
-            
+
+
         })
     }
 

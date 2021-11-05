@@ -14,7 +14,7 @@
             </a>
         </div>
         &nbsp;
-        <input type="button" class="text-decoration-none text-white btn btn-primary" value="Archiver" onclick="ArchiveDoc()" />
+        <input type="button" class="text-decoration-none text-white btn btn-primary" value="Archiver" onclick="ArchiveDocument()" />
     </div>
 </div>
 
@@ -265,7 +265,7 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function (result) {
-                ShowNotification("@CadSourcesRES.Succes", "@CadSourcesRES.SourcesEnregistrees", "successTemplate")
+                ShowNotification("@Html.Raw(CadSourcesRES.Succes)", "@Html.Raw(CadSourcesRES.SourcesEnregistrees)", "successTemplate")
 
                 if (result == 1) {
                     DocumentsSync();
@@ -273,14 +273,14 @@
                 }
             },
             error: function (data) {
-                ShowNotification("@CadSourcesRES.Erreur", "@CadSourcesRES.SourcePasEnregistrees", "errorTemplate")
+                ShowNotification("@Html.Raw(CadSourcesRES.Erreur)", "@Html.Raw(CadSourcesRES.SourcePasEnregistrees)", "errorTemplate")
             }
         });
     }
 
-    function ArchiveDoc() {
-        $("#liste-doc").find("a.d-none.k-grid-archive").click();
-    }
+    //function ArchiveDoc() {
+    //    $("#liste-doc").find("a.d-none.k-grid-archive").click();
+    //}
 
 
     $('#btnAddDoc').click(function () {

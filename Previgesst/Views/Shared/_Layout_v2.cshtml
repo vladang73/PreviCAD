@@ -96,12 +96,12 @@
         <div class="bg-light d-none d-md-block sidebar">
             <div class="left-sidebar">
                 @*<ul class="nav flex-column sidebar-nav ">
-                    <li class="nav-item text-center mt-2">
-                        <a class="nav-link home-navlink active" href='@Url.Action("Index", "AdminPrevi")'>
-                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
-                        </a>
-                    </li>
-                </ul>*@
+                        <li class="nav-item text-center mt-2">
+                            <a class="nav-link home-navlink active" href='@Url.Action("Index", "AdminPrevi")'>
+                                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                            </a>
+                        </li>
+                    </ul>*@
 
                 @RenderSection("sidebar", required: false)
 
@@ -165,11 +165,11 @@
                 </div>
             </div>
         </div>
-    
+
         @*<div class="company-tagline-wrapper">
-            <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
-        </div>
-        <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>*@
+                <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
+            </div>
+            <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>*@
     </footer>
 
 
@@ -179,10 +179,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="delete-generic-title">
-                    @GridRES.Confirmation</h4>
+                        @GridRES.Confirmation
+                    </h4>
                     @*<button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
-                        <span aria-hidden="true">&times;</span>
-                    </button>*@
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
                 </div>
                 <div class="modal-body">
                     <div>
@@ -206,8 +207,8 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="duplicate-generic-title">@GridRES.Confirmation</h4>
                     @*<button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
-                        <span aria-hidden="true">&times;</span>
-                    </button>*@
+                            <span aria-hidden="true">&times;</span>
+                        </button>*@
                 </div>
                 <div class="modal-body">
                     <div>
@@ -330,6 +331,24 @@
             });
         </script>
     }
+
+    <div id="generic-popup" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="generic-title">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="generic-title">Error</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-Annuler" value="Close" data-dismiss="modal" data-bs-dismiss="modal" />
+                </div>
+            </div>
+        </div>
+    </div>
 
     @RenderSection("scripts", required: false)
 

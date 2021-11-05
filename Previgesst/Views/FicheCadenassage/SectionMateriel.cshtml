@@ -148,9 +148,9 @@
                 });
             });
         }
-
-
-
+        else if (args.xhr) {
+            ShowGridError("@Html.Raw(CadMaterielRES.Erreur)", selecteurGrid, args);
+        }
     }
 
     function ListeDataBoundMAT(e) {
@@ -180,6 +180,6 @@
     }
 
     $('#btnAddMaterial').click(function () {
-        $("#btnAddMaterial").find("a.d-none.k-grid-add").click();
+        $("#listMAT").find("a.d-none.k-grid-add").click();
     });
 </script>
