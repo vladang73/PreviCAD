@@ -54,14 +54,14 @@
                 .IsEqualTo(GridRES.Egale)
                 .IsNotEqualTo(GridRES.NotEquals)
                 )))
-                .Width("410px");
+                ;
 
 
             // TODO MAX : if DateMAJ NULL, display none
             columns.Bound(c => c.DateMAJ)
                 .Filterable(f => f.Extra(false))
                 .Format("{0:" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern + "}")
-                .Width("130px")
+                .Width("150px")
                 .Title(AREditClientRES.MiseAJour);
 
             columns.Bound(c => c.AfficherChezClient)
@@ -108,6 +108,7 @@
             .Destroy(u => u.Action("DeleteAnalyse", "AnalyseRisque"))
         )
         .Events(e => e.DataBound("ListeDataBoundAnalyse"))
+        //.Scrollable(s => s.Enabled(true).Height("auto"))
 )
 
 

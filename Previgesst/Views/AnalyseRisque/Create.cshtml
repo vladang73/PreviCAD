@@ -4,129 +4,92 @@
 
 @{
     ViewBag.Title = "Analyses";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_v2.cshtml";
+}
+
+
+@section styles{
+    <link href="~/Content/v2/grid-override.css" rel="stylesheet" />
 }
 
 
 
-<div class="container">
+@section sidebar{
 
-    <div class="row">
+    <ul class="nav flex-column sidebar-nav" role="tablist">
+        <li class="nav-item text-center mt-2">
+            <a class="nav-link home-navlink" role="tab" href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>
+                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            </a>
+        </li>
+    </ul>
+}
 
-        <div class="col-md-12 ">
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>Accueil</a></li>
+            <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AnalyseRisque/EditClient/@Model.ClientId">Analyses de risques</a></li>
+            <li class="active" aria-current="page">@ARCreateRES.Creation</li>
+        </ul>
+    </div>
 
-            <div class="panel panel-danger analyseContent">
+    <div class="main-page-content">
 
-                <div class="panel-heading 	back-panel" style="font-size:larger;font-weight:500;color:white">@ARCreateRES.Creation</div>
-
-                <div class="panel-body">
-
-                    @using (Html.BeginForm("Create", "AnalyseRisque", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken();
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" });
-
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="form-group form-inline" style="width:100%">
-                                    @*<div class="col-md-3">
-                                        @Html.LabelFor(m => m.ClientId, new { @class = "control-label pull-right" })
-
-                                    </div>*@
-                                    @*<div class="col-md-3">
-                                        @Html.(m => m.ClientId, new { @class = "hidden" })
-                                    </div>*@
-                                <div class="col-md-6">
-                                    @*@if (User.IsInRole("System"))
-
-                                    {
-                                        @Html.TextBox("NameClient", (string)ViewBag.NameClient, new { @class = "form-control", @readonly = "readonly", @style = "width:100%" })
-
-                                    }*@
-                                    @*else
-                                    {
-
-                                        @(Html.Kendo().DropDownListFor(m => m.ClientId)
-                                                .HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
-                                                .OptionLabel("-- Sélectionner un client --")
-                                                .DataValueField(nameof(ClientDDLViewModel.ClientId))
-                                                .DataTextField(nameof(ClientDDLViewModel.ClientNom))
-                                                .Filter(FilterType.Contains)
-                                                .IgnoreCase(true)
-                                                .BindTo(ViewBag.ListeClients)
-                                        )
-                                    }*@
-
-                                    @Html.HiddenFor(m => m.ClientId)
-                                    @Html.ValidationMessageFor(m => m.ClientId, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group form-inline" style="width:100%">
-                        <div class="col-md-3">
-                            @Html.LabelFor(m => m.NoRef, new { @class = "control-label pull-right" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.TextBoxFor(m => m.NoRef, new { @class = "form-control", @style = "width:100%" })
-                            @Html.ValidationMessageFor(m => m.NoRef, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group form-inline" style="width:100%">
-                        <div class="col-md-3">
-                            @Html.LabelFor(m => m.Equipement, new { @class = "control-label pull-right" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.TextBoxFor(m => m.Equipement, new { @class = "form-control", @style = "width:100%" })
-                            @Html.ValidationMessageFor(m => m.Equipement, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group form-inline" style="width:100%">
-                        <div class="col-md-3">
-                            @Html.LabelFor(m => m.AfficherChezClient, new { @class = "control-label pull-right" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.CheckBoxFor(m => m.AfficherChezClient, new { @class = "control-label" })
-                            @Html.ValidationMessageFor(m => m.AfficherChezClient, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group form-inline" style="width:100%">
-                        <div class="col-md-6" style="display:none;">
-                            @Html.TextBoxFor(m => m.Createur, new { @class = "control-label" })
-                            @Html.ValidationMessageFor(m => m.AfficherChezClient, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
+        <div class="table-top-header">
+            <div class="page-title d-flex justify-content-center align-items-center">
+                <h3 class="m-0">@ARCreateRES.Creation</h3>
             </div>
+        </div>
 
-                <div class="row">
-                    <div class="col-md-10" style="margin-left:calc(25% + -8px)">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <input type="submit" class="btn btn-primary" value="@ARCreateRES.Creer" />
-                            </div>
+        <div class="row">
+            <div class="col-12 col-md-6">
+
+
+                @using (Html.BeginForm("Create", "AnalyseRisque", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+                    @Html.HiddenFor(m => m.ClientId)
+                    @Html.ValidationMessageFor(m => m.ClientId, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group mt-3">
+                        @Html.LabelFor(m => m.NoRef, new { @class = "form-label d-block" })
+
+                        @Html.TextBoxFor(m => m.NoRef, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.NoRef, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mt-3">
+                        @Html.LabelFor(m => m.Equipement, new { @class = "form-label d-block" })
+                        @Html.TextBoxFor(m => m.Equipement, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Equipement, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mt-3">
+
+                        <div class="squaredThree squaredThree-blue d-inline-block">
+                            <input type="checkbox" id="AfficherChezClient" name="AfficherChezClient" @(Model.AfficherChezClient ? "checked" : "") value="@Convert.ToString(Model.AfficherChezClient).ToLower()" />
+                            <label for="squaredone"><span>@Html.DisplayNameFor(m => m.AfficherChezClient) </span></label>
+                        </div>
+
+                        @Html.ValidationMessageFor(m => m.AfficherChezClient, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mt-3" style="display:none;">
+                        @Html.TextBoxFor(m => m.Createur, new { @class = "control-label" })
+                        @Html.ValidationMessageFor(m => m.AfficherChezClient, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <div class="col-md-12 text-right">
+                            <input type="submit" class="btn btn-mettre m-1" value="@ARCreateRES.Creer" />
                         </div>
                     </div>
-                </div>
-                    }
-                </div>
+                }
             </div>
         </div>
     </div>
-</div>
-<script type="text/javascript">
-    // White background for the body ID
-    jQuery('#body').css('background', '#FFF');
+</main>
 
-    // HIDE CURRENT LOGO
-    jQuery('.content-wrapper .float-left img').css('display', 'none');
-</script>

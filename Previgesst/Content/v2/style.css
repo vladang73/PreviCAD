@@ -218,19 +218,22 @@
 
 .k-widget.k-tooltip-validation {
     color: var(--annulerbtnbg) !important;
+    position: static;
+    text-align: left;
 }
     .k-widget.k-tooltip-validation:after {
         clear: both;
     }
-
-/*    .k-widget.k-tooltip-validation .k-callout.k-callout-n {
+    .k-widget.k-tooltip-validation .k-icon.k-warning{
+        display: none;
+    }
+    /*    .k-widget.k-tooltip-validation .k-callout.k-callout-n {
         color: var(--annulerbtnbg) !important;
     }*/
-
-.home-navlink.big img {
-    width: 40px;
-    margin-bottom: -5px;
-}
+    .home-navlink.big img {
+        width: 40px;
+        margin-bottom: -5px;
+    }
 
 .bg-white{
     background-color: #FFF;

@@ -188,17 +188,8 @@
 </main>
 
 <script type="text/javascript">
-    // White background for the body ID
-    jQuery('#body').css('background', '#FFF');
 
-    // Get and inject the li name selected
-    jQuery(document).on('click', '.nav-tabs li', function () {
-        let liSelected = jQuery(this).find('.icon-noactive').attr('title');
-        jQuery('.currentTitleCadenassage').html(liSelected);
-    });
 
-    // HIDE CURRENT LOGO
-    jQuery('.content-wrapper .float-left img').css('display', 'none');
 
     if(jQuery('.tryDone').length) {
         jQuery('.btn-primary').css('display', 'none');

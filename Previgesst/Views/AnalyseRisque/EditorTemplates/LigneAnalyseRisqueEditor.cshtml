@@ -1,7 +1,7 @@
 ﻿@model LigneAnalyseRisqueEditViewModel
 @using Previgesst.Ressources.Analyse
 
-<style>
+@*<style>
     .autocomplete {
         display: inline-block !important;
         border: 1px solid #ccc !important;
@@ -12,178 +12,135 @@
         max-width: none;
         padding-right: 6px !important;
     }
-</style>
+</style>*@
 
 <div class="p-3">
     <div class="row">
         <div class="col-11">
-            @*<div class="panel-heading">@ARLignesRES.TacheOP</div>*@
+            <p class="alert alert-info d-block">@ARLignesRES.TacheOP</p>
 
-            <div class="row mt-3">
-                <div class="col-md-4">
-                    <div class="col-md-2">
-                        @Html.LabelFor(model => model.Rang, new { @class = "form-label d-block" })
-                    </div>
-                    <div class="col-md-6">
-                        @(Html.Kendo().NumericTextBoxFor(m => m.Rang)
+            <div class="row">
+                <div class="col-2">
+                    @Html.LabelFor(model => model.Rang, new { @class = "form-label d-block" })
+
+                    @(Html.Kendo().NumericTextBoxFor(m => m.Rang)
                                     .HtmlAttributes(new { @class = "form-control" })
                                     .Min(0)
                                     .Decimals(1)
                                     .Format("N1")
                                     .Culture("fr-CA")
                                 )
-                    </div>
                 </div>
 
-                <div class="col-md-6 form-inline">
-                    <div class="col-md-2">
-                        @Html.LabelFor(model => model.Zone, new { @class = "form-label d-block" })
-                    </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.Zone, new { @class = "autocomplete form-control petit" })
-                        @Html.ValidationMessageFor(model => model.Zone)
-                    </div>
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Zone, new { @class = "form-label d-block" })
+
+                    @Html.TextBoxFor(model => model.Zone, new { @class = "autocomplete form-control petit" })
+                    @Html.ValidationMessageFor(model => model.Zone)
                 </div>
-            </div>
 
-            <div class="row mt-3">
-                <div class="col-md-4"></div>
 
-                <div class="col-md-6 form-inline">
-                    <div class="col-md-2">
-                        @Html.LabelFor(model => model.Operation, new { @class = "form-label d-block" })
-                    </div>
-                    <div class="col-md-7">
-                        @Html.TextBoxFor(model => model.Operation, new { @class = "autocomplete form-control petit" })
-                        @Html.ValidationMessageFor(model => model.Operation)
-                    </div>
+                <div class="col-4">
+
+                    @Html.LabelFor(model => model.Operation, new { @class = "form-label d-block" })
+
+                    @Html.TextBoxFor(model => model.Operation, new { @class = "autocomplete form-control petit" })
+                    @Html.ValidationMessageFor(model => model.Operation)
                 </div>
             </div>
         </div>
     </div>
 
+    <hr />
 
+    <div class="row mt-3">
+        <div class="col-5">
+            <p class="alert alert-danger d-block">@ARLignesRES.EvalSansProtection</p>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-danger">
-                <div class="panel-heading">@ARLignesRES.EvalSansProtection</div>
+            <div class="row">
 
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.PhenomeneId, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.PhenomeneId)
+                <div class="col-12">
+                    @Html.LabelFor(model => model.PhenomeneId, new { @class = "form-label d-block" })
+                    @(Html.Kendo().DropDownListFor(m => m.PhenomeneId)
                                 .DataValueField("PhenomeneId")
                                 .DataTextField("Description")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Phenomenes"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.PhenomeneId)
-                        </div>
-                    </div>
+                    @Html.ValidationMessageFor(model => model.PhenomeneId)
+                </div>
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.SituationId, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.SituationId)
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.SituationId, new { @class = "form-label d-block" })
+
+                    @(Html.Kendo().DropDownListFor(m => m.SituationId)
                                 .DataValueField("SituationId")
                                 .DataTextField("Description")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Situations"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.SituationId)
-                        </div>
-                    </div>
+                    @Html.ValidationMessageFor(model => model.SituationId)
+                </div>
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.EvenementId, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.EvenementId)
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.EvenementId, new { @class = "form-label d-block" })
+                    @(Html.Kendo().DropDownListFor(m => m.EvenementId)
                                 .DataValueField("EvenementId")
                                 .DataTextField("Description")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Evenements"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.EvenementId)
-                        </div>
-                    </div>
+                    @Html.ValidationMessageFor(model => model.EvenementId)
+                </div>
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.DommagePossibleId, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.DommagePossibleId)
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.DommagePossibleId, new { @class = "form-label d-block" })
+                    @(Html.Kendo().DropDownListFor(m => m.DommagePossibleId)
                                 .DataValueField("EvenementId")
                                 .DataTextField("Description")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Dommages"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.DommagePossibleId)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.GraviteAvantId, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.GraviteAvantId)
+                    @Html.ValidationMessageFor(model => model.DommagePossibleId)
+                </div>
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.GraviteAvantId, new { @class = "form-label d-block" })
+                    @(Html.Kendo().DropDownListFor(m => m.GraviteAvantId)
                                 .DataValueField("GraviteId")
                                 .DataTextField("No")
                                 .Template("<div class=\"drop-down-list-item\" title=\"#=Explication#\">#=No#</div>")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Gravites"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.GraviteAvantId)
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.FrequenceAvantId, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.FrequenceAvantId)
+                    @Html.ValidationMessageFor(model => model.GraviteAvantId)
+                </div>
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.FrequenceAvantId, new { @class = "form-label d-block" })
+                    @(Html.Kendo().DropDownListFor(m => m.FrequenceAvantId)
                                 .DataValueField("FrequenceId")
                                 .DataTextField("No")
                                 .Template("<div class=\"drop-down-list-item\" title=\"#=Explication#\">#=No#</div>")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Frequences"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.FrequenceAvantId)
-                        </div>
-                    </div>
+                    @Html.ValidationMessageFor(model => model.FrequenceAvantId)
+                </div>
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.ProbabiliteAvantId, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.ProbabiliteAvantId, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.ProbabiliteAvantId)
+                    @(Html.Kendo().DropDownListFor(m => m.ProbabiliteAvantId)
                                 .DataValueField("ProbabiliteId")
                                 .DataTextField("No")
                                 .Template("<div class=\"drop-down-list-item\" title=\"#=Explication#\">#=No#</div>")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Probabilites"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.ProbabiliteAvantId)
-                        </div>
-                    </div>
+                    @Html.ValidationMessageFor(model => model.ProbabiliteAvantId)
+                </div>
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.PossibiliteAvantId, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.PossibiliteAvantId, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.PossibiliteAvantId)
+                    @(Html.Kendo().DropDownListFor(m => m.PossibiliteAvantId)
                                 .DataValueField("PossibiliteId")
                                 .DataValueField("PossibiliteId")
                                 .DataTextField("No")
@@ -191,122 +148,86 @@
                                 .BindTo((System.Collections.IEnumerable)ViewData["Possibilites"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.PossibiliteAvantId)
-                        </div>
-                    </div>
+                    @Html.ValidationMessageFor(model => model.PossibiliteAvantId)
+                </div>
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.IndiceFinalAvant, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.IndiceFinalAvant, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.IndiceFinalAvantTEXTE, new { @class = "form-control petit", @style = "width:90%;", @disabled = "disabled" })
-                            @Html.ValidationMessageFor(model => model.IndiceFinalAvant)
-                        </div>
-                    </div>
+                    @Html.TextBoxFor(model => model.IndiceFinalAvantTEXTE, new { @class = "form-control petit", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(model => model.IndiceFinalAvant)
+                </div>
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.NbPersonnesExposees, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.NbPersonnesExposees, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.NbPersonnesExposees, new { @type = "number", @class = "form-control petit", @style = "width:20%" })
-                            @Html.ValidationMessageFor(model => model.NbPersonnesExposees)
-                        </div>
-                    </div>
+                    @Html.TextBoxFor(model => model.NbPersonnesExposees, new { @type = "number", @class = "form-control petit" })
+                    @Html.ValidationMessageFor(model => model.NbPersonnesExposees)
+                </div>
+                <div class="col-12 mt-3">
+                    @Html.LabelFor(model => model.SystemeCommandeAvant, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.SystemeCommandeAvant, new { @class = "form-label d-block" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.SystemeCommandeAvant, new { @class = "form-control petit", @style = "width:90%" })
-                            @Html.ValidationMessageFor(model => model.SystemeCommandeAvant)
-                        </div>
-                    </div>
+                    @Html.TextBoxFor(model => model.SystemeCommandeAvant, new { @class = "form-control petit" })
+                    @Html.ValidationMessageFor(model => model.SystemeCommandeAvant)
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="panel panel-success">
-                <div class="panel-heading">@ARLignesRES.MesuresReduction</div>
 
-                <div class="panel-body">
-                    <div class="row">
 
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.ReglesEtNormes, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.ReglesEtNormes, new { @class = "form-control petit", @style = "width:90%" })
-                            @Html.ValidationMessageFor(model => model.ReglesEtNormes)
-                        </div>
-                    </div>
+        <div class="offset-1 col-5">
+            <p class="alert alert-success d-block">@ARLignesRES.MesuresReduction</p>
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.MesurePrevention, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.MesurePrevention, new { @class = "form-control petit", @style = "width:90%" })
-                            @Html.ValidationMessageFor(model => model.MesurePrevention)
-                        </div>
-                    </div>
+            <div class="col-12">
+                @Html.LabelFor(model => model.ReglesEtNormes, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.GraviteApresId, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.GraviteApresId)
+                @Html.TextBoxFor(model => model.ReglesEtNormes, new { @class = "form-control petit" })
+                @Html.ValidationMessageFor(model => model.ReglesEtNormes)
+            </div>
+            <div class="col-12 mt-3">
+
+                @Html.LabelFor(model => model.MesurePrevention, new { @class = "form-label d-block" })
+
+                @Html.TextBoxFor(model => model.MesurePrevention, new { @class = "form-control petit" })
+                @Html.ValidationMessageFor(model => model.MesurePrevention)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.GraviteApresId, new { @class = "form-label d-block" })
+
+                @(Html.Kendo().DropDownListFor(m => m.GraviteApresId)
                                 .DataValueField("GraviteId")
                                 .DataTextField("No")
                                 .Template("<div class=\"drop-down-list-item\" title=\"#=Explication#\">#=No#</div>")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Gravites"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.GraviteApresId)
-                        </div>
-                    </div>
+                @Html.ValidationMessageFor(model => model.GraviteApresId)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.FrequenceApresId, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.FrequenceApresId, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.FrequenceApresId)
+                @(Html.Kendo().DropDownListFor(m => m.FrequenceApresId)
                                 .DataValueField("FrequenceId")
                                 .DataTextField("No")
                                 .Template("<div class=\"drop-down-list-item\" title=\"#=Explication#\">#=No#</div>")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Frequences"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.FrequenceApresId)
-                        </div>
-                    </div>
+                @Html.ValidationMessageFor(model => model.FrequenceApresId)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.ProbabiliteApresId, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.ProbabiliteApresId, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.ProbabiliteApresId)
+                @(Html.Kendo().DropDownListFor(m => m.ProbabiliteApresId)
                                 .DataValueField("ProbabiliteId")
                                 .DataTextField("No")
                                 .Template("<div class=\"drop-down-list-item\" title=\"#=Explication#\">#=No#</div>")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Probabilites"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.ProbabiliteApresId)
-                        </div>
-                    </div>
+                @Html.ValidationMessageFor(model => model.ProbabiliteApresId)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.PossibiliteApresId, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.PossibiliteApresId, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.PossibiliteApresId)
+                @(Html.Kendo().DropDownListFor(m => m.PossibiliteApresId)
                                 .DataValueField("PossibiliteId")
                                 .DataValueField("PossibiliteId")
                                 .DataTextField("No")
@@ -314,95 +235,68 @@
                                 .BindTo((System.Collections.IEnumerable)ViewData["Possibilites"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.PossibiliteApresId)
-                        </div>
-                    </div>
+                @Html.ValidationMessageFor(model => model.PossibiliteApresId)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.IndiceFinalApres, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.IndiceFinalApres, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.IndiceFinalApresTEXTE, new { @class = "form-control petit", @style = "width:90%;", @disabled = "disabled" })
-                            @Html.ValidationMessageFor(model => model.IndiceFinalApres)
-                        </div>
-                    </div>
+                @Html.TextBoxFor(model => model.IndiceFinalApresTEXTE, new { @class = "form-control petit", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.IndiceFinalApres)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.SystemeCommandeInstalles, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.SystemeCommandeInstalles, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.SystemeCommandeInstalles, new { @class = "form-control petit", @style = "width:90%;" })
-                            @Html.ValidationMessageFor(model => model.SystemeCommandeInstalles)
-                        </div>
-                    </div>
+                @Html.TextBoxFor(model => model.SystemeCommandeInstalles, new { @class = "form-control petit" })
+                @Html.ValidationMessageFor(model => model.SystemeCommandeInstalles)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.ConformiteAuNormes, new { @class = "control-label" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.ConformiteAuNormes, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @Html.CheckBoxFor(m => m.ConformiteAuNormes)
-                            @Html.ValidationMessageFor(model => model.ConformiteAuNormes)
-                        </div>
-                    </div>
+                @Html.CheckBoxFor(m => m.ConformiteAuNormes)
+                @Html.ValidationMessageFor(model => model.ConformiteAuNormes)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.PlanAction, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.PlanAction, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.PlanAction, new { @class = "form-control petit", @style = "width:90%" })
-                            @Html.ValidationMessageFor(model => model.PlanAction)
-                        </div>
-                    </div>
+                @Html.TextBoxFor(model => model.PlanAction, new { @class = "form-control petit" })
+                @Html.ValidationMessageFor(model => model.PlanAction)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.ResponsableAnalyse, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.ResponsableAnalyse, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @Html.TextBoxFor(model => model.ResponsableAnalyse, new { @class = "form-control petit", @style = "width:90%" })
-                            @Html.ValidationMessageFor(model => model.ResponsableAnalyse)
-                        </div>
-                    </div>
+                @Html.TextBoxFor(model => model.ResponsableAnalyse, new { @class = "form-control petit" })
+                @Html.ValidationMessageFor(model => model.ResponsableAnalyse)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.DateDeRealisation, new { @class = "form-label d-block" })
 
-                    <div class="row">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.DateDeRealisation, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DateTimePickerFor(model => model.DateDeRealisation).HtmlAttributes(new { @class = "form-control petit", @style = "width:100%" }))
-                            @Html.ValidationMessageFor(model => model.DateDeRealisation)
-                        </div>
-                    </div>
+                @(Html.Kendo().DateTimePickerFor(model => model.DateDeRealisation).HtmlAttributes(new { @class = "form-control petit" }))
+                @Html.ValidationMessageFor(model => model.DateDeRealisation)
+            </div>
+            <div class="col-12 mt-3">
+                @Html.LabelFor(model => model.EtatId, new { @class = "form-label d-block" })
 
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col-4">
-                            @Html.LabelFor(model => model.EtatId, new { @class = "control-label" })
-                        </div>
-                        <div class="col">
-                            @(Html.Kendo().DropDownListFor(m => m.EtatId)
+                @(Html.Kendo().DropDownListFor(m => m.EtatId)
                                 .DataValueField("EtatId")
                                 .DataTextField("Description")
                                 .BindTo((System.Collections.IEnumerable)ViewData["Etat"])
                                 .HtmlAttributes(new { data_value_primitive = "true" })
                             )
-                            @Html.ValidationMessageFor(model => model.EtatId)
-                        </div>
-                    </div>
-                </div>
+                @Html.ValidationMessageFor(model => model.EtatId)
             </div>
         </div>
     </div>
-
-    @Html.HiddenFor(m => m.IdLigneAnalyseRisqueEditor)
-
 </div>
+
+@Html.HiddenFor(m => m.IdLigneAnalyseRisqueEditor)
+
 
 <script type="text/javascript">
     $(document).ready(() => {
+
+        $('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        $('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+
 
         $(".drop-down-list-item").each(() => {
             $(this).kendoTooltip();

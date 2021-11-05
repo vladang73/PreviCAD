@@ -96,11 +96,13 @@
                 .Model(m => { m.Id(e => e.FicheCadenassageId); })
                 .Read(r => r.Action("ReadListFiches", "Registre", new { client = Model.ClientId }))
                 .Update(r => r.Action("AddNewLine", "Registre", new { client = Model.ClientId }))
+                .Events(e => e.Error("ListeErreurFiche"))
             )
             .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneRegistreNew").Window(w => w.Title(PrevFicheRES.Cadenasser).Width(600)))
-            .Events( e=> e.Edit("onEditFiches"))
-            .Events(e=>e.DataBound("dataBoundFiches"))
+            .Events(e => e.Edit("onEditFiches"))
+            .Events(e => e.DataBound("dataBoundFiches"))
     )
+
 
 @(Html.Kendo().Window().Name("Materiel")
     .Title(PrevFicheRES.Materiel)
@@ -215,6 +217,27 @@
         });
     }, 3000);
 
+
+    function ListeErreurFiche(args) {
+        var selecteurGrid = "#list";
+        if (args.errors) {
+            var grid = $(selecteurGrid).data("kendoGrid");
+            var validationTemplate = kendo.template($("#gridValidationMessageTemplate").html());
+
+            grid.one("dataBinding", function (e) {
+                e.preventDefault();
+
+                $.each(args.errors, function (propertyName) {
+                    var errorList = validationTemplate({ field: propertyName, messages: this.errors });
+                    alert(this.errors);
+                    ShowNotification("Erreur - Gestions", errorList, "errorListTemplate");
+                });
+            });
+        }
+        else if (args.xhr) {
+            ShowGridError("Erreur - Gestions", selecteurGrid, args);
+        }
+    }
 </script>
 
 
