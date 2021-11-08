@@ -44,7 +44,7 @@ namespace Previgesst.Controllers
             else
             */
 
-            this.Layout = "~/Views/Shared/_Layout.cshtml";
+            this.Layout = "~/Views/Shared/_Layout_v2.cshtml";
         }
 
         public ActionResult Login()
@@ -99,7 +99,7 @@ namespace Previgesst.Controllers
             {
                 Token = token
             };
-            return View("ResetPassword", "_Layout", vm);
+            return View("ResetPassword", vm);
         }
 
         [HttpPost]

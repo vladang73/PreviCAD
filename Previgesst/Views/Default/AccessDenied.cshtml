@@ -4,6 +4,33 @@
     ViewBag.Title = "Access Denied";
 }
 
-<h3>@UtilisateursRES.AccessDeniedMessage</h3>
-<hr />
+
+
+<main class="main-container-wrapper page-container">
+
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>Accueil</a></li>
+            <li>Access Denied</li>
+        </ul>
+    </div>
+
+
+    <div class="main-page-content">
+
+        <div class="table-top-header">
+            <div class="page-title d-flex justify-content-center align-items-center">
+                <h3>@UtilisateursRES.AccessDeniedMessage</h3>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+</main>
+
+
 

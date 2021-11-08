@@ -7,7 +7,7 @@
             @Html.HiddenFor(model => model.SectionId)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ApplicationPreviId, new { @class = "control-label" })
+                @Html.LabelFor(model => model.ApplicationPreviId, new { @class = "form-label d-block" })
 
                 @(Html.Kendo().DropDownListFor(m => m.ApplicationPreviId)
                                     .DataValueField("ApplicationPreviId")
@@ -19,10 +19,10 @@
             </div>
 
             <div class="form-group mt-3">
-                @Html.LabelFor(model => model.Nom, new { @class = "control-label pull-left" })
+                @Html.LabelFor(model => model.Nom, new { @class = "form-label d-block" })
 
 
-                @Html.TextBoxFor(model => model.Nom, new { @class = "form-control petit", @style = "width:90%" })
+                @Html.TextBoxFor(model => model.Nom, new { @class = "form-control petit" })
                 @Html.ValidationMessageFor(model => model.Nom)
 
             </div>
@@ -30,9 +30,9 @@
             <div class="form-group mt-3">
 
 
-                @Html.LabelFor(m => m.Ordre, new { @class = "control-label pull-left" })
+                @Html.LabelFor(m => m.Ordre, new { @class = "form-label d-block" })
                 @(Html.Kendo().NumericTextBoxFor(m => m.Ordre)
-                            .HtmlAttributes(new { @class = "form-control", @style = "width:100%" })
+                            .HtmlAttributes(new { @class = "form-control" })
                             .Min(0)
                             .Decimals(0)
                             .Format("N0")

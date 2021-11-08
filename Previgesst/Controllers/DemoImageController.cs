@@ -19,37 +19,35 @@ namespace Previgesst.Controllers
         }
 
         public ActionResult Index()
-         {
-
-            var repertoire = System.IO.Directory.EnumerateFiles(@"C:\bordel\imagesJosee\");
-
-            int i = 1;
-            foreach ( var v in repertoire)
-            
         {
-                using (var image = Image.FromFile(v))
+            try
+            {
+                var repertoire = System.IO.Directory.EnumerateFiles(@"C:\bordel\imagesJosee\");
 
+                int i = 1;
+                foreach (var v in repertoire)
                 {
-                    //var img = Imager.Crop(image, new Rectangle(0, 0,1000, 1000));
-              
+                    using (var image = Image.FromFile(v))
 
-                    if (image.Size.Width > image.HorizontalResolution * 1.5 || image.Size.Height > image.VerticalResolution * 1.5)
                     {
-                        var resized = Imager.Resize(image, (int)((int) image.HorizontalResolution * 1.5), (int)((int) image.VerticalResolution * 1.5), true);
+                        //var img = Imager.Crop(image, new Rectangle(0, 0,1000, 1000));
 
 
-                    
+                        if (image.Size.Width > image.HorizontalResolution * 1.5 || image.Size.Height > image.VerticalResolution * 1.5)
+                        {
+                            var resized = Imager.Resize(image, (int)((int)image.HorizontalResolution * 1.5), (int)((int)image.VerticalResolution * 1.5), true);
 
-                        Imager.SaveJpeg(@"c:\bordel\ImagesJosee\DONE\" + i + ".jpg" , resized);
-                        i += 1;
+                            Imager.SaveJpeg(@"c:\bordel\ImagesJosee\DONE\" + i + ".jpg", resized);
+                            i += 1;
+                        }
                     }
-
-
                 }
-           
-        }
+                
+                return RedirectToAction("Index2");
+            }
+            catch { }
 
-            return RedirectToAction("Index2");
+            return View();
         }
     }
 }

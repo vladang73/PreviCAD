@@ -153,6 +153,9 @@
   <data name="PasswordValidation" xml:space="preserve">
     <value>You must enter a password of {1} characters or more.</value>
   </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset</value>
+  </data>
   <data name="SeConnecter" xml:space="preserve">
     <value>Sign in</value>
   </data>

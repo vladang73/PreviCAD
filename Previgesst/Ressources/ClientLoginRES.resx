@@ -153,6 +153,9 @@
   <data name="PasswordValidation" xml:space="preserve">
     <value>Vous devez entrer un mot de passe de {1} caractères ou plus.</value>
   </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
   <data name="SeConnecter" xml:space="preserve">
     <value>Se connecter</value>
   </data>
