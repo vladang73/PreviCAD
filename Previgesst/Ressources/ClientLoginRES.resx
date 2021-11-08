@@ -117,14 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Mot de passe oublié?</value>
+  </data>
   <data name="IdentificateurCIE" xml:space="preserve">
     <value>Nom de l'enterprise</value>
+  </data>
+  <data name="MissingConfirmPassword" xml:space="preserve">
+    <value>Vous devez confirmer votre mot de passe.</value>
+  </data>
+  <data name="MissingNewPassword" xml:space="preserve">
+    <value>Vous devez entrer votre nouveau mot de passe</value>
+  </data>
+  <data name="MissingPassword" xml:space="preserve">
+    <value>Vous devez entrer votre mot de passe.</value>
+  </data>
+  <data name="MissingUsername" xml:space="preserve">
+    <value>Vous devez entrer votre nom d'utilisateur.</value>
   </data>
   <data name="MotPasse" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
   <data name="NomUsager" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>Numéro d'utilisateur</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Le mot de passe doit être identique.</value>
+  </data>
+  <data name="PasswordValidation" xml:space="preserve">
+    <value>Vous devez entrer un mot de passe de {1} caractères ou plus.</value>
   </data>
   <data name="SeConnecter" xml:space="preserve">
     <value>Se connecter</value>

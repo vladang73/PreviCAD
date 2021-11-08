@@ -135,6 +135,9 @@
   <data name="Fiches" xml:space="preserve">
     <value>Procédures de contrôle des source d’énergie</value>
   </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Mot de passe oublié?</value>
+  </data>
   <data name="MenuFiche" xml:space="preserve">
     <value>Procédures de contrôle</value>
   </data>

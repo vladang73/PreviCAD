@@ -61,11 +61,65 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirmer le mot de passe.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mot de passe oublié?.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nom de l&apos;enterprise.
         /// </summary>
         public static string IdentificateurCIE {
             get {
                 return ResourceManager.GetString("IdentificateurCIE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous devez confirmer votre mot de passe..
+        /// </summary>
+        public static string MissingConfirmPassword {
+            get {
+                return ResourceManager.GetString("MissingConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous devez entrer votre nouveau mot de passe.
+        /// </summary>
+        public static string MissingNewPassword {
+            get {
+                return ResourceManager.GetString("MissingNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous devez entrer votre mot de passe..
+        /// </summary>
+        public static string MissingPassword {
+            get {
+                return ResourceManager.GetString("MissingPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous devez entrer votre nom d&apos;utilisateur..
+        /// </summary>
+        public static string MissingUsername {
+            get {
+                return ResourceManager.GetString("MissingUsername", resourceCulture);
             }
         }
         
@@ -79,11 +133,38 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nom d&apos;utilisateur.
+        ///   Looks up a localized string similar to Nouveau mot de passe.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numéro d&apos;utilisateur.
         /// </summary>
         public static string NomUsager {
             get {
                 return ResourceManager.GetString("NomUsager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Le mot de passe doit être identique..
+        /// </summary>
+        public static string PasswordMismatch {
+            get {
+                return ResourceManager.GetString("PasswordMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vous devez entrer un mot de passe de {1} caractères ou plus..
+        /// </summary>
+        public static string PasswordValidation {
+            get {
+                return ResourceManager.GetString("PasswordValidation", resourceCulture);
             }
         }
         

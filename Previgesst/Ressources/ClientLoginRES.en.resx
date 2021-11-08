@@ -117,14 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
   <data name="IdentificateurCIE" xml:space="preserve">
     <value>Client name</value>
+  </data>
+  <data name="MissingConfirmPassword" xml:space="preserve">
+    <value>You must confirm your password.</value>
+  </data>
+  <data name="MissingNewPassword" xml:space="preserve">
+    <value>You must enter your new password.</value>
+  </data>
+  <data name="MissingPassword" xml:space="preserve">
+    <value>You must enter your password.</value>
+  </data>
+  <data name="MissingUsername" xml:space="preserve">
+    <value>You must enter your username.</value>
   </data>
   <data name="MotPasse" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
   <data name="NomUsager" xml:space="preserve">
-    <value>User name</value>
+    <value>Username</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>The password must be the same.</value>
+  </data>
+  <data name="PasswordValidation" xml:space="preserve">
+    <value>You must enter a password of {1} characters or more.</value>
   </data>
   <data name="SeConnecter" xml:space="preserve">
     <value>Sign in</value>

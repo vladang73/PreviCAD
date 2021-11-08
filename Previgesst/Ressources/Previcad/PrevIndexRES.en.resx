@@ -135,6 +135,9 @@
   <data name="Fiches" xml:space="preserve">
     <value>Energy source control procedures</value>
   </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
   <data name="LuEtDecadenasse" xml:space="preserve">
     <value>I have reed and unlock</value>
   </data>

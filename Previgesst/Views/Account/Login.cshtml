@@ -1,9 +1,30 @@
 ﻿@model LoginViewModel
+@using Previgesst.Ressources;
 
 @{
     ViewBag.Title = "Applications Prévigesst";
     Layout = null;
 }
+
+@{
+    string path = Request.Url.PathAndQuery;
+    string selectedLang = string.Empty;
+
+    if (path.Contains("/en/")) { selectedLang = "en"; }
+    else if (path.Contains("/fr/")) { selectedLang = "fr"; }
+
+    path = path.Replace("/en/", "");
+    path = path.Replace("/fr/", "");
+    if (path.Length == 0)
+    {
+        path = "ClientLogin/Index";
+    }
+    if (path.Substring(0, 1) == "/")
+    {
+        path = path.Substring(1);
+    }
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +37,20 @@
 </head>
 
 
+
 <body>
+    <nav class="navbar navbar-light fixed-top navbar-bg flex-md-nowrap flex-row-reverse">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <select name="name_privacy" id="slct" class="p-2">
+                    <option class="p-2" value="/fr/@path" @if (selectedLang == "fr") { <text> selected="selected" </text> }>Fr</option>
+                    <option class="p-2" value="/en/@path" @if (selectedLang == "en") { <text> selected="selected" </text> }>En</option>
+                </select>
+            </li>
+        </ul>
+    </nav>
+
+
     <div class="login-wrapper login-top-max">
         <div class="login-image">
             <img src="/content/v2/images/bg-image.png" alt="...">
@@ -41,10 +75,10 @@
 
                         <div class="login-form-footer">
                             <div class="login-btn-wrapper">
-                                <button type="submit" class="btn btn-primary previcad-login-btn">Se connecter</button>
+                                <button type="submit" class="btn btn-primary previcad-login-btn">@ClientLoginRES.SeConnecter</button>
                             </div>
                             <div class="forgot-pass">
-                                <span>Mot de passe oublié?</span>
+                                <span>@ClientLoginRES.ForgotPassword</span>
                             </div>
                             <br />
                             <br />
@@ -90,6 +124,12 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script src="/Scripts/v2/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $('#slct').change(function () {
+            location.href = $(this).val();
+        });
+    </script>
 </body>
 </html>
 

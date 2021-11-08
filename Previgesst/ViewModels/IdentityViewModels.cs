@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Previgesst.Ressources;
 using Previgesst.Validation;
+
 
 namespace Previgesst.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Vous devez entrer votre nom d'utilisateur.")]
-        [Display(Name = "Numéro d'utilisateur")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingUsername")]
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "NomUsager")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Vous devez entrer votre mot de passe.")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingPassword")]
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "MotPasse")]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe")]
         public string Password { get; set; }
     }
 
@@ -32,18 +34,19 @@ namespace Previgesst.ViewModels
 
     public class ResetPasswordViewModel
     {
-        [Display(Name = "Nom d'utilisateur")]
-        [Required(ErrorMessage = "Vous devez entrer votre nom d'utilisateur.")]
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "NomUsager")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingUsername")]
         public string UserName { get; set; }
 
-        [Display(Name = "Nouveau mot de passe")]
-        [Required(ErrorMessage = "Vous devez entrer votre nouveau mot de passe")]
-        [MinLength(8, ErrorMessage = "Vous devez entrer un mot de passe de {1} caractères ou plus.")]
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "NewPassword")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingNewPassword")]
+        [MinLength(8, ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "PasswordValidation")]
         public string Password { get; set; }
 
-        [Display(Name = "Confirmer le mot de passe")]
-        [Required(ErrorMessage = "Vous devez confirmer votre mot de passe.")]
-        [Compare(nameof(Password), ErrorMessage = "Le mot de passe doit être identique.")]
+
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "ConfirmPassword")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingConfirmPassword")]
+        [Compare(nameof(Password), ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "PasswordMismatch")]
         public string ConfirmPassword { get; set; }
 
         public string Token { get; set; }

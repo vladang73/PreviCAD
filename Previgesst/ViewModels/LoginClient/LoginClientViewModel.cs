@@ -16,12 +16,12 @@ namespace Previgesst.ViewModels
         [Display(ResourceType = typeof(ClientLoginRES), Name ="IdentificateurCIE")]
         public string Identificateur { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingUsername")]
         [StringLength(250)]
         [Display(ResourceType = typeof(ClientLoginRES), Name = "NomUsager")]
-
         public string UserName { get; set; }
-        [Required]
+
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingPassword")]
         [StringLength(250)]
         [Display(ResourceType = typeof(ClientLoginRES), Name = "MotPasse")]
         public string Password { get; set; }

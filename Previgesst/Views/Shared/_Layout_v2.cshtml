@@ -118,13 +118,13 @@
                             <ul class="submenu">
                                 @RenderSection("sidebarChilds", required: false)
 
-                                @if (User.IsInRole("Administrateur") && HttpContext.Current.Session["IsCorporate"] != null)
+                                @*@if (User.IsInRole("Administrateur") && HttpContext.Current.Session["IsCorporate"] != null)
                                 {
                                     if (!IsCorporate)
                                     {
                                         <li><a class="submenu-dropdown-item" href="~/Manage/Index">Utilisateurs</a></li>
                                     }
-                                }
+                                }*@
 
                                 <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
                                 <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@ARCreateRES.CentreSupport</a></li>

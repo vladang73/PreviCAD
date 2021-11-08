@@ -115,6 +115,15 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mot de passe oublié?.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Procédures de contrôle.
         /// </summary>
         public static string MenuFiche {
