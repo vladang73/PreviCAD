@@ -1,7 +1,7 @@
 ﻿@model LigneDecadenassageViewModel
 @using Previgesst.Ressources.Cadenassage
 
-<div class="main-page-content">
+<div class="p-3 bg-white popup-mx-h">
     <div class="row">
         <div class="col">
             @Html.HiddenFor(model => model.LigneDecadenassageId)
@@ -34,7 +34,7 @@
                                                                         {
                                                                             c.Read(k => k.Action("getPhotos", "FicheCadenassage", new { FicheCadenassageId = ViewData["idFiche"] }));
                                                                         })
-                                                                    .HtmlAttributes(new { data_value_primitive = "true" })
+                                                                    .HtmlAttributes(new { data_value_primitive = "true", @class = "form-control" })
                                                                         .OptionLabel("-- " + CadLigneCadRES.SelectImage + "  --")
                                                                         .Template("<img style='height:65px' class='imgDropDown' src='" + Url.Content("~/Images/Cadenassage/Photos/") + "#:data.PhotoFicheCadenassageId#/thumb.jpg' /><span class='txtImgDropDown'>#:data.Rang#</span>")
                                                                         .ValueTemplate("<img style='height:65px' class='imgDropDown' src='" + Url.Content("~/Images/Cadenassage/Photos/") + "#:data.PhotoFicheCadenassageId#/thumb.jpg' /><span class='txtImgDropDown'>#:data.Rang#</span>")
@@ -45,9 +45,7 @@
 
 
 
-            <div class="form-group mt-3">
-
-
+            <div class="form-group mt-5">
                 @Html.LabelFor(m => m.NoLigne, new { @class = "form-label d-block" })
 
                 @(Html.Kendo().NumericTextBoxFor(m => m.NoLigne)

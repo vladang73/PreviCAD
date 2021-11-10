@@ -934,7 +934,7 @@ div.k-window-content {
 
 .k-window > div.k-popup-edit-form {
     padding: 0;
-    margin: 50px 15px 15px 15px;
+    /*margin: 40px 15px 15px 15px;*/
     border-top: 1px solid #fff;
 }
 

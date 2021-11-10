@@ -9,7 +9,7 @@
 
 <style>
     #gridTest .k-grid-content{
-        height: 378px !important;
+        height: 350px !important;
         overflow: scroll;
     }
 
@@ -21,15 +21,16 @@
     }
 
     .squaredThree .selected-equi{ width: 0; }
+    div.k-window-content{height: auto; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;}
 </style>
 
-<div class="p-3">
-    <div class="row">
-        <div class="col-11">
+<div class="p-1 bg-white1">
+    <div class="row11">
+        <div class="col-111">
 
             @if (Model != null && Model.Count() > 0)
             {
-                <div style="display: block;min-height: 100px;">
+                <div style="display: block;min-height: 100px;" class="bg-white td-round-left-border ps-4 pt-4 pb-1">
                     <div style="display: inline-block; float: left;">
                         <label class="form-label">
                             <input type="radio" name="RadioType" value="60503" /> @CadEquipRES.QROption1
@@ -62,8 +63,12 @@
 
 
                 <br />
-                @*<input type="button" value="@CadEquipRES.PrintQRCode" class="btn btn-qr pull-right pull-end" id="btnPrintSelected" />*@
-                <a class="btn btn-qr pull-right float-end" id="btnPrintSelected" href="#" >@CadEquipRES.PrintQRCode</a>
+                <div class="float-end">
+                    @*<input type="button" value="@CadEquipRES.PrintQRCode" class="btn btn-qr pull-right pull-end" id="btnPrintSelected" />*@
+                    <a class="k-button btn-Annuler m-1" href="#" id="btnPrintSelectedClose"><span class="">Annuler</span> </a>
+
+                    <a class="btn btn-qr pull-right- float-end-" id="btnPrintSelected" href="#">@CadEquipRES.PrintQRCode</a>
+                </div>
             }
             else
             {

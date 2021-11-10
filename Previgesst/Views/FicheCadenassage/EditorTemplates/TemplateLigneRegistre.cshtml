@@ -1,7 +1,7 @@
 ﻿@using Previgesst.Ressources.Previcad
 @model LigneRegistreViewModel
 
-<div class="p-3">
+<div class="p-4 bg-white">
 
     <div class="row">
         <div class="col-11">
@@ -91,3 +91,14 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
+        $('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');
+
+
+        /*console.log('adding blue header');*/
+        $('.k-widget.k-window').addClass('blue-header');
+    });
+</script>

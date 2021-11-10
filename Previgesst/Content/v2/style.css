@@ -235,11 +235,80 @@
         margin-bottom: -5px;
     }
 
-.bg-white{
+/*.bg-white{
     background-color: #FFF;
-}
+    padding-right: 3rem;
+    padding-left: 3rem;
+}*/
 
 
 #generic-popup pre{
     display: none;
+}
+
+
+/* popup head override */
+.k-widget.k-window {
+    /*padding-top: 25px !important*/
+    
+    padding-top: 55px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+    .k-widget.k-window .k-window-actions {
+        /*display: none;*/
+        right: 2.3em;
+    }
+
+    .k-widget.k-window .k-window-title {
+        right: 2.44em;
+    }
+
+    .k-widget.k-window .k-window-titlebar.k-header {
+        /*margin-top: -10px !important;
+        margin-left: 10px !important;*/
+        color: var(--branddarkblue) !important;
+        z-index: 999;
+    }
+
+    .k-widget.k-window .bg-white textarea.form-control {
+        border: 1px solid #cccccc !important;
+        box-sizing: border-box;
+        height: auto !important;
+    }
+    .k-widget.k-window .bg-white input[type=text].form-control {
+        border: 1px solid #cccccc !important;
+    }
+    .k-widget.k-window .k-edit-form-container .k-edit-buttons{
+        border: none;
+        border-style: none;
+    }
+
+    .k-widget.k-window.blue-header {
+        /*padding-top: 0 !important;*/
+        border: none;
+    }
+
+        .k-widget.k-window.blue-header .k-window-titlebar.k-header {
+            background-color: var(--detailbtnbg) !important;
+            /*padding: 9px 1px;
+            margin: -1px !important;*/
+            color: #FFF !important;
+            border-top-right-radius: 19px;
+            border-top-left-radius: 19px;
+
+            left: 0;
+        }
+
+        .k-widget.k-window.blue-header .k-window-title {
+            /*right: 2.44em;*/
+            padding-left: 10px;
+        }
+
+/* popup head override */
+
+
+.popup-mx-h{
+    max-height: 500px;
+    overflow: scroll;
 }

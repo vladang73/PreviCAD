@@ -7,6 +7,7 @@ namespace Previgesst.ViewModels
 {
     public class AnalyseRisqueCreateViewModel
     {
+        [Required]
         [Display(ResourceType = typeof(ARCreateRES), Name = "NomClient")]
         public int ClientId { get; set; }
 
@@ -15,10 +16,12 @@ namespace Previgesst.ViewModels
         public string Createur { get; set; }
 
 
+        [Required]
         [Display(ResourceType = typeof(ARCreateRES), Name = "NoReference")]
         public string NoRef { get; set; }
 
 
+        [Required]
         [Display(ResourceType = typeof(ARCreateRES), Name = "Equipement")]
         public string Equipement { get; set; }
 
