@@ -4,9 +4,10 @@
 
 /*buttons custom code*/
 .btn-table {
-  padding: 12px;
-  outline: none;
-	text-decoration: none;
+    padding: 12px;
+    outline: none;
+    text-decoration: none;
+    white-space: nowrap !important;
 }
 .btn-table:focus {
   outline: none;
@@ -156,13 +157,14 @@
 
 
 .btn-detail {
-  color: var(--white);
-  background-color: var(--detailbtnbg);
-  border-color: var(--branddarkblue);
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 30px;
-	padding: 9px 12px;
+    color: var(--white);
+    background-color: var(--detailbtnbg);
+    border-color: var(--branddarkblue);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 9px 12px;
+    white-space: nowrap !important;
 }
 .btn-detail:before {
 	content: url("images/detail-icon.svg");
@@ -192,13 +194,14 @@
 }
 
 .btn-energy {
-  color: var(--white);
-  background-color: var(--detailbtnbg);
-  border-color: var(--branddarkblue);
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 30px;
-	padding: 9px 12px;
+    color: var(--white);
+    background-color: var(--detailbtnbg);
+    border-color: var(--branddarkblue);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 9px 12px;
+    white-space: nowrap !important;
 }
 .btn-energy:before {
 	content: url("images/energy-icon.svg");
@@ -228,13 +231,14 @@
 }
 
 .btn-qr {
-  color: var(--white);
-  background-color: var(--detailbtnbg);
-  border-color: var(--detailbtnbg);
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 30px;
-	padding: 9px 12px;
+    color: var(--white);
+    background-color: var(--detailbtnbg);
+    border-color: var(--detailbtnbg);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 9px 12px;
+    white-space: nowrap !important;
 }
 .btn-qr:before {
 	content: url("images/qr-icon.svg");

@@ -2,6 +2,9 @@
 @using Previgesst.Ressources
 @model Previgesst.ViewModels.EditCadenassageViewModel
 
+@{ 
+    string selectedLang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+}
 <div class="table-top-header">
     <div class="page-title d-flex justify-content-center align-items-center">
         <h3 class="m-0">@CadEditRES.TitreSectionCadenassage</h3>
@@ -92,8 +95,8 @@
 
                         columns.Bound(e => e.TravailAEffectuer).Title(CadFichesRES.AEffectuer).ClientTemplate("").Width("300px");
 
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title='" + CadFichesRES.Telecharger +"'><img src='/content/v2/images/fr-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Width("30px");
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title='"+ CadFichesRES.Telecharger + "'><img src='/content/v2/images/en-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Width("30px");
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title='" + CadFichesRES.Telecharger +"'><img src='/content/v2/images/fr-icon.svg' alt='FR'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@selectedLang != "fr").Width("30px");
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title='"+ CadFichesRES.Telecharger + "'><img src='/content/v2/images/en-icon.svg' alt='EN'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@selectedLang != "en").Width("30px");
 
                         if (User.IsInRole("Administrateur")) { 
                             columns.Bound(e => e.estDocumentPrevigesst)

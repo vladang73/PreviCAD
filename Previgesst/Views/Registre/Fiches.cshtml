@@ -78,9 +78,9 @@
                 columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a  href='../../Registre/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title=" + PrevFicheRES.Telecharger + "><img src='/content/v2/images/download-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@Model.Langue != "en").Width("65px");
 
 
-                columns.Command(command => command.Custom(PrevFicheRES.Materiel).Click("showDetails").HtmlAttributes(new {@class= "materialButton btn-material mx-1", @style="text-align:center"})).Width("140px");
+                columns.Command(command => command.Custom(PrevFicheRES.Materiel).Click("showDetails").HtmlAttributes(new {@class= "materialButton btn-material mx-1 text-nowrap", @style="text-align:center"})).Width("140px");
 
-                columns.Command(e => e.Edit().Text(PrevFicheRES.Cadenasser).HtmlAttributes(new { @class = "btn-table btn-edit" })).Width("160px");
+                columns.Command(e => e.Edit().Text(PrevFicheRES.Cadenasser).HtmlAttributes(new { @class = "btn-table btn-edit text-nowrap" })).Width("160px");
 
             })
 

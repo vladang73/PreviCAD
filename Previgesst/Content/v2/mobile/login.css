@@ -197,3 +197,10 @@ input {
 	}
 
 }
+
+.lang-select {
+	position: fixed;
+	top: 20px;
+	right: 25px;
+	padding:5px;
+}

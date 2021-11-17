@@ -127,7 +127,7 @@
     <value>#BT</value>
   </data>
   <data name="Cadenasser" xml:space="preserve">
-    <value>Cadenasser</value>
+    <value>Intervention</value>
   </data>
   <data name="Card" xml:space="preserve">
     <value>Card</value>
@@ -205,10 +205,10 @@
     <value>Lockout logbook</value>
   </data>
   <data name="ScanQR" xml:space="preserve">
-    <value>Scannez le QR</value>
+    <value>Scanner le QR</value>
   </data>
   <data name="ScanQREquip" xml:space="preserve">
-    <value>Scannez le code QR de l'équipement</value>
+    <value>Scanner le QR</value>
   </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Rechercher par # de fiche</value>

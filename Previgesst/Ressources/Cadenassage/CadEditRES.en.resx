@@ -153,6 +153,12 @@
   <data name="MenuEquipment" xml:space="preserve">
     <value>Equipments</value>
   </data>
+  <data name="MenuPreferences" xml:space="preserve">
+    <value>Preferences</value>
+  </data>
+  <data name="MenuUtilisateur" xml:space="preserve">
+    <value>User Hyperlink</value>
+  </data>
   <data name="NotificationDebutCad" xml:space="preserve">
     <value>Lockout start notifications</value>
   </data>

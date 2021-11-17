@@ -79,7 +79,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nom de l&apos;enterprise.
+        ///   Looks up a localized string similar to Nom de l&apos;entreprise.
         /// </summary>
         public static string IdentificateurCIE {
             get {

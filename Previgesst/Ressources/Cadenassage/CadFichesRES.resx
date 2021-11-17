@@ -127,7 +127,7 @@
     <value>Ajouter</value>
   </data>
   <data name="ApprouvePar" xml:space="preserve">
-    <value>Approuvé par</value>
+    <value>Approuver par</value>
   </data>
   <data name="Attention" xml:space="preserve">
     <value>Attention!</value>
@@ -146,7 +146,7 @@
     <value>Département</value>
   </data>
   <data name="Dupliquer" xml:space="preserve">
-    <value>Duppliquer</value>
+    <value>Dupliquer</value>
   </data>
   <data name="Editer" xml:space="preserve">
     <value>Éditer</value>
@@ -182,16 +182,16 @@
     <value>Prévi</value>
   </data>
   <data name="Previgesst" xml:space="preserve">
-    <value>Prévigesst</value>
+    <value>Prévicad</value>
   </data>
   <data name="RevActive" xml:space="preserve">
     <value>Rev. Active</value>
   </data>
   <data name="ScanQR" xml:space="preserve">
-    <value>Scannez le QR</value>
+    <value>Scanner le QR</value>
   </data>
   <data name="ScanQREquip" xml:space="preserve">
-    <value>Scannez le code QR de l'équipement</value>
+    <value>Scanner le QR</value>
   </data>
   <data name="Sheet" xml:space="preserve">
     <value>EN</value>

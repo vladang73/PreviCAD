@@ -88,7 +88,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Approuvé par.
+        ///   Looks up a localized string similar to Approuver par.
         /// </summary>
         public static string ApprouvePar {
             get {

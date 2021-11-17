@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Previgesst.Ressources.Cadenassage {
+namespace Previgesst.Ressources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Previgesst.Ressources.Cadenassage {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CadEmpRES {
+    public class RegistreRES {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CadEmpRES() {
+        internal RegistreRES() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Previgesst.Ressources.Cadenassage {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Previgesst.Ressources.Cadenassage.CadEmpRES", typeof(CadEmpRES).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Previgesst.Ressources.RegistreRES", typeof(RegistreRES).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,110 +61,83 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actif.
+        ///   Looks up a localized string similar to Accueil.
         /// </summary>
-        public static string Actif {
+        public static string Accueil {
             get {
-                return ResourceManager.GetString("Actif", resourceCulture);
+                return ResourceManager.GetString("Accueil", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ajouter.
+        ///   Looks up a localized string similar to Interventions en cours.
         /// </summary>
-        public static string Ajouter {
+        public static string ActionEnCours {
             get {
-                return ResourceManager.GetString("Ajouter", resourceCulture);
+                return ResourceManager.GetString("ActionEnCours", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cadenas.
+        ///   Looks up a localized string similar to Mon compte.
         /// </summary>
-        public static string Cadenas {
+        public static string ActionMonCompte {
             get {
-                return ResourceManager.GetString("Cadenas", resourceCulture);
+                return ResourceManager.GetString("ActionMonCompte", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Département.
+        ///   Looks up a localized string similar to Paramètres.
         /// </summary>
-        public static string Departement {
+        public static string ActionParametres {
             get {
-                return ResourceManager.GetString("Departement", resourceCulture);
+                return ResourceManager.GetString("ActionParametres", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Effacer.
+        ///   Looks up a localized string similar to Procédures.
         /// </summary>
-        public static string Effacer {
+        public static string ActionProcedures {
             get {
-                return ResourceManager.GetString("Effacer", resourceCulture);
+                return ResourceManager.GetString("ActionProcedures", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Employé.
+        ///   Looks up a localized string similar to Programme.
         /// </summary>
-        public static string Employe {
+        public static string ActionProgramme {
             get {
-                return ResourceManager.GetString("Employe", resourceCulture);
+                return ResourceManager.GetString("ActionProgramme", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Le mot de passe doit avoir au moins 6 caractères.
+        ///   Looks up a localized string similar to Intervention terminés.
         /// </summary>
-        public static string ErreurMotPasse {
+        public static string ActionTermines {
             get {
-                return ResourceManager.GetString("ErreurMotPasse", resourceCulture);
+                return ResourceManager.GetString("ActionTermines", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mot de passe.
+        ///   Looks up a localized string similar to Déconnexion.
         /// </summary>
-        public static string MotPasse {
+        public static string SeDeconnecter {
             get {
-                return ResourceManager.GetString("MotPasse", resourceCulture);
+                return ResourceManager.GetString("SeDeconnecter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Identifiant de l&apos;employé.
+        ///   Looks up a localized string similar to Centre de support.
         /// </summary>
-        public static string NoEMP {
+        public static string SupportCenter {
             get {
-                return ResourceManager.GetString("NoEMP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nom et prénom.
-        /// </summary>
-        public static string Nom {
-            get {
-                return ResourceManager.GetString("Nom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to -- Sélectionner un département --.
-        /// </summary>
-        public static string SelectDEPT {
-            get {
-                return ResourceManager.GetString("SelectDEPT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  .
-        /// </summary>
-        public static string Vide {
-            get {
-                return ResourceManager.GetString("Vide", resourceCulture);
+                return ResourceManager.GetString("SupportCenter", resourceCulture);
             }
         }
     }

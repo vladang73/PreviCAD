@@ -88,7 +88,7 @@
                             .Click("ConfirmDeleteRowEQ")
                             .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
                     })
-                    .Width("200px");
+                    .Width("200px").HtmlAttributes(new { @class = "text-nowrap"});
 
                     columns.Bound(e => e.Model).Hidden();
                     columns.Bound(e => e.Manufacturer).Hidden();
@@ -138,7 +138,7 @@
         .Title(@CadEquipRES.CreateEquipmentQR)
         .Visible(false)
         .Modal(true)
-        .Width(300)
+        .Width(335)
 )
 @(Html.Kendo().Window().Name("EqWithQR")
         .Title(CadEquipRES.SelectQRToPrint)
@@ -353,10 +353,11 @@
     var timer;
     function Edit(e)
     {
-        var item = $(e.container).find('[value=Image]').hide();
+        $(e.container).find('[value=Image]').hide();
         $(e.container).find('.k-grid-Détails').hide();
         $(e.container).find('.k-grid-Énergie').hide();
         $(e.container).find('.k-grid-QR').hide();
+        $(e.container).find('.btn-img').hide();
 
         // add save and cancel classes
         $(e.container).find('.k-grid-update.btn-table').removeClass('btn-edit').addClass('btn-mettre m-1');

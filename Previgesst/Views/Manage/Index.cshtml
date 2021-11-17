@@ -1,4 +1,5 @@
-﻿@model IEnumerable<UserListViewModel>
+﻿@using Previgesst.Ressources
+@model IEnumerable<UserListViewModel>
 @{
     ViewBag.Title = "Utilisateurs";
     Layout = "~/Views/Shared/_Layout_v2.cshtml";
@@ -19,23 +20,23 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "AdminPrevi")'>
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
 
         @*<li class="nav-item text-center active">
-            <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#Fiches" id="Fich">
-                <img src="/content/v2/images/Procédures.svg">
-                <p class="nav-link-text">@Model.Type</p>
-            </a>
-        </li>*@
+                <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#Fiches" id="Fich">
+                    <img src="/content/v2/images/Procédures.svg">
+                    <p class="nav-link-text">@Model.Type</p>
+                </a>
+            </li>*@
     </ul>
 }
 
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href='@Url.Action("Index", "AdminPrevi")'>Accueil</a></li>
+            <li><a href='@Url.Action("Index", "AdminPrevi")'>@LayoutRES.Accueil</a></li>
             <li class="active">Liste des Utilisateurs</li>
         </ul>
     </div>

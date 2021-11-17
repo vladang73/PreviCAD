@@ -46,6 +46,7 @@ namespace Previgesst.Controllers
         private EquipementArticuloeService equipementArticuloeService;
         private DispositifService dispositifService;
         private DocumentFicheNoteService documentFicheNoteService;
+        private AccessoireService accessoireService;
 
         private string Layout;
 
@@ -59,7 +60,7 @@ namespace Previgesst.Controllers
             UploadController uploadController, DocumentFicheNoteService documentFicheNoteService,
             PhotoFicheCadenassageRepository photoFicheCadenassageRepository,
             EmployeRegistreService employeRegistreService, LignesRegistreService lignesRegistreService,
-            EquipementArticuloeService equipementArticuloeService, DispositifService dispositifService)
+            EquipementArticuloeService equipementArticuloeService, DispositifService dispositifService, AccessoireService accessoireService)
         {
             this.ficheCadenassageService = ficheCadenassageService;
             this.sectionService = sectionService;
@@ -85,6 +86,7 @@ namespace Previgesst.Controllers
 
             this.equipementArticuloeService = equipementArticuloeService;
             this.dispositifService = dispositifService;
+            this.accessoireService = accessoireService;
 
             this.documentFicheNoteService = documentFicheNoteService;
 
@@ -1142,9 +1144,10 @@ namespace Previgesst.Controllers
 
         public ActionResult EquipementArticuloes(int id, int? client)
         {
-            PopulateMateriel();
+            //PopulateMateriel();
             PopulateDispositifs();
             PopulateSourceEnergie();
+            PopulateAccessoires();
 
 
             ViewData["EqID"] = id;
@@ -1201,6 +1204,12 @@ namespace Previgesst.Controllers
             ViewData["Dispositifs"] = dispositifDDL;
         }
 
+        private void PopulateAccessoires()
+        {
+            var accessoiresDDL = accessoireService.GetAllAsAccessoireDDLViewModel();
+
+            ViewData["Accessoires"] = accessoiresDDL;
+        }
 
         #endregion
 

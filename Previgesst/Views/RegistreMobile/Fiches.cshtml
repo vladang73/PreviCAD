@@ -19,18 +19,18 @@
             <h2>@PrevFicheRES.Equipement: @ViewBag.EquipmentName</h2>
         </div>
         <div class="main-section-content m-2">
-            <div class="grid-action-toolbar">
-                <span class="form-action-toolbar">@PrevFicheRES.NoFiche </span><span class="work-action-toolbar">@PrevFicheRES.Travaux</span>
+            <div class="row grid-action-toolbar">
+                <span class="col-sm-3 form-action-toolbar">@PrevFicheRES.NoFiche </span><span class="col-sm-8 work-action-toolbar">@PrevFicheRES.Travaux</span>
             </div>
-            <div class="row previced-grid">
+            <div class="previced-grid">
                 @if (Model.Data != null)
                 {
                     foreach (var item in Model.Data)
                     {
-                        <div class="col-md-12 dt-row">
-                            <div class="dt-col">@item.NoFicheCadenassage</div>
-                            <div class="dt-col">@item.TravailAEffectuer</div>
-                            <div class="dt-col d-flex">
+                        <div class="row bg-white td-round-left-border">
+                            <div class="col-sm-3">@item.NoFicheCadenassage</div>
+                            <div class="col-sm-8">@item.TravailAEffectuer</div>
+                            <div class="col-sm-1">
 
 
                                 @if (Model.Employe.Langue == "fr")
@@ -51,7 +51,26 @@
     </div>
 </main>
 
+@*
+    <div class="col-md-12 dt-row">
+                                <div class="dt-col">@item.NoFicheCadenassage</div>
+                                <div class="dt-col">@item.TravailAEffectuer</div>
+                                <div class="dt-col d-flex">
 
+
+                                    @if (Model.Employe.Langue == "fr")
+                                    {
+                                        <a href='../../Registre/GetFiche/@item.FicheCadenassageId' title='@PrevFicheRES.Telecharger'><img src="/content/v2/images/download.svg" class='grid-download-icon'></a>
+                                    }
+                                    else
+                                    {
+                                        <a href='../../Registre/GetFicheEN/@item.FicheCadenassageId' title='@PrevFicheRES.Telecharger'><img src="/content/v2/images/download.svg" class='grid-download-icon'></a>
+                                    }
+
+                                </div>
+                            </div>
+
+*@
 
 @*
 

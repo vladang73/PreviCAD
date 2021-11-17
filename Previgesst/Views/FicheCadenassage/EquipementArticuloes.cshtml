@@ -31,7 +31,7 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "MesApplications")'>
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
 
@@ -67,7 +67,7 @@
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href='@Url.Action("Index", "MesApplications")'>Accueil</a></li>
+            <li><a href='@Url.Action("Index", "MesApplications")'>@LayoutRES.Accueil</a></li>
             @if (clientId > 0)
             {
                 <li><a href="~/FicheCadenassage/Edit/@clientId?area=Eq">@CadEditRES.MenuEquipment</a></li>

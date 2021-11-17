@@ -23,7 +23,7 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" role="tab" href='@Url.Action("Index", "AdminPrevi")'>
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
     </ul>
@@ -32,7 +32,7 @@
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href="~/AdminPrevi/Index">Accueil</a></li>
+            <li><a href="~/AdminPrevi/Index">@LayoutRES.Accueil</a></li>
             <li class="active" aria-current="page">Journaux d'erreurs</li>
         </ul>
     </div>

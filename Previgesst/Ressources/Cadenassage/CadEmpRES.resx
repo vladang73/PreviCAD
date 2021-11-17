@@ -142,7 +142,7 @@
     <value>Mot de passe</value>
   </data>
   <data name="NoEMP" xml:space="preserve">
-    <value>No d'employé</value>
+    <value>Identifiant de l'employé</value>
   </data>
   <data name="Nom" xml:space="preserve">
     <value>Nom et prénom</value>

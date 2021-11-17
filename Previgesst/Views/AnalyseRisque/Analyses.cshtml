@@ -2,6 +2,10 @@
 @using Previgesst.Ressources
 @using Previgesst.Ressources.Analyse
 
+@{
+    string selectedLang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+}
+
 <div class="table-top-header">
     <div class="page-title d-flex justify-content-center align-items-center">
         <h3>@AREditClientRES.Analyses</h3>
@@ -18,7 +22,7 @@
 
         &nbsp;
         <a target='_blank' href='~/AnalyseRisque/getXLAnalyseClient/@Model.ClientId' class="btn btn-primary">@AREditClientRES.DocumentComplet</a>
-        
+
         &nbsp;
         <a target='_blank' href='~/AnalyseRisque/getXLAnalyseClientEN/@Model.ClientId' class="btn btn-primary">@AREditClientRES.DocumentCompletEN</a>
 
@@ -73,10 +77,12 @@
             //columns.Bound(e => e.Id).ClientTemplate("<a  href='Edit?ID=#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-primary' style='float:right'>Modifier</a>").Title("").Filterable(false).Sortable(false);
             columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='" + Url.Action("getXLAnalyse", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #'><img src='/content/v2/images/fr-icon.svg' alt='FR icon'/></a>")
             .Title("").Filterable(false).Sortable(false)
+            .Hidden(@selectedLang != "fr")
             .Width("60px").HtmlAttributes(new { @class = "text-center" }).HeaderHtmlAttributes(new { @class = "text-center" });
 
-            columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='" + Url.Action("getXLAnalyseEN", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #'><img src='/content/v2/images/en-icon.svg' alt='FR icon'/></a>")
+            columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='" + Url.Action("getXLAnalyseEN", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #'><img src='/content/v2/images/en-icon.svg' alt='EN icon'/></a>")
             .Title("").Filterable(false).Sortable(false)
+            .Hidden(@selectedLang != "en")
             .Width("60px").HtmlAttributes(new { @class = "text-center" }).HeaderHtmlAttributes(new { @class = "text-center" });
 
             columns.Bound(e => e.Id).ClientTemplate("<a  href='" + Url.Action("Edit", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='k-button btn btn-editicon btn-edit-previ'></a>")

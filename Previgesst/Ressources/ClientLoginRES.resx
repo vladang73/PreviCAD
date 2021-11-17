@@ -124,7 +124,7 @@
     <value>Mot de passe oublié?</value>
   </data>
   <data name="IdentificateurCIE" xml:space="preserve">
-    <value>Nom de l'enterprise</value>
+    <value>Nom de l'entreprise</value>
   </data>
   <data name="MissingConfirmPassword" xml:space="preserve">
     <value>Vous devez confirmer votre mot de passe.</value>

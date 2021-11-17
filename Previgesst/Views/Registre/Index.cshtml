@@ -2,7 +2,7 @@
 @using Previgesst.Ressources.Previcad
 @model LoginCadenassageViewModel
 @{
-    ViewBag.Title = "Applications Prévigesst";
+    ViewBag.Title = "Applications Prévicad";
     //Layout = "~/Views/Shared/_LayoutClient.cshtml";
     Layout = null;
 }
@@ -11,11 +11,17 @@
     string path = Request.Url.PathAndQuery;
     string selectedLang = string.Empty;
 
-    if (path.Contains("/en/")) { selectedLang = "en"; }
-    else if (path.Contains("/fr/")) { selectedLang = "fr"; }
+    if (path.Contains("/en/") || path.Contains("/en?")) { selectedLang = "en"; }
+    else if (path.Contains("/fr/") || path.Contains("/fr?")) { selectedLang = "fr"; }
 
-    path = path.Replace("/en/", "");
-    path = path.Replace("/fr/", "");
+    path = path.Replace("/en/", "").Replace("/en?", "");
+    path = path.Replace("/fr/", "").Replace("/fr?", "");
+
+    if (path.ToLower().Contains("returnurl="))
+    {
+        path = "";
+    }
+
     if (path.Length == 0)
     {
         path = "ClientLogin/Index";
@@ -110,8 +116,8 @@
                             <div class="col-md-8 previcad-copyright-sec p-0">
                                 <ul class="p-0 m-0">
                                     <li>Version 2.0</li>
-                                    <li>Copyright @DateTime.Now.Year Prévigesst</li>
-                                    <li>Tout droit réservés</li>
+                                    <li>@LayoutRES.FooterCopyright</li>
+                                    <li>@LayoutRES.FooterRights</li>
                                 </ul>
                             </div>
                             <div class="col-md-4">

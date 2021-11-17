@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applications Prévigesst</title>
+    <title>Applications Prévicad</title>
 
     <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
@@ -39,7 +39,7 @@
     @{
         string path = Request.Url.PathAndQuery;
         string selectedLang = string.Empty;
-        string plateformMessage = "des administrateurs";
+        string plateformMessage = LayoutRES.PlateformAdmin;
 
         if (path.Contains("/en/")) { selectedLang = "en"; }
         else if (path.Contains("/fr/")) { selectedLang = "fr"; }
@@ -65,7 +65,7 @@
 
         if (IsCorporate)
         {
-            plateformMessage = "corporative";
+            plateformMessage = LayoutRES.PlateformCorporate;
         }
     }
 
@@ -76,7 +76,7 @@
         <a class="navbar-brand col-sm-3 col-md-2 mr-0 white-logo" href="#"><img src="/content/v2/images/logo-white.png"></a>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <div class="top-right-nav"> <a class="nav-link" href="#">Plateforme @plateformMessage</a></div>
+                <div class="top-right-nav"> <a class="nav-link" href="#">@plateformMessage</a></div>
                 <div class="lang-dropdown header-dropdown edit-profile-select ">
                     <select name="name_privacy" id="slct">
                         <option value="/fr/@path" @if (selectedLang == "fr") { <text> selected="selected" </text> }>Fr</option>
@@ -98,12 +98,12 @@
         <div class="bg-light d-none d-md-block sidebar">
             <div class="left-sidebar">
                 @*<ul class="nav flex-column sidebar-nav ">
-                        <li class="nav-item text-center mt-2">
-                            <a class="nav-link home-navlink active" href='@Url.Action("Index", "AdminPrevi")'>
-                                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
-                            </a>
-                        </li>
-                    </ul>*@
+            <li class="nav-item text-center mt-2">
+                <a class="nav-link home-navlink active" href='@Url.Action("Index", "AdminPrevi")'>
+                    <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
+                </a>
+            </li>
+        </ul>*@
 
                 @RenderSection("sidebar", required: false)
 
@@ -113,21 +113,13 @@
                         <li class="nav-item text-center mt-2 nav-bottom-submenu">
                             <a class="nav-link setting-navlink" href="#">
                                 <img src="/content/v2/images/setting-icon.png">
-                                <span class="nav-title">Paramétres</span>
+                                <span class="nav-title">@LayoutRES.ActionParametres</span>
                             </a>
                             <ul class="submenu">
                                 @RenderSection("sidebarChilds", required: false)
 
-                                @*@if (User.IsInRole("Administrateur") && HttpContext.Current.Session["IsCorporate"] != null)
-                                {
-                                    if (!IsCorporate)
-                                    {
-                                        <li><a class="submenu-dropdown-item" href="~/Manage/Index">Utilisateurs</a></li>
-                                    }
-                                }*@
-
-                                <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">Mon compte</a></li>
-                                <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@ARCreateRES.CentreSupport</a></li>
+                                <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">@LayoutRES.ActionMonCompte</a></li>
+                                <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>
                             </ul>
                         </li>
                         <li class="nav-item text-center mt-2">
@@ -135,7 +127,7 @@
                             {
                                 <a class="nav-link power-navlink active tex" href="javascript:document.getElementById('logoutForm').submit()">
                                     <img src="/content/v2/images/power-icon.png">
-                                    <span class="nav-title">Déonnexion</span>
+                                    <span class="nav-title">@LayoutRES.SeDeconnecter</span>
                                 </a>
                             }
                         </li>
@@ -151,28 +143,23 @@
     @RenderBody()
 
 
-    <footer class="previcad-footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4 ">
+<footer class="previcad-footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 ">
 
+            </div>
+            <div class="col-12 col-lg-4 text-center">
+                <div class="company-tagline-wrapper">
+                    <img src="/content/v2/images/brand-logo.png"><p class="">@LayoutRES.FooterTitle</p>
                 </div>
-                <div class="col-12 col-lg-4 text-center">
-                    <div class="company-tagline-wrapper">
-                        <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <p class="copyright-text">Copyright 2021 Prévigesst. Tout droit réservés. Version 2.0</p>
-                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <p class="copyright-text">@LayoutRES.FooterCopyright @LayoutRES.FooterRights Version 2.0</p>
             </div>
         </div>
-
-        @*<div class="company-tagline-wrapper">
-                <img src="/content/v2/images/brand-logo.png"><p class="">La prévention en application</p>
-            </div>
-            <p class="copyright-text">Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés. Version 2.0</p>*@
-    </footer>
+    </div>
+</footer>
 
 
     @* Popup générique pour la suppression *@

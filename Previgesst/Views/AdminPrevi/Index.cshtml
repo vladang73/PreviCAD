@@ -1,4 +1,6 @@
 ﻿@using System.Threading
+@using Previgesst.Ressources
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout_v2.cshtml";
@@ -23,7 +25,7 @@
         </div>
         <div class="main-subheading">
             <img src="/content/v2/images/power-icon.svg">
-            <p> Espace pour message personnalisé à vos clients - Vide s’il y a rien </p>
+            <p> @LayoutRES.Note </p>
         </div>
         <div class="row previcad-main-cards">
             <div class="col-md-5 col-12 card" onclick='window.location = "@string.Format("/{0}/FicheCadenassage/Index", Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName)"'>
@@ -32,7 +34,7 @@
                     <div class="previcad-card-icons">
                         <img src="/content/v2/images/icn1.png" class="icn" alt="badge">
                     </div>
-                    <h4>Cadenassage</h4>
+                    <h4>@LayoutRES.Cadenassage</h4>
                     
                     <div class="card-enter-arrow">Enter <img src="/content/v2/images/arw.svg"></div>
                 </div>
@@ -45,10 +47,10 @@
                         <img src="/content/v2/images/icn2.png" class="icn" alt="badge">
                     </div>
                     <h4>
-                        Analyse de risque
-                        en sécurité
+                        @LayoutRES.AnalyseDeRisque
                     </h4>
-                  
+
+                    <div class="card-enter-arrow">Enter <img src="/content/v2/images/arw.svg"></div>
                 </div>
             </div>
 
@@ -68,7 +70,7 @@
         @if (User.IsInRole("Administrateur") && HttpContext.Current.Session["IsCorporate"] != null)
         {
             <div class="autries-actions">
-                <div class="autries-title">Autries Actions</div>
+                <div class="autries-title">@LayoutRES.Actions</div>
                 <ul>
                     @if (!IsCorporate)
                     {
@@ -78,7 +80,7 @@
                                     <img src="/content/v2/images/gest.svg">
                                 </div>
                                 <div class="autries-actions-title">
-                                    Gestion des administration
+                                    @LayoutRES.ActionAdmin
                                 </div>
                             </a>
                         </li>
@@ -91,7 +93,7 @@
                                 <img src="/content/v2/images/Clients.svg">
                             </div>
                             <div class="autries-actions-title">
-                                Clients
+                                @LayoutRES.ActionClient
                             </div>
                         </a>
                     </li>
@@ -103,7 +105,7 @@
                                 <div class="autries-actions-icon autries-circle-icon">
                                     <img src="/content/v2/images/Messages.svg">
                                 </div>
-                                <div class="autries-actions-title">Messages de maintenance</div>
+                                <div class="autries-actions-title">@LayoutRES.ActionMaintenance</div>
                             </a>
                         </li>
                         <li>
@@ -111,7 +113,7 @@
                                 <div class="autries-actions-icon autries-circle-icon">
                                     <img src="/content/v2/images/Tracage-de-bogues.svg">
                                 </div>
-                                <div class="autries-actions-title">Tracage de boguess</div>
+                                <div class="autries-actions-title">@LayoutRES.ActionLogs</div>
                             </a>
                         </li>
                     }
@@ -120,97 +122,3 @@
         }
     </div>
 </main>
-
-
-
-@*<div class="container">
-        <div class="row">
-            <div class="col-md-12 ">
-                <div class="container-fluid">
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="~/FicheCadenassage/Index" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    <div class="panel-body"><img src="~/Images/Images2019/Previcad.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-4">
-                            <a href="~/AnalyseRisque/Index" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    <div class="panel-body"><img src="~/Images/Images2019/Analyse-risque.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="col-md-4">
-                            <a href="~/Documents/Index" style="text-decoration:none;">
-                                <div class="panel panel-danger">
-                                    <div class="panel-body"><img src="~/Images/Images2019/documents.jpg" class="img-responsive center-block" /></div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <hr />
-
-                    @if (User.IsInRole("Administrateur") && HttpContext.Current.Session["IsCorporate"] != null)
-                    {
-
-                        <div class="row">
-                            @if (!IsCorporate)
-                            {
-                                <div class="col-md-2">
-                                    <a href="~/Manage/Index" style="text-decoration:none;">
-                                        <div class="panel panel-danger">
-                                            <div class="panel-body"><img src="~/Images/Images2019/Utilisateurs.jpg" class="img-responsive center-block" /></div>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-
-                            <div class="col-md-2">
-                                <a href="~/Client/Index" style="text-decoration:none;">
-                                    <div class="panel panel-danger">
-                                        <div class="panel-body"><img src="~/Images/Images2019/Clients.jpg" class="img-responsive center-block" /></div>
-                                    </div>
-                                </a>
-                            </div>
-
-                            @if (!IsCorporate)
-                            {
-                                <div class="col-md-2">
-                                    <a href="~/Section/Index" style="text-decoration:none;">
-                                        <div class="panel panel-danger">
-                                            <div class="panel-body"><img src="~/Images/Images2019/Sections.jpg" class="img-responsive center-block" /></div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <a href="~/ParametresApp/Index" style="text-decoration:none;">
-                                        <div class="panel panel-danger">
-                                            <div class="panel-body"><img src="~/Images/Settings.png" class="img-responsive center-block" style="max-width: 80px;" /></div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <a href="~/AdminPrevi/Errors" style="text-decoration:none;" title="Logs">
-                                        <div class="panel panel-danger">
-                                            <div class="panel-body"><img src="~/Images/Client/dangeureux.jpg" class="img-responsive center-block" style="max-width: 80px;" /></div>
-                                        </div>
-                                    </a>
-                                </div>
-                            }
-
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-    </div>
-
-*@

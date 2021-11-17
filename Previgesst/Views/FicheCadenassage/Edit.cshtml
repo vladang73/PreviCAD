@@ -1,4 +1,6 @@
-﻿@using Previgesst.Ressources.Cadenassage
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Cadenassage
+
 @model Previgesst.ViewModels.EditCadenassageViewModel
 
 @{
@@ -29,7 +31,7 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "MesApplications")'>
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
 
@@ -39,7 +41,7 @@
                 <p class="nav-link-text">@CadEditRES.FichesCadenassage</p>
             </a>
         </li>
-        <li class="nav nav-item text-center">
+        <li class="nav-item text-center">
             <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#Equipements" id="Equip">
                 <img src="/content/v2/images/equiment.svg"><p class="nav-link-text">@CadEditRES.MenuEquipment</p>
             </a>
@@ -69,22 +71,20 @@
 }
 
 @section sidebarChilds{
-    <li><a class="submenu-dropdown-item" href="#Previcad" role="tab" data-toggle="tab" data-bs-toggle="tab">Hyperlien Utilisateur</a></li>
-    <li><a class="submenu-dropdown-item" href="#CadParamAdmin">Préférences</a></li>
+    <li><a class="submenu-dropdown-item" href="#Previcad" role="tab" data-toggle="tab" data-bs-toggle="tab">@CadEditRES.MenuUtilisateur</a></li>
+    <li><a class="submenu-dropdown-item" href="#CadParamAdmin">@CadEditRES.MenuPreferences</a></li>
 }
 
 
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href='@Url.Action("Index", "MesApplications")'>Accueil</a></li>
+            <li><a href='@Url.Action("Index", "MesApplications")'>@LayoutRES.Accueil</a></li>
             <li class="active">@CadEditRES.TitreSectionCadenassage</li>
         </ul>
     </div>
 
     <div class="main-page-content">
-
-
 
         <div class="tab-content">
 

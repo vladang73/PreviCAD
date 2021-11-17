@@ -88,7 +88,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Approuvé par.
+        ///   Looks up a localized string similar to Approuver par.
         /// </summary>
         public static string ApprouvePar {
             get {
@@ -142,7 +142,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Duppliquer.
+        ///   Looks up a localized string similar to Dupliquer.
         /// </summary>
         public static string Dupliquer {
             get {
@@ -250,7 +250,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prévigesst.
+        ///   Looks up a localized string similar to Prévicad.
         /// </summary>
         public static string Previgesst {
             get {
@@ -268,7 +268,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scannez le QR.
+        ///   Looks up a localized string similar to Scanner le QR.
         /// </summary>
         public static string ScanQR {
             get {
@@ -277,7 +277,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scannez le code QR de l&apos;équipement.
+        ///   Looks up a localized string similar to Scanner le QR.
         /// </summary>
         public static string ScanQREquip {
             get {

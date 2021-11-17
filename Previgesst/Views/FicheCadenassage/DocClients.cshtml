@@ -41,7 +41,7 @@
                     .Hidden();
 
 
-                    columns.Bound(c => c.Titre).Width(320)
+                    columns.Bound(c => c.Titre)
                          .Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
                             .Contains(GridRES.Contains)
@@ -52,23 +52,23 @@
                     .HtmlAttributes(new { @class = "td-round-left-border" })
                     ;
 
-                    columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false).Width(500);
+                    columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
 
                     columns.Bound(e => e.Bidon).EditorTemplateName("Vide")
                            //.ClientTemplate("<a href='#=BasePath#' class='FicheClientDownload' style='float:right'><img style='width:40px;' src='/Images/dl.png' title='"+ CadProgRES.Telecharger +"'></a>")
                            .ClientTemplate("<a href='#=BasePath#' class='FicheClientDownload'><img src='/content/v2/images/fr-icon.svg' title='" + CadProgRES.Telecharger + "'></a>")
-                           .Title("").Filterable(false).Sortable(false).Width(100);
+                           .Title("").Filterable(false).Sortable(false).Width("60px");
 
                     columns.Command(c =>
                     {
-                        c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                        c.Edit().Text(" ").HtmlAttributes(new { @class = "btn-table btn-edit" });
                         c.Custom(CadProgRES.Vide)
                               .Click("ConfirmDeleteRow")
                               .Text("")
                               .HtmlAttributes(new { @class = "k-grid-effacer kendoDanger btn-del" });
 
                     })
-                    .Width(120).Hidden(!Model.estUpdate);
+                    .Width("150px").Hidden(!Model.estUpdate);
 
                 })
 

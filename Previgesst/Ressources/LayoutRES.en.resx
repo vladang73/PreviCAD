@@ -117,11 +117,74 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accueil" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="ActionAdmin" xml:space="preserve">
+    <value>Administration Management</value>
+  </data>
+  <data name="ActionClient" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="ActionClientAdmin" xml:space="preserve">
+    <value>Customer management</value>
+  </data>
+  <data name="ActionLogs" xml:space="preserve">
+    <value>Error Logs</value>
+  </data>
+  <data name="ActionMaintenance" xml:space="preserve">
+    <value>Maintenance messages</value>
+  </data>
+  <data name="ActionMonCompte" xml:space="preserve">
+    <value>My account</value>
+  </data>
+  <data name="ActionParametres" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Other Actions</value>
+  </data>
+  <data name="ActionSupport" xml:space="preserve">
+    <value>Support center</value>
+  </data>
+  <data name="AnalyseDeRisque" xml:space="preserve">
+    <value>Security Risk Analysis</value>
+  </data>
+  <data name="Cadenassage" xml:space="preserve">
+    <value>Lockout</value>
+  </data>
   <data name="Creation" xml:space="preserve">
     <value>Created by</value>
   </data>
   <data name="Fax" xml:space="preserve">
     <value>Fax</value>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>Copyright 2021 Prévicad.</value>
+  </data>
+  <data name="FooterRights" xml:space="preserve">
+    <value>All rights reserved.</value>
+  </data>
+  <data name="FooterTitle" xml:space="preserve">
+    <value>Prevention in application</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Space for personalized message to your customers - Empty if there is nothing.</value>
+  </data>
+  <data name="PlateformAdmin" xml:space="preserve">
+    <value>Administrators platform</value>
+  </data>
+  <data name="PlateformCorporate" xml:space="preserve">
+    <value>Corporate platform</value>
+  </data>
+  <data name="PlateformEmployee" xml:space="preserve">
+    <value>Employee platform</value>
+  </data>
+  <data name="PlateformSuperAdmin" xml:space="preserve">
+    <value>Super administrators platform</value>
   </data>
   <data name="SeDeconnecter" xml:space="preserve">
     <value>Quit</value>

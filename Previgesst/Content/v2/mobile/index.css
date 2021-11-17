@@ -380,3 +380,18 @@ input {
         padding: 0px 26px;
     }
 }
+
+
+.td-round-left-border {
+    border-radius: 50px 0px 0px 0px !important;
+    border: none;
+    padding: 20px 0.6em;
+    border-left-width: 0;
+    margin-bottom: 10px;
+}
+.lang-select {
+    position: fixed;
+    top: 15px;
+    right: 100px;
+    padding: 5px;
+}

@@ -133,7 +133,7 @@
     <value>Tentative de connexion non valide.</value>
   </data>
   <data name="Fiches" xml:space="preserve">
-    <value>Procédures de contrôle des source d’énergie</value>
+    <value>PROCÉDURES</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Mot de passe oublié?</value>
@@ -151,7 +151,7 @@
     <value>Mot de passe</value>
   </data>
   <data name="NoEmploye" xml:space="preserve">
-    <value>Numéro d'employé</value>
+    <value>Identifiant de l'employé</value>
   </data>
   <data name="Programme" xml:space="preserve">
     <value>Programme de cadenassage</value>

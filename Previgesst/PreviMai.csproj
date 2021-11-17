@@ -936,6 +936,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DocumentRES.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ressources\RegistreRES.Designer.cs">
+      <DependentUpon>RegistreRES.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ressources\RegistreRES.en.Designer.cs">
+      <DependentUpon>RegistreRES.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ressources\ParametresAppRES.en.Designer.cs">
       <DependentUpon>ParametresAppRES.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2934,6 +2944,14 @@
     <EmbeddedResource Include="Ressources\DocumentRES.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DocumentRES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\RegistreRES.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegistreRES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\RegistreRES.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegistreRES.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\ParametresAppRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

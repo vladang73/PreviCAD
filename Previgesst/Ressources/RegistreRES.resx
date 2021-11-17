@@ -120,82 +120,28 @@
   <data name="Accueil" xml:space="preserve">
     <value>Accueil</value>
   </data>
-  <data name="ActionAdmin" xml:space="preserve">
-    <value>Gestion des administration</value>
-  </data>
-  <data name="ActionClient" xml:space="preserve">
-    <value>Clients</value>
-  </data>
-  <data name="ActionClientAdmin" xml:space="preserve">
-    <value>Gestion des clients</value>
-  </data>
-  <data name="ActionLogs" xml:space="preserve">
-    <value>Tracage de boguess</value>
-  </data>
-  <data name="ActionMaintenance" xml:space="preserve">
-    <value>Messages de maintenance</value>
+  <data name="ActionEnCours" xml:space="preserve">
+    <value>Interventions en cours</value>
   </data>
   <data name="ActionMonCompte" xml:space="preserve">
     <value>Mon compte</value>
   </data>
   <data name="ActionParametres" xml:space="preserve">
-    <value>Paramétres</value>
+    <value>Paramètres</value>
   </data>
-  <data name="Actions" xml:space="preserve">
-    <value>Autries Actions</value>
+  <data name="ActionProcedures" xml:space="preserve">
+    <value>Procédures</value>
   </data>
-  <data name="ActionSupport" xml:space="preserve">
-    <value>Centre de support</value>
+  <data name="ActionProgramme" xml:space="preserve">
+    <value>Programme</value>
   </data>
-  <data name="AnalyseDeRisque" xml:space="preserve">
-    <value>Analyse de risque en sécurité</value>
-  </data>
-  <data name="Cadenassage" xml:space="preserve">
-    <value>Cadenassage</value>
-  </data>
-  <data name="Creation" xml:space="preserve">
-    <value>Création de </value>
-  </data>
-  <data name="Fax" xml:space="preserve">
-    <value>Téléc.</value>
-  </data>
-  <data name="FooterCopyright" xml:space="preserve">
-    <value>Copyright 2021 Prévicad.</value>
-  </data>
-  <data name="FooterRights" xml:space="preserve">
-    <value>Tous droits réservés</value>
-  </data>
-  <data name="FooterTitle" xml:space="preserve">
-    <value>La prévention en application</value>
-  </data>
-  <data name="ForgotPassword" xml:space="preserve">
-    <value>Mot de passe oublié?</value>
-  </data>
-  <data name="Note" xml:space="preserve">
-    <value>Espace pour message personnalisé à vos clients - Vide s’il y a rien.</value>
-  </data>
-  <data name="PlateformAdmin" xml:space="preserve">
-    <value>Plateforme des administrateurs</value>
-  </data>
-  <data name="PlateformCorporate" xml:space="preserve">
-    <value>Plateforme corporative</value>
-  </data>
-  <data name="PlateformEmployee" xml:space="preserve">
-    <value>Plateforme des employés</value>
-  </data>
-  <data name="PlateformSuperAdmin" xml:space="preserve">
-    <value>Plateforme Super-administrateurs</value>
+  <data name="ActionTermines" xml:space="preserve">
+    <value>Intervention terminés</value>
   </data>
   <data name="SeDeconnecter" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
-  <data name="SF" xml:space="preserve">
-    <value>S.F.</value>
-  </data>
-  <data name="Tel" xml:space="preserve">
-    <value>Tél.</value>
-  </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>Bienvenue</value>
+  <data name="SupportCenter" xml:space="preserve">
+    <value>Centre de support</value>
   </data>
 </root>

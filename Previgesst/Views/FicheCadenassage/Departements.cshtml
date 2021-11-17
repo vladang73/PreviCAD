@@ -26,21 +26,23 @@
                 columns.Bound(e => e.DepartementId).Hidden();
 
                 columns.Bound(c => c.NomDepartement)//.EditorTemplateName("MyView")
-                .Filterable(f => f.Extra(false).Operators(operators => operators
-                .ForString(str => str.Clear()
-                .Contains(GridRES.Contains)
-                .StartsWith(GridRES.StartsWith)
-                .IsEqualTo(GridRES.Egale)
-                .IsNotEqualTo(GridRES.NotEquals)
-            )));
-                columns.Bound(c => c.NomDepartementEN)//.EditorTemplateName("MyView")
-                .Filterable(f => f.Extra(false).Operators(operators => operators
+                    .Filterable(f => f.Extra(false).Operators(operators => operators
                     .ForString(str => str.Clear()
                     .Contains(GridRES.Contains)
                     .StartsWith(GridRES.StartsWith)
                     .IsEqualTo(GridRES.Egale)
                     .IsNotEqualTo(GridRES.NotEquals)
                 )));
+
+                columns.Bound(c => c.NomDepartementEN)//.EditorTemplateName("MyView")
+                    .Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                )));
+
                 columns.Command(c =>
                 {
                     c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
@@ -48,7 +50,7 @@
                     .Click("ConfirmDeleteRowDEPT")
                     .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
                 }
-                ).Width(200);
+                ).Width("200px");
             })
             .Sortable(s => s.AllowUnsort(false))
             .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
@@ -56,25 +58,19 @@
 
             .DataSource(ds => ds
                 .Ajax()
-                .PageSize(10).Sort(x => x.Add(c => c.NomDepartement)
+                .PageSize(10).Sort(x => x.Add(c => c.NomDepartement))
+                .Model(m =>
+                {
+                    m.Id(e => e.DepartementId);
+                    m.Field(e => e.Suppressible).DefaultValue(true);
+                })
+                .Read(r => r.Action("ReadListDepartement", "Departement", new { client = Model.ClientId }))
+                .Create(c => c.Action("SaveDepartement", "Departement", new { client = Model.ClientId }))
+                .Update(u => u.Action("SaveDepartement", "Departement", new { client = Model.ClientId }))
+                .Destroy(d => d.Action("DeleteDepartement", "Departement"))
+                .Events(e => e.Error("ListeErreurDEPT").RequestEnd("EndDept"))
             )
-            .Model(m =>
-            {
-                m.Id(e => e.DepartementId);
-                m.Field(e => e.Suppressible).DefaultValue(true);
-
-            })
-            .Read(r => r.Action("ReadListDepartement", "Departement", new { client = Model.ClientId }))
-            .Create(c => c.Action("SaveDepartement", "Departement", new { client = Model.ClientId }))
-            .Update(u => u.Action("SaveDepartement", "Departement", new { client = Model.ClientId }))
-            .Destroy(d => d.Action("DeleteDepartement", "Departement"))
-            .Events(e => e
-                .Error("ListeErreurDEPT").RequestEnd("EndDept")
-            )
-            )
-            .Events(e => e
-                .DataBound("ListeDataBoundDEPT").Edit("Edit")
-            )
+            .Events(e => e.DataBound("ListeDataBoundDEPT").Edit("Edit"))
             .Editable(e => e
                 .Mode(GridEditMode.InLine)
                 .CreateAt(GridInsertRowPosition.Top)
@@ -149,11 +145,8 @@
     }
 
     function ListeDataBoundDEPT(e) {
-
-
-
-        var selecteurGrid = "#listDEPT";
-        var grid = $(selecteurGrid).data("kendoGrid");
+        //var selecteurGrid = "#listDEPT";
+        //var grid = $(selecteurGrid).data("kendoGrid");
 
 
         //$(selecteurGrid + " .k-grid-effacer").find("span").addClass("k-icon k-delete");

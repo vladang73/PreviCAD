@@ -153,6 +153,12 @@
   <data name="MenuEquipment" xml:space="preserve">
     <value>Équipements</value>
   </data>
+  <data name="MenuPreferences" xml:space="preserve">
+    <value>Préférences</value>
+  </data>
+  <data name="MenuUtilisateur" xml:space="preserve">
+    <value>Hyperlien Utilisateur</value>
+  </data>
   <data name="NotificationDebutCad" xml:space="preserve">
     <value>Notifications de début de cadenassage</value>
   </data>

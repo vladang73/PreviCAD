@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Previgesst.Ressources.Previcad;
 using Newtonsoft.Json;
+using Previgesst.Helpers;
 
 namespace Previgesst.Controllers
 {
@@ -22,6 +23,7 @@ namespace Previgesst.Controllers
 
         private FicheCadenassageRepository ficheCadenassageRepository;
         private EquipementRepository equipementRepository;
+        private ClientRepository clientRepository;
 
         public RegistreMobileController(
             EmployeRegistreService employeRegistreService,
@@ -29,7 +31,8 @@ namespace Previgesst.Controllers
             ParametresAppService parametresAppService,
             ParametresAppController parametresAppController,
             FicheCadenassageRepository ficheCadenassageRepository,
-            EquipementRepository equipementRepository)
+            EquipementRepository equipementRepository,
+            ClientRepository clientRepository)
         {
             this.employeRegistreService = employeRegistreService;
             this.parametresAppService = parametresAppService;
@@ -37,6 +40,7 @@ namespace Previgesst.Controllers
             this.ficheCadenassageRepository = ficheCadenassageRepository;
             this.parametresAppController = parametresAppController;
             this.equipementRepository = equipementRepository;
+            this.clientRepository = clientRepository;
         }
 
         [HttpGet]
@@ -140,38 +144,6 @@ namespace Previgesst.Controllers
             ficheCadenassageService.ReturnFile2(id, lang);
         }
 
-        /*
-        private void GetFicheByLanguage(int id, string lang)
-        {
-            var loginInfo = employeRegistreService.getEmployeRegistre();
-
-            if (loginInfo == null) return;
-
-            // get FicheCadenassageId by client and equipment id
-            var allRecords = ficheCadenassageRepository.AsQueryable()
-                                        .Where(x => x.EquipementId == id)
-                                        .Where(x => x.ClientId == loginInfo.ClientId)
-                                        .Where(x => x.IsApproved)
-                                        .ToList()
-                                        ;
-
-            if (allRecords == null) return;
-            if (allRecords != null && allRecords.Count() == 0) return;
-
-            if (allRecords.Count() == 1)
-            {
-                var ficheCadenassageId = allRecords.FirstOrDefault().FicheCadenassageId;
-
-                var fiche = ficheCadenassageService.getFicheVM(ficheCadenassageId);
-                if (fiche == null || loginInfo == null)
-                    return;
-                if (fiche.ClientId != loginInfo.ClientId)
-                    return;
-                ficheCadenassageService.ReturnFile2(id, lang);
-            }
-        }
-        */
-
         [HttpPost]
         public JsonResult GetFicheDetails(int id)
         {
@@ -239,5 +211,32 @@ namespace Previgesst.Controllers
 
         }
 
+        public ActionResult LogOff()
+        {
+            if (System.Web.HttpContext.Current.Session["EmployeCadenassage"] == null)
+            {
+                // site administratif du client
+                employeRegistreService.LogOff();
+                return RedirectToAction(nameof(RegistreMobileController.Index), typeof(RegistreMobileController).GetUrlName());
+            }
+            else
+            {
+                EmployeRegistreViewModel employe = (EmployeRegistreViewModel)System.Web.HttpContext.Current.Session["EmployeCadenassage"];
+                var client = clientRepository.Get(employe.ClientId);
+                var urlBuilder =
+                                   new System.UriBuilder(Request.Url.AbsoluteUri)
+                                   {
+                                       Path = Url.Content("~/RegistreMobile/Index?ClientID=" + client.IdentificateurUnique.ToString()),
+                                       Query = null,
+                                   };
+
+                Uri uri = urlBuilder.Uri;
+                string url = urlBuilder.ToString().Replace("%3F", "?");
+
+                System.Web.HttpContext.Current.Session.Abandon();
+                return Redirect(url);
+            }
+
+        }
     }
 }

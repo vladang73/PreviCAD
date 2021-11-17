@@ -1,5 +1,7 @@
-﻿@model Previgesst.ViewModels.EditCadenassageViewModel
+﻿@using Previgesst.Ressources
 @using Previgesst.Ressources.Analyse
+@model Previgesst.ViewModels.EditCadenassageViewModel
+
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutClient_v2.cshtml";
@@ -26,7 +28,7 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" role="tab" href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
 
@@ -50,7 +52,7 @@
 
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>Accueil</a></li>
+            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>@LayoutRES.Accueil</a></li>
             <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AnalyseRisque/Index">Analyses de risques</a></li>
             <li>@AREditClientRES.GestionAnalyses</li>
         </ul>

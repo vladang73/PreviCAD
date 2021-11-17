@@ -169,6 +169,24 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Préférences.
+        /// </summary>
+        public static string MenuPreferences {
+            get {
+                return ResourceManager.GetString("MenuPreferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hyperlien Utilisateur.
+        /// </summary>
+        public static string MenuUtilisateur {
+            get {
+                return ResourceManager.GetString("MenuUtilisateur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notifications de début de cadenassage.
         /// </summary>
         public static string NotificationDebutCad {

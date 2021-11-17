@@ -11,41 +11,46 @@
 
 <div class="td-round-left-border mt-5 pt-5 bg-white">
     <div class="row">
-        <div class="col-8">
+        <div class="col-12">
             <label class="form-label ps-2">@CadDeptPrevicad.Lien</label>
-        </div>
-        <div class="col-4 float-end">
-
-            <a class="btn-table btn-link m-1 card-wrapper-link" onclick="copieClientUrl()">
-                @CadDeptPrevicad.Copy
-            </a>
-
-            &nbsp;
+            @*</div>
+                <div class="col-4 float-end">*@
 
 
-
-            <a class="k-button btn-mettre m-1" style="width: 225px;" href="mailto:?subject=@CadDeptPrevicad.EmailSubject&body=@CadDeptPrevicad.EmailContent : @Model.LienPrevicad">
+            <a class="k-button btn-mettre m-1 float-end" style="width: 225px; padding: 15px;" href="mailto:?subject=@CadDeptPrevicad.EmailSubject&body=@CadDeptPrevicad.EmailContent : @Model.LienPrevicad">
                 @CadDeptPrevicad.Send
             </a>
-
+           
         </div>
     </div>
 </div>
 
 <div class="td-round-left-border mt-5 pt-5 bg-white">
     <div class="row">
-        <div class="col-12">
+        <div class="col-10">
             <label class="form-label ps-2">Desktop Version</label>
             <input type="text" id="urlClient" value="@Model.LienPrevicad" class="form-control" />
         </div>
+        <div class="col-2 text-end">
+            <br />
+            <a class="btn-table btn-link m-1 card-wrapper-link" onclick="copieClientUrl()">
+                @CadDeptPrevicad.Copy
+            </a>
+        </div>
     </div>
 </div>
 
 <div class="td-round-left-border mt-5 pt-5 bg-white">
     <div class="row">
-        <div class="col-12">
+        <div class="col-10">
             <label class="form-label ps-2">Mobile Version</label>
-            <input type="text" id="urlClient" value="@Model.LienPrevicadMobile" class="form-control" />
+            <input type="text" id="urlClientMobile" value="@Model.LienPrevicadMobile" class="form-control" />
+        </div>
+        <div class="col-2 text-end">
+            <br />
+            <a class="btn-table btn-link m-1 card-wrapper-link" onclick="copieClientUrlMobile()">
+                @CadDeptPrevicad.Copy
+            </a>
         </div>
     </div>
 </div>
@@ -68,6 +73,13 @@
 <script defer="defer">
     function copieClientUrl() {
         var copyText = document.getElementById("urlClient");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+    }
+
+    function copieClientUrlMobile() {
+        var copyText = document.getElementById("urlClientMobile");
         copyText.select();
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");

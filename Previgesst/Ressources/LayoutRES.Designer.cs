@@ -61,6 +61,114 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accueil.
+        /// </summary>
+        public static string Accueil {
+            get {
+                return ResourceManager.GetString("Accueil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestion des administration.
+        /// </summary>
+        public static string ActionAdmin {
+            get {
+                return ResourceManager.GetString("ActionAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clients.
+        /// </summary>
+        public static string ActionClient {
+            get {
+                return ResourceManager.GetString("ActionClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gestion des clients.
+        /// </summary>
+        public static string ActionClientAdmin {
+            get {
+                return ResourceManager.GetString("ActionClientAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracage de boguess.
+        /// </summary>
+        public static string ActionLogs {
+            get {
+                return ResourceManager.GetString("ActionLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Messages de maintenance.
+        /// </summary>
+        public static string ActionMaintenance {
+            get {
+                return ResourceManager.GetString("ActionMaintenance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mon compte.
+        /// </summary>
+        public static string ActionMonCompte {
+            get {
+                return ResourceManager.GetString("ActionMonCompte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paramétres.
+        /// </summary>
+        public static string ActionParametres {
+            get {
+                return ResourceManager.GetString("ActionParametres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Autries Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Centre de support.
+        /// </summary>
+        public static string ActionSupport {
+            get {
+                return ResourceManager.GetString("ActionSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyse de risque en sécurité.
+        /// </summary>
+        public static string AnalyseDeRisque {
+            get {
+                return ResourceManager.GetString("AnalyseDeRisque", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cadenassage.
+        /// </summary>
+        public static string Cadenassage {
+            get {
+                return ResourceManager.GetString("Cadenassage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Création de .
         /// </summary>
         public static string Creation {
@@ -79,7 +187,88 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Déonnexion.
+        ///   Looks up a localized string similar to Copyright 2021 Prévicad..
+        /// </summary>
+        public static string FooterCopyright {
+            get {
+                return ResourceManager.GetString("FooterCopyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tous droits réservés.
+        /// </summary>
+        public static string FooterRights {
+            get {
+                return ResourceManager.GetString("FooterRights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La prévention en application.
+        /// </summary>
+        public static string FooterTitle {
+            get {
+                return ResourceManager.GetString("FooterTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mot de passe oublié?.
+        /// </summary>
+        public static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Espace pour message personnalisé à vos clients - Vide s’il y a rien..
+        /// </summary>
+        public static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plateforme des administrateurs.
+        /// </summary>
+        public static string PlateformAdmin {
+            get {
+                return ResourceManager.GetString("PlateformAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plateforme corporative.
+        /// </summary>
+        public static string PlateformCorporate {
+            get {
+                return ResourceManager.GetString("PlateformCorporate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plateforme des employés.
+        /// </summary>
+        public static string PlateformEmployee {
+            get {
+                return ResourceManager.GetString("PlateformEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plateforme Super-administrateurs.
+        /// </summary>
+        public static string PlateformSuperAdmin {
+            get {
+                return ResourceManager.GetString("PlateformSuperAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Déconnexion.
         /// </summary>
         public static string SeDeconnecter {
             get {

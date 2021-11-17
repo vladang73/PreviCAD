@@ -10,6 +10,8 @@
     {
         Layout = (string)ViewData["Layout"];
     }
+
+    string selectedLang = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
 }
 
 @section styles{
@@ -29,7 +31,7 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" role="tab" href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
 
@@ -51,7 +53,7 @@
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>Accueil</a></li>
+            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>@LayoutRES.Accueil</a></li>
             <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AnalyseRisque/EditClient/@Model.ClientId">@ARCreateRES.Retour</a></li>
             <li class="active" aria-current="page">@ARCreateRES.EditionAnalyse</li>
         </ul>
@@ -67,9 +69,14 @@
                         <h3 class="m-0">@ARCreateRES.EditionAnalyseRisque</h3>
                     </div>
                     <div class="page-table-meta">
-                        <a class="me-4" href='~/AnalyseRisque/getXLAnalyse?id=@Model.Id'><img src='/content/v2/images/fr-icon.svg' alt='FR' /></a>
-                        &nbsp;
-                        <a class="me-2" href='~/AnalyseRisque/getXLAnalyseEN?id=@Model.Id'><img src='/content/v2/images/en-icon.svg' alt='EN' /></a>
+                        @if (selectedLang == "en")
+                        {
+                            <a class="me-4" href='~/AnalyseRisque/getXLAnalyseEN?id=@Model.Id'><img src='/content/v2/images/en-icon.svg' alt='EN' /></a>
+                        }
+                        else
+                        {
+                            <a class="me-4" href='~/AnalyseRisque/getXLAnalyse?id=@Model.Id'><img src='/content/v2/images/fr-icon.svg' alt='FR' /></a>
+                        }
                     </div>
                 </div>
 
@@ -276,13 +283,15 @@
                                     .ClientTemplate("<a onclick='return duplicateFunction(#=IdLigneAnalyseRisqueEditor#, this)' href='../../AnalyseRisque/DuplicateLigneAnalyseRisque/#= " + nameof(LigneAnalyseRisqueEditViewModel.IdLigneAnalyseRisqueEditor) + " #' class='k-cde-edit btn-table btn-duplicate' ><img src='/content/v2/images/dup-icon.svg' alt='Duplicate'> " + ARCreateRES.Dupliquer + "</a>")
                                     .Title(ARCreateRES.Vide).Filterable(false).Sortable(false)
                                     .Width("90px");
-                                    //.Hidden(!Model.AfficherChezClient);
+                                //.Hidden(!Model.AfficherChezClient);
 
                                 columns.Command(command => {
                                     command.Edit().Text(ARCreateRES.Editer).HtmlAttributes(new { @class = "btn-table btn-edit" });
                                     command.Custom(ARCreateRES.Vide).Click("ConfirmDeleteRow")
                                            .HtmlAttributes(new { @class = "k-grid-dupliquer btn-table btn-del" }); })
-                                           .Width("130px");
+                                           .Width("130px")
+                                           .HtmlAttributes(new { @class = "text-nowrap"})
+                                           ;
                             })
                             .Sortable(s => s.AllowUnsort(false))
                             .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))

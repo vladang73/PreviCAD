@@ -130,7 +130,7 @@ namespace Previgesst.Controllers
             }
         }
 
-        [HttpPost]
+        //[HttpPost]
         public ActionResult LogOff()
         {
             AccountService.SignOut();

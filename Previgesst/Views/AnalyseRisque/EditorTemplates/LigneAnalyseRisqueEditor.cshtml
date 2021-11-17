@@ -29,6 +29,7 @@
                                     .Decimals(1)
                                     .Format("N1")
                                     .Culture("fr-CA")
+                                    .Spinners(false)
                                 )
                 </div>
 
@@ -270,7 +271,7 @@
             <div class="col-12 mt-3">
                 @Html.LabelFor(model => model.DateDeRealisation, new { @class = "form-label d-block" })
 
-                @(Html.Kendo().DateTimePickerFor(model => model.DateDeRealisation).HtmlAttributes(new { @class = "form-control petit" }))
+                @(Html.Kendo().DateTimePickerFor(model => model.DateDeRealisation).HtmlAttributes(new { @class = "form-control" }))
                 @Html.ValidationMessageFor(model => model.DateDeRealisation)
             </div>
             <div class="col-12 mt-3">

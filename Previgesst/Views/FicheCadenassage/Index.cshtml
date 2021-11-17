@@ -1,4 +1,5 @@
-﻿@model AffichageListesViewModel
+﻿@using Previgesst.Ressources
+@model AffichageListesViewModel
 
 
 @{
@@ -21,7 +22,7 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" role="tab" href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AdminPrevi/Index">
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
 
@@ -48,7 +49,7 @@
 
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href="~/AdminPrevi/Index">Accueil</a></li>
+            <li><a href="~/AdminPrevi/Index">@LayoutRES.Accueil</a></li>
             <li>Cadenassage</li>
         </ul>
     </div>

@@ -1,4 +1,5 @@
-﻿@using Previgesst.Ressources.Cadenassage
+﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Cadenassage
 @model Previgesst.ViewModels.EditFicheViewModel
 
 
@@ -28,8 +29,8 @@
 
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
-            <a class="nav-link home-navlink" role="tab" href='@Url.Action("Index", "MesApplications")'>
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+            <a class="nav-link home-navlink" role="tab" href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/Edit/@Model.ClientId">
+                <img src="/content/v2/images/Procédures.svg" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
 
@@ -97,7 +98,7 @@
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href='@Url.Action("Index", "MesApplications")'>Accueil</a></li>
+            <li><a href='@Url.Action("Index", "MesApplications")'>@LayoutRES.Accueil</a></li>
             <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/Edit/@Model.ClientId">@CadEditRES.TitreSectionCadenassage</a></li>
 
             @if (Model.FicheCadenassageId == 0)
@@ -114,69 +115,69 @@
     <div class="main-page-content">
 
 
-                <div class="tab-content">
+        <div class="tab-content">
 
-                    @if (!Model.DisplaySourceTab)
-                    {
-                        <div id="InfosGenerales" class="tab-pane active">
-                            @Html.Partial("SectionInfoGenerales", @Model)
-                        </div>
-                    }
-                    else
-                    {
-                        <div id="InfosGenerales" class="tab-pane active">
-                            @Html.Partial("SectionInfoGenerales", @Model)
-                        </div>
-                    }
-
-
-                    @if (Model.FicheCadenassageId != 0)
-                    {
-
-                        <div id="Materiel" class="tab-pane">
-                            @Html.Partial("SectionMateriel", @Model)
-
-                        </div>
-
-
-
-                        if (Model.DisplaySourceTab)
-                        {
-                            <div id="Sources" class="tab-pane">
-                                @Html.Partial("SectionSources", new SourceEnergieCadenassageViewModel{ FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
-                            </div>
-                        }
-                        else
-                        {
-                            <div id="Sources" class="tab-pane">
-                                @Html.Partial("SectionSources", new SourceEnergieCadenassageViewModel { FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
-                            </div>
-                        }
-
-                        <div id="ImagesFiche" class="tab-pane">
-                            @Html.Partial("SectionImages", @Model)
-
-                        </div>
-
-
-                        <div id="Cadenassage" class="tab-pane">
-                            @Html.Partial("SectionLignesCadenassage", @Model)
-
-                        </div>
-
-                        <div id="Decadenassage" class="tab-pane">
-
-                            @Html.Partial("SectionLignesDecadenassage", @Model)
-
-                        </div>
-
-                        <div id="DocFiche" class="tab-pane">
-
-                            @Html.Partial("SectionDocuments", @Model)
-
-                        </div>
-                    }
+            @if (!Model.DisplaySourceTab)
+            {
+                <div id="InfosGenerales" class="tab-pane active">
+                    @Html.Partial("SectionInfoGenerales", @Model)
                 </div>
+            }
+            else
+            {
+                <div id="InfosGenerales" class="tab-pane active">
+                    @Html.Partial("SectionInfoGenerales", @Model)
+                </div>
+            }
+
+
+            @if (Model.FicheCadenassageId != 0)
+            {
+
+                <div id="Materiel" class="tab-pane">
+                    @Html.Partial("SectionMateriel", @Model)
+
+                </div>
+
+
+
+                if (Model.DisplaySourceTab)
+                {
+                    <div id="Sources" class="tab-pane">
+                        @Html.Partial("SectionSources", new SourceEnergieCadenassageViewModel { FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
+                    </div>
+                }
+                else
+                {
+                    <div id="Sources" class="tab-pane">
+                        @Html.Partial("SectionSources", new SourceEnergieCadenassageViewModel { FicheCadenassageId = Model.FicheCadenassageId, SourcesEnergieId = Model.SourcesEnergieId })
+                    </div>
+                }
+
+                <div id="ImagesFiche" class="tab-pane">
+                    @Html.Partial("SectionImages", @Model)
+
+                </div>
+
+
+                <div id="Cadenassage" class="tab-pane">
+                    @Html.Partial("SectionLignesCadenassage", @Model)
+
+                </div>
+
+                <div id="Decadenassage" class="tab-pane">
+
+                    @Html.Partial("SectionLignesDecadenassage", @Model)
+
+                </div>
+
+                <div id="DocFiche" class="tab-pane">
+
+                    @Html.Partial("SectionDocuments", @Model)
+
+                </div>
+            }
+        </div>
 
 
 

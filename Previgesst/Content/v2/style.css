@@ -276,7 +276,8 @@
         box-sizing: border-box;
         height: auto !important;
     }
-    .k-widget.k-window .bg-white input[type=text].form-control {
+    .k-widget.k-window .bg-white input[type=text].form-control,
+    .k-widget.k-window .bg-white input[type=number].form-control {
         border: 1px solid #cccccc !important;
     }
     .k-widget.k-window .k-edit-form-container .k-edit-buttons{
@@ -312,3 +313,97 @@
     max-height: 500px;
     overflow: scroll;
 }
+
+/***** Remove Arrows/Spinners *****/
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/***** Remove Arrows/Spinners *****/
+.k-window-action.k-link,
+.k-window-action.k-link:hover {
+    border: 2px solid var(--annulerbtnbg);
+    border-radius: 15px !important;
+}
+
+/*.k-window-actions .k-icon.k-i-close {
+    border-radius: 20px;
+    padding: 4px;
+    background-position: -43px -21px;
+    background-size: 470px;
+    border: 1px solid red;
+}
+
+.k-window-action.k-link:hover {
+    border: none;
+    padding: 3px;
+}
+*/
+
+/*.k-window-action.k-link {
+    margin-right: 20px;
+    margin-block: 15px;
+}
+    .k-window-action.k-link:hover{
+        border: none;
+        padding:3px;
+    }
+
+    .k-window-actions .k-icon.k-i-close {
+        color: var(--white);
+        background-color: transparent;
+        border-color: var(--delbtnbg);
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 50%;*/
+        /*padding: 12px 14px;*/
+        /*line-height: 0px;
+        background-image: none;
+        padding: 5px;
+    }
+
+    .k-window-actions .k-icon.k-i-close:before {
+        content: url("images/delete.svg");
+    }
+
+    .k-window-actions .k-icon.k-i-close:hover {
+        color: var(--white);
+        background-color: transparent;
+        border-color: var(--delbtnbg);
+    }
+
+    .k-window-actions .k-icon.k-i-close.focus, 
+    .k-window-actions .k-icon.k-i-close:focus {
+        color: var(--white);
+        background-color: transparent;
+        border-color: var(--delbtnbg);
+        box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+    }
+
+    .k-window-actions .k-icon.k-i-close:not(:disabled):not(.disabled).active,
+    .k-window-actions .k-icon.k-i-close:not(:disabled):not(.disabled):active, 
+    .show > .k-window-actions .k-icon.k-i-close.dropdown-toggle {
+        color: var(--white);
+        background-color: transparent;
+        border-color: var(--delbtnbg);
+    }
+
+        .k-window-actions .k-icon.k-i-close:not(:disabled):not(.disabled).active:focus,
+        .k-window-actions .k-icon.k-i-close:not(:disabled):not(.disabled):active:focus,
+        .show > .k-window-actions .k-icon.k-i-close.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(33, 122, 147, .25);
+        }
+
+    .k-window-actions .k-icon.k-i-close img {
+        position: relative;
+        top: -3px;
+    }*/

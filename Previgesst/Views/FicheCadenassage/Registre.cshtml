@@ -33,7 +33,7 @@
                         .IsNotEqualTo(GridRES.NotEquals)
                     )))
                     .HtmlAttributes(new { @class = "td-round-left-border" })
-                    .Width(105);
+                    .Width("130px");
 
                 //columns.Bound(e => e.NoFicheCadenassage).Title(CadRegRES.Fiche).Filterable(f => f.Extra(false).Operators(operators => operators
                 //    .ForString(str => str.Clear()
@@ -49,7 +49,7 @@
                     .StartsWith(GridRES.StartsWith)
                     .IsEqualTo(GridRES.Egale)
                     .IsNotEqualTo(GridRES.NotEquals)
-                ))).Width(100);
+                ))).Width("160px");
 
                 columns.Bound(e => e.NomEquipement).Title(CadRegRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
                     .ForString(str => str.Clear()
@@ -57,15 +57,15 @@
                     .StartsWith(GridRES.StartsWith)
                     .IsEqualTo(GridRES.Egale)
                     .IsNotEqualTo(GridRES.NotEquals)
-                ))).Width(110);
+                ))).Width("185px");
 
-                columns.Bound(e => e.BonDeTravail).Title(CadRegRES.BonDeTravail).Width(50);
-                columns.Bound(e => e.DateDebut).Format("{0:yy-MMM-dd 0:HH:mm}").Filterable(f => f.Extra(false)).Title(CadRegRES.Debut).Width(90);
-                columns.Bound(e => e.FinPrevue).Format("{0:yy-MMM-dd}").Filterable(f => f.Enabled(false)).Title(CadRegRES.FinPrevueLe).Width(90);
-                columns.Bound(e => e.DateFin).Format("{0:yy-MMM-dd }").Filterable(f => f.Extra(false)).Title(CadRegRES.Fin).Width(90);
+                columns.Bound(e => e.BonDeTravail).Title(CadRegRES.BonDeTravail).Width("135px");
+                columns.Bound(e => e.DateDebut).Format("{0:yy-MMM-dd 0:HH:mm}").Filterable(f => f.Extra(false)).Title(CadRegRES.Debut).Width("120px");
+                columns.Bound(e => e.FinPrevue).Format("{0:yy-MMM-dd}").Filterable(f => f.Enabled(false)).Title(CadRegRES.FinPrevueLe).Width("120px");
+                columns.Bound(e => e.DateFin).Format("{0:yy-MMM-dd }").Filterable(f => f.Extra(false)).Title(CadRegRES.Fin).Width("120px");
 
-                columns.Bound(e => e.Note).Title(CadRegRES.Details).Width(120);
-                columns.Bound(e => e.NomAuditeur).Title(CadRegRES.Auditeur).Width(105);
+                columns.Bound(e => e.Note).Title(CadRegRES.Details);
+                columns.Bound(e => e.NomAuditeur).Title(CadRegRES.Auditeur).Width("135px");
 
                 //columns.Bound(e => e.Rep1).Title("Q1");
                 //columns.Bound(e => e.Rep2).Title("Q2");
@@ -76,7 +76,7 @@
                 {
                     c.Edit().Text(" ").HtmlAttributes(new { @class = "btn-table btn-edit" });
                 })
-                .Width(30).Hidden(!@Model.estAudit);
+                .Width("60px").Hidden(!@Model.estAudit);
             })
 
             .Sortable(s => s.AllowUnsort(false))

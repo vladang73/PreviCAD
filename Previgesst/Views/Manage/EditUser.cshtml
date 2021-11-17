@@ -1,4 +1,5 @@
-﻿@model UserViewModel
+﻿@using Previgesst.Ressources
+@model UserViewModel
 @{
     ViewBag.Title = "Utilisateur";
     Layout = "~/Views/Shared/_Layout_v2.cshtml";
@@ -16,7 +17,7 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" href='@Url.Action("Index", "AdminPrevi")'>
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
 
@@ -33,7 +34,7 @@
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href='@Url.Action("Index", "AdminPrevi")'>Accueil</a></li>
+            <li><a href='@Url.Action("Index", "AdminPrevi")'>@LayoutRES.Accueil</a></li>
             <li><a href='@Url.Action("Index", "Manage", new { })'>Utilisateurs</a></li>
             <li class="active" aria-current="page">Create/Edit</li>
         </ul>
@@ -55,8 +56,8 @@
                 <div class="col-md-12">
                     @Html.HiddenFor(m => m.IsCreate)
                     @Html.HiddenFor(m => m.CanDelete)
-                    
-                    
+
+
                     <div class="form-group m-3">
                         @Html.LabelFor(m => m.UserName, new { @class = "form-label" })
                         <div class="col-md-6">
@@ -151,7 +152,7 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-6">
                             <input type="submit" class="btn btn-mettre m-1" value="Enregistrer" />
-                            
+
                             @if (Model.CanDelete)
                             {
                                 <button id="btnDelete" type="button" class="btn btn-Annuler m-1" data-toggle="modal" data-target="#delete-popup">Supprimer</button>

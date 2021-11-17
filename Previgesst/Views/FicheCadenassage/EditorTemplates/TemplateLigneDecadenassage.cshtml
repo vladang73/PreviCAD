@@ -53,7 +53,8 @@
                             .Min(0)
                             .Decimals(1)
                             .Format("N1")
-                        //.Culture(System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "-CA")
+                            .Spinners(false)
+                //.Culture(System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName + "-CA")
                 )
 
                 @Html.ValidationMessageFor(m => m.NoLigne, "", new { @class = "text-danger" })

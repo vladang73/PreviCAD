@@ -106,7 +106,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Procédures de contrôle des source d’énergie.
+        ///   Looks up a localized string similar to PROCÉDURES.
         /// </summary>
         public static string Fiches {
             get {
@@ -160,7 +160,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numéro d&apos;employé.
+        ///   Looks up a localized string similar to Identifiant de l&apos;employé.
         /// </summary>
         public static string NoEmploye {
             get {

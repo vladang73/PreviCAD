@@ -1,4 +1,5 @@
-﻿
+﻿@using Previgesst.Ressources
+
 @{
     ViewBag.Title = "Index";
     //  Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +23,7 @@
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
             <a class="nav-link home-navlink" role="tab" data-toggle="tab" href="~/AdminPrevi/Index">
-                <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Accueil</p>
+                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
     </ul>
@@ -34,8 +35,8 @@
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href="~/AdminPrevi/Index">Accueil</a></li>
-            <li class="active">Gestion des clients</li>
+            <li><a href="~/AdminPrevi/Index">@LayoutRES.Accueil</a></li>
+            <li class="active">@LayoutRES.ActionClientAdmin</li>
         </ul>
     </div>
 
@@ -43,7 +44,7 @@
 
         <div class="table-top-header">
             <div class="page-title d-flex justify-content-center align-items-center">
-                <h3>Clients</h3>
+                <h3>@LayoutRES.ActionClient</h3>
             </div>
             <div class="page-table-meta">
                 <div class="add-icon">

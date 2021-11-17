@@ -1,6 +1,32 @@
 ﻿@using Previgesst.Ressources
 @using Previgesst.Ressources.Previcad
 
+@{
+    string path = Request.Url.PathAndQuery;
+    string selectedLang = string.Empty;
+
+
+    if (path.Contains("/en/")) { selectedLang = "en"; }
+    else if (path.Contains("/fr/")) { selectedLang = "fr"; }
+
+
+    path = path.Replace("/en/", "");
+    path = path.Replace("/fr/", "");
+    if (path.Length == 0)
+    {
+        path = "RegistreMobile/Index";
+    }
+    if (path.Substring(0, 1) == "/")
+    {
+        path = path.Substring(1);
+    }
+    ////utilisé pour prévicad client
+    //if (Session["ClientID"] != null && !path.Contains("?"))
+    //{
+    //    path = path + "?ClientID=" + Session["ClientID"];
+    //}
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +35,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
-    <title>Prévigesst - @ViewBag.Title</title>
+    <title>Prévicad - @ViewBag.Title</title>
 
     <link href="/Content/v2/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="/Content/v2/mobile/index.css" rel="stylesheet" />
@@ -28,6 +54,12 @@
 
     <nav class="navbar navbar-light fixed-top navbar-bg flex-md-nowrap">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0 white-logo" href="/RegistreMobile"><img src="/content/v2/images/logo-white.png"></a>
+
+        <select name="slct" id="slct" class="lang-select">
+            <option value="/fr/@path" @if (selectedLang == "fr") { <text> selected="selected" </text> }>Fr</option>
+            <option value="/en/@path" @if (selectedLang == "en") { <text> selected="selected" </text> }>En</option>
+        </select>
+
         <button class="navbar-toggler" type="button">
             <img class="my-1 mx-2 close" src="/content/v2/images/icons-delete.svg">
 
@@ -44,22 +76,22 @@
                 <ul class="nav flex-column sidebar-nav ">
                     <li class="nav-item text-center">
                         <a class="nav-link home-navlink active" href="#">
-                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Procédres de contrôle</p>
+                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">@RegistreRES.ActionProcedures</p>
                         </a>
                     </li>
                     <li class="nav-item text-center">
                         <a class="nav-link home-navlink" href="#">
-                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Cadenassage en cours</p>
+                            <img src="/content/v2/images/Procédures.svg"><p class="nav-link-text">@RegistreRES.ActionEnCours</p>
                         </a>
                     </li>
                     <li class="nav-item text-center">
                         <a class="nav-link home-navlink" href="#">
-                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Cadenassage terminés</p>
+                            <img src="/content/v2/images/left-icon20.svg"><p class="nav-link-text">@RegistreRES.ActionTermines</p>
                         </a>
                     </li>
                     <li class="nav-item text-center">
                         <a class="nav-link home-navlink" href="#">
-                            <img src="/content/v2/images/icon-home.png"><p class="nav-link-text">Programme de cadenassage</p>
+                            <img src="/content/v2/images/attach.svg"><p class="nav-link-text">@RegistreRES.ActionProgramme</p>
                         </a>
                     </li>
                 </ul>
@@ -68,34 +100,35 @@
                         <li class="nav-item text-center nav-bottom-submenu">
                             <a class="nav-link setting-navlink" href="#">
                                 <img src="/content/v2/images/setting-icon.png">
-                                <span class="nav-title">Paramétres</span>
+                                <span class="nav-title">Paramètres</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-chevron-right navbar-bottom-icon" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
                                 </svg>
                             </a>
                             <ul class="submenu">
-                                <li><a class="submenu-dropdown-item" href="#">Utilisateurs</a></li>
-                                <li><a class="submenu-dropdown-item" href="#">Mon compte</a></li>
-                                <li><a class="submenu-dropdown-item" href="#">Centre de support</a></li>
+                                @*<li><a class="submenu-dropdown-item" href="#">Utilisateurs</a></li>*@
+                                <li><a class="submenu-dropdown-item" href="#">@RegistreRES.ActionMonCompte</a></li>
+                                <li><a class="submenu-dropdown-item" href="#">@RegistreRES.SupportCenter</a></li>
                             </ul>
                         </li>
                         <li class="nav-item text-center mt-2">
 
                             @{
-                                using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
+                                using (Html.BeginForm("LogOff", "RegistreMobile", FormMethod.Post, new { id = "logoutForm" }))
                                 {
-                                    string path = Request.Url.PathAndQuery;
+                                    //string path = Request.Url.PathAndQuery;
 
-                                    path = path.Replace("/en/", "");
-                                    path = path.Replace("/fr/", "");
-                                    if (path.Length == 0)
-                                    {
-                                        path = "ClientLogin/Index";
-                                    }
-                                    if (path.Substring(0, 1) == "/")
-                                    {
-                                        path = path.Substring(1);
-                                    }
+                                    //path = path.Replace("/en/", "");
+                                    //path = path.Replace("/fr/", "");
+                                    //if (path.Length == 0)
+                                    //{
+                                    //    path = "RegistreMobile/Index";
+                                    //}
+                                    //if (path.Substring(0, 1) == "/")
+                                    //{
+                                    //    path = path.Substring(1);
+                                    //}
+
                                     //utilisé pour prévicad client
                                     if (Session["ClientID"] != null && !path.Contains("?"))
                                     {
@@ -103,10 +136,10 @@
                                     }
 
 
-                                    
+
                                     <a class="nav-link  power-navlink active tex" href="javascript:document.getElementById('logoutForm').submit()">
                                         <img src="/content/v2/images/power-icon.png">
-                                        <span class="nav-title">@LayoutRES.SeDeconnecter</span>
+                                        <span class="nav-title">@RegistreRES.SeDeconnecter</span>
                                     </a>
                                 }
                             }
@@ -119,8 +152,8 @@
                     <img src="/content/v2/images/brand-logo.png">
                 </div>
                 <div class="nav-footer-content">
-                    <span class="app-prevention" style="color:#0835B0">La prevention en application.</span>
-                    <p><span style="color:#329FFD">Plateforme des employés </span>Version 2.0 <br /> Copyright @DateTime.Now.Year Prévigesst. Tout droit réservés.</p>
+                    <span class="app-prevention" style="color:#0835B0">@LayoutRES.FooterTitle</span>
+                    <p><span style="color:#329FFD">@LayoutRES.PlateformEmployee </span>Version 2.0 <br /> @LayoutRES.FooterCopyright @LayoutRES.FooterRights</p>
 
                 </div>
             </div>
@@ -135,80 +168,80 @@
 
     @*
 
-    <header class="white-light-bg py-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-6"><a href="/RegistreMobile"> <img src="/content/mobile/images/logo.png" alt="Previcad Logo" /></a> </div>
-                <div class="col-6">
+        <header class="white-light-bg py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6"><a href="/RegistreMobile"> <img src="/content/mobile/images/logo.png" alt="Previcad Logo" /></a> </div>
+                    <div class="col-6">
 
 
-                    @{
-                        using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
-                        {
-                            string path = Request.Url.PathAndQuery;
-
-                            path = path.Replace("/en/", "");
-                            path = path.Replace("/fr/", "");
-                            if (path.Length == 0)
+                        @{
+                            using (Html.BeginForm("LogOff", "ClientLogin", FormMethod.Post, new { id = "logoutForm" }))
                             {
-                                path = "ClientLogin/Index";
+                                string path = Request.Url.PathAndQuery;
+
+                                path = path.Replace("/en/", "");
+                                path = path.Replace("/fr/", "");
+                                if (path.Length == 0)
+                                {
+                                    path = "ClientLogin/Index";
+                                }
+                                if (path.Substring(0, 1) == "/")
+                                {
+                                    path = path.Substring(1);
+                                }
+                                //utilisé pour prévicad client
+                                if (Session["ClientID"] != null && !path.Contains("?"))
+                                {
+                                    path = path + "?ClientID=" + Session["ClientID"];
+                                }
+
+
+                                string nomUtilisateur = "";
+                                if (Request.IsAuthenticated)
+                                {
+                                    Previgesst.Sessions.sessionInfo session = (Previgesst.Sessions.sessionInfo)Session["utilisateur"];
+                                    nomUtilisateur = session?.Nom;
+                                }
+
+                                if (HttpContext.Current.Session["EmployeCadenassage"] != null)
+                                {
+                                    EmployeRegistreViewModel employe = (EmployeRegistreViewModel)HttpContext.Current.Session["EmployeCadenassage"];
+
+                                    nomUtilisateur = employe.Nom;
+                                }
+
+                                <div class="dropdown  d-flex justify-content-end ">
+                                    <a class="text-decoration-none  fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @nomUtilisateur
+                                        <i class="ri-arrow-down-s-line position-relative" style="top: 3px"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">@LayoutRES.SeDeconnecter</a></li>
+
+                                        <li><hr /></li>
+                                        <li><a class="dropdown-item" onclick="location.href='/fr/@path'">FR</a></li>
+                                        <li><a class="dropdown-item" onclick="location.href='/en/@path'">EN</a></li>
+                                    </ul>
+                                </div>
+
                             }
-                            if (path.Substring(0, 1) == "/")
-                            {
-                                path = path.Substring(1);
-                            }
-                            //utilisé pour prévicad client
-                            if (Session["ClientID"] != null && !path.Contains("?"))
-                            {
-                                path = path + "?ClientID=" + Session["ClientID"];
-                            }
-
-
-                            string nomUtilisateur = "";
-                            if (Request.IsAuthenticated)
-                            {
-                                Previgesst.Sessions.sessionInfo session = (Previgesst.Sessions.sessionInfo)Session["utilisateur"];
-                                nomUtilisateur = session?.Nom;
-                            }
-
-                            if (HttpContext.Current.Session["EmployeCadenassage"] != null)
-                            {
-                                EmployeRegistreViewModel employe = (EmployeRegistreViewModel)HttpContext.Current.Session["EmployeCadenassage"];
-
-                                nomUtilisateur = employe.Nom;
-                            }
-
-                            <div class="dropdown  d-flex justify-content-end ">
-                                <a class="text-decoration-none  fw-bold dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @nomUtilisateur
-                                    <i class="ri-arrow-down-s-line position-relative" style="top: 3px"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">@LayoutRES.SeDeconnecter</a></li>
-
-                                    <li><hr /></li>
-                                    <li><a class="dropdown-item" onclick="location.href='/fr/@path'">FR</a></li>
-                                    <li><a class="dropdown-item" onclick="location.href='/en/@path'">EN</a></li>
-                                </ul>
-                            </div>
-
                         }
-                    }
+                    </div>
                 </div>
             </div>
+        </header>
+
+        <div class="container-fluid body-content">
+            <main>
+                @RenderBody()
+            </main>
+
+            <footer class="footer mt-auto py-3">
+                <hr />
+                <p>PréviCad @DateTime.Now.Year, PréviCad. Tous droits réservés</p>
+            </footer>
         </div>
-    </header>
-
-    <div class="container-fluid body-content">
-        <main>
-            @RenderBody()
-        </main>
-
-        <footer class="footer mt-auto py-3">
-            <hr />
-            <p>PréviCad @DateTime.Now.Year, PréviCad. Tous droits réservés</p>
-        </footer>
-    </div>
 
     *@
 
@@ -216,6 +249,10 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#slct').change(function () {
+                location.href = $(this).val();
+            });
+
             $('.nav-bottom-submenu .nav-link').click(function () {
                 $(this).parents('.nav-bottom-submenu').toggleClass('active');
             })

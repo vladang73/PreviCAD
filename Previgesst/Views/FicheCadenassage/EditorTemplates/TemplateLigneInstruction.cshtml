@@ -58,11 +58,11 @@
                 @Html.LabelFor(m => m.NoLigne, new { @class = "form-label d-block" })
 
                 @(Html.Kendo().NumericTextBoxFor(m => m.NoLigne)
-                .HtmlAttributes(new { @class = "form-control lh-50", type="text" })
-                .Min(0)
-                .Decimals(1)
-                .Format("N1")
-
+                        .HtmlAttributes(new { @class = "form-control lh-50", type="text" })
+                        .Min(0)
+                        .Decimals(1)
+                        .Format("N1")
+                        .Spinners(false)
                 )
 
                 @Html.ValidationMessageFor(m => m.NoLigne, "", new { @class = "text-danger" })

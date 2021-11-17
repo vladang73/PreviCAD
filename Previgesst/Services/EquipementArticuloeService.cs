@@ -17,15 +17,19 @@ namespace Previgesst.Services
 
         private SourceEnergieRepository sourceEnergieRepository;
         private DispositifRepository dispositifRepository;
-        private MaterielRepository materielRepository;
+        //private MaterielRepository materielRepository;
+        private AccessoireRepository accessoireRepository;
 
 
-        public EquipementArticuloeService(EquipementRepository equipementRepository, SourceEnergieRepository sourceEnergieRepository, DispositifRepository dispositifRepository, MaterielRepository materielRepository, EquipementArticuloRepository equipementArticuloRepository)
+        public EquipementArticuloeService(EquipementRepository equipementRepository, SourceEnergieRepository sourceEnergieRepository, 
+            DispositifRepository dispositifRepository,  AccessoireRepository accessoireRepository, //MaterielRepository materielRepository,
+            EquipementArticuloRepository equipementArticuloRepository)
         {
             this.sourceEnergieRepository = sourceEnergieRepository;
             this.dispositifRepository = dispositifRepository;
-            this.materielRepository = materielRepository;
+            //this.materielRepository = materielRepository;
             this.equipementArticuloRepository = equipementArticuloRepository;
+            this.accessoireRepository = accessoireRepository;
         }
 
 
@@ -40,7 +44,8 @@ namespace Previgesst.Services
                 from eq in equipementArticuloRepository.AsQueryable()
                 join eng in sourceEnergieRepository.AsQueryable() on eq.Energy equals eng.SourceEnergieId
                 join dis in dispositifRepository.AsQueryable() on eq.Deposit equals dis.DispositifId
-                join mat in materielRepository.AsQueryable() on eq.Accessories equals mat.MaterielId
+                //join mat in materielRepository.AsQueryable() on eq.Accessories equals mat.MaterielId
+                join acc in accessoireRepository.AsQueryable() on eq.Accessories equals acc.AccessoireId
 
                 where eq.EquipementId == eqID
                 select new EquipementArticuloViewModel
@@ -51,11 +56,10 @@ namespace Previgesst.Services
                     Deposit = eq.Deposit,
                     Energy = eq.Energy,
 
-                    AccessoriesDescription = mat.Description,
+                    AccessoriesDescription = acc.Description,
                     DepositDescription = dis.Description,
                     EnergyDescription = eng.Description,
                     Nomenclature = eq.Nomenclature,
-
                 })
                 .OrderBy(x => x.EquipementArticuloID)
                 .ToDataSourceResult(request);
@@ -70,7 +74,8 @@ namespace Previgesst.Services
                 from eq in equipementArticuloRepository.AsQueryable()
                 join eng in sourceEnergieRepository.AsQueryable() on eq.Energy equals eng.SourceEnergieId
                 join dis in dispositifRepository.AsQueryable() on eq.Deposit equals dis.DispositifId
-                join mat in materielRepository.AsQueryable() on eq.Accessories equals mat.MaterielId
+                //join mat in materielRepository.AsQueryable() on eq.Accessories equals mat.MaterielId
+                join acc in accessoireRepository.AsQueryable() on eq.Accessories equals acc.AccessoireId
 
                 select new EquipementArticuloViewModel
                 {
@@ -80,7 +85,7 @@ namespace Previgesst.Services
                     Deposit = eq.Deposit,
                     Energy = eq.Energy,
 
-                    AccessoriesDescription = mat.Description,
+                    AccessoriesDescription = acc.Description,
                     DepositDescription = dis.Description,
                     EnergyDescription = eng.Description,
                     Nomenclature = eq.Nomenclature,

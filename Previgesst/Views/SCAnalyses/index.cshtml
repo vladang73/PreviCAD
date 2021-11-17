@@ -1,4 +1,5 @@
-﻿
+﻿@using Previgesst.Ressources
+
 @{
     ViewBag.Title = "Analyses";
     Layout = "~/Views/Shared/_LayoutClient.cshtml";
@@ -11,7 +12,7 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="~/MesApplications/Index">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="~/MesApplications/Index">@LayoutRES.Accueil</a></li>
 
         <li class="breadcrumb-item active" aria-current="page">Analyse de risques</li>
     </ol>
@@ -199,11 +200,9 @@
 <script type="text/javascript">
 
 
-    function docListeDataBound(e)
-    { }
+    function docListeDataBound(e) { }
 
-    function docListeErreur(e)
-    { }
+    function docListeErreur(e) { }
 
 
     function ConfirmDeleteRow(e) {
@@ -233,8 +232,8 @@
                 $.each(args.errors, function (propertyName) {
                     var errorList = validationTemplate({ field: propertyName, messages: this.errors });
                     ShowNotification("Erreur - Gestions",
-                                        errorList,
-                                        "errorListTemplate");
+                        errorList,
+                        "errorListTemplate");
                 });
             });
         }

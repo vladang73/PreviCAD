@@ -44,9 +44,9 @@
                 <label for="Model" class="form-label">@CadEquipRES.Accessoires</label>
 
                 @(Html.Kendo().DropDownListFor(m => m.Accessories)
-                        .DataValueField("MaterielId")
+                        .DataValueField("AccessoireId")
                         .DataTextField("Description")
-                        .BindTo((System.Collections.IEnumerable)ViewData["Materiel"])
+                        .BindTo((System.Collections.IEnumerable)ViewData["Accessoires"])
                         .HtmlAttributes(new { data_value_primitive = "true" })
                 )
                 @Html.ValidationMessageFor(model => model.Accessories)

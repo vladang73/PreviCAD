@@ -88,7 +88,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cadenasser.
+        ///   Looks up a localized string similar to Intervention.
         /// </summary>
         public static string Cadenasser {
             get {
@@ -322,7 +322,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scannez le QR.
+        ///   Looks up a localized string similar to Scanner le QR.
         /// </summary>
         public static string ScanQR {
             get {
@@ -331,7 +331,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scannez le code QR de l&apos;équipement.
+        ///   Looks up a localized string similar to Scanner le QR.
         /// </summary>
         public static string ScanQREquip {
             get {
