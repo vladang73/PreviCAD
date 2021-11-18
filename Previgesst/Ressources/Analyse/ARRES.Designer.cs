@@ -79,11 +79,38 @@ namespace Previgesst.Ressources.Analyse {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ajouter.
+        /// </summary>
+        public static string ButtonAjouter {
+            get {
+                return ResourceManager.GetString("ButtonAjouter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gérer les analyses.
         /// </summary>
         public static string ButtonClient {
             get {
                 return ResourceManager.GetString("ButtonClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Créer.
+        /// </summary>
+        public static string ButtonCreer {
+            get {
+                return ResourceManager.GetString("ButtonCreer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Détails.
+        /// </summary>
+        public static string ButtonDetails {
+            get {
+                return ResourceManager.GetString("ButtonDetails", resourceCulture);
             }
         }
         
@@ -142,6 +169,15 @@ namespace Previgesst.Ressources.Analyse {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Site Administratif - Création d&apos;un client.
+        /// </summary>
+        public static string CreateAdminTitle {
+            get {
+                return ResourceManager.GetString("CreateAdminTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modifier.
         /// </summary>
         public static string Edit {
@@ -160,11 +196,29 @@ namespace Previgesst.Ressources.Analyse {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Erreur.
+        /// </summary>
+        public static string Erreur {
+            get {
+                return ResourceManager.GetString("Erreur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Identificateur.
         /// </summary>
         public static string Identificateur {
             get {
                 return ResourceManager.GetString("Identificateur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Charger l&apos;image.
+        /// </summary>
+        public static string ImgWindowTitle {
+            get {
+                return ResourceManager.GetString("ImgWindowTitle", resourceCulture);
             }
         }
         

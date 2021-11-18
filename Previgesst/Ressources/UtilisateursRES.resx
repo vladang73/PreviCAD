@@ -150,6 +150,15 @@
   <data name="ErreurNomUtilisateur" xml:space="preserve">
     <value>Le nom d'usager ne doit pas dépasser {1} caractères."</value>
   </data>
+  <data name="HeadingAcces" xml:space="preserve">
+    <value>ACCÈS</value>
+  </data>
+  <data name="HeadingNotifications" xml:space="preserve">
+    <value>NOTIFICATIONS</value>
+  </data>
+  <data name="HeadingParameters" xml:space="preserve">
+    <value>PARAMÈTRES</value>
+  </data>
   <data name="LectureAnalyse" xml:space="preserve">
     <value>Lecture Analyse de risque</value>
   </data>
@@ -158,6 +167,9 @@
   </data>
   <data name="LecturePrevicad" xml:space="preserve">
     <value>Lecture Prévicad</value>
+  </data>
+  <data name="Modifier" xml:space="preserve">
+    <value>Modifier</value>
   </data>
   <data name="MotDePasse" xml:space="preserve">
     <value>Mot de passe</value>

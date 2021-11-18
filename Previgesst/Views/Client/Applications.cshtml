@@ -1,8 +1,10 @@
 ﻿@model ClientEditDetailsViewModel
+@using Previgesst.Ressources
+
 
 <div class="table-top-header">
     <div class="page-title d-flex justify-content-center align-items-center">
-        <h3 class="m-0">Applications permises</h3>
+        <h3 class="m-0">@ApplicationsRES.Title</h3>
     </div>
 </div>
 
@@ -19,7 +21,8 @@
 
         @Html.LabelFor(m => m.ApplicationIds, new { @class = "form-label" })
 
-        @(Html.Kendo().MultiSelectFor(m => m.ApplicationIds).HtmlAttributes(new { @class = "form-control" })
+        @(Html.Kendo().MultiSelectFor(m => m.ApplicationIds)
+                    .HtmlAttributes(new { @class = "form-control" })
                     .DataTextField("Nom")
                     .DataValueField("ApplicationPreviId")
                     .AutoClose(true)
@@ -30,7 +33,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" class="btn btn-mettre m-1" value="Enregistrer" />
+        <input type="submit" class="btn btn-mettre m-1" value="@ApplicationsRES.ButtonEnregistrer" />
     </div>
 
 

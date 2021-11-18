@@ -160,6 +160,33 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACCÈS.
+        /// </summary>
+        public static string HeadingAcces {
+            get {
+                return ResourceManager.GetString("HeadingAcces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NOTIFICATIONS.
+        /// </summary>
+        public static string HeadingNotifications {
+            get {
+                return ResourceManager.GetString("HeadingNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PARAMÈTRES.
+        /// </summary>
+        public static string HeadingParameters {
+            get {
+                return ResourceManager.GetString("HeadingParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lecture Analyse de risque.
         /// </summary>
         public static string LectureAnalyse {
@@ -183,6 +210,15 @@ namespace Previgesst.Ressources {
         public static string LecturePrevicad {
             get {
                 return ResourceManager.GetString("LecturePrevicad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modifier.
+        /// </summary>
+        public static string Modifier {
+            get {
+                return ResourceManager.GetString("Modifier", resourceCulture);
             }
         }
         

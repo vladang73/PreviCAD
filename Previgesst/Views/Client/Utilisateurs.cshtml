@@ -4,7 +4,7 @@
 
 <div class="table-top-header">
     <div class="page-title d-flex justify-content-center align-items-center">
-        <h3 class="m-0">Utilisateur</h3>
+        <h3 class="m-0">@UtilisateursRES.User</h3>
     </div>
     <div class="page-table-meta">
         <div class="add-icon">
@@ -56,7 +56,7 @@
 
             columns.Command(c =>
             {
-                c.Edit().Text("Modifier").HtmlAttributes(new { @class = "btn-table btn-edit" });
+                c.Edit().Text(UtilisateursRES.Modifier).HtmlAttributes(new { @class = "btn-table btn-edit" });
                 c.Custom(" ")
                         .Click("ConfirmDeleteRow")
                         .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });

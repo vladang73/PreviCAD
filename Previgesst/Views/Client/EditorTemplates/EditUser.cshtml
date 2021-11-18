@@ -1,4 +1,4 @@
-﻿
+﻿@using Previgesst.Ressources
 @model UtilisateurIndexViewModel
 
 
@@ -51,9 +51,6 @@
 
 
             <div class="form-group mt-3">
-                @*@Html.LabelFor(model => model.Actif, new { @class = "form-label d-block" })
-                @Html.CheckBoxFor(model => model.Actif)*@
-
                 <div class="squaredThree squaredThree-blue d-inline-block">
                     <input type="checkbox" id="Actif" name="Actif" @(Model.Actif ? "checked" : "") value="@Convert.ToString(Model.Actif).ToLower()" />
                     <label for="squaredone"><span>@Html.DisplayNameFor(x => x.Actif) </span></label>
@@ -63,15 +60,12 @@
 
             </div>
 
-            <h4 style="text-align:center;padding:20px 0;"><strong>PARAMÈTRES</strong></h4>
+            <h4 style="text-align:center;padding:20px 0;"><strong>@UtilisateursRES.HeadingParameters</strong></h4>
 
-            <p><strong>NOTIFICATIONS</strong></p>
+            <p><strong>@UtilisateursRES.HeadingNotifications</strong></p>
             <hr />
 
             <div class="form-group mt-3">
-                @*@Html.LabelFor(model => model.NotificationDebutCad, new { @class = "form-label d-block" })
-        @Html.CheckBoxFor(model => model.NotificationDebutCad)*@
-
                 <div class="squaredThree squaredThree-blue d-inline-block">
                     <input type="checkbox" id="NotificationDebutCad" name="NotificationDebutCad" @(Model.NotificationDebutCad ? "checked" : "") value="@Convert.ToString(Model.NotificationDebutCad).ToLower()" />
                     <label for="squaredone"><span>@Html.DisplayNameFor(x => x.NotificationDebutCad) </span></label>
@@ -82,9 +76,6 @@
                 <br />
                 <div class="clearfix"></div>
 
-                @*@Html.LabelFor(model => model.NotificationNonConformite, new { @class = "form-label d-block" })
-        @Html.CheckBoxFor(model => model.NotificationNonConformite)*@
-
                 <div class="squaredThree squaredThree-blue d-inline-block mt-3">
                     <input type="checkbox" id="NotificationNonConformite" name="NotificationNonConformite" @(Model.NotificationNonConformite ? "checked" : "") value="@Convert.ToString(Model.NotificationNonConformite).ToLower()" />
                     <label for="squaredone"><span>@Html.DisplayNameFor(x => x.NotificationNonConformite) </span></label>
@@ -94,7 +85,7 @@
             </div>
 
             <hr />
-            <p><strong>ACCÈS</strong></p>
+            <p><strong>@UtilisateursRES.HeadingAcces</strong></p>
             <hr />
 
             @if (User.IsInRole("Administrateur"))
@@ -103,9 +94,6 @@
                     <div class="col-md-10">
 
                         <div class="form-group mt-3">
-                            @*@Html.LabelFor(model => model.AdmUtilisateurs, new { @class = "form-label d-block" })
-                            @Html.CheckBoxFor(model => model.AdmUtilisateurs)*@
-
                             <div class="squaredThree squaredThree-blue d-inline-block">
                                 <input type="checkbox" id="AdmUtilisateurs" name="AdmUtilisateurs" @(Model.AdmUtilisateurs ? "checked" : "") value="@Convert.ToString(Model.AdmUtilisateurs).ToLower()" />
                                 <label for="squaredone"><span>@Html.DisplayNameFor(x => x.AdmUtilisateurs) </span></label>
@@ -126,9 +114,6 @@
 
                 <div class="col-md-5">
                     <div class="form-group mt-3">
-                        @*@Html.LabelFor(model => model.AdmPrevicad, new { @class = "form-label d-block" })
-                        @Html.CheckBoxFor(model => model.AdmPrevicad)*@
-
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="AdmPrevicad" name="AdmPrevicad" @(Model.AdmUtilisateurs ? "checked" : "") value="@Convert.ToString(Model.AdmPrevicad).ToLower()" />
                             <label for="squaredone"><span>@Html.DisplayNameFor(x => x.AdmPrevicad) </span></label>
@@ -137,9 +122,6 @@
 
                     </div>
                     <div class="form-group mt-3">
-                        @*@Html.LabelFor(model => model.AdmAnalyseRisque, new { @class = "form-label d-block" })
-                        @Html.CheckBoxFor(model => model.AdmAnalyseRisque)*@
-
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="AdmAnalyseRisque" name="AdmAnalyseRisque" @(Model.AdmAnalyseRisque ? "checked" : "") value="@Convert.ToString(Model.AdmAnalyseRisque).ToLower()" />
                             <label for="squaredone"><span>@Html.DisplayNameFor(x => x.AdmAnalyseRisque) </span></label>
@@ -149,9 +131,7 @@
 
                     </div>
                     <div class="form-group mt-3">
-                        @*@Html.LabelFor(model => model.Auditeur, new { @class = "form-label d-block" })
-                        @Html.CheckBoxFor(model => model.Auditeur)*@
-
+             
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="Auditeur" name="Auditeur" @(Model.Auditeur ? "checked" : "") value="@Convert.ToString(Model.Auditeur).ToLower()" />
                             <label for="squaredone"><span>@Html.DisplayNameFor(x => x.Auditeur) </span></label>
@@ -163,9 +143,7 @@
 
                 <div class="col-md-5">
                     <div class="form-group mt-3">
-                        @*@Html.LabelFor(model => model.ROPrevicad, new { @class = "form-label d-block" })
-                        @Html.CheckBoxFor(model => model.ROPrevicad)*@
-
+          
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="ROPrevicad" name="ROPrevicad" @(Model.ROPrevicad ? "checked" : "") value="@Convert.ToString(Model.ROPrevicad).ToLower()" />
                             <label for="squaredone"><span>@Html.DisplayNameFor(x => x.ROPrevicad) </span></label>
@@ -175,9 +153,7 @@
 
                     </div>
                     <div class="form-group mt-3">
-                        @*@Html.LabelFor(model => model.ROAnalyseRisque, new { @class = "form-label d-block" })
-                        @Html.CheckBoxFor(model => model.ROAnalyseRisque)*@
-
+       
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="ROAnalyseRisque" name="ROAnalyseRisque" @(Model.ROAnalyseRisque ? "checked" : "") value="@Convert.ToString(Model.ROAnalyseRisque).ToLower()" />
                             <label for="squaredone"><span>@Html.DisplayNameFor(x => x.ROAnalyseRisque) </span></label>
@@ -187,9 +163,7 @@
 
                     </div>
                     <div class="form-group mt-3">
-                        @*@Html.LabelFor(model => model.RODocuments, new { @class = "form-label d-block" })
-                        @Html.CheckBoxFor(model => model.RODocuments)*@
-
+      
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="RODocuments" name="RODocuments" @(Model.RODocuments ? "checked" : "") value="@Convert.ToString(Model.RODocuments).ToLower()" />
                             <label for="squaredone"><span>@Html.DisplayNameFor(x => x.RODocuments) </span></label>
@@ -219,7 +193,6 @@
 <script>
     jQuery(document).ready(function () {
         "use strict";
-        console.log('creation material');
 
         jQuery('.k-grid-update').removeClass('btn-edit').addClass('btn-mettre m-1');
         jQuery('.k-grid-cancel').removeClass('btn-edit').addClass('btn-Annuler m-1');

@@ -160,6 +160,24 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gestion des clients.
+        /// </summary>
+        public static string TitleDetails {
+            get {
+                return ResourceManager.GetString("TitleDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximums.
+        /// </summary>
+        public static string TitleMaximums {
+            get {
+                return ResourceManager.GetString("TitleMaximums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Utilisateurs.
         /// </summary>
         public static string Utilisateurs {

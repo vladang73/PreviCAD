@@ -150,6 +150,12 @@
   <data name="PasAdminEtLecture" xml:space="preserve">
     <value>On ne peut pas être à la fois Admin et Lecture pour une application</value>
   </data>
+  <data name="TitleDetails" xml:space="preserve">
+    <value>Gestion des clients</value>
+  </data>
+  <data name="TitleMaximums" xml:space="preserve">
+    <value>Maximums</value>
+  </data>
   <data name="Utilisateurs" xml:space="preserve">
     <value>Utilisateurs</value>
   </data>

@@ -1,4 +1,5 @@
 ﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Analyse
 
 @{
     ViewBag.Title = "Index";
@@ -90,7 +91,7 @@
                         .Width("60px");
 
 
-                columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a target='_blank' href='../Client/Details?id=#= ClientId #' class='k-button btn-detail mx-1'>Détails</a>")
+                columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a target='_blank' href='../Client/Details?id=#= ClientId #' class='k-button btn-detail mx-1'>"+ Html.Raw(ARRES.ButtonDetails) +"</a>")
                         .Title("").Filterable(false).Sortable(false)
                         .Width("140px");
 
@@ -101,7 +102,8 @@
                         .Click("ConfirmDeleteRow")
                         .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
                 })
-                .Width("200px");
+                .Width("200px")
+                .HtmlAttributes(new { @class = "text-nowrap" });
             })
             .Sortable(s => s.AllowUnsort(false))
             .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
@@ -140,7 +142,7 @@
             )
             .ToolBar(t =>
             {
-                t.Create().Text("Ajouter").HtmlAttributes(new { @class = "d-none" });
+                t.Create().Text(ARRES.ButtonAjouter).HtmlAttributes(new { @class = "d-none" });
             })
         )
     </div>
@@ -173,7 +175,7 @@
     function ListErreur(e, status) {
         if (e.errors) {
 
-            var message = "Erreur:\n";
+            var message = "@Html.Raw(ARRES.Erreur):\n";
 
             var grid = $('#list').data('kendoGrid');
             var gridElement = grid.editable.element;
@@ -225,30 +227,25 @@
     var timer;
 
     function Edit(e) {
-        var item = $(e.container).find('[value=Image]').hide();
+        $(e.container).find('[value=Image]').hide();
         // add save and cancel classes
         $(e.container).find('.k-grid-update.btn-table').removeClass('btn-edit').addClass('btn-mettre m-1');
         $(e.container).find('.k-grid-cancel.btn-table').removeClass('btn-edit').addClass('btn-Annuler m-1');
     }
 
     function changerImage(e) {
-
-
         var path = '@Url.Content("~/upload/SetClientPic/")';
         path = path + e;
 
         var config = { contextPath: path };
 
-        imageWindow = PopupCenter(config.contextPath, "Charger l'image", 600, 300);
+        imageWindow = PopupCenter(config.contextPath, "@Html.Raw(ARRES.ImgWindowTitle)", 600, 300);
 
         timer = setInterval(checkWindow, 100);
-
     }
 
     function checkWindow() {
-
         if (imageWindow.closed) {
-
             $('#list').data('kendoGrid').dataSource.read();
             $('#list').data('kendoGrid').refresh();
             clearInterval(timer);

@@ -1,8 +1,9 @@
 ﻿@model ClientEditDetailsViewModel
+@using Previgesst.Ressources
 
 <div class="table-top-header">
     <div class="page-title d-flex justify-content-center align-items-center">
-        <h3 class="m-0">Maximums</h3>
+        <h3 class="m-0">@ClientRES.TitleMaximums</h3>
     </div>
 </div>
 
@@ -21,7 +22,7 @@
             @Html.HiddenFor(model => model.ClientId)
 
             <hr />
-            <h4><strong>INFO</strong></h4>
+            <h4><strong>@ApplicationsRES.HeadingInfo</strong></h4>
             <hr />
 
             <div class="form-group mt-3">
@@ -69,7 +70,7 @@
 
             @*// TOTAL CADENASSAGE SHEETS*@
             <hr />
-            <h4><strong>CADENASSAGE - ACCÈS</strong></h4>
+            <h4><strong>@ApplicationsRES.HeadingAccess</strong></h4>
             <hr />
 
             @if (Model.TotalCadenassage == null)
@@ -132,7 +133,7 @@
 
         <div class="col-md-11">
             <div class="form-group mt-3">
-                <input type="submit" class="btn btn-mettre m-1 float-end" value="Enregistrer" />
+                <input type="submit" class="btn btn-mettre m-1 float-end" value="@ApplicationsRES.ButtonEnregistrer" />
             </div>
         </div>
     </div>

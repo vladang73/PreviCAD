@@ -3,56 +3,67 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Previgesst.Ressources;
 
 namespace Previgesst.ViewModels
 {
     public class ClientEditDetailsViewModel
     {
         public int ClientId { get; set; }
+        
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "Nom")]
         public string Nom { get; set; }
 
-        [Display(Name = "Applications")]
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "Applications")]
         public IEnumerable<int> ApplicationIds { get; set; } = new List<int>();
 
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "LienPrevicad")]
         public string LienPrevicad;
 
-        [Display(Name = "Nombre d'administrateurs Prévicad")]
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "NbAdminsPrevicadMax")]
         public int NbAdminsPrevicadMax { get; set; }
-        [Display(Name = "Nombre d'administrateurs Analyse de risques")]
+
+
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "NbAdminsAnalyseRisqueMax")]
         public int NbAdminsAnalyseRisqueMax { get; set; }
 
-        [Display(Name = "Autorisation")]
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "StatusCadenassage")]
         public int StatusCadenassage { get; set; }
 
 
-        [Display(Name = "Limite fiches de cadenassage")]
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "NbLimitCadenassage")]
         public int NbLimitCadenassage { get; set; }
 
 
-        [Display(Name = "Période d'essai")]
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "PeriodeEssai")]
         public bool PeriodeEssai { get; set; }
 
 
-        [Display(Name = "Date limite")]
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "DateCadenassage")]
         public DateTime DateCadenassage { get; set; }
         
 
-        [Display(Name = "Total des fiches enregistrées")]
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "TotalCadenassage")]
         public int TotalCadenassage { get; set; }
         
 
-        //[Display(Name = "Nombre d'administrateurs Documents")]
+        //[Display(ResourceType = typeof(ApplicationsRES), Name = "NbAdminsDocumentsMax")]
         //public int NbAdminsDocumentsMax { get; set; }
-        [Display(Name = "Nombre d'auditeurs")]
+
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "NbAuditeursMax")]
         public int NbAuditeursMax { get; set; }
-        [Display(Name = "Nombre d'utilisateurs Prévicad")]
+
+
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "NbUtilisateursPrevicad")]
         public int NbUtilisateursPrevicad { get; set; }
 
-        public string classMaximums { get; set; }
-        public string classDefault { get; set; }
-        [Display(Name = "Nombre d'administrateurs des utilisateurs")]
+
+        [Display(ResourceType = typeof(ApplicationsRES), Name = "NbAdminUtilisateurs")]
         public int NbAdminUtilisateurs { get; set; }
 
-        
+
+        public string classMaximums { get; set; }
+
+        public string classDefault { get; set; }
     }
 }

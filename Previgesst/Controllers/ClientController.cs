@@ -61,8 +61,6 @@ namespace Previgesst.Controllers
         }
 
 
-
-
         public ActionResult Details(int id)
         {
             PopulateRolesUtilisateurs();
@@ -142,7 +140,6 @@ namespace Previgesst.Controllers
             PopulateRolesUtilisateurs();
 
             return View("Utilisateurs", vm);
-
         }
 
         [HttpPost]
@@ -156,19 +153,14 @@ namespace Previgesst.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete([DataSourceRequest] DataSourceRequest request,
-           ClientListViewModel item)
+        public ActionResult Delete([DataSourceRequest] DataSourceRequest request, ClientListViewModel item)
         {
             if (item != null)
             {
                 clientService.Supprimer(item);
             }
             return Json(new[] { item }.ToDataSourceResult(request, ModelState));
-
         }
-
-
-
 
 
         public ActionResult ReadListClients([DataSourceRequest] DataSourceRequest request)
@@ -192,8 +184,8 @@ namespace Previgesst.Controllers
 
 
             ViewData["Roles"] = DDL;
-
         }
+
         public ActionResult SaveMaximums(ClientEditDetailsViewModel model)
         {
             if (ModelState.IsValid)
@@ -242,8 +234,7 @@ namespace Previgesst.Controllers
             return Json(model);
         }
 
-        public ActionResult SaveUser([DataSourceRequest] DataSourceRequest request,
-        UtilisateurIndexViewModel item, int z)
+        public ActionResult SaveUser([DataSourceRequest] DataSourceRequest request, UtilisateurIndexViewModel item, int z)
         {
             if (ModelState.IsValid)
             {
@@ -288,18 +279,14 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult DeleteUser([DataSourceRequest] DataSourceRequest request,
-        UtilisateurIndexViewModel item)
+        public ActionResult DeleteUser([DataSourceRequest] DataSourceRequest request, UtilisateurIndexViewModel item)
         {
             if (item != null)
             {
                 utilisateurService.Supprimer(item);
             }
             return Json(new[] { item }.ToDataSourceResult(request, ModelState));
-
         }
-
-
 
 
         private void PopulateApplication()
@@ -307,13 +294,11 @@ namespace Previgesst.Controllers
             var DDL = applicationPrevisService.GetAllApplicationDDLViewModel();
 
             ViewData["Applications"] = DDL;
-
         }
 
 
 
-        public ActionResult Save([DataSourceRequest] DataSourceRequest request,
-       ClientListViewModel item)
+        public ActionResult Save([DataSourceRequest] DataSourceRequest request, ClientListViewModel item)
         {
             var erreur = false;
             using (var context = AppDbContext.Create())
@@ -333,24 +318,20 @@ namespace Previgesst.Controllers
             }
 
             return Json(new[] { item }.ToDataSourceResult(request, ModelState));
-
         }
 
 
         public JsonResult SaveLink(IEnumerable<HttpPostedFileBase> file, int ClientId, string Nom, string Identificateur, Boolean Actif)
         {
-
             Models.Client myClient;
 
             if (ClientId == 0)
             {
                 var d = new ClientListViewModel()
                 {
-
                     Nom = Nom,
                     Identificateur = Identificateur,
                     Actif = Actif
-
                 };
 
                 if (d.Nom == "")
@@ -362,9 +343,6 @@ namespace Previgesst.Controllers
                 clientService.SaveClient(d);
 
                 ClientId = d.ClientId;
-
-
-
             }
 
             myClient = clientRepository.Get(ClientId);
@@ -383,9 +361,6 @@ namespace Previgesst.Controllers
                         {
                             System.IO.File.Delete(f);
                         }
-
-
-
                     }
 
                     fichier.SaveAs(System.IO.Path.Combine(Server.MapPath(repertoire), fichier.FileName));
@@ -393,8 +368,6 @@ namespace Previgesst.Controllers
 
                     saveTOXLSize(Server.MapPath(repertoire), fichier.FileName);
                     saveThumb(Server.MapPath(repertoire), fichier.FileName);
-
-
 
 
                     myClient.Logo = fichier.FileName;
@@ -405,7 +378,6 @@ namespace Previgesst.Controllers
 
                     clientRepository.Update(myClient);
                     clientRepository.SaveChanges();
-
                 }
             }
 
@@ -421,8 +393,6 @@ namespace Previgesst.Controllers
             image.Dispose();
             thumb.Dispose();
         }
-
-
 
 
         void saveTOXLSize(string repertoire, string filename)
@@ -452,21 +422,16 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult SaveApplications(
-    ClientEditDetailsViewModel item)
+        public ActionResult SaveApplications(ClientEditDetailsViewModel item)
         {
             if (item != null && ModelState.IsValid)
             {
-
                 this.clientApplicationPreviRepository.UpdateApplications(item);
-
             };
 
 
             return Redirect("~/Client/Details?id=" + item.ClientId);
-
         }
-
 
 
         public ActionResult IsExist(string NomUtilisateur)
@@ -488,9 +453,6 @@ namespace Previgesst.Controllers
                 return Content("true");
             }
         }
-
-
-
     }
 
 }

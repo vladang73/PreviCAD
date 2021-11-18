@@ -123,8 +123,17 @@
   <data name="Analyse" xml:space="preserve">
     <value>Analyse de risque</value>
   </data>
+  <data name="ButtonAjouter" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
   <data name="ButtonClient" xml:space="preserve">
     <value>Gérer les analyses</value>
+  </data>
+  <data name="ButtonCreer" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="ButtonDetails" xml:space="preserve">
+    <value>Détails</value>
   </data>
   <data name="ButtonDommagesPotentiels" xml:space="preserve">
     <value>Dommages potentiels</value>
@@ -144,14 +153,23 @@
   <data name="ButtonSituations" xml:space="preserve">
     <value>Situations dangereuses</value>
   </data>
+  <data name="CreateAdminTitle" xml:space="preserve">
+    <value>Site Administratif - Création d'un client</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Modifier</value>
   </data>
   <data name="Edition" xml:space="preserve">
     <value>Édition d'une ligne</value>
   </data>
+  <data name="Erreur" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
   <data name="Identificateur" xml:space="preserve">
     <value>Identificateur</value>
+  </data>
+  <data name="ImgWindowTitle" xml:space="preserve">
+    <value>Charger l'image</value>
   </data>
   <data name="LinkClients" xml:space="preserve">
     <value>Clients</value>

@@ -1,8 +1,9 @@
 ﻿@model ClientListViewModel
+@using Previgesst.Ressources.Analyse
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout_c2.cshtml";
 }
 
 
@@ -10,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-12" style="text-align:center">
-        <h2 style="color:#BA3500">Site Administratif - Création d'un client</h2>
+        <h2 style="color:#BA3500">@ARRES.CreateAdminTitle</h2>
     </div>
 </div>
 <hr />
@@ -22,44 +23,44 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="form-group form-inline" style="width:100%">
+            <div class="form-group form-inline">
                 <div class="col-md-3">
-                    @Html.LabelFor(m => m.ClientId, new { @class = "control-label pull-right" })
+                    @Html.LabelFor(m => m.ClientId, new { @class = "form-label" })
                 </div>
                
             </div>
         </div>
         <div class="row">
-            <div class="form-group form-inline" style="width:100%">
+            <div class="form-group form-inline">
                 <div class="col-md-3">
-                    @Html.LabelFor(m => m.Nom, new { @class = "control-label pull-right" })
+                    @Html.LabelFor(m => m.Nom, new { @class = "form-label" })
                 </div>
                 <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.Nom, new { @class = "form-control", @style = "width:100%" })
+                    @Html.TextBoxFor(m => m.Nom, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Nom, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="form-group form-inline" style="width:100%">
+            <div class="form-group form-inline">
                 <div class="col-md-3">
-                    @Html.LabelFor(m => m.Identificateur, new { @class = "control-label pull-right" })
+                    @Html.LabelFor(m => m.Identificateur, new { @class = "form-label" })
                 </div>
                 <div class="col-md-6">
-                    @Html.TextBoxFor(m => m.Identificateur, new { @class = "form-control", @style = "width:100%" })
+                    @Html.TextBoxFor(m => m.Identificateur, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Identificateur, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="form-group form-inline" style="width:100%">
+            <div class="form-group form-inline">
                 <div class="col-md-3">
-                    @Html.LabelFor(m => m.Actif, new { @class = "control-label pull-right" })
+                    @Html.LabelFor(m => m.Actif, new { @class = "form-label" })
                 </div>
                 <div class="col-md-6">
-                    @Html.CheckBoxFor(m => m.Actif, new { @class = "control-label" })
+                    @Html.CheckBoxFor(m => m.Actif, new { @class = "form-label" })
                     @Html.ValidationMessageFor(m => m.Actif, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -70,7 +71,7 @@
             <div class="col-md-10" style="margin-left:calc(25% + -8px)">
                 <div class="form-group">
                     <div class="col-md-12">
-                        <input type="submit" class="btn btn-primary" value="Créer" />
+                        <input type="submit" class="btn btn-primary" value="@ARRES.ButtonCreer" />
                     </div>
                 </div>
             </div>

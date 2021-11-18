@@ -1036,6 +1036,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ressources\ApplicationsRES.Designer.cs">
+      <DependentUpon>ApplicationsRES.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ressources\ApplicationsRES.en.Designer.cs">
+      <DependentUpon>ApplicationsRES.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ressources\UtilisateursRES.en.Designer.cs">
       <DependentUpon>UtilisateursRES.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -3053,6 +3063,15 @@
     <EmbeddedResource Include="Ressources\LogEntriesRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogEntriesRES.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\ApplicationsRES.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationsRES.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\ApplicationsRES.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationsRES.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\UtilisateursRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

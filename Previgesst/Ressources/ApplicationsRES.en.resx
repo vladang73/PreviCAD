@@ -117,76 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccessDeniedMessage" xml:space="preserve">
-    <value>Access Denied, You don't have permission to access on this resource.</value>
+  <data name="Applications" xml:space="preserve">
+    <value>Applications</value>
   </data>
-  <data name="Actif" xml:space="preserve">
-    <value>Active</value>
+  <data name="ButtonEnregistrer" xml:space="preserve">
+    <value>Save</value>
   </data>
-  <data name="ADMAnalyse" xml:space="preserve">
-    <value>Risk Analysis Admin</value>
+  <data name="DateCadenassage" xml:space="preserve">
+    <value>Deadline</value>
   </data>
-  <data name="ADMDocument" xml:space="preserve">
-    <value>Documents Admin</value>
+  <data name="HeadingAccess" xml:space="preserve">
+    <value>LOCKOUT - ACCESS</value>
   </data>
-  <data name="ADMPrevicad" xml:space="preserve">
-    <value>Prévicad Admin</value>
+  <data name="HeadingInfo" xml:space="preserve">
+    <value>INFO</value>
   </data>
-  <data name="AdmUtilisateurs" xml:space="preserve">
-    <value>Users Admin</value>
+  <data name="HeadingPlusUtlisePrevi" xml:space="preserve">
+    <value>PREVICAD link for the client's employees:</value>
   </data>
-  <data name="Auditeur" xml:space="preserve">
-    <value>Auditor</value>
+  <data name="LienPrevicad" xml:space="preserve">
+    <value>Previcad link</value>
   </data>
-  <data name="ErreurCourriel" xml:space="preserve">
-    <value>The email must not exceed {1} characters.</value>
+  <data name="NbAdminsAnalyseRisqueMax" xml:space="preserve">
+    <value>Number of directors Risk analysis</value>
   </data>
-  <data name="ErreurMotPasse" xml:space="preserve">
-    <value>The password must not exceed {1} characters.</value>
+  <data name="NbAdminsDocumentsMax" xml:space="preserve">
+    <value>Number of administrators Documents</value>
   </data>
-  <data name="ErreurNom" xml:space="preserve">
-    <value>The name must not exceed {1} characters.</value>
+  <data name="NbAdminsPrevicadMax" xml:space="preserve">
+    <value>Number of Prévicad directors</value>
   </data>
-  <data name="ErreurNomUtilisateur" xml:space="preserve">
-    <value>The user name must not exceed {1} characters.</value>
+  <data name="NbAdminUtilisateurs" xml:space="preserve">
+    <value>Number of administrator users</value>
   </data>
-  <data name="HeadingAcces" xml:space="preserve">
-    <value>ACCESS</value>
+  <data name="NbAuditeursMax" xml:space="preserve">
+    <value>Number of listeners</value>
   </data>
-  <data name="HeadingNotifications" xml:space="preserve">
-    <value>NOTIFICATIONS</value>
+  <data name="NbLimitCadenassage" xml:space="preserve">
+    <value>Limit lockout sheets</value>
   </data>
-  <data name="HeadingParameters" xml:space="preserve">
-    <value>SETTINGS</value>
-  </data>
-  <data name="LectureAnalyse" xml:space="preserve">
-    <value>Risk Analysis read only</value>
-  </data>
-  <data name="LectureDocument" xml:space="preserve">
-    <value>Documents read only</value>
-  </data>
-  <data name="LecturePrevicad" xml:space="preserve">
-    <value>Previcad read only</value>
-  </data>
-  <data name="Modifier" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="MotDePasse" xml:space="preserve">
-    <value>Password</value>
+  <data name="NbUtilisateursPrevicad" xml:space="preserve">
+    <value>Number of Prévicad users</value>
   </data>
   <data name="Nom" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NomUsager" xml:space="preserve">
-    <value>User name</value>
+  <data name="PeriodeEssai" xml:space="preserve">
+    <value>Trial period</value>
   </data>
-  <data name="NotificationDebutCad" xml:space="preserve">
-    <value>Lockout notifications started</value>
+  <data name="StatusCadenassage" xml:space="preserve">
+    <value>Authorisation</value>
   </data>
-  <data name="NotificationNonConformite" xml:space="preserve">
-    <value>Notification of Non-Compliance</value>
+  <data name="Title" xml:space="preserve">
+    <value>Permitted applications</value>
   </data>
-  <data name="User" xml:space="preserve">
-    <value>User</value>
+  <data name="TotalCadenassage" xml:space="preserve">
+    <value>Total records recorded</value>
   </data>
 </root>
