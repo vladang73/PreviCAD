@@ -9,9 +9,8 @@ namespace Previgesst.ViewModels
 {
     public class DocumentViewModel
     {
-
-
         public int DocumentId { get; set; }
+
         public int Bidon { get; set; }
 
         [Required]
@@ -22,26 +21,26 @@ namespace Previgesst.ViewModels
         public string Titre { get; set; }
 
         [Required]
-
-
         [DisplayName("Section")]
+        [Display(ResourceType = typeof(DocumentRES), Name = "Section")]
         public int SectionId { get; set; }
 
 
 
         [DisplayName("Section")]
-        
+        [Display(ResourceType = typeof(DocumentRES), Name = "Section")]
         public string DisplaySection { get; set; }
 
 
+        [Display(ResourceType = typeof(DocumentRES), Name = "Ordre")]
         public int Ordre { get; set; }
 
 
         [Required]
         [Display(ResourceType = typeof(DocumentRES), Name = "Fichier")]
-
-
         public string FileName { get; set; }
+
+
         public string BasePath { get; set; }
     }
 }

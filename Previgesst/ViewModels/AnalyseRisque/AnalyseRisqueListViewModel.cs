@@ -12,12 +12,15 @@ namespace Previgesst.ViewModels
     {
         public int Id { get; set; }
         public int AnalyseRisqueId { get; set; }
-        [DisplayName("Nom du client")]
 
 
         public DateTime DateCreation { get; set; }
+
+        [DisplayName("Nom du client")]
         public string NomClient { get; set; }
+
         public string Createur { get; set; }
+
         public string Participants { get; set; }
         
 
@@ -29,7 +32,7 @@ namespace Previgesst.ViewModels
 
         public string UserMAJ { get; set; }
 
-        [DisplayName("Afficher chez le client")]
+        [Display(ResourceType = typeof(AREditClientRES), Name = "AfficherChezLeClient")]
         public bool AfficherChezClient { get; set; }
 
 

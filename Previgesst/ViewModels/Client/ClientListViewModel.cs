@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Previgesst.Ressources.Analyse;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -13,23 +14,25 @@ namespace Previgesst.ViewModels
 
         [Required]
         [StringLength(250)]
-        [DisplayName("Nom du client")]
+        [Display(ResourceType = typeof(ARRES), Name = "Nom")]
         public string Nom { get; set; }
 
 
         [Required]
         [StringLength(250)]
-        [DisplayName("Identificateur")]
+        [Display(ResourceType = typeof(ARRES), Name = "Identificateur")]
         public string Identificateur { get; set; }
 
 
 
+        [Display(ResourceType = typeof(ARRES), Name = "Actif")]
         public Boolean Actif { get; set; }
 
         public Boolean EstSupprimable { get; set; }
 
         public string Bidon { get; set; }
 
+        [Display(ResourceType = typeof(ARRES), Name = "Logo")]
         public string Logo { get; set; }
 
         public string Thumb { get; set; }

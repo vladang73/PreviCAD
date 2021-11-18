@@ -156,6 +156,9 @@
   <data name="Creation" xml:space="preserve">
     <value>Création de </value>
   </data>
+  <data name="Errors" xml:space="preserve">
+    <value>Tracage de boguess</value>
+  </data>
   <data name="Fax" xml:space="preserve">
     <value>Téléc.</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Mot de passe oublié?</value>
+  </data>
+  <data name="Journaux" xml:space="preserve">
+    <value>Journaux d'erreurs</value>
   </data>
   <data name="Note" xml:space="preserve">
     <value>Espace pour message personnalisé à vos clients - Vide s’il y a rien.</value>

@@ -117,28 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Accueil" xml:space="preserve">
-    <value>Accueil</value>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
   </data>
-  <data name="DocumentGeneraux" xml:space="preserve">
-    <value>Documents utiles</value>
+  <data name="Exception" xml:space="preserve">
+    <value>Exception</value>
   </data>
-  <data name="Fichier" xml:space="preserve">
-    <value>Fichier</value>
+  <data name="Level" xml:space="preserve">
+    <value>Niveau</value>
   </data>
-  <data name="Ordre" xml:space="preserve">
-    <value>Ordre</value>
+  <data name="Logger" xml:space="preserve">
+    <value>Enregistreuse</value>
   </data>
-  <data name="Section" xml:space="preserve">
-    <value>Section</value>
+  <data name="MachineName" xml:space="preserve">
+    <value>Nom de la machine</value>
   </data>
-  <data name="Telecharger" xml:space="preserve">
-    <value>Télécharger</value>
+  <data name="Message" xml:space="preserve">
+    <value>Un message</value>
   </data>
-  <data name="Titre" xml:space="preserve">
-    <value>Titre</value>
-  </data>
-  <data name="TitreErreur" xml:space="preserve">
-    <value>Le titre ne doit pas dépasser {1} caractères.</value>
+  <data name="StackTrace" xml:space="preserve">
+    <value>Trace de la pile</value>
   </data>
 </root>

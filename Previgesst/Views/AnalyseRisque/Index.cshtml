@@ -1,4 +1,5 @@
 ﻿@using Previgesst.Ressources
+@using Previgesst.Ressources.Analyse
 @model AffichageListesViewModel
 
 @{
@@ -26,10 +27,10 @@
             </a>
         </li>
 
-        <li class="nav-item text-center">
+        <li class="nav-item text-center active">
             <a class="nav-link home-navlink big" href="#Clients" aria-controls="general" role="tab" data-toggle="tab" data-bs-toggle="tab">
                 <img src="/content/v2/images/Clients.svg" title="Clients" />
-                <p class="nav-link-text">Clients</p>
+                <p class="nav-link-text">@ARRES.LinkClients</p>
             </a>
         </li>
 
@@ -38,7 +39,7 @@
             <li class="nav-item text-center">
                 <a class="nav-link home-navlink" href="#Listes" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
                     <img src="/content/v2/images/detail-icon.svg" title="Listes" />
-                    <p class="nav-link-text">Listes</p>
+                    <p class="nav-link-text">@ARRES.LinkListes</p>
                 </a>
             </li>
         }
@@ -50,7 +51,7 @@
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
             <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/AdminPrevi/Index">@LayoutRES.Accueil</a></li>
-            <li>Liste des analyses de risque</li>
+            <li>@ARRES.PageTitle</li>
         </ul>
     </div>
 
@@ -59,7 +60,7 @@
 
         <div class="table-top-header">
             <div class="page-title d-flex justify-content-center align-items-center">
-                <h3>Édition de l'analyse de risque</h3>
+                <h3>@ARRES.PageHeading</h3>
             </div>
         </div>
 
@@ -92,7 +93,8 @@
                                 .IsNotEqualTo("Différent")
                                 )));
 
-                            columns.Bound(e => e.ClientId).ClientTemplate("<a target='_blank'  href='../AnalyseRisque/EditClient?ID=#= " + nameof(ClientListViewModel.ClientId) + " #' class='btn btn-primary'>Gérer les analyses</a>")
+                            columns.Bound(e => e.ClientId)
+                                    .ClientTemplate("<a target='_blank'  href='../AnalyseRisque/EditClient?ID=#= " + nameof(ClientListViewModel.ClientId) + " #' class='btn btn-primary'>"+ Html.Raw(ARRES.ButtonClient) + "</a>")
                                     .Title("").Filterable(false).Sortable(false).Width("250px");
                         })
                         .Sortable(s => s.AllowUnsort(false))
@@ -206,13 +208,13 @@
                 <hr />
                 <div style="margin-left:10px">
 
-                    <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Situations" target="_blank" class="btn btn-primary d-block">Situations dangereuses</a><br /></div></div>
-                    <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Phenomenes" target="_blank" class="btn btn-primary d-block">Phénomènes dangereux</a><br /></div></div>
-                    <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Evenements" target="_blank" class="btn btn-primary d-block">Événements dangereux</a><br /></div></div>
-                    <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Dommages" target="_blank" class="btn btn-primary d-block">Dommages potentiels</a><br /></div></div>
+                    <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Situations" target="_blank" class="btn btn-primary d-block">@ARRES.ButtonSituations</a><br /></div></div>
+                    <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Phenomenes" target="_blank" class="btn btn-primary d-block">@ARRES.ButtonPhenomenes</a><br /></div></div>
+                    <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Evenements" target="_blank" class="btn btn-primary d-block">@ARRES.ButtonEvenements</a><br /></div></div>
+                    <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Dommages" target="_blank" class="btn btn-primary d-block">@ARRES.ButtonDommagesPotentiels</a><br /></div></div>
 
-                    @*   <div class="row" style="margin-bottom:10px;"><div class="col-md-4"><a href="~/Listes/Mesures" target="_blank" class="btn btn-primary form-control">Mesures de prévention</a><br /></div></div>*@
-                    @*   <div class="row" style="margin-bottom:10px;"><div class="col-md-4"><a href="~/Listes/Reglements" target="_blank" class="btn btn-primary form-control">Règlements / Normes</a><br /></div></div>*@
+                    @*   <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Mesures" target="_blank" class="btn btn-primary form-control">@ARRES.ButtonMesuresDePrevention</a><br /></div></div>*@
+                    @*   <div class="row"><div class="col-md-4 col-sm-12"><a href="~/Listes/Reglements" target="_blank" class="btn btn-primary form-control">@ARRES.ButtonReglements</a><br /></div></div>*@
                 </div>
 
             </div>

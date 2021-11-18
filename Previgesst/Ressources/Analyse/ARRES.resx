@@ -117,28 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Accueil" xml:space="preserve">
-    <value>Accueil</value>
+  <data name="Actif" xml:space="preserve">
+    <value>Actif</value>
   </data>
-  <data name="DocumentGeneraux" xml:space="preserve">
-    <value>Documents utiles</value>
+  <data name="Analyse" xml:space="preserve">
+    <value>Analyse de risque</value>
   </data>
-  <data name="Fichier" xml:space="preserve">
-    <value>Fichier</value>
+  <data name="ButtonClient" xml:space="preserve">
+    <value>Gérer les analyses</value>
   </data>
-  <data name="Ordre" xml:space="preserve">
-    <value>Ordre</value>
+  <data name="ButtonDommagesPotentiels" xml:space="preserve">
+    <value>Dommages potentiels</value>
   </data>
-  <data name="Section" xml:space="preserve">
-    <value>Section</value>
+  <data name="ButtonEvenements" xml:space="preserve">
+    <value>Événements dangereux</value>
   </data>
-  <data name="Telecharger" xml:space="preserve">
-    <value>Télécharger</value>
+  <data name="ButtonMesuresDePrevention" xml:space="preserve">
+    <value>Mesures de prévention</value>
   </data>
-  <data name="Titre" xml:space="preserve">
-    <value>Titre</value>
+  <data name="ButtonPhenomenes" xml:space="preserve">
+    <value>Phénomènes dangereux</value>
   </data>
-  <data name="TitreErreur" xml:space="preserve">
-    <value>Le titre ne doit pas dépasser {1} caractères.</value>
+  <data name="ButtonReglements" xml:space="preserve">
+    <value>Règlements / Normes</value>
+  </data>
+  <data name="ButtonSituations" xml:space="preserve">
+    <value>Situations dangereuses</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Edition" xml:space="preserve">
+    <value>Édition d'une ligne</value>
+  </data>
+  <data name="Identificateur" xml:space="preserve">
+    <value>Identificateur</value>
+  </data>
+  <data name="LinkClients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="LinkListes" xml:space="preserve">
+    <value>Listes</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logo</value>
+  </data>
+  <data name="Nom" xml:space="preserve">
+    <value>Nom du client</value>
+  </data>
+  <data name="PageHeading" xml:space="preserve">
+    <value>Édition de l'analyse de risque</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Liste des analyses de risque</value>
   </data>
 </root>

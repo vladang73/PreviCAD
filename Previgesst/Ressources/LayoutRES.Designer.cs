@@ -178,6 +178,15 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tracage de boguess.
+        /// </summary>
+        public static string Errors {
+            get {
+                return ResourceManager.GetString("Errors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Téléc..
         /// </summary>
         public static string Fax {
@@ -219,6 +228,15 @@ namespace Previgesst.Ressources {
         public static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Journaux d&apos;erreurs.
+        /// </summary>
+        public static string Journaux {
+            get {
+                return ResourceManager.GetString("Journaux", resourceCulture);
             }
         }
         

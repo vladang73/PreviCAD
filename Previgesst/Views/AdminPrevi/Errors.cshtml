@@ -33,7 +33,7 @@
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
             <li><a href="~/AdminPrevi/Index">@LayoutRES.Accueil</a></li>
-            <li class="active" aria-current="page">Journaux d'erreurs</li>
+            <li class="active" aria-current="page">@LayoutRES.Errors</li>
         </ul>
     </div>
 
@@ -41,7 +41,7 @@
 
         <div class="table-top-header">
             <div class="page-title d-flex justify-content-center align-items-center">
-                <h3 class="m-0">Journaux</h3>
+                <h3 class="m-0">@LayoutRES.Journaux</h3>
             </div>
         </div>
 
@@ -56,9 +56,9 @@
                         .Columns(columns =>
                         {
                             columns.Bound(e => e.LogEntryId).Hidden();
-                            columns.Bound(e => e.Date).Filterable(f => f.Extra(false)).Width("180px").Format("{0:G}");
-                            columns.Bound(c => c.Level).Filterable(f => f.Extra(false)).Width("80px");
-                            columns.Bound(c => c.MachineName).Filterable(f => f.Extra(false));
+                            columns.Bound(e => e.Date).Filterable(f => f.Extra(false)).HtmlAttributes(new { @class = "td-round-left-border" }).Width("180px").Format("{0:G}");
+                            columns.Bound(c => c.Level).Filterable(f => f.Extra(false)).Width("100px");
+                            columns.Bound(c => c.MachineName).Filterable(f => f.Extra(false)).Width("170px");
                             columns.Bound(e => e.Message).Filterable(f => f.Extra(false));
 
 
@@ -67,7 +67,7 @@
                             columns.Bound(e => e.StackTrace).Hidden();
 
 
-                            columns.Command(command => command.Custom("Détails").Click("showDetailsNew").HtmlAttributes(new { @class = "btn-detail mx-1" })).Width("130px");
+                            columns.Command(command => command.Custom("Détails").Click("showDetailsNew").HtmlAttributes(new { @class = "btn-detail mx-1 text-nowrap" })).Width("130px");
                         })
                         .Sortable(s => s.AllowUnsort(false))
                         .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
@@ -89,42 +89,42 @@
 
 
 @(Html.Kendo().Window().Name("EqDetails")
-    .Title("Journaux")
+    .Title(@LayoutRES.Journaux)
     .Visible(false)
     .Modal(true)
-    .Width(650)
+    .Width(750)
+    .Height(600)
 )
 
 
 <script type="text/x-kendo-template" id="eqTemplate">
     <div id="row">
         <div id="col-11">
-            <div id="details-contaner" class="p-4 bg-white" style="max-height:500px;">
+            <div id="details-contaner" class="p-4 bg-white">
 
-                    <div class="form-group">
-                        <label class="control-label">Exception</label>
-                        <p> #= Exception # </p>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label class="control-label">Logger</label>
-                        <p> #= Logger # </p>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label class="control-label">Message</label>
-                        <p> #= Message # </p>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label class="control-label">StackTrace</label>
-                        <p> #= StackTrace # </p>
-                    </div>
-
-
+                <div class="form-group mt-3">
+                    <label class="form-label">@LogEntriesRES.Logger</label>
+                    <p> #= Logger # </p>
                 </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label">@LogEntriesRES.Message</label>
+                    <p> #= Message # </p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">@LogEntriesRES.Exception</label>
+                    <p> #= Exception # </p>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label">@LogEntriesRES.StackTrace</label>
+                    <p> #= StackTrace # </p>
+                </div>
+
             </div>
         </div>
+    </div>
 </script>
 
 

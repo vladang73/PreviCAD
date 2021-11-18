@@ -47,7 +47,8 @@
                     .IsNotEqualTo(GridRES.NotEquals)
                 )))
                 .HtmlAttributes(new { @class = "td-round-left-border" })
-                .Title(AREditClientRES.NumeroEquipement);
+                //.Title(AREditClientRES.NumeroEquipement)
+                ;
 
             columns.Bound(c => c.Equipement)
                 .Filterable(f => f.Extra(false).Operators(operators => operators
@@ -70,9 +71,9 @@
             columns.Bound(c => c.AfficherChezClient)
                 //.ClientTemplate("<center><input disabled type='checkbox' #= AfficherChezClient ? checked='checked' :'' # /></center>")
                 .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' disabled value='None' id='squaredone' name='check' #=AfficherChezClient ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
-                .Title(AREditClientRES.AfficherChezLeClient).Sortable(false)
+                .Sortable(false)
                 .HeaderHtmlAttributes(new { @class = "text-no-wrap"})
-                .Width("80px");
+                .Width("120px");
 
             //columns.Bound(e => e.Id).ClientTemplate("<a  href='Edit?ID=#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-primary' style='float:right'>Modifier</a>").Title("").Filterable(false).Sortable(false);
             columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='" + Url.Action("getXLAnalyse", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #'><img src='/content/v2/images/fr-icon.svg' alt='FR icon'/></a>")

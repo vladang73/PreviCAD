@@ -15,13 +15,11 @@
                                     .DataTextField("Description")
                                     .BindTo((System.Collections.IEnumerable)ViewData["Sections"])
                                     .HtmlAttributes(new { data_value_primitive = "true" })
-                        )
+                )
                 @Html.ValidationMessageFor(model => model.SectionId)
             </div>
 
             <div class="form-group mt-3">
-
-
                 @Html.LabelFor(model => model.Titre, new { @class = "form-label" })
 
 
@@ -31,8 +29,6 @@
             </div>
 
             <div class="form-group mt-3">
-
-
                 @Html.LabelFor(m => m.Ordre, new { @class = "form-label" })
                 @(Html.Kendo().NumericTextBoxFor(m => m.Ordre)
                         .HtmlAttributes(new { @class = "form-control" })
@@ -50,17 +46,19 @@
 
 
                 @(Html.Kendo().Upload()
-                .Name("file")
-                .HtmlAttributes(new { @class = "form-control" })
-                                    .Multiple(false)
-                                    .Async(a => a
-                                        .Save("SaveLink", "Documents")
-                                        .AutoUpload(true)
-                                    )
-                                    .Events(
-                                    e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelect")
-                                    ))
-                @Html.ValidationMessageFor(model => model.Ordre)
+                        .Name("file")
+                        .HtmlAttributes(new { @class = "form-control" })
+                        .Multiple(false)
+                        .Async(a => a
+                            .Save("SaveLink", "Documents")
+                            .AutoUpload(true)
+                        )
+                        .Events(
+                        e => e.Success("fileSuccess").Upload("fileUpload").Select("fileSelect")
+                        )
+                )
+
+                @Html.ValidationMessageFor(model => model.FileName)
 
 
             </div>

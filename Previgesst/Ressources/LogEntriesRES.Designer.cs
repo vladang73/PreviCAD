@@ -22,14 +22,14 @@ namespace Previgesst.Ressources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DocumentRES {
+    public class LogEntriesRES {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DocumentRES() {
+        internal LogEntriesRES() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Previgesst.Ressources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Previgesst.Ressources.DocumentRES", typeof(DocumentRES).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Previgesst.Ressources.LogEntriesRES", typeof(LogEntriesRES).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,65 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accueil.
+        ///   Looks up a localized string similar to Date.
         /// </summary>
-        public static string Accueil {
+        public static string Date {
             get {
-                return ResourceManager.GetString("Accueil", resourceCulture);
+                return ResourceManager.GetString("Date", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Documents utiles.
+        ///   Looks up a localized string similar to Exception.
         /// </summary>
-        public static string DocumentGeneraux {
+        public static string Exception {
             get {
-                return ResourceManager.GetString("DocumentGeneraux", resourceCulture);
+                return ResourceManager.GetString("Exception", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fichier.
+        ///   Looks up a localized string similar to Niveau.
         /// </summary>
-        public static string Fichier {
+        public static string Level {
             get {
-                return ResourceManager.GetString("Fichier", resourceCulture);
+                return ResourceManager.GetString("Level", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ordre.
+        ///   Looks up a localized string similar to Enregistreuse.
         /// </summary>
-        public static string Ordre {
+        public static string Logger {
             get {
-                return ResourceManager.GetString("Ordre", resourceCulture);
+                return ResourceManager.GetString("Logger", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Section.
+        ///   Looks up a localized string similar to Nom de la machine.
         /// </summary>
-        public static string Section {
+        public static string MachineName {
             get {
-                return ResourceManager.GetString("Section", resourceCulture);
+                return ResourceManager.GetString("MachineName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Télécharger.
+        ///   Looks up a localized string similar to Un message.
         /// </summary>
-        public static string Telecharger {
+        public static string Message {
             get {
-                return ResourceManager.GetString("Telecharger", resourceCulture);
+                return ResourceManager.GetString("Message", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Titre.
+        ///   Looks up a localized string similar to Trace de la pile.
         /// </summary>
-        public static string Titre {
+        public static string StackTrace {
             get {
-                return ResourceManager.GetString("Titre", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Le titre ne doit pas dépasser {1} caractères..
-        /// </summary>
-        public static string TitreErreur {
-            get {
-                return ResourceManager.GetString("TitreErreur", resourceCulture);
+                return ResourceManager.GetString("StackTrace", resourceCulture);
             }
         }
     }

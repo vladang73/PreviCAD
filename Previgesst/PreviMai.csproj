@@ -746,6 +746,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AREditClientRES.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ressources\Analyse\ARRES.Designer.cs">
+      <DependentUpon>ARRES.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ressources\Analyse\ARRES.en.Designer.cs">
+      <DependentUpon>ARRES.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ressources\Analyse\ARLignesRES.en.Designer.cs">
       <DependentUpon>ARLignesRES.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1015,6 +1025,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PrevIndexRES.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Ressources\LogEntriesRES.Designer.cs">
+      <DependentUpon>LogEntriesRES.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ressources\LogEntriesRES.en.Designer.cs">
+      <DependentUpon>LogEntriesRES.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ressources\UtilisateursRES.en.Designer.cs">
       <DependentUpon>UtilisateursRES.en.resx</DependentUpon>
@@ -2782,6 +2802,16 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AREditClientRES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\Analyse\ARRES.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ARRES.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\Analyse\ARRES.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ARRES.en.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ressources\Analyse\ARLignesRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ARLignesRES.en.Designer.cs</LastGenOutput>
@@ -3014,6 +3044,15 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrevIndexRES.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\LogEntriesRES.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogEntriesRES.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ressources\LogEntriesRES.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogEntriesRES.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Ressources\UtilisateursRES.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
