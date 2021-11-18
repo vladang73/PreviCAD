@@ -150,6 +150,9 @@
   <data name="Etiquette" xml:space="preserve">
     <value>Étiquette</value>
   </data>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>Exporter vers Excel</value>
+  </data>
   <data name="Fiche" xml:space="preserve">
     <value>Fiche</value>
   </data>

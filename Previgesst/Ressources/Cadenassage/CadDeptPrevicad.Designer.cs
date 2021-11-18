@@ -88,6 +88,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hyperlien Utilisateur.
+        /// </summary>
+        public static string HyperlienUtilisateur {
+            get {
+                return ResourceManager.GetString("HyperlienUtilisateur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lien PRÉVICAD pour les employés:.
         /// </summary>
         public static string Lien {
@@ -111,6 +120,24 @@ namespace Previgesst.Ressources.Cadenassage {
         public static string Send {
             get {
                 return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version Desktop.
+        /// </summary>
+        public static string VersionDesktop {
+            get {
+                return ResourceManager.GetString("VersionDesktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version Mobile.
+        /// </summary>
+        public static string VersionMobile {
+            get {
+                return ResourceManager.GetString("VersionMobile", resourceCulture);
             }
         }
     }

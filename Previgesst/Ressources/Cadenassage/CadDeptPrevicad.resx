@@ -126,6 +126,9 @@
   <data name="EmailSubject" xml:space="preserve">
     <value>Lien de connexion</value>
   </data>
+  <data name="HyperlienUtilisateur" xml:space="preserve">
+    <value>Hyperlien Utilisateur</value>
+  </data>
   <data name="Lien" xml:space="preserve">
     <value>Lien PRÉVICAD pour les employés:</value>
   </data>
@@ -134,5 +137,11 @@
   </data>
   <data name="Send" xml:space="preserve">
     <value>Envoyer le lien par courriel</value>
+  </data>
+  <data name="VersionDesktop" xml:space="preserve">
+    <value>Version Desktop</value>
+  </data>
+  <data name="VersionMobile" xml:space="preserve">
+    <value>Version Mobile</value>
   </data>
 </root>
