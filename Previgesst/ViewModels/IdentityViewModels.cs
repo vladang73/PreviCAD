@@ -73,23 +73,23 @@ namespace Previgesst.ViewModels
     public class MyAccountViewModel
     {
         [Display(ResourceType = typeof(ManageRES), Name = "Courriel")]
-        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "CourrielRequired")]
-        [MaxLength(256, ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "CourrielMaxLength")]
+        [Required(ErrorMessageResourceType = typeof(ManageRES), ErrorMessageResourceName = "CourrielRequired")]
+        [MaxLength(256, ErrorMessageResourceType = typeof(ManageRES), ErrorMessageResourceName = "CourrielMaxLength")]
         public string Email { get; set; }
 
 
         [Display(ResourceType = typeof(ManageRES), Name = "OldPassword")]
-        [MinLength(8, ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "OldPasswordMinLength")]
+        [MinLength(8, ErrorMessageResourceType = typeof(ManageRES), ErrorMessageResourceName = "OldPasswordMinLength")]
         public string OldPassword { get; set; }
 
 
         [Display(ResourceType = typeof(ManageRES), Name = "NewPassword")]
-        [MinLength(8, ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "NewPasswordMinLength")]
+        [MinLength(8, ErrorMessageResourceType = typeof(ManageRES), ErrorMessageResourceName = "NewPasswordMinLength")]
         public string NewPassword { get; set; }
 
 
         [Display(ResourceType = typeof(ManageRES), Name = "ConfirmPassword")]
-        [Compare(nameof(NewPassword), ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "ConfirmPasswordCompare")]
+        [Compare(nameof(NewPassword), ErrorMessageResourceType = typeof(ManageRES), ErrorMessageResourceName = "ConfirmPasswordCompare")]
         public string ConfirmPassword { get; set; }
     }
 

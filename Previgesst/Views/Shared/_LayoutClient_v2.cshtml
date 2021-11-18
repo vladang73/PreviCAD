@@ -286,14 +286,14 @@
 
     @if (ViewBag.NotiticationTemplate != null && ViewBag.NotificationTitle != null)
     {
-        <script type="text/javascript">
+<script type="text/javascript">
             $(document).ready(function () {
-                ShowNotification("@ViewBag.NotificationTitle",
-                                 "@ViewBag.NotificationMessage",
-                                 "@ViewBag.NotiticationTemplate");
+                ShowNotification("@Html.Raw(ViewBag.NotificationTitle)",
+                                 "@Html.Raw(ViewBag.NotificationMessage)",
+                                 "@Html.Raw(ViewBag.NotiticationTemplate)");
 
             });
-        </script>
+</script>
     }
 
 
