@@ -117,55 +117,106 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Confirmation" xml:space="preserve">
-    <value>Confirmation de la suppression</value>
+  <data name="ButtonCopy" xml:space="preserve">
+    <value>Copy Link</value>
   </data>
-  <data name="Contains" xml:space="preserve">
-    <value>Contient</value>
+  <data name="ButtonGenerate" xml:space="preserve">
+    <value>Generate link</value>
   </data>
-  <data name="DeleteMessage" xml:space="preserve">
-    <value>Voulez-vous vraiment supprimer l'élément suivant</value>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
   </data>
-  <data name="DuplicateMessage" xml:space="preserve">
-    <value>Voulez-vous dupliquer l'élément suivant</value>
+  <data name="ConfirmPasswordCompare" xml:space="preserve">
+    <value>The password must be the same.</value>
   </data>
-  <data name="Egale" xml:space="preserve">
-    <value>Égal</value>
+  <data name="CorporateClients" xml:space="preserve">
+    <value>Clients</value>
   </data>
-  <data name="NePasSupprimer" xml:space="preserve">
-    <value>Non, ne pas supprimer</value>
+  <data name="Courriel" xml:space="preserve">
+    <value>Email</value>
   </data>
-  <data name="NePasDupliquer" xml:space="preserve">
-    <value>Non, ne pas dupliquer</value>
+  <data name="CourrielMaxLength" xml:space="preserve">
+    <value>The email must not exceed {1} characters.</value>
   </data>
-  <data name="NotEquals" xml:space="preserve">
-    <value>Différent</value>
+  <data name="CourrielRequired" xml:space="preserve">
+    <value>You must enter an email address.</value>
   </data>
-  <data name="Oui" xml:space="preserve">
-    <value>Oui</value>
+  <data name="CreateEdit" xml:space="preserve">
+    <value>Create/Edit</value>
   </data>
-  <data name="StartsWith" xml:space="preserve">
-    <value>Commence par</value>
+  <data name="DeleteConfirmText" xml:space="preserve">
+    <value>Are you sure you want to delete the user</value>
   </data>
-  <data name="ConfirmationDuplication" xml:space="preserve">
-    <value>Confirmation de duplication</value>
+  <data name="DeleteConfirmTitle" xml:space="preserve">
+    <value>Confirmation of deletion</value>
   </data>
-  <data name="ScreenRequire" xml:space="preserve">
-    <value>Require un appareil d'au moins 7.67 pouces</value>
+  <data name="EditUser" xml:space="preserve">
+    <value>Edit User</value>
   </data>
-  <data name="NotificationTitle" xml:space="preserve">
-    <value>Erreur - Gestions</value>
+  <data name="Enregistrer" xml:space="preserve">
+    <value>Save</value>
   </data>
-  <data name="PlusGrand" xml:space="preserve">
-    <value>Plus grand</value>
+  <data name="GeneratePass" xml:space="preserve">
+    <value>Reset password...</value>
   </data>
-  <data name="PlusGrandOuEgal" xml:space="preserve">
-    <value>Plus grand ou égal</value>
+  <data name="Inactif" xml:space="preserve">
+    <value>Inactive</value>
   </data>
-  <data name="PlusPetit" xml:space="preserve">
-    <value>Plus petit</value>
+  <data name="IsCorporate" xml:space="preserve">
+    <value>Is Corporate</value>
   </data>
-  <data name="PlusPetitOuEgal" xml:space="preserve">
-    <value>Plus petit ou égal</value>
+  <data name="ListUsers" xml:space="preserve">
+    <value>List of Users</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="NewPasswordMinLength" xml:space="preserve">
+    <value>You must enter a password of {1} characters or more.</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
+  <data name="OldPasswordMinLength" xml:space="preserve">
+    <value>You must enter a password of {1} characters or more.</value>
+  </data>
+  <data name="PopupNo" xml:space="preserve">
+    <value>No, do not delete</value>
+  </data>
+  <data name="PopupYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="RoleDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="RoleName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="RoleNames" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="SelectClient" xml:space="preserve">
+    <value>Select Clients</value>
+  </data>
+  <data name="SelectRole" xml:space="preserve">
+    <value>Select role</value>
+  </data>
+  <data name="Supprimer" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="TokenMessage" xml:space="preserve">
+    <value>This link is valid for {0} hours</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UserNameRequired" xml:space="preserve">
+    <value>You must enter the username.</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
   </data>
 </root>

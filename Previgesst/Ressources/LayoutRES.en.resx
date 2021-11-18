@@ -156,6 +156,18 @@
   <data name="Creation" xml:space="preserve">
     <value>Created by</value>
   </data>
+  <data name="Demo" xml:space="preserve">
+    <value>Demo</value>
+  </data>
+  <data name="DemoImage" xml:space="preserve">
+    <value>DemoImage</value>
+  </data>
+  <data name="Desole" xml:space="preserve">
+    <value>Sorry</value>
+  </data>
+  <data name="DesoleMessage" xml:space="preserve">
+    <value>Sorry, an error has occurred on the server.</value>
+  </data>
   <data name="Errors" xml:space="preserve">
     <value>Error logs</value>
   </data>
@@ -173,6 +185,12 @@
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot your password?</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="HomeMessage" xml:space="preserve">
+    <value>Authenticated portal entry point</value>
   </data>
   <data name="Journaux" xml:space="preserve">
     <value>Journaux</value>

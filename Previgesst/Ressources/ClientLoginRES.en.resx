@@ -129,6 +129,9 @@
   <data name="MissingConfirmPassword" xml:space="preserve">
     <value>You must confirm your password.</value>
   </data>
+  <data name="MissingLink" xml:space="preserve">
+    <value>Link to reset password</value>
+  </data>
   <data name="MissingNewPassword" xml:space="preserve">
     <value>You must enter your new password.</value>
   </data>
@@ -164,5 +167,8 @@
   </data>
   <data name="TitreCorporate" xml:space="preserve">
     <value>Corporate access to Prévicad Intranet</value>
+  </data>
+  <data name="TokenExpiryHour" xml:space="preserve">
+    <value>Token Expiry Hour</value>
   </data>
 </root>

@@ -157,4 +157,19 @@
   <data name="ScreenRequire" xml:space="preserve">
     <value>Requires a device of at least 7.67 inch</value>
   </data>
+  <data name="NotificationTitle" xml:space="preserve">
+    <value>Error - Management</value>
+  </data>
+  <data name="PlusGrand" xml:space="preserve">
+    <value>Greater</value>
+  </data>
+  <data name="PlusGrandOuEgal" xml:space="preserve">
+    <value>Greater or equal</value>
+  </data>
+  <data name="PlusPetit" xml:space="preserve">
+    <value>Smaller</value>
+  </data>
+  <data name="PlusPetitOuEgal" xml:space="preserve">
+    <value>Smaller or equal</value>
+  </data>
 </root>

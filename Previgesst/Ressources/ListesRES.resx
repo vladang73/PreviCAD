@@ -117,55 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Confirmation" xml:space="preserve">
-    <value>Confirmation de la suppression</value>
+  <data name="Description" xml:space="preserve">
+    <value>Description (FR)</value>
   </data>
-  <data name="Contains" xml:space="preserve">
-    <value>Contient</value>
+  <data name="DescriptionEN" xml:space="preserve">
+    <value>Description (EN)</value>
   </data>
-  <data name="DeleteMessage" xml:space="preserve">
-    <value>Voulez-vous vraiment supprimer l'élément suivant</value>
+  <data name="DescriptionMaxLength" xml:space="preserve">
+    <value>Le description ne doit pas dépasser {1} caractères.</value>
   </data>
-  <data name="DuplicateMessage" xml:space="preserve">
-    <value>Voulez-vous dupliquer l'élément suivant</value>
-  </data>
-  <data name="Egale" xml:space="preserve">
-    <value>Égal</value>
-  </data>
-  <data name="NePasSupprimer" xml:space="preserve">
-    <value>Non, ne pas supprimer</value>
-  </data>
-  <data name="NePasDupliquer" xml:space="preserve">
-    <value>Non, ne pas dupliquer</value>
-  </data>
-  <data name="NotEquals" xml:space="preserve">
-    <value>Différent</value>
-  </data>
-  <data name="Oui" xml:space="preserve">
-    <value>Oui</value>
-  </data>
-  <data name="StartsWith" xml:space="preserve">
-    <value>Commence par</value>
-  </data>
-  <data name="ConfirmationDuplication" xml:space="preserve">
-    <value>Confirmation de duplication</value>
-  </data>
-  <data name="ScreenRequire" xml:space="preserve">
-    <value>Require un appareil d'au moins 7.67 pouces</value>
-  </data>
-  <data name="NotificationTitle" xml:space="preserve">
-    <value>Erreur - Gestions</value>
-  </data>
-  <data name="PlusGrand" xml:space="preserve">
-    <value>Plus grand</value>
-  </data>
-  <data name="PlusGrandOuEgal" xml:space="preserve">
-    <value>Plus grand ou égal</value>
-  </data>
-  <data name="PlusPetit" xml:space="preserve">
-    <value>Plus petit</value>
-  </data>
-  <data name="PlusPetitOuEgal" xml:space="preserve">
-    <value>Plus petit ou égal</value>
+  <data name="Edition" xml:space="preserve">
+    <value>Édition</value>
   </data>
 </root>

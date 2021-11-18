@@ -29,7 +29,7 @@
         <li class="nav-item text-center active">
             <a class="nav-link home-navlink" role="tab" data-toggle="tab" data-bs-toggle="tab" href="#tab">
                 <img src="/content/v2/images/Procédures.svg">
-                <p class="nav-link-text">Instructions</p>
+                <p class="nav-link-text">@InstructionRES.LinkInstructions</p>
             </a>
         </li>
     </ul>
@@ -42,7 +42,7 @@
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
             <li><a href='@Url.Action("Index", "AdminPrevi")'>@LayoutRES.Accueil</a></li>
-            <li class="active">Instructions</li>
+            <li class="active">@InstructionRES.LinkInstructions</li>
         </ul>
     </div>
 
@@ -50,7 +50,7 @@
 
         <div class="table-top-header">
             <div class="page-title d-flex justify-content-center align-items-center">
-                <h3>Gestion des instructions</h3>
+                <h3>@InstructionRES.InstructionHeading</h3>
             </div>
             <div class="page-table-meta">
                 <div class="add-icon">
@@ -59,7 +59,7 @@
                     </a>
                 </div>
                 &nbsp;&nbsp;
-                <a class="btn-table btn-excel pt-0 card-wrapper-link" id="btnExcel">Exporter vers Excel</a>
+                <a class="btn-table btn-excel pt-0 card-wrapper-link" id="btnExcel">@InstructionRES.ExportToExcel</a>
             </div>
         </div>
 
@@ -78,58 +78,58 @@
 
                         columns.Bound(c => c.Identificateur).Filterable(f => f.Extra(false).Operators(operators => operators
                                 .ForString(str => str.Clear()
-                                .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
-                                )))
-                                .HtmlAttributes(new { @class = "td-round-left-border" })
-                                ;
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
+                        )))
+                        .HtmlAttributes(new { @class = "td-round-left-border" })
+                        ;
 
                         columns.Bound(c => c.IdentificateurEN).Filterable(f => f.Extra(false).Operators(operators => operators
                                 .ForString(str => str.Clear()
-                                .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                                 )));
 
                         columns.Bound(c => c.Accessoire)
                                 .Filterable(f => f.Extra(false).Operators(operators => operators
                                 .ForString(str => str.Clear()
-                                .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                                 )));
 
 
                         columns.Bound(c => c.Dispositif)
                                 .Filterable(f => f.Extra(false).Operators(operators => operators
                                 .ForString(str => str.Clear()
-                                .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                                 )));
 
 
                         columns.Bound(c => c.TexteInstruction)
                                 .Filterable(f => f.Extra(false).Operators(operators => operators
                                 .ForString(str => str.Clear()
-                                .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                                 )));
 
                         columns.Bound(c => c.TexteInstructionEN)
                                 .Filterable(f => f.Extra(false).Operators(operators => operators
                                 .ForString(str => str.Clear()
-                                .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                                 )));
 
 
@@ -142,7 +142,6 @@
 
                         })
                         .Width("150px");
-
                     })
 
                     .Sortable(s => s.AllowUnsort(false))
@@ -165,7 +164,7 @@
 
                     .Events(e => e.DataBound("ListeDataBound"))
                     .Editable(e => e.DisplayDeleteConfirmation(false))
-                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("InstructionEditor").Window(w => w.Title("Édition d'une instruction").Width(600).Name("editWindow").Events(e => e.Close("doRefresh"))))
+                    .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("InstructionEditor").Window(w => w.Title(InstructionRES.EditPopupTitle).Width(600).Name("editWindow").Events(e => e.Close("doRefresh"))))
 
                     .ToolBar(t =>
                     {
@@ -194,7 +193,6 @@
         if (e.type == "update") {
             var grid = $("#list").data("kendoGrid");
             grid.dataSource.read();
-
         }
     }
 
@@ -205,7 +203,6 @@
 
 
     function ConfirmDeleteRow(e) {
-
         e.preventDefault();
 
         var grid = this;
@@ -217,12 +214,10 @@
                 grid.removeRow(row);
             }
         });
-
     }
 
 
     function ListeErreur(args) {
-
         var selecteurGrid = "#list";
         if (args.errors) {
             var grid = $(selecteurGrid).data("kendoGrid");
@@ -233,14 +228,12 @@
                 $.each(args.errors, function (propertyName) {
                     var errorList = validationTemplate({ field: propertyName, messages: this.errors });
                     alert(this.errors);
-                    ShowNotification("Erreur - Gestions",
-                        errorList,
-                        "errorListTemplate");
+                    ShowNotification("@Html.Raw(InstructionRES.NotificationTitle)", errorList, "errorListTemplate");
                 });
             });
         }
         else if (args.xhr) {
-            ShowGridError("Erreur - Gestions", selecteurGrid, args);
+            ShowGridError("@Html.Raw(InstructionRES.NotificationTitle)", selecteurGrid, args);
         }
     }
 

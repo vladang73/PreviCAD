@@ -178,6 +178,42 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Démo.
+        /// </summary>
+        public static string Demo {
+            get {
+                return ResourceManager.GetString("Demo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image de démonstration.
+        /// </summary>
+        public static string DemoImage {
+            get {
+                return ResourceManager.GetString("DemoImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Désolé.
+        /// </summary>
+        public static string Desole {
+            get {
+                return ResourceManager.GetString("Desole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Désolé, une erreur est survenue sur le serveur..
+        /// </summary>
+        public static string DesoleMessage {
+            get {
+                return ResourceManager.GetString("DesoleMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tracage de boguess.
         /// </summary>
         public static string Errors {
@@ -228,6 +264,24 @@ namespace Previgesst.Ressources {
         public static string ForgotPassword {
             get {
                 return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bonjour.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point d&apos;entrée authentifiée du portail.
+        /// </summary>
+        public static string HomeMessage {
+            get {
+                return ResourceManager.GetString("HomeMessage", resourceCulture);
             }
         }
         

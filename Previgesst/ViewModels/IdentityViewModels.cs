@@ -28,9 +28,10 @@ namespace Previgesst.ViewModels
         [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingUsername")]
         public string UserName { get; set; }
 
-        [Display(Name = "Lien pour réinitialiser le mot de passe")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingLink")]
         public string Link { get; set; }
 
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "TokenExpiryHour")]
         public string TokenExpiryHour { get; set; }
     }
 
@@ -59,33 +60,36 @@ namespace Previgesst.ViewModels
         [Display(Name = "")]
         public string UserId { get; set; }
 
-        [Display(Name = "Utilisateur")]
+        [Display(ResourceType = typeof(ManageRES), Name = "User")]
         public string UserName { get; set; }
 
-        [Display(Name = "Courriel")]
+        [Display(ResourceType = typeof(ManageRES), Name = "Courriel")]
         public string Email { get; set; }
 
-        [Display(Name = "Inactif")]
+        [Display(ResourceType = typeof(ManageRES), Name = "Inactif")]
         public bool Inactive { get; set; }
     }
 
     public class MyAccountViewModel
     {
-        [Display(Name = "Courriel")]
-        [Required(ErrorMessage = "Vous devez entrer une adresse courriel.")]
-        [MaxLength(256, ErrorMessage = "Le courriel ne doit pas dépasser {1} caractères.")]
+        [Display(ResourceType = typeof(ManageRES), Name = "Courriel")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "CourrielRequired")]
+        [MaxLength(256, ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "CourrielMaxLength")]
         public string Email { get; set; }
 
-        [Display(Name = "Ancien mot de passe")]
-        [MinLength(8, ErrorMessage = "Vous devez entrer un mot de passe de {1} caractères ou plus.")]
+
+        [Display(ResourceType = typeof(ManageRES), Name = "OldPassword")]
+        [MinLength(8, ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "OldPasswordMinLength")]
         public string OldPassword { get; set; }
 
-        [Display(Name = "Nouveau mot de passe")]
-        [MinLength(8, ErrorMessage = "Vous devez entrer un mot de passe de {1} caractères ou plus.")]
+
+        [Display(ResourceType = typeof(ManageRES), Name = "NewPassword")]
+        [MinLength(8, ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "NewPasswordMinLength")]
         public string NewPassword { get; set; }
 
-        [Display(Name = "Confirmer le mot de passe")]
-        [Compare(nameof(NewPassword), ErrorMessage = "Le mot de passe doit être identique.")]
+
+        [Display(ResourceType = typeof(ManageRES), Name = "ConfirmPassword")]
+        [Compare(nameof(NewPassword), ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "ConfirmPasswordCompare")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -93,34 +97,40 @@ namespace Previgesst.ViewModels
     {
         public string UserId { get; set; }
 
-        [Display(Name = "Inactif")]
+        [Display(ResourceType = typeof(ManageRES), Name = "Inactif")]
         public bool Inactive { get; set; }
 
-        [Display(Name = "Courriel")]
+        [Display(ResourceType = typeof(ManageRES), Name = "Courriel")]
         public string Email { get; set; }
 
-        [Display(Name = "Nom d'utilisateur")]
-        [Required(ErrorMessage = "Vous devez entrer le nom d'utilisateur.")]
+
+        [Display(ResourceType = typeof(ManageRES), Name = "UserName")]
+        [Required(ErrorMessageResourceType = typeof(ManageRES), ErrorMessageResourceName = "UserNameRequired")]
         public string UserName { get; set; }
 
+
         public bool IsCreate { get; set; }
+
         public bool CanDelete { get; set; }
 
-        [Display(Name = "Rôles")]
+        [Display(ResourceType = typeof(ManageRES), Name = "RoleNames")]
         [NotEmpty]
         public IEnumerable<string> RoleNames { get; set; }
 
 
-        [Display(Name = "Is Corporate")]
+        [Display(ResourceType = typeof(ManageRES), Name = "IsCorporate")]
         public bool IsCorporate { get; set; }
 
-        [Display(Name = "Clients")]
+        [Display(ResourceType = typeof(ManageRES), Name = "CorporateClients")]
         public IEnumerable<string> CorporateClients { get; set; }
     }
 
     public class RoleViewModel
     {
+        [Display(ResourceType = typeof(ManageRES), Name = "RoleName")]
         public string Name { get; set; }
+
+        [Display(ResourceType = typeof(ManageRES), Name = "RoleDescription")]
         public string Description { get; set; }
     }
 }

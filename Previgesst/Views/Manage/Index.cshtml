@@ -37,7 +37,7 @@
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
             <li><a href='@Url.Action("Index", "AdminPrevi")'>@LayoutRES.Accueil</a></li>
-            <li class="active">Liste des Utilisateurs</li>
+            <li class="active">@ManageRES.ListUsers</li>
         </ul>
     </div>
 
@@ -47,7 +47,7 @@
 
         <div class="table-top-header">
             <div class="page-title">
-                <h3>Liste des Utilisateurs</h3>
+                <h3>@ManageRES.ListUsers</h3>
             </div>
             <div class="page-table-meta">
                 <div class="add-icon" onclick="window.location.href='@Url.Action("EditUser", "Manage", new { })'">

@@ -97,6 +97,15 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lien pour réinitialiser le mot de passe.
+        /// </summary>
+        public static string MissingLink {
+            get {
+                return ResourceManager.GetString("MissingLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vous devez entrer votre nouveau mot de passe.
         /// </summary>
         public static string MissingNewPassword {
@@ -201,6 +210,15 @@ namespace Previgesst.Ressources {
         public static string TitreCorporate {
             get {
                 return ResourceManager.GetString("TitreCorporate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heure d&apos;expiration du jeton.
+        /// </summary>
+        public static string TokenExpiryHour {
+            get {
+                return ResourceManager.GetString("TokenExpiryHour", resourceCulture);
             }
         }
     }

@@ -24,7 +24,7 @@
         <li class="nav-item text-center active">
             <a class="nav-link home-navlink" href='@Url.Action("Index", "Manage", new { })'>
                 <img src="/content/v2/images/Procédures.svg">
-                <p class="nav-link-text">Utilisateurs</p>
+                <p class="nav-link-text">@ManageRES.Users</p>
             </a>
         </li>
     </ul>
@@ -35,8 +35,8 @@
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
             <li><a href='@Url.Action("Index", "AdminPrevi")'>@LayoutRES.Accueil</a></li>
-            <li><a href='@Url.Action("Index", "Manage", new { })'>Utilisateurs</a></li>
-            <li class="active" aria-current="page">Create/Edit</li>
+            <li><a href='@Url.Action("Index", "Manage", new { })'>@ManageRES.Users</a></li>
+            <li class="active" aria-current="page">@ManageRES.CreateEdit</li>
         </ul>
     </div>
 
@@ -86,7 +86,7 @@
                         @Html.LabelFor(m => m.RoleNames, new { @class = "form-label" })
                         <div class="col-md-6">
                             @(Html.Kendo().MultiSelectFor(m => m.RoleNames)
-                                .Placeholder("Sélectionner le rôle")
+                                .Placeholder(@ManageRES.SelectRole)
                                 .DataTextField("Description")
                                 .DataValueField("Name")
                                 .BindTo(ViewBag.Roles)
@@ -102,7 +102,7 @@
 
                             <div class="squaredThree squaredThree-blue d-inline-block">
                                 <input type="checkbox" id="Inactive" name="Inactive" @(Model.Inactive ? "checked" : "") value="@Convert.ToString(Model.Inactive).ToLower()" />
-                                <label for="squaredone"><span>Inactive </span></label>
+                                <label for="squaredone"><span>@ManageRES.Inactif </span></label>
                             </div>
 
                             @Html.ValidationMessageFor(m => m.Inactive, "", new { @class = "text-danger" })
@@ -130,7 +130,7 @@
                         <div class="col-md-6">
                             @(Html.Kendo().MultiSelectFor(m => m.CorporateClients)
                                   .Name("CorporateClients")
-                                  .Placeholder("Select Clients")
+                                  .Placeholder(ManageRES.SelectClient)
                                   .DataTextField("ClientName")
                                   .DataValueField("ClientID")
                                   .BindTo(ViewBag.Clients))
@@ -151,15 +151,15 @@
 
                         <div class="col-md-2"></div>
                         <div class="col-md-6">
-                            <input type="submit" class="btn btn-mettre m-1" value="Enregistrer" />
+                            <input type="submit" class="btn btn-mettre m-1" value="@ManageRES.Enregistrer" />
 
                             @if (Model.CanDelete)
                             {
-                                <button id="btnDelete" type="button" class="btn btn-Annuler m-1" data-toggle="modal" data-target="#delete-popup">Supprimer</button>
+                                <button id="btnDelete" type="button" class="btn btn-Annuler m-1" data-toggle="modal" data-target="#delete-popup">@ManageRES.Supprimer</button>
                             }
                             @if (!Model.IsCreate)
                             {
-                                @Html.ActionLink("Réinitialiser le mot de passe...", "GenerateResetPassword", new { id = Model.UserId }, new { @class = "btn btn-primary", @target = "_blank" })
+                                @Html.ActionLink(ManageRES.GeneratePass, "GenerateResetPassword", new { id = Model.UserId }, new { @class = "btn btn-primary", @target = "_blank" })
 
                             }
                         </div>
@@ -185,16 +185,19 @@
                         <button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Fermer">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="delete-title">Confirmation de la suppression</h4>
+                        <h4 class="modal-title" id="delete-title">@ManageRES.DeleteConfirmTitle</h4>
                     </div>
                     <div class="modal-body">
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(m => m.UserId)
-                        <div>Voulez-vous vraiment supprimer l'utilisateur <span class="text-danger">'@Html.DisplayTextFor(m => m.UserName)'</span>?</div>
+                        <div>
+                            @ManageRES.DeleteConfirmText
+                            <span class="text-danger">'@Html.DisplayTextFor(m => m.UserName)'</span>?
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" class="btn btn-danger" value="Oui" />
-                        <input type="button" class="btn btn-primary" value="Non, ne pas supprimer" data-dismiss="modal" data-bs-dismiss="modal" />
+                        <input type="submit" class="btn btn-danger" value="@ManageRES.PopupYes" />
+                        <input type="button" class="btn btn-primary" value="@ManageRES.PopupNo" data-dismiss="modal" data-bs-dismiss="modal" />
                     </div>
                 }
             </div>

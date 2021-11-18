@@ -61,6 +61,15 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accès Refusé.
+        /// </summary>
+        public static string AccessDenied {
+            get {
+                return ResourceManager.GetString("AccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accès refusé, vous n&apos;êtes pas autorisé à accéder à cette ressource..
         /// </summary>
         public static string AccessDeniedMessage {

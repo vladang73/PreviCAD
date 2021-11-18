@@ -53,7 +53,7 @@
 
         <div class="table-top-header">
             <div class="page-title d-flex justify-content-center align-items-center">
-                <h3>Édition @Html.Raw(Model.NomListe)</h3>
+                <h3>@ListesRES.Edition @Html.Raw(Model.NomListe)</h3>
             </div>
             <div class="page-table-meta">
                 <div class="add-icon">
@@ -77,10 +77,10 @@
                         columns.Bound(c => c.Description)//.EditorTemplateName("MyView")
                             .Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
-                            .Contains("Contient")
-                            .StartsWith("Commence par")
-                            .IsEqualTo("Égal")
-                            .IsNotEqualTo("Différent")
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
                         )))
                         .HtmlAttributes(new { @class = "td-round-left-border" })
                         ;
@@ -89,10 +89,10 @@
                         columns.Bound(c => c.DescriptionEN)//.EditorTemplateName("MyView")
                             .Filterable(f => f.Extra(false).Operators(operators => operators
                             .ForString(str => str.Clear()
-                            .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
                         )));
 
                         columns.Command(c =>
@@ -175,13 +175,11 @@
 
                 $.each(args.errors, function (propertyName) {
                     var errorList = validationTemplate({ field: propertyName, messages: this.errors });
-                    ShowNotification("Erreur - Gestions",
-                        errorList,
-                        "errorListTemplate");
+                    ShowNotification("@GridRES.NotificationTitle", errorList, "errorListTemplate");
                 });
             });
         } else if (args.xhr) {
-            ShowGridError("Erreur - Gestions", selecteurGrid, args);
+            ShowGridError("@GridRES.NotificationTitle", selecteurGrid, args);
         }
     }
 

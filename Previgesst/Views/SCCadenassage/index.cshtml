@@ -1,4 +1,5 @@
-﻿
+﻿@using Previgesst.Ressources
+
 @{
     ViewBag.Title = "Analyses";
     Layout = "~/Views/Shared/_LayoutClient.cshtml";
@@ -8,15 +9,15 @@
 <hr />
 
 
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active">
-            <a href="#Fiches" aria-controls="general" role="tab" data-toggle="tab">Fiches de cadenassage</a>
-        </li>
-        <li role="presentation">
-            <a href="#Documents" aria-controls="pratiques" role="tab" data-toggle="tab">Documents</a>
-        </li>
-       
-    </ul>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+        <a href="#Fiches" aria-controls="general" role="tab" data-toggle="tab">Fiches de cadenassage</a>
+    </li>
+    <li role="presentation">
+        <a href="#Documents" aria-controls="pratiques" role="tab" data-toggle="tab">Documents</a>
+    </li>
+
+</ul>
 
 
 <div class="tab-content">
@@ -40,12 +41,12 @@
     {
 
         columns.Bound(c => c.NoFiche).Width(200)
-           .Filterable(f => f.Extra(false).Operators(operators => operators
-        .ForString(str => str.Clear()
-        .Contains("Contient")
-            .StartsWith("Commence par")
-            .IsEqualTo("Égal")
-            .IsNotEqualTo("Différent")
+                .Filterable(f => f.Extra(false).Operators(operators => operators
+                .ForString(str => str.Clear()
+                .Contains(GridRES.Contains)
+                .StartsWith(GridRES.StartsWith)
+                .IsEqualTo(GridRES.Egale)
+                .IsNotEqualTo(GridRES.NotEquals)
            )));
         columns.Bound(c => c.Departement).Width(300)
            .Filterable(f => f.Extra(false).Operators(operators => operators
@@ -119,14 +120,14 @@
     .Columns(columns =>
     {
         columns.Bound(c => c.Titre)
-           .Filterable(f => f.Extra(false).Operators(operators => operators
-        .ForString(str => str.Clear()
-        .Contains("Contient")
-            .StartsWith("Commence par")
-            .IsEqualTo("Égal")
-            .IsNotEqualTo("Différent")
+                .Filterable(f => f.Extra(false).Operators(operators => operators
+                .ForString(str => str.Clear()
+                .Contains(GridRES.Contains)
+                .StartsWith(GridRES.StartsWith)
+                .IsEqualTo(GridRES.Egale)
+                .IsNotEqualTo(GridRES.NotEquals)
            )));
-        
+
         columns.Bound(e => e.DocumentId).ClientTemplate("<a href='~/AnalyseRisque/Edit?ID=#= " + nameof(DocumentViewModel.DocumentId) + " #' class='btn btn-info' style='float:right'>Télécharger le document</a>").Title("").Filterable(false).Sortable(false).Width(200);
     })
     .Sortable(s => s.AllowUnsort(false))
@@ -143,8 +144,8 @@
         .Create(c => c.Action("Save", "Listes"))
         .Events(e => e.Error("ListeErreur"))
     )
-   
-   
+
+
 )
 
 

@@ -78,19 +78,19 @@
                             columns.Bound(c => c.Nom)
                                 .Filterable(f => f.Extra(false).Operators(operators => operators
                                 .ForString(str => str.Clear()
-                                .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                                 )));
 
                             columns.Bound(c => c.Identificateur)
                                 .Filterable(f => f.Extra(false).Operators(operators => operators
                                 .ForString(str => str.Clear()
-                                .Contains("Contient")
-                                .StartsWith("Commence par")
-                                .IsEqualTo("Égal")
-                                .IsNotEqualTo("Différent")
+                                .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                                 )));
 
                             columns.Bound(e => e.ClientId)
@@ -116,93 +116,93 @@
 
             @*<div id="Documents" class="tab-pane">
 
-                           @Html.AntiForgeryToken()
+                   @Html.AntiForgeryToken()
 
-                           @(Html.Kendo().Grid<DocumentViewModel>()
-                               .Name("liste-doc")
-                               .Columns(columns =>
-                               {
+                   @(Html.Kendo().Grid<DocumentViewModel>()
+                       .Name("liste-doc")
+                       .Columns(columns =>
+                       {
 
-                                   columns.Bound(e => e.DocumentId).Hidden();
+                           columns.Bound(e => e.DocumentId).Hidden();
 
-                                   columns.Bound(c => c.Titre)
-                                      .Filterable(f => f.Extra(false).Operators(operators => operators
-                                       .ForString(str => str.Clear()
-                                       .Contains("Contient")
-                                       .StartsWith("Commence par")
-                                       .IsEqualTo("Égal")
-                                       .IsNotEqualTo("Différent")
-                                   )));
-
-
-                                   columns.Bound(c => c.Ordre)
-                                     .Filterable(false);
-
-                                     columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
-
-                                     columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='../File/DownloadFile?ID=#= " + nameof(DocumentViewModel.DocumentId) + " #' class='btn btn-info' style='float:right'>Télécharger le document</a>").Title("").Filterable(false).Sortable(false).Width(200);
-
-                                     columns.Bound(c => c.DisplaySection).Hidden()
-                                  .Filterable(f => f.Extra(false).Operators(operators => operators
-                                  .ForString(str => str.Clear()
-                                  .Contains("Contient")
-                                   .StartsWith("Commence par")
-                                   .IsEqualTo("Égal")
-                                   .IsNotEqualTo("Différent")
-                                  )));
-
-                             columns.Command(c =>
-                             {
-                                 c.Edit();
-                                 c.Custom("Effacer")
-                                       .Click("ConfirmDeleteRow")
-                                       .HtmlAttributes(new { @class = "k-grid-effacer" });
-
-                             })
-                                .Width(250);
-
-                         })
-
-                         .Sortable(s => s.AllowUnsort(false))
-                         .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
-                         .Filterable()
-                         .DataSource(ds => ds
-                             .Ajax()
-                              .Group(g => g.Add(c => c.DisplaySection))
-                             //.Sort(x => x.Add(c => c.Section))
-                             .Sort(x => x.Add(c => c.Ordre))
-                             .PageSize(20)
-                             .Model(m =>
-                             {
-                                 m.Id(e => e.DocumentId);
-                                 m.Field(e => e.Bidon).Editable(true);
+                           columns.Bound(c => c.Titre)
+                              .Filterable(f => f.Extra(false).Operators(operators => operators
+                               .ForString(str => str.Clear()
+                               .Contains(GridRES.Contains)
+                        .StartsWith(GridRES.StartsWith)
+                        .IsEqualTo(GridRES.Egale)
+                        .IsNotEqualTo(GridRES.NotEquals)
+                           )));
 
 
+                           columns.Bound(c => c.Ordre)
+                             .Filterable(false);
 
-                             })
+                             columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
 
-                         .Read(r => r.Action("ReadListAnalyseRisque", "Documents"))
-                         .Create(c => c.Action("SaveAR", "Documents"))
-                         .Update(u => u.Action("SaveAR", "Documents"))
-                         .Destroy(u => u.Action("DeleteDOC", "Documents"))
+                             columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='../File/DownloadFile?ID=#= " + nameof(DocumentViewModel.DocumentId) + " #' class='btn btn-info' style='float:right'>Télécharger le document</a>").Title("").Filterable(false).Sortable(false).Width(200);
 
-                         .Events(e => e
-                             .Error("docListeErreur")
-                         )
-                     )
+                             columns.Bound(c => c.DisplaySection).Hidden()
+                          .Filterable(f => f.Extra(false).Operators(operators => operators
+                          .ForString(str => str.Clear()
+                          .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
+                          )));
 
-                     .Events(e => e
-                         .DataBound("docListeDataBound")
-                     ).Editable(e => e.DisplayDeleteConfirmation(false))
+                     columns.Command(c =>
+                     {
+                         c.Edit();
+                         c.Custom("Effacer")
+                               .Click("ConfirmDeleteRow")
+                               .HtmlAttributes(new { @class = "k-grid-effacer" });
 
-                .ToolBar(t =>
-                {
-                    t.Create();
-                }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentEditor").Window(w => w.Title("Édition d'un document").Width(600).Name("editWindow")))
-                   )
+                     })
+                        .Width(250);
+
+                 })
+
+                 .Sortable(s => s.AllowUnsort(false))
+                 .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10, 20, 50 }).Input(true).Info(false).Numeric(false))
+                 .Filterable()
+                 .DataSource(ds => ds
+                     .Ajax()
+                      .Group(g => g.Add(c => c.DisplaySection))
+                     //.Sort(x => x.Add(c => c.Section))
+                     .Sort(x => x.Add(c => c.Ordre))
+                     .PageSize(20)
+                     .Model(m =>
+                     {
+                         m.Id(e => e.DocumentId);
+                         m.Field(e => e.Bidon).Editable(true);
 
 
-                       </div>*@
+
+                     })
+
+                 .Read(r => r.Action("ReadListAnalyseRisque", "Documents"))
+                 .Create(c => c.Action("SaveAR", "Documents"))
+                 .Update(u => u.Action("SaveAR", "Documents"))
+                 .Destroy(u => u.Action("DeleteDOC", "Documents"))
+
+                 .Events(e => e
+                     .Error("docListeErreur")
+                 )
+             )
+
+             .Events(e => e
+                 .DataBound("docListeDataBound")
+             ).Editable(e => e.DisplayDeleteConfirmation(false))
+
+        .ToolBar(t =>
+        {
+            t.Create();
+        }).Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("LigneDocumentEditor").Window(w => w.Title("Édition d'un document").Width(600).Name("editWindow")))
+           )
+
+
+               </div>*@
 
             <div id="Listes" class="tab-pane">
                 <hr />

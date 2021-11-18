@@ -22,14 +22,14 @@ namespace Previgesst.Ressources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class GridRES {
+    public class InstructionRES {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal GridRES() {
+        internal InstructionRES() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Previgesst.Ressources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Previgesst.Ressources.GridRES", typeof(GridRES).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Previgesst.Ressources.InstructionRES", typeof(InstructionRES).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,92 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirmation de la suppression.
+        ///   Looks up a localized string similar to Accessoire.
         /// </summary>
-        public static string Confirmation {
+        public static string Accessoire {
             get {
-                return ResourceManager.GetString("Confirmation", resourceCulture);
+                return ResourceManager.GetString("Accessoire", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirmation de duplication.
+        ///   Looks up a localized string similar to Dispositif.
         /// </summary>
-        public static string ConfirmationDuplication {
+        public static string Dispositif {
             get {
-                return ResourceManager.GetString("ConfirmationDuplication", resourceCulture);
+                return ResourceManager.GetString("Dispositif", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contient.
+        ///   Looks up a localized string similar to Édition d&apos;une instruction.
         /// </summary>
-        public static string Contains {
+        public static string EditPopupTitle {
             get {
-                return ResourceManager.GetString("Contains", resourceCulture);
+                return ResourceManager.GetString("EditPopupTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voulez-vous vraiment supprimer l&apos;élément suivant.
+        ///   Looks up a localized string similar to Exporter vers Excel.
         /// </summary>
-        public static string DeleteMessage {
+        public static string ExportToExcel {
             get {
-                return ResourceManager.GetString("DeleteMessage", resourceCulture);
+                return ResourceManager.GetString("ExportToExcel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voulez-vous dupliquer l&apos;élément suivant.
+        ///   Looks up a localized string similar to Identificateur.
         /// </summary>
-        public static string DuplicateMessage {
+        public static string Identificateur {
             get {
-                return ResourceManager.GetString("DuplicateMessage", resourceCulture);
+                return ResourceManager.GetString("Identificateur", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Égal.
+        ///   Looks up a localized string similar to Identificateur EN.
         /// </summary>
-        public static string Egale {
+        public static string IdentificateurEN {
             get {
-                return ResourceManager.GetString("Egale", resourceCulture);
+                return ResourceManager.GetString("IdentificateurEN", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non, ne pas dupliquer.
+        ///   Looks up a localized string similar to L&apos;identificateur ne doit pas dépasser {1} caractères..
         /// </summary>
-        public static string NePasDupliquer {
+        public static string IdentificateurMaxLength {
             get {
-                return ResourceManager.GetString("NePasDupliquer", resourceCulture);
+                return ResourceManager.GetString("IdentificateurMaxLength", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non, ne pas supprimer.
+        ///   Looks up a localized string similar to L&apos;identificateur ne doit pas dépasser {1} caractères..
         /// </summary>
-        public static string NePasSupprimer {
+        public static string IdentificateurMaxLengthEN {
             get {
-                return ResourceManager.GetString("NePasSupprimer", resourceCulture);
+                return ResourceManager.GetString("IdentificateurMaxLengthEN", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Différent.
+        ///   Looks up a localized string similar to Gestion des instructions.
         /// </summary>
-        public static string NotEquals {
+        public static string InstructionHeading {
             get {
-                return ResourceManager.GetString("NotEquals", resourceCulture);
+                return ResourceManager.GetString("InstructionHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instructions.
+        /// </summary>
+        public static string LinkInstructions {
+            get {
+                return ResourceManager.GetString("LinkInstructions", resourceCulture);
             }
         }
         
@@ -151,65 +160,38 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Oui.
+        ///   Looks up a localized string similar to Texte.
         /// </summary>
-        public static string Oui {
+        public static string Texte {
             get {
-                return ResourceManager.GetString("Oui", resourceCulture);
+                return ResourceManager.GetString("Texte", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plus grand.
+        ///   Looks up a localized string similar to Texte EN.
         /// </summary>
-        public static string PlusGrand {
+        public static string TexteEn {
             get {
-                return ResourceManager.GetString("PlusGrand", resourceCulture);
+                return ResourceManager.GetString("TexteEn", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plus grand ou égal.
+        ///   Looks up a localized string similar to Le texte ne doit pas dépasser {1} caractères..
         /// </summary>
-        public static string PlusGrandOuEgal {
+        public static string TexteMaxLength {
             get {
-                return ResourceManager.GetString("PlusGrandOuEgal", resourceCulture);
+                return ResourceManager.GetString("TexteMaxLength", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plus petit.
+        ///   Looks up a localized string similar to Le texte ne doit pas dépasser {1} caractères..
         /// </summary>
-        public static string PlusPetit {
+        public static string TexteMaxLengthEn {
             get {
-                return ResourceManager.GetString("PlusPetit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Plus petit ou égal.
-        /// </summary>
-        public static string PlusPetitOuEgal {
-            get {
-                return ResourceManager.GetString("PlusPetitOuEgal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Require un appareil d&apos;au moins 7.67 pouces.
-        /// </summary>
-        public static string ScreenRequire {
-            get {
-                return ResourceManager.GetString("ScreenRequire", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Commence par.
-        /// </summary>
-        public static string StartsWith {
-            get {
-                return ResourceManager.GetString("StartsWith", resourceCulture);
+                return ResourceManager.GetString("TexteMaxLengthEn", resourceCulture);
             }
         }
     }

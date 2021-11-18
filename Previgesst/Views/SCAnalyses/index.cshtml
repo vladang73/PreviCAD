@@ -54,21 +54,22 @@
     {
 
         columns.Bound(c => c.NoRef)
-           .Filterable(f => f.Extra(false).Operators(operators => operators
-        .ForString(str => str.Clear()
-        .Contains("Contient")
-            .StartsWith("Commence par")
-            .IsEqualTo("Égal")
-            .IsNotEqualTo("Différent")
+                .Filterable(f => f.Extra(false).Operators(operators => operators
+                .ForString(str => str.Clear()
+                .Contains(GridRES.Contains)
+                .StartsWith(GridRES.StartsWith)
+                .IsEqualTo(GridRES.Egale)
+                .IsNotEqualTo(GridRES.NotEquals)
            )));
+
         columns.Bound(c => c.DateMAJ)
-           .Filterable(f => f.Extra(false).Operators(operators => operators
-        .ForDate(d => d.Clear()
-            .IsEqualTo("Égal")
-            .IsGreaterThan("Plus grand")
-            .IsGreaterThanOrEqualTo("Plus grand ou égal")
-            .IsLessThan("Plus petit")
-            .IsLessThanOrEqualTo("Plus petit ou égal")
+                .Filterable(f => f.Extra(false).Operators(operators => operators
+                .ForDate(d => d.Clear()
+                .IsEqualTo(GridRES.Egale)
+                .IsGreaterThan(GridRES.PlusGrand)
+                .IsGreaterThanOrEqualTo(GridRES.PlusGrandOuEgal)
+                .IsLessThan(GridRES.PlusPetit)
+                .IsLessThanOrEqualTo(GridRES.PlusPetitOuEgal)
            ))).Format("{0:" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern + "}");
 
         //   columns.Bound(e => e.Id).ClientTemplate("<a href='/AnalyseRisque/Edit?ID=#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-info' style='float:right'>Télécharger l'analyse</a>").Title("").Filterable(false).Sortable(false).Width(200);
@@ -117,19 +118,19 @@
             columns.Bound(c => c.DisplaySection)
                .Filterable(f => f.Extra(false).Operators(operators => operators
             .ForString(str => str.Clear()
-            .Contains("Contient")
-                .StartsWith("Commence par")
-                .IsEqualTo("Égal")
-                .IsNotEqualTo("Différent")
+            .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                )));
 
             columns.Bound(c => c.Titre)
                  .Filterable(f => f.Extra(false).Operators(operators => operators
               .ForString(str => str.Clear()
-              .Contains("Contient")
-                  .StartsWith("Commence par")
-                  .IsEqualTo("Égal")
-                  .IsNotEqualTo("Différent")
+              .Contains(GridRES.Contains)
+                                .StartsWith(GridRES.StartsWith)
+                                .IsEqualTo(GridRES.Egale)
+                                .IsNotEqualTo(GridRES.NotEquals)
                  )));
 
 

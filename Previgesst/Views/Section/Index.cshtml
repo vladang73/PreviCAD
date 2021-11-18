@@ -72,10 +72,10 @@
 
                             columns.Bound(c => c.ApplicationName).Filterable(f => f.Extra(false).Operators(operators => operators
                                     .ForString(str => str.Clear()
-                                    .Contains("Contient")
-                                    .StartsWith("Commence par")
-                                    .IsEqualTo("Égal")
-                                    .IsNotEqualTo("Différent")
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
                             )))
                             .Hidden();
 
@@ -83,10 +83,10 @@
                             columns.Bound(c => c.Nom)
                                     .Filterable(f => f.Extra(false).Operators(operators => operators
                                     .ForString(str => str.Clear()
-                                    .Contains("Contient")
-                                    .StartsWith("Commence par")
-                                    .IsEqualTo("Égal")
-                                    .IsNotEqualTo("Différent")
+                                    .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
                                 )))
                                 ;
 
@@ -98,7 +98,6 @@
                                 c.Custom(" ")
                                       .Click("ConfirmDeleteRow")
                                       .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
-
                             })
                             .Width("160px");
                         })

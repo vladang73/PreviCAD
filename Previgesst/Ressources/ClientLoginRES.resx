@@ -129,6 +129,9 @@
   <data name="MissingConfirmPassword" xml:space="preserve">
     <value>Vous devez confirmer votre mot de passe.</value>
   </data>
+  <data name="MissingLink" xml:space="preserve">
+    <value>Lien pour réinitialiser le mot de passe</value>
+  </data>
   <data name="MissingNewPassword" xml:space="preserve">
     <value>Vous devez entrer votre nouveau mot de passe</value>
   </data>
@@ -164,5 +167,8 @@
   </data>
   <data name="TitreCorporate" xml:space="preserve">
     <value>Plateforme corporative</value>
+  </data>
+  <data name="TokenExpiryHour" xml:space="preserve">
+    <value>Heure d'expiration du jeton</value>
   </data>
 </root>

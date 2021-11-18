@@ -156,6 +156,18 @@
   <data name="Creation" xml:space="preserve">
     <value>Création de </value>
   </data>
+  <data name="Demo" xml:space="preserve">
+    <value>Démo</value>
+  </data>
+  <data name="DemoImage" xml:space="preserve">
+    <value>Image de démonstration</value>
+  </data>
+  <data name="Desole" xml:space="preserve">
+    <value>Désolé</value>
+  </data>
+  <data name="DesoleMessage" xml:space="preserve">
+    <value>Désolé, une erreur est survenue sur le serveur.</value>
+  </data>
   <data name="Errors" xml:space="preserve">
     <value>Tracage de boguess</value>
   </data>
@@ -173,6 +185,12 @@
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Mot de passe oublié?</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Bonjour</value>
+  </data>
+  <data name="HomeMessage" xml:space="preserve">
+    <value>Point d'entrée authentifiée du portail</value>
   </data>
   <data name="Journaux" xml:space="preserve">
     <value>Journaux d'erreurs</value>

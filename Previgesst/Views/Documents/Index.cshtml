@@ -77,21 +77,21 @@
 
                                 columns.Bound(c => c.DisplaySection).Filterable(f => f.Extra(false).Operators(operators => operators
                                         .ForString(str => str.Clear()
-                                        .Contains("Contient")
-                                        .StartsWith("Commence par")
-                                        .IsEqualTo("Égal")
-                                        .IsNotEqualTo("Différent")
-                                       ))).Hidden();
+                                        .Contains(GridRES.Contains)
+                                        .StartsWith(GridRES.StartsWith)
+                                        .IsEqualTo(GridRES.Egale)
+                                        .IsNotEqualTo(GridRES.NotEquals)
+                                ))).Hidden();
 
 
                                 columns.Bound(c => c.Titre)
                                      .Filterable(f => f.Extra(false).Operators(operators => operators
                                      .ForString(str => str.Clear()
-                                     .Contains("Contient")
-                                     .StartsWith("Commence par")
-                                     .IsEqualTo("Égal")
-                                     .IsNotEqualTo("Différent")
-                                     )));
+                                     .Contains(GridRES.Contains)
+                                    .StartsWith(GridRES.StartsWith)
+                                    .IsEqualTo(GridRES.Egale)
+                                    .IsNotEqualTo(GridRES.NotEquals)
+                                )));
 
 
 

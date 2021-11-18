@@ -117,55 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Confirmation" xml:space="preserve">
-    <value>Confirmation de la suppression</value>
+  <data name="Accessoire" xml:space="preserve">
+    <value>Accessoire</value>
   </data>
-  <data name="Contains" xml:space="preserve">
-    <value>Contient</value>
+  <data name="Dispositif" xml:space="preserve">
+    <value>Dispositif</value>
   </data>
-  <data name="DeleteMessage" xml:space="preserve">
-    <value>Voulez-vous vraiment supprimer l'élément suivant</value>
+  <data name="EditPopupTitle" xml:space="preserve">
+    <value>Édition d'une instruction</value>
   </data>
-  <data name="DuplicateMessage" xml:space="preserve">
-    <value>Voulez-vous dupliquer l'élément suivant</value>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>Exporter vers Excel</value>
   </data>
-  <data name="Egale" xml:space="preserve">
-    <value>Égal</value>
+  <data name="Identificateur" xml:space="preserve">
+    <value>Identificateur</value>
   </data>
-  <data name="NePasSupprimer" xml:space="preserve">
-    <value>Non, ne pas supprimer</value>
+  <data name="IdentificateurEN" xml:space="preserve">
+    <value>Identificateur EN</value>
   </data>
-  <data name="NePasDupliquer" xml:space="preserve">
-    <value>Non, ne pas dupliquer</value>
+  <data name="IdentificateurMaxLength" xml:space="preserve">
+    <value>L'identificateur ne doit pas dépasser {1} caractères.</value>
   </data>
-  <data name="NotEquals" xml:space="preserve">
-    <value>Différent</value>
+  <data name="IdentificateurMaxLengthEN" xml:space="preserve">
+    <value>L'identificateur ne doit pas dépasser {1} caractères.</value>
   </data>
-  <data name="Oui" xml:space="preserve">
-    <value>Oui</value>
+  <data name="InstructionHeading" xml:space="preserve">
+    <value>Gestion des instructions</value>
   </data>
-  <data name="StartsWith" xml:space="preserve">
-    <value>Commence par</value>
-  </data>
-  <data name="ConfirmationDuplication" xml:space="preserve">
-    <value>Confirmation de duplication</value>
-  </data>
-  <data name="ScreenRequire" xml:space="preserve">
-    <value>Require un appareil d'au moins 7.67 pouces</value>
+  <data name="LinkInstructions" xml:space="preserve">
+    <value>Instructions</value>
   </data>
   <data name="NotificationTitle" xml:space="preserve">
     <value>Erreur - Gestions</value>
   </data>
-  <data name="PlusGrand" xml:space="preserve">
-    <value>Plus grand</value>
+  <data name="Texte" xml:space="preserve">
+    <value>Texte</value>
   </data>
-  <data name="PlusGrandOuEgal" xml:space="preserve">
-    <value>Plus grand ou égal</value>
+  <data name="TexteEn" xml:space="preserve">
+    <value>Texte EN</value>
   </data>
-  <data name="PlusPetit" xml:space="preserve">
-    <value>Plus petit</value>
+  <data name="TexteMaxLength" xml:space="preserve">
+    <value>Le texte ne doit pas dépasser {1} caractères.</value>
   </data>
-  <data name="PlusPetitOuEgal" xml:space="preserve">
-    <value>Plus petit ou égal</value>
+  <data name="TexteMaxLengthEn" xml:space="preserve">
+    <value>Le texte ne doit pas dépasser {1} caractères.</value>
   </data>
 </root>
