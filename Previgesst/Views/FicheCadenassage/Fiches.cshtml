@@ -95,8 +95,6 @@
 
                         columns.Bound(e => e.TravailAEffectuer).Title(CadFichesRES.AEffectuer).ClientTemplate("").Width("300px");
 
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title='" + CadFichesRES.Telecharger +"'><img src='/content/v2/images/fr-icon.svg' alt='FR'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@selectedLang != "fr").Width("30px");
-                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title='"+ CadFichesRES.Telecharger + "'><img src='/content/v2/images/en-icon.svg' alt='EN'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@selectedLang != "en").Width("30px");
 
                         if (User.IsInRole("Administrateur")) {
                             columns.Bound(e => e.estDocumentPrevigesst)
@@ -105,8 +103,11 @@
                             .Title("Prévi").Width("65px");
                         }
 
-                        columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/EditFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-edit'> " + Html.Raw(CadFichesRES.Modifier) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width("125px");
-                        columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/DuplicateFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-duplicate'><img src='/content/v2/images/dup-icon.svg' alt='dup icon'/> " + Html.Raw(CadFichesRES.Dupliquer) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width("130px");
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title='" + CadFichesRES.Telecharger + "'><img src='/content/v2/images/fr-icon.svg' alt='FR'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@selectedLang != "fr").Width("40px");
+                        columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title='" + CadFichesRES.Telecharger + "'><img src='/content/v2/images/en-icon.svg' alt='EN'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@selectedLang != "en").Width("40px");
+
+                        columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/EditFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-edit'> " + Html.Raw(CadFichesRES.Modifier) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width("105px");
+                        columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/DuplicateFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-duplicate'><img src='/content/v2/images/dup-icon.svg' alt='dup icon'/> " + Html.Raw(CadFichesRES.Dupliquer) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width("105px");
 
                         columns.Command(c =>
                         {
