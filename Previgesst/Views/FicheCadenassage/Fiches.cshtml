@@ -49,7 +49,7 @@
                         columns.Bound(e => e.IsApproved).Title(CadFichesRES.Statut)
                             .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' " + Model.RCDisabled + " value='None' id='squaredone' name='check' #=IsApproved ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
                             .HtmlAttributes(new { @class = "td-round-left-border" })
-                            .Width("50px");
+                            .Width("70px");
 
                         columns.Bound(c => c.NoFiche).Title(CadFichesRES.NoFiche)
                             .Filterable(f => f.Extra(false).Operators(operators => operators
@@ -98,11 +98,11 @@
                         columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title='" + CadFichesRES.Telecharger +"'><img src='/content/v2/images/fr-icon.svg' alt='FR'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@selectedLang != "fr").Width("30px");
                         columns.Bound(e => e.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title='"+ CadFichesRES.Telecharger + "'><img src='/content/v2/images/en-icon.svg' alt='EN'/></a>").Title("").Filterable(false).Sortable(false).Hidden(@selectedLang != "en").Width("30px");
 
-                        if (User.IsInRole("Administrateur")) { 
+                        if (User.IsInRole("Administrateur")) {
                             columns.Bound(e => e.estDocumentPrevigesst)
                             //.ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>")
                             .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' value='None' id='squaredone' name='check' #=estDocumentPrevigesst ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
-                            .Title("Prévi").Width("65px"); 
+                            .Title("Prévi").Width("65px");
                         }
 
                         columns.Bound(bt => bt.FicheCadenassageId).ClientTemplate("<a href='../../FicheCadenassage/EditFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + " #' class='btn-table btn-edit'> " + Html.Raw(CadFichesRES.Modifier) + "</a>").Title("").Filterable(false).Sortable(false).Hidden(!Model.estUpdate).Width("125px");
@@ -141,9 +141,11 @@
                         .Destroy(u => u.Action("DeleteFiche", "FicheCadenassage"))
                         .Events(e => e.Error("ListeErreurFiche"))
                     )
-                    .Events(e => e.DataBound("ListeDataBoundFiche")
-                    )
+                    .Events(e => e.DataBound("ListeDataBoundFiche"))
                     .Editable(e => e.DisplayDeleteConfirmation(false))
+
+                    .Scrollable()
+                    .HtmlAttributes(new { @class = "k-grid-height" })
                 )
 
 <script>

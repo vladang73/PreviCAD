@@ -92,9 +92,9 @@
 
                         columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette + "><img src='/content/v2/images/download-icon.svg' alt='download'/></a>").Title("").Filterable(false).Sortable(false).Width("100px");
 
-                        columns.Command(e => e.Custom("steps").Click("showInsDetails").HtmlAttributes(new { @data_viewonly = "false", @class = "btn-material mx-1" }).Text(@PrevFicheRES.Steps)).Width("130px");
+                        columns.Command(e => e.Custom("steps").Click("showInsDetails").HtmlAttributes(new { @data_viewonly = "false", @class = "btn-material mx-1 text-nowrap" }).Text(@PrevFicheRES.Steps)).Width("130px");
 
-                        columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier).HtmlAttributes(new { @class = "btn-table btn-edit" })).Width("140px");
+                        columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier).HtmlAttributes(new { @class = "btn-table btn-edit text-nowrap" })).Width("140px");
                     })
                     .DataSource(ds => ds
                     .Ajax()
@@ -150,7 +150,7 @@
         </div>
     </div>
     <div class="window-footer">
-        <input type="button" class="btn btn-mettre m-1" id="btnSaveInstructionStatus" value="@CadEditRES.Enregistrer" />
+        <input type="button" class="btn btn-mettre m-1 mt-3" id="btnSaveInstructionStatus" value="@CadEditRES.Enregistrer" />
     </div>
 </div>
 
@@ -158,12 +158,12 @@
 <div id="wndEmail" style="display: none;">
     <div style="width:97%">
         <div>
-            <label>@PrevFicheRES.WarningToEmails</label>
+            <label class="form-label">@PrevFicheRES.WarningToEmails</label>
             <input type="text" id="WarningToEmails" name="WarningToEmails" class="form-control" />
         </div>
         <div>
-            <label>@PrevFicheRES.WarningBodyLabel</label>
-            <textarea class="form-control" id="WarningEmailText" name="WarningEmailText" rows="15">
+            <label class="form-label">@PrevFicheRES.WarningBodyLabel</label>
+            <textarea class="form-control h-300" id="WarningEmailText" name="WarningEmailText" rows="15">
             </textarea>
         </div>
 
@@ -387,7 +387,7 @@
 
                     $("#wnd").data("kendoWindow").close();
                     if (allWarnings1.length > 0 || allWarnings2.length > 0) {
-                        OpenWarningEmail(allData[0].FicheCadenassageId, allWarnings1, allWarnings2);
+                        OpenWarningEmail(allData[1].FicheCadenassageId, allWarnings1, allWarnings2);
                     }
                 }
             },
@@ -398,8 +398,8 @@
 
     function OpenWarningEmail(ficheID, allWarnings1, allWarnings2) {
 
-        var warSubject = '@Html.Raw(PrevFicheRES.WarningEmailSubject)' + "\n" + "\n";
-        var warDescr = '@Html.Raw(PrevFicheRES.WarningDescr)' + "\n" + "\n";
+        var warSubject = '@Html.Raw(PrevFicheRES.WarningEmailSubject)' + "\n";
+        var warDescr = '@Html.Raw(PrevFicheRES.WarningDescr)' + "\n";
         var warFildId = '@Html.Raw(PrevFicheRES.WarningFileId)' + ' ' + ficheID ;
         var warUser = '@Html.Raw(PrevFicheRES.WarningUser)' + ' @nomUtilisateur';
         var warTexts = '@Html.Raw(PrevFicheRES.WarningTexts)';
@@ -409,17 +409,22 @@
 
 
         var allWarningText = '';
-        if (allWarnings1.length > 0) {
-            allWarningText += '\n' + switchOn + '\n';
-            allWarningText += allWarnings1.join("\n");
-        }
-
-        allWarningText += '\n\n';
 
         if (allWarnings2.length > 0) {
             allWarningText += '\n' + switchOff + '\n';
             allWarningText += allWarnings2.join("\n");
         }
+
+        allWarningText += '\n';
+
+
+        if (allWarnings1.length > 0) {
+            allWarningText += '\n' + switchOn + '\n';
+            allWarningText += allWarnings1.join("\n");
+        }
+
+
+        
 
         console.log(allWarningText);
 

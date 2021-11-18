@@ -32,7 +32,9 @@
                     .StartsWith(GridRES.StartsWith)
                     .IsEqualTo(GridRES.Egale)
                     .IsNotEqualTo(GridRES.NotEquals)
-                )));
+                )))
+                .HtmlAttributes(new { @class = "td-round-left-border" })
+                ;
 
                 columns.Bound(c => c.NomDepartementEN)//.EditorTemplateName("MyView")
                     .Filterable(f => f.Extra(false).Operators(operators => operators
@@ -45,12 +47,12 @@
 
                 columns.Command(c =>
                 {
-                    c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                    c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit me-5" });
                     c.Custom(CadDeptRES.Vide)
                     .Click("ConfirmDeleteRowDEPT")
                     .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
                 }
-                ).Width("200px");
+                ).Width("300px");
             })
             .Sortable(s => s.AllowUnsort(false))
             .Pageable(s => s.PageSizes(true).PageSizes(new List<int> { 5, 10 }).Input(true).Info(false).Numeric(false))
@@ -80,6 +82,9 @@
             {
                 t.Create().HtmlAttributes(new { @class = "d-none btn-test" });
             })
+
+        //.Scrollable()
+        //.HtmlAttributes(new { @class = "k-grid-height" })
         )
 
 

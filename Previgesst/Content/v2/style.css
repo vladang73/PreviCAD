@@ -339,6 +339,15 @@ input[type=number] {
     min-height: 50px;
 }
 
+.h-300 {
+    height: 300px !important;
+    line-height: 25px;
+}
+
+.k-grid-height {
+    height: 600px;
+}
+
 /*.k-window-actions .k-icon.k-i-close {
     border-radius: 20px;
     padding: 4px;
