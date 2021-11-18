@@ -142,7 +142,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numéro d&apos;utilisateur.
+        ///   Looks up a localized string similar to Nom d’usager.
         /// </summary>
         public static string NomUsager {
             get {

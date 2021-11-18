@@ -24,6 +24,8 @@ namespace Previgesst.ViewModels
     public class GenerateResetPasswordViewModel
     {
         public string UserId { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingUsername")]
         public string UserName { get; set; }
 
         [Display(Name = "Lien pour réinitialiser le mot de passe")]

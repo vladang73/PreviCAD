@@ -145,7 +145,7 @@
     <value>Nouveau mot de passe</value>
   </data>
   <data name="NomUsager" xml:space="preserve">
-    <value>Numéro d'utilisateur</value>
+    <value>Nom d’usager</value>
   </data>
   <data name="PasswordMismatch" xml:space="preserve">
     <value>Le mot de passe doit être identique.</value>

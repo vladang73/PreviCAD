@@ -335,6 +335,10 @@ input[type=number] {
     border-radius: 15px !important;
 }
 
+.main-page-heading{
+    min-height: 50px;
+}
+
 /*.k-window-actions .k-icon.k-i-close {
     border-radius: 20px;
     padding: 4px;

@@ -20,7 +20,7 @@
         </div>
         <div class="main-section-content m-2">
             <div class="row grid-action-toolbar">
-                <span class="col-sm-3 form-action-toolbar">@PrevFicheRES.NoFiche </span><span class="col-sm-8 work-action-toolbar">@PrevFicheRES.Travaux</span>
+                <span class="col-3 col-sm-3 form-action-toolbar">@PrevFicheRES.NoFiche </span><span class="col-8 col-sm-8 work-action-toolbar">@PrevFicheRES.Travaux</span>
             </div>
             <div class="previced-grid">
                 @if (Model.Data != null)
@@ -28,9 +28,9 @@
                     foreach (var item in Model.Data)
                     {
                         <div class="row bg-white td-round-left-border">
-                            <div class="col-sm-3">@item.NoFicheCadenassage</div>
-                            <div class="col-sm-8">@item.TravailAEffectuer</div>
-                            <div class="col-sm-1">
+                            <div class="col-3 col-sm-3">@item.NoFicheCadenassage</div>
+                            <div class="col-8 col-sm-8">@item.TravailAEffectuer</div>
+                            <div class="col-1 col-sm-1">
 
 
                                 @if (Model.Employe.Langue == "fr")
