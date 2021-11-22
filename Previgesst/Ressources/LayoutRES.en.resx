@@ -121,7 +121,7 @@
     <value>Home</value>
   </data>
   <data name="ActionAdmin" xml:space="preserve">
-    <value>Administration Management</value>
+    <value>Administrator management</value>
   </data>
   <data name="ActionClient" xml:space="preserve">
     <value>Clients</value>

@@ -70,7 +70,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gestion des administration.
+        ///   Looks up a localized string similar to Gestion des administrateurs.
         /// </summary>
         public static string ActionAdmin {
             get {
