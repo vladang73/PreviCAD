@@ -18,20 +18,19 @@
         <div class="main-section-tile">
             <h2>@PrevFicheRES.Equipement: @ViewBag.EquipmentName</h2>
         </div>
-        <div class="main-section-content m-2">
+        <div class="main-section-content mt-2">
             <div class="row grid-action-toolbar">
-                <span class="col-3 col-sm-3 form-action-toolbar">@PrevFicheRES.NoFiche </span><span class="col-8 col-sm-8 work-action-toolbar">@PrevFicheRES.Travaux</span>
+                <span class="col-4 col-sm-4 form-action-toolbar mobile-small-font">@PrevFicheRES.NoFiche </span><span class="col-7 col-sm-7 work-action-toolbar mobile-small-font">@PrevFicheRES.Travaux</span>
             </div>
             <div class="previced-grid">
                 @if (Model.Data != null)
                 {
                     foreach (var item in Model.Data)
                     {
-                        <div class="row bg-white td-round-left-border">
-                            <div class="col-3 col-sm-3">@item.NoFicheCadenassage</div>
-                            <div class="col-8 col-sm-8">@item.TravailAEffectuer</div>
-                            <div class="col-1 col-sm-1">
-
+                        <div class="row bg-white td-round-left-border-small mobile-small-font">
+                            <div class="col-4 col-sm-4">@item.NoFicheCadenassage</div>
+                            <div class="col-7 col-sm-7">@item.TravailAEffectuer</div>
+                            <div class="col-1 col-sm-1 p-0">
 
                                 @if (Model.Employe.Langue == "fr")
                                 {

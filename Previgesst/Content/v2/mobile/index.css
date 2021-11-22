@@ -246,8 +246,9 @@ input {
     .main-section-tile h2 {
         color: #59c6f8;
         padding-bottom: 5px;
-        font-size: 26px;
+        /*font-size: 26px;*/
         font-family: 'IBMPlexSans-Medium';
+        font-size: calc(1.25rem + .9vw);
     }
 
     .main-section-tile img {
@@ -281,7 +282,6 @@ input {
 
     .btn.btn-secondary span {
         vertical-align: middle;
-        ;
     }
 
 .main-section-content .btn img {
@@ -395,3 +395,18 @@ input {
     right: 100px;
     padding: 5px;
 }
+
+.mobile-small-font{
+    font-size: 11px;
+}
+    .mobile-small-font .grid-download-icon{
+        width: 22px;
+    }
+
+    .td-round-left-border-small {
+        border-radius: 25px 0px 0px 0px !important;
+        border: none;
+        padding: 10px 0.6em;
+        border-left-width: 0;
+        margin-bottom: 7px;
+    }
