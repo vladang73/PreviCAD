@@ -2540,6 +2540,9 @@
     <Content Include="Views\RegistreMobile\Fiches.cshtml" />
     <Content Include="Views\Shared\_LayoutClient_v2.cshtml" />
     <Content Include="Views\Shared\_Layout_v2.cshtml" />
+    <Content Include="Views\Registre\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\ClientLogin\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />

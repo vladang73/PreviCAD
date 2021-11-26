@@ -1,5 +1,6 @@
-﻿@model Previgesst.ViewModels.EmployeRegistreViewModel
+﻿@using Previgesst.Ressources
 @using Previgesst.Ressources.Previcad
+@model Previgesst.ViewModels.EmployeRegistreViewModel
 
 
 @{
@@ -19,7 +20,7 @@
 
 @section sidebar{
     <ul class="nav flex-column sidebar-nav" role="tablist">
-      
+
         <li class="nav-item text-center active">
             <a id="Fiches" class="nav-link home-navlink active" href="#TabFiches" aria-controls="general" role="tab" data-toggle="tab" data-bs-toggle="tab">
                 <img src="/content/v2/images/Procédures.svg" title="@PrevIndexRES.MenuFiche" />
@@ -48,6 +49,10 @@
             </a>
         </li>
     </ul>
+}
+
+@section sidebarChilds{
+    <li><a class="submenu-dropdown-item" href="/Registre/ChangePassword">@LayoutRES.ChangePassword</a></li>
 }
 
 <main class="main-container-wrapper page-container">
@@ -88,12 +93,6 @@
     function refreshTermines(e) {
         $("#listTermines").data("kendoGrid").dataSource.read();
     }
-
-    //// Get and inject the li name selected
-    //jQuery(document).on('click', '.nav-tabs li', function () {
-    //    let liSelected = jQuery(this).find('.icon-noactive').attr('title');
-    //    jQuery('.currentTitleCadenassage').html(liSelected);
-    //});
 
     $(document).ready(function () {
         $('.k-grid-content').removeAttr('style');

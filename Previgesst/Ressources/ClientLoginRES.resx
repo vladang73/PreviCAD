@@ -120,6 +120,9 @@
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirmer le mot de passe</value>
   </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Mot de passe actuel</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Mot de passe oublié?</value>
   </data>

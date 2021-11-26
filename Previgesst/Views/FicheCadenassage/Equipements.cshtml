@@ -38,10 +38,10 @@
                     columns.Bound(e => e.EquipementId).Hidden();
                     columns.Bound(e => e.QRCode).Hidden();
 
-                    columns.Bound(e => e.Thumbnail).ClientTemplate("# if(Thumbnail != null) {# <img class='mx-3 img-eq' src='#=Thumbnail#'/> #}#")
+                    columns.Bound(e => e.Thumbnail).ClientTemplate("# if(Thumbnail != null) {# <img class='mx-1 img-eq' src='#=Thumbnail#' /> #}#")
                     .EditorTemplateName("VideView").Title("").Filterable(false).Sortable(false)
                     .HtmlAttributes(new { @class = "td-round-left-border" })
-                    .Width("60px")
+                    .Width("110px")
                     ;
 
                     //NomEquipement
@@ -125,9 +125,10 @@
                 {
                     t.Create().HtmlAttributes(new { @class = "btn-test d-none" });
                 })
+
+                .Scrollable()
+                .HtmlAttributes(new { @class = "k-grid-height" })
             )
-
-
 @(Html.Kendo().Window().Name("EqDetails")
         .Title(CadEquipRES.EquipmentMgmt)
         .Visible(false)
@@ -257,12 +258,17 @@
     </div>
 </script>
 
-
 <script type="text/javascript" charset="utf-8">
 
     var detailsTemplate;
     var energieTemplate;
     var qrCodeTemplate;
+
+    // Initialize the variable which will hold the scroll positions.
+    var scrollOffset = {
+        left: 0,
+        top: 0
+    };
 
     $(document).ready(function () {
         detailsTemplate = kendo.template($("#eqTemplate").html());
@@ -509,8 +515,18 @@
         ////        $(this).remove();
         ////    }
         ////})
+
+        //var container = e.sender.wrapper.children(".k-grid-content"); // or ".k-virtual-scrollable-wrap"
+        //container.scrollLeft(scrollOffset.left);
+        //container.scrollTop(scrollOffset.top); // use only if virtual scrolling is disabled
     }
 
+    //function ListeDataBindingEQ(e) {
+    //    debugger;
+    //    var container = e.sender.wrapper.children(".k-grid-content"); // or ".k-virtual-scrollable-wrap"
+    //    scrollOffset.left = container.scrollLeft();
+    //    scrollOffset.top = container.scrollTop(); // use only if virtual scrolling is disabled
+    //}
 
 
     function showDetailsQR(e) {
@@ -676,4 +692,22 @@
         $("#EqWithQR").data("kendoWindow").close();
     });
 
+
+    $(document).ready(GridResize);
+    $(window).resize(GridResize);
+
+    $("#Equip").click(GridResize);
+
+    function GridResize() {
+        var windowHeight = $(window).height();
+        var gridHeight = $('.k-grid-height').find('.k-grid-content').height();
+
+        var newHeight = windowHeight - 400;
+        newHeight = 300 > newHeight ? 300 : newHeight;
+
+
+        console.log('windowHeight', windowHeight, 'k-grid-content', gridHeight, 'new height', newHeight);
+
+        $('.k-grid-height').find('.k-grid-content').attr('style', 'height:' + newHeight + 'px !important;');
+    }
 </script>

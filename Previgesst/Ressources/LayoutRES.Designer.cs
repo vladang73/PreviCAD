@@ -169,6 +169,24 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changer le mot de passe.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Impossible de changer le mot de passe, veuillez réessayer plus tard..
+        /// </summary>
+        public static string ChangePasswordError {
+            get {
+                return ResourceManager.GetString("ChangePasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Création de .
         /// </summary>
         public static string Creation {

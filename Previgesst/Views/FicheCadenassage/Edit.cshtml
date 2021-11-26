@@ -30,7 +30,7 @@
 
     <ul class="nav flex-column sidebar-nav" role="tablist">
         <li class="nav-item text-center mt-2">
-            <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@Url.Action("Index", "MesApplications")'>
+            <a class="nav-link home-navlink" role="tab" data-toggle="tab" href='@if (this.Layout.EndsWith("_Layout.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") }'>
                 <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
             </a>
         </li>
@@ -129,122 +129,6 @@
     </div>
 </main>
 
-
-@*
-
-    <div class="container-fluid">
-        <div class="cadenassageContent cadenassageAdmin row">
-            <div class="cadenassageContent--header col col-sm-12 col-md-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page"><h1>@CadEditRES.TitreSectionCadenassage</h1></li>
-                    </ol>
-                </nav>
-                <hr />
-            </div>
-            <ul class="nav nav-tabs col-md-1" role="tablist">
-                <li role="presentation" class="active">
-                    <a id="Fich" href="#Fiches" aria-controls="general" role="tab" data-toggle="tab"><img src="~/Images/fiche-de-cadenassage.png" class="menu-icon icon-noactive" title="@CadEditRES.FichesCadenassage" /><img src="~/Images/fiche-de-cadenassage-previ.png" class="menu-icon icon-active" title="@CadEditRES.FichesCadenassage" /><!--@CadEditRES.FichesCadenassage--></a>
-                </li>
-
-
-
-                @if (Model.estUpdate)
-                {
-                <li role="presentation">
-                    <a id="Equip" href="#Equipements" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/equipements.png" class="menu-icon icon-noactive" title="@CadEditRES.Equipements" /><img src="/Images/equipements-previ.png" class="menu-icon icon-active" title="@CadEditRES.Equipements" /><!--@CadEditRES.Equipements--></a>
-                </li>
-
-                <li role="presentation">
-                    <a id="Dep" href="#Departements" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/departements.png" class="menu-icon icon-noactive" title="@CadEditRES.Departements" /><img src="/Images/departements-previ.png" class="menu-icon icon-active" title="@CadEditRES.Departements" /><!--@CadEditRES.Departements--></a>
-                </li>
-
-                <li role="presentation">
-                    <a id="Emp" href="#EmployesCadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/employes.png" class="menu-icon icon-noactive" title="@CadEditRES.Employes" /><img src="/Images/employes-previ.png" class="menu-icon icon-active" title="@CadEditRES.Employes" /><!--@CadEditRES.Employes--></a>
-                </li>
-
-                }
-
-                @if (Model.estUpdate || Model.estAudit)
-                {
-                <li role="presentation">
-                    <a id="Registre" href="#RegistreCadenassage" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/registre.png" class="menu-icon icon-noactive" title="@CadEditRES.Registre" /><img src="/Images/registre-previ.png" class="menu-icon icon-active" title="@CadEditRES.Registre" /><!--@CadEditRES.Registre--></a>
-                </li>
-
-
-
-                }
-
-
-                <li role="presentation">
-                    <a id="DocCli" href="#DocClients" aria-controls="pratiques" role="tab" data-toggle="tab"><img src="/Images/programme-de-cadenassage.png" class="menu-icon icon-noactive" title="@CadEditRES.Programme" /><img src="/Images/programme-de-cadenassage-previ.png" class="menu-icon icon-active" title="@CadEditRES.Programme" /><!--@CadEditRES.Programme--></a>
-                </li>
-
-
-                <li role="presentation">
-                    <a href="#Previcad" aria-controls="previcad" role="tab" data-toggle="tab"><img src="/Images/lien.png" class="menu-icon icon-noactive" title="@CadEditRES.LienUtilisateur" /><img src="/Images/lien-previ.png" class="menu-icon icon-active" title="@CadEditRES.LienUtilisateur" /><!--@CadEditRES.LienUtilisateur--></a>
-                </li>
-
-
-
-                <li role="presentation">
-                    <a href="#CadParamAdmin" aria-controls="pratiques" role="tab" data-toggle="tab" style="margin-left: 5px;"><img src="/Images/settings-admin.png" class="menu-icon icon-noactive" title="@CadEditRES.CadParamAdmin" /><img src="/Images/settings-admin-previ.png" class="menu-icon icon-active" title="@CadEditRES.CadParamAdmin" /><!--@CadEditRES.CadParamAdmin--></a>
-                </li>
-
-
-            </ul>
-
-            <div class="panel panel-danger col col-xs-12 col-sm-12 col-md-10">
-                <div class="panel-heading back-panel" style="font-size:larger;font-weight:500;color:white"><span class="currentTitleCadenassage">@CadEditRES.FichesCadenassage</span> <a href="https://previgesst.com/centre-de-support/" class="supportLink" target="_blank"><img src="/Images/help.png" class="help-icon" title="Centre support" /> @CadEditRES.CentreSupport</a></div>
-                <div class="panel-body">
-                    <div class="tab-content">
-
-                        <div id="Fiches" class="tab-pane active">
-                            @Html.Partial("Fiches", @Model)
-                        </div>
-
-                        <div id="Equipements" class="tab-pane">
-                            @Html.Partial("Equipements", @Model)
-                        </div>
-
-                        <div id="Departements" class="tab-pane">
-
-                            @Html.Partial("Departements", @Model)
-                        </div>
-
-                        <div id="EmployesCadenassage" class="tab-pane">
-
-                            @Html.Partial("EmployesCadenassage", @Model)
-                        </div>
-
-                        <div id="Previcad" class="tab-pane">
-                            @Html.Partial("Previcad", @Model)
-                        </div>
-
-                        <div id="DocClients" class="tab-pane">
-
-                            @Html.Partial("DocClients", @Model)
-                        </div>
-
-
-                        <div id="RegistreCadenassage" class="tab-pane">
-                            @Html.Partial("Registre", @Model)
-                        </div>
-
-                        <div id="CadParamAdmin" class="tab-pane">
-                            @Html.Partial("CadParamAdmin", @Model)
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <a class='shieldLogoCadenassage' href='@if (this.Layout.EndsWith("_Layout.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '><img src='/Images/dark_logo.png'></a>
-        </div>
-    </div>
-
-
-*@
-
 @section scripts{
     <script type="text/javascript">
     /*
@@ -278,24 +162,19 @@
         //$(document).ready(GridResize);
         //$(window).resize(GridResize);
 
-    $(document).ready(function () {
-        ///////////////////////////////////////
-        // navigate Equipement Articuloe to edit page, and select equipment tab
+        $(document).ready(function () {
+            ///////////////////////////////////////
+            // navigate Equipement Articuloe to edit page, and select equipment tab
 
-        var area = '@Request.QueryString["area"]';
+            var area = '@Request.QueryString["area"]';
 
-        if (area != null && area.toUpperCase() == 'EQ') {
-            $('#Equip').click();
-        }
+            if (area != null && area.toUpperCase() == 'EQ') {
+                $('#Equip').click();
+            }
 
-        ///////////////////////////////////////
-    });
-
-
-    //$(".sidebar-nav li a").click(function () {
-    //    $(".sidebar-nav li a").removeClass("active");
-    //    $(this).addClass("active");
-    //});
+            ///////////////////////////////////////
+        });
+       
     </script>
 
 }

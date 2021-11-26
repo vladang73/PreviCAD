@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NLog;
+using Previgesst.Ressources;
 
 namespace Previgesst.Controllers
 {
@@ -137,6 +138,34 @@ namespace Previgesst.Controllers
             Session.Abandon();
             Session.Clear();
             return RedirectToAction(nameof(Login));
+        }
+
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View(new ChangePasswordViewModel { UserName = User.Identity.Name });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Throttle(Message = "Attendez {n} secondes avant d'exécuter cette action de nouveau.", Name = nameof(ResetPassword), Seconds = 5)]
+        public ActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            IdentityResult result = null;
+            if (ModelState.IsValid)
+            {
+                result = AccountService.ChangePassword(model);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(AdminPreviController.Index), typeof(AdminPreviController).GetUrlName());
+                }
+
+                AddErrors(result);
+            }
+
+            return View(model);
         }
     }
 }

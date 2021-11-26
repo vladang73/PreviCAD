@@ -96,7 +96,10 @@
                     .Update(u => u.Action("SaveAudit", "Registre"))
                     .Events(e => e.RequestEnd("EndRegistre"))
                 )
-            )
+
+            .Scrollable()
+            .HtmlAttributes(new { @class = "k-grid-height" })
+        )
 
 </div>
 

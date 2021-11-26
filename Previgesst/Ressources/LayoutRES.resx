@@ -153,6 +153,12 @@
   <data name="Cadenassage" xml:space="preserve">
     <value>Cadenassage</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Changer le mot de passe</value>
+  </data>
+  <data name="ChangePasswordError" xml:space="preserve">
+    <value>Impossible de changer le mot de passe, veuillez réessayer plus tard.</value>
+  </data>
   <data name="Creation" xml:space="preserve">
     <value>Création de </value>
   </data>

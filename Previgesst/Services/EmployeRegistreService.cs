@@ -111,7 +111,7 @@ namespace Previgesst.Services
                 EmployeRegistreId = s.EmployeRegistreId,
                 NoCadenas = s.NoCadenas,
                 Nom = s.Nom,
-                NomDepartement =langue=="fr"? s.Departement.NomDepartement: s.Departement.NomDepartementEN,
+                NomDepartement = langue == "fr" ? s.Departement.NomDepartement : s.Departement.NomDepartementEN,
                 Password = s.Password,
                 ClientId = s.ClientId,
                 Actif = s.Actif,
@@ -151,8 +151,8 @@ namespace Previgesst.Services
         {
             if (HttpContext.Current.Session["EmployeCadenassage"] != null)
                 return (EmployeRegistreViewModel)HttpContext.Current.Session["EmployeCadenassage"];
-            
-            
+
+
             return new EmployeRegistreViewModel();
         }
 
@@ -182,5 +182,22 @@ namespace Previgesst.Services
             return result;
         }
 
+
+        public bool ChangePassword(ChangeEmployeePasswordViewModel model)
+        {
+            var emp = employeRegistreRepository.Get(model.EmpID);
+
+            if (emp != null)
+            {
+                emp.Password = model.Password;
+
+                employeRegistreRepository.Update(emp);
+                employeRegistreRepository.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

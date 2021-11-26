@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Previgesst.ActionFilters;
 using Previgesst.Helpers;
 using Previgesst.Repositories;
+using Previgesst.Ressources;
 using Previgesst.Services;
 using Previgesst.ViewModels;
 
@@ -137,5 +139,39 @@ namespace Previgesst.Controllers
             return RedirectToAction(nameof(MesApplicationsController.Index), typeof(MesApplicationsController).GetUrlName());
         }
 
+
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            var session = utilisateurService.GetSession();
+
+            if (session != null)
+            {
+                var client = clientRepository.Get(session.ClientId);
+                return View(new ChangeClientPasswordViewModel { UserName = session.NomUtilisateur, Identificateur = client.Identificateur });
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Throttle(Message = "Attendez {n} secondes avant d'exécuter cette action de nouveau.", Name = nameof(ChangePassword), Seconds = 5)]
+        public ActionResult ChangePassword(ChangeClientPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = utilisateurService.ChangePassword(model);
+
+                if (result)
+                {
+                    return RedirectToAction(nameof(AdminPreviController.Index), typeof(AdminPreviController).GetUrlName());
+                }
+            }
+
+            ModelState.AddModelError("", LayoutRES.ChangePasswordError);
+            return View(model);
+        }
     }
 }

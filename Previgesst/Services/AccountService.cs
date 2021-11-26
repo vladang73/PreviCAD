@@ -85,5 +85,19 @@ namespace Previgesst.Services
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        public IdentityResult ChangePassword(ChangePasswordViewModel model)
+        {
+            var user = UserManager.FindByName(model.UserName);
+            if (user == null)
+            {
+                //Do not reveal that the user doesn't exist
+                return IdentityResult.Success;
+            }
+
+            var result = UserManager.ChangePassword(user.Id, model.CurrentPassword, model.Password);
+
+            return result;
+        }
     }
 }

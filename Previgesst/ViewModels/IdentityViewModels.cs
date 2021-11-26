@@ -133,4 +133,28 @@ namespace Previgesst.ViewModels
         [Display(ResourceType = typeof(ManageRES), Name = "RoleDescription")]
         public string Description { get; set; }
     }
+
+    public class ChangePasswordViewModel
+    {
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "NomUsager")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingUsername")]
+        public string UserName { get; set; }
+
+
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "CurrentPassword")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingPassword")]
+        public string CurrentPassword { get; set; }
+
+
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "NewPassword")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingNewPassword")]
+        [MinLength(8, ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "PasswordValidation")]
+        public string Password { get; set; }
+
+
+        [Display(ResourceType = typeof(ClientLoginRES), Name = "ConfirmPassword")]
+        [Required(ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "MissingConfirmPassword")]
+        [Compare(nameof(Password), ErrorMessageResourceType = typeof(ClientLoginRES), ErrorMessageResourceName = "PasswordMismatch")]
+        public string ConfirmPassword { get; set; }
+    }
 }

@@ -1045,5 +1045,27 @@ namespace Previgesst.Services
 
             return resultContacts;
         }
+
+        public bool ChangePassword(ChangeClientPasswordViewModel vm)
+        {
+            var client = clientRepository.getClientByIdentificateur(vm.Identificateur.Trim());
+            if (client == null)
+                return false;
+
+            var utilisateur = client.Utilisateurs.Where(x => x.NomUtilisateur == vm.UserName.Trim() && x.Password == Helpers.Encryption.Encrypt(vm.CurrentPassword.Trim(), true)).FirstOrDefault();
+
+            if (utilisateur != null)
+            {
+                utilisateur.Password = Helpers.Encryption.Encrypt(vm.ConfirmPassword.Trim(), true);
+                
+                utilisateurRepository.Update(utilisateur);
+                utilisateurRepository.SaveChanges();
+
+                return true;
+            }
+
+
+            return false;
+        }
     }
 }

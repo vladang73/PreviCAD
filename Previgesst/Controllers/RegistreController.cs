@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Previgesst.Ressources.Previcad;
 using Newtonsoft.Json;
+using Previgesst.Ressources;
 
 namespace Previgesst.Controllers
 {
@@ -69,9 +70,9 @@ namespace Previgesst.Controllers
             {
                 return View("RegistreEmploye", currentEMP);
             }
+            Session["ClientID"] = Guid.Parse(ClientID);
 
             var loginInfo = new LoginCadenassageViewModel() { Identificateur = Guid.Parse(ClientID) };
-            Session["ClientID"] = Guid.Parse(ClientID);
 
             loginInfo.MaintenancePrevue = false;
 
@@ -498,6 +499,47 @@ namespace Previgesst.Controllers
             var result = savedInstructionService.GetSavedInstructionNote(ficheId, ligneRegistreId);
 
             return Json(new { isSuccess = true, Note = result }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            EmployeRegistreViewModel currentEMP = employeRegistreService.getEmployeRegistre();
+            currentEMP.Langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+
+            if (currentEMP.ClientId != 0)
+            {
+                var vm = clientService.getClientVM(currentEMP.ClientId);
+                Session["ClientID"] = vm.UniqueIdentifier;
+
+                return View(new ChangeEmployeePasswordViewModel { EmpID = currentEMP.EmployeRegistreId, NoEmploye = currentEMP.NoEmploye });
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult ChangePassword(ChangeEmployeePasswordViewModel model)
+        {
+            EmployeRegistreViewModel currentEMP = employeRegistreService.getEmployeRegistre();
+            currentEMP.Langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.ToLower();
+
+            if (currentEMP.ClientId != 0 && currentEMP.NoEmploye == model.NoEmploye && currentEMP.EmployeRegistreId == model.EmpID)
+            {
+                bool isChanged = employeRegistreService.ChangePassword(model);
+
+                if (isChanged)
+                {
+                    var vm = clientService.getClientVM(currentEMP.ClientId);
+                    Session["ClientID"] = vm.UniqueIdentifier;
+
+                    return RedirectToAction("Index", new { @ClientID = vm.UniqueIdentifier });
+                }
+            }
+
+            ModelState.AddModelError("", LayoutRES.ChangePasswordError);
+            return View(model);
         }
     }
 }

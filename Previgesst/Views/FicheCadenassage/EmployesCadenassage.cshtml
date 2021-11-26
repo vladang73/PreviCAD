@@ -107,6 +107,9 @@
                         .Editable(e => e.DisplayDeleteConfirmation(false))
                         .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("TemplateLigneEmploye").Window(w => w.Title(CadEmpRES.Employe).Width(600)))
 
+                    .Scrollable()
+                    .HtmlAttributes(new { @class = "k-grid-height" })
+
                     .ToolBar(t =>
                     {
                         t.Create().HtmlAttributes(new { @class = "btn-sectionEmp d-none" });
