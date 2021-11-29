@@ -101,5 +101,10 @@ namespace Previgesst.ViewModels
                 return count;
             }
         }
+
+        [Required]
+        [StringLength(250)]
+        [Display(ResourceType = typeof(CadFichesRES), Name = "Num")]
+        public string NumeroEquipment { get; set; }
     }
 }

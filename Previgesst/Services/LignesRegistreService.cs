@@ -153,7 +153,7 @@ namespace Previgesst.Services
                                             "Numéro employé : " + model.NoEmploye + "<br>" +
                                             "Département : " + model.NomDepartement + "<br>" +
                                             "Équipement : " + model.NomEquipement + "<br>" +
-                                            "Numéro de fiche de cadenassage : " + model.NoFicheCadenassage + "<br>" +
+                                            "Numéro de procédure de cadenassage : " + model.NoFicheCadenassage + "<br>" +
                                         "</p>" +
                                         "<center><table style=\"width:300px;background-color:#337ab7\">" +
                                             "<tr>" +

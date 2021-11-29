@@ -61,7 +61,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fiche de cadenassage.
+        ///   Looks up a localized string similar to Procédure de cadenassage.
         /// </summary>
         public static string Cadenassage {
             get {

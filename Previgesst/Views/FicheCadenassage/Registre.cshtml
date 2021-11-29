@@ -35,13 +35,13 @@
                     .HtmlAttributes(new { @class = "td-round-left-border" })
                     .Width("130px");
 
-                //columns.Bound(e => e.NoFicheCadenassage).Title(CadRegRES.Fiche).Filterable(f => f.Extra(false).Operators(operators => operators
-                //    .ForString(str => str.Clear()
-                //    .Contains(GridRES.Contains)
-                //    .StartsWith(GridRES.StartsWith)
-                //    .IsEqualTo(GridRES.Egale)
-                //    .IsNotEqualTo(GridRES.NotEquals)
-                //))).Width(40);
+                columns.Bound(e => e.NoFicheCadenassage).Title(CadRegRES.Fiche).Filterable(f => f.Extra(false).Operators(operators => operators
+                    .ForString(str => str.Clear()
+                    .Contains(GridRES.Contains)
+                    .StartsWith(GridRES.StartsWith)
+                    .IsEqualTo(GridRES.Egale)
+                    .IsNotEqualTo(GridRES.NotEquals)
+                ))).Width("120px");
 
                 columns.Bound(e => e.NomDepartement).Title(CadRegRES.Departement).Filterable(f => f.Extra(false).Operators(operators => operators
                     .ForString(str => str.Clear()

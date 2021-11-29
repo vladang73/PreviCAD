@@ -178,7 +178,7 @@
     <value>Sélectionner un équipement</value>
   </data>
   <data name="SelectionnerTypeFiche" xml:space="preserve">
-    <value>Sélectionner un type de fiche</value>
+    <value>Sélectionner un type de procédure</value>
   </data>
   <data name="TravailAEffectuer" xml:space="preserve">
     <value>Travail à effectuer (Français)</value>
@@ -187,7 +187,7 @@
     <value>Travail à effectuer (Anglais)</value>
   </data>
   <data name="TypeFiche" xml:space="preserve">
-    <value>Type de fiche</value>
+    <value>Type de procédure</value>
   </data>
   <data name="UpdatedBy" xml:space="preserve">
     <value>Mise à jour par</value>

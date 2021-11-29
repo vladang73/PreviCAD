@@ -250,7 +250,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sélectionner un type de fiche.
+        ///   Looks up a localized string similar to Sélectionner un type de procédure.
         /// </summary>
         public static string SelectionnerTypeFiche {
             get {
@@ -277,7 +277,7 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Type de fiche.
+        ///   Looks up a localized string similar to Type de procédure.
         /// </summary>
         public static string TypeFiche {
             get {

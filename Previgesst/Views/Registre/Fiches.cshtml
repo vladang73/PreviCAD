@@ -55,6 +55,15 @@
 
                 columns.Bound(e => e.TitreFiche).Title(PrevFicheRES.Type).ClientTemplate("").Width("200px");
 
+                columns.Bound(e => e.NumeroEquipment) //.Title(CadFichesRES.Num)
+                            .Filterable(f => f.Extra(false).Operators(operators => operators
+                            .ForString(str => str.Clear()
+                            .Contains(GridRES.Contains)
+                            .StartsWith(GridRES.StartsWith)
+                            .IsEqualTo(GridRES.Egale)
+                            .IsNotEqualTo(GridRES.NotEquals)
+                )))
+                .Width("140px");
 
                 columns.Bound(e => e.NomEquipement).Title(PrevFicheRES.Equipement).Filterable(f => f.Extra(false).Operators(operators => operators
                     .ForString(str => str.Clear()
@@ -177,8 +186,8 @@
                     else if (jQuery(this).text() == 'Safe work procedure') {
                         jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
                     }
-                    else if (jQuery(this).text() == 'Fiche de cadenassage') {
-                        jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
+                    else if (jQuery(this).text() == 'Procédure de cadenassage') {
+                        jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Procédure de cadenassage'>");
                     }
                     else if (jQuery(this).text() == 'Lockout procedure') {
                         jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout procedure'>");
@@ -198,8 +207,8 @@
             else if (jQuery(this).text() == 'Safe work procedure') {
                 jQuery(this).html("<img src='/Images/procedure.png' style='width: 40px;' title='Safe work procedure'>");
             }
-            else if (jQuery(this).text() == 'Fiche de cadenassage') {
-                jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Fiche de cadenassage'>");
+            else if (jQuery(this).text() == 'Procédure de cadenassage') {
+                jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Procédure de cadenassage'>");
             }
             else if (jQuery(this).text() == 'Lockout procedure') {
                 jQuery(this).html("<img src='/Images/Unknown.png' style='width: 40px;' title='Lockout procedure'>");

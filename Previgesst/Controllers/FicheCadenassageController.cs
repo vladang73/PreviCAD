@@ -462,7 +462,7 @@ namespace Previgesst.Controllers
 
 
                 vm.EstDocumentPrevigesst = (Request.IsAuthenticated) && (User.IsInRole("Administrateur") || User.IsInRole("Lecture-Écriture"));
-                vm.TitreFiche = "Fiche de cadenassage";
+                vm.TitreFiche = "Procédure de cadenassage";
                 //vm.RevisionCourante = true;
                 vm.AfficherClient = true;
                 //  vm.DateCreation = DateTime.Today;

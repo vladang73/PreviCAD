@@ -19,13 +19,13 @@ namespace Previgesst.Services
 
         internal DataSourceResult GetReadCadenas(DataSourceRequest request, int clientId)
         {
-            var result = cadenasRepository.AsQueryable().Select(x => new  CadenassageViewModel()
+            var result = cadenasRepository.AsQueryable().Select(x => new CadenassageViewModel()
             {
-              CadenasId= x.CadenasId,
-              Departement = x.Departement,
-              Equipement = x.Departement,
-              NoFiche = x.NoFiche,
-              Travail = x.Travail
+                CadenasId = x.CadenasId,
+                Departement = x.Departement,
+                Equipement = x.Departement,
+                NoFiche = x.NoFiche,
+                Travail = x.Travail
             }).ToDataSourceResult(request);
 
             return result;
@@ -37,8 +37,8 @@ namespace Previgesst.Services
             var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
             var list = new List<TitreFicheDDLViewModel>();
-            list.Add(new TitreFicheDDLViewModel { Texte = langue=="fr"? "Fiche de cadenassage": "Lockout procedure" });
-            list.Add(new TitreFicheDDLViewModel { Texte = langue=="fr"? "Procédure de travail sécuritaire":"Safe work procedure" });
+            list.Add(new TitreFicheDDLViewModel { Texte = langue == "fr" ? "Procédure de cadenassage" : "Lockout procedure" });
+            list.Add(new TitreFicheDDLViewModel { Texte = langue == "fr" ? "Procédure de travail sécuritaire" : "Safe work procedure" });
             return list;
         }
     }

@@ -124,7 +124,7 @@ namespace Previgesst.Services
 
             double hauteurLigne = 0;
 
-            if (fiche.TitreFiche != "Fiche de cadenassage") // procedure de travail sécuritaire
+            if (fiche.TitreFiche != "Procédure de cadenassage") // procedure de travail sécuritaire
             {
                 ws.Cells["A12"].Value = langue == "" ? "CONTRÔLE DES SOURCES D'ÉNERGIE" : "CONTROL OF ENERGY SOURCES";
 
@@ -941,7 +941,9 @@ namespace Previgesst.Services
                             DateDebut = DateTime.Today,
 
                             TexteMateriel = x.MaterielsRequisCadenassage.Select(z => langue == "fr" ? z.Materiel.Description + " (" + z.Quantite.ToString() + ")" : z.Materiel.DescriptionEN + " (" + z.Quantite.ToString() + ")").ToList(),
-                            EquipementId = x.EquipementId
+                            EquipementId = x.EquipementId,
+
+                            NumeroEquipment = x.Equipement.NumeroEquipement,
 
                         }).ToDataSourceResult(request);
 
@@ -1117,9 +1119,9 @@ namespace Previgesst.Services
             //item.DateRevision = model.DateRevision;
 
 
-            if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout procedure")
+            if (model.TitreFiche == "Procédure de cadenassage" || model.TitreFiche == "Lockout procedure")
             {
-                item.TitreFiche = "Fiche de cadenassage";
+                item.TitreFiche = "Procédure de cadenassage";
                 item.TitreFicheEN = "Lockout procedure";
             }
             else
@@ -1167,9 +1169,9 @@ namespace Previgesst.Services
             item.DateApproved = model.DateApproved;
             item.IsApproved = true;
 
-            if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout procedure")
+            if (model.TitreFiche == "Procédure de cadenassage" || model.TitreFiche == "Lockout procedure")
             {
-                item.TitreFiche = "Fiche de cadenassage";
+                item.TitreFiche = "Procédure de cadenassage";
                 item.TitreFicheEN = "Lockout procedure";
             }
             else
@@ -1209,9 +1211,9 @@ namespace Previgesst.Services
 
             item.IsApproved = false;
 
-            if (model.TitreFiche == "Fiche de cadenassage" || model.TitreFiche == "Lockout procedure")
+            if (model.TitreFiche == "Procédure de cadenassage" || model.TitreFiche == "Lockout procedure")
             {
-                item.TitreFiche = "Fiche de cadenassage";
+                item.TitreFiche = "Procédure de cadenassage";
                 item.TitreFicheEN = "Lockout procedure";
             }
             else
