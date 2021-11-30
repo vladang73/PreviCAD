@@ -1618,6 +1618,7 @@
     <Content Include="Content\v2\fonts\IBM_Plex_Sans\IBMPlexSans-ThinItalic.svg" />
     <Content Include="Content\v2\fonts\IBM_Plex_Sans\OFL.txt" />
     <Content Include="Content\v2\images\1.png" />
+    <Content Include="Content\v2\images\2-new.jpg" />
     <Content Include="Content\v2\images\2.png" />
     <Content Include="Content\v2\images\arrow-down.svg" />
     <Content Include="Content\v2\images\arw.png" />
