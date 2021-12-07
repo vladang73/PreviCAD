@@ -97,6 +97,15 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Listes.
+        /// </summary>
+        public static string ActionListes {
+            get {
+                return ResourceManager.GetString("ActionListes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tracage de boguess.
         /// </summary>
         public static string ActionLogs {

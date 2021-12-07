@@ -53,9 +53,9 @@
             </div>
 
             <div class="form-group mt-3">
-                <label for="Model" class="form-label">Nomenclature</label>
+                <label for="Model" class="form-label">@CadEquipRES.Nomenclature</label>
 
-                @Html.TextBoxFor(model => model.Nomenclature, new { @class = "form-control petit", @style = "width:95%;" })
+                @Html.TextBoxFor(model => model.Nomenclature, new { @class = "form-control petit" })
                 @Html.ValidationMessageFor(model => model.Nomenclature)
             </div>
 

@@ -207,6 +207,9 @@
   <data name="NomEN" xml:space="preserve">
     <value>Equipment name (EN)</value>
   </data>
+  <data name="Nomenclature" xml:space="preserve">
+    <value>Nomenclature</value>
+  </data>
   <data name="NomFR" xml:space="preserve">
     <value>Equipment name (FR)</value>
   </data>

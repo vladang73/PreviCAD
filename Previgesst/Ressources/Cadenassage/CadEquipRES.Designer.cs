@@ -331,6 +331,15 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nomenclature.
+        /// </summary>
+        public static string Nomenclature {
+            get {
+                return ResourceManager.GetString("Nomenclature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nom de l&apos;équipement (FR).
         /// </summary>
         public static string NomFR {

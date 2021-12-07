@@ -129,6 +129,9 @@
   <data name="ActionClientAdmin" xml:space="preserve">
     <value>Customer management</value>
   </data>
+  <data name="ActionListes" xml:space="preserve">
+    <value>Listes</value>
+  </data>
   <data name="ActionLogs" xml:space="preserve">
     <value>Error Logs</value>
   </data>

@@ -28,16 +28,16 @@
 
         <li class="nav-item text-center">
             <a class="nav-link home-navlink" href="#Clients" aria-controls="general" role="tab" data-toggle="tab" data-bs-toggle="tab">
-                <img src="/content/v2/images/Clients.svg" title="Clients" />
-                <p class="nav-link-text">Clients</p>
+                <img src="/content/v2/images/Clients.svg" title="@LayoutRES.ActionClient" />
+                <p class="nav-link-text">@LayoutRES.ActionClient</p>
             </a>
         </li>
         @if (Model.AfficherListes)
         {
             <li class="nav-item text-center">
                 <a class="nav-link home-navlink" href="#Listes" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">
-                    <img src="/content/v2/images/detail-icon.svg" title="Listes" />
-                    <p class="nav-link-text">Listes</p>
+                    <img src="/content/v2/images/detail-icon.svg" title="@LayoutRES.ActionListes" />
+                    <p class="nav-link-text">@LayoutRES.ActionListes</p>
                 </a>
             </li>
         }
@@ -50,7 +50,7 @@
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
             <li><a href="~/AdminPrevi/Index">@LayoutRES.Accueil</a></li>
-            <li>Cadenassage</li>
+            <li>@LayoutRES.Cadenassage</li>
         </ul>
     </div>
 
