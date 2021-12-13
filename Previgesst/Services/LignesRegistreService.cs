@@ -135,7 +135,7 @@ namespace Previgesst.Services
                         var membreCourriel = EachMember.Courriel;
                         var membreNom = EachMember.Nom;
 
-                        GeneralService.SendMail(
+                        GeneralService.SendMail_v2(
                             "<center><table style=\"width:500px;padding:30px;border:1px solid #efeeef;\">" +
                                 "<tr>" +
                                     "<td><center><img style=\"max-height:100px;\" src=\"cid:" + Logo + "\"></img></center></td>" +

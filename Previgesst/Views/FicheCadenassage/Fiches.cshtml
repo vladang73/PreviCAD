@@ -47,7 +47,7 @@
                         columns.Bound(e => e.FicheCadenassageId).Hidden();
 
                         columns.Bound(e => e.IsApproved).Title(CadFichesRES.Statut)
-                            .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' " + Model.RCDisabled + " value='None' id='squaredone' name='check' #=IsApproved ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
+                            .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' " + Model.RCDisabled + " value='None'  onclick='return false;' #=IsApproved ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
                             .HtmlAttributes(new { @class = "td-round-left-border" })
                             .Width("70px");
 
@@ -98,8 +98,8 @@
 
                         if (User.IsInRole("Administrateur")) {
                             columns.Bound(e => e.estDocumentPrevigesst)
-                            //.ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>")
-                            .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' value='None' id='squaredone' name='check' #=estDocumentPrevigesst ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
+                            //.ClientTemplate("<center><input disabled type='checkbox' #=estDocumentPrevigesst ? checked='checked' :'' # /></center>")id='squaredone' name='check'
+                            .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' value='None' onclick='return false;' #=estDocumentPrevigesst ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
                             .Title("Prévi").Width("65px");
                         }
 
