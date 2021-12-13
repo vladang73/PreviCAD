@@ -229,6 +229,9 @@ namespace Previgesst.Controllers
                 return Json("");
             else
             {
+                // clear NumeroEquipment errors
+                if (ModelState.ContainsKey("NumeroEquipment")) ModelState["NumeroEquipment"].Errors.Clear();
+
                 if (item != null && ModelState.IsValid)
                 {
 
