@@ -96,7 +96,7 @@ namespace Previgesst.Services
 
         }
 
-        public static bool SendMail_v2(string body, string subject, string courriel, int ClientId, string Logo)
+        public static bool SendMail_v2(string body, string subject, string courriel, int ClientId, string Logo, bool isHtml = false)
         {
             try
             {
@@ -150,7 +150,7 @@ namespace Previgesst.Services
 
 
                 mail.Body = body.Replace("\n", Environment.NewLine);
-                mail.IsBodyHtml = false;
+                mail.IsBodyHtml = isHtml;
 
 
                 client.Send(mail);

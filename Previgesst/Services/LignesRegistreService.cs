@@ -170,7 +170,7 @@ namespace Previgesst.Services
                                 "</tr>" +
                             "</table></center>"
                             ,
-                            "Cadenassage en cours :  " + model.NomEquipement, membreCourriel, ClientId, Logo
+                            "Cadenassage en cours :  " + model.NomEquipement, membreCourriel, ClientId, Logo, true
                         ); // Sujet du courriel + courriel membre + cliendId + logo
                     }
 
