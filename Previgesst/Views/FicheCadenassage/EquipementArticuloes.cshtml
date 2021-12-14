@@ -252,7 +252,7 @@
             });
         }
         else if (args.xhr) {
-            ShowGridError("@Html.Raw(CadEquipRES.ErrorTitle)", selecteurGrid, args);
+            ShowGridError("@Html.Raw(CadEquipRES.ErrorTitle)", selecteurGrid, args, "@Html.Raw(LayoutRES.LinkedEntityError)");
         }
     }
 

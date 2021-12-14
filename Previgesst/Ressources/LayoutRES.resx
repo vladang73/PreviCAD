@@ -204,6 +204,9 @@
   <data name="Journaux" xml:space="preserve">
     <value>Journaux d'erreurs</value>
   </data>
+  <data name="LinkedEntityError" xml:space="preserve">
+    <value>L'entrée ne peut pas être supprimée, car elle est liée à un autre enregistrement.</value>
+  </data>
   <data name="Note" xml:space="preserve">
     <value>Espace pour message personnalisé à vos clients - Vide s’il y a rien.</value>
   </data>

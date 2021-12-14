@@ -93,7 +93,7 @@ $(document).ready(function () {
     });
 });
 
-function ShowGridError(title, selecteurGrid, args) {
+function ShowGridError(title, selecteurGrid, args, inUseError) {
     console.log('There was some error in ' + selecteurGrid, args);
     ShowNotification(title, args.xhr.statusText, "errorTemplate");
 
@@ -101,7 +101,13 @@ function ShowGridError(title, selecteurGrid, args) {
     grid.dataSource.read();
 
     $('#generic-popup').modal('show');
-    $('#generic-popup #generic-title').text(args.xhr.statusText);
+    //$('#generic-popup #generic-title').text(args.xhr.statusText);
+    $('#generic-popup #generic-title').text(title);
     $('#generic-popup .text-danger').text('');
-    $('#generic-popup .text-danger').append(args.xhr.responseText);
+
+
+    //$('#generic-popup .text-danger').append(args.xhr.responseText);
+    if (args.xhr.responseText.includes('The DELETE statement conflicted with the REFERENCE constraint')) {
+        $('#generic-popup .text-danger').append(inUseError);
+    }
 }

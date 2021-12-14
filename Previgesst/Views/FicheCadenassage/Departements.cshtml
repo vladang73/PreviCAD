@@ -145,7 +145,7 @@
             });
         }
         else if (args.xhr) {
-            ShowGridError("@Html.Raw(CadDeptRES.Erreur)", selecteurGrid, args);
+            ShowGridError("@Html.Raw(CadDeptRES.Erreur)", selecteurGrid, args, "@Html.Raw(LayoutRES.LinkedEntityError)");
         }
     }
 

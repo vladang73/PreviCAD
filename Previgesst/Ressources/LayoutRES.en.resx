@@ -204,6 +204,9 @@
   <data name="Journaux" xml:space="preserve">
     <value>Journaux</value>
   </data>
+  <data name="LinkedEntityError" xml:space="preserve">
+    <value>The entry cannot be deleted, as it linked to another record.</value>
+  </data>
   <data name="Note" xml:space="preserve">
     <value>Space for personalized message to your customers - Empty if there is nothing.</value>
   </data>

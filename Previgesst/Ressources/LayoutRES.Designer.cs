@@ -322,6 +322,15 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to L&apos;entrée ne peut pas être supprimée, car elle est liée à un autre enregistrement..
+        /// </summary>
+        public static string LinkedEntityError {
+            get {
+                return ResourceManager.GetString("LinkedEntityError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Espace pour message personnalisé à vos clients - Vide s’il y a rien..
         /// </summary>
         public static string Note {

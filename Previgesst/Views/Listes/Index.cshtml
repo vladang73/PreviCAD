@@ -179,7 +179,7 @@
                 });
             });
         } else if (args.xhr) {
-            ShowGridError("@GridRES.NotificationTitle", selecteurGrid, args);
+            ShowGridError("@GridRES.NotificationTitle", selecteurGrid, args, "@Html.Raw(LayoutRES.LinkedEntityError)");
         }
     }
 

@@ -369,7 +369,7 @@
             });
         }
         else if (args.xhr) {
-            ShowGridError("@Html.Raw(ARCreateRES.Erreur)", selecteurGrid, args);
+            ShowGridError("@Html.Raw(ARCreateRES.Erreur)", selecteurGrid, args, "@Html.Raw(LayoutRES.LinkedEntityError)");
         }
     }
 
