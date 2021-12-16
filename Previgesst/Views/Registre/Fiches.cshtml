@@ -250,7 +250,7 @@
 </script>
 
 
-<div class="modal" tabindex="-1" role="dialog" id="qrModal" data-backdrop="static" data-keyboard="false" data-bs-backdrop="static">
+<div class="modal" tabindex="-1" role="dialog" id="qrModal" data-backdrop="static" data-keyboard="false" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -283,6 +283,7 @@
 
 
         $('#qrModal').modal('hide');
+        $('.modal-backdrop').remove();
         var qrEqID = decodedText.split('#')[1];
 
         var qrFilter = new Array();

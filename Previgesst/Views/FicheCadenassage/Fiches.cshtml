@@ -329,7 +329,7 @@
 
 
 
-<div class="modal" tabindex="-1" role="dialog" id="qrModal" data-backdrop="static" data-keyboard="false">
+<div class="modal" tabindex="-1" role="dialog" id="qrModal" data-backdrop="static" data-keyboard="false" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg1" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -362,8 +362,9 @@
             console.log('Scan result ' + decodedText, decodedResult);
 
 
-
             $('#qrModal').modal('hide');
+            $('.modal-backdrop').remove();
+
             var qrEqID = decodedText.split('#')[1];
 
             var qrFilter = new Array();

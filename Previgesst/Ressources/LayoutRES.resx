@@ -145,7 +145,7 @@
     <value>Paramétres</value>
   </data>
   <data name="Actions" xml:space="preserve">
-    <value>Autries Actions</value>
+    <value>Autres actions</value>
   </data>
   <data name="ActionSupport" xml:space="preserve">
     <value>Centre de support</value>
@@ -176,6 +176,9 @@
   </data>
   <data name="DesoleMessage" xml:space="preserve">
     <value>Désolé, une erreur est survenue sur le serveur.</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Entrer</value>
   </data>
   <data name="Errors" xml:space="preserve">
     <value>Tracage de boguess</value>

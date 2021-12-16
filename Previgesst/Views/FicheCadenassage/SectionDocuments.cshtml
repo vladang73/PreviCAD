@@ -60,14 +60,14 @@
 
                 columns.Command(c =>
                 {
-                    c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                    c.Edit().Text(CadEquipRES.ButtonEdit).HtmlAttributes(new { @class = "btn-table btn-edit" });
                     c.Custom(" ")
                             .Click("ConfirmDeleteRowDoc")
                             .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
 
                 })
                 .Hidden(!Model.estUpdate)
-                .Width("175px");
+                .Width("230px");
             })
 
             .Sortable(s => s.AllowUnsort(false))
@@ -221,6 +221,9 @@
     function DocumentsSync(e) {
         if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
         if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
+
+        if ($('#DateValidated') != undefined) { $('#DateValidated').val(''); }
+        if ($('#ValidatedPar') != undefined) { $('#ValidatedPar').val(''); }
 
         GetUpdateInfo();
         //window.location.reload();

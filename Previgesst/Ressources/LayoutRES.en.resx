@@ -177,6 +177,9 @@
   <data name="DesoleMessage" xml:space="preserve">
     <value>Sorry, an error has occurred on the server.</value>
   </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
   <data name="Errors" xml:space="preserve">
     <value>Error logs</value>
   </data>

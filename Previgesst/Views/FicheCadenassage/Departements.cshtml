@@ -47,7 +47,7 @@
 
                 columns.Command(c =>
                 {
-                    c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit me-5" });
+                    c.Edit().Text(CadEquipRES.ButtonEdit).HtmlAttributes(new { @class = "btn-table btn-edit me-5" });
                     c.Custom(CadDeptRES.Vide)
                     .Click("ConfirmDeleteRowDEPT")
                     .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });

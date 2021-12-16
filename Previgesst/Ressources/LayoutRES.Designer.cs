@@ -142,7 +142,7 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Autries Actions.
+        ///   Looks up a localized string similar to Autres actions.
         /// </summary>
         public static string Actions {
             get {
@@ -237,6 +237,15 @@ namespace Previgesst.Ressources {
         public static string DesoleMessage {
             get {
                 return ResourceManager.GetString("DesoleMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entrer.
+        /// </summary>
+        public static string Enter {
+            get {
+                return ResourceManager.GetString("Enter", resourceCulture);
             }
         }
         

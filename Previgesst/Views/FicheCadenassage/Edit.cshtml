@@ -165,11 +165,13 @@
         $(document).ready(function () {
             ///////////////////////////////////////
             // navigate Equipement Articuloe to edit page, and select equipment tab
-
             var area = '@Request.QueryString["area"]';
 
             if (area != null && area.toUpperCase() == 'EQ') {
                 $('#Equip').click();
+
+                $('.main-page-content .tab-pane').removeClass('active');
+                $('.main-page-content #Equipements').addClass('active');
             }
 
             ///////////////////////////////////////

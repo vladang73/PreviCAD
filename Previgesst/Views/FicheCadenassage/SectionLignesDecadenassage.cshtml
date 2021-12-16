@@ -47,33 +47,35 @@
             ))).Title(CadLigneCadRES.Instruction);
 
 
-            columns.Bound(c => c.TexteSupplementaireInstruction).Title("Instruction").Width("150px")
-            .Filterable(f => f.Extra(false).Operators(operators => operators
-            .ForString(str => str.Clear()
-            .Contains(GridRES.Contains)
-            .StartsWith(GridRES.StartsWith)
-            .IsEqualTo(GridRES.Egale)
-            .IsNotEqualTo(GridRES.NotEquals)
-                ))).Title(CadLigneCadRES.AutresInstructions);
+            columns.Bound(c => c.TexteSupplementaireInstruction).Title("Instruction")
+                .Filterable(f => f.Extra(false).Operators(operators => operators
+                .ForString(str => str.Clear()
+                .Contains(GridRES.Contains)
+                .StartsWith(GridRES.StartsWith)
+                .IsEqualTo(GridRES.Egale)
+                .IsNotEqualTo(GridRES.NotEquals)
+            )))
+            .Title(CadLigneCadRES.AutresInstructions).Width("170px");
 
             columns.Bound(c => c.TexteSupplementaireDispositif)
-            .Filterable(f => f.Extra(false).Operators(operators => operators
-            .ForString(str => str.Clear()
-            .Contains(GridRES.Contains)
-            .StartsWith(GridRES.StartsWith)
-            .IsEqualTo(GridRES.Egale)
-            .IsNotEqualTo(GridRES.NotEquals)
-            ))).Title(CadLigneCadRES.Dispositif).Width("150px");
+                .Filterable(f => f.Extra(false).Operators(operators => operators
+                .ForString(str => str.Clear()
+                .Contains(GridRES.Contains)
+                .StartsWith(GridRES.StartsWith)
+                .IsEqualTo(GridRES.Egale)
+                .IsNotEqualTo(GridRES.NotEquals)
+            )))
+            .Title(CadLigneCadRES.Dispositif).Width("170px");
 
 
             columns.Command(c =>
             {
-                c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                c.Edit().Text(CadEquipRES.ButtonEdit).HtmlAttributes(new { @class = "btn-table btn-edit" });
                 c.Custom(" ")
                 .Click("ConfirmDeleteRowCAD")
                 .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
             })
-            .Width("175px");
+            .Width("230px");
 
         })
         .Sortable(s => s.AllowUnsort(false))
@@ -280,6 +282,9 @@
     function DecadenassageSync(e) {
         if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
         if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
+
+        if ($('#DateValidated') != undefined) { $('#DateValidated').val(''); }
+        if ($('#ValidatedPar') != undefined) { $('#ValidatedPar').val(''); }
 
         GetUpdateInfo();
         //window.location.reload();

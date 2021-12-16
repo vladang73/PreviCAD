@@ -69,18 +69,18 @@
                         .IsNotEqualTo(GridRES.NotEquals)
                 )))
                 .Title(CadLigneCadRES.Dispositif)
-                .Width("150px");
+                .Width("170px");
 
 
                 columns.Command(c =>
                 {
-                    c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                    c.Edit().Text(CadEquipRES.ButtonEdit).HtmlAttributes(new { @class = "btn-table btn-edit" });
                     c.Custom(" ")
                             .Click("ConfirmDeleteRowCAD")
                             .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
 
                 })
-                .Width("175px");
+                .Width("230px");
             })
 
         .Sortable(s => s.AllowUnsort(false))
@@ -310,6 +310,9 @@
     function CadenassageSync(e) {
         if ($('#ApprouvePar') != undefined) { $('#ApprouvePar').val(''); }
         if ($('#DateApproved') != undefined) { $('#DateApproved').val(''); }
+
+        if ($('#DateValidated') != undefined) { $('#DateValidated').val(''); }
+        if ($('#ValidatedPar') != undefined) { $('#ValidatedPar').val(''); }
 
         GetUpdateInfo();
         //window.location.reload();

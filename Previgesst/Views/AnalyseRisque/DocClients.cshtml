@@ -1,6 +1,7 @@
 ﻿@model Previgesst.ViewModels.EditCadenassageViewModel
 @using Previgesst.Ressources
 @using Previgesst.Ressources.Analyse
+@using Previgesst.Ressources.Cadenassage
 
 
 <div class="table-top-header">
@@ -60,7 +61,7 @@
             columns.Command(c =>
             {
 
-                c.Edit().HtmlAttributes(new { @class = "btn-table btn-edit" });
+                c.Edit().Text(CadEquipRES.ButtonEdit).HtmlAttributes(new { @class = "btn-table btn-edit" });
                 c.Custom(" ")
                         .Click("ConfirmDeleteRow")
                         .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
