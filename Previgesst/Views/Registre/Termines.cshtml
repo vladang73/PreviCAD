@@ -60,7 +60,9 @@
                     columns.Bound(e => e.FinPrevue).Format("{0:yyyy-MM-dd HH:mm}").Filterable(f => f.Enabled(false)).Title(PrevFicheRES.FinPrevueEmploye).Width("110px");
                     columns.Bound(e => e.Note);
                     columns.Bound(e => e.BonDeTravail).Title(PrevFicheRES.BonDeTravail).Width("120px");
-                    columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton'  title=" + PrevFicheRES.Etiquette + "><img src='/content/v2/images/download-icon.svg' alt='FR icon'/></a>").Title("").Filterable(false).Sortable(false).Width("100px");
+                    columns.Bound(e => e.LigneRegistreId)
+                           .ClientTemplate("<center><a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton'  title=" + PrevFicheRES.Etiquette + "><img src='/content/v2/images/download-icon.svg' alt='FR icon'/></a></center>")
+                           .Title(GridRES.Etiquette).Filterable(false).Sortable(false).Width("100px");
                     // columns.Command(e => e.Edit().Text(PrevFicheRES.Modifier)).Width(40);
 
                     columns.Command(e => e.Custom("steps").Click("showInsDetails").HtmlAttributes(new { @data_viewonly = "yes", @class = "btn-material mx-1" }).Text(@PrevFicheRES.Steps)).Width("130px");

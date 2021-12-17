@@ -77,12 +77,12 @@
 
             //columns.Bound(e => e.Id).ClientTemplate("<a  href='Edit?ID=#= " + nameof(AnalyseRisqueListViewModel.Id) + " #' class='btn btn-primary' style='float:right'>Modifier</a>").Title("").Filterable(false).Sortable(false);
             columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='" + Url.Action("getXLAnalyse", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #'><img src='/content/v2/images/fr-icon.svg' alt='FR icon'/></a>")
-            .Title("").Filterable(false).Sortable(false)
+            .Title(GridRES.Etiquette).Filterable(false).Sortable(false)
             .Hidden(@selectedLang != "fr")
             .Width("60px").HtmlAttributes(new { @class = "text-center" }).HeaderHtmlAttributes(new { @class = "text-center" });
 
             columns.Bound(e => e.Id).ClientTemplate("<a target='_blank' href='" + Url.Action("getXLAnalyseEN", "AnalyseRisque") + "/#= " + nameof(AnalyseRisqueListViewModel.Id) + " #'><img src='/content/v2/images/en-icon.svg' alt='EN icon'/></a>")
-            .Title("").Filterable(false).Sortable(false)
+            .Title(GridRES.Etiquette).Filterable(false).Sortable(false)
             .Hidden(@selectedLang != "en")
             .Width("60px").HtmlAttributes(new { @class = "text-center" }).HeaderHtmlAttributes(new { @class = "text-center" });
 

@@ -172,4 +172,7 @@
   <data name="PlusPetitOuEgal" xml:space="preserve">
     <value>Smaller or equal</value>
   </data>
+  <data name="Etiquette" xml:space="preserve">
+    <value>Tag</value>
+  </data>
 </root>

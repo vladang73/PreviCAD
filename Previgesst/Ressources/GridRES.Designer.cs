@@ -115,6 +115,15 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Étiquette.
+        /// </summary>
+        public static string Etiquette {
+            get {
+                return ResourceManager.GetString("Etiquette", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non, ne pas dupliquer.
         /// </summary>
         public static string NePasDupliquer {

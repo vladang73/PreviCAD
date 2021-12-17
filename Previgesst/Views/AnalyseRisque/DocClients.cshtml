@@ -54,8 +54,9 @@
 
             columns.Bound(c => c.FileName).EditorTemplateName("UploadEditor").Encoded(false).Sortable(false).Filterable(false);
 
-            columns.Bound(e => e.Bidon).EditorTemplateName("Vide").ClientTemplate("<a href='#=BasePath#' class='downloadButton'><img src='/content/v2/images/download-icon.svg'></a>")
-                   .Title("").Filterable(false).Sortable(false).Width("60px");
+            columns.Bound(e => e.Bidon).EditorTemplateName("Vide")
+                   .ClientTemplate("<center><a href='#=BasePath#' class='downloadButton'><img src='/content/v2/images/download-icon.svg'></a></center>")
+                   .Title(GridRES.Etiquette).Filterable(false).Sortable(false).Width("90px");
 
 
             columns.Command(c =>

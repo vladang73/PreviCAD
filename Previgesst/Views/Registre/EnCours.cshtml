@@ -90,7 +90,9 @@
 
 
 
-                        columns.Bound(e => e.LigneRegistreId).ClientTemplate("<a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title="+ PrevFicheRES.Etiquette + "><img src='/content/v2/images/download-icon.svg' alt='download'/></a>").Title("").Filterable(false).Sortable(false).Width("100px");
+                        columns.Bound(e => e.LigneRegistreId)
+                               .ClientTemplate("<center><a href='../../Registre/GetEtiquette/#= LigneRegistreId#' class='btn etiquetteButton' style='text-align:center' title=" + PrevFicheRES.Etiquette + "><img src='/content/v2/images/download-icon.svg' alt='download'/></a></center>")
+                               .Title(GridRES.Etiquette).Filterable(false).Sortable(false).Width("100px");
 
                         columns.Command(e => e.Custom("steps").Click("showInsDetails").HtmlAttributes(new { @data_viewonly = "false", @class = "btn-material mx-1 text-nowrap" }).Text(@PrevFicheRES.Steps)).Width("130px");
 
