@@ -146,11 +146,10 @@ namespace Previgesst.Services
             #region -----    -----
 
             bool isCorporate = false;
-            var corporateClients = new List<int>();
-
             bool.TryParse(Convert.ToString(HttpContext.Current.Session["IsCorporate"]), out isCorporate);
 
 
+            var corporateClients = new List<int>();
             if (isCorporate && HttpContext.Current.Session["CorporateClients"] != null)
             {
                 corporateClients = ((string[])HttpContext.Current.Session["CorporateClients"]).Select(x => int.Parse(x)).ToList();

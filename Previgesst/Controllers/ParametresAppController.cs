@@ -17,7 +17,7 @@ namespace Previgesst.Controllers
         // GET: ParametresApp
         private ParametresAppService parametresAppService;
         private ParametresAppRepository parametresAppRepository;
-        private string Layout;
+        //private string Layout;
 
         public ParametresAppController(ParametresAppRepository parametresAppRepository, ParametresAppService parametresAppService)
         {
@@ -31,7 +31,7 @@ namespace Previgesst.Controllers
             var parametresAppConvert = parametresAppIdRequest.Replace("[", "").Replace("]", "");
             var parametresAppId = int.Parse(parametresAppConvert);
             var vm = GetReadListParametresApp(parametresAppId);
-            return View("Index", Layout, vm);
+            return View("Index", vm);
         }
 
         public ActionResult SaveParametersApp([DataSourceRequest] DataSourceRequest request, ParametresAppViewModel item)

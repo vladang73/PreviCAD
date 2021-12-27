@@ -26,7 +26,7 @@ namespace Previgesst.Localisation
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang+ "-CA");
                     
                 }
-                catch (Exception e)
+                catch
                 {
                     throw new NotSupportedException(String.Format("ERROR: Invalid language code '{0}'.", lang));
                 }

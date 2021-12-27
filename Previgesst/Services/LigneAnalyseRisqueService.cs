@@ -13,7 +13,7 @@ namespace Previgesst.Services
     public class LigneAnalyseRisqueService
     {
         private LigneAnalyseRisqueRepository ligneAnalyseRisqueRepository;
-        private UtilisateurService utilisateurService;
+        //private UtilisateurService utilisateurService;
         private PhenomeneRepository phenomeneRepository;
 
         public LigneAnalyseRisqueService(LigneAnalyseRisqueRepository ligneAnalyseRisqueRepository, PhenomeneRepository phenomeneRepository)

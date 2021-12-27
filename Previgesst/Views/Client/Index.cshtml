@@ -4,6 +4,9 @@
 @{
     ViewBag.Title = "Index";
     //  Layout = "~/Views/Shared/_Layout.cshtml";
+
+    bool isCorporate = false;
+    bool.TryParse(Convert.ToString(HttpContext.Current.Session["IsCorporate"]), out isCorporate);
 }
 
 
@@ -47,13 +50,16 @@
             <div class="page-title d-flex justify-content-center align-items-center">
                 <h3>@LayoutRES.ActionClient</h3>
             </div>
-            <div class="page-table-meta">
-                <div class="add-icon">
-                    <a id="btnAddList">
-                        <img src="/content/v2/images/plus-icon.svg" />
-                    </a>
+            @if (!isCorporate)
+            {
+                <div class="page-table-meta">
+                    <div class="add-icon">
+                        <a id="btnAddList">
+                            <img src="/content/v2/images/plus-icon.svg" />
+                        </a>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
 
 
@@ -98,9 +104,13 @@
                 columns.Command(c =>
                 {
                     c.Edit().Text("Modifier").HtmlAttributes(new { @class = "btn-table btn-edit" });
-                    c.Custom(" ")
-                        .Click("ConfirmDeleteRow")
-                        .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+
+                    if (!isCorporate)
+                    {
+                        c.Custom(" ")
+                            .Click("ConfirmDeleteRow")
+                            .HtmlAttributes(new { @class = "k-grid-effacer btn-del" });
+                    }
                 })
                 .Width("200px")
                 .HtmlAttributes(new { @class = "text-nowrap" });
@@ -142,7 +152,10 @@
             )
             .ToolBar(t =>
             {
-                t.Create().Text(ARRES.ButtonAjouter).HtmlAttributes(new { @class = "d-none" });
+                if (!isCorporate)
+                {
+                    t.Create().Text(ARRES.ButtonAjouter).HtmlAttributes(new { @class = "d-none" });
+                }
             })
         )
     </div>

@@ -198,4 +198,10 @@
   <data name="StepStatus" xml:space="preserve">
     <value>Step Status</value>
   </data>
+  <data name="MissingComments" xml:space="preserve">
+    <value>Comments are missing.</value>
+  </data>
+  <data name="MissingEmails" xml:space="preserve">
+    <value>Email Address are missing.</value>
+  </data>
 </root>

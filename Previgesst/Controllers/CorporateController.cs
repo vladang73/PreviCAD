@@ -19,7 +19,7 @@ namespace Previgesst.Controllers
 
         private string Layout;
 
-        UtilisateurService utilisateurService;
+        //UtilisateurService utilisateurService;
         private readonly AccountService accountService;
 
         protected AccountService AccountService

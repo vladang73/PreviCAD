@@ -24,6 +24,12 @@
     {
         sauvegarderMaFicheDeCadenassage = "SaveFiche";
     }
+
+    bool showCheckbox = false;
+    bool IsCorporate = false;
+    bool.TryParse(Convert.ToString(HttpContext.Current.Session["IsCorporate"]), out IsCorporate);
+
+    showCheckbox = (User.IsInRole("Administrateur") || IsCorporate);
 }
 
 
@@ -42,11 +48,11 @@
     </div>
     <div class="page-table-meta">
 
-            @if (Model.FicheCadenassageId != 0)
-            {
-                <a href='~/FicheCadenassage/GetFiche?id=@Model.FicheCadenassageId' class='btn-table btn-view buttonView'>@CadInfoGeneralesRES.Fiche</a>
+        @if (Model.FicheCadenassageId != 0)
+        {
+            <a href='~/FicheCadenassage/GetFiche?id=@Model.FicheCadenassageId' class='btn-table btn-view buttonView'>@CadInfoGeneralesRES.Fiche</a>
 
-            }
+        }
     </div>
 </div>
 
@@ -176,21 +182,22 @@
             </div>
         </div>
 
-
+        @if (showCheckbox)
+        {
         <div class="col-12 col-md-6">
             <div class="mt-5">
-                @Html.LabelFor(m => m.AfficherClient, new { @class = "form-label d-block" })
+                @*@Html.LabelFor(m => m.AfficherClient, new { @class = "form-label d-block" })*@
 
 
-                <div class="squaredThree squaredThree-blue">
-                    <input type="checkbox" id="squaredone" name="AfficherClient" @(Model.AfficherClient ? "checked" : "") value="@Convert.ToString(Model.AfficherClient).ToLower()" />
-                    <label for="squaredone"><span> </span></label>
+                <div class="squaredThree squaredThree-blue d-inline-block">
+                    <input type="checkbox" id="AfficherClient" name="AfficherClient" @(Model.AfficherClient ? "checked" : "") value="@Convert.ToString(Model.AfficherClient).ToLower()" />
+                    <label for="AfficherClient"><span>@Html.DisplayNameFor(x => x.AfficherClient) </span></label>
                 </div>
 
                 @Html.ValidationMessageFor(m => m.AfficherClient, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        }
 
         @if (currentUrl.Contains(editFicheUrl))
         {

@@ -85,7 +85,7 @@
             .Read(r => r.Action("ReadListDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
             .Create(c => c.Action("SaveDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
             .Update(u => u.Action("SaveDocFicheCadenassage", "DocumentsFiche", new { id = Model.FicheCadenassageId }))
-            .Destroy(u => u.Action("DeleteDocumentFiche", "DocumentsFiche"))
+            //.Destroy(u => u.Action("DeleteDocumentFiche", "DocumentsFiche"))
 
 
             .Events(e => e.Error("docListeErreur").Sync("DocumentsSync"))
@@ -98,6 +98,7 @@
         .ToolBar(t =>
         {
             t.Create().HtmlAttributes(new { @class = "d-none btn-sectioncad" });
+
             t.Custom().Text("Archiver").Name("Archive")
                       .HtmlAttributes(new { @class = "k-grid-archive d-none" });
         })
@@ -114,7 +115,8 @@
 <script>
 
 
-    $("#DocFicheCadenassage").click(function () {
+    $("#DocFiche").click(function () {
+        HideArchive();
 
         @*$("a.k-grid-add").removeClass("k-button  k-button-icontext");
         $("a.k-grid-add").addClass("btn btn-success btn-analyse");
@@ -169,10 +171,20 @@
         }
     }
 
-    function docListeDataBound(e)
-    { }
+    function docListeDataBound(e) {
+        HideArchive();
+    }
 
+    function HideArchive() {
+        $("#liste-doc tbody tr .k-grid-effacer").each(function () {
+            var currentDataItem = $("#liste-doc").data("kendoGrid").dataItem($(this).closest("tr"));
 
+            //Check in the current dataItem starting with word "Archive"
+            if (currentDataItem.Titre.indexOf('Archive') == 0) {
+                $(this).remove();
+            }
+        });
+    }
 
     function docSelect(e) {
         var extension = e.files[0].extension.toLowerCase().trim();
@@ -271,7 +283,7 @@
                 ShowNotification("@Html.Raw(CadSourcesRES.Succes)", "@Html.Raw(CadSourcesRES.SourcesEnregistrees)", "successTemplate")
 
                 if (result == 1) {
-                    DocumentsSync();
+                    //DocumentsSync();
                     $("#liste-doc").data("kendoGrid").dataSource.read();
                 }
             },

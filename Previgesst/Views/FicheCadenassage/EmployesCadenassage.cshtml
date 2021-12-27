@@ -69,7 +69,7 @@
 
                         columns.Bound(e => e.Actif).Filterable(f => f.Extra(false))
                         //.ClientTemplate("<center><input disabled type='checkbox' #= Actif ? checked='checked' :'' # /></center>")
-                        .ClientTemplate("<center><div class='squaredThree'><input type='checkbox' value='None' id='squaredone' name='check' #=Actif ? checked='checked' :'' # /><label for='squaredone'><span> </span></label></div></center>")
+                        .ClientTemplate("<center><div class='squaredThree'><input type='checkbox'  #=Actif ? checked='checked' :'' # onclick='return false;' /><label for='squaredone'><span> </span></label></div></center>")
                         .Width("30px");
 
                         columns.Command(c =>

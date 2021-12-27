@@ -338,11 +338,12 @@ namespace Previgesst.Controllers
                 this.documentFicheService.SaveDocumentFiche(d);
                 int DocumentFicheId = d.DocumentFicheId;
 
-                if (DocumentFicheId > 0)
-                {
-                    // update approve and modified fields
-                    ficheCadenassageService.UnapproveFiche(id, GetCurrentUser());
-                }
+                // comment this functionality "previcad 3 tasks to do important 22 october.docx"
+                //if (DocumentFicheId > 0)
+                //{
+                //    // update approve and modified fields
+                //    ficheCadenassageService.UnapproveFiche(id, GetCurrentUser());
+                //}
 
 
                 if (DocumentFicheId > 0)

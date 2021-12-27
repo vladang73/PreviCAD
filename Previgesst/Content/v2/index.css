@@ -975,3 +975,8 @@ body {
 .footer {
     flex-shrink: 0;
 }
+
+textarea.form-control{
+    line-height: unset;
+    height: unset !important;
+}

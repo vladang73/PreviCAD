@@ -67,9 +67,9 @@
                 columns.Bound(e => e.Note).Title(CadRegRES.Details);
                 columns.Bound(e => e.NomAuditeur).Title(CadRegRES.Auditeur).Width("135px");
 
-                //columns.Bound(e => e.Rep1).Title("Q1");
-                //columns.Bound(e => e.Rep2).Title("Q2");
-                //columns.Bound(e => e.Rep3).Title("Q3");
+                columns.Bound(e => e.Rep1).Title("Q1").Hidden();
+                columns.Bound(e => e.Rep2).Title("Q2").Hidden();
+                columns.Bound(e => e.Rep3).Title("Q3").Hidden();
 
                 columns.Bound(e => e.NoteAudit).Title(CadRegRES.NoteAudit).Hidden().Title("Commentaires");
                 columns.Command(c =>

@@ -15,7 +15,7 @@ namespace Previgesst.Services
         private readonly UserManager userManager;
         private readonly SignInManager signInManager;
         private readonly IAuthenticationManager authenticationManager;
-        internal static string emailSender;
+        //internal static string emailSender;
 
         public UserManager UserManager
         {

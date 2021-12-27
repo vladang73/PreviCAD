@@ -195,4 +195,10 @@
   <data name="StepStatus" xml:space="preserve">
     <value>Statut de l'étape</value>
   </data>
+  <data name="MissingComments" xml:space="preserve">
+    <value>Les commentaires sont manquants.</value>
+  </data>
+  <data name="MissingEmails" xml:space="preserve">
+    <value>L'adresse e-mail est manquante.</value>
+  </data>
 </root>

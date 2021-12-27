@@ -147,8 +147,8 @@
     <div class="armchair">
         <div id="wrapped-grid"></div>
         <div>
-            <label>@PrevFicheRES.Notes</label>
-            <textarea id="StepComments" name="StepComments" class="form-control" rows="5" style="width:97%"></textarea>
+            <label class="p-3"><strong>@PrevFicheRES.Notes</strong></label>
+            <textarea id="StepComments" name="StepComments" class="form-control" rows="5" style="width:97%" required></textarea>
         </div>
     </div>
     <div class="window-footer">
@@ -171,7 +171,7 @@
 
         <div class="d-block">
             <br />
-            <input type="button" class="btn btn-info pull-right" id="btnSendInsWarningEmail" value="@PrevFicheRES.SendEmail" />
+            <input type="button" class="btn btn-primary pull-right" id="btnSendInsWarningEmail" value="@PrevFicheRES.SendEmail" />
         </div>
     </div>
 </div>
@@ -252,8 +252,8 @@
                 }
             },
 
-            /*height: "465px",*/
-            scrollable: false,
+            height: "465px",
+            scrollable: true,
             sortable: false,
             resizable: false,
             columns: [
@@ -298,13 +298,15 @@
                         }
                     }
                 });
+
+                $("#wrapped-grid .k-grid-content.k-auto-scrollable").attr('style', 'height: 430px;');
             }
         });
 
         GetComments(dataItem.FicheCadenassageId, dataItem.LigneRegistreId);
 
         var wnd = $("#wnd").kendoWindow({
-            height: 500,
+            height: 720,
             width: 975,
             visible: false,
             modal: true
@@ -343,6 +345,14 @@
 
     $(document).on('click', '#btnSaveInstructionStatus', function () {
 
+        var insNotes = $('#StepComments').val();
+
+        if (insNotes == '') {
+            ShowNotification("@Html.Raw(CadLigneCadRES.Erreur)", "@Html.Raw(CadLigneCadRES.MissingComments)", "errorTemplate")
+            $('#StepComments').focus();
+            return;
+        }
+
         var entityGrid = $("#wrapped-grid").data("kendoGrid");
         var data = entityGrid.dataSource.data();
         var totalNumber = data.length;
@@ -350,7 +360,7 @@
         var allWarnings1 = [];
         var allWarnings2 = [];
 
-     
+
         for (var i = 0; i < totalNumber; i++) {
             var currentDataItem = data[i];
 
@@ -374,7 +384,6 @@
             }
         }
 
-        var insNotes = $('#StepComments').val();
 
         $.ajax({
             url: "@Url.Action("SaveInstructions", "Registre")",
@@ -426,7 +435,7 @@
         }
 
 
-        
+
 
         console.log(allWarningText);
 
@@ -465,6 +474,9 @@
                     wndEmail.title("@PrevFicheRES.WarningEmailSubject")
                         .center()
                         .open();
+
+                    // remove close button
+                    $("#wndEmail").parent().find('.k-window-actions').remove();
                 }
             },
             error: function (req, status, errorObj) {
@@ -480,8 +492,7 @@
         var warningEmails = $("#WarningToEmails").val();
 
         if (warningEmails == '') {
-            //alert('Missing Emails');
-            ShowNotification("Required", "Email Address are missing.", "errorTemplate");
+            ShowNotification("@Html.Raw(CadLigneCadRES.Erreur)", "@Html.Raw(CadLigneCadRES.MissingEmails)", "errorTemplate")
             return;
         }
 
@@ -503,7 +514,7 @@
                     $("#wndEmail").data("kendoWindow").close();
                 }
                 else {
-                    ShowNotification("Error", result.ErrorMessage, "errorTemplate");
+                    ShowNotification("@Html.Raw(CadLigneCadRES.Erreur)", result.ErrorMessage, "errorTemplate");
                 }
             },
             error: function (req, status, errorObj) {

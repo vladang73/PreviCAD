@@ -9,7 +9,7 @@ namespace Previgesst.Repositories
 {
     public class LigneAnalyseRisqueRepository : RepositoryBase<LigneAnalyseRisque>
     {
-        internal List<bool> ConfimiteAuxNormesInt;
+        //internal List<bool> ConfimiteAuxNormesInt;
         private AnalyseRisqueRepository analyseRisqueRepository;
 
         public LigneAnalyseRisqueRepository(DbContext context, AnalyseRisqueRepository analyseRisqueRepository) : base(context) {

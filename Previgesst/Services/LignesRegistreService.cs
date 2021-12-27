@@ -157,7 +157,7 @@ namespace Previgesst.Services
                                         "</p>" +
                                         "<center><table style=\"width:300px;background-color:#337ab7\">" +
                                             "<tr>" +
-                                                "<td><center><a style=\"text-decoration:none;color:white;font-weight:bold\" href=\"https://applications.previgesst.com\">Accès au compte</a></center></td>" +
+                                                "<td><center><a style=\"text-decoration:none;color:white;font-weight:bold\" href=\"https://applications.previcad.com\">Accès au compte</a></center></td>" +
                                             "</tr>" +
                                         "</table></center>" +
                                     "</td>" +

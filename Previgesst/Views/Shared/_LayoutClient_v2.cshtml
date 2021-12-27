@@ -111,7 +111,7 @@
 
 
                                 <li id="liMonCompte"><a class="submenu-dropdown-item" href="/Manage/MyAccount">@LayoutRES.ActionMonCompte</a></li>
-                                <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>
+                                @*<li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>*@
                             </ul>
                         </li>
                         <li class="nav-item text-center mt-2">
@@ -378,6 +378,7 @@
         });
 
         $(document).on('click', '.squaredThree', function () {
+            console.log('squaredThree v2');
             $(this).find('input[type=checkbox]').click();
         });
 

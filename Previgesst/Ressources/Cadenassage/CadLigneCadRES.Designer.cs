@@ -196,6 +196,24 @@ namespace Previgesst.Ressources.Cadenassage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Les commentaires sont manquants..
+        /// </summary>
+        public static string MissingComments {
+            get {
+                return ResourceManager.GetString("MissingComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to L&apos;adresse e-mail est manquante..
+        /// </summary>
+        public static string MissingEmails {
+            get {
+                return ResourceManager.GetString("MissingEmails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No Ligne.
         /// </summary>
         public static string NoLigne {

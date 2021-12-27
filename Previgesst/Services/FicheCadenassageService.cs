@@ -238,9 +238,9 @@ namespace Previgesst.Services
                 {
                     var m = q.Dequeue();
                     var materiel = (langue == "" ? m.Materiel.Description : m.Materiel.DescriptionEN);
-                    ws.Cells[ligne, colonne].Value = (materiel) + (m.Quantite != 1 ? " (" + m.Quantite.ToString() + ")" : "");
-                    if (m.Quantite != 1)
-                        ws.Cells[ligne, colonne].GetCharacters(materiel.Length + 2, m.Quantite.ToString().Length).Font.Color = GemBox.Spreadsheet.SpreadsheetColor.FromName(GemBox.Spreadsheet.ColorName.Red);
+                    ws.Cells[ligne, colonne].Value = (materiel) + " (" + m.Quantite.ToString() + ")"; // + (m.Quantite != 1 ? " (" + m.Quantite.ToString() + ")" : "");
+                                                                                                      //if (m.Quantite != 1)
+                    ws.Cells[ligne, colonne].GetCharacters(materiel.Length + 2, m.Quantite.ToString().Length).Font.Color = GemBox.Spreadsheet.SpreadsheetColor.FromName(GemBox.Spreadsheet.ColorName.Red);
                     if (colonne == 2)
                         colonne = colonne + 3;
                     else

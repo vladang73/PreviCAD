@@ -1,6 +1,10 @@
 ﻿@using Previgesst.Ressources;
 @model ClientEditDetailsViewModel
 
+@{ 
+    bool isCorporate = false;
+    bool.TryParse(Convert.ToString(HttpContext.Current.Session["IsCorporate"]), out isCorporate);
+}
 
 
 @section styles{
@@ -38,7 +42,7 @@
         </li>
 
 
-        @if (User.IsInRole("Administrateur"))
+        @if (User.IsInRole("Administrateur") && !isCorporate)
         {
             <li class="nav-item text-center">
                 <a class="nav-link home-navlink" href="#Applications" aria-controls="pratiques" role="tab" data-toggle="tab" data-bs-toggle="tab">

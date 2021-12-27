@@ -259,7 +259,7 @@ namespace Previgesst.Ressources.Previcad {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Commentaires.
+        ///   Looks up a localized string similar to Observation sur l’étiquette, le lieu, la procédure..
         /// </summary>
         public static string Notes {
             get {

@@ -121,7 +121,7 @@
     <value>Active</value>
   </data>
   <data name="AfficherClient" xml:space="preserve">
-    <value>Display on premises</value>
+    <value>Display for client</value>
   </data>
   <data name="Approuve" xml:space="preserve">
     <value>Approve</value>

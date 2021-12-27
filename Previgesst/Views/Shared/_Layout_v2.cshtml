@@ -119,7 +119,7 @@
                                 @RenderSection("sidebarChilds", required: false)
 
                                 <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">@LayoutRES.ActionMonCompte</a></li>
-                                <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>
+                                @*<li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>*@
                             </ul>
                         </li>
                         <li class="nav-item text-center mt-2">
@@ -378,6 +378,7 @@
         });
 
         function SetCheckbox(ctrl) {
+            console.log('SetCheckbox', $(ctrl).val());
             if ($(ctrl).val() == 'on' || $(ctrl).prop("checked")) {
                 $(ctrl).val(true);
             }
@@ -415,10 +416,12 @@
         $(document)
             .off('click', '.squaredThree label')
             .on('click', '.squaredThree label', function () {
-                console.log('squaredThree checkbox click');
+                console.log('squaredThree label click');
+                //console.log($($(this).parent().find('input[type=checkbox]')));
+                //console.log($($(this).parent().find('input[type=checkbox]')[0]));
 
                 //$(this).find('input[type=checkbox]').click();
-                $(this).parent().find('input[type=checkbox]').click();
+                //$(this).parent().find('input[type=checkbox]').click();
             });
 
     </script>

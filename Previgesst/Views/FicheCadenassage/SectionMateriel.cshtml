@@ -57,7 +57,7 @@
                 .Ajax()
                 .Sort(x => x.Add(c => c.NomMateriel))
                 .PageSize(20)
-                .Model(m => { m.Id(e => e.MaterielRequisCadenassageId); })
+                .Model(m => { m.Id(e => e.MaterielRequisCadenassageId); m.Field(f => f.Quantite).DefaultValue(1); })
 
                 .Read(r => r.Action("ReadListMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
                 .Create(c => c.Action("SaveItemMateriel", "FicheCadenassage", new { ficheId = Model.FicheCadenassageId }))
