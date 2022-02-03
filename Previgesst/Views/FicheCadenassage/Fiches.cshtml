@@ -125,9 +125,24 @@
                         .Ajax()
                         .Filter(f =>
                         {
-                            if ( !Model.estUpdate)
+                            if (!Model.estUpdate)
                             {
-                                f.Add(b => b.IsApproved).IsEqualTo(true);
+                                //f.Add(b => b.IsApproved).IsEqualTo(true);
+                                f.Add(b => b.AfficherClient).IsEqualTo(true);
+
+
+                                //ICollection<Kendo.Mvc.CompositeFilterDescriptor> filters = new List<Kendo.Mvc.CompositeFilterDescriptor>();
+                                //filters.Add(new Kendo.Mvc.CompositeFilterDescriptor()
+                                //{
+                                //    LogicalOperator = Kendo.Mvc.FilterCompositionLogicalOperator.And,
+                                //    FilterDescriptors = new Kendo.Mvc.Infrastructure.Implementation.FilterDescriptorCollection()
+                                //    {
+                                //        new Kendo.Mvc.FilterDescriptor() { Member = "IsApproved", Operator = Kendo.Mvc.FilterOperator.IsEqualTo, Value = true},
+                                //        new Kendo.Mvc.FilterDescriptor() { Member = "AfficherClient", Operator = Kendo.Mvc.FilterOperator.IsEqualTo, Value = true},
+                                //    }
+                                //});
+
+                                //f.AddRange(filters);
                             }
                         })
                         .PageSize(20)

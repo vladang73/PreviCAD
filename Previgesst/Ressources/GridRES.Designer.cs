@@ -124,6 +124,15 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fiche.
+        /// </summary>
+        public static string EtiquetteGrid {
+            get {
+                return ResourceManager.GetString("EtiquetteGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non, ne pas dupliquer.
         /// </summary>
         public static string NePasDupliquer {

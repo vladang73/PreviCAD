@@ -1,0 +1,61 @@
+﻿@using Previgesst.Ressources
+@{
+    ViewBag.Title = "Email";
+    Layout = "~/Views/Shared/_Layout_v2.cshtml";
+}
+
+
+@section styles{
+    <link href="~/Content/kendo/2016.2.714/kendo.common-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/2016.2.714/kendo.bootstrap.min.css" rel="stylesheet" />
+}
+
+
+
+<main class="main-container-wrapper page-container">
+    <div class="breadcrumbs-nav-wrapper">
+        <ul class="breadcrumbs">
+            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>@LayoutRES.Accueil</a></li>
+            <li class="active">Email</li>
+        </ul>
+    </div>
+
+    <div class="main-page-content">
+
+        <div class="tab-content">
+
+
+
+
+
+            @using (Html.BeginForm("Email", "Test", FormMethod.Post, new { @class = "form-horizontal needs-validation", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="mt-5">
+                            <label for="ToEmail" class="form-label d-block">To</label>
+                            <input type="text" class="form-control" id="ToEmail" name="ToEmail" value="atta.hameeed@gmail.com" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="mt-3">
+                            <label for="EmailBody" class="form-label d-block">Body</label>
+                            <textarea class="form-control" id="EmailBody" name="EmailBody" rows="7" required >this is test email</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 d-flex justify-content-end pt-5">
+                    <input type="submit" class="btn btn-primary" value="Send" />
+                </div>
+            }
+
+
+        </div>
+    </div>
+</main>

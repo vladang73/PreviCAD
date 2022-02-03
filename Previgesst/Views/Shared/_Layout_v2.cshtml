@@ -98,12 +98,12 @@
         <div class="bg-light d-none d-md-block sidebar">
             <div class="left-sidebar">
                 @*<ul class="nav flex-column sidebar-nav ">
-            <li class="nav-item text-center mt-2">
-                <a class="nav-link home-navlink active" href='@Url.Action("Index", "AdminPrevi")'>
-                    <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
-                </a>
-            </li>
-        </ul>*@
+                        <li class="nav-item text-center mt-2">
+                            <a class="nav-link home-navlink active" href='@Url.Action("Index", "AdminPrevi")'>
+                                <img src="/content/v2/images/icon-home.png" /><p class="nav-link-text">@LayoutRES.Accueil</p>
+                            </a>
+                        </li>
+                    </ul>*@
 
                 @RenderSection("sidebar", required: false)
 
@@ -117,9 +117,10 @@
                             </a>
                             <ul class="submenu">
                                 @RenderSection("sidebarChilds", required: false)
-
-                                <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">@LayoutRES.ActionMonCompte</a></li>
-                                @*<li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>*@
+                                @*
+                                    <li><a class="submenu-dropdown-item" href="/Manage/MyAccount">@LayoutRES.ActionMonCompte</a></li>
+                                    <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>
+                                *@
                             </ul>
                         </li>
                         <li class="nav-item text-center mt-2">
@@ -143,23 +144,23 @@
     @RenderBody()
 
 
-<footer class="previcad-footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4 ">
+    <footer class="previcad-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 ">
 
-            </div>
-            <div class="col-12 col-lg-4 text-center">
-                <div class="company-tagline-wrapper">
-                    <img src="/content/v2/images/brand-logo.png"><p class="">@LayoutRES.FooterTitle</p>
+                </div>
+                <div class="col-12 col-lg-4 text-center">
+                    <div class="company-tagline-wrapper">
+                        <img src="/content/v2/images/brand-logo.png"><p class="">@LayoutRES.FooterTitle</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <p class="copyright-text">@LayoutRES.FooterCopyright @LayoutRES.FooterRights Version 2.0</p>
                 </div>
             </div>
-            <div class="col-12 col-lg-4">
-                <p class="copyright-text">@LayoutRES.FooterCopyright @LayoutRES.FooterRights Version 2.0</p>
-            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 
     @* Popup générique pour la suppression *@
@@ -413,16 +414,16 @@
         });
 
 
-        $(document)
-            .off('click', '.squaredThree label')
-            .on('click', '.squaredThree label', function () {
-                console.log('squaredThree label click');
-                //console.log($($(this).parent().find('input[type=checkbox]')));
-                //console.log($($(this).parent().find('input[type=checkbox]')[0]));
+            //$(document)
+            //    .off('click', '.squaredThree label')
+            //    .on('click', '.squaredThree label', function () {
+            //        console.log('squaredThree label click');
+            //        //console.log($($(this).parent().find('input[type=checkbox]')));
+            //        //console.log($($(this).parent().find('input[type=checkbox]')[0]));
 
-                //$(this).find('input[type=checkbox]').click();
-                //$(this).parent().find('input[type=checkbox]').click();
-            });
+            //        //$(this).find('input[type=checkbox]').click();
+            //        //$(this).parent().find('input[type=checkbox]').click();
+            //    });
 
     </script>
 

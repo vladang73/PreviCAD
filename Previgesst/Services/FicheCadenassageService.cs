@@ -909,7 +909,9 @@ namespace Previgesst.Services
                             IsApproved = x.IsApproved,
 
                             ValidatedPar = x.ValidatedPar,
-                            DateValidated = x.DateValidated
+                            DateValidated = x.DateValidated,
+
+                            AfficherClient = x.AfficherClient
 
                             //DateRevision = x.DateRevision,
 
@@ -928,7 +930,7 @@ namespace Previgesst.Services
             //droitSuppressionClient = false;
 
             var result = ficheCadenassageRepository.AsQueryable()
-                        .Where(x => x.ClientId == clientId && x.IsApproved == true)
+                        .Where(x => x.ClientId == clientId && x.IsApproved == true && x.AfficherClient == true)
                         .Select(x => new LigneRegistreViewModel()
                         {
                             FicheCadenassageId = x.FicheCadenassageId,

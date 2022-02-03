@@ -53,7 +53,7 @@
             <div class="form-group mt-3">
                 <div class="squaredThree squaredThree-blue d-inline-block">
                     <input type="checkbox" id="Actif" name="Actif" @(Model.Actif ? "checked" : "") value="@Convert.ToString(Model.Actif).ToLower()" />
-                    <label for="squaredone"><span>@Html.DisplayNameFor(x => x.Actif) </span></label>
+                    <label for="Actif"><span>@Html.DisplayNameFor(x => x.Actif) </span></label>
                 </div>
 
                 @Html.ValidationMessageFor(model => model.Actif)
@@ -68,7 +68,7 @@
             <div class="form-group mt-3">
                 <div class="squaredThree squaredThree-blue d-inline-block">
                     <input type="checkbox" id="NotificationDebutCad" name="NotificationDebutCad" @(Model.NotificationDebutCad ? "checked" : "") value="@Convert.ToString(Model.NotificationDebutCad).ToLower()" />
-                    <label for="squaredone"><span>@Html.DisplayNameFor(x => x.NotificationDebutCad) </span></label>
+                    <label for="NotificationDebutCad"><span>@Html.DisplayNameFor(x => x.NotificationDebutCad) </span></label>
                 </div>
 
                 @Html.ValidationMessageFor(model => model.NotificationDebutCad)
@@ -78,7 +78,7 @@
 
                 <div class="squaredThree squaredThree-blue d-inline-block mt-3">
                     <input type="checkbox" id="NotificationNonConformite" name="NotificationNonConformite" @(Model.NotificationNonConformite ? "checked" : "") value="@Convert.ToString(Model.NotificationNonConformite).ToLower()" />
-                    <label for="squaredone"><span>@Html.DisplayNameFor(x => x.NotificationNonConformite) </span></label>
+                    <label for="NotificationNonConformite"><span>@Html.DisplayNameFor(x => x.NotificationNonConformite) </span></label>
                 </div>
 
                 @Html.ValidationMessageFor(model => model.NotificationNonConformite)
@@ -96,7 +96,7 @@
                         <div class="form-group mt-3">
                             <div class="squaredThree squaredThree-blue d-inline-block">
                                 <input type="checkbox" id="AdmUtilisateurs" name="AdmUtilisateurs" @(Model.AdmUtilisateurs ? "checked" : "") value="@Convert.ToString(Model.AdmUtilisateurs).ToLower()" />
-                                <label for="squaredone"><span>@Html.DisplayNameFor(x => x.AdmUtilisateurs) </span></label>
+                                <label for="AdmUtilisateurs"><span>@Html.DisplayNameFor(x => x.AdmUtilisateurs) </span></label>
                             </div>
 
                             @Html.ValidationMessageFor(model => model.AdmUtilisateurs)
@@ -116,7 +116,7 @@
                     <div class="form-group mt-3">
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="AdmPrevicad" name="AdmPrevicad" @(Model.AdmUtilisateurs ? "checked" : "") value="@Convert.ToString(Model.AdmPrevicad).ToLower()" />
-                            <label for="squaredone"><span>@Html.DisplayNameFor(x => x.AdmPrevicad) </span></label>
+                            <label for="AdmPrevicad"><span>@Html.DisplayNameFor(x => x.AdmPrevicad) </span></label>
                         </div>
                         @Html.ValidationMessageFor(model => model.AdmPrevicad)
 
@@ -124,7 +124,7 @@
                     <div class="form-group mt-3">
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="AdmAnalyseRisque" name="AdmAnalyseRisque" @(Model.AdmAnalyseRisque ? "checked" : "") value="@Convert.ToString(Model.AdmAnalyseRisque).ToLower()" />
-                            <label for="squaredone"><span>@Html.DisplayNameFor(x => x.AdmAnalyseRisque) </span></label>
+                            <label for="AdmAnalyseRisque"><span>@Html.DisplayNameFor(x => x.AdmAnalyseRisque) </span></label>
                         </div>
 
                         @Html.ValidationMessageFor(model => model.AdmAnalyseRisque)
@@ -134,7 +134,7 @@
              
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="Auditeur" name="Auditeur" @(Model.Auditeur ? "checked" : "") value="@Convert.ToString(Model.Auditeur).ToLower()" />
-                            <label for="squaredone"><span>@Html.DisplayNameFor(x => x.Auditeur) </span></label>
+                            <label for="Auditeur"><span>@Html.DisplayNameFor(x => x.Auditeur) </span></label>
                         </div>
 
                         @Html.ValidationMessageFor(model => model.Auditeur)
@@ -146,7 +146,7 @@
           
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="ROPrevicad" name="ROPrevicad" @(Model.ROPrevicad ? "checked" : "") value="@Convert.ToString(Model.ROPrevicad).ToLower()" />
-                            <label for="squaredone"><span>@Html.DisplayNameFor(x => x.ROPrevicad) </span></label>
+                            <label for="ROPrevicad"><span>@Html.DisplayNameFor(x => x.ROPrevicad) </span></label>
                         </div>
 
                         @Html.ValidationMessageFor(model => model.ROPrevicad)
@@ -156,7 +156,7 @@
        
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="ROAnalyseRisque" name="ROAnalyseRisque" @(Model.ROAnalyseRisque ? "checked" : "") value="@Convert.ToString(Model.ROAnalyseRisque).ToLower()" />
-                            <label for="squaredone"><span>@Html.DisplayNameFor(x => x.ROAnalyseRisque) </span></label>
+                            <label for="ROAnalyseRisque"><span>@Html.DisplayNameFor(x => x.ROAnalyseRisque) </span></label>
                         </div>
 
                         @Html.ValidationMessageFor(model => model.ROAnalyseRisque)
@@ -166,7 +166,7 @@
       
                         <div class="squaredThree squaredThree-blue d-inline-block">
                             <input type="checkbox" id="RODocuments" name="RODocuments" @(Model.RODocuments ? "checked" : "") value="@Convert.ToString(Model.RODocuments).ToLower()" />
-                            <label for="squaredone"><span>@Html.DisplayNameFor(x => x.RODocuments) </span></label>
+                            <label for="RODocuments"><span>@Html.DisplayNameFor(x => x.RODocuments) </span></label>
                         </div>
 
                         @Html.ValidationMessageFor(model => model.RODocuments)

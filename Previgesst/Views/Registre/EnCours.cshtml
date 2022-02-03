@@ -147,7 +147,7 @@
     <div class="armchair">
         <div id="wrapped-grid"></div>
         <div>
-            <label class="p-3"><strong>@PrevFicheRES.Notes</strong></label>
+            <label class="p-3"><strong>@PrevFicheRES.Notes</strong> <span class="text-danger"><b>*</b></span> </label>
             <textarea id="StepComments" name="StepComments" class="form-control" rows="5" style="width:97%" required></textarea>
         </div>
     </div>
@@ -226,7 +226,7 @@
 
     function showInsDetails(e) {
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-        var url = "@Url.Action("Instruction", "Registre")?ficheId=" + dataItem.FicheCadenassageId + '&ligneRegistreId=' + dataItem.LigneRegistreId;
+        var url = "@Url.Action("Instruction", "Registre")?ficheId=" + dataItem.FicheCadenassageId + '&ligneRegistreId=' + dataItem.LigneRegistreId + '&eq=' + dataItem.NomEquipement;
 
         var viewonly =  $(e.currentTarget).data("viewonly");
 
@@ -239,6 +239,8 @@
             $('.armchair').addClass('fullheight');
             $('#StepComments').attr('readonly', 'readonly');
         }
+
+        var noFiche = dataItem.NoFicheCadenassage;
 
         /*$("#wrapped-grid").empty();*/
 
@@ -261,6 +263,8 @@
                 { field: "PKId", hidden: true },
                 { field: "FicheCadenassageId", hidden: true },
                 { field: "LigneRegistreId", hidden: true },
+                { field: "NomEquipement", hidden: true },
+                { field: "NoFicheCadenassage", hidden: true /*, template: function () { return noFiche; }*/  },
                 { field: "NoLigne", width: "60px", title: "#", template: "# if(NoLigne > 0) {# #=NoLigne# #}#", attributes: { "class": "td-round-left-border" } },
                 {
                     field: "TexteInstruction", title: "@CadLigneCadRES.Instruction",
@@ -315,6 +319,8 @@
         wnd.title("@PrevFicheRES.OptionWindowTitle")
             .center()
             .open();
+
+        $("#wnd").parent().find('.k-window-actions').remove();
     }
 
     var ddlDataSource = [
@@ -350,8 +356,12 @@
         if (insNotes == '') {
             ShowNotification("@Html.Raw(CadLigneCadRES.Erreur)", "@Html.Raw(CadLigneCadRES.MissingComments)", "errorTemplate")
             $('#StepComments').focus();
+            $('#StepComments').attr('style', 'border: 2px solid red;');
             return;
         }
+
+        $('#StepComments').attr('style', 'border: unset;');
+
 
         var entityGrid = $("#wrapped-grid").data("kendoGrid");
         var data = entityGrid.dataSource.data();
@@ -360,6 +370,7 @@
         var allWarnings1 = [];
         var allWarnings2 = [];
 
+        console.log('wrapped-grid', data);
 
         for (var i = 0; i < totalNumber; i++) {
             var currentDataItem = data[i];
@@ -370,7 +381,9 @@
                 InstructionType: currentDataItem.PKType,
                 StepStatus: currentDataItem.StepStatus,
                 FicheCadenassageId: currentDataItem.FicheCadenassageId,
-                LigneRegistreId: currentDataItem.LigneRegistreId
+                LigneRegistreId: currentDataItem.LigneRegistreId,
+                NomEquipement: currentDataItem.NomEquipement,
+                NoFicheCadenassage: currentDataItem.NoFicheCadenassage
             });
 
             // Empty and Non-conforme
@@ -384,6 +397,7 @@
             }
         }
 
+        console.log('array', allData);
 
         $.ajax({
             url: "@Url.Action("SaveInstructions", "Registre")",
@@ -398,7 +412,7 @@
 
                     $("#wnd").data("kendoWindow").close();
                     if (allWarnings1.length > 0 || allWarnings2.length > 0) {
-                        OpenWarningEmail(allData[1].FicheCadenassageId, allWarnings1, allWarnings2);
+                        OpenWarningEmail(allData[1].NoFicheCadenassage, allWarnings1, allWarnings2, allData[1].NomEquipement);
                     }
                 }
             },
@@ -407,11 +421,11 @@
         });
     });
 
-    function OpenWarningEmail(ficheID, allWarnings1, allWarnings2) {
+    function OpenWarningEmail(ficheID, allWarnings1, allWarnings2, eqName) {
 
         var warSubject = '@Html.Raw(PrevFicheRES.WarningEmailSubject)' + "\n";
         var warDescr = '@Html.Raw(PrevFicheRES.WarningDescr)' + "\n";
-        var warFildId = '@Html.Raw(PrevFicheRES.WarningFileId)' + ' ' + ficheID ;
+        var warFildId = '@Html.Raw(PrevFicheRES.WarningFileId)' + ' ' + ficheID + '\n' +'@PrevFicheRES.Equipement [' + eqName +']';
         var warUser = '@Html.Raw(PrevFicheRES.WarningUser)' + ' @nomUtilisateur';
         var warTexts = '@Html.Raw(PrevFicheRES.WarningTexts)';
 

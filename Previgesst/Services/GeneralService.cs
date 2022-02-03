@@ -119,7 +119,7 @@ namespace Previgesst.Services
                 mail.Subject = subject;
                 //mail.IsBodyHtml = true;
 
-                /*
+                
                 //AlternateView plainView = AlternateView.CreateAlternateViewFromString(body);
                 //mail.AlternateViews.Add(plainView);
 
@@ -137,7 +137,8 @@ namespace Previgesst.Services
 
 
                 // Previgesst logo
-                LinkedResource logo = new LinkedResource(HttpContext.Current.Server.MapPath("~/Images/dark_logo.png"), "image/png");
+                //LinkedResource logo = new LinkedResource(HttpContext.Current.Server.MapPath("~/Images/dark_logo.png"), "image/png");
+                LinkedResource logo = new LinkedResource(HttpContext.Current.Server.MapPath("/content/v2/images/logo.png"), "image/png");
                 logo.ContentId = "dark_logo.png";
                 logo.TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
                 logo.ContentLink = new Uri("cid:dark_logo.png");
@@ -145,13 +146,28 @@ namespace Previgesst.Services
                 htmlView.LinkedResources.Add(logo);
                 htmlView.TransferEncoding = System.Net.Mime.TransferEncoding.QuotedPrintable;
                 mail.AlternateViews.Add(htmlView);
-                */
+                
 
 
 
                 mail.Body = body.Replace("\n", Environment.NewLine);
                 mail.IsBodyHtml = isHtml;
 
+                //if (!string.IsNullOrEmpty(Logo))
+                //{
+                //    // Client logo
+                //    //string logoPath = "~/Images/Cadenassage/Clients/" + ClientId + "/" + Logo;
+                //    string logoPath = "/content/v2/images/logo.png";
+                //    LinkedResource logoClient = new LinkedResource(HttpContext.Current.Server.MapPath(logoPath), "image/png");
+                //    logoClient.ContentId = Logo;
+                //    logoClient.TransferEncoding = System.Net.Mime.TransferEncoding.Base64;
+                //    logoClient.ContentLink = new Uri("cid:" + Logo + "");
+
+                //    AlternateView AV = AlternateView.CreateAlternateViewFromString(body, null, System.Net.Mime.MediaTypeNames.Text.Html);
+                //    AV.LinkedResources.Add(logoClient);
+
+                //    mail.AlternateViews.Add(AV);
+                //}
 
                 client.Send(mail);
             }

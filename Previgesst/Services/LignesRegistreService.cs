@@ -147,10 +147,10 @@ namespace Previgesst.Services
                                     "<td>" +
                                         "<p>Bonjour " + membreNom + ",</p>" +
                                         "<p>" +
-                                            "<strong>Un cadenassage vient d'être déclenché.</strong><br><br>" +
-                                            "Détails du cadenassage<br>" +
+                                            "<strong>Une interventions nécessitant le contrôle des énergies dangereuses est en cours.</strong><br><br>" +
+                                            "Détails de l’intervention<br>" +
                                             "Nom employé : " + model.Nom + "<br>" +
-                                            "Numéro employé : " + model.NoEmploye + "<br>" +
+                                            "Identifiant de l’employé : " + model.NoEmploye + "<br>" +
                                             "Département : " + model.NomDepartement + "<br>" +
                                             "Équipement : " + model.NomEquipement + "<br>" +
                                             "Numéro de procédure de cadenassage : " + model.NoFicheCadenassage + "<br>" +

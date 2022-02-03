@@ -102,7 +102,7 @@
 
                             <div class="squaredThree squaredThree-blue d-inline-block">
                                 <input type="checkbox" id="Inactive" name="Inactive" @(Model.Inactive ? "checked" : "") value="@Convert.ToString(Model.Inactive).ToLower()" />
-                                <label for="squaredone"><span>@ManageRES.Inactif </span></label>
+                                <label for="Inactive"><span>@ManageRES.Inactif </span></label>
                             </div>
 
                             @Html.ValidationMessageFor(m => m.Inactive, "", new { @class = "text-danger" })
@@ -117,7 +117,7 @@
 
                             <div class="squaredThree squaredThree-blue d-inline-block">
                                 <input type="checkbox" id="IsCorporate" name="IsCorporate" @(Model.IsCorporate ? "checked" : "") value="@Convert.ToString(Model.IsCorporate).ToLower()" onclick="ShowHideCorporate(this);" />
-                                <label for="squaredone"><span>@Html.DisplayNameFor(x => x.IsCorporate) </span></label>
+                                <label for="IsCorporate"><span>@Html.DisplayNameFor(x => x.IsCorporate) </span></label>
                             </div>
 
 

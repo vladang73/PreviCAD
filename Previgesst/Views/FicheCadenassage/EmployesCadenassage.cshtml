@@ -86,10 +86,10 @@
                         .Filterable()
                         .DataSource(ds => ds
                             .Ajax()
-                            .Filter(f =>
-                            {
-                                f.Add(b => b.Actif).IsEqualTo(true);
-                            })
+                            //.Filter(f =>
+                            //{
+                            //    f.Add(b => b.Actif).IsEqualTo(true);
+                            //})
                             .Sort(x => x.Add(c => c.NoEmploye))
                             .PageSize(20)
                             .Model(m =>

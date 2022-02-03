@@ -108,7 +108,7 @@
 
                 <div class="squaredThree squaredThree-blue d-inline-block">
                     <input type="checkbox" id="PeriodeEssai" name="PeriodeEssai" @(Model.PeriodeEssai ? "checked" : "") value="@Convert.ToString(Model.PeriodeEssai).ToLower()" />
-                    <label for="squaredone"><span>@Html.DisplayNameFor(x => x.PeriodeEssai) </span></label>
+                    <label for="PeriodeEssai"><span>@Html.DisplayNameFor(x => x.PeriodeEssai) </span></label>
                 </div>
 
                 @Html.ValidationMessageFor(m => m.PeriodeEssai, "", new { @class = "text-danger" })

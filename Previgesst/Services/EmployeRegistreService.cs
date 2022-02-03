@@ -130,15 +130,16 @@ namespace Previgesst.Services
         public Boolean isLoginOK(LoginCadenassageViewModel loginfo)
         {
 
-            return (employeRegistreRepository.AsQueryable().Where(x => x.Client.IdentificateurUnique == loginfo.Identificateur && x.NoEmploye == loginfo.NoEmploye && x.Password == loginfo.Password).Count() > 0);
-
-
-
+            return (employeRegistreRepository.AsQueryable()
+                                             .Where(x => x.Client.IdentificateurUnique == loginfo.Identificateur)
+                                             .Where(x => x.NoEmploye == loginfo.NoEmploye)
+                                             .Where(x => x.Password == loginfo.Password)
+                                             .Where(x => x.Actif == true).Count() > 0);
         }
 
         public void setSession(LoginCadenassageViewModel loginfo)
         {
-            var employe = employeRegistreRepository.AsQueryable().Where(x => x.Client.IdentificateurUnique == loginfo.Identificateur && x.NoEmploye == loginfo.NoEmploye && x.Password == loginfo.Password).FirstOrDefault();
+            var employe = employeRegistreRepository.AsQueryable().Where(x => x.Client.IdentificateurUnique == loginfo.Identificateur && x.NoEmploye == loginfo.NoEmploye && x.Password == loginfo.Password && x.Actif == true).FirstOrDefault();
             if (employe != null)
             {
                 var vm = new EmployeRegistreViewModel() { NoEmploye = employe.NoEmploye, Nom = employe.Nom, EmployeRegistreId = employe.EmployeRegistreId, ClientId = employe.ClientId };

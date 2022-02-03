@@ -178,6 +178,16 @@ namespace Previgesst.Controllers
         {
             var vm = ManageService.GetMyAccountVM();
                 
+            if(vm.Email == "cdeuser@cde.com")
+            {
+                var session = utilisateurService.GetSession();
+
+                if(session != null)
+                {
+                    vm.Email = session.NomUtilisateur;
+                }
+            }
+
             return View("MyAccount", Layout, vm);
         }
 

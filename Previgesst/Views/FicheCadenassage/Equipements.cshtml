@@ -204,7 +204,7 @@
                 </select>
             </div>
 
-            <div class="form-group mt-3">
+            @*<div class="form-group mt-3">
                 <input type="checkbox" id="RiskAnalysis" name="RiskAnalysis" # if (RiskAnalysis) { # checked=\"checked\" # } # />
                 <label for="RiskAnalysis">Analyse de risque complétée</label>
             </div>
@@ -217,7 +217,7 @@
             <div class="form-group mt-3">
                 <input type="checkbox" id="SafeWorkProcedure" name="SafeWorkProcedure" # if (SafeWorkProcedure) { # checked=\"checked\" # } # />
                 <label for="SafeWorkProcedure">Procédure de travail sécuritaire complétée</label>
-            </div>
+            </div>*@
         </div>
 
             <div class="form-group mt-3 text-right text-end">
@@ -607,8 +607,8 @@
                 columns: [
                     {
                         field: "EquipementId", filterable: false, sortable: false, width: "55px",
-                        template: "<center><div class='squaredThree squaredThree-blue'><input type='checkbox' id='squaredone' name='selected-equi' class='selected-equi'  data-eqid='#: EquipementId #' /><label for='squaredone'><span> </span></label></div></center>",
-                        headerTemplate: "<center><div class='squaredThree squaredThree-blue'><input type='checkbox' class='selected-equi-all' onClick='toggleOnlyWithQR(this)' /><label for='squaredone'><span> </span></label></div></center>",
+                        template: "<center><div class='squaredThree squaredThree-blue' onclick='toggleCheck(this)'><input type='checkbox' class='selected-equi'  data-eqid='#: EquipementId #' /><label for='squaredone1'><span> </span></label></div></center>",
+                        headerTemplate: "<center><div class='squaredThree squaredThree-blue' onclick='toggleCheck(this)'><input type='checkbox' class='selected-equi-all' onClick='toggleOnlyWithQR(this)' /><label for='squaredone2'><span> </span></label></div></center>",
                     },
                     { field: "NumeroEquipment", width: "150px", title: "@CadEquipRES.Num" },
                     { field: "NomEquipement", title: "@CadEquipRES.Nom" }
@@ -674,6 +674,8 @@
     });
 
     function toggleOnlyWithQR(source) {
+        console.log('source.checked', source.checked);
+
         $('.selected-equi').each(function () {
             $(this).prop('checked', source.checked)
         });
@@ -709,5 +711,18 @@
         console.log('windowHeight', windowHeight, 'k-grid-content', gridHeight, 'new height', newHeight);
 
         $('.k-grid-height').find('.k-grid-content').attr('style', 'height:' + newHeight + 'px !important;');
+    }
+
+    function toggleCheck(ctrl) {
+        console.log('toggleCheck v2');
+
+        //if ($(ctrl).find('input[type=checkbox]').is(':checked') == true) {
+        //    $(ctrl).find('input[type=checkbox]').prop('checked', true);
+        //}
+        //else {
+        //    $(ctrl).find('input[type=checkbox]').prop('checked', false);
+        //}
+
+        $(ctrl).find('input[type=checkbox]').click();
     }
 </script>

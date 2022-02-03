@@ -86,5 +86,6 @@ namespace Previgesst.ViewModels
         public virtual PhotoFicheCadenassage PhotoFicheCadenassage { get; set; }
 
 
+        public string NoFicheCadenassage { get; set; }
     }
 }

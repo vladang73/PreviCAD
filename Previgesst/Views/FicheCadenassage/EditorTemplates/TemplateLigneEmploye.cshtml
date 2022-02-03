@@ -65,8 +65,8 @@
 
 
                 <div class="squaredThree squaredThree-blue">
-                    <input type="checkbox" id="squaredone" name="Actif" @(Model.Actif ? "checked" : "") value="@Convert.ToString(Model.Actif).ToLower()" />
-                    <label for="squaredone"><span class="form-label d-inline-block mt-1">@CadEmpRES.Actif </span></label>
+                    <input type="checkbox" id="Actif" name="Actif" @(Model.Actif ? "checked" : "") value="@Convert.ToString(Model.Actif).ToLower()" />
+                    <label for="Actif"><span class="form-label d-inline-block mt-1">@CadEmpRES.Actif </span></label>
                 </div>
 
                 @Html.ValidationMessageFor(m => m.Actif, "", new { @class = "text-danger" })

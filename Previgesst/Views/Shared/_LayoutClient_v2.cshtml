@@ -40,30 +40,30 @@
 
 
 
-@{
-    string path = Request.Url.PathAndQuery;
-    string selectedLang = string.Empty;
+    @{
+        string path = Request.Url.PathAndQuery;
+        string selectedLang = string.Empty;
 
-    if (path.Contains("/en/")) { selectedLang = "en"; }
-    else if (path.Contains("/fr/")) { selectedLang = "fr"; }
+        if (path.Contains("/en/")) { selectedLang = "en"; }
+        else if (path.Contains("/fr/")) { selectedLang = "fr"; }
 
-    path = path.Replace("/en/", "");
-    path = path.Replace("/fr/", "");
-    if (path.Length == 0)
-    {
-        path = "ClientLogin/Index";
-    }
-    if (path.Substring(0, 1) == "/")
-    {
-        path = path.Substring(1);
-    }
+        path = path.Replace("/en/", "");
+        path = path.Replace("/fr/", "");
+        if (path.Length == 0)
+        {
+            path = "ClientLogin/Index";
+        }
+        if (path.Substring(0, 1) == "/")
+        {
+            path = path.Substring(1);
+        }
 
-    //utilisé pour prévicad client
-    if (Session["ClientID"] != null && !path.Contains("?"))
-    {
-        path = path + "?ClientID=" + Session["ClientID"];
+        //utilisé pour prévicad client
+        if (Session["ClientID"] != null && !path.Contains("?"))
+        {
+            path = path + "?ClientID=" + Session["ClientID"];
+        }
     }
-}
 </head>
 <body>
 
@@ -109,9 +109,10 @@
                             <ul class="submenu">
                                 @RenderSection("sidebarChilds", required: false)
 
-
-                                <li id="liMonCompte"><a class="submenu-dropdown-item" href="/Manage/MyAccount">@LayoutRES.ActionMonCompte</a></li>
-                                @*<li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>*@
+                                @*
+                                    <li id="liMonCompte"><a class="submenu-dropdown-item" href="/Manage/MyAccount">@LayoutRES.ActionMonCompte</a></li>
+                                    <li><a class="submenu-dropdown-item" href="https://previgesst.com/centre-de-support/" target="_blank">@LayoutRES.ActionSupport</a></li>
+                                *@
                             </ul>
                         </li>
                         <li class="nav-item text-center mt-2">
@@ -148,7 +149,7 @@
                 </div>
             </div>
         </div>
-      
+
     </footer>
 
 
@@ -286,14 +287,14 @@
 
     @if (ViewBag.NotiticationTemplate != null && ViewBag.NotificationTitle != null)
     {
-<script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function () {
                 ShowNotification("@Html.Raw(ViewBag.NotificationTitle)",
                                  "@Html.Raw(ViewBag.NotificationMessage)",
                                  "@Html.Raw(ViewBag.NotiticationTemplate)");
 
             });
-</script>
+        </script>
     }
 
 
@@ -377,10 +378,10 @@
             }
         });
 
-        $(document).on('click', '.squaredThree', function () {
-            console.log('squaredThree v2');
-            $(this).find('input[type=checkbox]').click();
-        });
+            //$(document).on('click', '.squaredThree', function () {
+            //    console.log('squaredThree v2');
+            //    //$(this).find('input[type=checkbox]').click();
+            //});
 
     </script>
 </body>

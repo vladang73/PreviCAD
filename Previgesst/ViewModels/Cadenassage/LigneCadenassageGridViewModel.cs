@@ -78,6 +78,7 @@ namespace Previgesst.ViewModels
         [Display(ResourceType = typeof(CadInfoGeneralesRES), Name = "ValidatedBy")]
         public string ValidatedPar { get; set; }
 
+        public bool AfficherClient { get; set; }
         //[System.ComponentModel.DataAnnotations.Schema.NotMapped]
         //public bool IsApproved
         //{

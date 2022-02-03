@@ -85,11 +85,11 @@
 
                 columns.Bound(e => e.FicheCadenassageId)
                        .ClientTemplate("<center><a  href='../../Registre/GetFiche/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#' title=" + PrevFicheRES.Telecharger + "><img src='/content/v2/images/download-icon.svg' alt='FR icon'/></a></center>")
-                       .Title(GridRES.Etiquette).Filterable(false).Sortable(false).Hidden(@Model.Langue != "fr").Width("90px");
+                       .Title(GridRES.EtiquetteGrid).Filterable(false).Sortable(false).Hidden(@Model.Langue != "fr").Width("90px");
 
                 columns.Bound(e => e.FicheCadenassageId)
                        .ClientTemplate("<center><a  href='../../Registre/GetFicheEN/#= " + nameof(LigneCadenassageGridViewModel.FicheCadenassageId) + "#'  title=" + PrevFicheRES.Telecharger + "><img src='/content/v2/images/download-icon.svg' alt='FR icon'/></a></center>")
-                       .Title(GridRES.Etiquette).Filterable(false).Sortable(false).Hidden(@Model.Langue != "en").Width("90px");
+                       .Title(GridRES.EtiquetteGrid).Filterable(false).Sortable(false).Hidden(@Model.Langue != "en").Width("90px");
 
 
                 columns.Command(command => command.Custom(PrevFicheRES.Materiel).Click("showDetails").HtmlAttributes(new {@class= "materialButton btn-material mx-1 text-nowrap", @style="text-align:center"})).Width("140px");

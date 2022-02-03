@@ -98,7 +98,7 @@
 <main class="main-container-wrapper page-container">
     <div class="breadcrumbs-nav-wrapper">
         <ul class="breadcrumbs">
-            <li><a href='@Url.Action("Index", "MesApplications")'>@LayoutRES.Accueil</a></li>
+            <li><a href='@if (this.Layout.EndsWith("_Layout_v2.cshtml")) { @Url.Action("Index", "AdminPrevi") } else { @Url.Action("Index", "MesApplications") } '>@LayoutRES.Accueil</a></li>
             <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName/FicheCadenassage/Edit/@Model.ClientId">@CadEditRES.TitreSectionCadenassage</a></li>
 
             @if (Model.FicheCadenassageId == 0)

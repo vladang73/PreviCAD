@@ -167,7 +167,7 @@
                             <div class="mt-4">
                                 <div class="squaredThree squaredThree-blue d-inline-block">
                                     <input type="checkbox" id="AfficherChezClient" name="AfficherChezClient" @(Model.AfficherChezClient ? "checked" : "") value="@Convert.ToString(Model.AfficherChezClient).ToLower()" />
-                                    <label for="squaredone" class="control-label"><span>@Html.DisplayNameFor(m => m.AfficherChezClient) </span></label>
+                                    <label for="AfficherChezClient" class="control-label"><span>@Html.DisplayNameFor(m => m.AfficherChezClient) </span></label>
                                 </div>
 
                                 @Html.ValidationMessageFor(m => m.AfficherChezClient, "", new { @class = "text-danger" })

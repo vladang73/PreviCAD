@@ -274,7 +274,7 @@ namespace Previgesst.Controllers
         }
 
 
-        public ActionResult Instruction(int ficheId, int ligneRegistreId)
+        public ActionResult Instruction(int ficheId, int ligneRegistreId, string eq)
         {
             var langue = System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
@@ -322,7 +322,8 @@ namespace Previgesst.Controllers
                             TexteRealiser = x.TexteRealiser,
                             PhotoFicheCadenassageId = x.PhotoFicheCadenassageId,
 
-                            StepStatus = ""
+                            StepStatus = "",
+                            NoFicheCadenassage = x.NoFicheCadenassage
                         });
 
             var model2 = ligneDecadenassageService.GetListeLignesDecadenassage(ficheId).ToList()
@@ -354,7 +355,8 @@ namespace Previgesst.Controllers
                             TexteRealiser = x.TexteRealiser,
                             PhotoFicheCadenassageId = x.PhotoFicheCadenassageId,
 
-                            StepStatus = ""
+                            StepStatus = "",
+                            NoFicheCadenassage = x.NoFicheCadenassage
                         });
 
             var switchOn = PrevFicheRES.SwitchOn;
@@ -440,11 +442,14 @@ namespace Previgesst.Controllers
             //temp.AddRange(seperatorsDec);
             //var model = temp.Concat(model2).ToList();
 
+            string noFiche = finalModel.FirstOrDefault(x => !string.IsNullOrEmpty(x.NoFicheCadenassage)).NoFicheCadenassage;
             // set already saved status
             finalModel.ForEach(x =>
             {
                 x.StepStatus = alreadySaved.FirstOrDefault(i => i.InstructionId == x.PKId && i.InstructionType == x.PKType)?.StepStatus;
                 x.StepStatus = x.StepStatus == null ? "" : x.StepStatus;
+                x.NomEquipement = eq;
+                x.NoFicheCadenassage = noFiche;
             });
 
             //return View(model);
@@ -479,12 +484,22 @@ namespace Previgesst.Controllers
                 // get client logo
                 var logoClient = clientService.getClientVM(client);
 
+                string finalBody = "<center><table style='width:500px;padding:30px;border:1px solid #efeeef;font-family:\"IBM Plex Sans\" !important;'>" + 
+                    "<tr>" +
+                        "<td><center><img style=\"max-height:80px;\" src=\"cid:" + logoClient.Logo + "\"></img></center></td>" +
+                    "</tr>" +
+                    body +
+                    "<tr>" +
+                        "<td><img style=\"margin-left:280px;max-height:30px;\" src=\"cid:dark_logo.png\"></img></td>" +
+                    "</tr>"+
+                    "</table></center>";
+
                 // send emails one at a time
                 foreach (var Courriel in allEmails)
                 {
                     var membreCourriel = Courriel;
 
-                    GeneralService.SendMail_v2(body, subject, membreCourriel, client, logoClient.Logo);
+                    GeneralService.SendMail_v2(finalBody, subject, membreCourriel, client, logoClient.Logo, true);
                 }
 
                 // return true

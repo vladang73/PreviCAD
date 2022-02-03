@@ -2544,6 +2544,7 @@
     <Content Include="Views\Registre\ChangePassword.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\ClientLogin\ChangePassword.cshtml" />
+    <Content Include="Views\TEST\Email.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.before.css" />

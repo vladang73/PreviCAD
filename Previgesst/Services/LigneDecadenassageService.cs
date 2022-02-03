@@ -72,6 +72,8 @@ namespace Previgesst.Services
                             {
                                 NoLigne = x.NoLigne ?? 0,
                                 FicheCadenassageId = x.FicheCadenassageId,
+                                //FicheCadenassage = x.FicheCadenassage,
+                                NoFicheCadenassage = x.FicheCadenassage.NoFiche,
 
                                 Suppressible = true,
                                 CocherColonneCadenas = x.CocherColonneCadenas,

@@ -171,4 +171,7 @@
   <data name="Etiquette" xml:space="preserve">
     <value>Étiquette</value>
   </data>
+  <data name="EtiquetteGrid" xml:space="preserve">
+    <value>Fiche</value>
+  </data>
 </root>

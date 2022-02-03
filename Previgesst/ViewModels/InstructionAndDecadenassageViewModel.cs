@@ -96,5 +96,7 @@ namespace Previgesst.ViewModels
         [Display(ResourceType = typeof(CadLigneCadRES), Name = "Image")]
         public int? PhotoFicheCadenassageId { get; set; }
         public virtual PhotoFicheCadenassage PhotoFicheCadenassage { get; set; }
+        public string NomEquipement { get; set; }
+        public string NoFicheCadenassage { get; set; }
     }
 }

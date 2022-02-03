@@ -4,6 +4,7 @@ using Previgesst.Repositories;
 using Previgesst.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -67,12 +68,15 @@ namespace Previgesst.Services
                 baseURL += "/";
 
             var result = ligneInstructionRepository.AsQueryable()
+                .Include(x => x.FicheCadenassage)
                 .Where(x => x.FicheCadenassageId == FicheCadenassageId && x.InstructionId != null)
                 .OrderBy(x => x.NoLigne)
                 .Select(x => new LigneInstructionViewModel()
                 {
                     NoLigne = x.NoLigne ?? 0,
                     FicheCadenassageId = x.FicheCadenassageId,
+                    //FicheCadenassage = x.FicheCadenassage,
+                    NoFicheCadenassage = x.FicheCadenassage.NoFiche,
 
                     Suppressible = true,
                     CocherColonneCadenas = x.CocherColonneCadenas,
@@ -85,14 +89,14 @@ namespace Previgesst.Services
                     TexteSupplementaireInstruction = x.TexteSupplementaireInstruction,
                     TexteSupplementaireDispositifEN = x.TexteSupplementaireDispositifEN,
                     TexteSupplementaireInstructionEN = x.TexteSupplementaireInstructionEN,
-                    
+
                     TexteInstruction = langue == "fr" ? x.Instruction.TexteInstruction : x.Instruction.TexteInstructionEN,
                     TexteDispositif = langue == "fr" ? x.Instruction.Dispositif.Description : x.Instruction.Dispositif.DescriptionEN,
                     TexteAccessoire = langue == "fr" ? x.Instruction.Accessoire.Description : x.Instruction.Accessoire.DescriptionEN,
 
                     Thumbnail = baseURL + "Images/Cadenassage/Photos/" + (x.PhotoFicheCadenassageId == null ? "vide" : x.PhotoFicheCadenassageId.ToString()) + "/thumb.jpg?time=" + time,
                     PhotoFicheCadenassageId = x.PhotoFicheCadenassageId,
-                    TexteRealiser = x.TexteSupplementaireRealiser                     
+                    TexteRealiser = x.TexteSupplementaireRealiser
                 });
 
             return result;

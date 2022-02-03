@@ -149,14 +149,10 @@ namespace Previgesst.Controllers
 
         public ActionResult SaveFiche(EditFicheViewModel item)
         {
+            ViewData["Layout"] = Layout;
+
             if (utilisateurService.VerifierBonClientCadenassage_Client(item.ClientId, true))
             {
-                ViewData["Layout"] = Layout;
-
-                // Initialize VM, create DroitAjout and parser it
-                var vm = new EditFicheViewModel();
-                vm.DroitAjout = true;
-
                 if (utilisateurService.VerifierStatusCadenassageSave(item.ClientId, true))
                 {
                     PopulateLists(item.ClientId);
@@ -186,9 +182,12 @@ namespace Previgesst.Controllers
                         ViewData["idFiche"] = item.FicheCadenassageId;
                         // return View("EditFiche", item);
                         return RedirectToAction("EditFiche", new { Id = item.FicheCadenassageId, DroitAjout = "true" });
-                    };
-                    return View("EditFiche", Layout, vm);
+                    }
                 }
+
+                // Initialize VM, create DroitAjout and parser it
+                var vm = new EditFicheViewModel();
+                vm.DroitAjout = true;
                 return View("EditFiche", Layout, vm);
             }
             else
@@ -319,10 +318,23 @@ namespace Previgesst.Controllers
 
 
                 vm.estClient = (sessionUtilisateur != null);
+
+                #region ----- Jan-2022 -----
+
+                // only super admin can see + edit the procedure
+                // and
+                // he can give permission to see admin and employee by turn on "Afficher chez le client"
+                // employee can see it if procedure is approved + "Afficher chez le client"
+
+                //vm.estUpdate = User.IsInRole("Administrateur");
+
                 vm.estUpdate = (
                       (sessionUtilisateur == null && (User.IsInRole("Administrateur") || User.IsInRole("Lecture-Écriture")))
                       || (sessionUtilisateur != null && sessionUtilisateur.AdmPrevicad)
-                      );
+                );
+
+                #endregion
+
                 // par le droit d'update, pas le droit de cocher la révision active du côté client
                 if (!vm.estUpdate)
                     vm.RCDisabled = "disabled";
