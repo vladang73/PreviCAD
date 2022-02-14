@@ -70,6 +70,42 @@ namespace Previgesst.Ressources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approuvé par.
+        /// </summary>
+        internal static string ApprovedBy {
+            get {
+                return ResourceManager.GetString("ApprovedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date d’approbation.
+        /// </summary>
+        internal static string ApprovedDate {
+            get {
+                return ResourceManager.GetString("ApprovedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Créé par.
+        /// </summary>
+        internal static string CreatedBy {
+            get {
+                return ResourceManager.GetString("CreatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date de création.
+        /// </summary>
+        internal static string CreatedDate {
+            get {
+                return ResourceManager.GetString("CreatedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Approbation: .
         /// </summary>
         internal static string Date {
@@ -111,6 +147,51 @@ namespace Previgesst.Ressources {
         internal static string NoFiche {
             get {
                 return ResourceManager.GetString("NoFiche", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preparation.
+        /// </summary>
+        internal static string Preparation {
+            get {
+                return ResourceManager.GetString("Preparation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Révisé par.
+        /// </summary>
+        internal static string UpdatedBy {
+            get {
+                return ResourceManager.GetString("UpdatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date de révision.
+        /// </summary>
+        internal static string UpdatedDate {
+            get {
+                return ResourceManager.GetString("UpdatedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valider par.
+        /// </summary>
+        internal static string ValidatedBy {
+            get {
+                return ResourceManager.GetString("ValidatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date de validation.
+        /// </summary>
+        internal static string ValidatedDate {
+            get {
+                return ResourceManager.GetString("ValidatedDate", resourceCulture);
             }
         }
     }

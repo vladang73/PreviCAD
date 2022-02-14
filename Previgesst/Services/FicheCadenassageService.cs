@@ -1,7 +1,4 @@
-﻿
-
-
-using Kendo.Mvc.Extensions;
+﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using OfficeOpenXml.Style;
 using Previgesst.Models;
@@ -111,16 +108,39 @@ namespace Previgesst.Services
             ws.Cells["C2"].Value = langue == "" ? fiche.Equipement.NomEquipement : fiche.Equipement.NomEquipementEN;
             ws.Cells["C5"].Value = langue == "" ? fiche.TravailAEffectuer : fiche.TravailAEffectuerEN;
 
+            #region ----- footer changes -----
+
+            
             ws.Cells["J1"].Value = langue == "" ? fiche.Departement.NomDepartement : fiche.Departement.NomDepartementEN;
             ws.Cells["J2"].Value = FicheRES.NoFiche + fiche.NoFiche;
+            
+           
             ws.Cells["J3"].Value = FicheRES.ApprouvePar + fiche.ApprouvePar;
 
 
             ws.Cells["J4"].Value = FicheRES.Date + (fiche.DateApproved?.ToShortDateString()) ?? string.Empty;
             ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateUpdated.HasValue ? fiche.DateUpdated?.ToShortDateString() : fiche.DateCreation?.ToShortDateString()) ?? string.Empty;
 
-            //ws.Cells["J4"].Value = FicheRES.Date + (fiche.DateCreation?.ToShortDateString()) ?? string.Empty;
-            //ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateRevision?.ToShortDateString()) ?? string.Empty;
+            // ws.Cells["J4"].Value = FicheRES.Date + (fiche.DateCreation?.ToShortDateString()) ?? string.Empty;
+            // ws.Cells["J5"].Value = FicheRES.DateRevision + (fiche.DateRevision?.ToShortDateString()) ?? string.Empty;
+
+            /*
+
+
+            string footerText =
+                $"{FicheRES.CreatedBy}: {fiche.CreatedPar} \t {FicheRES.CreatedDate}: {fiche.DateCreation} " +
+                $"{Environment.NewLine}" +
+                $"{FicheRES.UpdatedBy}: {fiche.UpdatedPar} \t {FicheRES.UpdatedDate}: {(fiche.DateUpdated.HasValue ? fiche.DateUpdated?.ToShortDateString() : fiche.DateCreation?.ToShortDateString()) ?? string.Empty}" +
+                $"{Environment.NewLine}" +
+                $"{FicheRES.ApprovedBy}: {fiche.ApprouvePar} \t {FicheRES.ApprovedDate}: {(fiche.DateApproved?.ToShortDateString()) ?? string.Empty}" +
+                $"{Environment.NewLine}" +
+                $"{FicheRES.ValidatedBy}: {fiche.ValidatedPar} \t {FicheRES.ValidatedDate}: {(fiche.DateValidated?.ToShortDateString()) ?? string.Empty}"
+                ;
+
+            ws.HeadersFooters.DefaultPage.Footer.LeftSection.Append(footerText);
+            */
+            #endregion
+
 
             double hauteurLigne = 0;
 

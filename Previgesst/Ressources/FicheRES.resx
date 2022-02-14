@@ -120,6 +120,18 @@
   <data name="ApprouvePar" xml:space="preserve">
     <value>Approbateur: </value>
   </data>
+  <data name="ApprovedBy" xml:space="preserve">
+    <value>Approuvé par</value>
+  </data>
+  <data name="ApprovedDate" xml:space="preserve">
+    <value>Date d’approbation</value>
+  </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>Créé par</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Date de création</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Approbation: </value>
   </data>
@@ -134,5 +146,20 @@
   </data>
   <data name="NoFiche" xml:space="preserve">
     <value>No FICHE: </value>
+  </data>
+  <data name="Preparation" xml:space="preserve">
+    <value>Preparation</value>
+  </data>
+  <data name="UpdatedBy" xml:space="preserve">
+    <value>Révisé par</value>
+  </data>
+  <data name="UpdatedDate" xml:space="preserve">
+    <value>Date de révision</value>
+  </data>
+  <data name="ValidatedBy" xml:space="preserve">
+    <value>Valider par</value>
+  </data>
+  <data name="ValidatedDate" xml:space="preserve">
+    <value>Date de validation</value>
   </data>
 </root>

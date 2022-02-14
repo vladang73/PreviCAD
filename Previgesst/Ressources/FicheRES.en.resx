@@ -120,6 +120,18 @@
   <data name="ApprouvePar" xml:space="preserve">
     <value>APPROVED BY: </value>
   </data>
+  <data name="ApprovedBy" xml:space="preserve">
+    <value>Approved By</value>
+  </data>
+  <data name="ApprovedDate" xml:space="preserve">
+    <value>Approved Date</value>
+  </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>Created by</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>DATE: </value>
   </data>
@@ -134,5 +146,20 @@
   </data>
   <data name="NoFiche" xml:space="preserve">
     <value>Card #:</value>
+  </data>
+  <data name="Preparation" xml:space="preserve">
+    <value>Preparation</value>
+  </data>
+  <data name="UpdatedBy" xml:space="preserve">
+    <value>Updated By</value>
+  </data>
+  <data name="UpdatedDate" xml:space="preserve">
+    <value>Updated Date</value>
+  </data>
+  <data name="ValidatedBy" xml:space="preserve">
+    <value>Validated By</value>
+  </data>
+  <data name="ValidatedDate" xml:space="preserve">
+    <value>Validation Date</value>
   </data>
 </root>
